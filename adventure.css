@@ -1,0 +1,182 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #008170;
+}
+.pacifico-regular {
+  font-family: "Pacifico", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+.sevillana-regular {
+  font-family: "Sevillana", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+.ga-maamli-regular {
+  font-family: "Ga Maamli", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+h1 {
+  color: #50b498;
+  font-family: "Pacifico", cursive;
+  /* font-family: "Sevillana", cursive; */
+  font-size: 30px;
+}
+
+header {
+  background-color: white;
+  color: white;
+  padding: 10px 0;
+  text-align: center;
+  
+  
+}
+
+.adventures-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+}
+
+.card {
+  background-color: #f8f8f8;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  max-width: 300px;
+  flex: 1;
+  padding: 20px;
+  text-align: center;
+  font-family: "Ga Maamli", sans-serif;
+}
+
+.card img {
+  border-radius: 10px;
+  max-width: 100%;
+  height: auto;
+}
+
+.card h3 {
+  color: #333;
+  margin: 10px 0;
+}
+
+.card p {
+  color: #555;
+}
+.footer {
+  background: #36454f;
+  color: #fff;
+  padding: 40px 0;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  font-family: "Pacifico", cursive;
+}
+
+.footer .container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.footer .footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.footer .footer-section {
+  flex: 1;
+  padding: 20px;
+}
+
+.footer .footer-section h3 {
+  margin-bottom: 15px;
+  color: #f39c12;
+}
+
+.footer .footer-section p,
+.footer .footer-section ul,
+.footer .footer-section a {
+  color: #bbb;
+  margin-bottom: 10px;
+  text-decoration: none;
+}
+
+.footer .footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer .footer-section ul li {
+  margin-bottom: 10px;
+}
+
+.footer .footer-section .social a {
+  margin: 0 10px;
+  color: #bbb;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+.footer .footer-bottom {
+  text-align: center;
+  padding: 20px 0;
+  border-top: 1px solid #444;
+}
+
+.footer .footer-bottom p {
+  margin: 0;
+  color: #bbb;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .footer .footer-content {
+    flex-direction: column;
+  }
+
+  .footer .footer-section {
+    margin-bottom: 20px;
+  }
+}
+/* loading */
+/* Add this to your CSS file */
+.loading-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 5px solid #ccc;
+  border-top-color: #333;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/* new */
