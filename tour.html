@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awesome Tours</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shalimar&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Shalimar&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ga+Maamli&family=Kalam:wght@300;400;700&family=Shalimar&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Ga+Maamli&family=Kalam:wght@300;400;700&family=Shalimar&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Ga+Maamli&family=Kalam:wght@300;400;700&family=Rubik+Marker+Hatch&family=Shalimar&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Ga+Maamli&family=Kalam:wght@300;400;700&family=Rubik+Marker+Hatch&family=Shalimar&family=Syne+Tactile&display=swap" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="tour.css">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        .container {
+            width: 90%;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+        .logo {
+            float: left;
+            font-size: 1.5em;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-left: 20px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 5px 0;
+        }
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                text-align: center;
+                width: 100%;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                background: #333;
+            }
+            nav ul.show {
+                display: block;
+            }
+            nav ul li {
+                display: block;
+                margin: 10px 0;
+            }
+            .hamburger {
+                display: block;
+            }
+        }
+        #hero {
+            background: url('hero.jpg') no-repeat center center/cover;
+            height: 100vh;
+            color: white;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .cta-button {
+            background-color: #ff6f61;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        section {
+            padding: 60px 0;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #ff6f61;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+        .social-links a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+        @media (max-width: 768px) {
+            footer .social-links a {
+                display: block;
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">Upcoming Adventures</div>
+            <nav>
+                <ul>
+                    <li><a target="_blank" href="index.html">Home</a></li>
+                    <li><a target="_blank" href="#tours">Tours</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a target="_blank" href="https://www.instagram.com/zoh.aib__?igsh=MWM0OWJwM3IzOTVzMg==">Follow Us</a></li>
+                </ul>
+            </nav>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="container">
+                <h1>Discover Amazing Adventures</h1>
+                <p>Embark on unforgettable journeys with Upcoming Adventures</p>
+                <a href="#tours" class="cta-button">Explore Tours</a>
+            </div>
+        </section>
+
+        <section id="tours">
+            <div class="container">
+                <h2>Upcoming Tours</h2>
+                <div class="tours-grid" id="tours-list">
+                    <!-- Tours will be dynamically added here -->
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2>Interested in a Tour?</h2>
+                <form id="interest-form" action="https://formspree.io/f/mblrgela" method="POST">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tour">Preferred Tour:</label>
+                        <input type="text" id="tour" name="tour" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message (optional):</label>
+                        <textarea id="message" name="message"></textarea>
+                    </div>
+                    <button type="submit">Submit Interest</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="new">
+        <div class="container">
+            <p>&copy; 2024 Friend Circle.All Rights Reserved</p>
+            
+            <div class="social-links">
+                <a href="https://www.instagram.com/zoh.aib__?igsh=MWM0OWJwM3IzOTVzMg==" class="social-icon" target="_blank" rel="noopener noreferrer">
+                    <img src="https://img.icons8.com/material-outlined/24/instagram-new.png" alt="Instagram">
+                <!-- </a>
+                <a href="https://www.facebook.com/sam.zuhaib.98" class="social-icon" target="_blank" rel="noopener noreferrer">
+                    <img src="https://img.icons8.com/material-outlined/24/linkedin.png" alt="LinkedIn">
+                </a> -->
+                <a href="https://www.facebook.com/sam.zuhaib.98" class="social-icon" target="_blank" rel="noopener noreferrer">
+                    <img src="https://img.icons8.com/material-outlined/24/facebook.png" alt="Facebook">
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelector('.hamburger').addEventListener('click', function() {
+            document.querySelector('nav ul').classList.toggle('show');
+        });
+    </script>
+    <script src="tour.js"></script>
+</body>
+</html>
