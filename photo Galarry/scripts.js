@@ -149,6 +149,9 @@ document.addEventListener("DOMContentLoaded", () => {
     { src: "Farhan (1).jpg", alt: "photo of Farhan" },
     { src: "Farhan (2).jpg", alt: "photo of Farhan" },
     { src: "Farhan (3).jpg", alt: "photo of Farhan" },
+    { src: "sahil (1).jpg", alt: "photo of Sahil Javid at Tosamaidan" },
+    { src: "sahil (2).jpg", alt: "photo of Sahil Javid at Tosamaidan" },
+    { src: "sahil (3).jpg", alt: "photo of Sahil Javid at Tosamaidan" },
     
 
   
