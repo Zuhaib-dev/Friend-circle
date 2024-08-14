@@ -153,6 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
     { src: "sahil (2).jpg", alt: "photo of Sahil Javid at Tosamaidan" },
     { src: "sahil (3).jpg", alt: "photo of Sahil Javid at Tosamaidan" },
     { src: "sahil (4).jpg", alt: "photo of Sahil Javid at Tosamaidan" },
+    { src: "swim (1).jpg", alt: "Dive into a night swim adventure in the river! 🌌💦 Have a blast with friends, creating unforgettable memories under the stars. 🌟😄" },
     
 
   
