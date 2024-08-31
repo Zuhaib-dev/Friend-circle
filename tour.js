@@ -1,10 +1,10 @@
 // Sample tour data
 const tours = [
     { 
-        name: "Diskhal Budgam", 
-        date: "August , 2024", 
-        abouttheplace: "Diskhal is a picturesque village in Jammu and Kashmir. I've visited many times, and each trip reveals new beauty in its tranquil landscapes and lush greenery.",
-        image: "Diskhal/Diskhal4.jpg"
+        name: "Gurez Valley", 
+        date: " 2025", 
+        abouttheplace: "We've explored Gurez Valley multiple times, captivated by its stunning landscapes, serene rivers, and welcoming locals. We're eagerly planning another visit in 2025 to create more unforgettable memories.",
+        image: "gurez valley.jpg"
     },
     { 
         name: "Ladakh", 
