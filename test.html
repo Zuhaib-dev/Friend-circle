@@ -155,7 +155,18 @@
     </style>
 </head>
 <body>
+    <style>
+        #preloader{
+            background: white url(loader\ 1.gif) no-repeat center center ;
+            position: fixed;
+            height: 100vh;
+            width: 100%;
+            z-index: 100;
+        }
+    </style>
+    
     <!-- Header Section -->
+     <div id="preloader"></div>
     <header>
         <div class="container">
             <div class="logo">Testimonials</div>
@@ -414,6 +425,12 @@
     </html>
 
     <footer>
+        <script>
+            var loader = document.getElementById("preloader")
+            window.addEventListener("load", function(){
+                loader.style.display = "none"
+            })
+        </script>
 </body>
 </html>
 </body>
