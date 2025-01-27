@@ -154,8 +154,9 @@ document.addEventListener("DOMContentLoaded", () => {
     { src: "sahil (3).jpg", alt: "photo of Sahil Javid at Tosamaidan" },
     { src: "sahil (4).jpg", alt: "photo of Sahil Javid at Tosamaidan" },
     { src: "swim (1).jpg", alt: "Dive into a night swim adventure in the river! 🌌💦 Have a blast with friends, creating unforgettable memories under the stars. 🌟😄" },
-    { src: "Group Photo📍.jpg", alt: "A timeless memory from 2016—our bond began here, filled with laughter, adventures, and unbreakable friendships that continue to grow. 💫🚀 #FriendshipGoals"}
+    { src: "Group Photo📍.jpg", alt: "A timeless memory from 2016—our bond began here, filled with laughter, adventures, and unbreakable friendships that continue to grow. 💫🚀 #FriendshipGoals"},
     { src: "swim.jpeg", alt: "Amidst the crowd, our Friend Circle makes every splash count—bonding, laughing, and creating memories in the heart of the river. 🌊✨ #FriendshipGoals #RiverVibes"}
+    
   
     
 
