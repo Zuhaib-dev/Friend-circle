@@ -155,7 +155,22 @@ document.addEventListener("DOMContentLoaded", () => {
     { src: "sahil (4).jpg", alt: "photo of Sahil Javid at Tosamaidan" },
     { src: "swim (1).jpg", alt: "Dive into a night swim adventure in the river! 🌌💦 Have a blast with friends, creating unforgettable memories under the stars. 🌟😄" },
     { src: "Group Photo📍.jpg", alt: "A timeless memory from 2016—our bond began here, filled with laughter, adventures, and unbreakable friendships that continue to grow. 💫🚀 #FriendshipGoals"},
-    { src: "swim.jpeg", alt: "Amidst the crowd, our Friend Circle makes every splash count—bonding, laughing, and creating memories in the heart of the river. 🌊✨ #FriendshipGoals #RiverVibes"}
+    { src: "swim.jpeg", alt: "Amidst the crowd, our Friend Circle makes every splash count—bonding, laughing, and creating memories in the heart of the river. 🌊✨ #FriendshipGoals #RiverVibes"},
+    { src: "amir shafi (1).jpeg", alt: "Amir Shafi: Trekking & volleyball enthusiast" },
+    { src: "amir shafi (2).jpeg", alt: "Amir Shafi: Trekking & volleyball enthusiast" },
+    { src: "amir shafi (3).jpeg", alt: "Amir Shafi: Trekking & volleyball enthusiast" },
+    { src: "amir shafi (4).jpeg", alt: "Group adventure & memories." },
+    { src: "amir shafi (5).jpeg", alt: "Group adventure & memories." },
+    { src: "amir shafi (6).jpeg", alt: "Group adventure & memories." },
+    { src: "amir shafi (7).jpeg", alt: "Group adventure & memories." },
+    { src: "amir shafi (8).jpeg", alt: "Group adventure & memories." },
+    { src: "amir shafi (9).jpeg", alt: "Amir Shafi: Trekking & volleyball enthusiast" },
+    { src: "amir shafi (10).jpeg", alt: "Group adventure & memories." },
+    { src: "mudasir.webp", alt: "Off-roading & photography lover."},
+    { src: "mudasir2.webp", alt: "Off-roading & photography lover."},
+    { src: "Mudasir Hameed.webp", alt: "Off-roading & photography lover."},
+    
+    
     
   
     
