@@ -42,6 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
     { src: "photo15.jpg", alt: "photo of Tatakoti MT taken By Mursalien" },
     { src: "photo16.jpg", alt: "photo taken by Aqib at Yousmarg" },
     { src: "Tehseen akbar/new6.jpg", alt: "Photo taken by tehseen Bin Akbar" },
+    { src: "Tehseen akbar/new11.jpg", alt: "Photo taken by tehseen Bin Akbar" },
     { src: "Tehseen akbar/new12.jpg", alt: "Photo taken by tehseen Bin Akbar" },
     { src: "Tehseen akbar/new16.jpg", alt: "Photo taken by tehseen Bin Akbar" },
     { src: "Tehseen akbar/new20.jpg", alt: "Photo taken by tehseen Bin Akbar" },
