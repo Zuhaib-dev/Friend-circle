@@ -19,4 +19,5 @@ Contact Form: A polished and styled contact form for getting in touch.
 Technologies Used
 HTML5
 CSS3
+Tailwind
 JavaScript
