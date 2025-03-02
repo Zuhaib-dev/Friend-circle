@@ -1061,7 +1061,11 @@
   </div>
 </section>
 <!-- Feature sections -->
- 
+  <!-- Offline Alert -->
+  <div id="offline-message" class="network-message">⚠️ You are offline! Please connect to the internet.</div>
+
+  <!-- Online Alert -->
+  <div id="online-message" class="network-message">✅ Back online! Connection restored.</div>
 
 <script>
   document.querySelectorAll('.faq-question').forEach(button => {
@@ -1085,6 +1089,34 @@
           }
       });
   });
+</script>
+
+<!-- for alert like one is offline for that and another is online for that the script goes here  -->
+<script>
+  function updateNetworkStatus() {
+      let offlineMessage = document.getElementById("offline-message");
+      let onlineMessage = document.getElementById("online-message");
+
+      if (!navigator.onLine) {
+          offlineMessage.style.display = "flex"; // Show offline alert
+          onlineMessage.style.display = "none";  // Hide online alert
+      } else {
+          offlineMessage.style.display = "none"; // Hide offline alert
+          onlineMessage.style.display = "flex";  // Show online alert
+          
+          // Auto-hide the online message after 3 seconds
+          setTimeout(() => {
+              onlineMessage.style.display = "none";
+          }, 3000);
+      }
+  }
+
+  // Check network status on page load
+  window.addEventListener("load", updateNetworkStatus);
+
+  // Listen for network changes
+  window.addEventListener("online", updateNetworkStatus);
+  window.addEventListener("offline", updateNetworkStatus);
 </script>
 
     
