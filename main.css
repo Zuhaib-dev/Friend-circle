@@ -49,4 +49,52 @@ header{
     font-style: normal;
   }
   
-  
+  /* Marque css */
+
+  .marquee-container {
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    width: 100%;
+    padding: 20px 0;
+    background: white;
+    display: flex;
+}
+
+.marquee-content {
+    display: flex;
+    gap: 20px;
+    animation: marquee 15s linear infinite;
+    min-width: 200%; /* Ensures smooth looping */
+}
+
+.marquee-content img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid black;
+    object-fit: cover;
+}
+
+@keyframes marquee {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+/* Duplicate content for seamless infinite effect */
+.marquee-content::after {
+    content: "";
+    display: flex;
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    .marquee-content img {
+        width: 70px;
+        height: 70px;
+    }
+}
