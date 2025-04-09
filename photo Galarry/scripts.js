@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const images = [
     // Yousmarg photos 2025
-    { src: "yousmarg/main photo.jpg ", alt: "Wandering where the WiFi is weak and the views are strong - Yousmarg📍" },
+    { src: "yousmarg/main photo.jpg ", alt: "Wandering where the WiFi is weak and the views are strong -  Yousmarg📍" },
     { src: "wazwan party (2).jpg", alt: "Where the mountains whisper peace and the meadows speak magic – Yousmarg." },
     { src: "wazwan party (3).jpg", alt: "This view = therapy for free." },
     { src: "wazwan party (5).jpg", alt: "Every step here feels like a scene from a dream." },
