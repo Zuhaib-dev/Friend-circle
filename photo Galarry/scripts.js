@@ -7,13 +7,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const images = [
     // Yousmarg photos 2025
-    { src: "yousmarg/main photo.jpg ", alt: "Wandering where the WiFi is weak and the views are strong -  Yousmarg📍" },
+    { src: "main photo.jpg ", alt: "Wandering where the WiFi is weak and the views are strong -  Yousmarg📍" },
     { src: "wazwan party (2).jpg", alt: "Where the mountains whisper peace and the meadows speak magic – Yousmarg." },
     { src: "wazwan party (3).jpg", alt: "This view = therapy for free." },
     { src: "wazwan party (5).jpg", alt: "Every step here feels like a scene from a dream." },
     { src: "wazwan party (1).jpg", alt: "Every step here feels like a scene from a dream." },
     // solo pics of the above one
-    { src: "yousmarg/yous (1).jpg", alt: "Just me, the moment, and the mountain breeze." },
+    { src: "yous (1).jpg", alt: "Just me, the moment, and the mountain breeze." },
     { src: "yousmarg/yous (2).jpg", alt: "Learning to enjoy my own company, one solo trip at a time." },
     { src: "yousmarg/yous (3).jpg", alt: "Just me, the moment, and the mountain breeze." },
     { src: "yousmarg/yous (4).jpg", alt: "Confidence looks better in natural light." },
