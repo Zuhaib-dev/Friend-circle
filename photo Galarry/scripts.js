@@ -6,11 +6,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const close = document.getElementById("close");
 
   const images = [
+    // Yousmarg photos 2025
+    { src: "wazwan party (2).jpg", alt: "Yousmarg 2025" },
+    { src: "wazwan party (3).jpg", alt: "Yousmarg 2025" },
+    { src: "wazwan party (5).jpg", alt: "Yousmarg 2025" },
+    { src: "wazwan party (1).jpg", alt: "Yousmarg 2025" },
+
+
     { src: "photo.jpg", alt: "Group photo in Machikhanen Haijen " },
     { src: "photo1.jpg", alt: "Group photo in Machikhanen Haijen" },
     { src: "Tehseen akbar/new.jpg ", alt: "Photo  taken by Tehseen, showcasing the scenic beauty of the region" },
     { src: "Tehseen akbar/new1.jpg", alt: "Photo of Gulmarg, taken by Tehseen, showcasing the scenic beauty of the region" },
     { src: "Tehseen akbar/new2.jpg", alt: "Photo of Doodhpathri, taken by Tehseen, showcasing the scenic beauty of the region" },
+    // Ramazan party photos
+    { src: "wazwan party (6).jpg", alt: "Ramadan 2025 pics🤞" },
+    { src: "wazwan party (4).jpg", alt: "Ramadan 2025 pics🤞" },
+
     { src: "Tehseen akbar/new3.jpg", alt: "Photo taken by tehseen Bin Akbar" },
     { src: "Tehseen akbar/new4.jpg", alt: "Photo taken by tehseen Bin Akbar" },
     { src: "Tehseen akbar/new17.jpg", alt: "Photo taken by tehseen Bin Akbar" },
