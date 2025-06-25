@@ -44,6 +44,24 @@ document.addEventListener("DOMContentLoaded", () => {
     { src: "yous (29).jpg", alt: "One man. Infinite journeys." },
     { src: "yous (30).jpg", alt: "Just me, the moment, and the mountain breeze." },
     { src: "yous (31).jpg", alt: "Learning to enjoy my own company, one solo trip at a time." },
+     // July 2025 new Images
+    { src: "astanmarg.jpg", alt:"Breathtaking views from Astanmarg 🌄✨ – where the sky kisses the mountains and peace embraces your soul."},
+    { src: "badipoora party.jpg", alt:"Breathtaking views from Astanmarg 🌄✨ – where the sky kisses the mountains and peace embraces your soul."},
+    { src: "badipoora party (1).jpg", alt:"Breathtaking views from Astanmarg 🌄✨ – where the sky kisses the mountains and peace embraces your soul."},
+    { src: "badipoora party (2).jpg", alt:"Breathtaking views from Astanmarg 🌄✨ – where the sky kisses the mountains and peace embraces your soul."},
+    { src: "badipoora party (3).jpg", alt:"Breathtaking views from Astanmarg 🌄✨ – where the sky kisses the mountains and peace embraces your soul."},
+    { src: "may2024 (1).jpg", alt:"Grace isn’t just in the pose, it’s in the presence. Timeless moments, effortlessly captured. 🌄✨"},
+    { src: "may2024 (2).jpg", alt:"Grace isn’t just in the pose, it’s in the presence. Timeless moments, effortlessly captured. 🌄✨"},
+    { src: "may2024 (3).jpg", alt:"Grace isn’t just in the pose, it’s in the presence. Timeless moments, effortlessly captured. 🌄✨"},
+    { src: "may2024 (4).jpg", alt:"Grace isn’t just in the pose, it’s in the presence. Timeless moments, effortlessly captured. 🌄✨"},
+    { src: "may2024 (5).jpg", alt:"Grace isn’t just in the pose, it’s in the presence. Timeless moments, effortlessly captured. 🌄✨"},
+    { src: "may2024 (6).jpg", alt:"Grace isn’t just in the pose, it’s in the presence. Timeless moments, effortlessly captured. 🌄✨"},
+    { src: "may2024 (7).jpg", alt:"Grace isn’t just in the pose, it’s in the presence. Timeless moments, effortlessly captured. 🌄✨"},
+    { src: "may2024 (8).jpg", alt:"Grace isn’t just in the pose, it’s in the presence. Timeless moments, effortlessly captured. 🌄✨"},
+    { src: "may2024 (9).jpg", alt:"Grace isn’t just in the pose, it’s in the presence. Timeless moments, effortlessly captured.🌄✨"},
+    { src: "may2024 (10).jpg", alt:"Grace isn’t just in the pose, it’s in the presence. Timeless moments, effortlessly captured. 🌄✨"},
+    
+
 
 
     { src: "photo.jpg", alt: "Group photo in Machikhanen Haijen " },
