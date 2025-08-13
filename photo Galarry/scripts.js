@@ -171,7 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
     { src: "edit1 (12).jpg", alt: "photo taken by Zuhaib" },
     { src: "edit1 (13).jpg", alt: "photo taken by Zuhaib" },
     // { src: "haijen17.jpg", alt: "Image 13 description" },
-    { src: "umer.jpg", alt: "Photo of Umer at Gym" },
+    { src: "umar.enc", alt: "Photo of Umer Ayoub " },
     { src: "Haseeb.webp", alt: "Photo of Haseeb" },
 
     { src: "Haziq.webp", alt: "photo of Haziq" },
