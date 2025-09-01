@@ -142,6 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
     { src: "janna (3).jpg", alt: "Photo of Tehseen Bin Akbar" },
     { src: "janna (4).jpg", alt: "Photo of Tehseen Bin Akbar" },
     { src: "janna (5).jpg", alt: "Photo of Tehseen Bin Akbar" },
+    { src: "mavin.jpg", alt: "Mavin enjoying the adventure with Friend Circle, spreading positivity and energy" },
 
     
     { src: "photo18.jpg", alt: "photo of chicken cooked at the Mandikhal Haijen" },
