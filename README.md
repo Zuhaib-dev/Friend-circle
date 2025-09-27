@@ -46,6 +46,7 @@ From **offroad biking** 🏍️ to **fishing competitions** 🎣 and **endless v
 
 <p align="center">
   <a href="mailto:xuvaxuva006@gmail.com"><img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white"></a>
+  <a href="http://zuhaibrashid.com/"><img  src="https://www.zuhaibrashid.com/favicon.ico"></a>
   <a href="https://www.linkedin.com/in/xuhaib-rashid-661345318"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"></a>
   <a href="https://x.com/xuhaib_x9"><img src="https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white"></a>
   <a href="https://github.com/Zuhaib-dev/Projects.git"><img src="https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=github&logoColor=white"></a>
