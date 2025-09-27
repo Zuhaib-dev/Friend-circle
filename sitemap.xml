@@ -48,6 +48,13 @@
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
+  <!-- adventure -->
+  <url>
+    <loc>https://zuhaib-dev.github.io/Friend-circle/adventure.html</loc>
+    <lastmod>2025-09-27</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
 
   <!-- Play Game Page -->
   <url>
