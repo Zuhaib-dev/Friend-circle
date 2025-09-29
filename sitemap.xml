@@ -3,7 +3,7 @@
 
   <!-- Homepage -->
   <url>
-    <loc>https://zuhaib-dev.github.io/Friend-circle/index.html</loc>
+    <loc>https://friendcirclee.netlify.app/l</loc>
     <lastmod>2025-09-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -11,7 +11,7 @@
 
   <!-- About Us Page -->
   <url>
-    <loc>https://zuhaib-dev.github.io/Friend-circle/about.html</loc>
+    <loc>https://friendcirclee.netlify.app/about</loc>
     <lastmod>2025-09-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -19,7 +19,7 @@
 
   <!-- Video Gallery Page -->
   <url>
-    <loc>https://zuhaib-dev.github.io/Friend-circle/viedo%20Gallary/video.html</loc>
+    <loc>https://friendcirclee.netlify.app/viedo%20gallary/video</loc>
     <lastmod>2025-09-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -27,7 +27,7 @@
 
   <!-- Image Gallery Page -->
   <url>
-    <loc>https://zuhaib-dev.github.io/Friend-circle/photo%20Galarry/Memories%20in%20Frames.html</loc>
+    <loc>https://friendcirclee.netlify.app/photo%20galarry/memories%20in%20frames</loc>
     <lastmod>2025-09-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -35,7 +35,7 @@
 
   <!-- Upcoming Adventures Page -->
   <url>
-    <loc>https://zuhaib-dev.github.io/Friend-circle/tour.html</loc>
+    <loc>https://friendcirclee.netlify.app/tour</loc>
     <lastmod>2025-09-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -43,14 +43,14 @@
 
   <!-- Testimonials Page -->
   <url>
-    <loc>https://zuhaib-dev.github.io/Friend-circle/test.html</loc>
+    <loc>https://friendcirclee.netlify.app/test</loc>
     <lastmod>2025-09-27</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <!-- adventure -->
   <url>
-    <loc>https://zuhaib-dev.github.io/Friend-circle/adventure.html</loc>
+    <loc>https://friendcirclee.netlify.app/adventure</loc>
     <lastmod>2025-09-27</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
@@ -58,7 +58,7 @@
 
   <!-- Play Game Page -->
   <url>
-    <loc>https://zuhaib-dev.github.io/Friend-circle/Stick%20Hero%20game/game.htmll</loc>
+    <loc>https://friendcirclee.netlify.app/stick%20hero%20game/game</loc>
     <lastmod>2025-09-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -66,7 +66,7 @@
 
   <!-- APK Download Page -->
   <url>
-    <loc>https://zuhaib-dev.github.io/Friend-circle/apk.html</loc>
+    <loc>https://friendcirclee.netlify.app/apk</loc>
     <lastmod>2025-09-27</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
