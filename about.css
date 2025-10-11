@@ -126,7 +126,9 @@ header {
   color: #f39c12;
 }
 
-.footer .footer-section p, .footer .footer-section ul, .footer .footer-section a {
+.footer .footer-section p,
+.footer .footer-section ul,
+.footer .footer-section a {
   color: #bbb;
   margin-bottom: 10px;
   text-decoration: none;
@@ -182,10 +184,10 @@ footer {
 p {
   font-family: "Caveat", cursive;
 }
-img{
+img {
   margin: 8px; /* Adds space around the image */
-        padding: 3px; /* Adds space inside the image border */
-        border: 1px solid #ccc; /* Adds a light grey border */
-        border-radius: 5px; /* Rounds the corners */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+  padding: 3px; /* Adds space inside the image border */
+  border: 1px solid #ccc; /* Adds a light grey border */
+  border-radius: 5px; /* Rounds the corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
 }
