@@ -1,34 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Basics -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="canonical"
-      href="https://friendcirclee.netlify.app/photo%20galarry/memories%20in%20frames"
-    />
+
+    <!-- Canonical + Identity -->
+    <link rel="canonical" href="https://friendcirclee.netlify.app/photo%20galarry/memories%20in%20frames" />
     <link rel="me" href="https://www.zuhaibrashid.com/" />
+    <meta name="author" content="Zuhaib Rashid" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+    <!-- Title + Description (keep title ~55–60 chars, description ~150–160) -->
+    <title>Memories in Frames | Extreme Photo Gallery | Friend Circle</title>
+    <meta name="description" content="Explore Memories in Frames — an extreme adventure photo gallery by Friend Circle with offroading, trekking, and Kashmir landscapes captured by Zuhaib Rashid." />
+
+    <!-- Favicons / PWA -->
+    <link rel="shortcut icon" href="Favicon1.png" type="image/x-icon" />
     <link rel="manifest" href="/manifest.json" />
 
-    <title>Extreme Photo Gallery</title>
-    <link rel="shortcut icon" href="Favicon1.png" type="image/x-icon" />
+    <!-- Performance: Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap" rel="stylesheet" />
 
-    <!-- Font Awesome -->
+    <!-- Performance: Preload main LCP image -->
+    <link rel="preload" as="image" href="main photo.jpg" />
+
+    <!-- Social Sharing: Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://friendcirclee.netlify.app/photo%20galarry/memories%20in%20frames" />
+    <meta property="og:title" content="Memories in Frames | Extreme Photo Gallery" />
+    <meta property="og:description" content="Extreme adventure gallery from Friend Circle — offroading, trekking, camping, and scenic Kashmir moments by Zuhaib Rashid." />
+    <!-- Replace with an absolute URL to a 1200x630 image hosted on your site or CDN -->
+    <meta property="og:image" content="https://friendcirclee.netlify.app/All%20photos/group.new.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Memories in Frames | Extreme Photo Gallery" />
+    <meta name="twitter:description" content="Adventure photo gallery by Friend Circle featuring Kashmir’s offroading and trekking memories." />
+    <meta name="twitter:image" content="https://friendcirclee.netlify.app/All%20photos/group.new.jpg" />
+
+    <!-- Geo/Locale (optional) -->
+    <meta name="geo.region" content="IN-JK" />
+    <meta name="geo.placename" content="Srinagar, Budgam" />
+    <link rel="alternate" href="https://friendcirclee.netlify.app/photo%20galarry/memories%20in%20frames" hreflang="en-IN" />
+
+    <!-- Styles and Icons -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
     />
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Structured Data: ImageGallery with example items -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ImageGallery",
+      "name": "Memories in Frames | Extreme Photo Gallery",
+      "url": "https://friendcirclee.netlify.app/photo%20galarry/memories%20in%20frames",
+      "description": "Extreme adventure photo gallery by Friend Circle featuring offroading, trekking, and Kashmir landscapes captured by Zuhaib Rashid.",
+      "creator": {
+        "@type": "Person",
+        "name": "Zuhaib Rashid",
+        "url": "https://www.zuhaibrashid.com/"
+      },
+      "image": [
+        {
+          "@type": "ImageObject",
+          "url": "https://friendcirclee.netlify.app/All%20photos/group.new.jpg",
+          "contentUrl": "https://friendcirclee.netlify.app/All%20photos/group.new.jpg",
+          "caption": "Offroading trail in Kashmir",
+          "width": 1920,
+          "height": 1280
+        },
+        {
+          "@type": "ImageObject",
+          "url": "https://friendcirclee.netlify.app/All%20photos/group.new.jpg",
+          "contentUrl": "https://friendcirclee.netlify.app/All%20photos/group.new.jpg",
+          "caption": "Memories in Frames cover",
+          "width": 1200,
+          "height": 630
+        }
+      ]
+    }
+    </script>
+  </head>
 
-    <!-- Preload main LCP image -->
-    <link rel="preload" as="image" href="main photo.jpg" />
 
     <style>
       html,
