@@ -2,6 +2,10 @@
 const images = [
   // Yousmarg photos 2025
   {
+    src: "main photo.jpg",
+    alt: "whisper the mountains whisper peace and the meadows speak magic – Yousmarg.",
+  },
+  {
     src: "wazwan party (2).jpg",
     alt: "Where the mountains whisper peace and the meadows speak magic – Yousmarg.",
   },
