@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Meta basics -->
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Verification -->
+  <meta name="google-site-verification" content="PhC4G2XmPO_iZ5yQFaXvkOkJHHJEwRRJsjygMozyteA" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://friendcirclee.netlify.app/" />
+
+  <!-- Primary SEO -->
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+  <meta name="referrer" content="no-referrer-when-downgrade">
+  <meta name="rating" content="General">
+  <meta name="theme-color" content="#0d1117">
+  <meta name="author" content="Zuhaib Rashid" />
+
+  <!-- Description and Keywords -->
+  <meta name="description" content="Friend Circle – Kashmir-based adventure community exploring trekking, camping, offroading, fishing, and photography across Budgam, Srinagar, and Chadoora. Follow Zuhaib Rashid and his group's journey of friendship and exploration." />
+  <meta name="keywords" content="Friend Circle, Zuhaib Rashid, Kashmir adventures, Budgam travel, Srinagar trekking, Chadoora nature, J&K travel group, offroading in Kashmir, camping Kashmir, fishing Kashmir, friendship adventures, Zuhaib Rashid portfolio, adventure vloggers, hiking Kashmir, photography group Kashmir, travel blog Kashmir, youth explorers Kashmir, outdoor community India, camping buddies India, team adventures Kashmir, travelwithtehseen, zuhaib dev, zuhaibrashid.com" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Friend Circle - Kashmir Adventures & Brotherhood" />
+  <meta property="og:description" content="Join Zuhaib Rashid and team on Kashmir’s most scenic adventures: offroading, camping, fishing, and photography. Explore friendship that fuels exploration." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://friendcirclee.netlify.app/" />
+  <meta property="og:image" content="https://friendcirclee.netlify.app/All%20photos/group.new.jpg" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:site_name" content="Friend Circle" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Friend Circle - Kashmir Adventures | Zuhaib Rashid" />
+  <meta name="twitter:description" content="Explore adventures across Kashmir – trekking, photography, offroading, and camping with Zuhaib Rashid and friends." />
+  <meta name="twitter:image" content="https://friendcirclee.netlify.app/All%20photos/group.new.jpg" />
+
+  <!-- Preconnects (fonts served directly, but keep gstatic for TLS reuse) -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Preload brand font (Syne 700) for instant brand paint -->
+  <link rel="preload" href="https://fonts.gstatic.com/s/syne/v22/8vIM7w4qzmVXsJ7w6lY.woff2" as="font" type="font/woff2" crossorigin>
+
+  <style>
+    /* Elegant section title font */
+    @font-face{
+      font-family:'Shalimar';
+      font-style:normal;font-weight:400;font-display:swap;
+      src:url('https://fonts.gstatic.com/s/shalimar/v9/uU9MCBoE6I6iNWFUvQP2-vGsgFuW.woff2') format('woff2');
+    }
+
+    /* Strong brand font (Syne Bold 700) */
+    @font-face{
+      font-family:'Syne';
+      font-style:normal;font-weight:700;font-display:swap;
+      src:url('https://fonts.gstatic.com/s/syne/v22/8vIM7w4qzmVXsJ7w6lY.woff2') format('woff2');
+    }
+
+    :root{
+      --fc-display:'Shalimar', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      --fc-brand:'Syne', cursive;
+      --fc-body: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+
+      /* Colors tuned for contrast on light header */
+      --fc-brand-color:#1e293b;  /* slate-800 (AA on white) */
+      --fc-brand-color-hover:#0b1220; /* deeper slate */
+    }
+
+    /* Apply fonts */
+    body{font-family:var(--fc-body); margin:0}
+    .title-font,h1,h2,h3{font-family:var(--fc-display)}
+
+    /* Brand: bold, slightly larger, accessible color */
+    .brand-logo{
+      font-family:var(--fc-brand);
+      font-weight:700;
+      font-size: clamp(2rem, 3.6vw, 3rem); /* bigger and responsive */
+      line-height:1.05;
+      letter-spacing: .2px;
+      color: var(--fc-brand-color);
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+    header a:focus .brand-logo,
+    header a:hover .brand-logo{
+      color: var(--fc-brand-color-hover);
+      outline: none;
+    }
+
+    /* Tiny critical skeleton to prevent FOUC if CSS is delayed */
+    html{visibility:visible}
+    .container{max-width:1200px;margin-left:auto;margin-right:auto;padding-left:1.25rem;padding-right:1.25rem}
+    .text-gray-900{color:#111827}
+    .bg-white{background:#fff}
+  </style>
+
+  <!-- Preload LCP image with priority (adjust if different) -->
+  <link rel="preload" href="https://friendcirclee.netlify.app/All%20photos/group.new.jpg" as="image" fetchpriority="high">
+
+  <!-- Styles: keep Tailwind stable (blocking) or self-host for caching -->
+  <link href="https://unpkg.com/tailwindcss@1.9.6/dist/tailwind.min.css" rel="stylesheet" media="all" />
+
+  <!-- Your site CSS -->
+  <link rel="preload" href="main.css" as="style">
+  <link rel="stylesheet" href="main.css" media="all" />
+
+  <!-- Icons -->
+  <link rel="shortcut icon" href="Favicon1.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="Favicon1.png">
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="/manifest.json">
+
+  <!-- Portfolio Link -->
+  <link rel="me" href="https://www.zuhaibrashid.com/" />
+
+  <!-- Schema: Website -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Friend Circle",
+    "url": "https://friendcirclee.netlify.app/",
+    "description": "Friend Circle – Adventurers from Kashmir exploring trekking, offroading, and photography. A digital showcase of travel stories and friendship.",
+    "publisher": {
+      "@type": "Person",
+      "name": "Zuhaib Rashid",
+      "url": "https://www.zuhaibrashid.com/",
+      "sameAs": [
+        "https://github.com/Zuhaib-dev",
+        "https://x.com/xuhaibx9",
+        "https://www.linkedin.com/in/zuhaib-rashid-661345318/"
+      ]
+    },
+    "image": "https://friendcirclee.netlify.app/All%20photos/group.new.jpg",
+    "inLanguage": "en",
+    "keywords": [
+      "Friend Circle",
+      "Kashmir trekking",
+      "Camping adventures",
+      "Offroading Jammu and Kashmir",
+      "Travel photography Kashmir",
+      "Trekking Budgam",
+      "Camping Chadoora",
+      "Exploring Srinagar",
+      "Friendship travel community"
+    ]
+  }
+  </script>
+
+  <!-- Schema: Person -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Zuhaib Rashid",
+    "url": "https://www.zuhaibrashid.com/",
+    "image": "https://friendcirclee.netlify.app/Zuhaib%20Rashid.png",
+    "jobTitle": "Frontend Developer",
+    "worksFor": { "@type": "Organization", "name": "Independent Developer" },
+    "alumniOf": { "@type": "EducationalOrganization", "name": "Sheryians Coding School" },
+    "knowsAbout": [
+      "React.js",
+      "TypeScript",
+      "Next.js",
+      "Frontend Development",
+      "Backend Integration",
+      "Web Accessibility",
+      "Technical SEO",
+      "Trekking in Kashmir",
+      "Adventure videography"
+    ],
+    "sameAs": [
+      "https://github.com/Zuhaib-dev",
+      "https://x.com/xuhaibx9",
+      "https://www.linkedin.com/in/zuhaib-rashid-661345318/",
+      "https://www.zuhaibrashid.com/"
+    ]
+  }
+  </script>
+
+  <title>Friend Circle - Kashmir Adventures & Offroading | Zuhaib Rashid</title>
+</head>
+
+  
+  <body>  
+    <!-- new -->
+    
+   <!-- HEADER -->
+<header class="text-gray-900 body-font">
+  <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+    <a class="flex items-center text-gray-900 mb-4 md:mb-0">
+      <img src="profile picturs/zuhaib.jpg" alt="logo" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4">
+      <!-- Upgraded brand font and size -->
+      <span class="ml-3 brand-logo">Friend Circle</span>
+    </a>
+    <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+      <a href="photo Galarry/Memories in Frames.html" class="mr-5 text-gray-900 hover:text-blue-700 underline-offset-2 hover:underline">Memories in Frames</a>
+      <a href="./viedo Gallary/video.html" class="mr-5 text-gray-900 hover:text-blue-700 underline-offset-2 hover:underline">Video Gallary</a>
+      <a href="adventure.html" class="mr-5 text-gray-900 hover:text-blue-700 underline-offset-2 hover:underline">Into the Wild</a>
+      <a href="tour.html" class="mr-5 text-gray-900 hover:text-blue-700 underline-offset-2 hover:underline">Upcoming Adventures</a>
+      <a href="test.html" class="mr-5 text-gray-900 hover:text-blue-700 underline-offset-2 hover:underline">Voices of Our Circle</a>
+      <a href="about.html" class="mr-5 text-gray-900 hover:text-blue-700 underline-offset-2 hover:underline">About us</a>
+      <a href="http://zuhaibrashid.com/" class="mr-5 text-gray-900 hover:text-blue-700 underline-offset-2 hover:underline">My Portfolio</a>
+      <a href="Stick Hero game/game.html" class="mr-5 text-gray-900 hover:text-blue-700 underline-offset-2 hover:underline">Play Game</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO TITLE -->
+<section class="text-gray-800 body-font">
+  <div class="container px-5 py-24 mx-auto">
+    <div class="flex flex-col text-center w-full mb-20">
+      <!-- Upgraded Adventure Circle font -->
+      <h1 class="adventure-title mb-4 text-gray-900">
+        The Adventurers' Circle
+      </h1>
+
+          <p  class="new"></p>
+          <span class="text-gray-900 leading-relaxed">
+          Our crew is a dynamic group united by a passion for adventure and exploration. Each member brings unique skills and interests to the table, creating a diverse and talented team. Whether it's offroading, camping, fishing, filmmaking, photography, or playing volleyball, our adventures are always filled with excitement and camaraderie. We thrive on discovering new places and sharing unforgettable experiences. Our varied talents enhance every journey, making us not just a group of friends but a close-knit team bound by shared adventures and mutual respect.
+          </span>
+        </div>
+
+       <div class="flex flex-wrap -m-2" bis_skin_checked="1">
+  <div class="p-2 lg:w-1/3 md:w-1/2 w-full" bis_skin_checked="1">
+    <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg" bis_skin_checked="1">
+      <img
+        alt="team"
+        class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
+        src="profile picturs/aqib 1.jpg" loading="lazy"
+      />
+      <div class="flex-grow" bis_skin_checked="1">
+        <h2 class="text-gray-900 title-font font-medium">Aqib</h2>
+
+        <p class="text-gray-700">
+            Aqib is a multi-talented friend with a knack for offroad biking, fishing, and cooking. His adventurous spirit and diverse skills make him truly exceptional.
+        </p>
+        <a aria-label="Instagram handle of the taem Member" href="https://www.instagram.com/itx_aqib_45?igsh=MWlpYm1hOTNhbGozNA==" target="_blank"
+          ><img src="instagram.svg" height="30px" width="25px" alt="insta-logo"
+        /></a>
+        
+        
+      </div>
+    </div>
+  </div>
+  <div class="p-2 lg:w-1/3 md:w-1/2 w-full" bis_skin_checked="1">
+    <div
+      class="h-full flex items-center border-gray-200 border p-4 rounded-lg"
+      bis_skin_checked="1"
+    >
+      <img
+        alt="team"
+        class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
+        src="profile picturs/Sahil mushtaq.jpg"
+       loading="lazy" />
+      <div class="flex-grow" bis_skin_checked="1">
+        <h2 class="text-gray-900 title-font font-medium">
+          Sahil
+        </h2>
+        <p class="text-gray-700">Sahil loves adventure, playing online games, and volleyball. His diverse interests and energetic spirit make him a fun and engaging friend who enjoys a wide range of activities.
+
+
+
+
+
+        </p>
+        <a aria-label="Instagram handle of the taem Member" href="https://www.instagram.com/sahill_2032?igsh=MWR0eGtuYzR1NWZxeg==" target="_blank"
+        ><img src="instagram.svg" height="30px" width="25px" alt="insta-logo"
+      /></a>
+      </div>
+    </div>
+  </div>
+  <div class="p-2 lg:w-1/3 md:w-1/2 w-full" bis_skin_checked="1">
+    <div
+      class="h-full flex items-center border-gray-200 border p-4 rounded-lg"
+      bis_skin_checked="1"
+    >
+      <img
+        alt="team"
+        class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
+        src="profile picturs/Furqan.jpg" loading="lazy"
+      />
+      <div class="flex-grow" bis_skin_checked="1">
+        <h2 class="text-gray-900 title-font font-medium">
+          Furqan
+        </h2>
+        <p class="text-gray-700">Furqan shines with his skills in cricket and volleyball, and his refined taste in food adds a touch of elegance to his dynamic personality.
+
+
+
+
+
+        </p>
+        <a aria-label="Instagram handle of the taem Member" href="https://www.instagram.com/fasu20790?igsh=MXprMDU1aTR0eHJw" target="_blank"
+        ><img src="instagram.svg" height="30px" width="25px" alt="insta-logo"
+      /></a>
+      </div>
+    </div>
+  </div>
+  <div class="p-2 lg:w-1/3 md:w-1/2 w-full" bis_skin_checked="1">
+    <div
+      class="h-full flex items-center border-gray-200 border p-4 rounded-lg"
+      bis_skin_checked="1"
+    >
+      <img
+        alt="team"
+        class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
+        src="profile picturs/tehseen.jpg" loading="lazy"
+      />
+      <div class="flex-grow" bis_skin_checked="1">
+        <h2 class="text-gray-900 title-font font-medium">Tehseen Bin Akbar</h2>
+        <p class="text-gray-700">Tehseen is passionate about filmmaking, exploring new places, and event management. He’s a talented vocalist, avid photographer, and enjoys adventures and traveling.</p>
+        <a aria-label="Instagram handle of the taem Member" href="https://www.instagram.com/tehseenbinakba?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"
+        ><img src="instagram.svg" height="30px" width="25px" alt="insta-logo"
+      /></a>
+      </div>
+
+    </div>
+  </div>
+  <div class="p-2 lg:w-1/3 md:w-1/2 w-full" bis_skin_checked="1">
+    <div
+      class="h-full flex items-center border-gray-200 border p-4 rounded-lg"
+      bis_skin_checked="1"
+    >
+      <img
+        alt="team"
+        class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
+        src="profile picturs/xuhaib.gif.gif" loading="lazy"
+      />
+      <div class="flex-grow" bis_skin_checked="1">
+        <h2 class="text-gray-900 title-font font-medium">
+          Zuhaib
+        </h2>
+        <p class="text-gray-700">Founder & Adventurer
+            Passionate about web development and adventure, <a href="http://zuhaibrashid.com/">Zuhaib</a> leads the crew with a love for exploring new places and tackling exciting projects.</p>
+            <a aria-label="Instagram handle of the taem Member" href="https://www.instagram.com/zoh.aib__/" target="_blank"
+            ><img src="instagram.svg" height="30px" width="25px" alt="insta-logo"
+          /></a>
+      </div>
+    </div>
+  </div>
+  <div class="p-2 lg:w-1/3 md:w-1/2 w-full" bis_skin_checked="1">
+    <div
+      class="h-full flex items-center border-gray-200 border p-4 rounded-lg"
+      bis_skin_checked="1"
+    >
+      <img
+        alt="team"
+        class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
+        src="profile picturs/musaib.jpg" loading="lazy"
+      />
+      <div class="flex-grow" bis_skin_checked="1">
+        <h2 class="text-gray-900 title-font font-medium">
+          Musaib
+        </h2>
+        <p class="text-gray-700">Musaib is a practicing Muslim and respected Imam, known for his dedication to guiding our crew spiritually and leading prayers with deep faith and commitment.
+
+
+
+        </p>
+        <a aria-label="Instagram handle of the taem Member" href="https://www.instagram.com/musaebahmed?igsh=MTF1aTg1NjNpcWtr" target="_blank"
+        ><img src="instagram.svg" height="30px" width="25px" alt="inta-logo"
+      /></a>
+      </div>
+    </div>
+  </div>
+  <div class="p-2 lg:w-1/3 md:w-1/2 w-full" bis_skin_checked="1">
+    <div
+      class="h-full flex items-center border-gray-200 border p-4 rounded-lg"
+      bis_skin_checked="1"
+    >
+      <img
+        alt="team"
+        class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
+        src="profile picturs/sahil javeed.jpg" loading="lazy"
+      />
+      <div class="flex-grow" bis_skin_checked="1">
+        <h2 class="text-gray-900 title-font font-medium">
+          Sahil Javeed
+        </h2>
+        <p class="text-gray-700">Sahil Javeed is known for his great sense of humor and love for adventures. He enjoys fishing and exploring new experiences with enthusiasm and wit.
+
+
+
+
+
+        </p>
+        <a aria-label="Instagram handle of the taem Member" href="https://www.instagram.com/sahil.4024?igsh=a2R3OXVzc3BvYXR6" target="_blank"
+        ><img src="instagram.svg" height="30px" width="25px" alt="insta-logo"
+      /></a>
+      </div>
+    </div>
+  </div>
+  <div class="p-2 lg:w-1/3 md:w-1/2 w-full" bis_skin_checked="1">
+    <div
+      class="h-full flex items-center border-gray-200 border p-4 rounded-lg"
+      bis_skin_checked="1"
+    >
+      <img
+        alt="team"
+        class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
+        src="profile picturs/zubair.jpg" loading="lazy"
+      />
+      <div class="flex-grow" bis_skin_checked="1">
+        <h2 class="text-gray-900 title-font font-medium">Zubair</h2>
+        <p class="text-gray-700">Zubair is known for his adventurous spirit and curiosity. He loves exploring new places and has a kind nature, making him a valued friend.
+
+
+
+
+
+        </p>
+        <a aria-label="facebook handle of the taem Member" href="https://www.facebook.com/profile.php?id=100052350402534" target="_blank"
+        ><img src="facebook.png" height="40px" width="35px" alt="facebook-logo"
+      /></a>
+      </div>
+    </div>
+  </div>
+  <div class="p-2 lg:w-1/3 md:w-1/2 w-full" bis_skin_checked="1">
+    <div
+      class="h-full flex items-center border-gray-200 border p-4 rounded-lg"
+      bis_skin_checked="1"
+    >
+      <img
+        alt="team"
+        class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
+        src="profile picturs/mubashir.jpg" loading="lazy"
+      />
+      <div class="flex-grow" bis_skin_checked="1">
+        <h2 class="text-gray-900 title-font font-medium">
+           Muhammed Mubashir
+        </h2>
+        <p class="text-gray-700">Muhammed Mubashir is an adventure enthusiast who loves exploring jungles, swimming, and tracking. His passion for outdoor activities and nature drives his adventurous spirit.
+
+        </p>
+        <a aria-label="facebook handle of the taem Member" href="https://www.facebook.com/profile.php?id=100023662695866" target="_blank"
+        ><img src="facebook.png" height="40px" width="35px" alt="facebook-logo"
+      /></a>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</section>
+<section>
+  
+       
+    </div>
+  </div> 
+  <div class="container mx-auto px-1 py-1">
+    <div class="flex flex-wrap -mx-1 -my-1">
+      <!-- Friend Card 1 -->
+      <div class="p-2 lg:w-1/3 md:w-1/2 w-full" bis_skin_checked="1">
+        <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg" bis_skin_checked="1">
+          <img
+            alt="team"
+            class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
+            src="profile picturs/Haziq.webp" loading="lazy"
+          />
+          <div class="flex-grow" bis_skin_checked="1">
+            <h2 class="text-gray-900 title-font font-medium">
+              Haziq
+            </h2>
+            <p class="text-gray-700">Haziq is our chef during tours. He loves exploring, meeting new friends, and brings creativity and passion to every meal he prepares, making our adventures even more enjoyable.</p>
+            <a aria-label="Instagram handle of the taem Member" href="https://www.instagram.com/hazik__lone?igsh=MXJtcGg3NGpjaGZqdg==" target="_blank"
+            ><img src="instagram.svg" height="30px" width="25px" alt="insta-logo"
+          /></a>
+          </div>
+        </div>
+      </div>
+      <!-- Friend Card 2 -->
+      <div class="p-2 lg:w-1/3 md:w-1/2 w-full" bis_skin_checked="1">
+        <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg" bis_skin_checked="1">
+          <img
+            alt="team"
+            class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
+            src="profile picturs/shahid khan.jpg" loading="lazy"
+          />
+          <div class="flex-grow" bis_skin_checked="1">
+            <h2 class="text-gray-900 title-font font-medium">
+              Shahid
+            </h2>
+            <p class="text-gray-700">Shahid is passionate about cricket and enjoys exploring new places. His love for adventure and discovering new experiences makes him an enthusiastic and dynamic friend.
+            </p>
+            <a aria-label="Instagram handle of the taem Member" href="https://www.instagram.com/_shahid._khan_?igsh=MWlqN2hlMnlhbzM1ZQ==" target="_blank"
+            ><img src="instagram.svg" height="30px" width="25px" alt="insta-logo"
+          /></a>
+          </div>
+        </div>
+      </div>
+      <!-- Friend Card 3 -->
+      <div class="p-2 lg:w-1/3 md:w-1/2 w-full" bis_skin_checked="1">
+        <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg" bis_skin_checked="1">
+          <img
+            alt="team"
+            class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
+            src="profile picturs/naveed.webp" loading="lazy"
+          />
+          <div class="flex-grow" bis_skin_checked="1">
+            <h2 class="text-gray-900 title-font font-medium">
+              Naveed
+            </h2>
+            <p class="text-gray-700">Naveed loves cars, offroading, and exploring new places. His passion for adventure and enthusiasm for vehicles make him an exciting and dynamic friend.
+
+
+
+
+
+
+</p>
+             <a aria-label="Instagram handle of the taem Member" href="https://www.instagram.com/nav_jatt____?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"
+                ><img src="instagram.svg" height="30px" width="25px" alt="insta-logo"
+              /></a>
+          </div>
+        </div>
+      </div>
+      <!-- Add more friend cards here -->
+      <div class="p-2 lg:w-1/3 md:w-1/2 w-full" bis_skin_checked="1">
+        <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg" bis_skin_checked="1">
+          <img
+            alt="team"
+            class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
+            src="profile picturs/farhan.jpg" loading="lazy"
+          />
+          <div class="flex-grow" bis_skin_checked="1">
+            <h2 class="text-gray-900 title-font font-medium">
+              Farhan
+            </h2>
+            <p class="text-gray-700">Farhan loves playing video games and volleyball, with a keen interest in adventure. His enthusiasm for gaming and sports makes him an engaging and fun friend.</p>
+            <a aria-label="Instagram handle of the taem Member" href="https://www.instagram.com/farhan_fayaz_71?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"
+            ><img src="instagram.svg" height="30px" width="25px" alt="insta-logo"
+          /></a>
+          </div>
+        </div>
+      </div>
+      <!-- add more -->
+      <div class="p-2 lg:w-1/3 md:w-1/2 w-full" bis_skin_checked="1">
+        <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg" bis_skin_checked="1">
+          <img
+            alt="team"
+            class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
+            src="profile picturs/umar.enc" loading="lazy"
+          />
+          <div class="flex-grow" bis_skin_checked="1">
+            <h2 class="text-gray-900 title-font font-medium">
+              Umer
+            </h2>
+            <p class="text-gray-700">Umer loves to wander and play cricket. With a passion for adventure, he dreams of becoming a cop, making him a determined and spirited friend.
+            </p>
+            <a aria-label="facebook handle of the taem Member" href="https://www.facebook.com/profile.php?id=100076668668005" target="_blank"
+            ><img src="facebook.png" height="40px" width="35px" alt="facebook-logo"
+          /></a>
+          </div>
+        </div>
+      </div>
+      <!-- add more -->
+      <div class="p-2 lg:w-1/3 md:w-1/2 w-full" bis_skin_checked="1">
+        <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg" bis_skin_checked="1">
+          <img
+            alt="team"
+            class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
+            src="profile picturs/sameem.jpg" loading="lazy"
+          />
+          <div class="flex-grow" bis_skin_checked="1">
+            <h2 class="text-gray-900 title-font font-medium">
+              Sameem
+            </h2>
+            <p class="text-gray-700">Sameem is a standout friend with a talent for cricket and volleyball, and his great sense of humor makes every moment with him enjoyable and fun.</p>
+            <a aria-label="Instagram handle of the taem Member" href="https://www.instagram.com/captain__s123?igsh=dTRzMXZyNm4xcnAy" target="_blank"
+            ><img src="instagram.svg" height="40px" width="35px" alt="insta-logo"
+          /></a>
+          </div>
+        </div>
+      </div>
+      <!-- add more if more than 9 -->
+       <!-- New  team members from here  -->
+       <section class="text-gray-800 body-font">
+        <div class="container px-5 py-24 mx-auto">
+          <div class="flex flex-wrap -m-2">
+            <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
+              <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
+                <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="profile picturs/Bilmam.jpg" loading="lazy"> 
+                <div class="flex-grow">
+                  <h2 class="text-gray-900 title-font font-medium">Bilal Bhat</h2>
+                  <p class="text-gray-700">Bilal Bhat is well-skilled and has a deep love for nature. His experience and passion enrich our adventures and inspire our group</p>
+                  <a aria-label="facebook handle of the taem Member" href="https://media.tenor.com/WfZD9HMO5sIAAAAM/hum-pe-toh-hai-hi-nau-arpit-bala.gif"><img height="40px" width="35px" src="facebook.png" alt="FB Logo"></a>
+                </div>
+              </div>
+            </div>
+            
+            <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
+              <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
+                <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="profile picturs/Mudasir Hameed.webp" loading="lazy">
+                <div class="flex-grow">
+                  <h2 class="text-gray-900 title-font font-medium">Mudasir Hameed</h2>
+                  <p class="text-gray-700">Mudasir Hameed is an adventurous soul who enjoys exploring new places, capturing moments through photography, and has a keen interest in off-roading.</p>
+                  <a aria-label="Instagram handle of the taem Member" href="https://www.instagram.com/_abubakar313_/?igsh=MW1veTgyOWdrbWxwbQ%3D%3D#"><img height="40px" width="35px" src="instagram.svg" alt="instagram logo"></a>
+                </div>
+              </div>
+            </div>
+            <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
+              <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
+                <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="profile picturs/amir shafi (2).jpeg" loading="lazy">
+                <div class="flex-grow">
+                  <h2 class="text-gray-900 title-font font-medium">Amir Shafi</h2>
+                  <p class="text-gray-700">Amir Shafi is a fun-loving team player with a passion for trekking, volleyball, and discovering hidden gems in nature.</p>
+                  <a aria-label="Instagram handle of the taem Member" href="https://www.instagram.com/amir_writes2/?igsh=MWQ3czV0c25kcXE3OA%3D%3D#"><img height="40px " width="35px" src="instagram.svg" alt="instagram logo"></a>
+                </div>
+                
+              </div>
+              
+            </div>
+            <!-- Mavin added -->
+            <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
+              <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
+                <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="profile picturs/mavin.jpg" loading="lazy">
+                <div class="flex-grow">
+                  <h2 class="text-gray-900 title-font font-medium">Mir Mavin</h2>
+                  <p class="text-gray-700">Mavin, an adventurous spirit who loves exploring, connecting with people, and bringing fresh energy and laughter to every journey</p>
+                  <a aria-label="Instagram handle of the taem Member" href="https://www.instagram.com/mir.mavin?utm_source=ig_web_button_share_sheet&igsh=YmsxZGc3NzNoNGk2"><img height="40px " width="35px" src="instagram.svg" alt="instagram logo"></a>
+                </div>
+                
+              </div>
+              
+            </div>
+            <!-- tell here -->
+            
+          </div>
+          
+        </div>
+        
+      </section>
+<h1>Expore the World</h1>
+<section class="text-gray-800 body-font">
+  <div class="container px-5 py-24 mx-auto flex flex-wrap">
+    <div class="flex w-full mb-20 flex-wrap">
+      <h1 class="sm:text-4xl text-3xl font-bold title-font text-gray-900 lg:w-1/3 lg:mb-0 mb-4">Haijen Budgam: An Adventure Awaits</h1>
+      <p class="lg:pl-6 lg:w-2/3 mx-auto leading-relaxed text-lg text-gray-900">
+        Discover the magic of Haijen Budgam, where every moment is a blend of excitement and tranquility. From exhilarating offroading and immersive explorations to savoring delicious home-cooked meals, capturing breathtaking moments through photography, and indulging in serene camping experiences—each adventure creates lasting memories. Join us in celebrating the essence of adventure and camaraderie in this picturesque locale.
+      </p>
+    </div>
+    <div class="flex flex-wrap md:-m-4 -m-2">
+      <div class="flex flex-wrap w-1/2">
+        <div class="md:p-4 p-2 w-1/2">
+          <img alt="gallery" class="w-full h-72 object-cover object-center block" src="photo Galarry/Tehseen akbar/new12.jpg" loading="lazy"> 
+        </div>
+        <div class="md:p-4 p-2 w-1/2">
+          <img alt="gallery" class="w-full h-72 object-cover object-center block" src="photo Galarry/Tehseen akbar/new36.jpg" loading="lazy">
+        </div>
+        <div class="md:p-4 p-2 w-full">
+          <img alt="gallery" class="w-full h-96 object-cover  object-center block" src="./photo Galarry/photo1.jpg" loading="lazy">
+        </div>
+      </div>
+      <div class="flex flex-wrap w-1/2">
+        <div class="md:p-4 p-2 w-full">
+          <img alt="gallery" class="w-full h-96 object-cover object-center block" src="./photo Galarry/photo.jpg" loading="lazy">
+        </div>
+        <div class="md:p-4 p-2 w-1/2">
+          <img alt="gallery" class="w-full h-72 object-cover object-center block" src="photo Galarry/Tehseen akbar/new38.jpg" loading="lazy">
+        </div>
+        <div class="md:p-4 p-2 w-1/2">
+          <img alt="gallery" class="w-full h-72 object-cover object-center block" src="photo Galarry/Tehseen akbar/new40.jpg" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- another tour -->
+<section class="text-gray-800 body-font">
+  <div class="container px-5 py-24 mx-auto" bis_skin_checked="1">
+    <div class="flex flex-col text-center w-full mb-20" bis_skin_checked="1">
+      <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Exploring Diskhal: The Serenity of Budgam</h1>
+      <p class="lg:w-2/3 mx-auto leading-relaxed text-base text-gray-900">Discover Diskhal, a tranquil village in Budgam that offers a unique blend of natural beauty and cultural richness. This hidden gem features rolling green hills, charming local architecture, and a peaceful atmosphere that's perfect for a relaxing escape. Wander through its scenic trails, experience the warmth of its community, and soak in the serene landscapes that make Diskhal a special destination. Join us as we explore the quiet allure of this beautiful locale.</p>
+    </div>
+    <div class="flex flex-wrap -m-4" bis_skin_checked="1">
+      <div class="lg:w-1/3 sm:w-1/2 p-4" bis_skin_checked="1">
+        <div class="flex relative" bis_skin_checked="1">
+          <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="Diskhal/Diskhal1.jpg" loading="lazy">
+          <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100" bis_skin_checked="1">
+            <h2 class="tracking-widest text-sm title-font font-medium text-indigo-700 mb-1">©zuhaib Rashid</h2>
+            <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Shooting Doodhpathri</h1>
+            <p class="leading-relaxed text-gray-900">Capturing the tranquil beauty of Diskhal through my lens.</p>
+          </div>
+        </div>
+      </div>
+      <div class="lg:w-1/3 sm:w-1/2 p-4" bis_skin_checked="1">
+        <div class="flex relative" bis_skin_checked="1">
+          <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="Diskhal/Diskhal2.jpg" loading="lazy">
+          <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100" bis_skin_checked="1">
+            <h2 class="tracking-widest text-sm title-font font-medium text-indigo-700 mb-1">©zuhaib Rashid</h2>
+            <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Shooting Doodhpathri</h1>
+            <p class="leading-relaxed text-gray-900">Capturing the tranquil beauty of Diskhal through my lens.</p>
+          </div>
+        </div>
+      </div>
+      <div class="lg:w-1/3 sm:w-1/2 p-4" bis_skin_checked="1">
+        <div class="flex relative" bis_skin_checked="1">
+          <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="Diskhal/Diskhal3.jpg" loading="lazy">
+          <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100" bis_skin_checked="1">
+            <h2 class="tracking-widest text-sm title-font font-medium text-indigo-700 mb-1">©zuhaib Rashid</h2>
+            <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Shooting Doodhpathri</h1>
+            <p class="leading-relaxed text-gray-900">Capturing the tranquil beauty of Diskhal through my lens.</p>
+          </div>
+        </div>
+      </div>
+      <div class="lg:w-1/3 sm:w-1/2 p-4" bis_skin_checked="1">
+        <div class="flex relative" bis_skin_checked="1">
+          <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="Diskhal/Diskhal4.jpg" loading="lazy">
+          <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100" bis_skin_checked="1">
+            <h2 class="tracking-widest text-sm title-font font-medium text-indigo-700 mb-1">©zuhaib Rashid</h2>
+            <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Shooting Doodhpathri</h1>
+            <p class="leading-relaxed text-gray-900">Capturing the tranquil beauty of Diskhal through my lens.</p>
+          </div>
+        </div>
+      </div>
+      <div class="lg:w-1/3 sm:w-1/2 p-4" bis_skin_checked="1">
+        <div class="flex relative" bis_skin_checked="1">
+          <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="Diskhal/Diskhal5.jpg" loading="lazy">
+          <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100" bis_skin_checked="1">
+            <h2 class="tracking-widest text-sm title-font font-medium text-indigo-700 mb-1">©zuhaib Rashid</h2>
+            <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Shooting Doodhpathri</h1>
+            <p class="leading-relaxed text-gray-900">Capturing the tranquil beauty of Diskhal through my lens.</p>
+          </div>
+        </div>
+      </div>
+      <div class="lg:w-1/3 sm:w-1/2 p-4" bis_skin_checked="1">
+        <div class="flex relative" bis_skin_checked="1">
+          <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="Diskhal/Diskhal6.jpg" loading="lazy">
+          <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100" bis_skin_checked="1">
+            <h2 class="tracking-widest text-sm title-font font-medium text-indigo-700 mb-1">©zuhaib Rashid</h2>
+            <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Shooting Doodhpathri</h1>
+            <p class="leading-relaxed text-gray-900">Capturing the tranquil beauty of Diskhal through my lens.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- another -->
+<section class="text-gray-800 body-font">
+  <div class="container px-5 py-24 mx-auto flex flex-col" bis_skin_checked="1">
+    <div class="lg:w-4/6 mx-auto" bis_skin_checked="1">
+      <div class="rounded-lg h-64 overflow-hidden" bis_skin_checked="1">
+        <img alt="content" class="object-cover object-center h-full w-full" src="TAtakoti/Tatakoti1.jpg" loading="lazy" title="Tatakoti Moutain Photo by Mursaleen">
+      </div>
+      <div class="flex flex-col sm:flex-row mt-10" bis_skin_checked="1">
+        <div class="sm:w-1/3 text-center sm:pr-8 sm:py-8" bis_skin_checked="1">
+          <div class="w-20 h-20 rounded-full inline-flex items-center justify-center bg-gray-200 text-gray-600" bis_skin_checked="1">
+            <svg fill="" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10" viewBox="0 0 24 24">
+              <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <img src="profile picturs/xuhaib.gif.gif" title alt="zuhaib" class="rounded-full mr-4" loading="lazy">
+          </div>
+          <div class="flex flex-col items-center text-center justify-center" bis_skin_checked="1">
+            <h2 class="font-medium title-font mt-4 text-gray-900 text-lg">Zuhaib Rashid</h2>
+            <div class="w-12 h-1 bg-indigo-500 rounded mt-2 mb-4" bis_skin_checked="1"></div>
+            <p class="text-base text-gray-900">A flawless haven in Budgam with serene landscapes and timeless beauty—a perfect escape into nature’s embrace.</p>
+          </div>
+        </div>
+        <div class="sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left" bis_skin_checked="1">
+          <p class="leading-relaxed text-lg mb-4 text-gray-900">Tattakoti Peak, an eminent pinnacle in the Pir Panjal Range of Jammu and Kashmir, India, presents an arduous yet exhilarating challenge to seasoned trekkers. Its towering elevation commands a resplendent panorama, encompassing the undulating valleys and the alabaster crests of neighboring mountains. The peak's remoteness and precipitous ascent make it a coveted conquest for those seeking solace amidst nature's grandeur. As one traverses the serpentine trails leading to its summit, the tranquil yet formidable ambiance of Tattakoti Peak evokes a profound sense of awe and introspection.</p>
+          <a href="https://en.wikipedia.org/wiki/Pir_Panjal_Range" target="_blank" class="text-indigo-700 underline hover:text-indigo-800 focus:text-indigo-800 focus:outline-none">
+            Check
+            <img src="click.png" height="100px" width="100px" alt="Informaition" />
+          </a>
+            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+              <path d="M5 12h14M12 5l7 7-7 7"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> 
+<!-- Contact or feedback forum starts from here -->
+
+
+  <div class="container mx-auto px-5 py-10">
+    <div class="flex flex-wrap -mx-4 -my-2">
+      <!-- Friend Cards Here -->
+       <!-- Salah Widget -->
+            <!-- Prayer Times Widget Container -->
+<div style="display: flex; justify-content: center; align-items: center; padding: 2rem; margin-left: 3rem;">
+  <div style="
+    max-width: 500px;
+    width: 100%;
+    background: #f8f9fa;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 1rem;
+  ">
+    <h3 style="
+      text-align: center;
+      font-family: 'Segoe UI', sans-serif;
+      color: #333;
+      margin-bottom: 1rem;
+    ">🕌 Prayer Times – Srinagar</h3>
+    <iframe
+      title="Prayer Widget"
+      src="https://www.islamicfinder.org/prayer-widget/1255634/shafi/3/0/18.0/18.0"
+      style="border: none; width: 100%; height: 360px;"
+      scrolling="no"
+      loading="lazy"
+    ></iframe>
+  </div>
+</div>
+
+<!-- Responsive Styles (optional media query) -->
+<style>
+  @media (max-width: 600px) {
+    iframe {
+      height: 400px !important;
+    }
+  }
+</style>
+
+<br>
+<br>
+      <!-- Marque section from here  -->
+
+<div class="marquee-container">
+  <div class="marquee-content">
+      <img src="./profile picturs/xuhaib.gif.gif" alt="Friend 1" loading="lazy" >
+      <img src="./profile picturs/Sahil mushtaq.jpg" alt="Friend 2" loading="lazy" >
+      <img src="./profile picturs/naveed.webp" alt="Friend 3" loading="lazy" >
+      <img src="./profile picturs/farhan.jpg" alt="Friend 4" loading="lazy" >
+      <img src="./profile picturs/umar.enc" alt="Friend 5" loading="lazy" >
+      <img src="./profile picturs/sameem.jpg" alt="Friend 6" loading="lazy" >
+      <img src="./profile picturs/Furqan.jpg" alt="Friend 7" loading="lazy" >
+      <img src="./profile picturs/sahil javeed.jpg" alt="Friend 8" loading="lazy" >
+      <img src="./profile picturs/Mudasir Hameed.webp" alt="Friend 8" loading="lazy" >
+      <img src="./profile picturs/Haziq.webp" alt="Friend 8" loading="lazy" >
+      <img src="./profile picturs/aqib 1.jpg" alt="Friend 8" loading="lazy" >
+      <img src="./profile picturs/amir shafi (2).jpeg" alt="Friend 8" loading="lazy" >
+      <img src="./profile picturs/tehseen.jpg" alt="Friend 8" loading="lazy" >
+      <img src="./profile picturs/mubashir.jpg" alt="Friend 8" loading="lazy" >
+      <img src="./profile picturs/shahid khan.jpg" alt="Friend 8" loading="lazy" >
+      <img src="./profile picturs/Bilmam.jpg" alt="Friend 8" loading="lazy" >
+      <img src="./profile picturs/musaib.jpg" alt="Friend 8" loading="lazy" >
+      <img src="./profile picturs/zubair.jpg" alt="Friend 8" loading="lazy" >
+      <!-- Duplicate images for smooth looping -->
+      <img src="./profile picturs/xuhaib.gif.gif" alt="Friend 1" loading="lazy" >
+      <img src="./profile picturs/Sahil mushtaq.jpg" alt="Friend 2" loading="lazy" >
+      <img src="./profile picturs/naveed.webp" alt="Friend 3" loading="lazy" >
+      <img src="./profile picturs/farhan.jpg" alt="Friend 4" loading="lazy" >
+      <img src="./profile picturs/umar.enc" alt="Friend 5" loading="lazy" >
+      <img src="./profile picturs/sameem.jpg" alt="Friend 6" loading="lazy" >
+      <img src="./profile picturs/Furqan.jpg" alt="Friend 7" loading="lazy" >
+      <img src="./profile picturs/sahil javeed.jpg" alt="Friend 8" loading="lazy" >
+      <img src="./profile picturs/Mudasir Hameed.webp" alt="Friend 8" loading="lazy" >
+      <img src="./profile picturs/Haziq.webp" alt="Friend 8" loading="lazy" >
+      <img src="./profile picturs/aqib 1.jpg" alt="Friend 8" loading="lazy" >
+      <img src="./profile picturs/amir shafi (2).jpeg" alt="Friend 8" loading="lazy" >
+      <img src="./profile picturs/tehseen.jpg" alt="Friend 8" loading="lazy" >
+      <img src="./profile picturs/mubashir.jpg" alt="Friend 8" loading="lazy" >
+      <img src="./profile picturs/shahid khan.jpg" alt="Friend 8" loading="lazy" >
+      <img src="./profile picturs/Bilmam.jpg" alt="Friend 8" loading="lazy" >
+      <img src="./profile picturs/musaib.jpg" alt="Friend 8" loading="lazy" >
+      <img src="./profile picturs/zubair.jpg" alt="Friend 8" loading="lazy" >
+  </div>
+</div>
+<!-- Till here -->
+<br> 
+<br>
+<!-- new ctas  -->
+<section class="relative max-w-screen-xl mx-auto py-4 px-4 md:px-8">
+  <!-- Increase overlay opacity for contrast -->
+  <div class="absolute top-0 left-0 w-full h-full bg-white opacity-60"></div>
+  <div class="relative z-10 gap-5 items-center lg:flex">
+      <div class="flex-1 max-w-lg py-5 sm:mx-auto sm:text-center lg:max-w-max lg:text-left">
+          <h3 class="text-3xl text-gray-900 font-semibold md:text-4xl">
+            Explore Kashmir with high <span class="text-indigo-700">performance adventure!</span>
+          </h3>
+          <p class="text-gray-900 leading-relaxed mt-3">
+            Friend Circle is more than just a group—it’s a bond of adventure and fun! 🎉 Whether it’s road trips 🚙, camping nights ⛺, or just sharing laughs 😂, we make every moment count.
+          </p>
+          <a class="mt-5 px-4 py-2 text-indigo-700 font-medium bg-indigo-100 rounded-full inline-flex items-center hover:text-indigo-800 focus:text-indigo-800 focus:outline-none"
+             href="./tour.html">
+              Try it out
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-1 duration-150" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+              </svg>
+          </a>
+      </div>
+      <div class="flex-1 mt-5 mx-auto sm:w-9/12 lg:mt-0 lg:w-auto">
+          <img src="https://i.postimg.cc/kgd4WhyS/container.png" alt="" class="w-full" />
+      </div>
+  </div>
+</section>
+
+<section class="overflow-hidden bg-gray-70 sm:grid sm:grid-cols-2">
+  <div class="p-8 md:p-12 lg:px-16 lg:py-24">
+    <div class="mx-auto max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
+      <h2 class="text-2xl font-bold text-gray-900 md:text-3xl">
+        Friend Circle  is a group of adventurers who love offroading , camping , and exploring new places . We share experiences, create memories , and enjoy the thrill of adventure together!
+      </h2>
+
+      <p class="hidden text-gray-900 md:mt-4 md:block">
+        Friend Circle  is all about adventure and friendship . We explore offbeat trails , camp under the stars , and take on exciting challenges . Every trip is a new story , filled with fun , teamwork , and unforgettable moments!
+      </p>
+
+      <div class="mt-4 md:mt-8">
+        <a
+          href="./tour.html"
+          class="inline-block rounded-full bg-indigo-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:ring-4 focus:ring-yellow-400 focus:outline-none"
+        >
+          Get Started Today
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <img
+    alt=""
+    src="./Diskhal/Diskhal1.jpg"
+    class="h-56 w-full object-cover sm:h-full"
+    loading="lazy"
+  />
+</section>
+
+<!-- Blogs section -->
+<section class="py-10 bg-white sm:py-16 lg:py-24">
+  <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
+      <div class="max-w-2xl mx-auto text-center">
+          <h2 class="text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">Friend Circle Blog</h2>
+          <p class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-900">Adventures, stories, and unforgettable moments—explore our journey through words and pictures. Stay updated with our latest experiences and travel tales!</p>
+      </div>
+
+      <div class="grid max-w-md grid-cols-1 mx-auto mt-12 lg:max-w-full lg:mt-16 lg:grid-cols-3 gap-x-16 gap-y-12">
+          <div>
+              <a href="https://timescontent.timesofindia.com/photo/travel/Diskhal/583161" title="Read about the untouched beauty of Diskhal" class="block aspect-w-4 aspect-h-3" aria-label="Diskhal: Untouched Beauty Blog Post">
+                  <img class="object-cover w-full h-full" src="https://image-timescontent.timesgroup.com/thumb/583075.webp" alt="Diskhal image showcasing lush meadows and mountains" loading="lazy" />
+              </a>
+              <span class="inline-flex px-4 py-2 text-xs font-semibold tracking-widest uppercase rounded-full text-rose-700 bg-rose-100 mt-9">  </span>
+              <p class="mt-6 text-xl font-semibold">
+                  <a href="https://timescontent.timesofindia.com/photo/travel/Diskhal/583161" title="Read about the untouched beauty of Diskhal" class="text-black underline-offset-2 hover:underline" aria-label="Read about the untouched beauty of Diskhal"> The Untouched Beauty of Diskhal</a>
+              </p>
+              <p class="mt-4 text-gray-900">Tucked away in Budgam, Diskhal remains an undiscovered paradise. Surrounded by lush meadows and breathtaking mountains, it's a perfect spot for adventure seekers.</p>
+              <div class="h-0 mt-6 mb-4 border-t-2 border-gray-200 border-dashed"></div>
+              <span class="block text-sm font-bold tracking-widest text-gray-700 uppercase"> Zuhaib Rashid . June 12, 2024 </span>
+          </div>
+
+          <div>
+              <a href="https://brenwarpowerproject.blogspot.com/2023/02/haijan-brenwar.html" title="Discover the hidden riverside retreat at Haijen" class="block aspect-w-4 aspect-h-3" aria-label="Haijen: Hidden Riverside Retreat Blog Post">
+                  <img class="object-cover w-full h-full" src="photo Galarry/Haijen15.jpg" alt="Scenic riverside retreat in Haijen" />
+              </a>
+              <span class="inline-flex px-4 py-2 text-xs font-semibold tracking-widest uppercase rounded-full text-sky-700 bg-sky-100 mt-9"> </span>
+              <p class="mt-6 text-xl font-semibold">
+                  <a href="https://brenwarpowerproject.blogspot.com/2023/02/haijan-brenwar.html" title="Discover the hidden riverside retreat at Haijen" class="text-black underline-offset-2 hover:underline" aria-label="Discover the hidden riverside retreat at Haijen"> Haijen: A Hidden Riverside Retreat </a>
+              </p>
+              <p class="mt-4 text-gray-900">A peaceful escape near the river, Haijen offers stunning views, fresh air, and an untouched natural vibe. A must-visit for those seeking serenity!.</p>
+              <div class="h-0 mt-6 mb-4 border-t-2 border-gray-200 border-dashed"></div>
+              <span class="block text-sm font-bold tracking-widest text-gray-700 uppercase"> Aqib Mushtaq . June 12, 2024 </span>
+          </div>
+
+          <div>
+              <a href="https://en.wikipedia.org/wiki/Gurez" title="Learn about the beauty of Gurez Valley" class="block aspect-w-4 aspect-h-3" aria-label="Gurez Valley: Kashmir’s Best-Kept Secret Blog Post">
+                  <img class="object-cover w-full h-full" src="gurez.jpg" alt="Gurez Valley landscape with traditional wooden houses" loading="lazy" />
+              </a>
+              <span class="inline-flex px-4 py-2 text-xs font-semibold tracking-widest uppercase rounded-full text-sky-700 bg-sky-100 mt-9"> </span>
+              <p class="mt-6 text-xl font-semibold">
+                  <a href="https://en.wikipedia.org/wiki/Gurez" title="Learn about the beauty of Gurez Valley" class="text-black underline-offset-2 hover:underline" aria-label="Learn about the beauty of Gurez Valley"> Gurez Valley: Kashmir’s Best-Kept Secret</a>
+              </p>
+              <p class="mt-4 text-gray-900">Nestled near the Line of Control, Gurez Valley boasts breathtaking landscapes, traditional wooden houses, and a glimpse into Kashmir’s untouched beauty. A true hidden gem!</p>
+              <div class="h-0 mt-6 mb-4 border-t-2 border-gray-200 border-dashed"></div>
+              <span class="block text-sm font-bold tracking-widest text-gray-700 uppercase"> Tehseen Bin Akbar . July 12, 2023 </span>
+          </div>
+      </div>
+  </div>
+</section>
+
+
+
+    <!-- our team some new stuff -->
+    <section>
+      <div class="py-10 bg-gradient-to-r from-fuchsia-600 to-blue-600">
+          <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+              <h2 class="text-3xl font-bold leading-tight text-center text-blacksm:text-4xl lg:text-5xl">You’ll be in great company</h2>
+          </div>
+      </div>
+  
+      <div class="grid grid-cols-4 md:grid-cols-6 xl:grid-cols-11">
+          <div>
+              <div class="aspect-w-1 aspect-h-1">
+                  <img class="bg-gray-200" src="./profile picturs/xuhaib.gif.gif" alt="" />
+              </div>
+          </div>
+  
+          <div>
+              <div class="aspect-w-1 aspect-h-1">
+                  <img class="bg-gray-300" src="./profile picturs/aqib 1.jpg" alt="" />
+              </div>
+          </div>
+  
+          <div>
+              <div class="aspect-w-1 aspect-h-1">
+                  <img class="bg-gray-200" src="./profile picturs/Sahil mushtaq.jpg" alt="" />
+              </div>
+          </div>
+  
+          <div>
+              <div class="aspect-w-1 aspect-h-1">
+                  <img class="bg-gray-300" src="./profile picturs/naveed.webp" alt="" />
+              </div>
+          </div>
+  
+          <div>
+              <div class="aspect-w-1 aspect-h-1">
+                  <img class="bg-gray-300" src="./profile picturs/musaib.jpg" alt="" />
+              </div>
+          </div>
+  
+         
+  
+          <div>
+              <div class="aspect-w-1 aspect-h-1">
+                  <img class="bg-gray-300" src="./profile picturs/mubashir.jpg" alt=""  loading="lazy" />
+              </div>
+          </div>
+  
+          <div>
+              <div class="aspect-w-1 aspect-h-1">
+                  <img class="bg-gray-200" src="./profile picturs/sahil javeed.jpg" alt=""  loading="lazy"/>
+              </div>
+          </div>
+  
+          <div>
+              <div class="aspect-w-1 aspect-h-1">
+                  <img class="bg-gray-300" src="./profile picturs/tehseen.jpg" alt="" loading="lazy" />
+              </div>
+          </div>
+  
+          <div>
+              <div class="aspect-w-1 aspect-h-1">
+                  <img class="bg-gray-200" src="./profile picturs/farhan.jpg" alt="" loading="lazy" />
+              </div>
+          </div>
+  
+          <div>
+              <div class="aspect-w-1 aspect-h-1">
+                  <img class="bg-gray-300" src="./profile picturs/Furqan.jpg" alt="" loading="lazy" />
+              </div>
+          </div>
+  
+          <div>
+              <div class="aspect-w-1 aspect-h-1">
+                  <img class="bg-gray-200" src="./profile picturs/Bilmam.jpg" alt=""  loading="lazy" />
+              </div>
+          </div>
+  
+        
+  </section>
+  <br>
+  <br>
+  <br>
+  <!-- else new will be from here  -->
+<section class="py-10 bg-white sm:py-16 lg:py-24">
+  <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+      <div class="text-center">
+          <!-- Changed h4 to h2 for proper heading hierarchy -->
+          <h2 id="component" class="text-xl font-medium text-gray-900">Numbers tell the hard works we’ve done in the last 6 years</h2>
+      </div>
+
+      <div class="grid grid-cols-1 gap-6 px-6 mt-8 sm:px-0 lg:mt-16 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-12">
+          <!-- Card 1 -->
+          <div class="overflow-hidden bg-white border border-gray-200 rounded-lg">
+              <div class="px-4 py-6">
+                  <div class="flex items-start">
+                      <svg class="flex-shrink-0 w-12 h-12 text-fuchsia-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
+                      <div class="ml-4">
+                          <h3 class="text-4xl font-bold text-gray-900">6+</h3>
+                          <p class="mt-1.5 text-lg font-medium leading-tight text-gray-900">Years in adventure</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="overflow-hidden bg-white border border-gray-200 rounded-lg">
+              <div class="px-4 py-6">
+                  <div class="flex items-start">
+                      <svg class="flex-shrink-0 w-12 h-12 text-fuchsia-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                      </svg>
+                      <div class="ml-4">
+                          <h3 class="text-4xl font-bold text-gray-900">15+</h3>
+                          <p class="mt-1.5 text-lg font-medium leading-tight text-gray-900">Team members</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="overflow-hidden bg-white border border-gray-200 rounded-lg">
+              <div class="px-4 py-6">
+                  <div class="flex items-start">
+                      <svg class="flex-shrink-0 w-12 h-12 text-fuchsia-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
+                      <div class="ml-4">
+                          <h3 class="text-4xl font-bold text-gray-900">274</h3>
+                          <p class="mt-1.5 text-lg font-medium leading-tight text-gray-900">Tours</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="overflow-hidden bg-white border border-gray-200 rounded-lg">
+              <div class="px-4 py-6">
+                  <div class="flex items-start">
+                      <svg class="flex-shrink-0 w-12 h-12 text-fuchsia-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
+                      </svg>
+                      <div class="ml-4">
+                          <h3 class="text-4xl font-bold text-gray-900">98%</h3>
+                          <p class="mt-1.5 text-lg font-medium leading-tight text-gray-900">Tour success</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+
+
+
+
+<br>
+<br>
+<!-- faq section -->
+<section class="max-w-4xl mx-auto my-10 p-6 bg-white text-gray-900 rounded-2xl shadow-xl">
+  <h2 class="text-3xl font-bold text-center mb-6">❓ Frequently Asked Questions</h2>
+  <div class="space-y-4">
+      <div class="faq-item border-b border-gray-300 pb-3">
+          <button class="faq-question w-full flex justify-between items-center text-lg font-semibold py-3 focus:outline-none">
+              🤔 What is Friend Circle?
+              <span class="arrow transition-transform duration-300 text-2xl">▼</span>
+          </button>
+          <div class="faq-answer-wrapper overflow-hidden">
+              <p class="faq-answer text-gray-600 text-sm opacity-0 transition-opacity duration-300">
+                  Friend Circle is a close-knit group where we share adventures, explore new places, and create unforgettable memories together.
+              </p>
+          </div>
+      </div>
+
+      <div class="faq-item border-b border-gray-300 pb-3">
+          <button class="faq-question w-full flex justify-between items-center text-lg font-semibold py-3 focus:outline-none">
+              🚀 How can I join Friend Circle?
+              <span class="arrow transition-transform duration-300 text-2xl">▼</span>
+          </button>
+          <div class="faq-answer-wrapper overflow-hidden">
+              <p class="faq-answer text-gray-600 text-sm opacity-0 transition-opacity duration-300">
+                  You can join by being part of our adventures or getting an invite from an existing member. Stay adventurous!
+              </p>
+          </div>
+      </div>
+
+      <div class="faq-item border-b border-gray-300 pb-3">
+          <button class="faq-question w-full flex justify-between items-center text-lg font-semibold py-3 focus:outline-none">
+              ⛺ What kind of activities do you do?
+              <span class="arrow transition-transform duration-300 text-2xl">▼</span>
+          </button>
+          <div class="faq-answer-wrapper overflow-hidden">
+              <p class="faq-answer text-gray-600 text-sm opacity-0 transition-opacity duration-300">
+                  We love trekking, off-roading, camping, fishing, and playing sports like volleyball. Adventure is in our DNA!
+              </p>
+          </div>
+      </div>
+
+      <div class="faq-item border-b border-gray-300 pb-3">
+          <button class="faq-question w-full flex justify-between items-center text-lg font-semibold py-3 focus:outline-none">
+              📸 Can I share my adventure photos?
+              <span class="arrow transition-transform duration-300 text-2xl">▼</span>
+          </button>
+          <div class="faq-answer-wrapper overflow-hidden">
+              <p class="faq-answer text-gray-600 text-sm opacity-0 transition-opacity duration-300">
+                  Yes! We encourage sharing your best adventure shots. Tag us on Instagram and let the world see our journey!
+              </p>
+          </div>
+      </div>
+
+      <div class="faq-item border-b border-gray-300 pb-3">
+          <button class="faq-question w-full flex justify-between items-center text-lg font-semibold py-3 focus:outline-none">
+              🎉 Do you organize events or trips?
+              <span class="arrow transition-transform duration-300 text-2xl">▼</span>
+          </button>
+          <div class="faq-answer-wrapper overflow-hidden">
+              <p class="faq-answer text-gray-600 text-sm opacity-0 transition-opacity duration-300">
+                  Absolutely! We plan group trips, fun meetups, and spontaneous road trips. Stay connected for the next big adventure.
+              </p>
+          </div>
+      </div>
+
+      <div class="faq-item border-b border-gray-300 pb-3">
+          <button class="faq-question w-full flex justify-between items-center text-lg font-semibold py-3 focus:outline-none">
+              🛠️ Can I contribute to Friend Circle?
+              <span class="arrow transition-transform duration-300 text-2xl">▼</span>
+          </button>
+          <div class="faq-answer-wrapper overflow-hidden">
+              <p class="faq-answer text-gray-600 text-sm opacity-0 transition-opacity duration-300">
+                  Yes! Whether it’s writing blogs, designing, or organizing trips, we welcome all contributions from our members.
+              </p>
+          </div>
+      </div>
+  </div>
+</section>
+<!-- Feature sections -->
+  
+
+<script>
+  // PWA Script
+  const CACHE_NAME = "friendcircle-cache-v1";
+const urlsToCache = [
+  "/",
+  "/index.html",
+  "/style.css",
+  "/script.js",
+  // add other assets you want cached
+];
+
+self.addEventListener("install", event => {
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(cache => {
+        return cache.addAll(urlsToCache);
+      })
+  );
+});
+
+self.addEventListener("activate", event => {
+  // optional: cleanup old caches
+  event.waitUntil(
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames.map(cn => {
+          if (cn !== CACHE_NAME) {
+            return caches.delete(cn);
+          }
+        })
+      );
+    })
+  );
+});
+
+self.addEventListener("fetch", event => {
+  event.respondWith(
+    caches.match(event.request).then(response => {
+      return response || fetch(event.request);
+    })
+  );
+});
+
+  document.querySelectorAll('.faq-question').forEach(button => {
+      button.addEventListener('click', () => {
+          const answerWrapper = button.nextElementSibling;
+          const answer = answerWrapper.querySelector('.faq-answer');
+          const arrow = button.querySelector('.arrow');
+
+          if (answerWrapper.style.maxHeight) {
+              answerWrapper.style.maxHeight = null;
+              answer.style.opacity = 0;
+              arrow.style.transform = 'rotate(0deg)';
+          } else {
+              document.querySelectorAll('.faq-answer-wrapper').forEach(wrapper => wrapper.style.maxHeight = null);
+              document.querySelectorAll('.faq-answer').forEach(p => p.style.opacity = 0);
+              document.querySelectorAll('.arrow').forEach(a => a.style.transform = 'rotate(0deg)');
+
+              answerWrapper.style.maxHeight = answer.scrollHeight + "px";
+              answer.style.opacity = 1;
+              arrow.style.transform = 'rotate(180deg)';
+          }
+      });
+  });
+</script>
+
+    
+  
+ <!-- new -->
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Contact Us</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ga+Maamli&family=Jersey+15+Charted&family=Protest+Riot&family=Rubik+Marker+Hatch&family=Shalimar&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --primary-color:#010712;
+      --secondary-color:#4b5563; /* darker than #818386 for contrast */
+      --bg-color:#FCFDFD;
+      --button-color:#3B3636;
+      --h1-color:#111827; /* near gray-900 for strong contrast */
+      --link-blue:#1d4ed8; /* stronger blue */
+      --link-blue-hover:#1e40af; /* darker on hover */
+      --muted:#374151; /* gray-700 for small text */
+    }
+
+    .contact-container *{margin:0;box-sizing:border-box;transition:all .3s ease-in-out}
+    .contact-container{display:flex;flex-direction:column;width:100%;min-height:100vh;background:var(--bg-color)}
+    .left-col{width:100%;height:30vh;background-image:url("https://images.pexels.com/photos/7824514/pexels-photo-7824514.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");background-size:cover;background-repeat:no-repeat}
+    .logo{width:10rem;padding:1.5rem}
+    .right-col{background:var(--bg-color);width:100%;padding:2rem 1.5rem;flex:1}
+
+    .right-col h1,.right-col p,.right-col label,.right-col button,.right-col .description{
+      font-family:"Shalimar",cursive;font-weight:400;letter-spacing:.1rem;font-size:20px
+    }
+
+    .right-col h1{color:var(--h1-color);text-transform:uppercase;font-size:2rem;letter-spacing:.5rem;font-weight:600}
+    .right-col p{color:#111827; /* gray-900 */ font-size:1rem;letter-spacing:.01rem;width:100%;margin:.25rem 0}
+    .right-col label,.right-col .description{color:#1f2937; /* gray-800 */ text-transform:uppercase;font-size:.75rem;letter-spacing:.06rem}
+
+    .right-col form{width:100%;position:relative;margin-top:2rem;padding:1rem 0}
+    .right-col input,.right-col textarea,.right-col label{width:100%;display:block}
+    .right-col p,.right-col placeholder,.right-col input,.right-col textarea{font-family:'Helvetica Neue',sans-serif}
+
+    .right-col input::placeholder,.right-col textarea::placeholder{color:#374151} /* gray-700 */
+    .right-col input,.right-col textarea{
+      color:#111827;background:var(--bg-color);border:none;border-bottom:1px solid #6b7280; /* gray-500 -> slightly darker */
+      padding:.5rem 0;margin-bottom:1rem;outline:none
+    }
+    .right-col textarea{resize:none}
+
+    .right-col button{
+      text-transform:uppercase;font-weight:600;background:var(--button-color);color:var(--bg-color);
+      width:100%;height:2.5rem;border:none;border-radius:4px;outline:none;cursor:pointer
+    }
+    .right-col input:hover,.right-col textarea:hover{border-bottom-color:#4b5563}
+    .right-col button:hover{filter:brightness(1.05)}
+    .right-col button:active{filter:brightness(.95)}
+
+    #error,#success-msg{
+      width:100%;margin:.125rem 0;font-size:.8rem;text-transform:uppercase;font-family:'Jost',sans-serif;color:#111827
+    }
+    #success-msg{transition-delay:3s}
+
+    @media only screen and (min-width:950px){
+      .contact-container{flex-direction:row}
+      .left-col{width:45vw;height:100vh}
+      .right-col{width:50vw;height:100vh;padding:5rem 3.5rem}
+      .right-col h1{font-size:2.5rem}
+      .right-col p{width:40vw}
+      .right-col form{width:31.25rem}
+      .right-col input,.right-col textarea{width:40vw}
+      .right-col button{width:10rem}
+    }
+
+    /* Utility link styles for distinguishability and contrast */
+    .link{
+      color:var(--link-blue);text-decoration:underline;text-underline-offset:2px
+    }
+    .link:hover,.link:focus{color:var(--link-blue-hover);outline:none}
+
+    /* Footer small text color for contrast */
+    .muted{color:var(--muted)}
+  </style>
+</head>
+<body>
+  <div class="contact-container">
+    <div class="left-col"></div>
+    <div class="right-col">
+      <h1>Contact Us</h1>
+      <p>Meet our vibrant crew, driven by a passion for adventure and creativity. From thrilling outdoor escapades to culinary experiments, we’re a close-knit group dedicated to making unforgettable memories together.</p>
+
+      <form id="contact-form" action="https://formspree.io/f/xjkbgadz" method="POST">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" placeholder="Your Full Name" required>
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="Your Email Address" required>
+        <label for="message">Message</label>
+        <textarea rows="6" placeholder="Your Message" id="message" name="message" required></textarea>
+        <button type="submit" id="submit" name="submit">Send</button>
+      </form>
+
+      <div id="error" aria-live="polite"></div>
+      <div id="success-msg" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <!-- SEO Related Stuff Here -->
+  <section id="about" class="bg-gray-100 py-10 px-6 md:px-16 text-center md:text-left">
+    <h2 class="text-3xl font-bold mb-4" style="color:#111827">About Friend Circle</h2>
+    <p class="text-lg leading-relaxed mb-6" style="color:#111827">
+      Friend Circle is a group of passionate adventurers from <strong>Kashmir</strong> – united by friendship, 
+      love for <strong>trekking</strong>, <strong>camping</strong>, <strong>volleyball</strong>, 
+      <strong>photography</strong>, <strong>offroading</strong>, and exploring hidden gems across 
+      <strong>Budgam, Srinagar, Chadoora, and Jammu & Kashmir</strong>.  
+      Our journey is about memories, brotherhood, and discovering nature’s beauty together.
+    </p>
+
+    <h2 class="text-2xl font-semibold mb-3" style="color:#111827">About the Creator</h2>
+    <p class="text-lg leading-relaxed" style="color:#111827">
+      This website is created by <strong>Zuhaib Rashid</strong>, a 
+      <a href="https://www.zuhaibrashid.com/" class="link" target="_blank" rel="noopener">
+        Frontend Developer
+      </a> from Srinagar, Jammu & Kashmir.  
+      Zuhaib specializes in <strong>React.js</strong>, <strong>TypeScript</strong>, and modern web technologies.  
+      Alongside his passion for coding, he enjoys <strong>adventure, trekking, volleyball, and exploring new places</strong>.  
+      Check out his portfolio here: 
+      <a href="https://www.zuhaibrashid.com/" class="link" target="_blank" rel="noopener">
+        www.zuhaibrashid.com
+      </a>.
+    </p>
+  </section>
+
+  <footer class="text-gray-900 body-font">
+    <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
+      <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900" href="https://zuhaibrashid.com">
+        <img src="profile picturs/zuhaib.jpg" alt="Zuhaib Rashid Profile Picture" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4">
+        <span class="ml-3 brand-logo text-xl">Friend Circle</span>
+      </a>
+      <p class="text-sm muted sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-300 sm:py-2 sm:mt-0 mt-4">© 2025 Zuhaib — 
+        <a href="http://zuhaibrashid.com/" class="link ml-1" rel="noopener noreferrer" target="_blank" aria-label="Visit Zuhaib Rashid's official website">@Zuhaib Rashid</a>
+      </p>
+      <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
+        <a href="https://www.facebook.com/sam.zuhaib.98/" class="muted ml-3" target="_blank" rel="noopener noreferrer" aria-label="Visit Zuhaib Rashid's Facebook">
+          <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+          </svg>
+        </a>
+        <a href="https://x.com/xuhaib_x9" class="muted ml-3" target="_blank" rel="noopener noreferrer" aria-label="Visit Zuhaib Rashid's X (formerly Twitter)">
+          <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+            <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+          </svg>
+        </a>
+        <a href="https://www.instagram.com/zoh.aib__/" class="muted ml-3" target="_blank" rel="noopener noreferrer" aria-label="Visit Zuhaib Rashid's Instagram">
+          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+          </svg>
+        </a>
+        <a href="https://www.linkedin.com/in/zuhaib-rashid-661345318/" class="muted ml-3" target="_blank" rel="noopener noreferrer" aria-label="Visit Zuhaib Rashid's LinkedIn">
+          <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
+            <path stroke="none" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path>
+            <circle cx="4" cy="4" r="2" stroke="none"></circle>
+          </svg>
+        </a>
+      </span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

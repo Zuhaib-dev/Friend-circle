@@ -1,0 +1,75 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  font-family: "Segoe UI", sans-serif;
+  cursor: pointer;
+  background: #fafafa;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  flex-direction: column;
+}
+
+#score, #highscore {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 1.5em;
+  font-weight: 900;
+  color: #111;
+}
+
+#highscore {
+  top: 60px;
+  font-size: 1.2em;
+  color: #444;
+}
+
+#introduction {
+  width: 220px;
+  position: absolute;
+  font-weight: 600;
+  font-size: 0.9em;
+  text-align: center;
+  transition: opacity 2s;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+#introduction a {
+  text-decoration: none;
+  color: #e84656;
+  font-family: cursive;
+  font-size: 18px;
+}
+
+button {
+  position: absolute;
+  border-radius: 12px;
+  padding: 12px 18px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1em;
+}
+
+#restart {
+  bottom: 80px;
+  background: royalblue;
+  color: white;
+  display: none;
+}
+
+#pause {
+  bottom: 20px;
+  background: crimson;
+  color: white;
+}

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="canonical" href="https://friendcirclee.netlify.app/tour" />
+  <link rel="me" href="https://www.zuhaibrashid.com/" />
+
+  <title>Awesome Tours | Friend Circle Kashmir Adventures</title>
+  <meta name="description" content="Discover upcoming adventures and tours with Friend Circle in Kashmir. Plan your unforgettable journeys and get in touch to join the experience." />
+  <meta name="keywords" content="Friend Circle Tours, Kashmir adventure tours, upcoming Kashmir trips, travel to Kashmir, explore Kashmir with Friend Circle, trekking tours in Kashmir, Kashmir sightseeing" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#222222" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Awesome Tours | Friend Circle Kashmir Adventures" />
+  <meta property="og:description" content="Join exciting upcoming tours with Friend Circle, exploring Kashmir's breathtaking landscapes and thrilling adventures." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://friendcirclee.netlify.app/tour" />
+  <meta property="og:image" content="https://friendcirclee.netlify.app/hero.jpg" />
+  <meta property="og:site_name" content="Friend Circle" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Awesome Tours | Friend Circle Kashmir Adventures" />
+  <meta name="twitter:description" content="Explore upcoming Kashmir tours with Friend Circle. Plan unforgettable adventures and join our travel community." />
+  <meta name="twitter:image" content="https://friendcirclee.netlify.app/hero.jpg" />
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="/manifest.json">
+
+  <!-- Fonts and CSS -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Pacifico&family=Shalimar&family=Kalam:wght@300;400;700&family=Rubik+Marker+Hatch&family=Syne+Tactile&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="tour.css" />
+  <link rel="shortcut icon" href="Favicon1.png" type="image/x-icon" />
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <div class="logo">Upcoming Adventures</div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#tours">Tours</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a target="_blank" href="https://www.instagram.com/zoh.aib__/">Follow Us</a></li>
+        </ul>
+      </nav>
+      <div class="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="hero">
+      <div class="container">
+        <h1>Discover Amazing Adventures</h1>
+        <p>Embark on unforgettable journeys with Upcoming Adventures</p>
+        <a href="#tours" class="cta-button">Explore Tours</a>
+      </div>
+    </section>
+
+    <section id="tours">
+      <div class="container">
+        <h2>Upcoming Tours</h2>
+        <div class="tours-grid" id="tours-list">
+          <!-- Tours will be dynamically added here -->
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <h2>Interested in a Tour?</h2>
+        <form id="interest-form" action="https://formspree.io/f/mblrgela" method="POST">
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="tour">Preferred Tour:</label>
+            <input type="text" id="tour" name="tour" required>
+          </div>
+          <div class="form-group">
+            <label for="message">Message (optional):</label>
+            <textarea id="message" name="message"></textarea>
+          </div>
+          <button type="submit">Submit Interest</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="new">
+    <div class="container">
+      <p>&copy; 2025 <a href="http://zuhaibrashid.com/">Friend Circle</a>. All Rights Reserved.</p>
+      <div class="social-links">
+        <a href="https://www.instagram.com/zoh.aib__/" class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <img src="https://img.icons8.com/material-outlined/24/ffffff/instagram-new.png" alt="Instagram">
+        </a>
+        <a href="https://www.facebook.com/sam.zuhaib.98" class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <img src="https://img.icons8.com/material-outlined/24/ffffff/facebook.png" alt="Facebook">
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelector('.hamburger').addEventListener('click', function() {
+      document.querySelector('nav ul').classList.toggle('active');
+      this.classList.toggle('active');
+    });
+  </script>
+  <script src="tour.js" defer></script>
+</body>
+</html>
