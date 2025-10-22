@@ -19,7 +19,7 @@
 
   <!-- Video Gallery Page -->
   <url>
-    <loc>https://friendcirclee.netlify.app/video-gallery/video</loc>
+    <loc>https://friendcirclee.netlify.app/viedo%20gallary/video</loc>
     <lastmod>2025-09-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -27,7 +27,7 @@
 
   <!-- Image Gallery Page -->
   <url>
-    <loc>https://friendcirclee.netlify.app/photo-gallery/memories-in-frames</loc>
+    <loc>https://friendcirclee.netlify.app/photo%20galarry/memories%20in%20frames</loc>
     <lastmod>2025-09-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -59,7 +59,7 @@
 
   <!-- Play Game Page -->
   <url>
-    <loc>https://friendcirclee.netlify.app/stick-hero-game/game</loc>
+    <loc>https://friendcirclee.netlify.app/stick%20hero%20game/game</loc>
     <lastmod>2025-09-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
