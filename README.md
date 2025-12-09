@@ -29,7 +29,7 @@ From **offroad biking** 🏍️ to **fishing competitions** 🎣 and **endless v
 ---
 
 ## 🖥️ Technologies Used
-- HTML, CSS, JavaScript (Frontend Power 💪)
+- HTML, CSS, Tailwind, formspree,JavaScript (Frontend Power 💪)
 - Cool animations 🎨
 - Responsive design 📱
 
