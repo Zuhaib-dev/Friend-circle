@@ -67,3 +67,4 @@ We have more **inside jokes** than actual money in our wallets.
 Give your friends a hug today.  
 Because **Friend Circle > Social Media** ❤️
 looking forward to add some more sections of Muslim related like a islamic calender
+likey to be add before Monday 
