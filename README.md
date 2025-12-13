@@ -68,3 +68,5 @@ Give your friends a hug today.
 Because **Friend Circle > Social Media** ❤️
 looking forward to add some more sections of Muslim related like a islamic calender
 likey to be add before Monday 
+
+looking for some sort of islamic apis and will also make me index page more performed and load faster
