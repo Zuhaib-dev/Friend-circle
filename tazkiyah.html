@@ -34,6 +34,8 @@
       rel="canonical"
       href="https://friendcirclee.netlify.app/tazkiyah.html"
     />
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     <!-- Open Graph (Facebook, LinkedIn, WhatsApp) -->
     <meta property="og:type" content="website" />
@@ -87,31 +89,30 @@
   </head>
 
   <body>
-  <!-- Hero Section -->
-  <section class="hero">
-    <h1>Tazkiyah</h1>
-    <p>Purify the heart • Strengthen the soul • Remember Allah</p>
-  </section>
+    <!-- Hero Section -->
+    <section class="hero">
+      <h1">Tazkiyah</h1>
+      <p>Purify the heart • Strengthen the soul • Remember Allah</p>
+    </section>
 
-  <!-- Daily Hadith Section -->
-  <section class="hadith-section">
-    <h2>📖 Hadith of the Day</h2>
+    <!-- Daily Hadith Section -->
+    <section class="hadith-section">
+      <h2>📖 Hadith of the Day</h2>
 
-    <div class="hadith-card">
-      <p class="hadith-arabic" id="hadithArabic">Loading...</p>
-      <p class="hadith-english" id="hadithEnglish"></p>
-      <span class="hadith-source" id="hadithSource"></span>
-    </div>
+      <div class="hadith-card">
+        <p class="hadith-arabic" id="hadithArabic">Loading...</p>
+        <p class="hadith-english" id="hadithEnglish"></p>
+        <span class="hadith-source" id="hadithSource"></span>
+      </div>
 
-    <button id="refreshHadith">🔄 New Hadith</button>
-  </section>
+      <button id="refreshHadith">🔄 New Hadith</button>
+    </section>
 
-  <!-- Footer -->
-  <footer>
-    <p>© 2025 Tazkiyah • <a href="index.html">Friend Circle</a></p>
-  </footer>
+    <!-- Footer -->
+    <footer>
+      <p>© 2025 Tazkiyah • <a href="index.html">Friend Circle</a></p>
+    </footer>
 
-  <script src="tazkiyah.js"></script>
-</body>
-
+    <script src="tazkiyah.js"></script>
+  </body>
 </html>
