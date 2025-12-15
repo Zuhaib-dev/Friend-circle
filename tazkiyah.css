@@ -103,6 +103,13 @@ footer {
   font-size: 0.85rem;
   color: #065f46;
 }
+footer a {
+  text-decoration: none;
+  color: #064e3b;
+  font-family: cursive;
+  font-size: 16px;
+
+}
 
 /* Responsive */
 @media (max-width: 600px) {
