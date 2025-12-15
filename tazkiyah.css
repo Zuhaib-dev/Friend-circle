@@ -1,3 +1,120 @@
-h1{
-    font-family: cursive;
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+body {
+  background: #f8faf7;
+  color: #1f2937;
+  line-height: 1.6;
+}
+
+/* Hero */
+.hero {
+  min-height: 40vh;
+  background: linear-gradient(135deg, #2f855a, #68d391);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero p {
+  font-size: 1.1rem;
+  max-width: 600px;
+  opacity: 0.95;
+}
+
+/* Hadith Section */
+.hadith-section {
+  padding: 3rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hadith-section h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #065f46;
+}
+
+/* Card */
+.hadith-card {
+  background: #ffffff;
+  max-width: 700px;
+  width: 100%;
+  padding: 2rem;
+  border-radius: 14px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+  margin-bottom: 1.5rem;
+}
+
+.hadith-arabic {
+  font-size: 1.4rem;
+  text-align: right;
+  direction: rtl;
+  margin-bottom: 1rem;
+  color: #064e3b;
+}
+
+.hadith-english {
+  font-size: 1rem;
+  margin-bottom: 0.8rem;
+}
+
+.hadith-source {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+/* Button */
+button {
+  background: #2f855a;
+  color: #fff;
+  border: none;
+  padding: 0.7rem 1.4rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #276749;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1.2rem;
+  background: #ecfdf5;
+  font-size: 0.85rem;
+  color: #065f46;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+
+  .hadith-arabic {
+    font-size: 1.2rem;
+  }
+
+  .hadith-card {
+    padding: 1.5rem;
+  }
 }

@@ -87,8 +87,31 @@
   </head>
 
   <body>
-    <h1>Tazkiyah Page</h1>
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Tazkiyah</h1>
+    <p>Purify the heart • Strengthen the soul • Remember Allah</p>
+  </section>
 
-    <script src="tazkiyah.js"></script>
-  </body>
+  <!-- Daily Hadith Section -->
+  <section class="hadith-section">
+    <h2>📖 Hadith of the Day</h2>
+
+    <div class="hadith-card">
+      <p class="hadith-arabic" id="hadithArabic">Loading...</p>
+      <p class="hadith-english" id="hadithEnglish"></p>
+      <span class="hadith-source" id="hadithSource"></span>
+    </div>
+
+    <button id="refreshHadith">🔄 New Hadith</button>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Tazkiyah • Friend Circle</p>
+  </footer>
+
+  <script src="tazkiyah.js"></script>
+</body>
+
 </html>
