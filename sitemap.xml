@@ -9,6 +9,14 @@
     <priority>1.0</priority>
   </url>
 
+  <!-- Tazkiyah Page -->
+  <url>
+    <loc>https://friendcirclee.netlify.app/tazkiyah.html</loc>
+    <lastmod>2025-12-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
   <!-- About Us Page -->
   <url>
     <loc>https://friendcirclee.netlify.app/about</loc>
