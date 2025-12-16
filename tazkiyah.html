@@ -89,87 +89,188 @@
   </head>
 
   <body>
-   <div class="min-h-screen bg-gray-50 text-gray-800 font-sans relative overflow-hidden">
+    <div
+      class="min-h-screen bg-gray-50 text-gray-800 font-sans relative overflow-hidden"
+    >
+      <div
+        class="absolute top-0 left-0 w-64 h-64 bg-emerald-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"
+      ></div>
+      <div
+        class="absolute top-0 right-0 w-64 h-64 bg-teal-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"
+      ></div>
 
-    <div class="absolute top-0 left-0 w-64 h-64 bg-emerald-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
-    <div class="absolute top-0 right-0 w-64 h-64 bg-teal-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
-
-    <header class="relative z-10 container mx-auto px-6 py-8 flex justify-between items-center">
-        <h1 class="text-3xl font-bold text-emerald-800 tracking-wide">Tazkiyah <span class="text-yellow-600">.</span></h1>
+      <header
+        class="relative z-10 container mx-auto px-6 py-8 flex justify-between items-center"
+      >
+        <h1 class="text-3xl font-bold text-emerald-800 tracking-wide">
+          Tazkiyah <span class="text-yellow-600">.</span>
+        </h1>
         <nav>
-            <a href="/" class="text-gray-500 hover:text-emerald-700 transition">Back to Home</a>
+          <a href="index.html" class="text-gray-500 hover:text-emerald-700 transition"
+            >Back to Home</a
+          >
         </nav>
-    </header>
+      </header>
 
-    <main class="relative z-10 container mx-auto px-6 py-4">
-
+      <main class="relative z-10 container mx-auto px-6 py-4">
         <section class="max-w-4xl mx-auto mb-16">
-            <div class="text-center mb-6">
-                <span class="bg-emerald-100 text-emerald-800 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">Daily Inspiration</span>
+          <div class="text-center mb-6">
+            <span
+              class="bg-emerald-100 text-emerald-800 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider"
+              >Daily Inspiration</span
+            >
+          </div>
+
+          <div
+            class="bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl border border-white/20 p-8 md:p-12 transform hover:scale-[1.01] transition duration-500 ease-in-out"
+          >
+            <div class="mb-8 text-center">
+              <p
+                id="hadith-arabic"
+                class="font-amiri text-3xl md:text-5xl text-gray-800 leading-relaxed dir-rtl"
+                dir="rtl"
+              >
+                Loading...
+              </p>
             </div>
 
-            <div class="bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl border border-white/20 p-8 md:p-12 transform hover:scale-[1.01] transition duration-500 ease-in-out">
-                
-                <div class="mb-8 text-center">
-                    <p id="hadith-arabic" class="font-amiri text-3xl md:text-5xl text-gray-800 leading-relaxed dir-rtl" dir="rtl">
-                        Loading...
-                    </p>
-                </div>
-
-                <div class="mb-6 text-center border-t border-gray-200 pt-6">
-                    <p id="hadith-urdu" class="font-nastaliq text-xl md:text-3xl text-emerald-700 leading-loose dir-rtl" dir="rtl">
-                        ...
-                    </p>
-                </div>
-
-                <div class="text-center mt-8">
-                    <p id="hadith-source" class="text-sm text-gray-500 font-medium tracking-widest uppercase">
-                        -
-                    </p>
-                </div>
+            <div class="mb-6 text-center border-t border-gray-200 pt-6">
+              <p
+                id="hadith-urdu"
+                class="font-nastaliq text-xl md:text-3xl text-emerald-700 leading-loose dir-rtl"
+                dir="rtl"
+              >
+                ...
+              </p>
             </div>
+
+            <div class="text-center mt-8">
+              <p
+                id="hadith-source"
+                class="text-sm text-gray-500 font-medium tracking-widest uppercase"
+              >
+                -
+              </p>
+            </div>
+          </div>
         </section>
 
         <section class="max-w-5xl mx-auto">
-            <h2 class="text-2xl font-bold text-gray-800 mb-8 text-center">Coming Soon to Friend Circle</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                
-                <div class="group bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition border border-gray-100 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 bg-yellow-400 text-yellow-900 text-xs font-bold px-2 py-1 rounded-bl-lg">SOON</div>
-                    <div class="h-12 w-12 bg-emerald-100 rounded-lg flex items-center justify-center mb-4 text-emerald-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                    </div>
-                    <h3 class="text-lg font-bold text-gray-800 mb-2">Prayer Times</h3>
-                    <p class="text-gray-500 text-sm">Accurate prayer times for your location with Adhan notifications.</p>
-                </div>
+          <h2 class="text-2xl font-bold text-gray-800 mb-8 text-center">
+            Coming Soon to Friend Circle
+          </h2>
 
-                <div class="group bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition border border-gray-100 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 bg-yellow-400 text-yellow-900 text-xs font-bold px-2 py-1 rounded-bl-lg">SOON</div>
-                    <div class="h-12 w-12 bg-emerald-100 rounded-lg flex items-center justify-center mb-4 text-emerald-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
-                    </div>
-                    <h3 class="text-lg font-bold text-gray-800 mb-2">Quran Reader</h3>
-                    <p class="text-gray-500 text-sm">Read the Holy Quran with translations and audio playback.</p>
-                </div>
-
-                <div class="group bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition border border-gray-100 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 bg-yellow-400 text-yellow-900 text-xs font-bold px-2 py-1 rounded-bl-lg">SOON</div>
-                    <div class="h-12 w-12 bg-emerald-100 rounded-lg flex items-center justify-center mb-4 text-emerald-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-                    </div>
-                    <h3 class="text-lg font-bold text-gray-800 mb-2">Qibla Finder</h3>
-                    <p class="text-gray-500 text-sm">Locate the Qibla direction instantly from anywhere in the world.</p>
-                </div>
-
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div
+              class="group bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition border border-gray-100 relative overflow-hidden"
+            >
+              <div
+                class="absolute top-0 right-0 bg-yellow-400 text-yellow-900 text-xs font-bold px-2 py-1 rounded-bl-lg"
+              >
+                SOON
+              </div>
+              <div
+                class="h-12 w-12 bg-emerald-100 rounded-lg flex items-center justify-center mb-4 text-emerald-600"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-gray-800 mb-2">Prayer Times</h3>
+              <p class="text-gray-500 text-sm">
+                Accurate prayer times for your location with Adhan
+                notifications.
+              </p>
             </div>
-        </section>
-    </main>
 
-    <footer class="text-center py-8 text-gray-400 text-sm">
-        <p>&copy; 2024 Friend Circle. All rights reserved.</p>
-    </footer>
-</div>
+            <div
+              class="group bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition border border-gray-100 relative overflow-hidden"
+            >
+              <div
+                class="absolute top-0 right-0 bg-yellow-400 text-yellow-900 text-xs font-bold px-2 py-1 rounded-bl-lg"
+              >
+                SOON
+              </div>
+              <div
+                class="h-12 w-12 bg-emerald-100 rounded-lg flex items-center justify-center mb-4 text-emerald-600"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-gray-800 mb-2">Quran Reader</h3>
+              <p class="text-gray-500 text-sm">
+                Read the Holy Quran with translations and audio playback.
+              </p>
+            </div>
+
+            <div
+              class="group bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition border border-gray-100 relative overflow-hidden"
+            >
+              <div
+                class="absolute top-0 right-0 bg-yellow-400 text-yellow-900 text-xs font-bold px-2 py-1 rounded-bl-lg"
+              >
+                SOON
+              </div>
+              <div
+                class="h-12 w-12 bg-emerald-100 rounded-lg flex items-center justify-center mb-4 text-emerald-600"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                  />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-gray-800 mb-2">Qibla Finder</h3>
+              <p class="text-gray-500 text-sm">
+                Locate the Qibla direction instantly from anywhere in the world.
+              </p>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="text-center py-8 text-gray-400 text-sm">
+        <p>&copy; 2025 <a class="text-xl text-rose-400 font-amiri" href="index.html">Friend Circle</a> . All rights reserved.</p>
+      </footer>
+    </div>
 
     <script src="tazkiyah.js"></script>
   </body>
