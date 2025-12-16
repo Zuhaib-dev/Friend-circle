@@ -1,127 +1,42 @@
-/* Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Segoe UI", system-ui, sans-serif;
-}
+/* Import Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Nastaliq+Urdu:wght@400;700&family=Inter:wght@300;400;600;700&display=swap');
 
+/* Apply Fonts */
 body {
-  background: #f8faf7;
-  color: #1f2937;
-  line-height: 1.6;
+    font-family: 'Inter', sans-serif;
 }
 
-/* Hero */
-.hero {
-  min-height: 40vh;
-  background: linear-gradient(135deg, #2f855a, #68d391);
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 2rem 1rem;
+.font-amiri {
+    font-family: 'Amiri', serif;
+    /* Improves Arabic rendering */
+    line-height: 1.8; 
 }
 
-.hero h1 {
-  font-size: 3rem;
-  margin-bottom: 0.5rem;
+.font-nastaliq {
+    font-family: 'Noto Nastaliq Urdu', serif;
+    /* Improves Urdu rendering */
+    line-height: 2; 
+    padding-bottom: 10px; /* Urdu often dips below the line */
 }
 
-.hero p {
-  font-size: 1.1rem;
-  max-width: 600px;
-  opacity: 0.95;
+/* Custom Animation for Background Blobs */
+@keyframes blob {
+    0% { transform: translate(0px, 0px) scale(1); }
+    33% { transform: translate(30px, -50px) scale(1.1); }
+    66% { transform: translate(-20px, 20px) scale(0.9); }
+    100% { transform: translate(0px, 0px) scale(1); }
 }
 
-/* Hadith Section */
-.hadith-section {
-  padding: 3rem 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.animate-blob {
+    animation: blob 7s infinite;
 }
 
-.hadith-section h2 {
-  font-size: 1.8rem;
-  margin-bottom: 1.5rem;
-  color: #065f46;
+.animation-delay-2000 {
+    animation-delay: 2s;
 }
 
-/* Card */
-.hadith-card {
-  background: #ffffff;
-  max-width: 700px;
-  width: 100%;
-  padding: 2rem;
-  border-radius: 14px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
-  margin-bottom: 1.5rem;
-}
-
-.hadith-arabic {
-  font-size: 1.4rem;
-  text-align: right;
-  direction: rtl;
-  margin-bottom: 1rem;
-  color: #064e3b;
-}
-
-.hadith-english {
-  font-size: 1rem;
-  margin-bottom: 0.8rem;
-}
-
-.hadith-source {
-  font-size: 0.85rem;
-  color: #6b7280;
-}
-
-/* Button */
-button {
-  background: #2f855a;
-  color: #fff;
-  border: none;
-  padding: 0.7rem 1.4rem;
-  border-radius: 999px;
-  cursor: pointer;
-  font-size: 0.95rem;
-  transition: background 0.3s ease;
-}
-
-button:hover {
-  background: #276749;
-}
-
-/* Footer */
-footer {
-  text-align: center;
-  padding: 1.2rem;
-  background: #ecfdf5;
-  font-size: 0.85rem;
-  color: #065f46;
-}
-footer a {
-  text-decoration: none;
-  color: #064e3b;
-  font-family: cursive;
-  font-size: 16px;
-
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-  .hero h1 {
-    font-size: 2.2rem;
-  }
-
-  .hadith-arabic {
-    font-size: 1.2rem;
-  }
-
-  .hadith-card {
-    padding: 1.5rem;
-  }
+/* RTL Support Utility */
+.dir-rtl {
+    direction: rtl;
+    unicode-bidi: embed;
 }

@@ -1,32 +1,53 @@
-const arabicEl = document.getElementById("hadithArabic");
-const englishEl = document.getElementById("hadithEnglish");
-const sourceEl = document.getElementById("hadithSource");
-const refreshBtn = document.getElementById("refreshHadith");
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // Data Store: Add more Hadiths here to increase variety
+    const hadithCollection = [
+        {
+            arabic: "إِنَّمَا الْأَعْمَالُ بِالنِّيَّاتِ",
+            urdu: "تمام اعمال کا دارومدار نیت پر ہے۔",
+            source: "Sahih Al-Bukhari"
+        },
+        {
+            arabic: "خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ",
+            urdu: "تم میں سے بہترین وہ ہے جو قرآن سیکھے اور سکھائے۔",
+            source: "Sahih Al-Bukhari"
+        },
+        {
+            arabic: "لَا يُؤْمِنُ أَحَدُكُمْ حَتَّى يُحِبَّ لِأَخِيهِ مَا يُحِبُّ لِنَفْسِهِ",
+            urdu: "تم میں سے کوئی مومن نہیں ہو سکتا جب تک کہ وہ اپنے بھائی کے لیے وہی نہ پسند کرے جو اپنے لیے پسند کرتا ہے۔",
+            source: "Sahih Muslim"
+        },
+        {
+            arabic: "الدُّنْيَا سِجْنُ الْمُؤْمِنِ وَجَنَّةُ الْكَافِرِ",
+            urdu: "دنیا مومن کے لیے قید خانہ اور کافر کے لیے جنت ہے۔",
+            source: "Sahih Muslim"
+        },
+        {
+            arabic: "أَكْمَلُ الْمُؤْمِنِينَ إِيمَانًا أَحْسَنُهُمْ خُلُقًا",
+            urdu: "مومنوں میں سب سے کامل ایمان والا وہ ہے جس کا اخلاق سب سے اچھا ہو۔",
+            source: "Sunan Abu Dawood"
+        }
+    ];
 
-async function fetchHadith() {
-  arabicEl.textContent = "Loading...";
-  englishEl.textContent = "";
-  sourceEl.textContent = "";
+    // Select Elements
+    const arabicEl = document.getElementById('hadith-arabic');
+    const urduEl = document.getElementById('hadith-urdu');
+    const sourceEl = document.getElementById('hadith-source');
 
-  try {
-    const random = Math.floor(Math.random() * 300) + 1;
-    const res = await fetch(
-      `https://api.hadith.gading.dev/books/muslim?range=${random}-${random}`
-    );
-    const data = await res.json();
+    // Logic to pick a hadith based on the day of the year
+    // This ensures everyone sees the same Hadith for 24 hours
+    const today = new Date();
+    const startOfYear = new Date(today.getFullYear(), 0, 0);
+    const diff = today - startOfYear;
+    const oneDay = 1000 * 60 * 60 * 24;
+    const dayOfYear = Math.floor(diff / oneDay);
 
-    const hadith = data.data.hadiths[0];
+    // Use Modulo (%) to loop through the array endlessly
+    const dailyIndex = dayOfYear % hadithCollection.length;
+    const todaysHadith = hadithCollection[dailyIndex];
 
-    arabicEl.textContent = hadith.arab;
-    englishEl.textContent = hadith.id;
-    sourceEl.textContent = `— Sahih Muslim | Hadith ${hadith.number}`;
-  } catch (error) {
-    arabicEl.textContent = "Failed to load hadith.";
-    englishEl.textContent = "Please try again later.";
-  }
-}
-
-refreshBtn.addEventListener("click", fetchHadith);
-
-// Load on page start
-fetchHadith();
+    // Inject Content
+    arabicEl.textContent = todaysHadith.arabic;
+    urduEl.textContent = todaysHadith.urdu;
+    sourceEl.textContent = todaysHadith.source;
+});
