@@ -370,25 +370,122 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 })();
 // ==========================================
-// 5. 99 NAMES CAROUSEL LOGIC
+// 5. 99 NAMES CAROUSEL LOGIC (Fixed Indicators)
 // ==========================================
 (function () {
-  // A subset of names for the carousel (You can add more)
   const namesCollection = [
-    { arabic: "ٱللَّٰه", trans: "Allah", meaning: "The One God" },
-    { arabic: "ٱلرَّحْمَٰن", trans: "Ar-Rahman", meaning: "The Most Gracious" },
-    { arabic: "ٱلرَّحِيم", trans: "Ar-Rahim", meaning: "The Most Merciful" },
-    { arabic: "ٱلْمَلِك", trans: "Al-Malik", meaning: "The King / Sovereign" },
-    { arabic: "ٱلْقُدُّوس", trans: "Al-Quddus", meaning: "The Most Holy" },
+    { arabic: "ٱلرَّحْمَٰن", trans: "Ar-Rahman", meaning: "The Most Merciful" },
+    {
+      arabic: "ٱلرَّحِيم",
+      trans: "Ar-Rahim",
+      meaning: "The Most Compassionate",
+    },
+    { arabic: "ٱلْمَلِك", trans: "Al-Malik", meaning: "The King" },
+    { arabic: "ٱلْقُدُّوس", trans: "Al-Quddus", meaning: "The Most Pure" },
     { arabic: "ٱلسَّلَام", trans: "As-Salam", meaning: "The Source of Peace" },
     {
       arabic: "ٱلْمُؤْمِن",
-      trans: "Al-Mu'min",
-      meaning: "The Granter of Security",
+      trans: "Al-Mu’min",
+      meaning: "The Giver of Security",
     },
-    { arabic: "ٱلْمُهَيْمِن", trans: "Al-Muhaimin", meaning: "The Guardian" },
+    { arabic: "ٱلْمُهَيْمِن", trans: "Al-Muhaymin", meaning: "The Protector" },
     { arabic: "ٱلْعَزِيز", trans: "Al-Aziz", meaning: "The Almighty" },
     { arabic: "ٱلْجَبَّار", trans: "Al-Jabbar", meaning: "The Compeller" },
+    {
+      arabic: "ٱلْمُتَكَبِّر",
+      trans: "Al-Mutakabbir",
+      meaning: "The Supremely Great",
+    },
+
+    { arabic: "ٱلْخَالِق", trans: "Al-Khaliq", meaning: "The Creator" },
+    { arabic: "ٱلْبَارِئ", trans: "Al-Bari'", meaning: "The Evolver" },
+    { arabic: "ٱلْمُصَوِّر", trans: "Al-Musawwir", meaning: "The Fashioner" },
+    { arabic: "ٱلْغَفَّار", trans: "Al-Ghaffar", meaning: "The All-Forgiving" },
+    { arabic: "ٱلْقَهَّار", trans: "Al-Qahhar", meaning: "The All-Subduer" },
+    { arabic: "ٱلْوَهَّاب", trans: "Al-Wahhab", meaning: "The Bestower" },
+    { arabic: "ٱلرَّزَّاق", trans: "Ar-Razzaq", meaning: "The Provider" },
+    { arabic: "ٱلْفَتَّاح", trans: "Al-Fattah", meaning: "The Opener" },
+    { arabic: "ٱلْعَلِيم", trans: "Al-'Alim", meaning: "The All-Knowing" },
+
+    { arabic: "ٱلْقَابِض", trans: "Al-Qabid", meaning: "The Withholder" },
+    { arabic: "ٱلْبَاسِط", trans: "Al-Basit", meaning: "The Expander" },
+    { arabic: "ٱلْخَافِض", trans: "Al-Khafid", meaning: "The Abaser" },
+    { arabic: "ٱلرَّافِع", trans: "Ar-Rafi'", meaning: "The Exalter" },
+    { arabic: "ٱلْمُعِزّ", trans: "Al-Mu'izz", meaning: "The Giver of Honor" },
+    {
+      arabic: "ٱلْمُذِلّ",
+      trans: "Al-Mudhill",
+      meaning: "The Giver of Dishonor",
+    },
+    { arabic: "ٱلسَّمِيع", trans: "As-Sami'", meaning: "The All-Hearing" },
+    { arabic: "ٱلْبَصِير", trans: "Al-Basir", meaning: "The All-Seeing" },
+    { arabic: "ٱلْحَكَم", trans: "Al-Hakam", meaning: "The Judge" },
+    { arabic: "ٱلْعَدْل", trans: "Al-'Adl", meaning: "The Utterly Just" },
+
+    { arabic: "ٱللَّطِيف", trans: "Al-Latif", meaning: "The Most Subtle" },
+    { arabic: "ٱلْخَبِير", trans: "Al-Khabir", meaning: "The All-Aware" },
+    { arabic: "ٱلْحَلِيم", trans: "Al-Halim", meaning: "The Most Forbearing" },
+    { arabic: "ٱلْعَظِيم", trans: "Al-'Azim", meaning: "The Magnificent" },
+    { arabic: "ٱلْغَفُور", trans: "Al-Ghafur", meaning: "The Most Forgiving" },
+    {
+      arabic: "ٱلشَّكُور",
+      trans: "Ash-Shakur",
+      meaning: "The Most Appreciative",
+    },
+    { arabic: "ٱلْعَلِيّ", trans: "Al-'Aliyy", meaning: "The Most High" },
+    { arabic: "ٱلْكَبِير", trans: "Al-Kabir", meaning: "The Most Great" },
+    { arabic: "ٱلْحَفِيظ", trans: "Al-Hafiz", meaning: "The Preserver" },
+    { arabic: "ٱلْمُقِيت", trans: "Al-Muqit", meaning: "The Sustainer" },
+
+    { arabic: "ٱلْحَسِيب", trans: "Al-Hasib", meaning: "The Reckoner" },
+    { arabic: "ٱلْجَلِيل", trans: "Al-Jalil", meaning: "The Majestic" },
+    { arabic: "ٱلْكَرِيم", trans: "Al-Karim", meaning: "The Most Generous" },
+    { arabic: "ٱلرَّقِيب", trans: "Ar-Raqib", meaning: "The Watchful" },
+    { arabic: "ٱلْمُجِيب", trans: "Al-Mujib", meaning: "The Responsive" },
+    { arabic: "ٱلْوَاسِع", trans: "Al-Wasi'", meaning: "The All-Encompassing" },
+    { arabic: "ٱلْحَكِيم", trans: "Al-Hakim", meaning: "The All-Wise" },
+    { arabic: "ٱلْوَدُود", trans: "Al-Wadud", meaning: "The Most Loving" },
+    { arabic: "ٱلْمَجِيد", trans: "Al-Majid", meaning: "The Glorious" },
+
+    { arabic: "ٱلْبَاعِث", trans: "Al-Ba'ith", meaning: "The Resurrector" },
+    { arabic: "ٱلشَّهِيد", trans: "Ash-Shahid", meaning: "The All-Witnessing" },
+    { arabic: "ٱلْحَقّ", trans: "Al-Haqq", meaning: "The Absolute Truth" },
+    { arabic: "ٱلْوَكِيل", trans: "Al-Wakil", meaning: "The Trustee" },
+    { arabic: "ٱلْقَوِيّ", trans: "Al-Qawiyy", meaning: "The All-Powerful" },
+    { arabic: "ٱلْمَتِين", trans: "Al-Matin", meaning: "The Firm" },
+    {
+      arabic: "ٱلْوَلِيّ",
+      trans: "Al-Waliyy",
+      meaning: "The Protecting Friend",
+    },
+    { arabic: "ٱلْحَمِيد", trans: "Al-Hamid", meaning: "The Praiseworthy" },
+    { arabic: "ٱلْمُحْصِي", trans: "Al-Muhsi", meaning: "The Accounter" },
+
+    { arabic: "ٱلْمُبْدِئ", trans: "Al-Mubdi'", meaning: "The Originator" },
+    { arabic: "ٱلْمُعِيد", trans: "Al-Mu'id", meaning: "The Restorer" },
+    { arabic: "ٱلْمُحْيِي", trans: "Al-Muhyi", meaning: "The Giver of Life" },
+    { arabic: "ٱلْمُمِيت", trans: "Al-Mumit", meaning: "The Giver of Death" },
+    { arabic: "ٱلْحَيّ", trans: "Al-Hayy", meaning: "The Ever-Living" },
+    { arabic: "ٱلْقَيُّوم", trans: "Al-Qayyum", meaning: "The Self-Existing" },
+    { arabic: "ٱلْوَاحِد", trans: "Al-Wahid", meaning: "The One" },
+    { arabic: "ٱلصَّمَد", trans: "As-Samad", meaning: "The Self-Sufficient" },
+    { arabic: "ٱلْقَادِر", trans: "Al-Qadir", meaning: "The All-Powerful" },
+    { arabic: "ٱلْمُقْتَدِر", trans: "Al-Muqtadir", meaning: "The Determiner" },
+
+    { arabic: "ٱلْمُقَدِّم", trans: "Al-Muqaddim", meaning: "The Promoter" },
+    { arabic: "ٱلْمُؤَخِّر", trans: "Al-Mu'akhkhir", meaning: "The Delayer" },
+    { arabic: "ٱلأَوَّل", trans: "Al-Awwal", meaning: "The First" },
+    { arabic: "ٱلْآخِر", trans: "Al-Akhir", meaning: "The Last" },
+    { arabic: "ٱلظَّاهِر", trans: "Az-Zahir", meaning: "The Manifest" },
+    { arabic: "ٱلْبَاطِن", trans: "Al-Batin", meaning: "The Hidden" },
+    { arabic: "ٱلْمُتَعَالِي", trans: "Al-Muta'ali", meaning: "The Exalted" },
+    { arabic: "ٱلْبَرّ", trans: "Al-Barr", meaning: "The Source of Goodness" },
+    {
+      arabic: "ٱلتَّوَّاب",
+      trans: "At-Tawwab",
+      meaning: "The Accepter of Repentance",
+    },
+    { arabic: "ٱلصَّبُور", trans: "As-Sabur", meaning: "The Most Patient" },
   ];
 
   const namesWrapper = document.getElementById("names-wrapper");
@@ -397,57 +494,55 @@ document.addEventListener("DOMContentLoaded", () => {
   let namesInterval;
 
   if (namesWrapper && namesIndicators) {
-    // 1. Generate Slides & Dots
+    // 1. Generate Slides (Standard logic)
     namesWrapper.innerHTML = "";
-    namesIndicators.innerHTML = "";
 
+    // CHANGE: No longer generating dots here!
+    // We just set up the slides.
     namesCollection.forEach((item, index) => {
-      // Slide
       const slide = document.createElement("div");
       slide.className =
         "min-w-full h-full flex flex-col items-center justify-center p-6 text-center space-y-2 select-none";
       slide.innerHTML = `
-                <div class="w-16 h-16 rounded-full bg-emerald-50 flex items-center justify-center mb-2 border border-emerald-100">
-                    <span class="text-emerald-300 font-bold opacity-50 text-xl">${
-                      index + 1
-                    }</span>
-                </div>
-                <h2 class="font-amiri text-4xl text-emerald-800 font-bold mb-1 drop-shadow-sm">${
-                  item.arabic
-                }</h2>
-                <h3 class="text-lg font-bold text-gray-700 tracking-wide">${
-                  item.trans
-                }</h3>
-                <p class="text-sm text-gray-500 italic">"${item.meaning}"</p>
-            `;
+            <div class="w-16 h-16 rounded-full bg-emerald-50 flex items-center justify-center mb-2 border border-emerald-100">
+                <span class="text-emerald-300 font-bold opacity-50 text-xl">${
+                  index + 1
+                }</span>
+            </div>
+            <h2 class="font-amiri text-4xl text-emerald-800 font-bold mb-1 drop-shadow-sm">${
+              item.arabic
+            }</h2>
+            <h3 class="text-lg font-bold text-gray-700 tracking-wide">${
+              item.trans
+            }</h3>
+            <p class="text-sm text-gray-500 italic">"${item.meaning}"</p>
+        `;
       namesWrapper.appendChild(slide);
-
-      // Dot
-      const dot = document.createElement("div");
-      dot.className = `w-1.5 h-1.5 rounded-full transition-colors duration-300 ${
-        index === 0 ? "bg-emerald-600" : "bg-emerald-200"
-      }`;
-      namesIndicators.appendChild(dot);
     });
 
-    // 2. Logic
+    // 2. Logic to Update Carousel AND Counter
     const slideToNextName = () => {
       currentIndex = (currentIndex + 1) % namesCollection.length;
       updateNamesCarousel();
     };
 
     const updateNamesCarousel = () => {
+      // Move the slides
       namesWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
 
-      // Update dots
-      Array.from(namesIndicators.children).forEach((dot, idx) => {
-        dot.className = `w-1.5 h-1.5 rounded-full transition-colors duration-300 ${
-          idx === currentIndex ? "bg-emerald-600" : "bg-emerald-200"
-        }`;
-      });
+      // CHANGE: Instead of highlighting a dot, we update the Text Counter
+      // e.g. "1 / 99"
+      namesIndicators.innerHTML = `
+        <span class="bg-emerald-100 text-emerald-700 text-[10px] font-bold px-2 py-0.5 rounded-full">
+            ${currentIndex + 1} / ${namesCollection.length}
+        </span>
+      `;
     };
 
-    // 3. Timer (Slightly faster than Dua card: 3.5s)
+    // Initialize the counter text immediately
+    updateNamesCarousel();
+
+    // 3. Timer (3.0s)
     namesInterval = setInterval(slideToNextName, 3000);
 
     // 4. Pause on Hover
@@ -456,7 +551,7 @@ document.addEventListener("DOMContentLoaded", () => {
       card.addEventListener("mouseenter", () => clearInterval(namesInterval));
       card.addEventListener(
         "mouseleave",
-        () => (namesInterval = setInterval(slideToNextName, 3500))
+        () => (namesInterval = setInterval(slideToNextName, 3000))
       );
     }
   }
