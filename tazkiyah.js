@@ -369,3 +369,95 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 })();
+// ==========================================
+// 5. 99 NAMES CAROUSEL LOGIC
+// ==========================================
+(function () {
+  // A subset of names for the carousel (You can add more)
+  const namesCollection = [
+    { arabic: "ٱللَّٰه", trans: "Allah", meaning: "The One God" },
+    { arabic: "ٱلرَّحْمَٰن", trans: "Ar-Rahman", meaning: "The Most Gracious" },
+    { arabic: "ٱلرَّحِيم", trans: "Ar-Rahim", meaning: "The Most Merciful" },
+    { arabic: "ٱلْمَلِك", trans: "Al-Malik", meaning: "The King / Sovereign" },
+    { arabic: "ٱلْقُدُّوس", trans: "Al-Quddus", meaning: "The Most Holy" },
+    { arabic: "ٱلسَّلَام", trans: "As-Salam", meaning: "The Source of Peace" },
+    {
+      arabic: "ٱلْمُؤْمِن",
+      trans: "Al-Mu'min",
+      meaning: "The Granter of Security",
+    },
+    { arabic: "ٱلْمُهَيْمِن", trans: "Al-Muhaimin", meaning: "The Guardian" },
+    { arabic: "ٱلْعَزِيز", trans: "Al-Aziz", meaning: "The Almighty" },
+    { arabic: "ٱلْجَبَّار", trans: "Al-Jabbar", meaning: "The Compeller" },
+  ];
+
+  const namesWrapper = document.getElementById("names-wrapper");
+  const namesIndicators = document.getElementById("names-indicators");
+  let currentIndex = 0;
+  let namesInterval;
+
+  if (namesWrapper && namesIndicators) {
+    // 1. Generate Slides & Dots
+    namesWrapper.innerHTML = "";
+    namesIndicators.innerHTML = "";
+
+    namesCollection.forEach((item, index) => {
+      // Slide
+      const slide = document.createElement("div");
+      slide.className =
+        "min-w-full h-full flex flex-col items-center justify-center p-6 text-center space-y-2 select-none";
+      slide.innerHTML = `
+                <div class="w-16 h-16 rounded-full bg-emerald-50 flex items-center justify-center mb-2 border border-emerald-100">
+                    <span class="text-emerald-300 font-bold opacity-50 text-xl">${
+                      index + 1
+                    }</span>
+                </div>
+                <h2 class="font-amiri text-4xl text-emerald-800 font-bold mb-1 drop-shadow-sm">${
+                  item.arabic
+                }</h2>
+                <h3 class="text-lg font-bold text-gray-700 tracking-wide">${
+                  item.trans
+                }</h3>
+                <p class="text-sm text-gray-500 italic">"${item.meaning}"</p>
+            `;
+      namesWrapper.appendChild(slide);
+
+      // Dot
+      const dot = document.createElement("div");
+      dot.className = `w-1.5 h-1.5 rounded-full transition-colors duration-300 ${
+        index === 0 ? "bg-emerald-600" : "bg-emerald-200"
+      }`;
+      namesIndicators.appendChild(dot);
+    });
+
+    // 2. Logic
+    const slideToNextName = () => {
+      currentIndex = (currentIndex + 1) % namesCollection.length;
+      updateNamesCarousel();
+    };
+
+    const updateNamesCarousel = () => {
+      namesWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+      // Update dots
+      Array.from(namesIndicators.children).forEach((dot, idx) => {
+        dot.className = `w-1.5 h-1.5 rounded-full transition-colors duration-300 ${
+          idx === currentIndex ? "bg-emerald-600" : "bg-emerald-200"
+        }`;
+      });
+    };
+
+    // 3. Timer (Slightly faster than Dua card: 3.5s)
+    namesInterval = setInterval(slideToNextName, 3000);
+
+    // 4. Pause on Hover
+    const card = namesWrapper.closest(".group");
+    if (card) {
+      card.addEventListener("mouseenter", () => clearInterval(namesInterval));
+      card.addEventListener(
+        "mouseleave",
+        () => (namesInterval = setInterval(slideToNextName, 3500))
+      );
+    }
+  }
+})();
