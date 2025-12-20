@@ -261,3 +261,111 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+// ==========================================
+// 4. DAILY DUA CAROUSEL LOGIC
+// ==========================================
+(function () {
+  // Wrap in IIFE or just paste inside your DOMContentLoaded event
+
+  const duaCollection = [
+    {
+      title: "For Knowledge",
+      arabic: "رَّبِّ زِدْنِي عِلْمًا",
+      trans: "Rabbi zidni 'ilma",
+      meaning: "My Lord, increase me in knowledge.",
+    },
+    {
+      title: "For Forgiveness",
+      arabic: "رَبَّنَا اغْفِرْ لِي وَلِوَالِدَيَّ",
+      trans: "Rabbana aghfir li wa liwalidayya",
+      meaning: "Our Lord! Forgive me and my parents.",
+    },
+    {
+      title: "For Goodness",
+      arabic: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً",
+      trans: "Rabbana atina fid-dunya hasanah",
+      meaning: "Our Lord, give us in this world [that which is] good.",
+    },
+    {
+      title: "For Patience",
+      arabic: "رَبَّنَا أَفْرِغْ عَلَيْنَا صَبْرًا",
+      trans: "Rabbana afrigh 'alayna sabra",
+      meaning: "Our Lord, pour upon us patience.",
+    },
+    {
+      title: "For Protection",
+      arabic: "بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ",
+      trans: "Bismillahil-ladhi la yadurru...",
+      meaning: "In the Name of Allah with Whose Name nothing can harm.",
+    },
+  ];
+
+  const duaWrapper = document.getElementById("dua-wrapper");
+  const duaIndicators = document.getElementById("dua-indicators");
+  let currentDuaIndex = 0;
+  let duaInterval;
+
+  // Only run if elements exist
+  if (duaWrapper && duaIndicators) {
+    // 1. Generate Slides & Dots
+    duaWrapper.innerHTML = ""; // Clean slate
+    duaIndicators.innerHTML = "";
+
+    duaCollection.forEach((dua, index) => {
+      // Create Slide Item
+      const slide = document.createElement("div");
+      // 'min-w-full' ensures each slide takes full width of the container
+      slide.className =
+        "min-w-full h-full flex flex-col items-center justify-center p-6 text-center space-y-3 select-none";
+      slide.innerHTML = `
+                <span class="text-[10px] text-emerald-500 font-bold uppercase tracking-widest bg-emerald-50 px-2 py-1 rounded mb-1">${dua.title}</span>
+                <h2 class="font-amiri text-2xl md:text-3xl text-gray-800 leading-relaxed dir-rtl" dir="rtl">${dua.arabic}</h2>
+                <p class="text-xs text-emerald-600 font-medium italic mt-1">${dua.trans}</p>
+                <p class="text-sm text-gray-500 max-w-[95%] leading-snug mt-1">"${dua.meaning}"</p>
+            `;
+      duaWrapper.appendChild(slide);
+
+      // Create Dot Indicator
+      const dot = document.createElement("div");
+      dot.className = `w-1.5 h-1.5 rounded-full transition-colors duration-300 ${
+        index === 0 ? "bg-emerald-500" : "bg-emerald-200"
+      }`;
+      duaIndicators.appendChild(dot);
+    });
+
+    // 2. Slide Function
+    const slideToNext = () => {
+      currentDuaIndex = (currentDuaIndex + 1) % duaCollection.length;
+      updateCarousel();
+    };
+
+    const updateCarousel = () => {
+      // Slide the wrapper by translating X based on index
+      duaWrapper.style.transform = `translateX(-${currentDuaIndex * 100}%)`;
+
+      // Update active dot color
+      const dots = duaIndicators.children;
+      Array.from(dots).forEach((dot, idx) => {
+        dot.className = `w-1.5 h-1.5 rounded-full transition-colors duration-300 ${
+          idx === currentDuaIndex ? "bg-emerald-500" : "bg-emerald-200"
+        }`;
+      });
+    };
+
+    // 3. Start Timer (Change every 4 seconds)
+    duaInterval = setInterval(slideToNext, 4000);
+
+    // 4. Pause on Hover (Better User Experience)
+    // Find the parent card to listen for mouse events
+    const cardContainer = duaWrapper.closest(".group");
+    if (cardContainer) {
+      cardContainer.addEventListener("mouseenter", () =>
+        clearInterval(duaInterval)
+      );
+      cardContainer.addEventListener(
+        "mouseleave",
+        () => (duaInterval = setInterval(slideToNext, 4000))
+      );
+    }
+  }
+})();
