@@ -17,6 +17,22 @@ From **offroad biking** 🏍️ to **fishing competitions** 🎣 and **endless v
 
 ---
 
+## 🌙 Tazkiyah (New Feature!)
+> "Balance your Deen with your Dunya."
+
+We recently added **Tazkiyah**, a peaceful digital sanctuary dedicated to spiritual growth and self-purification. It's a calm corner away from the noise.
+
+### ✨ Key Features:
+* **📖 Daily Hadith:** Auto-updates every 24 hours with Urdu meanings.
+* **🕌 Prayer Times:** Accurate Salah timings (Srinagar focused).
+* **📿 Digital Tasbih:** A haptic counter for your daily Dhikr.
+* **🤲 Daily Duas & 99 Names:** Beautiful auto-swiping carousels.
+* **✅ Sunnah Checklist:** An interactive tracker to revive daily habits.
+* **🧭 Qibla Finder:** AR-powered direction finder.
+* **📖 Quran Reader:** Read the Holy Quran directly in the browser.
+
+---
+
 ## 😎 Meet the Crew
 > We’re like Avengers, but broke... and with better food.
 
@@ -29,9 +45,10 @@ From **offroad biking** 🏍️ to **fishing competitions** 🎣 and **endless v
 ---
 
 ## 🖥️ Technologies Used
-- HTML, CSS, Tailwind, formspree,JavaScript (Frontend Power 💪)
-- Cool animations 🎨
-- Responsive design 📱
+- **Frontend:** HTML, CSS, Tailwind CSS, JavaScript
+- **Backend/Forms:** Formspree
+- **Features:** Glassmorphism UI, LocalStorage (for Tasbih/Checklist), IFrames & APIs.
+- **Design:** Responsive & Animated 🎨
 
 ---
 
@@ -46,7 +63,7 @@ From **offroad biking** 🏍️ to **fishing competitions** 🎣 and **endless v
 
 <p align="center">
   <a href="mailto:xuvaxuva006@gmail.com"><img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white"></a>
-  <a href="http://zuhaibrashid.com/"><img  src="https://www.zuhaibrashid.com/favicon.ico"></a>
+  <a href="http://zuhaibrashid.com/"><img src="https://img.shields.io/badge/Portfolio-000000?style=for-the-badge&logo=google-chrome&logoColor=white"></a>
   <a href="https://www.linkedin.com/in/xuhaib-rashid-661345318"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"></a>
   <a href="https://x.com/xuhaib_x9"><img src="https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white"></a>
   <a href="https://github.com/Zuhaib-dev/"><img src="https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=github&logoColor=white"></a>
