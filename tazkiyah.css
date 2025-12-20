@@ -79,3 +79,13 @@ body {
 #tasbih-count {
   font-variant-numeric: tabular-nums;
 }
+/* Compass Sway Animation */
+@keyframes sway {
+    0% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+    100% { transform: rotate(-5deg); }
+}
+
+.animate-compass-sway {
+    animation: sway 4s ease-in-out infinite;
+}

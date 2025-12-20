@@ -382,44 +382,45 @@
               </div>
             </div>
 
-            <div
-              class="group bg-gray-50 rounded-xl p-6 border border-gray-200 relative overflow-hidden h-[300px] flex flex-col justify-center items-center text-center opacity-90 hover:opacity-100 transition"
-            >
-              <div
-                class="absolute top-0 right-0 bg-yellow-400 text-yellow-900 text-xs font-bold px-3 py-1 rounded-bl-lg"
-              >
-                SOON
-              </div>
-              <div
-                class="h-16 w-16 bg-gray-200 rounded-full flex items-center justify-center mb-4 text-gray-400 group-hover:bg-emerald-100 group-hover:text-emerald-600 transition-colors"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-8 w-8"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.5"
-                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                  />
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.5"
-                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
-                </svg>
-              </div>
-              <h3 class="text-lg font-bold text-gray-600 mb-1">Qibla Finder</h3>
-              <p class="text-gray-400 text-sm px-4">
-                Locate the Kaaba direction instantly from anywhere in the world.
-              </p>
+          <div class="bg-white rounded-xl shadow-sm border border-emerald-100 relative overflow-hidden h-[400px] flex flex-col group hover:shadow-md transition duration-300">
+    
+    <div class="bg-emerald-50 px-4 py-2 border-b border-emerald-100 flex justify-between items-center h-10 shrink-0 z-10">
+        <h3 class="font-bold text-emerald-800 text-sm">Qibla Direction</h3>
+        <span class="text-[10px] text-emerald-600 bg-white px-2 py-0.5 rounded-full">Augmented Reality</span>
+    </div>
+
+    <div class="flex-1 relative flex flex-col items-center justify-center p-6 bg-emerald-50/30">
+        
+        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#059669 1px, transparent 1px); background-size: 20px 20px;"></div>
+
+        <div class="relative w-40 h-40 mb-6">
+            <div class="absolute inset-0 border-4 border-emerald-200 rounded-full"></div>
+            <div class="absolute inset-2 border-2 border-dashed border-emerald-300 rounded-full"></div>
+            
+            <div class="absolute inset-0 flex items-center justify-center animate-compass-sway">
+                <div class="w-4 h-28 relative">
+                    <div class="absolute top-0 left-0 w-full h-1/2 bg-red-500 rounded-t-full shadow-sm"></div>
+                    <div class="absolute bottom-0 left-0 w-full h-1/2 bg-gray-300 rounded-b-full shadow-sm"></div>
+                    <div class="absolute top-1/2 left-1/2 w-3 h-3 bg-white rounded-full border-2 border-emerald-500 -translate-x-1/2 -translate-y-1/2 z-10"></div>
+                </div>
             </div>
-          </div>
+
+            <div class="absolute top-2 right-6 text-emerald-800 animate-pulse">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M2 9l10-7 10 7v11a2 2 0 01-2 2H4a2 2 0 01-2-2V9z"/></svg>
+            </div>
+        </div>
+
+        <h3 class="text-lg font-bold text-gray-800 mb-2">Locate the Kaaba</h3>
+        <p class="text-sm text-gray-500 text-center mb-6 max-w-[200px]">
+            Use your camera and GPS to find the exact Qibla direction.
+        </p>
+
+        <a href="https://qiblafinder.withgoogle.com/" target="_blank" rel="noopener noreferrer" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 px-6 rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2 text-sm z-10">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+            Open Finder
+        </a>
+    </div>
+</div>
         </section>
         <!-- Form here i will put a more section  -->
         <section class="max-w-6xl mx-auto my-20 px-4">
