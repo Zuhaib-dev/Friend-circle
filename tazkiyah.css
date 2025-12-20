@@ -1,42 +1,70 @@
 /* Import Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Nastaliq+Urdu:wght@400;700&family=Inter:wght@300;400;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Nastaliq+Urdu:wght@400;700&family=Inter:wght@300;400;600;700&display=swap");
 
 /* Apply Fonts */
 body {
-    font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .font-amiri {
-    font-family: 'Amiri', serif;
-    /* Improves Arabic rendering */
-    line-height: 1.8; 
+  font-family: "Amiri", serif;
+  /* Improves Arabic rendering */
+  line-height: 1.8;
 }
 
 .font-nastaliq {
-    font-family: 'Noto Nastaliq Urdu', serif;
-    /* Improves Urdu rendering */
-    line-height: 2; 
-    padding-bottom: 10px; /* Urdu often dips below the line */
+  font-family: "Noto Nastaliq Urdu", serif;
+  /* Improves Urdu rendering */
+  line-height: 2;
+  padding-bottom: 10px; /* Urdu often dips below the line */
 }
 
 /* Custom Animation for Background Blobs */
 @keyframes blob {
-    0% { transform: translate(0px, 0px) scale(1); }
-    33% { transform: translate(30px, -50px) scale(1.1); }
-    66% { transform: translate(-20px, 20px) scale(0.9); }
-    100% { transform: translate(0px, 0px) scale(1); }
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
 }
 
 .animate-blob {
-    animation: blob 7s infinite;
+  animation: blob 7s infinite;
 }
 
 .animation-delay-2000 {
-    animation-delay: 2s;
+  animation-delay: 2s;
 }
 
 /* RTL Support Utility */
 .dir-rtl {
-    direction: rtl;
-    unicode-bidi: embed;
+  direction: rtl;
+  unicode-bidi: embed;
+}
+/* Styling for completed checklist items */
+.sunnah-item.completed {
+  background-color: rgba(16, 185, 129, 0.2); /* Emerald background */
+  border-color: rgba(16, 185, 129, 0.5);
+}
+
+.sunnah-item.completed .checkbox-circle {
+  background-color: #10b981; /* Fill circle */
+  border-color: #10b981;
+}
+
+.sunnah-item.completed svg {
+  opacity: 1; /* Show checkmark */
+  transform: scale(1);
+}
+
+.sunnah-item.completed span {
+  text-decoration: line-through; /* Cross out text */
+  color: #a7f3d0; /* Light emerald text */
 }
