@@ -243,39 +243,46 @@
               </div>
             </div>
 
-            <div
-              class="group bg-gray-50 rounded-xl p-6 border border-gray-200 relative overflow-hidden h-[300px] flex flex-col justify-center items-center text-center opacity-90 hover:opacity-100 transition"
-            >
-              <div
-                class="absolute top-0 right-0 bg-yellow-400 text-yellow-900 text-xs font-bold px-3 py-1 rounded-bl-lg"
-              >
-                SOON
-              </div>
-              <div
-                class="h-16 w-16 bg-gray-200 rounded-full flex items-center justify-center mb-4 text-gray-400 group-hover:bg-emerald-100 group-hover:text-emerald-600 transition-colors"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-8 w-8"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.5"
-                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-              </div>
-              <h3 class="text-lg font-bold text-gray-600 mb-1">
-                Digital Tasbih
-              </h3>
-              <p class="text-gray-400 text-sm px-4">
-                A simple digital counter for your daily Dhikr and Adhkar.
-              </p>
+            <div class="bg-white rounded-xl shadow-sm border border-emerald-100 relative overflow-hidden h-[300px] flex flex-col">
+    
+    <div class="bg-emerald-50 px-4 py-2 border-b border-emerald-100 flex justify-between items-center z-10">
+        <h3 class="font-bold text-emerald-800 text-sm flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            Digital Tasbih
+        </h3>
+        <button id="tasbih-reset" class="text-xs text-gray-400 hover:text-red-500 transition flex items-center gap-1">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+            Reset
+        </button>
+    </div>
+
+    <div class="flex-1 flex flex-col items-center justify-between p-4 relative">
+        
+        <div class="w-full flex justify-center items-center relative mb-2">
+             <div class="text-center transition-all duration-300" id="dhikr-display">
+                <h2 id="tasbih-arabic" class="font-amiri text-2xl text-emerald-900 font-bold mb-1">سبحان الله</h2>
+                <p id="tasbih-transliteration" class="text-xs text-emerald-600 font-medium tracking-wide uppercase">SubhanAllah</p>
             </div>
+            
+            <button id="tasbih-change" class="absolute right-0 top-1/2 -translate-y-1/2 p-2 text-gray-300 hover:text-emerald-600 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            </button>
+        </div>
+
+        <button id="tasbih-btn" class="group relative w-32 h-32 rounded-full bg-emerald-50 border-4 border-emerald-100 flex items-center justify-center shadow-inner hover:bg-emerald-100 hover:border-emerald-200 active:scale-95 active:shadow-none transition-all duration-100 select-none outline-none -mt-2">
+            
+            <div class="absolute inset-0 rounded-full overflow-hidden">
+                <div id="ripple" class="absolute bg-emerald-300 opacity-0 rounded-full transform scale-0"></div>
+            </div>
+
+            <span id="tasbih-count" class="text-5xl font-bold text-emerald-600 font-mono tracking-tighter">0</span>
+            
+            <div class="absolute -inset-2 border border-emerald-100 rounded-full opacity-50 pointer-events-none"></div>
+        </button>
+
+        <p class="text-[10px] text-gray-400 mt-2">Tap circle to count</p>
+    </div>
+</div>
 
             <div
               class="group bg-gray-50 rounded-xl p-6 border border-gray-200 relative overflow-hidden h-[300px] flex flex-col justify-center items-center text-center opacity-90 hover:opacity-100 transition"

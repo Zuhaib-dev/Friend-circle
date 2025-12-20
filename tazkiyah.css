@@ -68,3 +68,14 @@ body {
   text-decoration: line-through; /* Cross out text */
   color: #a7f3d0; /* Light emerald text */
 }
+/* Prevent text selection when tapping rapidly */
+#tasbih-btn {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Optional: Monospaced font for the number ensures it doesn't wiggle when width changes */
+#tasbih-count {
+  font-variant-numeric: tabular-nums;
+}

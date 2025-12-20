@@ -180,3 +180,84 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+// Digital  tasbih
+document.addEventListener("DOMContentLoaded", () => {
+  const dhikrs = [
+    { arabic: "سبحان الله", trans: "SubhanAllah" },
+    { arabic: "الحمد لله", trans: "Alhamdulillah" },
+    { arabic: "الله أكبر", trans: "Allahu Akbar" },
+    { arabic: "أستغفر الله", trans: "Astaghfirullah" },
+    { arabic: "لا إله إلا الله", trans: "La ilaha illallah" },
+  ];
+
+  // Select Elements
+  const countEl = document.getElementById("tasbih-count");
+  const btnEl = document.getElementById("tasbih-btn");
+  const resetEl = document.getElementById("tasbih-reset");
+  const changeEl = document.getElementById("tasbih-change");
+  const arabicEl = document.getElementById("tasbih-arabic");
+  const transEl = document.getElementById("tasbih-transliteration");
+
+  // State Variables
+  let count = parseInt(localStorage.getItem("tasbih_count")) || 0;
+  let currentDhikrIndex = parseInt(localStorage.getItem("tasbih_index")) || 0;
+
+  // Helper: Update UI
+  const updateTasbihUI = () => {
+    // Update Text
+    arabicEl.textContent = dhikrs[currentDhikrIndex].arabic;
+    transEl.textContent = dhikrs[currentDhikrIndex].trans;
+
+    // Update Count
+    countEl.textContent = count;
+
+    // Save to Storage
+    localStorage.setItem("tasbih_count", count);
+    localStorage.setItem("tasbih_index", currentDhikrIndex);
+  };
+
+  // Initialize UI
+  if (countEl) updateTasbihUI();
+
+  // 1. COUNT ACTION
+  if (btnEl) {
+    btnEl.addEventListener("click", (e) => {
+      // Increment
+      count++;
+
+      // Haptic Feedback (Vibration for Mobile)
+      if (navigator.vibrate) navigator.vibrate(25); // Short buzz
+
+      // Button Animation (Optional Ripple Logic)
+      btnEl.classList.remove("active");
+      void btnEl.offsetWidth; // Trigger reflow
+      btnEl.classList.add("active");
+
+      updateTasbihUI();
+    });
+  }
+
+  // 2. RESET ACTION
+  if (resetEl) {
+    resetEl.addEventListener("click", () => {
+      if (confirm("Reset counter to 0?")) {
+        count = 0;
+        updateTasbihUI();
+      }
+    });
+  }
+
+  // 3. CHANGE DHIKR ACTION
+  if (changeEl) {
+    changeEl.addEventListener("click", () => {
+      // Cycle through array
+      currentDhikrIndex = (currentDhikrIndex + 1) % dhikrs.length;
+
+      // Optional: Reset count on change?
+      // Let's keep count continuous for now, or uncomment next line to reset:
+      // count = 0;
+
+      updateTasbihUI();
+    });
+  }
+});
