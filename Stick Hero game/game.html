@@ -103,25 +103,22 @@
   </head>
   <body>
     <div class="container">
-      <div id="score" aria-live="polite" aria-atomic="true" role="region"></div>
-      <div
-        id="highscore"
-        aria-live="polite"
-        aria-atomic="true"
-        role="region"
-      ></div>
-      <canvas id="game" aria-label="Stick Hero game canvas"></canvas>
+      <div id="score">0</div>
+      <div id="highscore">Best: 0</div>
+      
+      <canvas id="game"></canvas>
+      
       <div id="introduction">
-        Hold down to stretch stick — by
-        <a href="http://zuhaibrashid.com/">Zuhaib</a>
+        Hold down to stretch stick
+        <p class="small">Sound enabled on click</p>
       </div>
-      <div id="perfect" aria-live="assertive" style="opacity: 0">
-        DOUBLE SCORE
-      </div>
-      <button id="restart" aria-label="Restart Game" tabindex="0">
-        RESTART
-      </button>
-      <button id="pause" aria-label="Pause Game" tabindex="0">PAUSE</button>
+      
+      <div id="perfect">PERFECT +2</div>
+      
+      <button id="restart">RESTART</button>
+      <button id="pause">PAUSE</button>
     </div>
+
+    <script src="game.js"></script>
   </body>
 </html>
