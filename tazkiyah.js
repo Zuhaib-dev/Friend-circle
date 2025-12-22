@@ -559,88 +559,161 @@ document.addEventListener("DOMContentLoaded", () => {
 // ==========================================
 // 6. MOMENT OF SAKINAH (Breathing Dhikr)
 // ==========================================
-(function() {
-    const circle = document.getElementById('breath-circle');
-    const ring1 = document.getElementById('breath-ring-1');
-    const ring2 = document.getElementById('breath-ring-2');
-    const playIcon = document.getElementById('breath-play-icon');
-    const textContainer = document.getElementById('breath-text-container');
-    const instructionEl = document.getElementById('breath-instruction');
-    const dhikrEl = document.getElementById('breath-dhikr');
+(function () {
+  const circle = document.getElementById("breath-circle");
+  const ring1 = document.getElementById("breath-ring-1");
+  const ring2 = document.getElementById("breath-ring-2");
+  const playIcon = document.getElementById("breath-play-icon");
+  const textContainer = document.getElementById("breath-text-container");
+  const instructionEl = document.getElementById("breath-instruction");
+  const dhikrEl = document.getElementById("breath-dhikr");
 
-    let isBreathing = false;
-    let breathInterval;
+  let isBreathing = false;
+  let breathInterval;
 
-    if(circle) {
-        circle.addEventListener('click', () => {
-            if(!isBreathing) {
-                startBreathing();
-            } else {
-                stopBreathing();
-            }
-        });
-    }
+  if (circle) {
+    circle.addEventListener("click", () => {
+      if (!isBreathing) {
+        startBreathing();
+      } else {
+        stopBreathing();
+      }
+    });
+  }
 
-    function startBreathing() {
-        isBreathing = true;
-        
-        // Hide Play Button, Show Text
-        playIcon.classList.add('opacity-0');
-        textContainer.classList.remove('opacity-0');
+  function startBreathing() {
+    isBreathing = true;
 
-        // Immediate First Breath
-        runBreathCycle();
+    // Hide Play Button, Show Text
+    playIcon.classList.add("opacity-0");
+    textContainer.classList.remove("opacity-0");
 
-        // Loop every 8 seconds (4s Inhale + 4s Exhale)
-        breathInterval = setInterval(runBreathCycle, 8000);
-    }
+    // Immediate First Breath
+    runBreathCycle();
 
-    function stopBreathing() {
-        isBreathing = false;
-        clearInterval(breathInterval);
+    // Loop every 8 seconds (4s Inhale + 4s Exhale)
+    breathInterval = setInterval(runBreathCycle, 8000);
+  }
 
-        // Reset Visuals
-        playIcon.classList.remove('opacity-0');
-        textContainer.classList.add('opacity-0');
-        
-        // Remove Animation Classes
-        circle.classList.remove('breath-active', 'duration-[4000ms]');
-        ring1.classList.remove('ring-active', 'duration-[4000ms]');
-        ring2.classList.remove('ring-active', 'duration-[4000ms]');
-        
-        // Quick Reset transition
-        circle.style.transition = "all 0.5s ease-out";
-        circle.style.transform = "scale(1)";
-    }
+  function stopBreathing() {
+    isBreathing = false;
+    clearInterval(breathInterval);
 
-    function runBreathCycle() {
-        // 1. INHALE PHASE (0s - 4s)
-        instructionEl.textContent = "Inhale...";
-        dhikrEl.textContent = "SubhanAllah";
-        
-        // Add smooth long transition for expansion
-        circle.style.transition = "all 4s ease-in-out";
-        ring1.style.transition = "all 4s ease-out";
-        ring2.style.transition = "all 4s ease-out";
+    // Reset Visuals
+    playIcon.classList.remove("opacity-0");
+    textContainer.classList.add("opacity-0");
 
-        // Add Active Classes (Grow)
-        circle.classList.add('breath-active');
-        ring1.classList.add('ring-active');
-        ring2.classList.add('ring-active');
+    // Remove Animation Classes
+    circle.classList.remove("breath-active", "duration-[4000ms]");
+    ring1.classList.remove("ring-active", "duration-[4000ms]");
+    ring2.classList.remove("ring-active", "duration-[4000ms]");
 
-        // 2. EXHALE PHASE (4s - 8s)
-        // We use setTimeout to trigger the exhale halfway through the loop
+    // Quick Reset transition
+    circle.style.transition = "all 0.5s ease-out";
+    circle.style.transform = "scale(1)";
+  }
+
+  function runBreathCycle() {
+    // 1. INHALE PHASE (0s - 4s)
+    instructionEl.textContent = "Inhale...";
+    dhikrEl.textContent = "SubhanAllah";
+
+    // Add smooth long transition for expansion
+    circle.style.transition = "all 4s ease-in-out";
+    ring1.style.transition = "all 4s ease-out";
+    ring2.style.transition = "all 4s ease-out";
+
+    // Add Active Classes (Grow)
+    circle.classList.add("breath-active");
+    ring1.classList.add("ring-active");
+    ring2.classList.add("ring-active");
+
+    // 2. EXHALE PHASE (4s - 8s)
+    // We use setTimeout to trigger the exhale halfway through the loop
+    setTimeout(() => {
+      if (!isBreathing) return;
+
+      instructionEl.textContent = "Exhale...";
+      dhikrEl.textContent = "Alhamdulillah";
+
+      // Remove Active Classes (Shrink)
+      circle.classList.remove("breath-active");
+      ring1.classList.remove("ring-active");
+      ring2.classList.remove("ring-active");
+    }, 4000); // 4000ms = 4 seconds
+  }
+})();
+// ==========================================
+// 7. THE QURANIC CURE (Mood Selector)
+// ==========================================
+(function () {
+  // Data Store
+  const verses = {
+    sad: {
+      arabic: "لَا يُكَلِّفُ ٱللَّهُ نَفْسًا إِلَّا وُسْعَهَا",
+      trans: "Allah does not burden a soul beyond that it can bear.",
+      ref: "Surah Al-Baqarah (2:286)",
+    },
+    anxious: {
+      arabic: "أَلَا بِذِكْرِ ٱللَّهِ تَطْمَئِنُّ ٱلْقُلُوبُ",
+      trans: "Unquestionably, by the remembrance of Allah do hearts find rest.",
+      ref: "Surah Ar-Ra'd (13:28)",
+    },
+    lonely: {
+      arabic: "وَنَحْنُ أَقْرَبُ إِلَيْهِ مِنْ حَبْلِ ٱلْوَرِيدِ",
+      trans: "And We are closer to him than [his] jugular vein.",
+      ref: "Surah Qaf (50:16)",
+    },
+    happy: {
+      arabic: "لَئِن شَكَرْتُمْ لَأَزِيدَنَّكُمْ",
+      trans: "If you are grateful, I will surely increase you [in favor].",
+      ref: "Surah Ibrahim (14:7)",
+    },
+    sinful: {
+      arabic: "إِنَّ ٱللَّهَ يَغْفِرُ ٱلذُّنُوبَ جَمِيعًا",
+      trans:
+        "Indeed, Allah forgives all sins. Indeed, it is He who is the Forgiving, the Merciful.",
+      ref: "Surah Az-Zumar (39:53)",
+    },
+    lost: {
+      arabic: "وَوَجَدَكَ ضَآلًّا فَهَدَىٰ",
+      trans: "And He found you lost and guided [you].",
+      ref: "Surah Ad-Duha (93:7)",
+    },
+  };
+
+  const buttons = document.querySelectorAll(".mood-btn");
+  const card = document.getElementById("cure-card");
+  const emotionEl = document.getElementById("cure-emotion");
+  const arabicEl = document.getElementById("cure-arabic");
+  const transEl = document.getElementById("cure-translation");
+  const refEl = document.getElementById("cure-reference");
+
+  if (buttons.length > 0 && card) {
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const mood = btn.getAttribute("data-mood");
+        const data = verses[mood];
+
+        // 1. Highlight Active Button
+        buttons.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        // 2. Hide Card (if open) to create transition effect
+        card.classList.add("opacity-0", "translate-y-4");
+        card.classList.remove("hidden");
+
+        // 3. Update Content after a tiny delay (to allow fade out if switching)
         setTimeout(() => {
-            if(!isBreathing) return;
+          emotionEl.textContent = `For when you feel ${mood}...`;
+          arabicEl.textContent = data.arabic;
+          transEl.textContent = `"${data.trans}"`;
+          refEl.textContent = data.ref;
 
-            instructionEl.textContent = "Exhale...";
-            dhikrEl.textContent = "Alhamdulillah";
-
-            // Remove Active Classes (Shrink)
-            circle.classList.remove('breath-active');
-            ring1.classList.remove('ring-active');
-            ring2.classList.remove('ring-active');
-
-        }, 4000); // 4000ms = 4 seconds
-    }
+          // 4. Show Card
+          card.classList.remove("opacity-0", "translate-y-4");
+        }, 200);
+      });
+    });
+  }
 })();
