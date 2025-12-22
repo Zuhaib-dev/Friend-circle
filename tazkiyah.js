@@ -717,3 +717,76 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 })();
+// ==========================================
+// 8. SHUKR JOURNAL (Gratitude List)
+// ==========================================
+(function() {
+    const input = document.getElementById('shukr-input');
+    const btn = document.getElementById('shukr-btn');
+    const list = document.getElementById('shukr-list');
+    const emptyState = document.getElementById('shukr-empty');
+    const STORAGE_KEY = 'shukr_entries';
+
+    // Load entries from storage
+    let entries = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+    function renderList() {
+        if(!list) return;
+        
+        list.innerHTML = '';
+        
+        if (entries.length === 0) {
+            emptyState.style.display = 'block';
+        } else {
+            emptyState.style.display = 'none';
+            
+            // Show newest first
+            entries.slice().reverse().forEach((entry, index) => {
+                // Determine original index for deletion
+                const originalIndex = entries.length - 1 - index;
+                
+                const li = document.createElement('li');
+                li.className = 'shukr-entry bg-emerald-50/50 border border-emerald-100 rounded-lg p-4 flex justify-between items-center group hover:bg-emerald-50 transition-colors';
+                
+                li.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <div class="h-2 w-2 rounded-full bg-emerald-400"></div>
+                        <span class="text-gray-700 font-medium text-sm md:text-base">${entry.text}</span>
+                    </div>
+                    <button onclick="deleteShukr(${originalIndex})" class="text-gray-300 hover:text-red-500 transition opacity-0 group-hover:opacity-100 p-1" aria-label="Delete">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                    </button>
+                `;
+                list.appendChild(li);
+            });
+        }
+    }
+
+    function addEntry() {
+        const text = input.value.trim();
+        if (text) {
+            entries.push({ text: text, date: new Date().toISOString() });
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+            input.value = '';
+            renderList();
+        }
+    }
+
+    // Expose delete function globally so the inline onclick works
+    window.deleteShukr = function(index) {
+        entries.splice(index, 1);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+        renderList();
+    };
+
+    if(btn && input) {
+        renderList();
+
+        btn.addEventListener('click', addEntry);
+        
+        // Allow pressing "Enter" to save
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') addEntry();
+        });
+    }
+})();
