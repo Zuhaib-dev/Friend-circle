@@ -556,3 +556,91 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 })();
+// ==========================================
+// 6. MOMENT OF SAKINAH (Breathing Dhikr)
+// ==========================================
+(function() {
+    const circle = document.getElementById('breath-circle');
+    const ring1 = document.getElementById('breath-ring-1');
+    const ring2 = document.getElementById('breath-ring-2');
+    const playIcon = document.getElementById('breath-play-icon');
+    const textContainer = document.getElementById('breath-text-container');
+    const instructionEl = document.getElementById('breath-instruction');
+    const dhikrEl = document.getElementById('breath-dhikr');
+
+    let isBreathing = false;
+    let breathInterval;
+
+    if(circle) {
+        circle.addEventListener('click', () => {
+            if(!isBreathing) {
+                startBreathing();
+            } else {
+                stopBreathing();
+            }
+        });
+    }
+
+    function startBreathing() {
+        isBreathing = true;
+        
+        // Hide Play Button, Show Text
+        playIcon.classList.add('opacity-0');
+        textContainer.classList.remove('opacity-0');
+
+        // Immediate First Breath
+        runBreathCycle();
+
+        // Loop every 8 seconds (4s Inhale + 4s Exhale)
+        breathInterval = setInterval(runBreathCycle, 8000);
+    }
+
+    function stopBreathing() {
+        isBreathing = false;
+        clearInterval(breathInterval);
+
+        // Reset Visuals
+        playIcon.classList.remove('opacity-0');
+        textContainer.classList.add('opacity-0');
+        
+        // Remove Animation Classes
+        circle.classList.remove('breath-active', 'duration-[4000ms]');
+        ring1.classList.remove('ring-active', 'duration-[4000ms]');
+        ring2.classList.remove('ring-active', 'duration-[4000ms]');
+        
+        // Quick Reset transition
+        circle.style.transition = "all 0.5s ease-out";
+        circle.style.transform = "scale(1)";
+    }
+
+    function runBreathCycle() {
+        // 1. INHALE PHASE (0s - 4s)
+        instructionEl.textContent = "Inhale...";
+        dhikrEl.textContent = "SubhanAllah";
+        
+        // Add smooth long transition for expansion
+        circle.style.transition = "all 4s ease-in-out";
+        ring1.style.transition = "all 4s ease-out";
+        ring2.style.transition = "all 4s ease-out";
+
+        // Add Active Classes (Grow)
+        circle.classList.add('breath-active');
+        ring1.classList.add('ring-active');
+        ring2.classList.add('ring-active');
+
+        // 2. EXHALE PHASE (4s - 8s)
+        // We use setTimeout to trigger the exhale halfway through the loop
+        setTimeout(() => {
+            if(!isBreathing) return;
+
+            instructionEl.textContent = "Exhale...";
+            dhikrEl.textContent = "Alhamdulillah";
+
+            // Remove Active Classes (Shrink)
+            circle.classList.remove('breath-active');
+            ring1.classList.remove('ring-active');
+            ring2.classList.remove('ring-active');
+
+        }, 4000); // 4000ms = 4 seconds
+    }
+})();

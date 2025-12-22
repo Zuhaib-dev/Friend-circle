@@ -89,3 +89,23 @@ body {
 .animate-compass-sway {
     animation: sway 4s ease-in-out infinite;
 }
+/* =========================================
+   MOMENT OF SAKINAH (Breathing)
+   ========================================= */
+
+/* The "Active" state classes that JS will toggle */
+
+/* Expands the circle (Inhale) */
+.breath-active {
+    transform: scale(1.3) !important; /* Grow bigger */
+    box-shadow: 0 0 80px rgba(52, 211, 153, 0.6) !important;
+}
+
+/* Expands the outer rings */
+.ring-active {
+    transform: scale(1.5) !important;
+    opacity: 1 !important;
+}
+
+/* Shrinks back (Exhale) - defaults to original CSS, 
+   but we use transition-duration in HTML to control speed */
