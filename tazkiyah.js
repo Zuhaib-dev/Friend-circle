@@ -969,3 +969,104 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 })();
+// ==========================================
+// SPIRITUAL GOAL TRACKER (WITH PERSISTENCE)
+// ==========================================
+(function () {
+  const goalInput = document.getElementById("goal-input");
+  const targetInput = document.getElementById("target-input");
+  const setBtn = document.getElementById("set-goal-btn");
+  const stepBtn = document.getElementById("step-btn");
+  const resetBtn = document.getElementById("reset-goal");
+
+  const displayTitle = document.getElementById("active-goal-title");
+  const ring = document.getElementById("progress-ring");
+  const currentText = document.getElementById("current-progress-text");
+  const targetText = document.getElementById("target-progress-text");
+
+  let state = {
+    goalName: "",
+    currentCount: 0,
+    targetCount: 0,
+  };
+
+  // 1. Load Data from LocalStorage on Startup
+  const loadData = () => {
+    const saved = localStorage.getItem("muraqaba_goal");
+    if (saved) {
+      state = JSON.parse(saved);
+      renderUI();
+    }
+  };
+
+  // 2. Save Data to LocalStorage
+  const saveData = () => {
+    localStorage.setItem("muraqaba_goal", JSON.stringify(state));
+  };
+
+  // 3. Update the Visuals
+  const renderUI = () => {
+    const { goalName, currentCount, targetCount } = state;
+
+    // Update Text
+    displayTitle.textContent = goalName || "Set a goal to begin";
+    currentText.textContent = currentCount;
+    targetText.textContent = `Target: ${targetCount}`;
+
+    // Update Progress Ring (Circumference is 251.2)
+    const percent = targetCount > 0 ? (currentCount / targetCount) * 100 : 0;
+    const offset = 251.2 - (Math.min(percent, 100) / 100) * 251.2;
+    ring.style.strokeDashoffset = offset;
+
+    // Success State
+    if (currentCount >= targetCount && targetCount > 0) {
+      displayTitle.innerHTML = `${goalName} <span class="block text-sm text-yellow-400 mt-2">Goal Achieved! ✨</span>`;
+      stepBtn.classList.add("opacity-50", "pointer-events-none");
+    } else {
+      stepBtn.classList.remove("opacity-50", "pointer-events-none");
+    }
+  };
+
+  // 4. Event Listeners
+  setBtn.addEventListener("click", () => {
+    const name = goalInput.value.trim();
+    const target = parseInt(targetInput.value);
+
+    if (name && target > 0) {
+      state = {
+        goalName: name,
+        currentCount: 0,
+        targetCount: target,
+      };
+      saveData();
+      renderUI();
+
+      // Visual feedback on button
+      const originalText = setBtn.textContent;
+      setBtn.textContent = "Goal Set!";
+      setTimeout(() => (setBtn.textContent = originalText), 1500);
+    }
+  });
+
+  stepBtn.addEventListener("click", () => {
+    if (state.currentCount < state.targetCount) {
+      state.currentCount++;
+      saveData();
+      renderUI();
+      if (navigator.vibrate) navigator.vibrate(20);
+    }
+  });
+
+  resetBtn.addEventListener("click", () => {
+    if (confirm("Do you want to clear your current goal?")) {
+      state = { goalName: "", currentCount: 0, targetCount: 0 };
+      localStorage.removeItem("muraqaba_goal");
+      goalInput.value = "";
+      targetInput.value = 1;
+      renderUI();
+    }
+  });
+
+  // Initialize
+  loadData();
+})();

@@ -819,6 +819,61 @@
         </div>
     </div>
 </section>
+<section class="max-w-6xl mx-auto my-24 px-4">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <div class="lg:col-span-1 bg-white rounded-3xl p-8 shadow-sm border border-emerald-50">
+            <h2 class="text-2xl font-bold text-emerald-900 font-amiri mb-2">My Muraqaba</h2>
+            <p class="text-gray-500 text-sm mb-8">Set a spiritual goal for today.</p>
+            
+            <div class="space-y-4">
+                <div>
+                    <label class="text-[10px] font-bold text-emerald-600 uppercase tracking-widest block mb-2">Goal Name</label>
+                    <input type="text" id="goal-input" placeholder="e.g., Read 5 pages of Quran" 
+                        class="w-full bg-emerald-50/50 border border-emerald-100 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all">
+                </div>
+                <div>
+                    <label class="text-[10px] font-bold text-emerald-600 uppercase tracking-widest block mb-2">Target Count</label>
+                    <input type="number" id="target-input" value="1" min="1"
+                        class="w-full bg-emerald-50/50 border border-emerald-100 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all">
+                </div>
+                <button id="set-goal-btn" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 rounded-xl shadow-lg shadow-emerald-200 transition-all active:scale-95">
+                    Start Tracking
+                </button>
+            </div>
+        </div>
+
+        <div class="lg:col-span-2 bg-emerald-900 rounded-3xl p-8 md:p-12 text-white relative overflow-hidden shadow-2xl flex flex-col items-center justify-center text-center">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16"></div>
+            
+            <div id="goal-display-area" class="relative z-10 w-full">
+                <p id="active-goal-name" class="text-emerald-300 font-medium italic mb-2">No active goal</p>
+                <h3 id="active-goal-title" class="text-3xl font-bold mb-10">Set a goal to begin</h3>
+                
+                <div class="relative w-48 h-48 mx-auto mb-10">
+                    <svg class="w-full h-full" viewBox="0 0 100 100">
+                        <circle class="text-emerald-800" stroke-width="8" stroke="currentColor" fill="transparent" r="40" cx="50" cy="50"/>
+                        <circle id="progress-ring" class="text-yellow-400 transition-all duration-500" stroke-width="8" stroke-dasharray="251.2" stroke-dashoffset="251.2" stroke-linecap="round" stroke="currentColor" fill="transparent" r="40" cx="50" cy="50" transform="rotate(-90 50 50)"/>
+                    </svg>
+                    <div class="absolute inset-0 flex flex-col items-center justify-center">
+                        <span id="current-progress-text" class="text-4xl font-bold">0</span>
+                        <span id="target-progress-text" class="text-xs text-emerald-400 font-bold uppercase tracking-widest">Target: 0</span>
+                    </div>
+                </div>
+
+                <div class="flex justify-center gap-4">
+                    <button id="step-btn" class="bg-white text-emerald-900 px-8 py-3 rounded-full font-bold hover:bg-emerald-50 transition-all active:scale-90">
+                        Log Progress
+                    </button>
+                    <button id="reset-goal" class="bg-emerald-800 text-emerald-300 px-6 py-3 rounded-full text-sm font-medium hover:bg-emerald-700 transition-all">
+                        New Goal
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
       </main>
 
       <footer
