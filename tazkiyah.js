@@ -720,35 +720,39 @@ document.addEventListener("DOMContentLoaded", () => {
 // ==========================================
 // 8. SHUKR JOURNAL (Gratitude List)
 // ==========================================
-(function() {
-    const input = document.getElementById('shukr-input');
-    const btn = document.getElementById('shukr-btn');
-    const list = document.getElementById('shukr-list');
-    const emptyState = document.getElementById('shukr-empty');
-    const STORAGE_KEY = 'shukr_entries';
+(function () {
+  const input = document.getElementById("shukr-input");
+  const btn = document.getElementById("shukr-btn");
+  const list = document.getElementById("shukr-list");
+  const emptyState = document.getElementById("shukr-empty");
+  const STORAGE_KEY = "shukr_entries";
 
-    // Load entries from storage
-    let entries = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+  // Load entries from storage
+  let entries = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
 
-    function renderList() {
-        if(!list) return;
-        
-        list.innerHTML = '';
-        
-        if (entries.length === 0) {
-            emptyState.style.display = 'block';
-        } else {
-            emptyState.style.display = 'none';
-            
-            // Show newest first
-            entries.slice().reverse().forEach((entry, index) => {
-                // Determine original index for deletion
-                const originalIndex = entries.length - 1 - index;
-                
-                const li = document.createElement('li');
-                li.className = 'shukr-entry bg-emerald-50/50 border border-emerald-100 rounded-lg p-4 flex justify-between items-center group hover:bg-emerald-50 transition-colors';
-                
-                li.innerHTML = `
+  function renderList() {
+    if (!list) return;
+
+    list.innerHTML = "";
+
+    if (entries.length === 0) {
+      emptyState.style.display = "block";
+    } else {
+      emptyState.style.display = "none";
+
+      // Show newest first
+      entries
+        .slice()
+        .reverse()
+        .forEach((entry, index) => {
+          // Determine original index for deletion
+          const originalIndex = entries.length - 1 - index;
+
+          const li = document.createElement("li");
+          li.className =
+            "shukr-entry bg-emerald-50/50 border border-emerald-100 rounded-lg p-4 flex justify-between items-center group hover:bg-emerald-50 transition-colors";
+
+          li.innerHTML = `
                     <div class="flex items-center gap-3">
                         <div class="h-2 w-2 rounded-full bg-emerald-400"></div>
                         <span class="text-gray-700 font-medium text-sm md:text-base">${entry.text}</span>
@@ -757,77 +761,80 @@ document.addEventListener("DOMContentLoaded", () => {
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                     </button>
                 `;
-                list.appendChild(li);
-            });
-        }
-    }
-
-    function addEntry() {
-        const text = input.value.trim();
-        if (text) {
-            entries.push({ text: text, date: new Date().toISOString() });
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
-            input.value = '';
-            renderList();
-        }
-    }
-
-    // Expose delete function globally so the inline onclick works
-    window.deleteShukr = function(index) {
-        entries.splice(index, 1);
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
-        renderList();
-    };
-
-    if(btn && input) {
-        renderList();
-
-        btn.addEventListener('click', addEntry);
-        
-        // Allow pressing "Enter" to save
-        input.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') addEntry();
+          list.appendChild(li);
         });
     }
+  }
+
+  function addEntry() {
+    const text = input.value.trim();
+    if (text) {
+      entries.push({ text: text, date: new Date().toISOString() });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+      input.value = "";
+      renderList();
+    }
+  }
+
+  // Expose delete function globally so the inline onclick works
+  window.deleteShukr = function (index) {
+    entries.splice(index, 1);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+    renderList();
+  };
+
+  if (btn && input) {
+    renderList();
+
+    btn.addEventListener("click", addEntry);
+
+    // Allow pressing "Enter" to save
+    input.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") addEntry();
+    });
+  }
 })();
 // ==========================================
 // QURAN EXPLORER (ALQURAN.CLOUD API)
 // ==========================================
-(function() {
-    const trigger = document.getElementById('quran-card-trigger');
-    const modal = document.getElementById('quran-modal');
-    const closeBtn = document.getElementById('close-quran');
-    const backBtn = document.getElementById('back-to-list');
-    const listGrid = document.getElementById('surah-list-grid');
-    const readingView = document.getElementById('reading-view');
-    const ayahList = document.getElementById('ayah-list');
+(function () {
+  const trigger = document.getElementById("quran-card-trigger");
+  const modal = document.getElementById("quran-modal");
+  const closeBtn = document.getElementById("close-quran");
+  const backBtn = document.getElementById("back-to-list");
+  const listGrid = document.getElementById("surah-list-grid");
+  const readingView = document.getElementById("reading-view");
+  const ayahList = document.getElementById("ayah-list");
 
-    if (!trigger) return;
+  if (!trigger) return;
 
-    trigger.onclick = () => {
-        modal.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-        fetchSurahList();
-    };
+  trigger.onclick = () => {
+    modal.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+    fetchSurahList();
+  };
 
-    closeBtn.onclick = () => {
-        modal.classList.add('hidden');
-        document.body.style.overflow = '';
-    };
+  closeBtn.onclick = () => {
+    modal.classList.add("hidden");
+    document.body.style.overflow = "";
+  };
 
-    backBtn.onclick = () => {
-        readingView.classList.add('hidden');
-        listGrid.classList.remove('hidden');
-        backBtn.classList.add('hidden');
-    };
+  backBtn.onclick = () => {
+    readingView.classList.add("hidden");
+    listGrid.classList.remove("hidden");
+    backBtn.classList.add("hidden");
+  };
 
-    async function fetchSurahList() {
-        if (listGrid.innerHTML !== "") return;
-        listGrid.innerHTML = '<div class="col-span-full text-center py-20 text-emerald-600">Loading Surahs...</div>';
-        try {
-            const res = await fetch('https://api.alquran.cloud/v1/surah');
-            const data = await res.json();
-            listGrid.innerHTML = data.data.map(s => `
+  async function fetchSurahList() {
+    if (listGrid.innerHTML !== "") return;
+    listGrid.innerHTML =
+      '<div class="col-span-full text-center py-20 text-emerald-600">Loading Surahs...</div>';
+    try {
+      const res = await fetch("https://api.alquran.cloud/v1/surah");
+      const data = await res.json();
+      listGrid.innerHTML = data.data
+        .map(
+          (s) => `
                 <div onclick="openSurah(${s.number})" class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm cursor-pointer hover:border-emerald-500 transition-all flex justify-between items-center">
                     <div class="flex items-center gap-4">
                         <div class="w-8 h-8 bg-emerald-100 rounded text-emerald-700 flex items-center justify-center font-bold text-xs">${s.number}</div>
@@ -838,38 +845,47 @@ document.addEventListener("DOMContentLoaded", () => {
                     </div>
                     <p class="font-amiri text-lg text-emerald-900">${s.name}</p>
                 </div>
-            `).join('');
-        } catch (e) { listGrid.innerHTML = "Error loading Quran."; }
+            `
+        )
+        .join("");
+    } catch (e) {
+      listGrid.innerHTML = "Error loading Quran.";
     }
+  }
 
-   window.openSurah = async function(num) {
-    listGrid.classList.add('hidden');
-    readingView.classList.remove('hidden');
-    backBtn.classList.remove('hidden');
-    
+  window.openSurah = async function (num) {
+    listGrid.classList.add("hidden");
+    readingView.classList.remove("hidden");
+    backBtn.classList.remove("hidden");
+
     // Clear previous and show loading state
-    ayahList.innerHTML = '<div class="text-center py-20 text-emerald-600 animate-pulse">Preparing Surah...</div>';
-    document.getElementById('quran-view-container').scrollTo(0,0);
+    ayahList.innerHTML =
+      '<div class="text-center py-20 text-emerald-600 animate-pulse">Preparing Surah...</div>';
+    document.getElementById("quran-view-container").scrollTo(0, 0);
 
     try {
-        // Fetch Arabic and English Translation
-        const [arRes, enRes] = await Promise.all([
-            fetch(`https://api.alquran.cloud/v1/surah/${num}`),
-            fetch(`https://api.alquran.cloud/v1/surah/${num}/en.sahih`)
-        ]);
-        
-        const arData = await arRes.json();
-        const enData = await enRes.json();
-        const surah = arData.data;
+      // Fetch Arabic and English Translation
+      const [arRes, enRes] = await Promise.all([
+        fetch(`https://api.alquran.cloud/v1/surah/${num}`),
+        fetch(`https://api.alquran.cloud/v1/surah/${num}/en.sahih`),
+      ]);
 
-        // 1. GENERATE THE UNIFORM HEADER
-        // We show Bismillah for all surahs except At-Tawbah (9)
-        const showBismillah = num !== 9;
-        
-        document.getElementById('reading-header').innerHTML = `
+      const arData = await arRes.json();
+      const enData = await enRes.json();
+      const surah = arData.data;
+
+      // 1. GENERATE THE UNIFORM HEADER
+      // We show Bismillah for all surahs except At-Tawbah (9)
+      const showBismillah = num !== 9;
+
+      document.getElementById("reading-header").innerHTML = `
             <div class="mb-8">
-                <span class="bg-emerald-100 text-emerald-700 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">Surah ${surah.number}</span>
-                <h1 class="font-amiri text-6xl text-emerald-900 my-4">${surah.name}</h1>
+                <span class="bg-emerald-100 text-emerald-700 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">Surah ${
+                  surah.number
+                }</span>
+                <h1 class="font-amiri text-6xl text-emerald-900 my-4">${
+                  surah.name
+                }</h1>
                 <div class="flex items-center justify-center gap-4 text-gray-500 text-sm mb-6">
                     <span>${surah.englishName}</span>
                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-200"></span>
@@ -878,12 +894,16 @@ document.addEventListener("DOMContentLoaded", () => {
                     <span>${surah.revelationType}</span>
                 </div>
                 
-                ${showBismillah ? `
+                ${
+                  showBismillah
+                    ? `
                     <div class="py-6 flex flex-col items-center">
                         <p class="font-amiri text-3xl text-emerald-800 mb-4">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
                         <p class="text-xs text-gray-400 italic">In the name of Allah, the Entirely Merciful, the Especially Merciful</p>
                     </div>
-                ` : ''}
+                `
+                    : ""
+                }
 
                 <div class="bg-white p-4 rounded-2xl shadow-sm border border-emerald-50 max-w-sm mx-auto mt-4">
                     <audio controls class="w-full h-10">
@@ -893,16 +913,20 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
         `;
 
-        // 2. RENDER THE AYAS
-        ayahList.innerHTML = surah.ayahs.map((ayah, i) => {
-            // Clean Bismillah from the first ayah of every surah (except Fatiha) 
-            // because we already displayed it in the header
-            let ayahText = ayah.text;
-            if (num !== 1 && num !== 9 && i === 0) {
-                ayahText = ayahText.replace("بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ", "");
-            }
+      // 2. RENDER THE AYAS
+      ayahList.innerHTML = surah.ayahs
+        .map((ayah, i) => {
+          // Clean Bismillah from the first ayah of every surah (except Fatiha)
+          // because we already displayed it in the header
+          let ayahText = ayah.text;
+          if (num !== 1 && num !== 9 && i === 0) {
+            ayahText = ayahText.replace(
+              "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ",
+              ""
+            );
+          }
 
-            return `
+          return `
                 <div class="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:border-emerald-200 transition-colors">
                     <div class="flex justify-between items-start gap-6 mb-4">
                         <span class="shrink-0 w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center text-[10px] font-bold border border-emerald-100">${ayah.numberInSurah}</span>
@@ -913,10 +937,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     </div>
                 </div>
             `;
-        }).join('');
-
+        })
+        .join("");
     } catch (e) {
-        ayahList.innerHTML = `<div class="text-center py-20 text-red-500 font-bold">Error connecting to the API. Please try again.</div>`;
+      ayahList.innerHTML = `<div class="text-center py-20 text-red-500 font-bold">Error connecting to the API. Please try again.</div>`;
     }
-};
+  };
 })();
