@@ -178,51 +178,36 @@
               </div>
             </div>
             <!-- Quran Majeed -->
-            <a
-              href="./QuranMajeed.pdf"
-              target="_blank"
-              class="group bg-white rounded-xl p-6 shadow-sm border border-emerald-100 relative overflow-hidden flex flex-col justify-between h-[300px] hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
-            >
-              <div
-                class="absolute top-0 right-0 bg-emerald-500 text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg uppercase tracking-wider"
-              >
-                Read Now
-              </div>
-              <div class="mt-4">
-                <div
-                  class="h-14 w-14 bg-emerald-100 rounded-2xl flex items-center justify-center mb-6 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-300 shadow-sm"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-8 w-8"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.5"
-                      d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-                    />
-                  </svg>
-                </div>
-                <h3
-                  class="text-xl font-bold text-gray-800 mb-2 group-hover:text-emerald-700 transition-colors"
-                >
-                  Quran Reader
-                </h3>
-                <p class="text-gray-500 text-sm leading-relaxed">
-                  Open the full Holy Quran PDF directly in your browser with
-                  clear text.
-                </p>
-              </div>
-              <div
-                class="text-emerald-600 text-sm font-semibold flex items-center gap-2 group-hover:gap-3 transition-all"
-              >
-                Open PDF <span>&rarr;</span>
-              </div>
-            </a>
+         <div id="quran-card-trigger" class="group bg-white rounded-xl p-6 shadow-sm border border-emerald-100 relative overflow-hidden flex flex-col justify-between h-[300px] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+    <div class="absolute top-0 right-0 bg-emerald-500 text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg uppercase tracking-wider">Interactive</div>
+    <div class="mt-4">
+        <div class="h-14 w-14 bg-emerald-100 rounded-2xl flex items-center justify-center mb-6 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-300 shadow-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+        </div>
+        <h3 class="text-xl font-bold text-gray-800 mb-2 group-hover:text-emerald-700 transition-colors">Quran Explorer</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">Listen to and read all 114 Surahs with translations and audio recitations.</p>
+    </div>
+    <div class="text-emerald-600 text-sm font-semibold flex items-center gap-2 group-hover:gap-3 transition-all">Open Explorer <span>&rarr;</span></div>
+</div>
+
+<div id="quran-modal" class="fixed inset-0 z-[100] hidden bg-white overflow-hidden flex flex-col">
+    <header class="bg-emerald-900 text-white px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center gap-4">
+            <button id="close-quran" class="text-2xl hover:text-emerald-300">&times;</button>
+            <h2 class="text-xl font-bold">Al-Quran Explorer</h2>
+        </div>
+        <button id="back-to-list" class="hidden bg-emerald-800 px-4 py-1 rounded text-sm hover:bg-emerald-700 transition">Back to Surahs</button>
+    </header>
+    <div id="quran-view-container" class="flex-1 overflow-y-auto bg-gray-50 p-6">
+        <div id="surah-list-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto"></div>
+        <div id="reading-view" class="hidden max-w-4xl mx-auto pb-20">
+            <div id="reading-header" class="text-center mb-10"></div>
+            <div id="ayah-list" class="space-y-6"></div>
+        </div>
+    </div>
+</div>
             <!-- 99 names of Allah -->
             <div
               class="bg-white rounded-xl shadow-sm border border-emerald-100 overflow-hidden h-[300px] relative flex flex-col group hover:shadow-md transition duration-300"
