@@ -207,3 +207,40 @@ body {
 .ayah-card-number {
   box-shadow: inset 0 0 0 1px rgba(16, 185, 129, 0.1);
 }
+/* Ensure the Arabic text doesn't feel cramped */
+.font-amiri {
+    line-height: 2.2 !important;
+}
+
+/* Style the Ayah End Symbol */
+.font-amiri span {
+    font-family: Arial, sans-serif; /* Fallback for the ۝ symbol if needed */
+    vertical-align: middle;
+}
+
+/* Optional: Add a subtle divider between ayahs */
+#ayah-list > div {
+    position: relative;
+    overflow: hidden;
+}
+
+#ayah-list > div::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background-color: transparent;
+    transition: background-color 0.3s;
+}
+
+#ayah-list > div:hover::before {
+    background-color: #10b981; /* Emerald highlight on hover */
+}
+/* Style for the Ayah end symbol */
+.font-amiri span {
+    display: inline-block;
+    transform: translateY(4px); /* Fine-tune the vertical position of the symbol */
+    font-family: "Amiri", serif;
+}

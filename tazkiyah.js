@@ -853,59 +853,40 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  window.openSurah = async function (num) {
-    listGrid.classList.add("hidden");
-    readingView.classList.remove("hidden");
-    backBtn.classList.remove("hidden");
-
-    // Clear previous and show loading state
-    ayahList.innerHTML =
-      '<div class="text-center py-20 text-emerald-600 animate-pulse">Preparing Surah...</div>';
-    document.getElementById("quran-view-container").scrollTo(0, 0);
+ window.openSurah = async function(num) {
+    listGrid.classList.add('hidden');
+    readingView.classList.remove('hidden');
+    backBtn.classList.remove('hidden');
+    
+    const ayahsContainer = document.getElementById('ayah-list');
+    ayahsContainer.innerHTML = '<div class="text-center py-20 text-emerald-600 animate-pulse font-bold">Opening Surah...</div>';
+    document.getElementById('quran-view-container').scrollTo({ top: 0, behavior: 'smooth' });
 
     try {
-      // Fetch Arabic and English Translation
-      const [arRes, enRes] = await Promise.all([
-        fetch(`https://api.alquran.cloud/v1/surah/${num}`),
-        fetch(`https://api.alquran.cloud/v1/surah/${num}/en.sahih`),
-      ]);
+        const [arRes, enRes] = await Promise.all([
+            fetch(`https://api.alquran.cloud/v1/surah/${num}`),
+            fetch(`https://api.alquran.cloud/v1/surah/${num}/en.sahih`)
+        ]);
+        
+        const arData = await arRes.json();
+        const enData = await enRes.json();
+        const surah = arData.data;
 
-      const arData = await arRes.json();
-      const enData = await enRes.json();
-      const surah = arData.data;
-
-      // 1. GENERATE THE UNIFORM HEADER
-      // We show Bismillah for all surahs except At-Tawbah (9)
-      const showBismillah = num !== 9;
-
-      document.getElementById("reading-header").innerHTML = `
-            <div class="mb-8">
-                <span class="bg-emerald-100 text-emerald-700 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">Surah ${
-                  surah.number
-                }</span>
-                <h1 class="font-amiri text-6xl text-emerald-900 my-4">${
-                  surah.name
-                }</h1>
-                <div class="flex items-center justify-center gap-4 text-gray-500 text-sm mb-6">
-                    <span>${surah.englishName}</span>
-                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-200"></span>
-                    <span>${surah.numberOfAyahs} Ayahs</span>
-                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-200"></span>
-                    <span>${surah.revelationType}</span>
-                </div>
+        // 1. Uniform Header for all Surahs
+        const bismillahText = "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ";
+        
+        document.getElementById('reading-header').innerHTML = `
+            <div class="mb-12 text-center">
+                <span class="bg-emerald-100 text-emerald-700 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest border border-emerald-200">Surah ${surah.number}</span>
+                <h1 class="font-amiri text-6xl text-emerald-900 my-6">${surah.name}</h1>
+                <p class="text-gray-500 mb-8">${surah.englishName} • ${surah.numberOfAyahs} Ayahs</p>
                 
-                ${
-                  showBismillah
-                    ? `
-                    <div class="py-6 flex flex-col items-center">
-                        <p class="font-amiri text-3xl text-emerald-800 mb-4">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
-                        <p class="text-xs text-gray-400 italic">In the name of Allah, the Entirely Merciful, the Especially Merciful</p>
-                    </div>
-                `
-                    : ""
-                }
+                <div class="py-4">
+                    <p class="font-amiri text-4xl text-emerald-800">${bismillahText}</p>
+                    <p class="text-[11px] text-gray-400 mt-2 italic">In the name of Allah, the Entirely Merciful, the Especially Merciful</p>
+                </div>
 
-                <div class="bg-white p-4 rounded-2xl shadow-sm border border-emerald-50 max-w-sm mx-auto mt-4">
+                <div class="mt-8 bg-white p-3 rounded-2xl shadow-sm border border-emerald-50 max-w-xs mx-auto">
                     <audio controls class="w-full h-10">
                         <source src="https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/${num}.mp3">
                     </audio>
@@ -913,34 +894,36 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
         `;
 
-      // 2. RENDER THE AYAS
-      ayahList.innerHTML = surah.ayahs
-        .map((ayah, i) => {
-          // Clean Bismillah from the first ayah of every surah (except Fatiha)
-          // because we already displayed it in the header
-          let ayahText = ayah.text;
-          if (num !== 1 && num !== 9 && i === 0) {
-            ayahText = ayahText.replace(
-              "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ",
-              ""
-            );
-          }
+        // 2. Render Ayahs without repeating Bismillah
+        ayahsContainer.innerHTML = surah.ayahs.map((ayah, i) => {
+            let arabicText = ayah.text;
 
-          return `
-                <div class="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:border-emerald-200 transition-colors">
-                    <div class="flex justify-between items-start gap-6 mb-4">
-                        <span class="shrink-0 w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center text-[10px] font-bold border border-emerald-100">${ayah.numberInSurah}</span>
-                        <p class="font-amiri text-3xl md:text-4xl text-right leading-loose text-gray-800" dir="rtl">${ayahText}</p>
-                    </div>
-                    <div class="border-l-2 border-emerald-50 pl-4 py-1">
-                        <p class="text-gray-600 text-sm leading-relaxed">${enData.data.ayahs[i].text}</p>
+            // Remove Bismillah from the first ayah if it's not Surah Al-Fatiha (1) or At-Tawbah (9)
+            // The API usually includes it in the text of the first ayah
+            if (num !== 1 && num !== 9 && i === 0) {
+                // This regex removes the Bismillah string if it appears at the start
+                arabicText = arabicText.replace(bismillahText, "").trim();
+            }
+
+            return `
+                <div class="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm">
+                    <div class="flex flex-col gap-6">
+                        <h2 class="font-amiri text-3xl md:text-4xl text-right leading-[2.6] text-gray-800" dir="rtl">
+                            ${arabicText} <span class="text-emerald-500/50 font-serif ml-2 text-2xl">۝</span>
+                        </h2>
+                        <div class="border-l-2 border-emerald-100 pl-4 py-1">
+                            <span class="text-[10px] font-bold text-emerald-300 uppercase mb-1 block">Verse ${ayah.numberInSurah}</span>
+                            <p class="text-gray-600 text-sm md:text-base italic leading-relaxed">
+                                ${enData.data.ayahs[i].text}
+                            </p>
+                        </div>
                     </div>
                 </div>
             `;
-        })
-        .join("");
+        }).join('');
+
     } catch (e) {
-      ayahList.innerHTML = `<div class="text-center py-20 text-red-500 font-bold">Error connecting to the API. Please try again.</div>`;
+        ayahsContainer.innerHTML = `<p class="text-center text-red-500">Error loading Surah.</p>`;
     }
-  };
+};
 })();
