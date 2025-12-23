@@ -853,29 +853,32 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
- window.openSurah = async function(num) {
-    listGrid.classList.add('hidden');
-    readingView.classList.remove('hidden');
-    backBtn.classList.remove('hidden');
-    
-    const ayahsContainer = document.getElementById('ayah-list');
-    ayahsContainer.innerHTML = '<div class="text-center py-20 text-emerald-600 animate-pulse font-bold">Opening Surah...</div>';
-    document.getElementById('quran-view-container').scrollTo({ top: 0, behavior: 'smooth' });
+  window.openSurah = async function (num) {
+    listGrid.classList.add("hidden");
+    readingView.classList.remove("hidden");
+    backBtn.classList.remove("hidden");
+
+    const ayahsContainer = document.getElementById("ayah-list");
+    ayahsContainer.innerHTML =
+      '<div class="text-center py-20 text-emerald-600 animate-pulse font-bold">Opening Surah...</div>';
+    document
+      .getElementById("quran-view-container")
+      .scrollTo({ top: 0, behavior: "smooth" });
 
     try {
-        const [arRes, enRes] = await Promise.all([
-            fetch(`https://api.alquran.cloud/v1/surah/${num}`),
-            fetch(`https://api.alquran.cloud/v1/surah/${num}/en.sahih`)
-        ]);
-        
-        const arData = await arRes.json();
-        const enData = await enRes.json();
-        const surah = arData.data;
+      const [arRes, enRes] = await Promise.all([
+        fetch(`https://api.alquran.cloud/v1/surah/${num}`),
+        fetch(`https://api.alquran.cloud/v1/surah/${num}/en.sahih`),
+      ]);
 
-        // 1. Uniform Header for all Surahs
-        const bismillahText = "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ";
-        
-        document.getElementById('reading-header').innerHTML = `
+      const arData = await arRes.json();
+      const enData = await enRes.json();
+      const surah = arData.data;
+
+      // 1. Uniform Header for all Surahs
+      const bismillahText = "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ";
+
+      document.getElementById("reading-header").innerHTML = `
             <div class="mb-12 text-center">
                 <span class="bg-emerald-100 text-emerald-700 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest border border-emerald-200">Surah ${surah.number}</span>
                 <h1 class="font-amiri text-6xl text-emerald-900 my-6">${surah.name}</h1>
@@ -894,18 +897,19 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
         `;
 
-        // 2. Render Ayahs without repeating Bismillah
-        ayahsContainer.innerHTML = surah.ayahs.map((ayah, i) => {
-            let arabicText = ayah.text;
+      // 2. Render Ayahs without repeating Bismillah
+      ayahsContainer.innerHTML = surah.ayahs
+        .map((ayah, i) => {
+          let arabicText = ayah.text;
 
-            // Remove Bismillah from the first ayah if it's not Surah Al-Fatiha (1) or At-Tawbah (9)
-            // The API usually includes it in the text of the first ayah
-            if (num !== 1 && num !== 9 && i === 0) {
-                // This regex removes the Bismillah string if it appears at the start
-                arabicText = arabicText.replace(bismillahText, "").trim();
-            }
+          // Remove Bismillah from the first ayah if it's not Surah Al-Fatiha (1) or At-Tawbah (9)
+          // The API usually includes it in the text of the first ayah
+          if (num !== 1 && num !== 9 && i === 0) {
+            // This regex removes the Bismillah string if it appears at the start
+            arabicText = arabicText.replace(bismillahText, "").trim();
+          }
 
-            return `
+          return `
                 <div class="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm">
                     <div class="flex flex-col gap-6">
                         <h2 class="font-amiri text-3xl md:text-4xl text-right leading-[2.6] text-gray-800" dir="rtl">
@@ -920,10 +924,48 @@ document.addEventListener("DOMContentLoaded", () => {
                     </div>
                 </div>
             `;
-        }).join('');
-
+        })
+        .join("");
     } catch (e) {
-        ayahsContainer.innerHTML = `<p class="text-center text-red-500">Error loading Surah.</p>`;
+      ayahsContainer.innerHTML = `<p class="text-center text-red-500">Error loading Surah.</p>`;
     }
-};
+  };
+})();
+// ==========================================
+// 9. NIYYAH SETTER LOGIC
+// ==========================================
+(function () {
+  const display = document.getElementById("display-niyyah");
+  const customInput = document.getElementById("custom-niyyah");
+  const buttons = document.querySelectorAll(".niyyah-btn");
+
+  if (display && customInput) {
+    // Handle Suggestion Buttons
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const text = btn.getAttribute("data-niyyah");
+
+        // Animate out
+        display.style.opacity = "0";
+        display.style.transform = "translateY(5px)";
+
+        setTimeout(() => {
+          display.textContent = `"${text}"`;
+          display.style.opacity = "1";
+          display.style.transform = "translateY(0)";
+          customInput.value = ""; // Clear custom input if button clicked
+        }, 300);
+      });
+    });
+
+    // Handle Custom Input
+    customInput.addEventListener("input", (e) => {
+      const val = e.target.value;
+      if (val.trim() !== "") {
+        display.textContent = `"${val}"`;
+      } else {
+        display.textContent = "Click a suggestion or type your own below...";
+      }
+    });
+  }
 })();

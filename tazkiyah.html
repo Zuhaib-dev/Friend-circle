@@ -759,6 +759,65 @@
         </div>
     </div>
 </section>
+<section class="max-w-5xl mx-auto my-24 px-4">
+    <div class="relative group">
+        <div class="absolute -inset-1 bg-gradient-to-r from-emerald-100 to-yellow-100 rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+        
+        <div class="relative bg-white border border-emerald-50 rounded-3xl p-8 md:p-12 shadow-sm overflow-hidden">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                
+                <div class="flex-1">
+                    <span class="inline-block px-4 py-1 rounded-full bg-emerald-50 text-emerald-600 text-xs font-bold uppercase tracking-widest mb-4">
+                        Purposeful Living
+                    </span>
+                    <h2 class="text-4xl font-bold text-emerald-900 font-amiri mb-6">
+                        Set Your <span class="text-yellow-600">Niyyah</span>
+                    </h2>
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        An intention (Niyyah) turns a habit into an act of worship. Before you start your next task, pause and ask: <strong>"Why am I doing this?"</strong>
+                    </p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="niyyah-suggestions">
+                        <button data-niyyah="To please Allah through my work" class="niyyah-btn text-left p-4 rounded-xl border border-gray-100 hover:border-emerald-300 hover:bg-emerald-50 transition-all group/item">
+                            <p class="text-xs text-emerald-500 font-bold mb-1">Work/Study</p>
+                            <p class="text-sm text-gray-700 font-medium">To please Allah through my excellence</p>
+                        </button>
+                        <button data-niyyah="To nourish the body Allah gave me" class="niyyah-btn text-left p-4 rounded-xl border border-gray-100 hover:border-emerald-300 hover:bg-emerald-50 transition-all">
+                            <p class="text-xs text-emerald-500 font-bold mb-1">Health/Eating</p>
+                            <p class="text-sm text-gray-700 font-medium">To nourish the body Allah gave me</p>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="w-full md:w-80 shrink-0">
+                    <div class="bg-emerald-900 rounded-2xl p-6 text-white shadow-2xl transform hover:scale-[1.02] transition-transform">
+                        <div class="flex justify-between items-start mb-10">
+                            <div class="h-10 w-10 bg-emerald-800 rounded-lg flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg>
+                            </div>
+                            <span class="text-[10px] text-emerald-300 font-bold uppercase">Current Focus</span>
+                        </div>
+                        
+                        <div class="mb-8">
+                            <p class="text-emerald-400 text-xs font-bold uppercase mb-2">My Intention:</p>
+                            <h3 id="display-niyyah" class="text-xl font-medium leading-relaxed italic text-emerald-50">
+                                Click a suggestion or type your own below...
+                            </h3>
+                        </div>
+
+                        <div class="relative">
+                            <input type="text" id="custom-niyyah" placeholder="Type your own..." 
+                                class="w-full bg-emerald-800/50 border border-emerald-700 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-yellow-400 text-white placeholder-emerald-500">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
       </main>
 
       <footer
