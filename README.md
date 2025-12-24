@@ -84,3 +84,4 @@ We have more **inside jokes** than actual money in our wallets.
 Give your friends a hug today.  
 Because **Friend Circle > Social Media** ❤️
 next will gonna add more and more features
+Added a Quran pop up model to show all the surhas of the Quran Majeed with the translation and also Audi recitation. Next will gonna and more features and one is in my mind right now is to add a pomodoro timer ⌛
