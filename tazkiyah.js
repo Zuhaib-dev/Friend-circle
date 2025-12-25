@@ -1070,3 +1070,90 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initialize
   loadData();
 })();
+// ==========================================
+// SABR POMODORO WITH PiP MODE
+// ==========================================
+(function () {
+  let timeLeft = 25 * 60;
+  let timerId = null;
+  const display = document.getElementById("pomodoro-timer");
+  const startBtn = document.getElementById("pomodoro-start");
+  const pipBtn = document.getElementById("pomodoro-pip");
+  const resetBtn = document.getElementById("pomodoro-reset");
+  const video = document.getElementById("pomodoro-video");
+  const canvas = document.getElementById("pomodoro-canvas");
+  const ctx = canvas.getContext("2d");
+
+  // 1. Logic to format time
+  const formatTime = (s) => {
+    const mins = Math.floor(s / 60);
+    const secs = s % 60;
+    return `${mins.toString().padStart(2, "0")}:${secs
+      .toString()
+      .padStart(2, "0")}`;
+  };
+
+  // 2. Logic to Draw Timer to Canvas (for PiP)
+  const updateCanvas = () => {
+    ctx.fillStyle = "#064e3b"; // Emerald 950
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "bold 80px sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText(
+      formatTime(timeLeft),
+      canvas.width / 2,
+      canvas.height / 2 + 20
+    );
+    ctx.font = "20px sans-serif";
+    ctx.fillStyle = "#34d399";
+    ctx.fillText("Sabr Session", canvas.width / 2, canvas.height / 2 + 80);
+  };
+
+  // 3. Start/Stop Timer
+  const toggleTimer = () => {
+    if (timerId) {
+      clearInterval(timerId);
+      timerId = null;
+      startBtn.textContent = "Resume Session";
+    } else {
+      startBtn.textContent = "Pause Session";
+      timerId = setInterval(() => {
+        if (timeLeft > 0) {
+          timeLeft--;
+          display.textContent = formatTime(timeLeft);
+          updateCanvas();
+        } else {
+          clearInterval(timerId);
+          alert("Time for a break! Take a moment for Zikr.");
+        }
+      }, 1000);
+    }
+  };
+
+  // 4. Picture-in-Picture Trigger
+  pipBtn.addEventListener("click", async () => {
+    try {
+      const stream = canvas.captureStream();
+      video.srcObject = stream;
+      await video.play();
+      await video.requestPictureInPicture();
+    } catch (error) {
+      console.error("PiP failed", error);
+    }
+  });
+
+  startBtn.addEventListener("click", toggleTimer);
+
+  resetBtn.addEventListener("click", () => {
+    clearInterval(timerId);
+    timerId = null;
+    timeLeft = 25 * 60;
+    display.textContent = formatTime(timeLeft);
+    startBtn.textContent = "Start Session";
+    updateCanvas();
+  });
+
+  // Initial canvas draw
+  updateCanvas();
+})();
