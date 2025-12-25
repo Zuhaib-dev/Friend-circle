@@ -1157,3 +1157,66 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initial canvas draw
   updateCanvas();
 })();
+// ==========================================
+// DAILY MUHASABAH LOGIC
+// ==========================================
+(function() {
+    const checks = document.querySelectorAll('.muhasabah-check');
+    const ring = document.getElementById('score-ring');
+    const percentText = document.getElementById('score-percent');
+    const feedback = document.getElementById('score-feedback');
+    const resetBtn = document.getElementById('reset-muhasabah');
+
+    const updateScore = (isInitial = false) => {
+        let total = 0;
+        let checkedCount = 0;
+        
+        checks.forEach((check, index) => {
+            if (isInitial) {
+                // Restore state from storage
+                const savedState = localStorage.getItem(`muhasabah_check_${index}`);
+                if (savedState === 'true') check.checked = true;
+            } else {
+                // Save state to storage
+                localStorage.setItem(`muhasabah_check_${index}`, check.checked);
+            }
+
+            if (check.checked) {
+                total += parseInt(check.getAttribute('data-weight'));
+                checkedCount++;
+            }
+        });
+
+        // Update UI
+        const circumference = 276.5; // 2 * pi * 44
+        const offset = circumference - (total / 100 * circumference);
+        ring.style.strokeDashoffset = offset;
+        percentText.textContent = `${total}%`;
+
+        // Feedback Logic
+        if (total === 0) feedback.textContent = "Awaiting your reflection...";
+        else if (total < 40) feedback.textContent = "Every small step counts.";
+        else if (total < 80) feedback.textContent = "Alhamdulillah, a productive day!";
+        else if (total <= 100) feedback.textContent = "Ma Sha Allah, a blessed day!";
+    };
+
+    checks.forEach(check => {
+        check.addEventListener('change', () => {
+            updateScore();
+            if (navigator.vibrate) navigator.vibrate(10);
+        });
+    });
+
+    resetBtn.addEventListener('click', () => {
+        if (confirm("Reset today's progress?")) {
+            checks.forEach((check, index) => {
+                check.checked = false;
+                localStorage.removeItem(`muhasabah_check_${index}`);
+            });
+            updateScore();
+        }
+    });
+
+    // Initialize
+    updateScore(true);
+})();
