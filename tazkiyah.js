@@ -1681,3 +1681,99 @@ document.addEventListener("DOMContentLoaded", () => {
   let autoSlide = setInterval(() => { currentIndex = (currentIndex + 1) % salawatData.length; updateSlider(); }, 7000);
   slider.addEventListener('mouseenter', () => clearInterval(autoSlide));
 })();
+// ==========================================
+// PROPHETIC FOODS (TIB AN-NABAWI)
+// ==========================================
+(function() {
+    const foodsData = [
+        {
+            name: "Honey",
+            arabic: "العسل",
+            desc: "A cure for mankind.",
+            icon: "🍯",
+            color: "amber",
+            hadith: "The Prophet ﷺ said: 'Make use of the two cures: Honey and the Quran.' (Sunan Ibn Majah)"
+        },
+        {
+            name: "Dates (Ajwa)",
+            arabic: "التمر",
+            desc: "Protection from poison.",
+            icon: "🌴",
+            color: "orange",
+            hadith: "The Prophet ﷺ said: 'He who eats seven Ajwa dates every morning will not be affected by poison or magic on that day.' (Bukhari)"
+        },
+        {
+            name: "Black Seed",
+            arabic: "الحبة السوداء",
+            desc: "Cure for everything but death.",
+            icon: "🌱",
+            color: "gray",
+            hadith: "The Prophet ﷺ said: 'Use the Black Seed, for indeed, it contains a cure for every disease except death.' (Bukhari)"
+        },
+        {
+            name: "Olive Oil",
+            arabic: "زيت الزيتون",
+            desc: "From a blessed tree.",
+            icon: "🫒",
+            color: "emerald",
+            hadith: "The Prophet ﷺ said: 'Eat olive oil and use it on your hair and skin, for it comes from a blessed tree.' (Tirmidhi)"
+        },
+        {
+            name: "Talbinah",
+            arabic: "التلبينة",
+            desc: "Soothing for the heart.",
+            icon: "🥣",
+            color: "yellow",
+            hadith: "The Prophet ﷺ said: 'The Talbinah soothes the heart of the patient and relieves some of his sorrow.' (Bukhari)"
+        },
+        {
+            name: "Milk",
+            arabic: "اللبن",
+            desc: "A complete food.",
+            icon: "🥛",
+            color: "blue",
+            hadith: "The Prophet ﷺ said: 'There is nothing that serves as both food and drink except milk.' (Abu Dawood)"
+        }
+    ];
+
+    const grid = document.getElementById('foods-grid');
+
+    if (grid) {
+        grid.innerHTML = foodsData.map((item, index) => `
+            <div class="group relative h-64 perspective-1000 cursor-pointer" onclick="this.classList.toggle('flipped')">
+                
+                <div class="relative w-full h-full duration-700 preserve-3d group-hover:shadow-xl transition-all rounded-3xl">
+                    
+                    <div class="absolute inset-0 backface-hidden bg-white border border-${item.color}-100 rounded-3xl p-8 flex flex-col justify-between shadow-sm group-hover:border-${item.color}-300 transition-colors">
+                        <div class="flex justify-between items-start">
+                            <span class="text-4xl filter drop-shadow-md">${item.icon}</span>
+                            <span class="font-amiri text-2xl text-${item.color}-800 opacity-20 font-bold">${item.arabic}</span>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-1">${item.name}</h3>
+                            <p class="text-sm text-gray-500 font-medium">${item.desc}</p>
+                        </div>
+
+                        <div class="flex items-center gap-2 text-${item.color}-600 text-xs font-bold uppercase tracking-widest mt-4">
+                            <span>Tap to Reveal</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="absolute inset-0 backface-hidden rotate-y-180 bg-${item.color}-50 border border-${item.color}-200 rounded-3xl p-8 flex flex-col justify-center text-center shadow-inner">
+                        <div class="mb-4 text-${item.color}-600 opacity-50">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21L14.017 18C14.017 16.8954 13.1216 16 12.017 16H9.01697V13C9.01697 12.4477 9.46468 12 10.017 12H12.017C13.1216 12 14.017 11.1046 14.017 10V4C14.017 2.89543 13.1216 2 12.017 2H6.01697C4.9124 2 4.01697 2.89543 4.01697 4V10C4.01697 11.1046 4.9124 12 6.01697 12H8.01697V16H5.01697C3.9124 16 3.01697 16.8954 3.01697 18V21H14.017ZM16.017 21H21.017V18C21.017 16.8954 20.1216 16 19.017 16H16.017V12H18.017C19.1216 12 20.017 11.1046 20.017 10V4C20.017 2.89543 19.1216 2 18.017 2H16.017V10H16.017V21Z"/></svg>
+                        </div>
+                        <p class="text-gray-800 font-medium text-sm md:text-base italic leading-relaxed">
+                            "${item.hadith}"
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        `).join('');
+    }
+})();
