@@ -1160,160 +1160,398 @@ document.addEventListener("DOMContentLoaded", () => {
 // ==========================================
 // DAILY MUHASABAH LOGIC
 // ==========================================
-(function() {
-    const checks = document.querySelectorAll('.muhasabah-check');
-    const ring = document.getElementById('score-ring');
-    const percentText = document.getElementById('score-percent');
-    const feedback = document.getElementById('score-feedback');
-    const resetBtn = document.getElementById('reset-muhasabah');
+(function () {
+  const checks = document.querySelectorAll(".muhasabah-check");
+  const ring = document.getElementById("score-ring");
+  const percentText = document.getElementById("score-percent");
+  const feedback = document.getElementById("score-feedback");
+  const resetBtn = document.getElementById("reset-muhasabah");
 
-    const updateScore = (isInitial = false) => {
-        let total = 0;
-        let checkedCount = 0;
-        
-        checks.forEach((check, index) => {
-            if (isInitial) {
-                // Restore state from storage
-                const savedState = localStorage.getItem(`muhasabah_check_${index}`);
-                if (savedState === 'true') check.checked = true;
-            } else {
-                // Save state to storage
-                localStorage.setItem(`muhasabah_check_${index}`, check.checked);
-            }
+  const updateScore = (isInitial = false) => {
+    let total = 0;
+    let checkedCount = 0;
 
-            if (check.checked) {
-                total += parseInt(check.getAttribute('data-weight'));
-                checkedCount++;
-            }
-        });
+    checks.forEach((check, index) => {
+      if (isInitial) {
+        // Restore state from storage
+        const savedState = localStorage.getItem(`muhasabah_check_${index}`);
+        if (savedState === "true") check.checked = true;
+      } else {
+        // Save state to storage
+        localStorage.setItem(`muhasabah_check_${index}`, check.checked);
+      }
 
-        // Update UI
-        const circumference = 276.5; // 2 * pi * 44
-        const offset = circumference - (total / 100 * circumference);
-        ring.style.strokeDashoffset = offset;
-        percentText.textContent = `${total}%`;
-
-        // Feedback Logic
-        if (total === 0) feedback.textContent = "Awaiting your reflection...";
-        else if (total < 40) feedback.textContent = "Every small step counts.";
-        else if (total < 80) feedback.textContent = "Alhamdulillah, a productive day!";
-        else if (total <= 100) feedback.textContent = "Ma Sha Allah, a blessed day!";
-    };
-
-    checks.forEach(check => {
-        check.addEventListener('change', () => {
-            updateScore();
-            if (navigator.vibrate) navigator.vibrate(10);
-        });
+      if (check.checked) {
+        total += parseInt(check.getAttribute("data-weight"));
+        checkedCount++;
+      }
     });
 
-    resetBtn.addEventListener('click', () => {
-        if (confirm("Reset today's progress?")) {
-            checks.forEach((check, index) => {
-                check.checked = false;
-                localStorage.removeItem(`muhasabah_check_${index}`);
-            });
-            updateScore();
-        }
-    });
+    // Update UI
+    const circumference = 276.5; // 2 * pi * 44
+    const offset = circumference - (total / 100) * circumference;
+    ring.style.strokeDashoffset = offset;
+    percentText.textContent = `${total}%`;
 
-    // Initialize
-    updateScore(true);
+    // Feedback Logic
+    if (total === 0) feedback.textContent = "Awaiting your reflection...";
+    else if (total < 40) feedback.textContent = "Every small step counts.";
+    else if (total < 80)
+      feedback.textContent = "Alhamdulillah, a productive day!";
+    else if (total <= 100)
+      feedback.textContent = "Ma Sha Allah, a blessed day!";
+  };
+
+  checks.forEach((check) => {
+    check.addEventListener("change", () => {
+      updateScore();
+      if (navigator.vibrate) navigator.vibrate(10);
+    });
+  });
+
+  resetBtn.addEventListener("click", () => {
+    if (confirm("Reset today's progress?")) {
+      checks.forEach((check, index) => {
+        check.checked = false;
+        localStorage.removeItem(`muhasabah_check_${index}`);
+      });
+      updateScore();
+    }
+  });
+
+  // Initialize
+  updateScore(true);
 })();
 // ==========================================
 // PURIFICATION GUIDES (Wudu/Ghusl Modal)
 // ==========================================
-(function() {
-    const guidesData = {
-        wudu: {
-            title: "How to Perform Wudu",
-            subtitle: "The Sunnah Method",
-            steps: [
-                { title: "Niyyah (Intention)", desc: "Make the intention in your heart to perform Wudu for the sake of Allah. Say 'Bismillah'." },
-                { title: "Hands", desc: "Wash both hands up to the wrists 3 times, ensuring water reaches between fingers." },
-                { title: "Mouth", desc: "Rinse the mouth thoroughly 3 times." },
-                { title: "Nose", desc: "Sniff water into the nose and blow it out 3 times." },
-                { title: "Face", desc: "Wash the entire face 3 times (from hairline to chin, and ear to ear)." },
-                { title: "Arms", desc: "Wash arms up to and including the elbows 3 times, starting with the right." },
-                { title: "Head (Masah)", desc: "Wipe the head once with wet hands, from front to back and back to front. Wipe inside ears." },
-                { title: "Feet", desc: "Wash feet up to and including the ankles 3 times, starting with the right. Ensure water reaches between toes." }
-            ],
-            tip: "Prophet Muhammad (ﷺ) said: 'He who performs Wudu perfectly, his sins will depart from his body, even from under his fingernails.' (Muslim)"
+(function () {
+  const guidesData = {
+    wudu: {
+      title: "How to Perform Wudu",
+      subtitle: "The Sunnah Method",
+      steps: [
+        {
+          title: "Niyyah (Intention)",
+          desc: "Make the intention in your heart to perform Wudu for the sake of Allah. Say 'Bismillah'.",
         },
-        ghusl: {
-            title: "How to Perform Ghusl",
-            subtitle: "Complete Ritual Bath",
-            steps: [
-                { title: "Niyyah", desc: "Intend to perform Ghusl to remove major impurity. Say 'Bismillah'." },
-                { title: "Wash Hands", desc: "Wash your hands three times." },
-                { title: "Private Parts", desc: "Wash private parts and remove any impurity from the body." },
-                { title: "Perform Wudu", desc: "Perform a complete Wudu (like for prayer)." },
-                { title: "Pour Water (Head)", desc: "Pour water over the head 3 times, ensuring it reaches the roots of the hair." },
-                { title: "Right Side", desc: "Pour water over the entire right side of the body." },
-                { title: "Left Side", desc: "Pour water over the entire left side of the body." },
-                { title: "Ensure", desc: "Ensure no part of the body remains dry." }
-            ],
-            tip: "Water must reach every part of the body, including inside the navel and roots of the hair."
+        {
+          title: "Hands",
+          desc: "Wash both hands up to the wrists 3 times, ensuring water reaches between fingers.",
         },
-        tayammum: {
-            title: "How to Perform Tayammum",
-            subtitle: "Dry Ablution",
-            steps: [
-                { title: "Find Clean Earth", desc: "Find clean soil, sand, or stone." },
-                { title: "Niyyah", desc: "Make intention to purify yourself for prayer. Say 'Bismillah'." },
-                { title: "Strike", desc: "Strike the earth lightly with the palms of both hands." },
-                { title: "Face", desc: "Blow off excess dust and wipe the face once." },
-                { title: "Hands/Arms", desc: "Wipe the back of the right hand with the left palm, and the back of the left hand with the right palm (up to wrists/elbows)." }
-            ],
-            tip: "Tayammum is valid only when water is unavailable, or using it would cause harm/illness."
-        }
-    };
+        { title: "Mouth", desc: "Rinse the mouth thoroughly 3 times." },
+        {
+          title: "Nose",
+          desc: "Sniff water into the nose and blow it out 3 times.",
+        },
+        {
+          title: "Face",
+          desc: "Wash the entire face 3 times (from hairline to chin, and ear to ear).",
+        },
+        {
+          title: "Arms",
+          desc: "Wash arms up to and including the elbows 3 times, starting with the right.",
+        },
+        {
+          title: "Head (Masah)",
+          desc: "Wipe the head once with wet hands, from front to back and back to front. Wipe inside ears.",
+        },
+        {
+          title: "Feet",
+          desc: "Wash feet up to and including the ankles 3 times, starting with the right. Ensure water reaches between toes.",
+        },
+      ],
+      tip: "Prophet Muhammad (ﷺ) said: 'He who performs Wudu perfectly, his sins will depart from his body, even from under his fingernails.' (Muslim)",
+    },
+    ghusl: {
+      title: "How to Perform Ghusl",
+      subtitle: "Complete Ritual Bath",
+      steps: [
+        {
+          title: "Niyyah",
+          desc: "Intend to perform Ghusl to remove major impurity. Say 'Bismillah'.",
+        },
+        { title: "Wash Hands", desc: "Wash your hands three times." },
+        {
+          title: "Private Parts",
+          desc: "Wash private parts and remove any impurity from the body.",
+        },
+        {
+          title: "Perform Wudu",
+          desc: "Perform a complete Wudu (like for prayer).",
+        },
+        {
+          title: "Pour Water (Head)",
+          desc: "Pour water over the head 3 times, ensuring it reaches the roots of the hair.",
+        },
+        {
+          title: "Right Side",
+          desc: "Pour water over the entire right side of the body.",
+        },
+        {
+          title: "Left Side",
+          desc: "Pour water over the entire left side of the body.",
+        },
+        { title: "Ensure", desc: "Ensure no part of the body remains dry." },
+      ],
+      tip: "Water must reach every part of the body, including inside the navel and roots of the hair.",
+    },
+    tayammum: {
+      title: "How to Perform Tayammum",
+      subtitle: "Dry Ablution",
+      steps: [
+        { title: "Find Clean Earth", desc: "Find clean soil, sand, or stone." },
+        {
+          title: "Niyyah",
+          desc: "Make intention to purify yourself for prayer. Say 'Bismillah'.",
+        },
+        {
+          title: "Strike",
+          desc: "Strike the earth lightly with the palms of both hands.",
+        },
+        { title: "Face", desc: "Blow off excess dust and wipe the face once." },
+        {
+          title: "Hands/Arms",
+          desc: "Wipe the back of the right hand with the left palm, and the back of the left hand with the right palm (up to wrists/elbows).",
+        },
+      ],
+      tip: "Tayammum is valid only when water is unavailable, or using it would cause harm/illness.",
+    },
+  };
 
-    // Global function to be accessed by HTML onclick attributes
-    window.openGuide = function(type) {
-        const modal = document.getElementById('guide-modal');
-        const title = document.getElementById('guide-title');
-        const subtitle = document.getElementById('guide-subtitle');
-        const container = document.getElementById('guide-steps');
-        const tip = document.getElementById('guide-tip');
-        
-        const data = guidesData[type];
-        
-        if(!data || !modal) return;
+  // Global function to be accessed by HTML onclick attributes
+  window.openGuide = function (type) {
+    const modal = document.getElementById("guide-modal");
+    const title = document.getElementById("guide-title");
+    const subtitle = document.getElementById("guide-subtitle");
+    const container = document.getElementById("guide-steps");
+    const tip = document.getElementById("guide-tip");
 
-        // Populate Data
-        title.textContent = data.title;
-        subtitle.textContent = data.subtitle;
-        tip.textContent = data.tip;
+    const data = guidesData[type];
 
-        // Create Steps HTML
-        container.innerHTML = data.steps.map((step, index) => `
+    if (!data || !modal) return;
+
+    // Populate Data
+    title.textContent = data.title;
+    subtitle.textContent = data.subtitle;
+    tip.textContent = data.tip;
+
+    // Create Steps HTML
+    container.innerHTML = data.steps
+      .map(
+        (step, index) => `
             <div class="flex gap-4">
                 <div class="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-sm border border-emerald-200">
                     ${index + 1}
                 </div>
                 <div>
-                    <h4 class="font-bold text-gray-800 text-base">${step.title}</h4>
-                    <p class="text-gray-500 text-sm leading-relaxed mt-1">${step.desc}</p>
+                    <h4 class="font-bold text-gray-800 text-base">${
+                      step.title
+                    }</h4>
+                    <p class="text-gray-500 text-sm leading-relaxed mt-1">${
+                      step.desc
+                    }</p>
                 </div>
             </div>
-        `).join('');
+        `
+      )
+      .join("");
 
-        // Show Modal
-        modal.classList.remove('hidden');
-        document.body.style.overflow = 'hidden'; // Prevent background scrolling
-    };
+    // Show Modal
+    modal.classList.remove("hidden");
+    document.body.style.overflow = "hidden"; // Prevent background scrolling
+  };
 
-    window.closeGuide = function() {
-        const modal = document.getElementById('guide-modal');
-        if(modal) {
-            modal.classList.add('hidden');
-            document.body.style.overflow = ''; // Restore scrolling
-        }
-    };
+  window.closeGuide = function () {
+    const modal = document.getElementById("guide-modal");
+    if (modal) {
+      modal.classList.add("hidden");
+      document.body.style.overflow = ""; // Restore scrolling
+    }
+  };
 
-    // Close on Escape Key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') window.closeGuide();
-    });
+  // Close on Escape Key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") window.closeGuide();
+  });
+})();
+// ==========================================
+// SPIRITUAL ARMOR (ADHKAR) LOGIC
+// ==========================================
+(function () {
+  // Helper strings for the heavy text (to keep code clean)
+  const ayatAlKursi =
+    "ٱللَّهُ لَآ إِلَٰهَ إِلَّا هُوَ ٱلْحَىُّ ٱلْقَيُّومُ ۚ لَا تَأْخُذُهُۥ سِنَةٌ وَلَا نَوْمٌ ۚ لَّهُۥ مَا فِى ٱلسَّمَٰوَٰتِ وَمَا فِى ٱلْأَرْضِ ۗ مَن ذَا ٱلَّذِى يَشْفَعُ عِندَهُۥٓ إِلَّا بِإِذْنِهِۦ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَىْءٍ مِّنْ عِلْمِهِۦٓ إِلَّا بِمَا شَآءَ ۚ وَسِعَ كُرْسِيُّهُ ٱلسَّمَٰوَٰتِ وَٱلْأَرْضَ ۖ وَلَا يَئُودُهُۥ حِفْظُهُمَا ۚ وَهُوَ ٱلْعَلِىُّ ٱلْعَظِيمُ";
+
+  const surahIkhlas =
+    "قُلْ هُوَ ٱللَّهُ أَحَدٌ ۝ ٱللَّهُ ٱلصَّمَدُ ۝ لَمْ يَلِدْ وَلَمْ يُولَدْ ۝ وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌۢ";
+
+  const surahFalaq =
+    "قُلْ أَعُوذُ بِرَبِّ ٱلْفَلَقِ ۝ مِن شَرِّ مَا خَلَقَ ۝ وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ ۝ وَمِن شَرِّ ٱلنَّفَّٰثَٰتِ فِى ٱلْعُقَدِ ۝ وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ";
+
+  const surahNas =
+    "قُلْ أَعُوذُ بِرَبِّ ٱلنَّاسِ ۝ مَلِكِ ٱلنَّاسِ ۝ إِلَٰهِ ٱلنَّاسِ ۝ مِن شَرِّ ٱلْوَسْوَاسِ ٱلْخَنَّاسِ ۝ ٱلَّذِى يُوَسْوِسُ فِى صُدُورِ ٱلنَّاسِ ۝ مِنَ ٱلْجِنَّةِ وَٱلنَّاسِ";
+
+  const adhkarData = {
+    morning: {
+      title: "Morning Adhkar",
+      subtitle: "Start your day with Barakah",
+      steps: [
+        {
+          title: "Ayat al-Kursi (1x)",
+          desc: `<p class="font-amiri text-xl text-emerald-900 leading-[2.2] dir-rtl text-right mt-2 mb-2 bg-emerald-50/50 p-3 rounded-lg border border-emerald-100">${ayatAlKursi}</p>
+                           <span class='text-emerald-600 italic text-xs'>Protection from Jinn until evening.</span>`,
+        },
+        {
+          title: "The 3 Quls (3x each)",
+          desc: `<div class="space-y-4 mt-2">
+                            <div class="bg-emerald-50/50 p-3 rounded-lg border border-emerald-100">
+                                <p class="text-[10px] text-emerald-500 font-bold uppercase mb-1">Al-Ikhlas</p>
+                                <p class="font-amiri text-lg text-emerald-900 leading-[2.2] dir-rtl text-right">${surahIkhlas}</p>
+                            </div>
+                            <div class="bg-emerald-50/50 p-3 rounded-lg border border-emerald-100">
+                                <p class="text-[10px] text-emerald-500 font-bold uppercase mb-1">Al-Falaq</p>
+                                <p class="font-amiri text-lg text-emerald-900 leading-[2.2] dir-rtl text-right">${surahFalaq}</p>
+                            </div>
+                            <div class="bg-emerald-50/50 p-3 rounded-lg border border-emerald-100">
+                                <p class="text-[10px] text-emerald-500 font-bold uppercase mb-1">An-Nas</p>
+                                <p class="font-amiri text-lg text-emerald-900 leading-[2.2] dir-rtl text-right">${surahNas}</p>
+                            </div>
+                           </div>`,
+        },
+        {
+          title: "Sayyidul Istighfar",
+          desc: `<p class="font-amiri text-xl text-emerald-900 leading-[2.2] dir-rtl text-right mt-2 mb-2 bg-emerald-50/50 p-3 rounded-lg border border-emerald-100">
+                           اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ بِذَنْبِي فَاغْفِرْ لِي فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ
+                           </p>
+                           <span class='text-emerald-600 italic text-xs'>The master prayer for forgiveness.</span>`,
+        },
+        {
+          title: "Protection Dua (3x)",
+          desc: `<p class="font-amiri text-xl text-emerald-900 leading-[2.2] dir-rtl text-right mt-2 mb-2 bg-emerald-50/50 p-3 rounded-lg border border-emerald-100">
+                           بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ
+                           </p>
+                           <span class='text-emerald-600 italic text-xs'>'In the Name of Allah... nothing can harm.'</span>`,
+        },
+      ],
+      tip: "The best time for Morning Adhkar is between Fajr and Sunrise.",
+    },
+    evening: {
+      title: "Evening Adhkar",
+      subtitle: "End your day with Peace",
+      steps: [
+        {
+          title: "Ayat al-Kursi (1x)",
+          desc: `<p class="font-amiri text-xl text-emerald-900 leading-[2.2] dir-rtl text-right mt-2 mb-2 bg-indigo-50/50 p-3 rounded-lg border border-indigo-100">${ayatAlKursi}</p>
+                           <span class='text-indigo-600 italic text-xs'>Protection from Jinn until morning.</span>`,
+        },
+        {
+          title: "The 3 Quls (3x each)",
+          desc: `<div class="space-y-4 mt-2">
+                            <div class="bg-indigo-50/50 p-3 rounded-lg border border-indigo-100">
+                                <p class="text-[10px] text-indigo-500 font-bold uppercase mb-1">Al-Ikhlas</p>
+                                <p class="font-amiri text-lg text-emerald-900 leading-[2.2] dir-rtl text-right">${surahIkhlas}</p>
+                            </div>
+                            <div class="bg-indigo-50/50 p-3 rounded-lg border border-indigo-100">
+                                <p class="text-[10px] text-indigo-500 font-bold uppercase mb-1">Al-Falaq</p>
+                                <p class="font-amiri text-lg text-emerald-900 leading-[2.2] dir-rtl text-right">${surahFalaq}</p>
+                            </div>
+                            <div class="bg-indigo-50/50 p-3 rounded-lg border border-indigo-100">
+                                <p class="text-[10px] text-indigo-500 font-bold uppercase mb-1">An-Nas</p>
+                                <p class="font-amiri text-lg text-emerald-900 leading-[2.2] dir-rtl text-right">${surahNas}</p>
+                            </div>
+                           </div>`,
+        },
+        {
+          title: "Complete Wellness (3x)",
+          desc: `<p class="font-amiri text-xl text-emerald-900 leading-[2.2] dir-rtl text-right mt-2 mb-2 bg-indigo-50/50 p-3 rounded-lg border border-indigo-100">
+                           اللَّهُمَّ عَافِنِي فِي بَدَنِي، اللَّهُمَّ عَافِنِي فِي سَمْعِي، اللَّهُمَّ عَافِنِي فِي بَصَرِي، لَا إِلَهَ إِلَّا أَنْتَ
+                           </p>
+                           <span class='text-indigo-600 italic text-xs'>'O Allah, grant me health in my body, hearing, and sight.'</span>`,
+        },
+        {
+          title: "Refuge in Allah's Words (3x)",
+          desc: `<p class="font-amiri text-xl text-emerald-900 leading-[2.2] dir-rtl text-right mt-2 mb-2 bg-indigo-50/50 p-3 rounded-lg border border-indigo-100">
+                           أَعُوذُ بِكَلِمَاتِ اللهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ
+                           </p>
+                           <span class='text-indigo-600 italic text-xs'>'I seek refuge in the perfect words of Allah...'</span>`,
+        },
+      ],
+      tip: "The best time for Evening Adhkar is between Asr and Maghrib.",
+    },
+    sleep: {
+      title: "Sunnahs Before Sleep",
+      subtitle: "Rest in the remembrance of Allah",
+      steps: [
+        {
+          title: "Wudu",
+          desc: "Perform Wudu before going to bed. Angels will pray for you.",
+        },
+        {
+          title: "Ayat al-Kursi",
+          desc: `<p class="font-amiri text-xl text-emerald-900 leading-[2.2] dir-rtl text-right mt-2 mb-2 bg-slate-50 p-3 rounded-lg border border-slate-200">${ayatAlKursi}</p>
+                           <span class='text-slate-600 italic text-xs'>Protection from shaytaan during sleep.</span>`,
+        },
+        {
+          title: "Tasbih Fatimah",
+          desc: "Recite SubhanAllah (33x), Alhamdulillah (33x), Allahu Akbar (34x).",
+        },
+        {
+          title: "Sleep on Right Side",
+          desc: "Lie on your right side with your right hand under your cheek.",
+        },
+        {
+          title: "Last Dua",
+          desc: `<p class="font-amiri text-xl text-emerald-900 leading-[2.2] dir-rtl text-right mt-2 mb-2 bg-slate-50 p-3 rounded-lg border border-slate-200">
+                                اللَّهُمَّ بِاسْمِكَ أَمُوتُ وَأَحْيَا
+                           </p>
+                           <span class='text-slate-600 italic text-xs'>'In Your Name, O Allah, I die and I live.'</span>`,
+        },
+      ],
+      tip: "If you die in this state, you die on the Fitrah (natural disposition).",
+    },
+  };
+
+  // Global Function (No changes needed here, just data update)
+  window.openAdhkar = function (type) {
+    const modal = document.getElementById("guide-modal");
+    const title = document.getElementById("guide-title");
+    const subtitle = document.getElementById("guide-subtitle");
+    const container = document.getElementById("guide-steps");
+    const tip = document.getElementById("guide-tip");
+
+    const data = adhkarData[type];
+
+    if (!data || !modal) return;
+
+    // Populate Data
+    title.textContent = data.title;
+    subtitle.textContent = data.subtitle;
+    tip.textContent = data.tip;
+
+    // Populate Steps with improved styling for Arabic blocks
+    container.innerHTML = data.steps
+      .map(
+        (step, index) => `
+            <div class="flex gap-4 items-start">
+                <div class="flex-shrink-0 w-8 h-8 rounded-full bg-orange-100 text-orange-700 flex items-center justify-center font-bold text-sm border border-orange-200 mt-1">
+                    ${index + 1}
+                </div>
+                <div class="w-full">
+                    <h4 class="font-bold text-gray-800 text-base">${
+                      step.title
+                    }</h4>
+                    <div class="text-gray-600 text-sm leading-relaxed mt-1">${
+                      step.desc
+                    }</div>
+                </div>
+            </div>
+        `
+      )
+      .join("");
+
+    // Show Modal
+    modal.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+  };
 })();
