@@ -1555,3 +1555,129 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.style.overflow = "hidden";
   };
 })();
+// ==========================================
+// GARDEN OF SALAWAT CAROUSEL
+// ==========================================
+(function () {
+  const salawatData = [
+    {
+      title: "Durood Ibrahim",
+      arabic:
+        "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ . اللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ",
+      transliteration:
+        "Allahumma salli 'ala Muhammadin wa 'ala aali Muhammadin kama sallaita 'ala Ibrahima wa 'ala aali Ibrahima innaka Hamidum Majid...",
+      translation:
+        "O Allah, send prayers upon Muhammad and upon the family of Muhammad, as You sent prayers upon Ibrahim and upon the family of Ibrahim; You are indeed Worthy of Praise, Full of Glory.",
+      benefit:
+        "The most authentic and complete Salawat, recited in every Salah.",
+    },
+    {
+      title: "Short & Powerful",
+      arabic: "اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ",
+      transliteration: "Allahumma salli wa sallim 'ala nabiyyina Muhammad",
+      translation:
+        "O Allah, send peace and blessings upon our Prophet Muhammad PBUH.",
+      benefit:
+        "Easy to recite frequently throughout the day. Whoever recites this 10 times morning and evening will get the Prophet's intercession.",
+    },
+    {
+      title: "Salawat for Relief",
+      arabic:
+        "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ عَبْدِكَ وَرَسُولِكَ النَّبِيِّ الأُمِّيِّ وَعَلَى آلِهِ وَصَحْبِهِ وَسَلِّمْ",
+      transliteration:
+        "Allahumma salli 'ala Muhammadin 'abdika wa rasulika an-nabiyyil ummiyyi...",
+      translation:
+        "O Allah, send blessings upon Muhammad, Your servant and Messenger, the unlettered Prophet, and upon his family and companions.",
+      benefit:
+        "Recommended for Friday afternoons; removes 80 years of sins (with sincerity).",
+    },
+  ];
+
+  const slider = document.getElementById("salawat-slider");
+  const dotsContainer = document.getElementById("salawat-dots");
+  const prevBtn = document.getElementById("prev-salawat");
+  const nextBtn = document.getElementById("next-salawat");
+
+  let currentIndex = 0;
+
+  if (!slider) return;
+
+  // 1. Render Slides
+  slider.innerHTML = salawatData
+    .map(
+      (item, index) => `
+        <div class="min-w-full p-8 md:p-16 flex flex-col items-center justify-center text-center select-none">
+            <span class="inline-block px-4 py-1 rounded-full bg-emerald-50 text-emerald-600 text-xs font-bold uppercase tracking-widest mb-8 border border-emerald-100">
+                ${item.title}
+            </span>
+            
+            <h3 class="font-amiri text-2xl md:text-4xl lg:text-5xl text-gray-800 leading-[2.2] dir-rtl mb-8 drop-shadow-sm">
+                ${item.arabic}
+            </h3>
+            
+            <div class="max-w-3xl mx-auto space-y-4">
+                <p class="text-emerald-700 font-medium italic text-sm md:text-base opacity-80">
+                    "${item.transliteration}"
+                </p>
+                <p class="text-gray-600 text-sm md:text-base leading-relaxed border-t border-gray-100 pt-4">
+                    ${item.translation}
+                </p>
+                <div class="bg-yellow-50 text-yellow-800 text-xs font-bold px-4 py-2 rounded-lg inline-block mt-4 border border-yellow-100">
+                    <span class="mr-1">✨</span> Benefit: ${item.benefit}
+                </div>
+            </div>
+        </div>
+    `
+    )
+    .join("");
+
+  // 2. Render Dots
+  dotsContainer.innerHTML = salawatData
+    .map(
+      (_, index) => `
+        <button onclick="goToSalawat(${index})" class="w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+        index === 0 ? "bg-emerald-600 w-6" : "bg-gray-300 hover:bg-emerald-300"
+      }" aria-label="Go to slide ${index + 1}"></button>
+    `
+    )
+    .join("");
+
+  // 3. Navigation Logic
+  const updateSlider = () => {
+    slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+    // Update Dots
+    const dots = dotsContainer.querySelectorAll("button");
+    dots.forEach((dot, idx) => {
+      if (idx === currentIndex) {
+        dot.className =
+          "w-6 h-2.5 rounded-full bg-emerald-600 transition-all duration-300";
+      } else {
+        dot.className =
+          "w-2.5 h-2.5 rounded-full bg-gray-300 hover:bg-emerald-300 transition-all duration-300";
+      }
+    });
+  };
+
+  window.goToSalawat = (index) => {
+    currentIndex = index;
+    updateSlider();
+  };
+
+  if (prevBtn && nextBtn) {
+    prevBtn.addEventListener("click", () => {
+      currentIndex =
+        currentIndex === 0 ? salawatData.length - 1 : currentIndex - 1;
+      updateSlider();
+    });
+
+    nextBtn.addEventListener("click", () => {
+      currentIndex = (currentIndex + 1) % salawatData.length;
+      updateSlider();
+    });
+  }
+
+  // Optional: Auto-slide every 10 seconds if user isn't interacting
+  // let autoSlide = setInterval(() => { currentIndex = (currentIndex + 1) % salawatData.length; updateSlider(); }, 10000);
+  // slider.addEventListener('mouseenter', () => clearInterval(autoSlide));
+})();

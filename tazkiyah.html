@@ -1146,6 +1146,49 @@
 
     </div>
 </section>
+<section class="max-w-6xl mx-auto my-24 px-4 relative">
+  <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+    <div class="absolute top-10 left-10 w-32 h-32 bg-emerald-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
+    <div class="absolute bottom-10 right-10 w-32 h-32 bg-yellow-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
+  </div>
+
+  <div class="relative z-10 text-center mb-12">
+    <span class="text-emerald-600 font-bold text-xs uppercase tracking-[0.3em] mb-4 block">Love of the Beloved ﷺ</span>
+    <h2 class="text-3xl md:text-4xl font-bold text-emerald-900 font-amiri">
+      The Garden of <span class="text-yellow-600">Salawat</span>
+    </h2>
+    <p class="text-gray-500 mt-4 max-w-lg mx-auto leading-relaxed">
+      "Indeed, Allah and His angels send blessings upon the Prophet. O you who have believed, ask [Allah to confer] blessing upon him and ask [Allah to grant him] peace." <br><span class="text-xs text-emerald-500 font-bold uppercase tracking-widest mt-2 block">(Quran 33:56)</span>
+    </p>
+  </div>
+
+  <div class="relative bg-white rounded-[2.5rem] shadow-xl border border-emerald-50 overflow-hidden">
+    
+    <button id="prev-salawat" class="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/80 hover:bg-emerald-50 text-emerald-800 p-3 rounded-full shadow-lg backdrop-blur-sm transition-all hover:scale-110 hidden md:block group" aria-label="Previous Salawat">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform group-hover:-translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+    </button>
+    
+    <button id="next-salawat" class="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/80 hover:bg-emerald-50 text-emerald-800 p-3 rounded-full shadow-lg backdrop-blur-sm transition-all hover:scale-110 hidden md:block group" aria-label="Next Salawat">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+    </button>
+
+    <div id="salawat-slider" class="flex transition-transform duration-700 ease-in-out cursor-grab active:cursor-grabbing">
+      </div>
+
+    <div class="absolute bottom-6 left-0 w-full flex justify-center gap-2 z-20" id="salawat-dots">
+      </div>
+  </div>
+
+  <div class="mt-8 bg-emerald-900 rounded-2xl p-6 md:p-8 text-center text-white relative overflow-hidden shadow-lg transform hover:scale-[1.01] transition-transform duration-500">
+    <div class="absolute top-0 right-0 w-40 h-40 bg-white opacity-5 rounded-full -mr-10 -mt-10 blur-2xl"></div>
+    <div class="relative z-10">
+      <p class="font-amiri text-xl md:text-2xl leading-relaxed mb-4">
+        "The closest of people to me on the Day of Resurrection will be those who sent the most blessings upon me."
+      </p>
+      <p class="text-emerald-300 text-xs font-bold uppercase tracking-widest">— Prophet Muhammad ﷺ (Tirmidhi)</p>
+    </div>
+  </div>
+</section>
       </main>
 
       <footer
