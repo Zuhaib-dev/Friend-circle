@@ -1220,3 +1220,100 @@ document.addEventListener("DOMContentLoaded", () => {
     // Initialize
     updateScore(true);
 })();
+// ==========================================
+// PURIFICATION GUIDES (Wudu/Ghusl Modal)
+// ==========================================
+(function() {
+    const guidesData = {
+        wudu: {
+            title: "How to Perform Wudu",
+            subtitle: "The Sunnah Method",
+            steps: [
+                { title: "Niyyah (Intention)", desc: "Make the intention in your heart to perform Wudu for the sake of Allah. Say 'Bismillah'." },
+                { title: "Hands", desc: "Wash both hands up to the wrists 3 times, ensuring water reaches between fingers." },
+                { title: "Mouth", desc: "Rinse the mouth thoroughly 3 times." },
+                { title: "Nose", desc: "Sniff water into the nose and blow it out 3 times." },
+                { title: "Face", desc: "Wash the entire face 3 times (from hairline to chin, and ear to ear)." },
+                { title: "Arms", desc: "Wash arms up to and including the elbows 3 times, starting with the right." },
+                { title: "Head (Masah)", desc: "Wipe the head once with wet hands, from front to back and back to front. Wipe inside ears." },
+                { title: "Feet", desc: "Wash feet up to and including the ankles 3 times, starting with the right. Ensure water reaches between toes." }
+            ],
+            tip: "Prophet Muhammad (ﷺ) said: 'He who performs Wudu perfectly, his sins will depart from his body, even from under his fingernails.' (Muslim)"
+        },
+        ghusl: {
+            title: "How to Perform Ghusl",
+            subtitle: "Complete Ritual Bath",
+            steps: [
+                { title: "Niyyah", desc: "Intend to perform Ghusl to remove major impurity. Say 'Bismillah'." },
+                { title: "Wash Hands", desc: "Wash your hands three times." },
+                { title: "Private Parts", desc: "Wash private parts and remove any impurity from the body." },
+                { title: "Perform Wudu", desc: "Perform a complete Wudu (like for prayer)." },
+                { title: "Pour Water (Head)", desc: "Pour water over the head 3 times, ensuring it reaches the roots of the hair." },
+                { title: "Right Side", desc: "Pour water over the entire right side of the body." },
+                { title: "Left Side", desc: "Pour water over the entire left side of the body." },
+                { title: "Ensure", desc: "Ensure no part of the body remains dry." }
+            ],
+            tip: "Water must reach every part of the body, including inside the navel and roots of the hair."
+        },
+        tayammum: {
+            title: "How to Perform Tayammum",
+            subtitle: "Dry Ablution",
+            steps: [
+                { title: "Find Clean Earth", desc: "Find clean soil, sand, or stone." },
+                { title: "Niyyah", desc: "Make intention to purify yourself for prayer. Say 'Bismillah'." },
+                { title: "Strike", desc: "Strike the earth lightly with the palms of both hands." },
+                { title: "Face", desc: "Blow off excess dust and wipe the face once." },
+                { title: "Hands/Arms", desc: "Wipe the back of the right hand with the left palm, and the back of the left hand with the right palm (up to wrists/elbows)." }
+            ],
+            tip: "Tayammum is valid only when water is unavailable, or using it would cause harm/illness."
+        }
+    };
+
+    // Global function to be accessed by HTML onclick attributes
+    window.openGuide = function(type) {
+        const modal = document.getElementById('guide-modal');
+        const title = document.getElementById('guide-title');
+        const subtitle = document.getElementById('guide-subtitle');
+        const container = document.getElementById('guide-steps');
+        const tip = document.getElementById('guide-tip');
+        
+        const data = guidesData[type];
+        
+        if(!data || !modal) return;
+
+        // Populate Data
+        title.textContent = data.title;
+        subtitle.textContent = data.subtitle;
+        tip.textContent = data.tip;
+
+        // Create Steps HTML
+        container.innerHTML = data.steps.map((step, index) => `
+            <div class="flex gap-4">
+                <div class="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-sm border border-emerald-200">
+                    ${index + 1}
+                </div>
+                <div>
+                    <h4 class="font-bold text-gray-800 text-base">${step.title}</h4>
+                    <p class="text-gray-500 text-sm leading-relaxed mt-1">${step.desc}</p>
+                </div>
+            </div>
+        `).join('');
+
+        // Show Modal
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    };
+
+    window.closeGuide = function() {
+        const modal = document.getElementById('guide-modal');
+        if(modal) {
+            modal.classList.add('hidden');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+    };
+
+    // Close on Escape Key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') window.closeGuide();
+    });
+})();
