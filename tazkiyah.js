@@ -1678,6 +1678,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Optional: Auto-slide every 10 seconds if user isn't interacting
-  // let autoSlide = setInterval(() => { currentIndex = (currentIndex + 1) % salawatData.length; updateSlider(); }, 10000);
-  // slider.addEventListener('mouseenter', () => clearInterval(autoSlide));
+  let autoSlide = setInterval(() => { currentIndex = (currentIndex + 1) % salawatData.length; updateSlider(); }, 7000);
+  slider.addEventListener('mouseenter', () => clearInterval(autoSlide));
 })();
