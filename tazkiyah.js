@@ -2379,3 +2379,335 @@ document.addEventListener("DOMContentLoaded", () => {
       .join("");
   }
 })();
+// ==========================================
+// ETERNAL INVESTMENTS (SPIRITUAL BANKING)
+// ==========================================
+(function () {
+  const investmentsData = [
+    {
+      title: "A House in Jannah",
+      action: "Recite Surah Al-Ikhlas 10x",
+      roi: "A Palace in Paradise",
+      cost: "2 Minutes",
+      rewardVal: 100000, // Symbolic value for the counter
+      icon: "🏰",
+      theme: "emerald",
+    },
+    {
+      title: "Heavy on the Scales",
+      action: "SubhanAllah wa bihamdihi, SubhanAllahil Azeem",
+      roi: "Infinite Weight",
+      cost: "5 Seconds",
+      rewardVal: 5000,
+      icon: "⚖️",
+      theme: "amber",
+    },
+    {
+      title: "Trees in Paradise",
+      action: "SubhanAllah, Alhamdulillah, La ilaha illallah, Allahu Akbar",
+      roi: "1 Tree per recitation",
+      cost: "3 Seconds",
+      rewardVal: 1000,
+      icon: "🌴",
+      theme: "teal",
+    },
+    {
+      title: "Treasure of Paradise",
+      action: "La hawla wa la quwwata illa billah",
+      roi: "A Treasure from beneath the Throne",
+      cost: "2 Seconds",
+      rewardVal: 25000,
+      icon: "💎",
+      theme: "indigo",
+    },
+    {
+      title: "Forgiveness of Sins",
+      action: "SubhanAllah wa bihamdihi (100x)",
+      roi: "Sins forgiven even if like sea foam",
+      cost: "3 Minutes",
+      rewardVal: 50000,
+      icon: "🌊",
+      theme: "blue",
+    },
+    {
+      title: "1000 Good Deeds",
+      action: "SubhanAllah (100x)",
+      roi: "1000 Hasanat written",
+      cost: "2 Minutes",
+      rewardVal: 1000,
+      icon: "📈",
+      theme: "rose",
+    },
+  ];
+
+  const grid = document.getElementById("invest-grid");
+  const portfolioCounter = document.getElementById("portfolio-count");
+  let totalHasanat = 0;
+
+  if (grid && portfolioCounter) {
+    // 1. Render Cards
+    grid.innerHTML = investmentsData
+      .map(
+        (item, index) => `
+            <div class="relative bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 group overflow-hidden">
+                
+                <div class="absolute -right-6 -top-6 w-24 h-24 bg-${item.theme}-50 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
+
+                <div class="relative z-10">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-${item.theme}-100 text-2xl flex items-center justify-center">
+                            ${item.icon}
+                        </div>
+                        <span class="bg-${item.theme}-50 text-${item.theme}-700 text-[10px] font-bold px-2 py-1 rounded border border-${item.theme}-100 uppercase">
+                            ${item.cost}
+                        </span>
+                    </div>
+
+                    <h3 class="text-xl font-bold text-gray-800 mb-1">${item.title}</h3>
+                    <p class="text-sm text-gray-500 mb-6 min-h-[40px]">${item.action}</p>
+
+                    <div class="bg-gray-50 rounded-lg p-3 mb-6 border border-gray-100">
+                        <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1">Return on Investment</p>
+                        <p class="text-${item.theme}-600 font-bold text-sm">${item.roi}</p>
+                    </div>
+
+                    <button onclick="invest(${index})" class="w-full bg-white border border-${item.theme}-200 text-${item.theme}-700 font-bold py-3 rounded-xl hover:bg-${item.theme}-600 hover:text-white hover:border-${item.theme}-600 transition-all active:scale-95 flex items-center justify-center gap-2 relative overflow-hidden btn-invest-${index}">
+                        <span>Invest Now</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        `
+      )
+      .join("");
+
+    // 2. Invest Function (Global)
+    window.invest = function (index) {
+      const item = investmentsData[index];
+      const btn = document.querySelector(`.btn-invest-${index}`);
+
+      // Update Logic
+      totalHasanat += item.rewardVal;
+
+      // Animate Counter
+      animateValue(
+        portfolioCounter,
+        parseInt(portfolioCounter.textContent.replace(/,/g, "")),
+        totalHasanat,
+        500
+      );
+
+      // Visual Feedback on Button
+      const originalText = btn.innerHTML;
+      btn.innerHTML = `<span class='flex items-center gap-2'>Invested! <svg class='w-4 h-4' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 13l4 4L19 7'></path></svg></span>`;
+      btn.classList.add(
+        "bg-emerald-50",
+        "border-emerald-500",
+        "text-emerald-700"
+      );
+
+      // Floating +1 Text
+      const float = document.createElement("div");
+      float.className =
+        "float-text absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-emerald-600 font-bold";
+      float.textContent = "+ Good Deeds";
+      btn.appendChild(float);
+
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.classList.remove(
+          "bg-emerald-50",
+          "border-emerald-500",
+          "text-emerald-700"
+        );
+        float.remove();
+      }, 1000);
+    };
+
+    // Helper: Number Animation
+    function animateValue(obj, start, end, duration) {
+      let startTimestamp = null;
+      const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        const current = Math.floor(progress * (end - start) + start);
+        obj.innerHTML = current.toLocaleString(); // Adds commas
+        if (progress < 1) {
+          window.requestAnimationFrame(step);
+        }
+      };
+      window.requestAnimationFrame(step);
+    }
+  }
+})();
+// ==========================================
+// ETERNAL INVESTMENTS (SPIRITUAL BANKING)
+// ==========================================
+(function () {
+  const investmentsData = [
+    {
+      title: "A House in Jannah",
+      action: "Recite Surah Al-Ikhlas 10x",
+      roi: "A Palace in Paradise",
+      cost: "2 Minutes",
+      rewardVal: 100000,
+      icon: "🏰",
+      theme: "emerald",
+    },
+    {
+      title: "Heavy on the Scales",
+      action: "SubhanAllah wa bihamdihi, SubhanAllahil Azeem",
+      roi: "Infinite Weight",
+      cost: "5 Seconds",
+      rewardVal: 5000,
+      icon: "⚖️",
+      theme: "amber",
+    },
+    {
+      title: "Trees in Paradise",
+      action: "SubhanAllah, Alhamdulillah, La ilaha illallah, Allahu Akbar",
+      roi: "1 Tree per recitation",
+      cost: "3 Seconds",
+      rewardVal: 1000,
+      icon: "🌴",
+      theme: "teal",
+    },
+    {
+      title: "Treasure of Paradise",
+      action: "La hawla wa la quwwata illa billah",
+      roi: "A Treasure from beneath the Throne",
+      cost: "2 Seconds",
+      rewardVal: 25000,
+      icon: "💎",
+      theme: "indigo",
+    },
+    {
+      title: "Forgiveness of Sins",
+      action: "SubhanAllah wa bihamdihi (100x)",
+      roi: "Sins forgiven even if like sea foam",
+      cost: "3 Minutes",
+      rewardVal: 50000,
+      icon: "🌊",
+      theme: "blue",
+    },
+    {
+      title: "1000 Good Deeds",
+      action: "SubhanAllah (100x)",
+      roi: "1000 Hasanat written",
+      cost: "2 Minutes",
+      rewardVal: 1000,
+      icon: "📈",
+      theme: "rose",
+    },
+  ];
+
+  const grid = document.getElementById("invest-grid");
+  const portfolioCounter = document.getElementById("portfolio-count");
+
+  // 1. Load saved score from LocalStorage (or default to 0)
+  let totalHasanat = parseInt(localStorage.getItem("tazkiyah_hasanat")) || 0;
+
+  if (grid && portfolioCounter) {
+    // 2. Initialize the display immediately
+    portfolioCounter.textContent = totalHasanat.toLocaleString();
+
+    // 3. Render Cards
+    grid.innerHTML = investmentsData
+      .map(
+        (item, index) => `
+            <div class="relative bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 group overflow-hidden">
+                
+                <div class="absolute -right-6 -top-6 w-24 h-24 bg-${item.theme}-50 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
+
+                <div class="relative z-10">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-${item.theme}-100 text-2xl flex items-center justify-center">
+                            ${item.icon}
+                        </div>
+                        <span class="bg-${item.theme}-50 text-${item.theme}-700 text-[10px] font-bold px-2 py-1 rounded border border-${item.theme}-100 uppercase">
+                            ${item.cost}
+                        </span>
+                    </div>
+
+                    <h3 class="text-xl font-bold text-gray-800 mb-1">${item.title}</h3>
+                    <p class="text-sm text-gray-500 mb-6 min-h-[40px]">${item.action}</p>
+
+                    <div class="bg-gray-50 rounded-lg p-3 mb-6 border border-gray-100">
+                        <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1">Return on Investment</p>
+                        <p class="text-${item.theme}-600 font-bold text-sm">${item.roi}</p>
+                    </div>
+
+                    <button onclick="invest(${index})" class="w-full bg-white border border-${item.theme}-200 text-${item.theme}-700 font-bold py-3 rounded-xl hover:bg-${item.theme}-600 hover:text-white hover:border-${item.theme}-600 transition-all active:scale-95 flex items-center justify-center gap-2 relative overflow-hidden btn-invest-${index}">
+                        <span>Invest Now</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        `
+      )
+      .join("");
+
+    // 4. Invest Function (Global)
+    window.invest = function (index) {
+      const item = investmentsData[index];
+      const btn = document.querySelector(`.btn-invest-${index}`);
+
+      // Update Variable
+      totalHasanat += item.rewardVal;
+
+      // 5. SAVE to LocalStorage
+      localStorage.setItem("tazkiyah_hasanat", totalHasanat);
+
+      // Animate Counter
+      const currentVal = parseInt(
+        portfolioCounter.textContent.replace(/,/g, "")
+      );
+      animateValue(portfolioCounter, currentVal, totalHasanat, 500);
+
+      // Visual Feedback on Button
+      const originalText = btn.innerHTML;
+      btn.innerHTML = `<span class='flex items-center gap-2'>Invested! <svg class='w-4 h-4' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 13l4 4L19 7'></path></svg></span>`;
+      btn.classList.add(
+        "bg-emerald-50",
+        "border-emerald-500",
+        "text-emerald-700"
+      );
+
+      // Floating +1 Text
+      const float = document.createElement("div");
+      float.className =
+        "float-text absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-emerald-600 font-bold";
+      float.textContent = "+ Good Deeds";
+      btn.appendChild(float);
+
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.classList.remove(
+          "bg-emerald-50",
+          "border-emerald-500",
+          "text-emerald-700"
+        );
+        float.remove();
+      }, 1000);
+    };
+
+    // Helper: Number Animation
+    function animateValue(obj, start, end, duration) {
+      let startTimestamp = null;
+      const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        const current = Math.floor(progress * (end - start) + start);
+        obj.innerHTML = current.toLocaleString(); // Adds commas
+        if (progress < 1) {
+          window.requestAnimationFrame(step);
+        }
+      };
+      window.requestAnimationFrame(step);
+    }
+  }
+})();
