@@ -2278,3 +2278,104 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 })();
+// ==========================================
+// DIVINE PROMISES LOGIC (FIXED ICON POSITION)
+// ==========================================
+(function () {
+  const promisesData = [
+    {
+      title: "Promise of Increase",
+      reward: "I will surely increase you.",
+      condition: "If you are grateful...",
+      verse: "لَئِن شَكَرْتُمْ لَأَزِيدَنَّكُمْ",
+      ref: "Surah Ibrahim (14:7)",
+      icon: "📈",
+    },
+    {
+      title: "Promise of Response",
+      reward: "I will answer you.",
+      condition: "Call upon Me...",
+      verse: "ٱدْعُونِىٓ أَسْتَجِبْ لَكُمْ",
+      ref: "Surah Ghafir (40:60)",
+      icon: "🤲",
+    },
+    {
+      title: "Promise of Remembrance",
+      reward: "I will remember you.",
+      condition: "Remember Me...",
+      verse: "فَٱذْكُرُونِىٓ أَذْكُرْكُمْ",
+      ref: "Surah Al-Baqarah (2:152)",
+      icon: "📿",
+    },
+    {
+      title: "Promise of Forgiveness",
+      reward: "He will forgive your sins.",
+      condition: "If you love Allah, follow me (the Prophet)...",
+      verse: "قُلْ إِن كُنتُمْ تُحِبُّونَ ٱللَّهَ فَٱتَّبِعُونِى",
+      ref: "Surah Ali 'Imran (3:31)",
+      icon: "❤️",
+    },
+    {
+      title: "Promise of Ease",
+      reward: "Indeed, with hardship comes ease.",
+      condition: "A promise for every struggle.",
+      verse: "إِنَّ مَعَ ٱلْعُسْرِ يُسْرًا",
+      ref: "Surah Ash-Sharh (94:6)",
+      icon: "🌤️",
+    },
+    {
+      title: "Promise of Provision",
+      reward: "He will provide from where he does not expect.",
+      condition: "Whoever fears Allah (Taqwa)...",
+      verse: "وَمَن يَتَّقِ ٱللَّهَ يَجْعَل لَّهُۥ مَخْرَجًا",
+      ref: "Surah At-Talaq (65:2-3)",
+      icon: "🌱",
+    },
+  ];
+
+  const container = document.getElementById("promises-grid");
+
+  if (container) {
+    container.innerHTML = promisesData
+      .map(
+        (item) => `
+            <div class="relative mt-10 group cursor-default">
+                
+                <div class="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 bg-white border border-amber-100 rounded-full flex items-center justify-center text-2xl shadow-sm z-20 group-hover:scale-110 group-hover:border-amber-300 transition-all duration-300">
+                    ${item.icon}
+                </div>
+
+                <div class="shimmer-card bg-white rounded-2xl p-8 pt-10 border border-amber-100 shadow-sm group-hover:shadow-xl group-hover:border-amber-300 transition-all duration-500 overflow-hidden h-full relative z-10">
+                    
+                    <div class="absolute inset-0 bg-texture-dots rounded-2xl"></div>
+                    
+                    <div class="relative z-10 flex flex-col items-center text-center h-full">
+                        
+                        <span class="text-[10px] font-bold text-amber-500 uppercase tracking-widest mb-2 mt-2">${item.title}</span>
+                        
+                        <h3 class="font-amiri text-2xl md:text-3xl text-emerald-900 font-bold mb-6 group-hover:text-amber-600 transition-colors leading-relaxed">
+                            "${item.reward}"
+                        </h3>
+
+                        <div class="w-12 h-0.5 bg-amber-100 mb-6 group-hover:w-24 group-hover:bg-amber-300 transition-all duration-500"></div>
+
+                        <div class="space-y-3 mt-auto">
+                            <p class="text-sm text-gray-500 font-medium italic">
+                                ${item.condition}
+                            </p>
+                            <p class="font-amiri text-lg text-emerald-800 dir-rtl opacity-60 group-hover:opacity-100 transition-opacity duration-300">
+                                ${item.verse}
+                            </p>
+                            <span class="text-[10px] text-gray-400 font-bold uppercase block mt-2">
+                                ${item.ref}
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        `
+      )
+      .join("");
+  }
+})();

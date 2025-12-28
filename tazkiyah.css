@@ -330,3 +330,37 @@ body {
 .timeline-card {
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
+/* Golden Shimmer Effect */
+.shimmer-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(251, 191, 36, 0.2),
+    transparent
+  );
+  transform: skewX(-25deg);
+  transition: all 0.75s;
+  pointer-events: none;
+}
+/* Update: Trigger shimmer when the 'group' (wrapper) is hovered */
+.group:hover .shimmer-card::before {
+  left: 200%;
+}
+
+/* Texture overlay */
+.bg-texture-dots {
+  background-image: radial-gradient(#f59e0b 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.1;
+}
