@@ -2253,3 +2253,28 @@ document.addEventListener("DOMContentLoaded", () => {
       .join("");
   }
 })();
+// ==========================================
+// SCROLL TO TOP LOGIC
+// ==========================================
+(function () {
+  const btn = document.getElementById("scroll-top-btn");
+
+  if (btn) {
+    // Show button when scrolling down
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 500) {
+        btn.classList.remove("translate-y-20", "opacity-0");
+      } else {
+        btn.classList.add("translate-y-20", "opacity-0");
+      }
+    });
+
+    // Scroll to top on click
+    btn.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    });
+  }
+})();
