@@ -1933,3 +1933,106 @@ document.addEventListener("DOMContentLoaded", () => {
         };
     }
 })();
+// ==========================================
+// TADABBUR (HIDDEN PEARLS) LOGIC
+// ==========================================
+(function() {
+    const gemsData = [
+        {
+            id: 'iron',
+            category: 'Scientific Miracle',
+            title: 'Iron Sent Down',
+            arabic: "وَأَنزَلْنَا ٱلْحَدِيدَ فِيهِ بَأْسٌ شَدِيدٌ",
+            trans: "And We sent down iron, wherein is great military might...",
+            reflection: "The Quran uses the word 'Anzalna' (We sent down) for Iron. Modern astrophysics has proven that iron is not native to Earth; it was forged in giant stars and sent down to Earth via meteorites. It literally came from the sky.",
+            ref: "Surah Al-Hadid (57:25)"
+        },
+        {
+            id: 'womb',
+            category: 'Linguistic Beauty',
+            title: 'Mercy & The Womb',
+            arabic: "ٱلرَّحْمَٰنِ ٱلرَّحِيمِ",
+            trans: "The Entirely Merciful, the Especially Merciful.",
+            reflection: "The words for Mercy (Rahmah) and Womb (Rahim) share the same root (R-H-M). Just as a womb protects, nourishes, and surrounds the unborn child from all sides, Allah's mercy envelopes His creation completely.",
+            ref: "The Root: R-H-M"
+        },
+        {
+            id: 'mountains',
+            category: 'Geology',
+            title: 'Mountains as Pegs',
+            arabic: "وَٱلْجِبَالَ أَوْتَادًا",
+            trans: "And [have We not made] the mountains as pegs?",
+            reflection: "The Quran describes mountains as 'Awtad' (Pegs/Stakes). Like a tent peg is mostly underground, modern geology confirms that mountains have deep 'roots' extending into the Earth's mantle to stabilize the crust (Isostasy).",
+            ref: "Surah An-Naba (78:7)"
+        },
+        {
+            id: 'orbit',
+            category: 'Astronomy',
+            title: 'Orbits',
+            arabic: "كُلٌّ فِى فَلَكٍ يَسْبَحُونَ",
+            trans: "All [heavenly bodies] are swimming in orbit.",
+            reflection: "The word 'Yasbahun' means 'swimming' or 'floating' with its own motion. This perfectly describes the movement of planets and stars in space—they are not fixed rigidly, but float through the vacuum.",
+            ref: "Surah Ya-Sin (36:40)"
+        }
+    ];
+
+    const btnContainer = document.getElementById('gem-buttons');
+    const contentArea = document.getElementById('gem-content');
+    
+    // Elements to update
+    const gemTag = document.getElementById('gem-tag');
+    const gemArabic = document.getElementById('gem-arabic');
+    const gemTrans = document.getElementById('gem-translation');
+    const gemReflect = document.getElementById('gem-reflection');
+
+    if(btnContainer && contentArea) {
+        
+        // 1. Render Buttons
+        btnContainer.innerHTML = gemsData.map((gem, index) => `
+            <button onclick="loadGem(${index})" class="gem-btn w-full text-left p-4 rounded-2xl transition-all duration-300 border border-transparent flex items-center justify-between group ${index === 0 ? 'bg-white/20 border-white/30 shadow-lg' : 'hover:bg-white/10'}" data-index="${index}">
+                <div>
+                    <span class="text-[10px] text-emerald-300 font-bold uppercase tracking-wider block mb-1">${gem.category}</span>
+                    <h4 class="text-white font-bold text-lg group-hover:text-yellow-400 transition-colors">${gem.title}</h4>
+                </div>
+                <div class="h-8 w-8 rounded-full bg-white/10 flex items-center justify-center text-white opacity-50 group-hover:opacity-100 transition-opacity">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                </div>
+            </button>
+        `).join('');
+
+        // 2. Load Function
+        window.loadGem = function(index) {
+            const data = gemsData[index];
+            
+            // Visual: Update active button state
+            document.querySelectorAll('.gem-btn').forEach(btn => {
+                if(parseInt(btn.getAttribute('data-index')) === index) {
+                    btn.classList.add('bg-white/20', 'border-white/30', 'shadow-lg');
+                    btn.classList.remove('hover:bg-white/10');
+                } else {
+                    btn.classList.remove('bg-white/20', 'border-white/30', 'shadow-lg');
+                    btn.classList.add('hover:bg-white/10');
+                }
+            });
+
+            // Animate Content Out
+            contentArea.style.opacity = '0';
+            contentArea.style.transform = 'translateY(10px)';
+
+            setTimeout(() => {
+                // Update Content
+                gemTag.textContent = data.category;
+                gemArabic.textContent = data.arabic;
+                gemTrans.textContent = `"${data.trans}"`;
+                gemReflect.innerHTML = `${data.reflection} <br><span class="block mt-3 text-xs text-emerald-400 font-bold uppercase">— ${data.ref}</span>`;
+
+                // Animate Content In
+                contentArea.style.opacity = '1';
+                contentArea.style.transform = 'translateY(0)';
+            }, 300);
+        };
+
+        // Initialize first gem
+        loadGem(0);
+    }
+})();
