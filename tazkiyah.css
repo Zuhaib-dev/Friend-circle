@@ -311,3 +311,22 @@ body {
 .flipped .preserve-3d {
   transform: rotateY(180deg);
 }
+/* Timeline Glow Effect for Active Card */
+.timeline-active {
+  border-color: #10b981 !important; /* Emerald-500 */
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1),
+    0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+  background-color: #ecfdf5 !important; /* Emerald-50 */
+  transform: scale(1.02);
+}
+
+.timeline-active .timeline-dot {
+  background-color: #059669 !important; /* Emerald-600 */
+  border-color: #fbbf24 !important; /* Yellow-400 */
+  box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.5); /* Yellow Glow ring */
+}
+
+/* Smooth transition for hover/active states */
+.timeline-card {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}

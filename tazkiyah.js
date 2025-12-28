@@ -1678,68 +1678,79 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Optional: Auto-slide every 10 seconds if user isn't interacting
-  let autoSlide = setInterval(() => { currentIndex = (currentIndex + 1) % salawatData.length; updateSlider(); }, 7000);
-  slider.addEventListener('mouseenter', () => clearInterval(autoSlide));
+  let autoSlide = setInterval(() => {
+    currentIndex = (currentIndex + 1) % salawatData.length;
+    updateSlider();
+  }, 7000);
+  slider.addEventListener("mouseenter", () => clearInterval(autoSlide));
 })();
 // ==========================================
 // PROPHETIC FOODS (TIB AN-NABAWI)
 // ==========================================
-(function() {
-    const foodsData = [
-        {
-            name: "Honey",
-            arabic: "العسل",
-            desc: "A cure for mankind.",
-            icon: "🍯",
-            color: "amber",
-            hadith: "The Prophet ﷺ said: 'Make use of the two cures: Honey and the Quran.' (Sunan Ibn Majah)"
-        },
-        {
-            name: "Dates (Ajwa)",
-            arabic: "التمر",
-            desc: "Protection from poison.",
-            icon: "🌴",
-            color: "orange",
-            hadith: "The Prophet ﷺ said: 'He who eats seven Ajwa dates every morning will not be affected by poison or magic on that day.' (Bukhari)"
-        },
-        {
-            name: "Black Seed",
-            arabic: "الحبة السوداء",
-            desc: "Cure for everything but death.",
-            icon: "🌱",
-            color: "gray",
-            hadith: "The Prophet ﷺ said: 'Use the Black Seed, for indeed, it contains a cure for every disease except death.' (Bukhari)"
-        },
-        {
-            name: "Olive Oil",
-            arabic: "زيت الزيتون",
-            desc: "From a blessed tree.",
-            icon: "🫒",
-            color: "emerald",
-            hadith: "The Prophet ﷺ said: 'Eat olive oil and use it on your hair and skin, for it comes from a blessed tree.' (Tirmidhi)"
-        },
-        {
-            name: "Talbinah",
-            arabic: "التلبينة",
-            desc: "Soothing for the heart.",
-            icon: "🥣",
-            color: "yellow",
-            hadith: "The Prophet ﷺ said: 'The Talbinah soothes the heart of the patient and relieves some of his sorrow.' (Bukhari)"
-        },
-        {
-            name: "Milk",
-            arabic: "اللبن",
-            desc: "A complete food.",
-            icon: "🥛",
-            color: "blue",
-            hadith: "The Prophet ﷺ said: 'There is nothing that serves as both food and drink except milk.' (Abu Dawood)"
-        }
-    ];
+(function () {
+  const foodsData = [
+    {
+      name: "Honey",
+      arabic: "العسل",
+      desc: "A cure for mankind.",
+      icon: "🍯",
+      color: "amber",
+      hadith:
+        "The Prophet ﷺ said: 'Make use of the two cures: Honey and the Quran.' (Sunan Ibn Majah)",
+    },
+    {
+      name: "Dates (Ajwa)",
+      arabic: "التمر",
+      desc: "Protection from poison.",
+      icon: "🌴",
+      color: "orange",
+      hadith:
+        "The Prophet ﷺ said: 'He who eats seven Ajwa dates every morning will not be affected by poison or magic on that day.' (Bukhari)",
+    },
+    {
+      name: "Black Seed",
+      arabic: "الحبة السوداء",
+      desc: "Cure for everything but death.",
+      icon: "🌱",
+      color: "gray",
+      hadith:
+        "The Prophet ﷺ said: 'Use the Black Seed, for indeed, it contains a cure for every disease except death.' (Bukhari)",
+    },
+    {
+      name: "Olive Oil",
+      arabic: "زيت الزيتون",
+      desc: "From a blessed tree.",
+      icon: "🫒",
+      color: "emerald",
+      hadith:
+        "The Prophet ﷺ said: 'Eat olive oil and use it on your hair and skin, for it comes from a blessed tree.' (Tirmidhi)",
+    },
+    {
+      name: "Talbinah",
+      arabic: "التلبينة",
+      desc: "Soothing for the heart.",
+      icon: "🥣",
+      color: "yellow",
+      hadith:
+        "The Prophet ﷺ said: 'The Talbinah soothes the heart of the patient and relieves some of his sorrow.' (Bukhari)",
+    },
+    {
+      name: "Milk",
+      arabic: "اللبن",
+      desc: "A complete food.",
+      icon: "🥛",
+      color: "blue",
+      hadith:
+        "The Prophet ﷺ said: 'There is nothing that serves as both food and drink except milk.' (Abu Dawood)",
+    },
+  ];
 
-    const grid = document.getElementById('foods-grid');
+  const grid = document.getElementById("foods-grid");
 
-    if (grid) {
-        grid.innerHTML = foodsData.map((item, index) => `
+  if (grid) {
+    grid.innerHTML = foodsData
+      .map(
+        (item, index) => `
             <div class="group relative h-64 perspective-1000 cursor-pointer" onclick="this.classList.toggle('flipped')">
                 
                 <div class="relative w-full h-full duration-700 preserve-3d group-hover:shadow-xl transition-all rounded-3xl">
@@ -1774,111 +1785,125 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 </div>
             </div>
-        `).join('');
-    }
+        `
+      )
+      .join("");
+  }
 })();
 // ==========================================
 // MEDICINE OF THE HEARTS (TIBB AL-QULUB)
 // ==========================================
-(function() {
-    const ailmentsData = [
-        {
-            id: 'anger',
-            name: 'Anger (Ghadab)',
-            icon: '🔥',
-            diagnosis: "Anger is a burning coal thrown by Shaytaan into the heart of the son of Adam. It destroys faith as aloe destroys honey.",
-            steps: [
-                "Seek refuge in Allah: Say 'A'udhu billahi minash shaytanir rajeem'.",
-                "Change your posture: If standing, sit; if sitting, lie down.",
-                "Perform Wudu: Water extinguishes the fire of anger.",
-                "Remain Silent: 'If one of you becomes angry, let him keep silent.'"
-            ],
-            dua: {
-                arabic: "أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ",
-                trans: "I seek refuge in Allah from the accursed Satan."
-            }
-        },
-        {
-            id: 'anxiety',
-            name: 'Anxiety (Hamm)',
-            icon: '😰',
-            diagnosis: "Anxiety comes from fearing the future. Remember that the pen has dried and what is meant for you will never miss you.",
-            steps: [
-                "Trust in Qadr: Know that Allah is Al-Wakeel (The Trustee).",
-                "Increase Istighfar: It removes worries and opens provision.",
-                "Focus on Today: 'O Allah, I seek refuge from worry and grief.'",
-                "Pray 2 Rakah: Seek help through patience and prayer."
-            ],
-            dua: {
-                arabic: "حَسْبِيَ اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ ۖ عَلَيْهِ تَوَكَّلْتُ",
-                trans: "Sufficient for me is Allah; there is no deity except Him. On Him I have relied."
-            }
-        },
-        {
-            id: 'envy',
-            name: 'Envy (Hasad)',
-            icon: '👁️',
-            diagnosis: "Envy consumes good deeds just as fire consumes wood. It is objecting to Allah's distribution of gifts.",
-            steps: [
-                "Pray for them: Make dua for the person you envy (angels say 'Ameen, and for you too').",
-                "Give a Gift: Gifts remove malice from the heart.",
-                "Say Ma Sha Allah: Attribute the blessing to Allah.",
-                "Focus on your own blessings: Gratitude kills envy."
-            ],
-            dua: {
-                arabic: "رَبَّنَا اغْفِرْ لَنَا وَلِإِخْوَانِنَا الَّذِينَ سَبَقُونَا بِالْإِيمَانِ وَلَا تَجْعَلْ فِي قُلُوبِنَا غِلًّا",
-                trans: "Our Lord, forgive us and our brothers... and leave no malice in our hearts."
-            }
-        },
-        {
-            id: 'pride',
-            name: 'Arrogance (Kibr)',
-            icon: '🦚',
-            diagnosis: "Arrogance is rejecting the truth and looking down on people. Remember your origin—you were created from dust.",
-            steps: [
-                "Serve Others: Physically serve those you think you are better than.",
-                "Remember Death: The grave makes everyone equal.",
-                "Reflect on Origin: You were a drop of fluid, and you will be a corpse.",
-                "Attribute success to Allah: Say 'Haza min fadli Rabbi' (This is from my Lord)."
-            ],
-            dua: {
-                arabic: "اللَّهُمَّ اجْعَلْنِي فِي عَيْنِي صَغِيرًا وَفِي أَعْيُنِ النَّاسِ كَبِيرًا",
-                trans: "O Allah, make me small in my own eyes, and great in the eyes of the people."
-            }
-        },
-        {
-            id: 'laziness',
-            name: 'Laziness (Kasl)',
-            icon: '💤',
-            diagnosis: "Laziness is a knot tied by Shaytaan. It prevents you from fulfilling your potential and purpose.",
-            steps: [
-                "Wake up Early: Barakah is in the early hours.",
-                "Make Wudu immediately: It unties the knots of Shaytaan.",
-                "Set small goals: 'The most beloved deeds are those that are consistent, even if small.'",
-                "Remember the Reward: Jannah is not for the lazy."
-            ],
-            dua: {
-                arabic: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْعَجْزِ وَالْكَسَلِ",
-                trans: "O Allah, I seek refuge in You from incapacity and laziness."
-            }
-        }
-    ];
+(function () {
+  const ailmentsData = [
+    {
+      id: "anger",
+      name: "Anger (Ghadab)",
+      icon: "🔥",
+      diagnosis:
+        "Anger is a burning coal thrown by Shaytaan into the heart of the son of Adam. It destroys faith as aloe destroys honey.",
+      steps: [
+        "Seek refuge in Allah: Say 'A'udhu billahi minash shaytanir rajeem'.",
+        "Change your posture: If standing, sit; if sitting, lie down.",
+        "Perform Wudu: Water extinguishes the fire of anger.",
+        "Remain Silent: 'If one of you becomes angry, let him keep silent.'",
+      ],
+      dua: {
+        arabic: "أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ",
+        trans: "I seek refuge in Allah from the accursed Satan.",
+      },
+    },
+    {
+      id: "anxiety",
+      name: "Anxiety (Hamm)",
+      icon: "😰",
+      diagnosis:
+        "Anxiety comes from fearing the future. Remember that the pen has dried and what is meant for you will never miss you.",
+      steps: [
+        "Trust in Qadr: Know that Allah is Al-Wakeel (The Trustee).",
+        "Increase Istighfar: It removes worries and opens provision.",
+        "Focus on Today: 'O Allah, I seek refuge from worry and grief.'",
+        "Pray 2 Rakah: Seek help through patience and prayer.",
+      ],
+      dua: {
+        arabic:
+          "حَسْبِيَ اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ ۖ عَلَيْهِ تَوَكَّلْتُ",
+        trans:
+          "Sufficient for me is Allah; there is no deity except Him. On Him I have relied.",
+      },
+    },
+    {
+      id: "envy",
+      name: "Envy (Hasad)",
+      icon: "👁️",
+      diagnosis:
+        "Envy consumes good deeds just as fire consumes wood. It is objecting to Allah's distribution of gifts.",
+      steps: [
+        "Pray for them: Make dua for the person you envy (angels say 'Ameen, and for you too').",
+        "Give a Gift: Gifts remove malice from the heart.",
+        "Say Ma Sha Allah: Attribute the blessing to Allah.",
+        "Focus on your own blessings: Gratitude kills envy.",
+      ],
+      dua: {
+        arabic:
+          "رَبَّنَا اغْفِرْ لَنَا وَلِإِخْوَانِنَا الَّذِينَ سَبَقُونَا بِالْإِيمَانِ وَلَا تَجْعَلْ فِي قُلُوبِنَا غِلًّا",
+        trans:
+          "Our Lord, forgive us and our brothers... and leave no malice in our hearts.",
+      },
+    },
+    {
+      id: "pride",
+      name: "Arrogance (Kibr)",
+      icon: "🦚",
+      diagnosis:
+        "Arrogance is rejecting the truth and looking down on people. Remember your origin—you were created from dust.",
+      steps: [
+        "Serve Others: Physically serve those you think you are better than.",
+        "Remember Death: The grave makes everyone equal.",
+        "Reflect on Origin: You were a drop of fluid, and you will be a corpse.",
+        "Attribute success to Allah: Say 'Haza min fadli Rabbi' (This is from my Lord).",
+      ],
+      dua: {
+        arabic:
+          "اللَّهُمَّ اجْعَلْنِي فِي عَيْنِي صَغِيرًا وَفِي أَعْيُنِ النَّاسِ كَبِيرًا",
+        trans:
+          "O Allah, make me small in my own eyes, and great in the eyes of the people.",
+      },
+    },
+    {
+      id: "laziness",
+      name: "Laziness (Kasl)",
+      icon: "💤",
+      diagnosis:
+        "Laziness is a knot tied by Shaytaan. It prevents you from fulfilling your potential and purpose.",
+      steps: [
+        "Wake up Early: Barakah is in the early hours.",
+        "Make Wudu immediately: It unties the knots of Shaytaan.",
+        "Set small goals: 'The most beloved deeds are those that are consistent, even if small.'",
+        "Remember the Reward: Jannah is not for the lazy.",
+      ],
+      dua: {
+        arabic: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْعَجْزِ وَالْكَسَلِ",
+        trans: "O Allah, I seek refuge in You from incapacity and laziness.",
+      },
+    },
+  ];
 
-    const buttonContainer = document.getElementById('ailment-buttons');
-    const emptyState = document.getElementById('rx-empty');
-    const contentState = document.getElementById('rx-content');
-    
-    // UI Elements to update
-    const rxTitle = document.getElementById('rx-title');
-    const rxDiagnosis = document.getElementById('rx-diagnosis');
-    const rxSteps = document.getElementById('rx-steps');
-    const rxDuaAr = document.getElementById('rx-dua-arabic');
-    const rxDuaEn = document.getElementById('rx-dua-trans');
+  const buttonContainer = document.getElementById("ailment-buttons");
+  const emptyState = document.getElementById("rx-empty");
+  const contentState = document.getElementById("rx-content");
 
-    if (buttonContainer && emptyState) {
-        
-        // 1. Render Buttons
-        buttonContainer.innerHTML = ailmentsData.map(item => `
+  // UI Elements to update
+  const rxTitle = document.getElementById("rx-title");
+  const rxDiagnosis = document.getElementById("rx-diagnosis");
+  const rxSteps = document.getElementById("rx-steps");
+  const rxDuaAr = document.getElementById("rx-dua-arabic");
+  const rxDuaEn = document.getElementById("rx-dua-trans");
+
+  if (buttonContainer && emptyState) {
+    // 1. Render Buttons
+    buttonContainer.innerHTML = ailmentsData
+      .map(
+        (item) => `
             <button onclick="loadPrescription('${item.id}')" class="rx-btn w-full text-left p-4 rounded-xl border border-gray-100 bg-white hover:border-emerald-500 hover:bg-emerald-50 transition-all duration-300 flex items-center justify-between group shadow-sm hover:shadow-md" data-id="${item.id}">
                 <div class="flex items-center gap-3">
                     <span class="text-xl group-hover:scale-110 transition-transform">${item.icon}</span>
@@ -1888,151 +1913,343 @@ document.addEventListener("DOMContentLoaded", () => {
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                 </svg>
             </button>
-        `).join('');
+        `
+      )
+      .join("");
 
-        // 2. Load Function (Global)
-        window.loadPrescription = function(id) {
-            const data = ailmentsData.find(i => i.id === id);
-            if (!data) return;
+    // 2. Load Function (Global)
+    window.loadPrescription = function (id) {
+      const data = ailmentsData.find((i) => i.id === id);
+      if (!data) return;
 
-            // Visual: Highlight active button
-            document.querySelectorAll('.rx-btn').forEach(btn => {
-                if(btn.getAttribute('data-id') === id) {
-                    btn.classList.add('border-emerald-500', 'bg-emerald-50', 'ring-1', 'ring-emerald-500');
-                } else {
-                    btn.classList.remove('border-emerald-500', 'bg-emerald-50', 'ring-1', 'ring-emerald-500');
-                }
-            });
+      // Visual: Highlight active button
+      document.querySelectorAll(".rx-btn").forEach((btn) => {
+        if (btn.getAttribute("data-id") === id) {
+          btn.classList.add(
+            "border-emerald-500",
+            "bg-emerald-50",
+            "ring-1",
+            "ring-emerald-500"
+          );
+        } else {
+          btn.classList.remove(
+            "border-emerald-500",
+            "bg-emerald-50",
+            "ring-1",
+            "ring-emerald-500"
+          );
+        }
+      });
 
-            // Hide content briefly for transition
-            contentState.classList.add('opacity-0');
-            
-            setTimeout(() => {
-                // Hide Empty State
-                emptyState.style.display = 'none';
-                
-                // Update Data
-                rxTitle.textContent = data.name;
-                rxDiagnosis.textContent = `"${data.diagnosis}"`;
-                rxDuaAr.textContent = data.dua.arabic;
-                rxDuaEn.textContent = data.dua.trans;
+      // Hide content briefly for transition
+      contentState.classList.add("opacity-0");
 
-                // Render List
-                rxSteps.innerHTML = data.steps.map(step => `
+      setTimeout(() => {
+        // Hide Empty State
+        emptyState.style.display = "none";
+
+        // Update Data
+        rxTitle.textContent = data.name;
+        rxDiagnosis.textContent = `"${data.diagnosis}"`;
+        rxDuaAr.textContent = data.dua.arabic;
+        rxDuaEn.textContent = data.dua.trans;
+
+        // Render List
+        rxSteps.innerHTML = data.steps
+          .map(
+            (step) => `
                     <li class="flex items-start gap-3 bg-white p-3 rounded-lg border border-gray-100">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-emerald-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                         <span class="text-sm text-gray-600 leading-relaxed">${step}</span>
                     </li>
-                `).join('');
+                `
+          )
+          .join("");
 
-                // Show content
-                contentState.classList.remove('opacity-0');
-            }, 300);
-        };
-    }
+        // Show content
+        contentState.classList.remove("opacity-0");
+      }, 300);
+    };
+  }
 })();
 // ==========================================
 // TADABBUR (HIDDEN PEARLS) LOGIC
 // ==========================================
-(function() {
-    const gemsData = [
-        {
-            id: 'iron',
-            category: 'Scientific Miracle',
-            title: 'Iron Sent Down',
-            arabic: "وَأَنزَلْنَا ٱلْحَدِيدَ فِيهِ بَأْسٌ شَدِيدٌ",
-            trans: "And We sent down iron, wherein is great military might...",
-            reflection: "The Quran uses the word 'Anzalna' (We sent down) for Iron. Modern astrophysics has proven that iron is not native to Earth; it was forged in giant stars and sent down to Earth via meteorites. It literally came from the sky.",
-            ref: "Surah Al-Hadid (57:25)"
-        },
-        {
-            id: 'womb',
-            category: 'Linguistic Beauty',
-            title: 'Mercy & The Womb',
-            arabic: "ٱلرَّحْمَٰنِ ٱلرَّحِيمِ",
-            trans: "The Entirely Merciful, the Especially Merciful.",
-            reflection: "The words for Mercy (Rahmah) and Womb (Rahim) share the same root (R-H-M). Just as a womb protects, nourishes, and surrounds the unborn child from all sides, Allah's mercy envelopes His creation completely.",
-            ref: "The Root: R-H-M"
-        },
-        {
-            id: 'mountains',
-            category: 'Geology',
-            title: 'Mountains as Pegs',
-            arabic: "وَٱلْجِبَالَ أَوْتَادًا",
-            trans: "And [have We not made] the mountains as pegs?",
-            reflection: "The Quran describes mountains as 'Awtad' (Pegs/Stakes). Like a tent peg is mostly underground, modern geology confirms that mountains have deep 'roots' extending into the Earth's mantle to stabilize the crust (Isostasy).",
-            ref: "Surah An-Naba (78:7)"
-        },
-        {
-            id: 'orbit',
-            category: 'Astronomy',
-            title: 'Orbits',
-            arabic: "كُلٌّ فِى فَلَكٍ يَسْبَحُونَ",
-            trans: "All [heavenly bodies] are swimming in orbit.",
-            reflection: "The word 'Yasbahun' means 'swimming' or 'floating' with its own motion. This perfectly describes the movement of planets and stars in space—they are not fixed rigidly, but float through the vacuum.",
-            ref: "Surah Ya-Sin (36:40)"
-        }
-    ];
+(function () {
+  const gemsData = [
+    {
+      id: "iron",
+      category: "Scientific Miracle",
+      title: "Iron Sent Down",
+      arabic: "وَأَنزَلْنَا ٱلْحَدِيدَ فِيهِ بَأْسٌ شَدِيدٌ",
+      trans: "And We sent down iron, wherein is great military might...",
+      reflection:
+        "The Quran uses the word 'Anzalna' (We sent down) for Iron. Modern astrophysics has proven that iron is not native to Earth; it was forged in giant stars and sent down to Earth via meteorites. It literally came from the sky.",
+      ref: "Surah Al-Hadid (57:25)",
+    },
+    {
+      id: "womb",
+      category: "Linguistic Beauty",
+      title: "Mercy & The Womb",
+      arabic: "ٱلرَّحْمَٰنِ ٱلرَّحِيمِ",
+      trans: "The Entirely Merciful, the Especially Merciful.",
+      reflection:
+        "The words for Mercy (Rahmah) and Womb (Rahim) share the same root (R-H-M). Just as a womb protects, nourishes, and surrounds the unborn child from all sides, Allah's mercy envelopes His creation completely.",
+      ref: "The Root: R-H-M",
+    },
+    {
+      id: "mountains",
+      category: "Geology",
+      title: "Mountains as Pegs",
+      arabic: "وَٱلْجِبَالَ أَوْتَادًا",
+      trans: "And [have We not made] the mountains as pegs?",
+      reflection:
+        "The Quran describes mountains as 'Awtad' (Pegs/Stakes). Like a tent peg is mostly underground, modern geology confirms that mountains have deep 'roots' extending into the Earth's mantle to stabilize the crust (Isostasy).",
+      ref: "Surah An-Naba (78:7)",
+    },
+    {
+      id: "orbit",
+      category: "Astronomy",
+      title: "Orbits",
+      arabic: "كُلٌّ فِى فَلَكٍ يَسْبَحُونَ",
+      trans: "All [heavenly bodies] are swimming in orbit.",
+      reflection:
+        "The word 'Yasbahun' means 'swimming' or 'floating' with its own motion. This perfectly describes the movement of planets and stars in space—they are not fixed rigidly, but float through the vacuum.",
+      ref: "Surah Ya-Sin (36:40)",
+    },
+  ];
 
-    const btnContainer = document.getElementById('gem-buttons');
-    const contentArea = document.getElementById('gem-content');
-    
-    // Elements to update
-    const gemTag = document.getElementById('gem-tag');
-    const gemArabic = document.getElementById('gem-arabic');
-    const gemTrans = document.getElementById('gem-translation');
-    const gemReflect = document.getElementById('gem-reflection');
+  const btnContainer = document.getElementById("gem-buttons");
+  const contentArea = document.getElementById("gem-content");
 
-    if(btnContainer && contentArea) {
-        
-        // 1. Render Buttons
-        btnContainer.innerHTML = gemsData.map((gem, index) => `
-            <button onclick="loadGem(${index})" class="gem-btn w-full text-left p-4 rounded-2xl transition-all duration-300 border border-transparent flex items-center justify-between group ${index === 0 ? 'bg-white/20 border-white/30 shadow-lg' : 'hover:bg-white/10'}" data-index="${index}">
+  // Elements to update
+  const gemTag = document.getElementById("gem-tag");
+  const gemArabic = document.getElementById("gem-arabic");
+  const gemTrans = document.getElementById("gem-translation");
+  const gemReflect = document.getElementById("gem-reflection");
+
+  if (btnContainer && contentArea) {
+    // 1. Render Buttons
+    btnContainer.innerHTML = gemsData
+      .map(
+        (gem, index) => `
+            <button onclick="loadGem(${index})" class="gem-btn w-full text-left p-4 rounded-2xl transition-all duration-300 border border-transparent flex items-center justify-between group ${
+          index === 0
+            ? "bg-white/20 border-white/30 shadow-lg"
+            : "hover:bg-white/10"
+        }" data-index="${index}">
                 <div>
-                    <span class="text-[10px] text-emerald-300 font-bold uppercase tracking-wider block mb-1">${gem.category}</span>
-                    <h4 class="text-white font-bold text-lg group-hover:text-yellow-400 transition-colors">${gem.title}</h4>
+                    <span class="text-[10px] text-emerald-300 font-bold uppercase tracking-wider block mb-1">${
+                      gem.category
+                    }</span>
+                    <h4 class="text-white font-bold text-lg group-hover:text-yellow-400 transition-colors">${
+                      gem.title
+                    }</h4>
                 </div>
                 <div class="h-8 w-8 rounded-full bg-white/10 flex items-center justify-center text-white opacity-50 group-hover:opacity-100 transition-opacity">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
                 </div>
             </button>
-        `).join('');
+        `
+      )
+      .join("");
 
-        // 2. Load Function
-        window.loadGem = function(index) {
-            const data = gemsData[index];
-            
-            // Visual: Update active button state
-            document.querySelectorAll('.gem-btn').forEach(btn => {
-                if(parseInt(btn.getAttribute('data-index')) === index) {
-                    btn.classList.add('bg-white/20', 'border-white/30', 'shadow-lg');
-                    btn.classList.remove('hover:bg-white/10');
-                } else {
-                    btn.classList.remove('bg-white/20', 'border-white/30', 'shadow-lg');
-                    btn.classList.add('hover:bg-white/10');
-                }
-            });
+    // 2. Load Function
+    window.loadGem = function (index) {
+      const data = gemsData[index];
 
-            // Animate Content Out
-            contentArea.style.opacity = '0';
-            contentArea.style.transform = 'translateY(10px)';
+      // Visual: Update active button state
+      document.querySelectorAll(".gem-btn").forEach((btn) => {
+        if (parseInt(btn.getAttribute("data-index")) === index) {
+          btn.classList.add("bg-white/20", "border-white/30", "shadow-lg");
+          btn.classList.remove("hover:bg-white/10");
+        } else {
+          btn.classList.remove("bg-white/20", "border-white/30", "shadow-lg");
+          btn.classList.add("hover:bg-white/10");
+        }
+      });
 
-            setTimeout(() => {
-                // Update Content
-                gemTag.textContent = data.category;
-                gemArabic.textContent = data.arabic;
-                gemTrans.textContent = `"${data.trans}"`;
-                gemReflect.innerHTML = `${data.reflection} <br><span class="block mt-3 text-xs text-emerald-400 font-bold uppercase">— ${data.ref}</span>`;
+      // Animate Content Out
+      contentArea.style.opacity = "0";
+      contentArea.style.transform = "translateY(10px)";
 
-                // Animate Content In
-                contentArea.style.opacity = '1';
-                contentArea.style.transform = 'translateY(0)';
-            }, 300);
-        };
+      setTimeout(() => {
+        // Update Content
+        gemTag.textContent = data.category;
+        gemArabic.textContent = data.arabic;
+        gemTrans.textContent = `"${data.trans}"`;
+        gemReflect.innerHTML = `${data.reflection} <br><span class="block mt-3 text-xs text-emerald-400 font-bold uppercase">— ${data.ref}</span>`;
 
-        // Initialize first gem
-        loadGem(0);
-    }
+        // Animate Content In
+        contentArea.style.opacity = "1";
+        contentArea.style.transform = "translateY(0)";
+      }, 300);
+    };
+
+    // Initialize first gem
+    loadGem(0);
+  }
+})();
+// ==========================================
+// SMART SUNNAH TIMELINE (DAY OF BARAKAH)
+// ==========================================
+(function () {
+  const routineData = [
+    {
+      title: "The Early Victory",
+      time: "04:00 - 07:00",
+      icon: "🌅",
+      desc: "Wake up for Tahajjud/Fajr. The Prophet ﷺ prayed for Barakah in the early hours.",
+      action: "Morning Adhkar + 2 Rakah Fajr",
+      startHour: 4,
+      endHour: 7,
+    },
+    {
+      title: "Charity of the Joints",
+      time: "08:00 - 11:00",
+      icon: "💼",
+      desc: "Perform Salat al-Duha (2-8 rakahs). It suffices as charity for every joint in your body.",
+      action: "Productive Work / Duha Prayer",
+      startHour: 8,
+      endHour: 11,
+    },
+    {
+      title: "The Sunnah Nap",
+      time: "12:00 - 13:30",
+      icon: "☀️",
+      desc: "Take a short 'Qaylulah' (nap) before or after Dhuhr to energize for worship.",
+      action: "Brief Rest + Dhuhr Prayer",
+      startHour: 12,
+      endHour: 13,
+    },
+    {
+      title: "The Pursuit of Risk",
+      time: "14:00 - 16:30",
+      icon: "🌱",
+      desc: "Work with excellence (Ihsan). After Asr, engage in Evening Adhkar.",
+      action: "Asr Prayer + Evening Adhkar",
+      startHour: 14,
+      endHour: 16,
+    },
+    {
+      title: "The Family Bond",
+      time: "17:00 - 20:00",
+      icon: "🏡",
+      desc: "Maghrib is family time. Serve them, eat together, and strengthen ties.",
+      action: "Maghrib + Family Khidmah",
+      startHour: 17,
+      endHour: 20,
+    },
+    {
+      title: "The Night Vigil",
+      time: "21:00 - 03:59",
+      icon: "🌙",
+      desc: "Perform Isha, pray Witr, and reflect (Muhasabah) before sleep.",
+      action: "Isha + Witr + Sleep Sunnahs",
+      startHour: 21,
+      endHour: 23, // Logic handles overnight wrap separately if needed, simplified here
+    },
+  ];
+
+  const container = document.getElementById("timeline-container");
+
+  if (container) {
+    // 1. Get Current Hour
+    const currentHour = new Date().getHours();
+
+    // 2. Render Timeline
+    container.innerHTML = routineData
+      .map((item, index) => {
+        // Check if this slot is active
+        let isActive = false;
+
+        // Handle midnight wrapping logic for the last item (e.g., 21:00 - 04:00)
+        if (item.startHour > item.endHour) {
+          // e.g. Start 21, End 4. Active if hour is >= 21 OR hour <= 4
+          isActive =
+            currentHour >= item.startHour || currentHour <= item.endHour;
+        } else {
+          // Normal range e.g. 8 to 11
+          isActive =
+            currentHour >= item.startHour && currentHour <= item.endHour;
+        }
+
+        // Alternating Layout Classes
+        const isLeft = index % 2 === 0;
+        const alignClass = isLeft ? "md:flex-row" : "md:flex-row-reverse";
+        const textClass = isLeft ? "md:text-right" : "md:text-left";
+        const marginClass = isLeft ? "md:mr-8" : "md:ml-8";
+
+        return `
+                <div class="timeline-card relative flex items-center ${alignClass} ${
+          isActive ? "timeline-active rounded-2xl" : ""
+        }">
+                    
+                    <div class="flex-1 w-full pl-12 md:pl-0 ${
+                      isLeft ? "md:pr-12" : "md:pl-12"
+                    }">
+                        
+                        <div class="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm relative z-10 ${
+                          isActive
+                            ? "border-emerald-500 ring-1 ring-emerald-500"
+                            : ""
+                        }">
+                            
+                            <div class="md:hidden absolute -left-10 top-6 w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center border-2 border-white timeline-dot text-sm">
+                                ${item.icon}
+                            </div>
+
+                            <div class="flex flex-col ${textClass}">
+                                <span class="text-[10px] font-bold ${
+                                  isActive
+                                    ? "text-emerald-600"
+                                    : "text-gray-400"
+                                } uppercase tracking-widest mb-1">
+                                    ${item.time} ${
+          isActive
+            ? '<span class="ml-2 animate-pulse text-red-500">● NOW</span>'
+            : ""
+        }
+                                </span>
+                                <h3 class="text-xl font-bold text-gray-800 mb-2">${
+                                  item.title
+                                }</h3>
+                            </div>
+
+                            <p class="text-gray-500 text-sm leading-relaxed mb-4 ${textClass}">
+                                ${item.desc}
+                            </p>
+
+                            <div class="flex items-center ${
+                              isLeft ? "md:justify-end" : "md:justify-start"
+                            } gap-2">
+                                <span class="bg-emerald-50 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full border border-emerald-100">
+                                    ${item.action}
+                                </span>
+                            </div>
+
+                            <div class="hidden md:block absolute top-1/2 -translate-y-1/2 w-4 h-4 bg-white border-t border-r border-emerald-100 transform rotate-45 ${
+                              isLeft
+                                ? "-right-2 border-r border-t border-l-0 border-b-0"
+                                : "-left-2 border-l border-b border-r-0 border-t-0"
+                            } ${
+          isActive ? "border-emerald-500 bg-emerald-50" : ""
+        }"></div>
+                        </div>
+
+                    </div>
+
+                    <div class="absolute left-4 md:left-1/2 w-4 h-4 rounded-full bg-emerald-200 border-2 border-white transform -translate-x-1/2 hidden md:block timeline-dot z-20 ${
+                      isActive ? "scale-125" : ""
+                    }"></div>
+                    
+                    <div class="flex-1 hidden md:block"></div>
+
+                </div>
+            `;
+      })
+      .join("");
+  }
 })();
