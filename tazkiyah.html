@@ -1210,6 +1210,86 @@
     <div id="foods-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         </div>
 </section>
+<section class="max-w-5xl mx-auto my-24 px-4">
+    <div class="text-center mb-12">
+        <span class="text-emerald-600 font-bold text-xs uppercase tracking-[0.3em] mb-4 block">Spiritual Pharmacy</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-emerald-900 font-amiri">
+            Medicine of the <span class="text-yellow-600">Heart</span>
+        </h2>
+        <p class="text-gray-500 mt-4 max-w-lg mx-auto">
+            "Indeed, in the body there is a lump of flesh; if it is sound, the whole body is sound..." — Identify your struggle to find the cure.
+        </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <div class="lg:col-span-4 space-y-3">
+            <h3 class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-4 ml-1">Select a Symptom</h3>
+            
+            <div id="ailment-buttons" class="flex flex-col gap-3">
+                </div>
+        </div>
+
+        <div class="lg:col-span-8">
+            <div id="prescription-card" class="bg-white rounded-3xl border border-emerald-100 shadow-xl overflow-hidden relative min-h-[400px] flex flex-col transition-all duration-500">
+                
+                <div class="h-2 bg-emerald-500 w-full"></div>
+                <div class="h-1 bg-yellow-400 w-full"></div>
+
+                <div id="rx-empty" class="absolute inset-0 flex flex-col items-center justify-center text-center p-8 z-10 bg-gray-50/50 backdrop-blur-sm">
+                    <div class="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mb-6 animate-pulse">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-700 mb-2">The Heart needs tending</h3>
+                    <p class="text-gray-500 text-sm max-w-xs">Select a spiritual ailment from the list to receive a prescription from the Sunnah.</p>
+                </div>
+
+                <div id="rx-content" class="p-8 md:p-10 opacity-0 transition-opacity duration-500 z-20">
+                    <div class="flex justify-between items-start mb-8 border-b border-gray-100 pb-6">
+                        <div>
+                            <span class="text-xs font-bold text-emerald-500 uppercase tracking-widest">Prescription For</span>
+                            <h2 id="rx-title" class="text-3xl font-bold text-emerald-900 mt-1 capitalize">---</h2>
+                        </div>
+                        <div class="text-right hidden sm:block">
+                            <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Source</span>
+                            <p class="text-emerald-700 font-amiri text-lg">Quran & Sunnah</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-8">
+                        <div>
+                            <h4 class="flex items-center gap-2 text-sm font-bold text-gray-800 uppercase mb-3">
+                                <span class="w-2 h-2 rounded-full bg-red-500"></span> The Diagnosis
+                            </h4>
+                            <p id="rx-diagnosis" class="text-gray-600 italic leading-relaxed bg-red-50 p-4 rounded-xl border border-red-100 text-sm">
+                                ...
+                            </p>
+                        </div>
+
+                        <div>
+                            <h4 class="flex items-center gap-2 text-sm font-bold text-gray-800 uppercase mb-3">
+                                <span class="w-2 h-2 rounded-full bg-emerald-500"></span> The Cure
+                            </h4>
+                            <ul id="rx-steps" class="space-y-3">
+                                </ul>
+                        </div>
+
+                        <div class="bg-emerald-900 text-white p-6 rounded-2xl relative overflow-hidden shadow-lg">
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-500 rounded-full mix-blend-overlay filter blur-3xl opacity-20"></div>
+                            <p class="text-emerald-300 text-[10px] font-bold uppercase tracking-widest mb-3">Recite for Healing</p>
+                            <h3 id="rx-dua-arabic" class="font-amiri text-2xl md:text-3xl leading-loose dir-rtl mb-4">...</h3>
+                            <p id="rx-dua-trans" class="text-emerald-100/90 text-sm italic">...</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
       </main>
 
       <footer

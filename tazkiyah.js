@@ -1777,3 +1777,159 @@ document.addEventListener("DOMContentLoaded", () => {
         `).join('');
     }
 })();
+// ==========================================
+// MEDICINE OF THE HEARTS (TIBB AL-QULUB)
+// ==========================================
+(function() {
+    const ailmentsData = [
+        {
+            id: 'anger',
+            name: 'Anger (Ghadab)',
+            icon: '🔥',
+            diagnosis: "Anger is a burning coal thrown by Shaytaan into the heart of the son of Adam. It destroys faith as aloe destroys honey.",
+            steps: [
+                "Seek refuge in Allah: Say 'A'udhu billahi minash shaytanir rajeem'.",
+                "Change your posture: If standing, sit; if sitting, lie down.",
+                "Perform Wudu: Water extinguishes the fire of anger.",
+                "Remain Silent: 'If one of you becomes angry, let him keep silent.'"
+            ],
+            dua: {
+                arabic: "أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ",
+                trans: "I seek refuge in Allah from the accursed Satan."
+            }
+        },
+        {
+            id: 'anxiety',
+            name: 'Anxiety (Hamm)',
+            icon: '😰',
+            diagnosis: "Anxiety comes from fearing the future. Remember that the pen has dried and what is meant for you will never miss you.",
+            steps: [
+                "Trust in Qadr: Know that Allah is Al-Wakeel (The Trustee).",
+                "Increase Istighfar: It removes worries and opens provision.",
+                "Focus on Today: 'O Allah, I seek refuge from worry and grief.'",
+                "Pray 2 Rakah: Seek help through patience and prayer."
+            ],
+            dua: {
+                arabic: "حَسْبِيَ اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ ۖ عَلَيْهِ تَوَكَّلْتُ",
+                trans: "Sufficient for me is Allah; there is no deity except Him. On Him I have relied."
+            }
+        },
+        {
+            id: 'envy',
+            name: 'Envy (Hasad)',
+            icon: '👁️',
+            diagnosis: "Envy consumes good deeds just as fire consumes wood. It is objecting to Allah's distribution of gifts.",
+            steps: [
+                "Pray for them: Make dua for the person you envy (angels say 'Ameen, and for you too').",
+                "Give a Gift: Gifts remove malice from the heart.",
+                "Say Ma Sha Allah: Attribute the blessing to Allah.",
+                "Focus on your own blessings: Gratitude kills envy."
+            ],
+            dua: {
+                arabic: "رَبَّنَا اغْفِرْ لَنَا وَلِإِخْوَانِنَا الَّذِينَ سَبَقُونَا بِالْإِيمَانِ وَلَا تَجْعَلْ فِي قُلُوبِنَا غِلًّا",
+                trans: "Our Lord, forgive us and our brothers... and leave no malice in our hearts."
+            }
+        },
+        {
+            id: 'pride',
+            name: 'Arrogance (Kibr)',
+            icon: '🦚',
+            diagnosis: "Arrogance is rejecting the truth and looking down on people. Remember your origin—you were created from dust.",
+            steps: [
+                "Serve Others: Physically serve those you think you are better than.",
+                "Remember Death: The grave makes everyone equal.",
+                "Reflect on Origin: You were a drop of fluid, and you will be a corpse.",
+                "Attribute success to Allah: Say 'Haza min fadli Rabbi' (This is from my Lord)."
+            ],
+            dua: {
+                arabic: "اللَّهُمَّ اجْعَلْنِي فِي عَيْنِي صَغِيرًا وَفِي أَعْيُنِ النَّاسِ كَبِيرًا",
+                trans: "O Allah, make me small in my own eyes, and great in the eyes of the people."
+            }
+        },
+        {
+            id: 'laziness',
+            name: 'Laziness (Kasl)',
+            icon: '💤',
+            diagnosis: "Laziness is a knot tied by Shaytaan. It prevents you from fulfilling your potential and purpose.",
+            steps: [
+                "Wake up Early: Barakah is in the early hours.",
+                "Make Wudu immediately: It unties the knots of Shaytaan.",
+                "Set small goals: 'The most beloved deeds are those that are consistent, even if small.'",
+                "Remember the Reward: Jannah is not for the lazy."
+            ],
+            dua: {
+                arabic: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْعَجْزِ وَالْكَسَلِ",
+                trans: "O Allah, I seek refuge in You from incapacity and laziness."
+            }
+        }
+    ];
+
+    const buttonContainer = document.getElementById('ailment-buttons');
+    const emptyState = document.getElementById('rx-empty');
+    const contentState = document.getElementById('rx-content');
+    
+    // UI Elements to update
+    const rxTitle = document.getElementById('rx-title');
+    const rxDiagnosis = document.getElementById('rx-diagnosis');
+    const rxSteps = document.getElementById('rx-steps');
+    const rxDuaAr = document.getElementById('rx-dua-arabic');
+    const rxDuaEn = document.getElementById('rx-dua-trans');
+
+    if (buttonContainer && emptyState) {
+        
+        // 1. Render Buttons
+        buttonContainer.innerHTML = ailmentsData.map(item => `
+            <button onclick="loadPrescription('${item.id}')" class="rx-btn w-full text-left p-4 rounded-xl border border-gray-100 bg-white hover:border-emerald-500 hover:bg-emerald-50 transition-all duration-300 flex items-center justify-between group shadow-sm hover:shadow-md" data-id="${item.id}">
+                <div class="flex items-center gap-3">
+                    <span class="text-xl group-hover:scale-110 transition-transform">${item.icon}</span>
+                    <span class="font-bold text-gray-700 group-hover:text-emerald-800">${item.name}</span>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-300 group-hover:text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
+        `).join('');
+
+        // 2. Load Function (Global)
+        window.loadPrescription = function(id) {
+            const data = ailmentsData.find(i => i.id === id);
+            if (!data) return;
+
+            // Visual: Highlight active button
+            document.querySelectorAll('.rx-btn').forEach(btn => {
+                if(btn.getAttribute('data-id') === id) {
+                    btn.classList.add('border-emerald-500', 'bg-emerald-50', 'ring-1', 'ring-emerald-500');
+                } else {
+                    btn.classList.remove('border-emerald-500', 'bg-emerald-50', 'ring-1', 'ring-emerald-500');
+                }
+            });
+
+            // Hide content briefly for transition
+            contentState.classList.add('opacity-0');
+            
+            setTimeout(() => {
+                // Hide Empty State
+                emptyState.style.display = 'none';
+                
+                // Update Data
+                rxTitle.textContent = data.name;
+                rxDiagnosis.textContent = `"${data.diagnosis}"`;
+                rxDuaAr.textContent = data.dua.arabic;
+                rxDuaEn.textContent = data.dua.trans;
+
+                // Render List
+                rxSteps.innerHTML = data.steps.map(step => `
+                    <li class="flex items-start gap-3 bg-white p-3 rounded-lg border border-gray-100">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-emerald-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span class="text-sm text-gray-600 leading-relaxed">${step}</span>
+                    </li>
+                `).join('');
+
+                // Show content
+                contentState.classList.remove('opacity-0');
+            }, 300);
+        };
+    }
+})();
