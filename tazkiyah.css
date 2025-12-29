@@ -410,3 +410,12 @@ body {
     line-height: 2.2;
   }
 }
+/* Button Shine Animation */
+@keyframes shine {
+  100% {
+    left: 125%;
+  }
+}
+.group:hover .group-hover\:animate-shine {
+  animation: shine 1s;
+}

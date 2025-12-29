@@ -2916,3 +2916,212 @@ document.addEventListener("DOMContentLoaded", () => {
     loadZikr(0);
   }
 })();
+// ==========================================
+// ZAKAT CALCULATOR LOGIC
+// ==========================================
+(function () {
+  // DOM Elements
+  const inputs = {
+    rateGold: document.getElementById("rate-gold"),
+    rateSilver: document.getElementById("rate-silver"),
+    cash: document.getElementById("asset-cash"),
+    goldG: document.getElementById("asset-gold-g"),
+    silverG: document.getElementById("asset-silver-g"),
+    invest: document.getElementById("asset-invest"),
+    debt: document.getElementById("liability-debt"),
+  };
+
+  const outputs = {
+    empty: document.getElementById("zakat-empty"),
+    content: document.getElementById("zakat-content"),
+    totalDue: document.getElementById("total-zakat-due"),
+    netAssets: document.getElementById("result-assets"),
+    nisabVal: document.getElementById("result-nisab"),
+    status: document.getElementById("result-status"),
+  };
+
+  // Global function
+  window.calcZakat = function () {
+    // 1. Get Values (Default to 0 if empty)
+    const rateGold = parseFloat(inputs.rateGold.value) || 0;
+    const rateSilver = parseFloat(inputs.rateSilver.value) || 0;
+
+    const cash = parseFloat(inputs.cash.value) || 0;
+    const goldWeight = parseFloat(inputs.goldG.value) || 0;
+    const silverWeight = parseFloat(inputs.silverG.value) || 0;
+    const invest = parseFloat(inputs.invest.value) || 0;
+    const debt = parseFloat(inputs.debt.value) || 0;
+
+    // 2. Validate Rates
+    if (rateGold === 0 && rateSilver === 0) {
+      alert("Please enter the current Gold or Silver rate to calculate Nisab.");
+      return;
+    }
+
+    // 3. Calculate Totals
+    const goldValue = goldWeight * rateGold;
+    const silverValue = silverWeight * rateSilver;
+    const totalAssets = cash + goldValue + silverValue + invest;
+    const netAssets = totalAssets - debt;
+
+    // 4. Calculate Nisab (Threshold)
+    // Silver Nisab is usually lower (~612.36g), making it safer for the poor.
+    // Gold Nisab is ~87.48g.
+    // We use Silver as default if provided, otherwise Gold.
+    const silverNisabThreshold = 612.36 * rateSilver;
+    const goldNisabThreshold = 87.48 * rateGold;
+
+    let nisabValue = 0;
+    // Prefer Silver standard for prudence, or whichever rate is provided
+    if (rateSilver > 0) nisabValue = silverNisabThreshold;
+    else nisabValue = goldNisabThreshold;
+
+    // 5. Determine Zakat
+    let zakatDue = 0;
+    let isEligible = false;
+
+    if (netAssets >= nisabValue && netAssets > 0) {
+      zakatDue = netAssets * 0.025; // 2.5%
+      isEligible = true;
+    }
+
+    // 6. Update UI
+    outputs.empty.classList.add("hidden");
+    outputs.content.classList.remove("hidden");
+
+    // Formatter
+    const fmt = (num) =>
+      num.toLocaleString("en-US", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      });
+
+    outputs.totalDue.textContent = fmt(zakatDue);
+    outputs.netAssets.textContent = fmt(netAssets);
+    outputs.nisabVal.textContent = fmt(nisabValue);
+
+    if (isEligible) {
+      outputs.status.textContent = "Eligible (Must Pay)";
+      outputs.status.className =
+        "font-bold px-2 py-0.5 rounded bg-white text-emerald-700 text-xs uppercase";
+      outputs.totalDue.parentElement.classList.remove("opacity-50");
+    } else {
+      outputs.status.textContent = "Below Nisab (No Zakat)";
+      outputs.status.className =
+        "font-bold px-2 py-0.5 rounded bg-white/10 text-gray-300 text-xs uppercase";
+      outputs.totalDue.parentElement.classList.add("opacity-50");
+    }
+  };
+
+  window.resetZakat = function () {
+    // Clear inputs
+    Object.values(inputs).forEach((input) => (input.value = ""));
+
+    // Reset View
+    outputs.content.classList.add("hidden");
+    outputs.empty.classList.remove("hidden");
+  };
+})();
+// ==========================================
+// ZAKAT CALCULATOR LOGIC (INR Version)
+// ==========================================
+(function () {
+  // DOM Elements
+  const inputs = {
+    rateGold: document.getElementById("rate-gold"),
+    rateSilver: document.getElementById("rate-silver"),
+    cash: document.getElementById("asset-cash"),
+    goldG: document.getElementById("asset-gold-g"),
+    silverG: document.getElementById("asset-silver-g"),
+    invest: document.getElementById("asset-invest"),
+    debt: document.getElementById("liability-debt"),
+  };
+
+  const outputs = {
+    empty: document.getElementById("zakat-empty"),
+    content: document.getElementById("zakat-content"),
+    totalDue: document.getElementById("total-zakat-due"),
+    netAssets: document.getElementById("result-assets"),
+    nisabVal: document.getElementById("result-nisab"),
+    status: document.getElementById("result-status"),
+  };
+
+  // Global function
+  window.calcZakat = function () {
+    // 1. Get Values (Default to 0 if empty)
+    const rateGold = parseFloat(inputs.rateGold.value) || 0;
+    const rateSilver = parseFloat(inputs.rateSilver.value) || 0;
+
+    const cash = parseFloat(inputs.cash.value) || 0;
+    const goldWeight = parseFloat(inputs.goldG.value) || 0;
+    const silverWeight = parseFloat(inputs.silverG.value) || 0;
+    const invest = parseFloat(inputs.invest.value) || 0;
+    const debt = parseFloat(inputs.debt.value) || 0;
+
+    // 2. Validate Rates
+    if (rateGold === 0 && rateSilver === 0) {
+      alert("Please enter the current Gold or Silver rate to calculate Nisab.");
+      return;
+    }
+
+    // 3. Calculate Totals
+    const goldValue = goldWeight * rateGold;
+    const silverValue = silverWeight * rateSilver;
+    const totalAssets = cash + goldValue + silverValue + invest;
+    const netAssets = totalAssets - debt;
+
+    // 4. Calculate Nisab (Threshold)
+    const silverNisabThreshold = 612.36 * rateSilver;
+    const goldNisabThreshold = 87.48 * rateGold;
+
+    let nisabValue = 0;
+    // Prefer Silver standard for prudence, or whichever rate is provided
+    if (rateSilver > 0) nisabValue = silverNisabThreshold;
+    else nisabValue = goldNisabThreshold;
+
+    // 5. Determine Zakat
+    let zakatDue = 0;
+    let isEligible = false;
+
+    if (netAssets >= nisabValue && netAssets > 0) {
+      zakatDue = netAssets * 0.025; // 2.5%
+      isEligible = true;
+    }
+
+    // 6. Update UI
+    outputs.empty.classList.add("hidden");
+    outputs.content.classList.remove("hidden");
+
+    // Formatter for Indian Rupee (en-IN)
+    const fmt = (num) =>
+      num.toLocaleString("en-IN", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      });
+
+    outputs.totalDue.textContent = fmt(zakatDue);
+    outputs.netAssets.textContent = fmt(netAssets);
+    outputs.nisabVal.textContent = fmt(nisabValue);
+
+    if (isEligible) {
+      outputs.status.textContent = "Eligible (Must Pay)";
+      outputs.status.className =
+        "font-bold px-2 py-0.5 rounded bg-white text-emerald-700 text-xs uppercase";
+      outputs.totalDue.parentElement.classList.remove("opacity-50");
+    } else {
+      outputs.status.textContent = "Below Nisab (No Zakat)";
+      outputs.status.className =
+        "font-bold px-2 py-0.5 rounded bg-white/10 text-gray-300 text-xs uppercase";
+      outputs.totalDue.parentElement.classList.add("opacity-50");
+    }
+  };
+
+  window.resetZakat = function () {
+    // Clear inputs
+    Object.values(inputs).forEach((input) => (input.value = ""));
+
+    // Reset View
+    outputs.content.classList.add("hidden");
+    outputs.empty.classList.remove("hidden");
+  };
+})();

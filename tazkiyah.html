@@ -1483,6 +1483,150 @@
 
     </div>
 </section>
+<section class="max-w-6xl mx-auto my-24 px-4">
+    <div class="text-center mb-12">
+        <span class="text-emerald-600 font-bold text-xs uppercase tracking-[0.3em] mb-4 block">The Third Pillar</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-emerald-900 font-amiri">
+            The <span class="text-yellow-600">Purifier</span>
+        </h2>
+        <p class="text-gray-500 mt-4 text-sm max-w-lg mx-auto">
+            "Take, [O, Muhammad], from their wealth a charity by which you purify them and cause them increase..." (9:103)
+        </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <div class="lg:col-span-7 space-y-6">
+            
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-emerald-100 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-1 h-full bg-yellow-400"></div>
+                <h3 class="font-bold text-gray-800 mb-4 flex items-center gap-2">
+                    <span class="bg-yellow-100 text-yellow-700 p-1.5 rounded-lg text-xs">Step 1</span> 
+                    Current Market Rates
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Gold Price (per gram)</label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-bold">₹</span>
+                            <input type="number" id="rate-gold" class="w-full pl-8 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-400 font-mono text-gray-700 placeholder-gray-300 transition-all" placeholder="e.g. 6500">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Silver Price (per gram)</label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-bold">₹</span>
+                            <input type="number" id="rate-silver" class="w-full pl-8 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-400 font-mono text-gray-700 placeholder-gray-300 transition-all" placeholder="e.g. 85">
+                        </div>
+                    </div>
+                </div>
+                <p class="text-[10px] text-gray-400 mt-3 italic">*Required to calculate the Nisab threshold accurately.</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-emerald-100">
+                <h3 class="font-bold text-gray-800 mb-4 flex items-center gap-2">
+                    <span class="bg-emerald-100 text-emerald-700 p-1.5 rounded-lg text-xs">Step 2</span> 
+                    Your Assets (Savings)
+                </h3>
+                <div class="space-y-4">
+                    <div>
+                        <label class="flex justify-between text-sm text-gray-600 mb-2">
+                            <span>Cash in Hand & Bank Accounts</span>
+                        </label>
+                        <input type="number" id="asset-cash" class="zakat-input w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all" placeholder="0.00">
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="text-sm text-gray-600 mb-2 block">Gold Weight (g)</label>
+                            <input type="number" id="asset-gold-g" class="zakat-input w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all" placeholder="0">
+                        </div>
+                        <div>
+                            <label class="text-sm text-gray-600 mb-2 block">Silver Weight (g)</label>
+                            <input type="number" id="asset-silver-g" class="zakat-input w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-400 transition-all" placeholder="0">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="flex justify-between text-sm text-gray-600 mb-2">
+                            <span>Investments (Stocks, Crypto, Funds)</span>
+                        </label>
+                        <input type="number" id="asset-invest" class="zakat-input w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all" placeholder="0.00">
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-red-100">
+                <h3 class="font-bold text-gray-800 mb-4 flex items-center gap-2">
+                    <span class="bg-red-100 text-red-700 p-1.5 rounded-lg text-xs">Step 3</span> 
+                    Liabilities (Debts Due)
+                </h3>
+                <div>
+                    <label class="flex justify-between text-sm text-gray-600 mb-2">
+                        <span>Immediate Debts Due Now</span>
+                        <span class="text-xs text-red-400">Subtracts from total</span>
+                    </label>
+                    <input type="number" id="liability-debt" class="zakat-input w-full px-4 py-3 bg-white border border-red-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-400 transition-all" placeholder="0.00">
+                </div>
+            </div>
+
+            <button onclick="calcZakat()" class="w-full bg-emerald-900 text-white font-bold py-4 rounded-xl shadow-lg hover:bg-emerald-800 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group">
+                <span class="relative z-10 flex items-center justify-center gap-2">
+                    Calculate Zakat
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
+                </span>
+                <div class="absolute top-0 -inset-full h-full w-1/2 z-5 block transform -skew-x-12 bg-gradient-to-r from-transparent to-white opacity-20 group-hover:animate-shine"></div>
+            </button>
+
+        </div>
+
+        <div class="lg:col-span-5 sticky top-8">
+            <div id="zakat-result-card" class="bg-gradient-to-br from-emerald-900 to-teal-900 text-white rounded-3xl p-8 relative overflow-hidden shadow-2xl min-h-[400px] flex flex-col justify-center transition-all duration-500">
+                
+                <div class="absolute top-0 right-0 w-64 h-64 bg-yellow-400 rounded-full mix-blend-overlay filter blur-3xl opacity-10 -mr-16 -mt-16"></div>
+                <div class="absolute bottom-0 left-0 w-64 h-64 bg-emerald-400 rounded-full mix-blend-overlay filter blur-3xl opacity-10 -ml-16 -mb-16"></div>
+
+                <div id="zakat-empty" class="text-center relative z-10">
+                    <div class="w-20 h-20 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-6 backdrop-blur-sm border border-white/20">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-emerald-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2 font-amiri">Ready to Purify?</h3>
+                    <p class="text-emerald-200/80 text-sm">Enter your assets and current market rates to see your obligation.</p>
+                </div>
+
+                <div id="zakat-content" class="hidden relative z-10">
+                    <span class="text-xs font-bold text-emerald-400 uppercase tracking-[0.2em] mb-1 block">Your Zakat Due</span>
+                    
+                    <div class="flex items-baseline gap-1 mb-6">
+                        <span class="text-lg text-emerald-400 font-bold" id="currency-symbol">₹</span>
+                        <span class="text-5xl font-mono font-bold text-white tracking-tighter" id="total-zakat-due">0.00</span>
+                    </div>
+
+                    <div class="space-y-4 border-t border-white/10 pt-6">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-emerald-200">Total Net Assets</span>
+                            <span class="font-mono font-bold" id="result-assets">0.00</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-emerald-200">Nisab Threshold</span>
+                            <span class="font-mono font-bold text-yellow-400" id="result-nisab">0.00</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-emerald-200">Eligibility</span>
+                            <span class="font-bold px-2 py-0.5 rounded bg-white/20 text-white text-xs" id="result-status">Checking...</span>
+                        </div>
+                    </div>
+
+                    <button onclick="resetZakat()" class="mt-8 w-full py-3 rounded-xl border border-white/20 hover:bg-white/10 text-sm font-bold text-emerald-200 transition-colors">
+                        Reset Calculator
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
 <!-- If you need to add more sections add before this section it is a back to top btn  -->
 <button id="scroll-top-btn" class="fixed bottom-8 right-8 bg-emerald-600 text-white p-4 rounded-full shadow-lg translate-y-20 opacity-0 transition-all duration-500 z-50 hover:bg-emerald-700 hover:-translate-y-1 focus:outline-none flex items-center justify-center" aria-label="Scroll to top">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
