@@ -3294,81 +3294,97 @@ document.addEventListener("DOMContentLoaded", () => {
 // ==========================================
 // DAILY DUAS CAROUSEL LOGIC
 // ==========================================
-(function() {
-    const duasData = [
-        {
-            category: "Cleanliness",
-            title: "After Wudu",
-            icon: "💧",
-            arabic: "أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",
-            trans: "Ashhadu an la ilaha illallah wahdahu la sharika lahu wa ashhadu anna Muhammadan 'abduhu wa rasuluh.",
-            meaning: "I bear witness that none has the right to be worshipped but Allah alone... and Muhammad is His slave and Messenger.",
-            ref: "Muslim 1/209"
-        },
-        {
-            category: "Eating",
-            title: "Before Eating",
-            icon: "🍽️",
-            arabic: "بِسْمِ اللَّهِ",
-            trans: "Bismillah.",
-            meaning: "In the name of Allah. (If you forget, say: Bismillahi awwalahu wa akhirahu).",
-            ref: "Abu Dawud 3/347"
-        },
-        {
-            category: "Eating",
-            title: "After Eating",
-            icon: "🤲",
-            arabic: "الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنَا وَسَقَانَا وَجَعَلَنَا مُسْلِمِينَ",
-            trans: "Alhamdu lillahil-ladzi at'amana wa saqana wa ja'alana Muslimeen.",
-            meaning: "All praise belongs to Allah, who fed us and quenched our thirst and made us Muslims.",
-            ref: "At-Tirmidhi"
-        },
-        {
-            category: "Home",
-            title: "Leaving Home",
-            icon: "🚪",
-            arabic: "بِسْمِ اللَّهِ تَوَكَّلْتُ عَلَى اللَّهِ، وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ",
-            trans: "Bismillahi tawakkaltu 'alallah, wa la hawla wa la quwwata illa billah.",
-            meaning: "In the name of Allah, I place my trust in Allah, and there is no might nor power except with Allah.",
-            ref: "Abu Dawud 4/325"
-        },
-        {
-            category: "Home",
-            title: "Entering Home",
-            icon: "🏡",
-            arabic: "بِسْمِ اللَّهِ وَلَجْنَا، وَبِسْمِ اللَّهِ خَرَجْنَا، وَعَلَى رَبِّنَا تَوَكَّلْنَا",
-            trans: "Bismillahi walajna, wa bismillahi kharajna, wa 'ala Rabbina tawakkalna.",
-            meaning: "In the name of Allah we enter, and in the name of Allah we leave, and upon our Lord we rely.",
-            ref: "Abu Dawud 4/325"
-        },
-        {
-            category: "Journey",
-            title: "Traveling",
-            icon: "🚗",
-            arabic: "سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ",
-            trans: "Subhanal-ladzi sakh-khara lana hadha wa ma kunna lahu muqrinin...",
-            meaning: "Glory to Him who has brought this [vehicle] under our control, though we were unable to control it ourselves...",
-            ref: "Quran 43:13-14"
-        },
-        {
-            category: "Mosque",
-            title: "Entering Mosque",
-            icon: "🕌",
-            arabic: "اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ",
-            trans: "Allahumma-ftah li abwaba rahmatik.",
-            meaning: "O Allah, open the gates of Your mercy for me.",
-            ref: "Muslim 1/494"
-        }
-    ];
+(function () {
+  const duasData = [
+    {
+      category: "Cleanliness",
+      title: "After Wudu",
+      icon: "💧",
+      arabic:
+        "أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",
+      trans:
+        "Ashhadu an la ilaha illallah wahdahu la sharika lahu wa ashhadu anna Muhammadan 'abduhu wa rasuluh.",
+      meaning:
+        "I bear witness that none has the right to be worshipped but Allah alone... and Muhammad is His slave and Messenger.",
+      ref: "Muslim 1/209",
+    },
+    {
+      category: "Eating",
+      title: "Before Eating",
+      icon: "🍽️",
+      arabic: "بِسْمِ اللَّهِ",
+      trans: "Bismillah.",
+      meaning:
+        "In the name of Allah. (If you forget, say: Bismillahi awwalahu wa akhirahu).",
+      ref: "Abu Dawud 3/347",
+    },
+    {
+      category: "Eating",
+      title: "After Eating",
+      icon: "🤲",
+      arabic:
+        "الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنَا وَسَقَانَا وَجَعَلَنَا مُسْلِمِينَ",
+      trans: "Alhamdu lillahil-ladzi at'amana wa saqana wa ja'alana Muslimeen.",
+      meaning:
+        "All praise belongs to Allah, who fed us and quenched our thirst and made us Muslims.",
+      ref: "At-Tirmidhi",
+    },
+    {
+      category: "Home",
+      title: "Leaving Home",
+      icon: "🚪",
+      arabic:
+        "بِسْمِ اللَّهِ تَوَكَّلْتُ عَلَى اللَّهِ، وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ",
+      trans:
+        "Bismillahi tawakkaltu 'alallah, wa la hawla wa la quwwata illa billah.",
+      meaning:
+        "In the name of Allah, I place my trust in Allah, and there is no might nor power except with Allah.",
+      ref: "Abu Dawud 4/325",
+    },
+    {
+      category: "Home",
+      title: "Entering Home",
+      icon: "🏡",
+      arabic:
+        "بِسْمِ اللَّهِ وَلَجْنَا، وَبِسْمِ اللَّهِ خَرَجْنَا، وَعَلَى رَبِّنَا تَوَكَّلْنَا",
+      trans:
+        "Bismillahi walajna, wa bismillahi kharajna, wa 'ala Rabbina tawakkalna.",
+      meaning:
+        "In the name of Allah we enter, and in the name of Allah we leave, and upon our Lord we rely.",
+      ref: "Abu Dawud 4/325",
+    },
+    {
+      category: "Journey",
+      title: "Traveling",
+      icon: "🚗",
+      arabic:
+        "سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ",
+      trans:
+        "Subhanal-ladzi sakh-khara lana hadha wa ma kunna lahu muqrinin...",
+      meaning:
+        "Glory to Him who has brought this [vehicle] under our control, though we were unable to control it ourselves...",
+      ref: "Quran 43:13-14",
+    },
+    {
+      category: "Mosque",
+      title: "Entering Mosque",
+      icon: "🕌",
+      arabic: "اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ",
+      trans: "Allahumma-ftah li abwaba rahmatik.",
+      meaning: "O Allah, open the gates of Your mercy for me.",
+      ref: "Muslim 1/494",
+    },
+  ];
 
-    const track = document.getElementById('dua-track');
-    const prevBtn = document.getElementById('dua-prev');
-    const nextBtn = document.getElementById('dua-next');
+  const track = document.getElementById("dua-track");
+  const prevBtn = document.getElementById("dua-prev");
+  const nextBtn = document.getElementById("dua-next");
 
-    if (track) {
-        
-        // 1. Render Cards
-        track.innerHTML = duasData.map((item, index) => `
+  if (track) {
+    // 1. Render Cards
+    track.innerHTML = duasData
+      .map(
+        (item, index) => `
             <div class="min-w-[300px] md:min-w-[350px] snap-center bg-white rounded-3xl p-6 border border-emerald-50 shadow-sm hover:shadow-xl hover:border-emerald-200 transition-all duration-300 flex flex-col relative group">
                 
                 <div class="flex justify-between items-start mb-4">
@@ -3398,143 +3414,164 @@ document.addEventListener("DOMContentLoaded", () => {
                     <p class="text-[10px] text-gray-300 font-bold uppercase">${item.ref}</p>
                 </div>
             </div>
-        `).join('');
+        `
+      )
+      .join("");
 
-        // 2. Navigation Logic
-        const scrollAmount = 320; // Width of card + gap
+    // 2. Navigation Logic
+    const scrollAmount = 320; // Width of card + gap
 
-        nextBtn.addEventListener('click', () => {
-            track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-        });
+    nextBtn.addEventListener("click", () => {
+      track.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    });
 
-        prevBtn.addEventListener('click', () => {
-            track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-        });
+    prevBtn.addEventListener("click", () => {
+      track.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+    });
 
-        // 3. Copy Function
-        window.copyDua = function(index) {
-            const text = document.getElementById(`dua-text-${index}`).textContent.trim();
-            navigator.clipboard.writeText(text).then(() => {
-                const btn = document.getElementById(`copy-btn-${index}`);
-                const originalHTML = btn.innerHTML;
-                
-                // Visual Feedback
-                btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-emerald-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>`;
-                btn.classList.add('animate-copy');
-                
-                setTimeout(() => {
-                    btn.innerHTML = originalHTML;
-                    btn.classList.remove('animate-copy');
-                }, 1500);
-            });
-        };
-    }
+    // 3. Copy Function
+    window.copyDua = function (index) {
+      const text = document
+        .getElementById(`dua-text-${index}`)
+        .textContent.trim();
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById(`copy-btn-${index}`);
+        const originalHTML = btn.innerHTML;
+
+        // Visual Feedback
+        btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-emerald-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>`;
+        btn.classList.add("animate-copy");
+
+        setTimeout(() => {
+          btn.innerHTML = originalHTML;
+          btn.classList.remove("animate-copy");
+        }, 1500);
+      });
+    };
+  }
 })();
 // ==========================================
 // DAILY DUAS CAROUSEL LOGIC
 // ==========================================
-(function() {
-    const duasData = [
-        {
-            category: "Cleanliness",
-            title: "Entering Bathroom",
-            icon: "🚽",
-            arabic: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ",
-            trans: "Allahumma inni a'udhu bika minal-khubuthi wal-khaba'ith.",
-            meaning: "O Allah, I seek refuge in You from the male and female evil spirits.",
-            ref: "Al-Bukhari 1/45"
-        },
-        {
-            category: "Cleanliness",
-            title: "Leaving Bathroom",
-            icon: "🚿",
-            arabic: "غُفْرَانَكَ",
-            trans: "Ghufranaka.",
-            meaning: "(I ask for) Your forgiveness.",
-            ref: "Abu Dawud & At-Tirmidhi"
-        },
-        {
-            category: "Cleanliness",
-            title: "After Wudu",
-            icon: "💧",
-            arabic: "أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",
-            trans: "Ashhadu an la ilaha illallah wahdahu la sharika lahu wa ashhadu anna Muhammadan 'abduhu wa rasuluh.",
-            meaning: "I bear witness that none has the right to be worshipped but Allah alone... and Muhammad is His slave and Messenger.",
-            ref: "Muslim 1/209"
-        },
-        {
-            category: "Eating",
-            title: "Before Eating",
-            icon: "🍽️",
-            arabic: "بِسْمِ اللَّهِ",
-            trans: "Bismillah.",
-            meaning: "In the name of Allah. (If you forget, say: Bismillahi awwalahu wa akhirahu).",
-            ref: "Abu Dawud 3/347"
-        },
-        {
-            category: "Eating",
-            title: "After Eating",
-            icon: "🤲",
-            arabic: "الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنَا وَسَقَانَا وَجَعَلَنَا مُسْلِمِينَ",
-            trans: "Alhamdu lillahil-ladzi at'amana wa saqana wa ja'alana Muslimeen.",
-            meaning: "All praise belongs to Allah, who fed us and quenched our thirst and made us Muslims.",
-            ref: "At-Tirmidhi"
-        },
-        {
-            category: "Home",
-            title: "Leaving Home",
-            icon: "🚪",
-            arabic: "بِسْمِ اللَّهِ تَوَكَّلْتُ عَلَى اللَّهِ، وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ",
-            trans: "Bismillahi tawakkaltu 'alallah, wa la hawla wa la quwwata illa billah.",
-            meaning: "In the name of Allah, I place my trust in Allah, and there is no might nor power except with Allah.",
-            ref: "Abu Dawud 4/325"
-        },
-        {
-            category: "Home",
-            title: "Entering Home",
-            icon: "🏡",
-            arabic: "بِسْمِ اللَّهِ وَلَجْنَا، وَبِسْمِ اللَّهِ خَرَجْنَا، وَعَلَى رَبِّنَا تَوَكَّلْنَا",
-            trans: "Bismillahi walajna, wa bismillahi kharajna, wa 'ala Rabbina tawakkalna.",
-            meaning: "In the name of Allah we enter, and in the name of Allah we leave, and upon our Lord we rely.",
-            ref: "Abu Dawud 4/325"
-        },
-        {
-            category: "Journey",
-            title: "Traveling",
-            icon: "🚗",
-            arabic: "سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ",
-            trans: "Subhanal-ladzi sakh-khara lana hadha wa ma kunna lahu muqrinin...",
-            meaning: "Glory to Him who has brought this [vehicle] under our control, though we were unable to control it ourselves...",
-            ref: "Quran 43:13-14"
-        },
-        {
-            category: "Mosque",
-            title: "Entering Mosque",
-            icon: "🕌",
-            arabic: "اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ",
-            trans: "Allahumma-ftah li abwaba rahmatik.",
-            meaning: "O Allah, open the gates of Your mercy for me.",
-            ref: "Muslim 1/494"
-        },
-        {
-            category: "Mosque",
-            title: "Leaving Mosque",
-            icon: "👟",
-            arabic: "اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِكَ",
-            trans: "Allahumma inni as'aluka min fadlik.",
-            meaning: "O Allah, I ask You from Your bounty.",
-            ref: "Muslim 1/494"
-        }
-    ];
+(function () {
+  const duasData = [
+    {
+      category: "Cleanliness",
+      title: "Entering Bathroom",
+      icon: "🚽",
+      arabic: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ",
+      trans: "Allahumma inni a'udhu bika minal-khubuthi wal-khaba'ith.",
+      meaning:
+        "O Allah, I seek refuge in You from the male and female evil spirits.",
+      ref: "Al-Bukhari 1/45",
+    },
+    {
+      category: "Cleanliness",
+      title: "Leaving Bathroom",
+      icon: "🚿",
+      arabic: "غُفْرَانَكَ",
+      trans: "Ghufranaka.",
+      meaning: "(I ask for) Your forgiveness.",
+      ref: "Abu Dawud & At-Tirmidhi",
+    },
+    {
+      category: "Cleanliness",
+      title: "After Wudu",
+      icon: "💧",
+      arabic:
+        "أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",
+      trans:
+        "Ashhadu an la ilaha illallah wahdahu la sharika lahu wa ashhadu anna Muhammadan 'abduhu wa rasuluh.",
+      meaning:
+        "I bear witness that none has the right to be worshipped but Allah alone... and Muhammad is His slave and Messenger.",
+      ref: "Muslim 1/209",
+    },
+    {
+      category: "Eating",
+      title: "Before Eating",
+      icon: "🍽️",
+      arabic: "بِسْمِ اللَّهِ",
+      trans: "Bismillah.",
+      meaning:
+        "In the name of Allah. (If you forget, say: Bismillahi awwalahu wa akhirahu).",
+      ref: "Abu Dawud 3/347",
+    },
+    {
+      category: "Eating",
+      title: "After Eating",
+      icon: "🤲",
+      arabic:
+        "الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنَا وَسَقَانَا وَجَعَلَنَا مُسْلِمِينَ",
+      trans: "Alhamdu lillahil-ladzi at'amana wa saqana wa ja'alana Muslimeen.",
+      meaning:
+        "All praise belongs to Allah, who fed us and quenched our thirst and made us Muslims.",
+      ref: "At-Tirmidhi",
+    },
+    {
+      category: "Home",
+      title: "Leaving Home",
+      icon: "🚪",
+      arabic:
+        "بِسْمِ اللَّهِ تَوَكَّلْتُ عَلَى اللَّهِ، وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ",
+      trans:
+        "Bismillahi tawakkaltu 'alallah, wa la hawla wa la quwwata illa billah.",
+      meaning:
+        "In the name of Allah, I place my trust in Allah, and there is no might nor power except with Allah.",
+      ref: "Abu Dawud 4/325",
+    },
+    {
+      category: "Home",
+      title: "Entering Home",
+      icon: "🏡",
+      arabic:
+        "بِسْمِ اللَّهِ وَلَجْنَا، وَبِسْمِ اللَّهِ خَرَجْنَا، وَعَلَى رَبِّنَا تَوَكَّلْنَا",
+      trans:
+        "Bismillahi walajna, wa bismillahi kharajna, wa 'ala Rabbina tawakkalna.",
+      meaning:
+        "In the name of Allah we enter, and in the name of Allah we leave, and upon our Lord we rely.",
+      ref: "Abu Dawud 4/325",
+    },
+    {
+      category: "Journey",
+      title: "Traveling",
+      icon: "🚗",
+      arabic:
+        "سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ",
+      trans:
+        "Subhanal-ladzi sakh-khara lana hadha wa ma kunna lahu muqrinin...",
+      meaning:
+        "Glory to Him who has brought this [vehicle] under our control, though we were unable to control it ourselves...",
+      ref: "Quran 43:13-14",
+    },
+    {
+      category: "Mosque",
+      title: "Entering Mosque",
+      icon: "🕌",
+      arabic: "اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ",
+      trans: "Allahumma-ftah li abwaba rahmatik.",
+      meaning: "O Allah, open the gates of Your mercy for me.",
+      ref: "Muslim 1/494",
+    },
+    {
+      category: "Mosque",
+      title: "Leaving Mosque",
+      icon: "👟",
+      arabic: "اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِكَ",
+      trans: "Allahumma inni as'aluka min fadlik.",
+      meaning: "O Allah, I ask You from Your bounty.",
+      ref: "Muslim 1/494",
+    },
+  ];
 
-    const track = document.getElementById('dua-track');
-    const prevBtn = document.getElementById('dua-prev');
-    const nextBtn = document.getElementById('dua-next');
+  const track = document.getElementById("dua-track");
+  const prevBtn = document.getElementById("dua-prev");
+  const nextBtn = document.getElementById("dua-next");
 
-    if (track) {
-        
-        // 1. Render Cards
-        track.innerHTML = duasData.map((item, index) => `
+  if (track) {
+    // 1. Render Cards
+    track.innerHTML = duasData
+      .map(
+        (item, index) => `
             <div class="min-w-[300px] md:min-w-[350px] snap-center bg-white rounded-3xl p-6 border border-emerald-50 shadow-sm hover:shadow-xl hover:border-emerald-200 transition-all duration-300 flex flex-col relative group">
                 
                 <div class="flex justify-between items-start mb-4">
@@ -3564,35 +3601,178 @@ document.addEventListener("DOMContentLoaded", () => {
                     <p class="text-[10px] text-gray-300 font-bold uppercase">${item.ref}</p>
                 </div>
             </div>
-        `).join('');
+        `
+      )
+      .join("");
 
-        // 2. Navigation Logic
-        const scrollAmount = 320; // Width of card + gap
+    // 2. Navigation Logic
+    const scrollAmount = 320; // Width of card + gap
 
-        nextBtn.addEventListener('click', () => {
-            track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-        });
+    nextBtn.addEventListener("click", () => {
+      track.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    });
 
-        prevBtn.addEventListener('click', () => {
-            track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-        });
+    prevBtn.addEventListener("click", () => {
+      track.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+    });
 
-        // 3. Copy Function
-        window.copyDua = function(index) {
-            const text = document.getElementById(`dua-text-${index}`).textContent.trim();
-            navigator.clipboard.writeText(text).then(() => {
-                const btn = document.getElementById(`copy-btn-${index}`);
-                const originalHTML = btn.innerHTML;
+    // 3. Copy Function
+    window.copyDua = function (index) {
+      const text = document
+        .getElementById(`dua-text-${index}`)
+        .textContent.trim();
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById(`copy-btn-${index}`);
+        const originalHTML = btn.innerHTML;
+
+        // Visual Feedback
+        btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-emerald-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>`;
+        btn.classList.add("animate-copy");
+
+        setTimeout(() => {
+          btn.innerHTML = originalHTML;
+          btn.classList.remove("animate-copy");
+        }, 1500);
+      });
+    };
+  }
+})();
+// ==========================================
+// ECHOES OF THE PROPHETS (ACCORDION)
+// ==========================================
+(function () {
+  const prophetsData = [
+    {
+      name: "Yunus (AS)",
+      title: "The Dua of Distress",
+      theme: "bg-yunus",
+      arabic:
+        "لَا إِلَهَ إِلَّا أَنتَ سُبْحَانَكَ إِنِّي كُنتُ مِنَ الظَّالِمِينَ",
+      trans: "La ilaha illa anta subhanaka inni kuntu minaz-zalimin.",
+      meaning:
+        "There is no deity except You; exalted are You. Indeed, I have been of the wrongdoers.",
+      context:
+        "Recited inside the belly of the whale. The ultimate dua for relief from anxiety and darkness.",
+    },
+    {
+      name: "Musa (AS)",
+      title: "The Dua of Confidence",
+      theme: "bg-musa",
+      arabic:
+        "رَبِّ اشْرَحْ لِي صَدْرِي وَيَسِّرْ لِي أَمْرِي وَاحْلُلْ عُقْدَةً مِّن لِّسَانِي يَفْقَهُوا قَوْلِي",
+      trans:
+        "Rabbish-rah li sadri, wa yassir li amri, wahlul 'uqdatan min lisani, yafqahu qawli.",
+      meaning:
+        "My Lord, expand for me my breast, and ease for me my task, and untie the knot from my tongue that they may understand my speech.",
+      context:
+        "Recited before facing Pharaoh. Use this before interviews, exams, or difficult conversations.",
+    },
+    {
+      name: "Ayyub (AS)",
+      title: "The Dua of Healing",
+      theme: "bg-ayyub",
+      arabic: "أَنِّي مَسَّنِيَ الضُّرُّ وَأَنتَ أَرْحَمُ الرَّاحِمِينَ",
+      trans: "Annee massani-yadh-dhurru wa anta arhamur-rahimeen.",
+      meaning:
+        "Indeed, adversity has touched me, and you are the Most Merciful of the merciful.",
+      context:
+        "Recited during his severe illness. A beautiful, polite plea for health and recovery.",
+    },
+    {
+      name: "Adam (AS)",
+      title: "The Dua of Forgiveness",
+      theme: "bg-adam",
+      arabic:
+        "رَبَّنَا ظَلَمْنَا أَنفُسَنَا وَإِن لَّمْ تَغْفِرْ لَنَا وَتَرْحَمْنَا لَنَكُونَنَّ مِنَ الْخَاسِرِينَ",
+      trans:
+        "Rabbana zalamna anfusana wa in lam taghfir lana wa tarhamna lanakunanna minal-khasireen.",
+      meaning:
+        "Our Lord, we have wronged ourselves, and if You do not forgive us and have mercy upon us, we will surely be among the losers.",
+      context:
+        "The first Dua of humanity. Use this when seeking a fresh start.",
+    },
+    {
+      name: "Ibrahim (AS)",
+      title: "The Dua for Family",
+      theme: "bg-ibrahim",
+      arabic:
+        "رَبِّ اجْعَلْنِي مُقِيمَ الصَّلَاةِ وَمِن ذُرِّيَّتِي ۚ رَبَّنَا وَتَقَبَّلْ دُعَاءِ",
+      trans:
+        "Rabbi-j'alni muqimas-salati wa min dhurriyyati, Rabbana wa taqabbal du'a.",
+      meaning:
+        "My Lord, make me an establisher of prayer, and [many] from my descendants. Our Lord, and accept my supplication.",
+      context:
+        "A prayer for his legacy. Use this for your children and your spiritual steadfastness.",
+    },
+  ];
+
+  const container = document.getElementById("prophets-accordion");
+
+  if (container) {
+    // 1. Render Cards
+    container.innerHTML = prophetsData
+      .map(
+        (item, index) => `
+            <div class="prophet-card ${
+              item.theme
+            } rounded-3xl relative p-8 text-white flex-1 lg:hover:flex-[3] ${
+          index === 0 ? "lg:flex-[3] active" : ""
+        }" onclick="expandCard(this)">
                 
-                // Visual Feedback
-                btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-emerald-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>`;
-                btn.classList.add('animate-copy');
+                <div class="absolute inset-0 bg-black/10 mix-blend-overlay"></div>
                 
-                setTimeout(() => {
-                    btn.innerHTML = originalHTML;
-                    btn.classList.remove('animate-copy');
-                }, 1500);
-            });
-        };
-    }
+                <div class="vertical-title absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white/40 font-bold uppercase tracking-[0.3em] hidden lg:block pointer-events-none whitespace-nowrap">
+                    ${item.name}
+                </div>
+
+                <div class="prophet-content relative z-10 flex flex-col h-full justify-between">
+                    
+                    <div>
+                        <div class="inline-block bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest mb-4 border border-white/10">
+                            ${item.name}
+                        </div>
+                        <h3 class="text-3xl font-bold font-amiri mb-1">${
+                          item.title
+                        }</h3>
+                        <p class="text-xs text-white/70 uppercase tracking-widest">${
+                          item.context
+                        }</p>
+                    </div>
+
+                    <div class="mt-8 lg:mt-0">
+                        <p class="font-amiri text-3xl md:text-4xl leading-[2.2] dir-rtl mb-6 drop-shadow-md">
+                            ${item.arabic}
+                        </p>
+                        <div class="bg-black/20 backdrop-blur-md rounded-xl p-4 border border-white/10">
+                            <p class="text-sm font-medium italic opacity-90 mb-2">"${
+                              item.trans
+                            }"</p>
+                            <p class="text-xs text-white/60 leading-relaxed border-t border-white/10 pt-2">
+                                ${item.meaning}
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        `
+      )
+      .join("");
+
+    // 2. Click Logic
+    window.expandCard = function (card) {
+      // Remove active class from all siblings
+      const allCards = container.querySelectorAll(".prophet-card");
+      allCards.forEach((c) => {
+        c.classList.remove("active");
+        c.classList.remove("lg:flex-[3]"); // Reset flex grow
+        c.classList.add("flex-1"); // Reset to base width
+      });
+
+      // Add active class to clicked card
+      card.classList.add("active");
+      card.classList.remove("flex-1");
+      card.classList.add("lg:flex-[3]");
+    };
+  }
 })();
