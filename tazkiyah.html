@@ -1418,6 +1418,71 @@
         </div>
 
 </section>
+<section class="max-w-4xl mx-auto my-24 px-4">
+    <div class="text-center mb-12">
+        <span class="text-emerald-600 font-bold text-xs uppercase tracking-[0.3em] mb-4 block">The Connection Continues</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-emerald-900 font-amiri">
+            The Seal of <span class="text-yellow-600">Prayer</span>
+        </h2>
+        <p class="text-gray-500 mt-4 text-sm max-w-lg mx-auto">
+            Authentic Adhkar to recite immediately after the Fard prayer.
+            <br>"Whoever recites Ayat-ul-Kursi after every obligatory prayer, nothing prevents him from entering Paradise except death." (An-Nasa'i)
+        </p>
+    </div>
+
+    <div class="relative bg-white rounded-[2.5rem] shadow-2xl border border-emerald-100 overflow-hidden min-h-[500px] flex flex-col">
+        
+        <div class="w-full h-2 bg-gray-100">
+            <div id="zikr-progress" class="h-full bg-emerald-500 transition-all duration-500 ease-out" style="width: 0%"></div>
+        </div>
+
+        <div class="bg-emerald-50 px-8 py-6 flex justify-between items-center border-b border-emerald-100">
+            <div>
+                <span id="zikr-step-num" class="text-xs font-bold text-emerald-600 uppercase tracking-widest">Step 1 of 6</span>
+                <h3 id="zikr-title" class="text-xl font-bold text-emerald-900 font-amiri mt-1">Istighfar</h3>
+            </div>
+            <div id="zikr-badge" class="px-3 py-1 bg-white border border-emerald-200 rounded-full text-xs font-bold text-emerald-700 shadow-sm">
+                Repeat 3x
+            </div>
+        </div>
+
+        <div class="flex-1 p-8 md:p-12 flex flex-col items-center justify-center text-center relative z-10">
+            
+            <div id="zikr-arabic" class="font-amiri text-3xl md:text-5xl text-gray-800 leading-[2.5] dir-rtl mb-8">
+                أَسْتَغْفِرُ اللَّهَ
+            </div>
+
+            <div class="max-w-2xl space-y-4 mb-8">
+                <p id="zikr-transliteration" class="text-emerald-600 font-medium italic">Astaghfirullah</p>
+                <p id="zikr-translation" class="text-gray-500 text-sm">I seek forgiveness from Allah.</p>
+            </div>
+
+            <button id="tally-btn" class="hidden group relative overflow-hidden bg-emerald-600 text-white w-24 h-24 rounded-full flex-col items-center justify-center shadow-lg hover:scale-105 active:scale-95 transition-all mb-6">
+                <span class="text-xs font-bold uppercase opacity-80 mb-1">Count</span>
+                <span id="tally-count" class="text-3xl font-mono font-bold">0</span>
+                <span id="tally-target" class="text-[10px] opacity-60">/ 33</span>
+                <div class="absolute inset-0 bg-white/20 rounded-full scale-0 group-active:scale-150 transition-transform duration-300"></div>
+            </button>
+
+            <div class="mt-auto pt-6 border-t border-gray-50 w-full">
+                <p id="zikr-ref" class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Source: Sahih Muslim 591</p>
+            </div>
+        </div>
+
+        <div class="bg-gray-50 p-6 flex justify-between items-center border-t border-gray-100">
+            <button onclick="prevZikr()" class="px-6 py-3 rounded-xl text-gray-500 font-bold hover:bg-white hover:text-gray-800 hover:shadow-sm transition-all text-sm flex items-center gap-2 disabled:opacity-30 disabled:cursor-not-allowed" id="btn-prev">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                Previous
+            </button>
+            
+            <button onclick="nextZikr()" class="px-8 py-3 rounded-xl bg-emerald-900 text-white font-bold hover:bg-emerald-800 shadow-lg hover:-translate-y-1 transition-all text-sm flex items-center gap-2" id="btn-next">
+                Next
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            </button>
+        </div>
+
+    </div>
+</section>
 <!-- If you need to add more sections add before this section it is a back to top btn  -->
 <button id="scroll-top-btn" class="fixed bottom-8 right-8 bg-emerald-600 text-white p-4 rounded-full shadow-lg translate-y-20 opacity-0 transition-all duration-500 z-50 hover:bg-emerald-700 hover:-translate-y-1 focus:outline-none flex items-center justify-center" aria-label="Scroll to top">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

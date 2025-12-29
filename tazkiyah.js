@@ -2711,3 +2711,208 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 })();
+// ==========================================
+// POST-SALAH ZIKR LOGIC
+// ==========================================
+(function () {
+  const zikrData = [
+    {
+      title: "The Opening",
+      count: 3,
+      badge: "Repeat 3 Times",
+      arabic: "أَسْتَغْفِرُ اللَّهَ",
+      translit: "Astaghfirullah",
+      trans: "I seek forgiveness from Allah.",
+      ref: "Sahih Muslim 591",
+      isCounter: false,
+    },
+    {
+      title: "Peace & Blessing",
+      count: 1,
+      badge: "Recite Once",
+      arabic:
+        "اللَّهُمَّ أَنْتَ السَّلاَمُ وَمِنْكَ السَّلاَمُ تَبَارَكْتَ يَا ذَا الْجَلاَلِ وَالإِكْرَامِ",
+      translit:
+        "Allahumma antas-salam wa minkas-salam tabarakta ya dhal-jalali wal-ikram",
+      trans:
+        "O Allah, You are Peace and from You is peace. Blessed are You, O Owner of Majesty and Honor.",
+      ref: "Sahih Muslim 591",
+      isCounter: false,
+    },
+    {
+      title: "Declaration of Tawheed",
+      count: 1,
+      badge: "Recite Once",
+      arabic:
+        "لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، اللَّهُمَّ لاَ مَانِعَ لِمَا أَعْطَيْتَ وَلاَ مُعْطِيَ لِمَا مَنَعْتَ وَلاَ يَنْفَعُ ذَا الْجَدِّ مِنْكَ الْجَدُّ",
+      translit:
+        "La ilaha illallahu wahdahu la sharika lahu... Allahumma la mani'a lima a'tayta...",
+      trans:
+        "None has the right to be worshipped but Allah alone... O Allah, no one can withhold what You give...",
+      ref: "Sahih Al-Bukhari 844",
+      isCounter: false,
+    },
+    {
+      title: "Ayat-ul-Kursi",
+      count: 1,
+      badge: "Essential",
+      arabic:
+        "ٱللَّهُ لَآ إِلَٰهَ إِلَّا هُوَ ٱلْحَىُّ ٱلْقَيُّومُ ۚ لَا تَأْخُذُهُۥ سِنَةٌ وَلَا نَوْمٌ ۚ لَّهُۥ مَا فِى ٱلسَّمَٰوَٰتِ وَمَا فِى ٱلْأَرْضِ ۗ مَن ذَا ٱلَّذِى يَشْفَعُ عِندَهُۥٓ إِلَّا بِإِذْنِهِۦ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَىْءٍ مِّنْ عِلْمِهِۦٓ إِلَّا بِمَا شَآءَ ۚ وَسِعَ كُرْسِيُّهُ ٱلسَّمَٰوَٰتِ وَٱلْأَرْضَ ۖ وَلَا يَئُودُهُۥ حِفْظُهُمَا ۚ وَهُوَ ٱلْعَلِىُّ ٱلْعَظِيمُ",
+      translit: "Allahu la ilaha illa Huwa, Al-Hayyul-Qayyum...",
+      trans:
+        "Allah - there is no deity except Him, the Ever-Living, the Sustainer of [all] existence...",
+      ref: "An-Nasa'i (Sahih) - The ticket to Jannah",
+      isCounter: false,
+    },
+    {
+      title: "Tasbih (Glory)",
+      count: 33,
+      badge: "Tap Counter",
+      arabic: "سُبْحَانَ اللَّهِ",
+      translit: "SubhanAllah",
+      trans: "Glory be to Allah.",
+      ref: "Sahih Muslim 597",
+      isCounter: true,
+    },
+    {
+      title: "Tahmid (Praise)",
+      count: 33,
+      badge: "Tap Counter",
+      arabic: "الْحَمْدُ لِلَّهِ",
+      translit: "Alhamdulillah",
+      trans: "All praise is due to Allah.",
+      ref: "Sahih Muslim 597",
+      isCounter: true,
+    },
+    {
+      title: "Takbir (Greatness)",
+      count: 33,
+      badge: "Tap Counter",
+      arabic: "اللَّهُ أَكْبَرُ",
+      translit: "Allahu Akbar",
+      trans: "Allah is the Greatest.",
+      ref: "Sahih Muslim 597",
+      isCounter: true,
+    },
+    {
+      title: "The Final Seal (Completing 100)",
+      count: 1,
+      badge: "The Finale",
+      arabic:
+        "لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",
+      translit: "La ilaha illallahu wahdahu la sharika lahu...",
+      trans:
+        "None has the right to be worshipped but Allah alone... (Completing the hundred).",
+      ref: "Sahih Muslim 597 - Sins forgiven even if like foam of sea",
+      isCounter: false,
+    },
+  ];
+
+  let currentIndex = 0;
+  let tallyValue = 0;
+
+  // Elements
+  const dom = {
+    title: document.getElementById("zikr-title"),
+    step: document.getElementById("zikr-step-num"),
+    badge: document.getElementById("zikr-badge"),
+    arabic: document.getElementById("zikr-arabic"),
+    translit: document.getElementById("zikr-transliteration"),
+    trans: document.getElementById("zikr-translation"),
+    ref: document.getElementById("zikr-ref"),
+    progress: document.getElementById("zikr-progress"),
+    tallyBtn: document.getElementById("tally-btn"),
+    tallyCount: document.getElementById("tally-count"),
+    tallyTarget: document.getElementById("tally-target"),
+    btnNext: document.getElementById("btn-next"),
+    btnPrev: document.getElementById("btn-prev"),
+  };
+
+  if (dom.title) {
+    // Render Function
+    function loadZikr(index) {
+      const data = zikrData[index];
+
+      // Text Updates
+      dom.title.textContent = data.title;
+      dom.step.textContent = `Step ${index + 1} of ${zikrData.length}`;
+      dom.badge.textContent = data.badge;
+      dom.arabic.textContent = data.arabic;
+      dom.translit.textContent = data.translit;
+      dom.trans.textContent = data.trans;
+      dom.ref.textContent = `Source: ${data.ref}`;
+
+      // Progress Bar
+      dom.progress.style.width = `${((index + 1) / zikrData.length) * 100}%`;
+
+      // Button States
+      dom.btnPrev.disabled = index === 0;
+      if (index === zikrData.length - 1) {
+        dom.btnNext.innerHTML = `Finish <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>`;
+      } else {
+        dom.btnNext.innerHTML = `Next <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>`;
+      }
+
+      // Tally Logic
+      if (data.isCounter) {
+        tallyValue = 0;
+        dom.tallyBtn.classList.remove("hidden");
+        dom.tallyBtn.classList.add("flex");
+        dom.tallyCount.textContent = 0;
+        dom.tallyTarget.textContent = `/ ${data.count}`;
+        dom.tallyBtn.disabled = false;
+        dom.tallyBtn.classList.remove("bg-gray-400");
+        dom.tallyBtn.classList.add("bg-emerald-600");
+      } else {
+        dom.tallyBtn.classList.add("hidden");
+        dom.tallyBtn.classList.remove("flex");
+      }
+    }
+
+    // Global Nav Functions
+    window.nextZikr = function () {
+      if (currentIndex < zikrData.length - 1) {
+        currentIndex++;
+        loadZikr(currentIndex);
+      } else {
+        // Optional: Reset or Show completion
+        alert("May Allah accept your worship! You have completed the Zikr.");
+        currentIndex = 0;
+        loadZikr(0);
+      }
+    };
+
+    window.prevZikr = function () {
+      if (currentIndex > 0) {
+        currentIndex--;
+        loadZikr(currentIndex);
+      }
+    };
+
+    // Tally Button Logic
+    dom.tallyBtn.addEventListener("click", function () {
+      const target = zikrData[currentIndex].count;
+      if (tallyValue < target) {
+        tallyValue++;
+        dom.tallyCount.textContent = tallyValue;
+
+        // Vibrate on mobile for tactile feedback
+        if (navigator.vibrate) navigator.vibrate(5);
+
+        if (tallyValue === target) {
+          // Success state
+          dom.tallyBtn.classList.remove("bg-emerald-600");
+          dom.tallyBtn.classList.add("bg-gray-400", "cursor-default");
+          if (navigator.vibrate) navigator.vibrate([50, 50, 50]);
+
+          // Auto advance option or just visual cue?
+          // Let's just give visual cue
+          dom.tallyBtn.disabled = true;
+        }
+      }
+    });
+
+    // Initialize
+    loadZikr(0);
+  }
+})();

@@ -400,3 +400,13 @@ body {
   font-weight: bold;
   color: #059669; /* Emerald 600 */
 }
+/* Ensure Ayat-ul-Kursi is readable */
+#zikr-arabic {
+  transition: all 0.3s ease;
+}
+@media (max-width: 768px) {
+  #zikr-arabic {
+    font-size: 1.8rem;
+    line-height: 2.2;
+  }
+}
