@@ -3437,6 +3437,24 @@ document.addEventListener("DOMContentLoaded", () => {
     const duasData = [
         {
             category: "Cleanliness",
+            title: "Entering Bathroom",
+            icon: "🚽",
+            arabic: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ",
+            trans: "Allahumma inni a'udhu bika minal-khubuthi wal-khaba'ith.",
+            meaning: "O Allah, I seek refuge in You from the male and female evil spirits.",
+            ref: "Al-Bukhari 1/45"
+        },
+        {
+            category: "Cleanliness",
+            title: "Leaving Bathroom",
+            icon: "🚿",
+            arabic: "غُفْرَانَكَ",
+            trans: "Ghufranaka.",
+            meaning: "(I ask for) Your forgiveness.",
+            ref: "Abu Dawud & At-Tirmidhi"
+        },
+        {
+            category: "Cleanliness",
             title: "After Wudu",
             icon: "💧",
             arabic: "أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",
