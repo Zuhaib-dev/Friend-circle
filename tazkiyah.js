@@ -3125,3 +3125,12 @@ document.addEventListener("DOMContentLoaded", () => {
     outputs.empty.classList.remove("hidden");
   };
 })();
+// ==========================================
+// AUTO-DATE UPDATE (FOR FOOTER/THANK YOU)
+// ==========================================
+(function () {
+  // This looks for any element with class 'current-year' and updates it
+  const yearElements = document.querySelectorAll(".current-year");
+  const year = new Date().getFullYear();
+  yearElements.forEach((el) => (el.textContent = year));
+})();
