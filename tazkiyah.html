@@ -1627,6 +1627,96 @@
 
     </div>
 </section>
+<section class="max-w-6xl mx-auto my-24 px-4">
+    <div class="text-center mb-12">
+        <span class="text-emerald-600 font-bold text-xs uppercase tracking-[0.3em] mb-4 block">Know Your Lord</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-emerald-900 font-amiri">
+            The Majestic <span class="text-yellow-600">Names</span>
+        </h2>
+        <p class="text-gray-500 mt-4 text-sm max-w-lg mx-auto">
+            "And to Allah belong the best names, so invoke Him by them..." (7:180)
+            <br>Select a name to reflect on its meaning and power.
+        </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <div class="lg:col-span-7 order-2 lg:order-1">
+            <div id="asma-card" class="bg-emerald-900 rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden shadow-2xl text-white min-h-[500px] flex flex-col justify-center transition-all duration-500">
+                
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-emerald-500 rounded-full mix-blend-overlay filter blur-[100px] opacity-30 animate-pulse-slow"></div>
+                <div class="absolute top-0 right-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')]"></div>
+
+                <div class="relative z-10 text-center">
+                    
+                    <div class="inline-block px-4 py-1 rounded-full border border-emerald-700 bg-emerald-800/50 backdrop-blur-sm text-xs font-bold uppercase tracking-widest text-emerald-300 mb-8">
+                        Name #<span id="name-number">1</span>
+                    </div>
+
+                    <h1 id="name-arabic" class="font-amiri text-6xl md:text-8xl mb-4 text-transparent bg-clip-text bg-gradient-to-b from-yellow-200 to-yellow-500 drop-shadow-lg py-2">
+                        ٱللَّهُ
+                    </h1>
+
+                    <h2 id="name-english" class="text-3xl font-bold mb-2">Allah</h2>
+                    <p id="name-meaning" class="text-emerald-200 text-lg italic mb-8">The One and Only Deity</p>
+
+                    <div class="w-16 h-1 bg-gradient-to-r from-transparent via-yellow-500 to-transparent mx-auto mb-8 opacity-50"></div>
+
+                    <div class="bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10 text-left">
+                        <h4 class="text-yellow-400 font-bold text-xs uppercase tracking-widest mb-3 flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                            Power of this Name
+                        </h4>
+                        <p id="name-reflection" class="text-emerald-50 text-sm leading-relaxed">
+                            He is the proper name of the Divine. When you say "Ya Allah," you are calling upon all of His attributes at once. Use this name when your heart is overwhelmed and you need the totality of His help.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="lg:col-span-5 order-1 lg:order-2">
+            <div class="bg-white rounded-3xl p-6 border border-emerald-100 shadow-sm h-[500px] flex flex-col">
+                <h3 class="font-bold text-gray-800 mb-4 px-2">Select a Name</h3>
+                
+                <div id="asma-list" class="flex-1 overflow-y-auto custom-scrollbar pr-2 space-y-2">
+                    </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<section class="max-w-7xl mx-auto my-24 px-4 relative group">
+    
+    <div class="text-center mb-12">
+        <span class="text-emerald-600 font-bold text-xs uppercase tracking-[0.3em] mb-4 block">Hisn Al-Muslim</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-emerald-900 font-amiri">
+            The Daily <span class="text-yellow-600">Shield</span>
+        </h2>
+        <p class="text-gray-500 mt-4 text-sm max-w-lg mx-auto">
+            Short supplications to illuminate your every move, from sunrise to sunset.
+        </p>
+    </div>
+
+    <div class="relative">
+        
+        <button id="dua-prev" class="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-white text-emerald-800 p-3 rounded-full shadow-lg border border-emerald-50 hover:bg-emerald-50 transition-all opacity-0 group-hover:opacity-100 -translate-x-4 md:-translate-x-6 hidden md:flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+        </button>
+
+        <button id="dua-next" class="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-white text-emerald-800 p-3 rounded-full shadow-lg border border-emerald-50 hover:bg-emerald-50 transition-all opacity-0 group-hover:opacity-100 translate-x-4 md:translate-x-6 hidden md:flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+        </button>
+
+        <div id="dua-track" class="flex gap-6 overflow-x-auto pb-8 px-4 snap-x snap-mandatory scrollbar-hide scroll-smooth">
+            </div>
+
+        <div class="flex justify-center gap-2 mt-4" id="dua-indicators">
+            </div>
+
+    </div>
+</section>
 
 
 <!-- Add Before this  -->

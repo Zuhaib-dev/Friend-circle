@@ -3134,3 +3134,319 @@ document.addEventListener("DOMContentLoaded", () => {
   const year = new Date().getFullYear();
   yearElements.forEach((el) => (el.textContent = year));
 })();
+// ==========================================
+// ASMA-UL-HUSNA (99 NAMES) LOGIC
+// ==========================================
+(function () {
+  // Curated list of names with deep reflections
+  const namesData = [
+    {
+      id: 1,
+      arabic: "ٱللَّهُ",
+      english: "Allah",
+      meaning: "The Greatest Name",
+      reflection:
+        "This is the name that encompasses all other names. Use 'Ya Allah' when you don't know exactly what to ask for, because it covers every attribute of perfection. It is the name of absolute sovereignty.",
+    },
+    {
+      id: 2,
+      arabic: "ٱلرَّحْمَٰنُ",
+      english: "Ar-Rahman",
+      meaning: "The Entirely Merciful",
+      reflection:
+        "His mercy is for everyone—believer and non-believer, in this world. Reflect on the air you breathe and the food you eat; these are gifts from Ar-Rahman given freely without you even asking.",
+    },
+    {
+      id: 3,
+      arabic: "ٱلرَّحِيمُ",
+      english: "Ar-Raheem",
+      meaning: "The Especially Merciful",
+      reflection:
+        "This implies a specific, loving mercy reserved for those who believe. Call upon Ar-Raheem when you need special care, forgiveness, or a hug for your soul during worship.",
+    },
+    {
+      id: 4,
+      arabic: "ٱلْمَلِكُ",
+      english: "Al-Malik",
+      meaning: "The King",
+      reflection:
+        "He is the Owner of everything. When you lose something worldly, remember Al-Malik owns it anyway. It frees you from attachment to material things.",
+    },
+    {
+      id: 6,
+      arabic: "ٱلسَّلَامُ",
+      english: "As-Salam",
+      meaning: "The Source of Peace",
+      reflection:
+        "If you feel anxiety or chaos, run to As-Salam. He is the only one who can place coolness and tranquility in a burning heart. True peace is found only in His remembrance.",
+    },
+    {
+      id: 19,
+      arabic: "ٱلْعَلِيمُ",
+      english: "Al-'Aleem",
+      meaning: "The All-Knowing",
+      reflection:
+        "He knows your pain even if you can't put it into words. He knows your intentions even if people misunderstand you. Find comfort that Al-'Aleem understands your story completely.",
+    },
+    {
+      id: 26,
+      arabic: "ٱلسَّمِيعُ",
+      english: "As-Sami'",
+      meaning: "The All-Hearing",
+      reflection:
+        "He hears the silent whisper of your heart just as clearly as a shout. Never think your Dua is lost in the noise of the world. As-Sami' is listening to you specifically right now.",
+    },
+    {
+      id: 30,
+      arabic: "ٱللَّطِيفُ",
+      english: "Al-Lateef",
+      meaning: "The Subtle One",
+      reflection:
+        "He helps you in ways you don't realize. A delay in traffic that saves you from an accident, a closed door that redirects you to something better. Al-Lateef is kind in the most subtle, hidden ways.",
+    },
+    {
+      id: 35,
+      arabic: "ٱلْغَفُورُ",
+      english: "Al-Ghafoor",
+      meaning: "The Exceedingly Forgiving",
+      reflection:
+        "No matter how big the mountain of your sins, the ocean of His forgiveness is deeper. Al-Ghafoor conceals your faults and protects you from their consequences.",
+    },
+    {
+      id: 55,
+      arabic: "ٱلْمَتِينُ",
+      english: "Al-Mateen",
+      meaning: "The Firm, The Steadfast",
+      reflection:
+        "When you feel weak, burnt out, or broken, lean on Al-Mateen. His strength never wavers, and He can recharge your exhausted soul instantly.",
+    },
+    {
+      id: 87,
+      arabic: "ٱلْجَامِعُ",
+      english: "Al-Jami'",
+      meaning: "The Gatherer",
+      reflection:
+        "He gathers people for the Day of Judgment, but He also gathers hearts that are separated. If you feel scattered or lost, ask Al-Jami' to gather the pieces of your heart together again.",
+    },
+  ];
+
+  const listContainer = document.getElementById("asma-list");
+
+  // Display Elements
+  const dom = {
+    number: document.getElementById("name-number"),
+    arabic: document.getElementById("name-arabic"),
+    english: document.getElementById("name-english"),
+    meaning: document.getElementById("name-meaning"),
+    reflection: document.getElementById("name-reflection"),
+    card: document.getElementById("asma-card"),
+  };
+
+  if (listContainer && dom.arabic) {
+    // 1. Render List
+    listContainer.innerHTML = namesData
+      .map(
+        (item, index) => `
+            <button onclick="loadName(${index})" class="name-btn w-full text-left px-4 py-3 rounded-xl border border-transparent hover:bg-gray-50 transition-all duration-200 flex items-center justify-between group" data-index="${index}">
+                <div class="flex items-center gap-3">
+                    <span class="text-xs font-mono font-bold text-gray-300 w-6">${item.id}.</span>
+                    <span class="font-bold text-gray-700 group-hover:text-emerald-700">${item.english}</span>
+                </div>
+                <span class="font-amiri text-lg text-emerald-800/50 group-hover:text-emerald-600">${item.arabic}</span>
+            </button>
+        `
+      )
+      .join("");
+
+    // 2. Load Function
+    window.loadName = function (index) {
+      const data = namesData[index];
+
+      // Visual Active State for Buttons
+      document.querySelectorAll(".name-btn").forEach((btn) => {
+        if (parseInt(btn.getAttribute("data-index")) === index) {
+          btn.classList.add("active");
+        } else {
+          btn.classList.remove("active");
+        }
+      });
+
+      // Animate Card Out
+      dom.card.classList.add("opacity-50", "scale-[0.98]");
+
+      setTimeout(() => {
+        // Update Data
+        dom.number.textContent = data.id;
+        dom.arabic.textContent = data.arabic;
+        dom.english.textContent = data.english;
+        dom.meaning.textContent = data.meaning;
+        dom.reflection.textContent = data.reflection;
+
+        // Animate Card In
+        dom.card.classList.remove("opacity-50", "scale-[0.98]");
+      }, 200);
+    };
+
+    // Initialize First Name
+    loadName(0);
+  }
+})();
+// ==========================================
+// DAILY DUAS CAROUSEL LOGIC
+// ==========================================
+(function () {
+  const duasData = [
+    {
+      category: "Cleanliness",
+      title: "After Wudu",
+      icon: "💧",
+      arabic:
+        "أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",
+      trans:
+        "Ashhadu an la ilaha illallah wahdahu la sharika lahu wa ashhadu anna Muhammadan 'abduhu wa rasuluh.",
+      meaning:
+        "I bear witness that none has the right to be worshipped but Allah alone... and Muhammad is His slave and Messenger.",
+      ref: "Muslim 1/209",
+    },
+    {
+      category: "Eating",
+      title: "Before Eating",
+      icon: "🍽️",
+      arabic: "بِسْمِ اللَّهِ",
+      trans: "Bismillah.",
+      meaning:
+        "In the name of Allah. (If you forget, say: Bismillahi awwalahu wa akhirahu).",
+      ref: "Abu Dawud 3/347",
+    },
+    {
+      category: "Eating",
+      title: "After Eating",
+      icon: "🤲",
+      arabic:
+        "الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنَا وَسَقَانَا وَجَعَلَنَا مُسْلِمِينَ",
+      trans: "Alhamdu lillahil-ladzi at'amana wa saqana wa ja'alana Muslimeen.",
+      meaning:
+        "All praise belongs to Allah, who fed us and quenched our thirst and made us Muslims.",
+      ref: "At-Tirmidhi",
+    },
+    {
+      category: "Home",
+      title: "Leaving Home",
+      icon: "🚪",
+      arabic:
+        "بِسْمِ اللَّهِ تَوَكَّلْتُ عَلَى اللَّهِ، وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ",
+      trans:
+        "Bismillahi tawakkaltu 'alallah, wa la hawla wa la quwwata illa billah.",
+      meaning:
+        "In the name of Allah, I place my trust in Allah, and there is no might nor power except with Allah.",
+      ref: "Abu Dawud 4/325",
+    },
+    {
+      category: "Home",
+      title: "Entering Home",
+      icon: "🏡",
+      arabic:
+        "بِسْمِ اللَّهِ وَلَجْنَا، وَبِسْمِ اللَّهِ خَرَجْنَا، وَعَلَى رَبِّنَا تَوَكَّلْنَا",
+      trans:
+        "Bismillahi walajna, wa bismillahi kharajna, wa 'ala Rabbina tawakkalna.",
+      meaning:
+        "In the name of Allah we enter, and in the name of Allah we leave, and upon our Lord we rely.",
+      ref: "Abu Dawud 4/325",
+    },
+    {
+      category: "Journey",
+      title: "Traveling",
+      icon: "🚗",
+      arabic:
+        "سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ",
+      trans:
+        "Subhanal-ladzi sakh-khara lana hadha wa ma kunna lahu muqrinin...",
+      meaning:
+        "Glory to Him who has brought this [vehicle] under our control, though we were unable to control it ourselves...",
+      ref: "Quran 43:13-14",
+    },
+    {
+      category: "Mosque",
+      title: "Entering Mosque",
+      icon: "🕌",
+      arabic: "اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ",
+      trans: "Allahumma-ftah li abwaba rahmatik.",
+      meaning: "O Allah, open the gates of Your mercy for me.",
+      ref: "Muslim 1/494",
+    },
+  ];
+
+  const track = document.getElementById("dua-track");
+  const prevBtn = document.getElementById("dua-prev");
+  const nextBtn = document.getElementById("dua-next");
+
+  if (track) {
+    // 1. Render Cards
+    track.innerHTML = duasData
+      .map(
+        (item, index) => `
+            <div class="min-w-[300px] md:min-w-[350px] snap-center bg-white rounded-3xl p-6 border border-emerald-50 shadow-sm hover:shadow-xl hover:border-emerald-200 transition-all duration-300 flex flex-col relative group">
+                
+                <div class="flex justify-between items-start mb-4">
+                    <span class="bg-emerald-50 text-emerald-700 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest border border-emerald-100">
+                        ${item.category}
+                    </span>
+                    <button onclick="copyDua(${index})" class="text-gray-300 hover:text-emerald-500 transition-colors" title="Copy Text" id="copy-btn-${index}">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+                    </button>
+                </div>
+
+                <div class="text-center mb-6">
+                    <div class="w-16 h-16 bg-emerald-50 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4 group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-300 shadow-sm">
+                        ${item.icon}
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">${item.title}</h3>
+                </div>
+
+                <div class="text-center mt-auto space-y-4">
+                    <p class="font-amiri text-2xl text-emerald-900 leading-loose dir-rtl" id="dua-text-${index}">
+                        ${item.arabic}
+                    </p>
+                    <div class="bg-gray-50 rounded-xl p-3">
+                        <p class="text-xs text-emerald-600 font-medium italic mb-2">${item.trans}</p>
+                        <p class="text-xs text-gray-500 leading-relaxed border-t border-gray-200 pt-2">${item.meaning}</p>
+                    </div>
+                    <p class="text-[10px] text-gray-300 font-bold uppercase">${item.ref}</p>
+                </div>
+            </div>
+        `
+      )
+      .join("");
+
+    // 2. Navigation Logic
+    const scrollAmount = 320; // Width of card + gap
+
+    nextBtn.addEventListener("click", () => {
+      track.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    });
+
+    prevBtn.addEventListener("click", () => {
+      track.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+    });
+
+    // 3. Copy Function
+    window.copyDua = function (index) {
+      const text = document
+        .getElementById(`dua-text-${index}`)
+        .textContent.trim();
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById(`copy-btn-${index}`);
+        const originalHTML = btn.innerHTML;
+
+        // Visual Feedback
+        btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-emerald-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>`;
+        btn.classList.add("animate-copy");
+
+        setTimeout(() => {
+          btn.innerHTML = originalHTML;
+          btn.classList.remove("animate-copy");
+        }, 1500);
+      });
+    };
+  }
+})();

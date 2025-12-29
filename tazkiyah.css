@@ -419,3 +419,63 @@ body {
 .group:hover .group-hover\:animate-shine {
   animation: shine 1s;
 }
+/* Slow Pulse for the Divine Glow */
+@keyframes pulseSlow {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulseSlow 4s infinite ease-in-out;
+}
+
+/* Active State for List Items */
+.name-btn.active {
+  background-color: #ecfdf5; /* emerald-50 */
+  border-color: #10b981; /* emerald-500 */
+  color: #065f46; /* emerald-800 */
+}
+
+/* Scrollbar refinement if not already present */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #e5e7eb;
+  border-radius: 20px;
+}
+/* Hide Scrollbar for Carousel */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Copy Animation */
+@keyframes copySuccess {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+    color: #10b981;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.animate-copy {
+  animation: copySuccess 0.3s ease-in-out;
+}
