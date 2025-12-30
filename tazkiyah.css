@@ -1633,3 +1633,95 @@ body {
   opacity: 1;
   transition: 0.7s;
 }
+/* =========================================
+   WOMEN OF PERFECTION STYLES
+   ========================================= */
+
+/* Floral Pattern Background for Cards */
+.bg-floral-pattern {
+  background-color: #fff1f2; /* rose-50 */
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23fb7185' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Smooth Height Transition for Accordion */
+.woman-card-content {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.woman-card.active .woman-card-content {
+  max-height: 300px; /* Adjust based on content */
+  opacity: 1;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px dashed #fecdd3; /* rose-200 */
+}
+
+/* Active State Border */
+.woman-card.active {
+  border-color: #f43f5e; /* rose-500 */
+  background-color: white;
+  box-shadow: 0 10px 25px -5px rgba(244, 63, 94, 0.15);
+}
+
+/* =========================================
+   SACRED GEOGRAPHY STYLES
+   ========================================= */
+
+/* The Arch Window Shape */
+.geo-window {
+  border-radius: 200px 200px 10px 10px; /* Islamic Arch Shape */
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  border: 2px solid #44403c; /* stone-700 */
+  background: #1c1917; /* stone-900 */
+}
+
+.geo-window:hover {
+  transform: translateY(-10px);
+  border-color: #d97706; /* amber-600 */
+  box-shadow: 0 0 40px rgba(217, 119, 6, 0.2);
+}
+
+/* The Reveal Content */
+.geo-overlay {
+  background: linear-gradient(to top, #000000 0%, transparent 100%);
+  opacity: 1;
+  transition: all 0.4s;
+}
+
+.geo-details {
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 0.4s ease 0.1s;
+}
+
+.geo-window:hover .geo-details {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Live Badge Pulse */
+.live-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #ef4444;
+  border-radius: 50%;
+  display: inline-block;
+  animation: pulseRed 2s infinite;
+}
+
+@keyframes pulseRed {
+  0% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+  }
+}

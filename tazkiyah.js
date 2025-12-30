@@ -4556,3 +4556,183 @@ document.addEventListener("DOMContentLoaded", function () {
       .join("");
   }
 });
+// ==========================================
+// 3. THE 4 WOMEN OF PERFECTION LOGIC
+// ==========================================
+(function () {
+  const womenData = [
+    {
+      name: "Maryam (AS)",
+      title: "The Devout",
+      virtue: "Chastity & Trust",
+      desc: "The mother of Isa (Jesus). She dedicated her life to the temple and trusted Allah completely when providing for her in solitude and defending her honor against her people.",
+      verse:
+        "And Allah has set forth an example... Maryam, the daughter of Imran...",
+      theme: "rose",
+    },
+    {
+      name: "Asiya (AS)",
+      title: "The Patient",
+      virtue: "Sacrifice & Resilience",
+      desc: "The wife of the tyrant Pharaoh. She sacrificed her royal status and her life for Tawheed. She asked Allah for a house in Jannah while being tortured.",
+      verse: "My Lord, build for me near You a house in Paradise...",
+      theme: "pink",
+    },
+    {
+      name: "Khadija (RA)",
+      title: "The Supporter",
+      virtue: "Loyalty & Comfort",
+      desc: "The first believer. She wrapped the Prophet ﷺ when he trembled, spent her entire wealth on Islam, and stood by him when the whole world rejected him.",
+      verse: "She believed in me when people denied me...",
+      theme: "fuchsia",
+    },
+    {
+      name: "Fatima (RA)",
+      title: "The Leader",
+      virtue: "Modesty & Detachment",
+      desc: "The leader of the women of Paradise. A copy of her father in manners and gait. She lived a life of extreme simplicity and spiritual richness.",
+      verse: "The Queen of the women of Paradise.",
+      theme: "purple",
+    },
+  ];
+
+  const womenGrid = document.getElementById("women-grid");
+
+  if (womenGrid) {
+    // Render Cards
+    womenGrid.innerHTML = womenData
+      .map(
+        (woman, index) => `
+            <div class="woman-card bg-floral-pattern p-6 rounded-3xl border border-rose-100 cursor-pointer transition-all duration-300 hover:shadow-lg group" onclick="toggleWomanCard(this)">
+                
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 rounded-full bg-white border border-rose-200 flex items-center justify-center text-xl shadow-sm group-hover:scale-110 transition-transform">
+                        🌺
+                    </div>
+                    <span class="text-[10px] font-bold text-rose-400 uppercase tracking-widest border border-rose-200 px-2 py-1 rounded-full bg-white">
+                        ${woman.virtue}
+                    </span>
+                </div>
+
+                <h3 class="text-2xl font-bold text-rose-900 font-amiri mb-1">${woman.name}</h3>
+                <p class="text-xs text-rose-500 font-bold uppercase tracking-wide">${woman.title}</p>
+
+                <div class="woman-card-content">
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                        ${woman.desc}
+                    </p>
+                    <div class="bg-white/60 p-3 rounded-lg border-l-2 border-rose-400">
+                        <p class="text-xs text-rose-700 italic font-serif">"${woman.verse}"</p>
+                    </div>
+                </div>
+
+                <div class="mt-4 text-center">
+                    <span class="text-xs text-rose-300 group-hover:text-rose-600 transition-colors font-bold">
+                        Click to Reveal Story &darr;
+                    </span>
+                </div>
+            </div>
+        `
+      )
+      .join("");
+
+    // Toggle Function
+    window.toggleWomanCard = function (element) {
+      // Close all others
+      document.querySelectorAll(".woman-card").forEach((card) => {
+        if (card !== element) card.classList.remove("active");
+      });
+      // Toggle clicked
+      element.classList.toggle("active");
+    };
+  }
+})();
+
+// ==========================================
+// 4. SACRED GEOGRAPHY LOGIC
+// ==========================================
+(function () {
+  const places = [
+    {
+      name: "Al-Masjid Al-Haram",
+      city: "Makkah",
+      reward: "100,000x Prayers",
+      feature: "The Kaaba",
+      desc: "The first House appointed for mankind. It contains the Black Stone (from Heaven) and the Station of Ibrahim.",
+      imageColor: "bg-stone-800", // Fallback color
+      icon: "🕋",
+    },
+    {
+      name: "Al-Masjid An-Nabawi",
+      city: "Madinah",
+      reward: "1,000x Prayers",
+      feature: "The Green Dome",
+      desc: "The sanctuary of the Prophet ﷺ. Between his house and his minbar is a Garden (Rawdah) from the Gardens of Paradise.",
+      imageColor: "bg-emerald-900",
+      icon: "🕌",
+    },
+    {
+      name: "Al-Masjid Al-Aqsa",
+      city: "Jerusalem",
+      reward: "500x Prayers",
+      feature: "Dome of the Rock",
+      desc: "The first Qibla and the site of Isra wal-Mi'raj. The land is blessed and holy.",
+      imageColor: "bg-blue-900",
+      icon: "🏛️",
+    },
+  ];
+
+  const geoGrid = document.getElementById("geo-grid");
+
+  if (geoGrid) {
+    geoGrid.innerHTML = places
+      .map(
+        (place) => `
+            <div class="geo-window h-[450px] relative group cursor-default">
+                
+                <div class="absolute inset-0 ${place.imageColor} opacity-50 transition-opacity duration-500 group-hover:opacity-30"></div>
+                
+                <div class="absolute inset-0 opacity-10" style="background-image: url('https://www.transparenttextures.com/patterns/arabesque.png');"></div>
+
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-8xl opacity-20 group-hover:opacity-0 transition-all duration-500 group-hover:scale-150 transform">
+                    ${place.icon}
+                </div>
+
+                <div class="geo-overlay absolute inset-0 flex flex-col justify-end p-8">
+                    
+                    <div class="mb-2">
+                        <div class="flex justify-between items-end">
+                            <h3 class="text-2xl font-bold font-amiri text-white">${place.name}</h3>
+                            <div class="bg-black/50 backdrop-blur-sm px-2 py-1 rounded text-[10px] text-amber-500 uppercase font-bold border border-amber-500/30">
+                                <span class="live-dot mr-1"></span> Live
+                            </div>
+                        </div>
+                        <p class="text-stone-400 text-xs font-bold uppercase tracking-widest">${place.city}</p>
+                    </div>
+
+                    <div class="geo-details space-y-4">
+                        <div class="w-full h-px bg-gradient-to-r from-amber-500 to-transparent"></div>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <span class="text-[10px] text-gray-500 uppercase block">Reward</span>
+                                <span class="text-amber-400 font-bold text-sm">${place.reward}</span>
+                            </div>
+                            <div>
+                                <span class="text-[10px] text-gray-500 uppercase block">Landmark</span>
+                                <span class="text-white font-bold text-sm">${place.feature}</span>
+                            </div>
+                        </div>
+
+                        <p class="text-sm text-gray-300 leading-relaxed">
+                            ${place.desc}
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        `
+      )
+      .join("");
+  }
+})();
