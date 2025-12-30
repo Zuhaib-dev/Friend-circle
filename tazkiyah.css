@@ -921,3 +921,300 @@ body {
   cursor: pointer;
   border: none;
 }
+/* =========================================
+   RAMADAN TRACKER SECTION
+   ========================================= */
+.ramadan-section {
+  max-width: 1000px;
+  margin: 6rem auto;
+  padding: 3rem 1.5rem;
+  background: linear-gradient(
+    to bottom,
+    #1e1b4b,
+    #312e81
+  ); /* Indigo 950 to 900 */
+  border-radius: 2.5rem;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Background Stars Pattern (Optional subtle texture) */
+.ramadan-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(white 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+/* Lantern Animation */
+.lantern-decor {
+  position: absolute;
+  top: 0;
+  right: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: swing 3s infinite ease-in-out alternate;
+  transform-origin: top center;
+}
+
+.lantern-string {
+  width: 2px;
+  height: 60px;
+  background: #fbbf24; /* Amber 400 */
+}
+
+.lantern-body {
+  width: 30px;
+  height: 40px;
+  background: #f59e0b;
+  border-radius: 5px 5px 15px 15px;
+  position: relative;
+  box-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+}
+
+.lantern-light {
+  position: absolute;
+  inset: 8px;
+  background: #fef3c7;
+  border-radius: 2px 2px 8px 8px;
+  animation: flicker 2s infinite;
+}
+
+@keyframes swing {
+  0% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(-5deg);
+  }
+}
+
+@keyframes flicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Header */
+.ramadan-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  position: relative;
+  z-index: 10;
+}
+
+.ramadan-subtitle {
+  color: #fbbf24; /* Amber 400 */
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.ramadan-title {
+  font-family: "Amiri", serif;
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.text-gold {
+  color: #fbbf24;
+}
+
+.ramadan-desc {
+  color: #c7d2fe; /* Indigo 200 */
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  font-style: italic;
+}
+
+/* Stats */
+.ramadan-stats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  margin-bottom: 3rem;
+  position: relative;
+  z-index: 10;
+}
+
+.r-stat-box {
+  text-align: center;
+}
+
+.r-stat-num {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 700;
+  font-family: monospace;
+  line-height: 1;
+}
+
+.r-stat-num.text-red {
+  color: #f87171;
+}
+
+.r-stat-label {
+  font-size: 0.75rem;
+  color: #818cf8; /* Indigo 400 */
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.5rem;
+  display: block;
+}
+
+.r-stat-divider {
+  width: 1px;
+  height: 40px;
+  background: #4338ca; /* Indigo 700 */
+}
+
+/* Grid */
+.ramadan-grid-container {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  z-index: 10;
+}
+
+.grid-label {
+  text-align: center;
+  color: #c7d2fe;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  font-family: "Amiri", serif;
+  font-size: 1.25rem;
+}
+
+.ramadan-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 cols on mobile */
+  gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .ramadan-grid {
+    grid-template-columns: repeat(10, 1fr); /* 10 cols on desktop */
+  }
+}
+
+/* Day Button */
+.day-node {
+  aspect-ratio: 1;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+  user-select: none;
+}
+
+.day-node:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.day-number {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #e0e7ff;
+}
+
+.day-status {
+  font-size: 0.6rem;
+  margin-top: 2px;
+  opacity: 0.6;
+}
+
+/* States */
+.day-node.fasted {
+  background: #059669; /* Emerald 600 */
+  border-color: #34d399;
+  box-shadow: 0 0 10px rgba(5, 150, 105, 0.4);
+}
+
+.day-node.missed {
+  background: #dc2626; /* Red 600 */
+  border-color: #f87171;
+  opacity: 0.8;
+}
+
+/* Shawwal Section */
+.shawwal-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 2rem;
+  border-top: 1px dashed rgba(255, 255, 255, 0.2);
+  position: relative;
+  z-index: 10;
+}
+
+.shawwal-header {
+  text-align: center;
+}
+
+.shawwal-header h4 {
+  color: #fbbf24;
+  font-weight: 700;
+}
+
+.shawwal-header p {
+  font-size: 0.75rem;
+  color: #818cf8;
+  font-style: italic;
+}
+
+.shawwal-grid {
+  display: flex;
+  gap: 1rem;
+}
+
+.shawwal-node {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.shawwal-node.completed {
+  background: #fbbf24;
+  color: #78350f;
+  border-color: #fcd34d;
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(251, 191, 36, 0.4);
+}

@@ -4246,3 +4246,107 @@ document.addEventListener("DOMContentLoaded", function () {
   // Initialize
   renderQada();
 });
+// ==========================================
+// RAMADAN TRACKER LOGIC
+// ==========================================
+document.addEventListener("DOMContentLoaded", function () {
+  // DOM Elements
+  const ramadanGrid = document.getElementById("ramadan-days-grid");
+  const shawwalGrid = document.getElementById("shawwal-grid");
+  const statCompleted = document.getElementById("ramadan-completed");
+  const statMissed = document.getElementById("ramadan-missed");
+
+  // Load Data
+  // We use an array of 30 items. 0 = null, 1 = fasted, 2 = missed
+  let ramadanData =
+    JSON.parse(localStorage.getItem("tazkiyah_ramadan_v1")) ||
+    new Array(30).fill(0);
+  let shawwalData =
+    JSON.parse(localStorage.getItem("tazkiyah_shawwal_v1")) ||
+    new Array(6).fill(0);
+
+  // 1. Render Ramadan Grid
+  function renderRamadan() {
+    if (!ramadanGrid) return;
+
+    ramadanGrid.innerHTML = "";
+    let completedCount = 0;
+    let missedCount = 0;
+
+    ramadanData.forEach((status, index) => {
+      const dayNum = index + 1;
+      const node = document.createElement("div");
+
+      // Base Class
+      node.className = "day-node";
+
+      // Status Logic
+      if (status === 1) {
+        node.classList.add("fasted");
+        node.innerHTML = `<span class="day-number">${dayNum}</span><span class="day-status">Fasted</span>`;
+        completedCount++;
+      } else if (status === 2) {
+        node.classList.add("missed");
+        node.innerHTML = `<span class="day-number">${dayNum}</span><span class="day-status">Missed</span>`;
+        missedCount++;
+      } else {
+        node.innerHTML = `<span class="day-number">${dayNum}</span>`;
+      }
+
+      // Click Event
+      node.onclick = () => toggleRamadanDay(index);
+
+      ramadanGrid.appendChild(node);
+    });
+
+    // Update Stats
+    if (statCompleted) statCompleted.textContent = completedCount;
+    if (statMissed) statMissed.textContent = missedCount;
+  }
+
+  // 2. Render Shawwal Grid
+  function renderShawwal() {
+    if (!shawwalGrid) return;
+
+    shawwalGrid.innerHTML = "";
+    shawwalData.forEach((status, index) => {
+      const node = document.createElement("div");
+      node.className = status === 1 ? "shawwal-node completed" : "shawwal-node";
+      node.textContent = index + 1;
+
+      node.onclick = () => toggleShawwalDay(index);
+
+      shawwalGrid.appendChild(node);
+    });
+  }
+
+  // 3. Toggle Logic (Ramadan)
+  window.toggleRamadanDay = function (index) {
+    // Cycle: 0 (None) -> 1 (Fasted) -> 2 (Missed) -> 0
+    let current = ramadanData[index];
+    let next = (current + 1) % 3;
+
+    ramadanData[index] = next;
+    localStorage.setItem("tazkiyah_ramadan_v1", JSON.stringify(ramadanData));
+
+    renderRamadan();
+  };
+
+  // 4. Toggle Logic (Shawwal)
+  window.toggleShawwalDay = function (index) {
+    // Cycle: 0 -> 1 -> 0
+    let current = shawwalData[index];
+    let next = current === 0 ? 1 : 0;
+
+    shawwalData[index] = next;
+    localStorage.setItem("tazkiyah_shawwal_v1", JSON.stringify(shawwalData));
+
+    renderShawwal();
+  };
+
+  // Initialize
+  if (ramadanGrid) {
+    renderRamadan();
+    renderShawwal();
+  }
+});
