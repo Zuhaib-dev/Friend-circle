@@ -5771,3 +5771,95 @@ document.addEventListener("contextmenu", function (event) {
     };
   }
 })();
+// ==========================================
+// SEEDS OF CERTAINTY (AQEEDAH) LOGIC
+// ==========================================
+(function () {
+  const aqeedahData = [
+    {
+      title: "Tawheed",
+      arabic: "الـتـوحـيـد",
+      meaning: "Oneness",
+      core: "La ilaha illallah",
+      desc: "Believing that Allah is One in His Lordship, His Worship, and His Names. He has no partner, no father, and no son.",
+      impact: "Freedom from fear of anyone other than Allah.",
+      icon: "☝️",
+    },
+    {
+      title: "Al-Qadr",
+      arabic: "الـقـدر",
+      meaning: "Divine Decree",
+      core: "Trusting the Plan",
+      desc: "Believing that everything—good or bad—is written by Allah before the creation of the heavens and earth.",
+      impact: "Resilience in tragedy and humility in success.",
+      icon: "📜",
+    },
+    {
+      title: "Al-Akhirah",
+      arabic: "الآخـرة",
+      meaning: "The Hereafter",
+      core: "The Return",
+      desc: "Certainty that death is a gateway, not an end. We will stand for judgment and enter either Jannah or Jahannam eternally.",
+      impact: "Living a life of purpose and accountability.",
+      icon: "⚖️",
+    },
+    {
+      title: "Ar-Risalah",
+      arabic: "الـرسـالـة",
+      meaning: "Prophethood",
+      core: "The Guidance",
+      desc: "Believing in all Prophets, from Adam to Muhammad ﷺ, and the books revealed to them as the manual for human life.",
+      impact: "Clarity in knowing right from wrong.",
+      icon: "📖",
+    },
+  ];
+
+  const aqeedahGrid = document.getElementById("aqeedah-grid");
+
+  if (aqeedahGrid) {
+    aqeedahGrid.innerHTML = aqeedahData
+      .map(
+        (item) => `
+            <div class="seed-card bg-floral-pattern cursor-pointer group w-full" onclick="toggleSeedCard(this)">
+                
+                <div class="seed-inner">
+                    <div class="aqeedah-icon">
+                        ${item.icon}
+                    </div>
+
+                    <div class="relative z-10 w-full">
+                        <h3 class="text-2xl font-bold text-rose-900 font-amiri mb-1">${item.title}</h3>
+                        <span class="text-rose-400 font-amiri text-lg block mb-2">(${item.arabic})</span>
+                        <p class="text-xs text-rose-500 font-bold uppercase tracking-widest bg-white/50 px-2 py-1 rounded-full inline-block border border-rose-100">${item.meaning}</p>
+                    </div>
+
+                    <div class="seed-content">
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                            ${item.desc}
+                        </p>
+                        <div class="bg-gradient-to-r from-rose-50 to-white p-3 rounded-xl border border-rose-100 text-left">
+                            <span class="block text-[10px] text-rose-400 uppercase font-bold mb-1">The Fruit (Impact)</span>
+                            <p class="text-xs text-rose-800 font-bold italic">"${item.impact}"</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 pt-2 opacity-50 text-[10px] uppercase tracking-widest text-rose-300 group-hover:opacity-0 transition-opacity">
+                        Click to Sprout
+                    </div>
+                </div>
+            </div>
+        `
+      )
+      .join("");
+
+    // Toggle Function
+    window.toggleSeedCard = function (element) {
+      // Close all others
+      document.querySelectorAll(".seed-card").forEach((card) => {
+        if (card !== element) card.classList.remove("active");
+      });
+      // Toggle clicked
+      element.classList.toggle("active");
+    };
+  }
+})();

@@ -2558,3 +2558,91 @@ body {
   display: inline-block;
   margin-bottom: 0.5rem;
 }
+/* =========================================
+   SEEDS OF CERTAINTY (AQEEDAH) STYLES
+   ========================================= */
+
+.seed-card {
+    /* Seed Shape: Rounded top, Pointed bottom */
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg); /* Tilted to look like a seed */
+    background: white;
+    border: 1px solid #ffe4e6; /* rose-100 */
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    
+    /* FIX: Use min-height instead of fixed height */
+    min-height: 300px; 
+    margin: 2rem 1rem; /* Add margin so rotation doesn't clip */
+    box-shadow: 0 10px 20px -5px rgba(0,0,0,0.05);
+    
+    /* Flex alignment */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Hover/Active: Upright the card and expand */
+.seed-card:hover,
+.seed-card.active {
+    transform: rotate(0deg) translateY(-10px);
+    border-radius: 2rem; /* Becomes a normal rounded card */
+    border-color: #f43f5e; /* rose-500 */
+    box-shadow: 0 20px 40px -5px rgba(244, 63, 94, 0.2);
+    z-index: 10;
+}
+
+/* Active State Colors */
+.seed-card.active {
+    background-color: #fff1f2; /* rose-50 */
+    border-color: #fda4af; /* rose-300 */
+}
+
+/* Inner Container */
+.seed-inner {
+    transform: rotate(45deg); /* Counter-rotate text initially */
+    transition: all 0.5s ease;
+    width: 100%;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Reset inner rotation on hover/active */
+.seed-card:hover .seed-inner, 
+.seed-card.active .seed-inner {
+    transform: rotate(0deg);
+}
+
+/* Icon Styling */
+.aqeedah-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    transition: transform 0.4s;
+}
+
+.seed-card:hover .aqeedah-icon {
+    transform: scale(1.2);
+}
+
+/* Content Reveal */
+.seed-content {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.5s ease;
+    width: 100%;
+}
+
+/* FIX: Allow content to expand fully */
+.seed-card.active .seed-content {
+    max-height: 500px; /* Increased max-height */
+    opacity: 1;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px dashed #fecdd3;
+}
