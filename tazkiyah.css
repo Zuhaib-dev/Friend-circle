@@ -496,7 +496,7 @@ body {
 /* Calligraphy gradient for the Rabbana text */
 .text-calligraphy {
   background: linear-gradient(180deg, #1e293b 0%, #334155 100%);
-  -webkit-background-clip: text;
+  --webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -526,7 +526,7 @@ body {
     rgba(79, 70, 229, 0.4),
     transparent 40%
   );
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  --webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;
@@ -566,7 +566,7 @@ body {
   border-radius: 10rem 10rem 1rem 1rem;
   padding: 2px; /* Border width */
   background: linear-gradient(to bottom, #fbbf24, transparent);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  --webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   opacity: 0.5;
