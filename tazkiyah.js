@@ -4118,3 +4118,131 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+// ==========================================
+// QADA TRACKER LOGIC
+// ==========================================
+document.addEventListener("DOMContentLoaded", function () {
+  // Config
+  const prayerTypes = [
+    { id: "q_fajr", label: "Fajr", icon: "🌅" },
+    { id: "q_dhuhr", label: "Dhuhr", icon: "☀️" },
+    { id: "q_asr", label: "Asr", icon: "🌤️" },
+    { id: "q_maghrib", label: "Maghrib", icon: "🌇" },
+    { id: "q_isha", label: "Isha", icon: "🌌" },
+    { id: "q_witr", label: "Witr", icon: "🤲" },
+    { id: "q_fast", label: "Fasts", icon: "🥣" }, // Fasting
+  ];
+
+  const grid = document.getElementById("qada-grid");
+  const totalPendingEl = document.getElementById("total-pending");
+  const totalRecoveredEl = document.getElementById("total-recovered");
+  const calcArea = document.getElementById("qada-calc-area");
+
+  // State
+  let qadaData = JSON.parse(localStorage.getItem("tazkiyah_qada")) || {};
+  let recoveredCount =
+    parseInt(localStorage.getItem("tazkiyah_qada_recovered")) || 0;
+
+  // Helper: Initialize data if empty
+  prayerTypes.forEach((p) => {
+    if (typeof qadaData[p.id] === "undefined") qadaData[p.id] = 0;
+  });
+
+  // 1. Render Function
+  function renderQada() {
+    if (!grid) return;
+
+    let pendingSum = 0;
+    grid.innerHTML = ""; // Clear
+
+    prayerTypes.forEach((p) => {
+      const count = qadaData[p.id];
+      pendingSum += count;
+
+      const card = document.createElement("div");
+      card.className = "qada-card";
+      card.innerHTML = `
+                <span class="qada-card-icon">${p.icon}</span>
+                <div class="qada-card-name">${p.label}</div>
+                <span class="qada-count-display" id="disp-${p.id}">${count}</span>
+                <div class="qada-controls">
+                    <button class="qada-btn btn-minus" onclick="updateQada('${p.id}', -1)">-</button>
+                    <button class="qada-btn btn-plus" onclick="updateQada('${p.id}', 1)">+</button>
+                </div>
+            `;
+      grid.appendChild(card);
+    });
+
+    // Update Stats
+    if (totalPendingEl)
+      totalPendingEl.textContent = pendingSum.toLocaleString();
+    if (totalRecoveredEl)
+      totalRecoveredEl.textContent = recoveredCount.toLocaleString();
+  }
+
+  // 2. Global Update Function
+  window.updateQada = function (id, change) {
+    const current = qadaData[id];
+
+    // Prevent negative
+    if (change < 0 && current <= 0) return;
+
+    // Update Data
+    qadaData[id] += change;
+
+    // If we are decrementing (performing qada), increase recovered score
+    if (change < 0) {
+      recoveredCount++;
+    }
+    // (Optional: If adding more debt, maybe decrease recovered? usually no, recovered is a lifetime stat)
+
+    // Save
+    localStorage.setItem("tazkiyah_qada", JSON.stringify(qadaData));
+    localStorage.setItem("tazkiyah_qada_recovered", recoveredCount);
+
+    // UI Update (Targeted for performance, or just re-render)
+    renderQada();
+  };
+
+  // 3. Calculator Logic
+  window.toggleQadaCalc = function () {
+    if (calcArea) calcArea.classList.toggle("hidden");
+  };
+
+  window.calculateQada = function () {
+    const years = parseInt(document.getElementById("calc-years").value) || 0;
+    const months = parseInt(document.getElementById("calc-months").value) || 0;
+
+    if (years === 0 && months === 0) return;
+
+    const totalDays = years * 365 + months * 30;
+
+    if (
+      confirm(
+        `Add ${totalDays} days of missed prayers to your tracker? This cannot be undone easily.`
+      )
+    ) {
+      // Add to all prayers (except Fasts, usually fasts are calculated differently)
+      const prayersOnly = [
+        "q_fajr",
+        "q_dhuhr",
+        "q_asr",
+        "q_maghrib",
+        "q_isha",
+        "q_witr",
+      ];
+
+      prayersOnly.forEach((id) => {
+        qadaData[id] += totalDays;
+      });
+
+      localStorage.setItem("tazkiyah_qada", JSON.stringify(qadaData));
+      renderQada();
+      toggleQadaCalc();
+      alert("Tracker updated. May Allah make it easy for you!");
+    }
+  };
+
+  // Initialize
+  renderQada();
+});

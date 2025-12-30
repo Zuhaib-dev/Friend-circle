@@ -1818,6 +1818,58 @@
         </div>
 
 </section>
+<!-- Qadaa Section -->
+ <section class="qada-section" id="qada-tracker">
+    
+    <div class="qada-header">
+        <span class="qada-subtitle">Fulfill Your Debts</span>
+        <h2 class="qada-title">
+            Restoring the <span class="highlight">Balance</span>
+        </h2>
+        <p class="qada-desc">
+            "The debt of Allah has more right to be paid." (Bukhari)<br>
+            Track your missed prayers and fasts here. Decrement the counter as you make them up.
+        </p>
+    </div>
+
+    <div class="qada-stats-bar">
+        <div class="stat-item">
+            <span class="stat-label">Total Pending</span>
+            <span class="stat-value" id="total-pending">0</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+            <span class="stat-label">Recovered</span>
+            <span class="stat-value text-emerald" id="total-recovered">0</span>
+        </div>
+    </div>
+
+    <div class="qada-grid" id="qada-grid">
+        </div>
+
+    <div class="qada-footer">
+        <button class="qada-calc-btn" onclick="toggleQadaCalc()">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
+            Estimate Missed Years
+        </button>
+    </div>
+
+    <div id="qada-calc-area" class="qada-calc-area hidden">
+        <div class="calc-box">
+            <h4>Quick Estimator</h4>
+            <p>Enter approximate years missed to auto-fill the counters.</p>
+            <div class="calc-input-group">
+                <input type="number" id="calc-years" placeholder="Years" min="0">
+                <input type="number" id="calc-months" placeholder="Months" min="0">
+            </div>
+            <div class="calc-actions">
+                <button onclick="calculateQada()" class="btn-apply">Add to Trackers</button>
+                <button onclick="toggleQadaCalc()" class="btn-cancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+</section>
 
 
 

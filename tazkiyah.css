@@ -526,7 +526,8 @@ body {
     rgba(79, 70, 229, 0.4),
     transparent 40%
   );
-  --webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  --webkit-mask: linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;
@@ -566,7 +567,8 @@ body {
   border-radius: 10rem 10rem 1rem 1rem;
   padding: 2px; /* Border width */
   background: linear-gradient(to bottom, #fbbf24, transparent);
-  --webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  --webkit-mask: linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   opacity: 0.5;
@@ -638,4 +640,284 @@ body {
 .prophetic-item-visible {
   opacity: 1;
   transform: translateY(0);
+}
+/* Qadaa section */
+/* =========================================
+   QADA TRACKER SECTION
+   ========================================= */
+.qada-section {
+  max-width: 1100px;
+  margin: 6rem auto;
+  padding: 0 1rem;
+  position: relative;
+}
+
+.qada-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.qada-subtitle {
+  color: #059669; /* Emerald 600 */
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.qada-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #064e3b; /* Emerald 900 */
+  font-family: "Amiri", serif;
+  line-height: 1.2;
+}
+
+.qada-title .highlight {
+  color: #d97706; /* Amber 600 */
+}
+
+.qada-desc {
+  color: #6b7280; /* Gray 500 */
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Stats Bar */
+.qada-stats-bar {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  max-width: 400px;
+  margin: 0 auto 3rem auto;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #9ca3af;
+  font-weight: 700;
+}
+
+.stat-value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #374151;
+  font-family: monospace;
+}
+
+.stat-value.text-emerald {
+  color: #059669;
+}
+
+.stat-divider {
+  width: 1px;
+  height: 30px;
+  background: #e5e7eb;
+}
+
+/* Grid */
+.qada-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Counter Card */
+.qada-card {
+  background: white;
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  text-align: center;
+  border: 1px solid #f3f4f6;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.qada-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  border-color: #d1fae5;
+}
+
+.qada-card-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.qada-card-name {
+  font-weight: 700;
+  color: #374151;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.qada-count-display {
+  font-family: monospace;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #059669;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+/* Buttons */
+.qada-controls {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.qada-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  color: #6b7280;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qada-btn:hover {
+  background: #059669;
+  color: white;
+  border-color: #059669;
+}
+
+.qada-btn.btn-minus {
+  color: #ef4444; /* Red for minus */
+}
+.qada-btn.btn-minus:hover {
+  background: #ef4444;
+  color: white;
+  border-color: #ef4444;
+}
+
+/* Footer / Calculator */
+.qada-footer {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.qada-calc-btn {
+  background: transparent;
+  border: 1px dashed #d1d5db;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  color: #6b7280;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.qada-calc-btn:hover {
+  border-color: #059669;
+  color: #059669;
+  background: #ecfdf5;
+}
+
+.qada-calc-btn .icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* Calculator Area */
+.qada-calc-area {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.qada-calc-area.hidden {
+  display: none;
+}
+
+.calc-box {
+  background: #f9fafb;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  border: 1px solid #e5e7eb;
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+}
+
+.calc-box h4 {
+  font-weight: bold;
+  color: #374151;
+  margin-bottom: 0.5rem;
+}
+
+.calc-box p {
+  font-size: 0.8rem;
+  color: #9ca3af;
+  margin-bottom: 1.5rem;
+}
+
+.calc-input-group {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.calc-input-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-family: inherit;
+  text-align: center;
+}
+
+.calc-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-apply {
+  flex: 1;
+  background: #059669;
+  color: white;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-cancel {
+  background: transparent;
+  color: #6b7280;
+  padding: 0.75rem;
+  cursor: pointer;
+  border: none;
 }
