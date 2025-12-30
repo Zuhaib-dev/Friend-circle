@@ -6391,3 +6391,104 @@ document.addEventListener("contextmenu", function (event) {
     };
   }
 })();
+// ==========================================
+// HEALING PETALS (DUA) LOGIC
+// ==========================================
+(function () {
+  const duaData = [
+    {
+      mood: "I feel Overwhelmed",
+      title: "Dua of Prophet Yunus",
+      arabic:
+        "لَّا إِلَٰهَ إِلَّا أَنتَ سُبْحَانَكَ إِنِّي كُنتُ مِنَ الظَّالِمِينَ",
+      translit: "La ilaha illa anta subhanaka inni kuntu minaz-zalimin",
+      meaning:
+        "There is no deity except You; exalted are You. Indeed, I have been of the wrongdoers.",
+      desc: "The Prophet ﷺ said: No Muslim recites this in any distress except that Allah rescues him.",
+      icon: "🌊", // Wave (Story of Yunus)
+    },
+    {
+      mood: "I feel Anxious",
+      title: "Remedy for Worry",
+      arabic: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ",
+      translit: "Allahumma inni a'udhu bika minal-hammi wal-hazan...",
+      meaning:
+        "O Allah, I seek refuge in You from anxiety and sorrow, weakness and laziness...",
+      desc: "Recite this when heavy with worry about the future or sadness about the past.",
+      icon: "🌫️", // Cloud/Fog
+    },
+    {
+      mood: "I feel Lost",
+      title: "Prayer for Guidance",
+      arabic: "رَبِّ اشْرَحْ لِي صَدْرِي وَيَسِّرْ لِي أَمْرِي",
+      translit: "Rabbi-shrah li sadri, wa yassir li amri",
+      meaning:
+        "My Lord, expand for me my chest [with assurance] and ease for me my task.",
+      desc: "The Dua of Musa (AS). Perfect for when you are confused or facing a difficult task.",
+      icon: "🧭", // Compass
+    },
+    {
+      mood: "I feel Heavy with Sin",
+      title: "Sayyidul Istighfar",
+      arabic:
+        "اللَّهُمَّ أَنْتَ رَبِّي لاَ إِلَهَ إِلاَّ أَنْتَ خَلَقْتَنِي وَأَنَا عَبْدُكَ",
+      translit: "Allahumma anta Rabbi la ilaha illa ant...",
+      meaning:
+        "O Allah, You are my Lord... I acknowledge Your favor upon me and I acknowledge my sin, so forgive me.",
+      desc: "The Best Manner of asking forgiveness. Whoever says it with certainty and dies that day enters Paradise.",
+      icon: "🤍", // White Heart
+    },
+  ];
+
+  const duaGrid = document.getElementById("dua-grid");
+
+  if (duaGrid) {
+    duaGrid.innerHTML = duaData
+      .map(
+        (item) => `
+            <div class="petal-card cursor-pointer group" onclick="togglePetalCard(this)">
+                
+                <div class="heart-icon-wrapper">
+                    ${item.icon}
+                </div>
+
+                <div class="relative z-10">
+                    <span class="mood-badge">${item.mood}</span>
+                    <h3 class="text-xl font-bold text-rose-950 font-amiri mb-1">${item.title}</h3>
+                    
+                    <div class="mt-2 text-xs text-rose-400 font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
+                        Click to Heal
+                    </div>
+                </div>
+
+                <div class="petal-content">
+                    <p class="text-2xl font-amiri text-rose-600 mb-3 leading-loose dir-rtl text-center bg-rose-50/50 p-2 rounded-lg">
+                        ${item.arabic}
+                    </p>
+                    <p class="text-xs font-bold text-gray-700 mb-2 italic text-center">
+                        "${item.translit}"
+                    </p>
+                    <p class="text-sm text-gray-500 leading-relaxed mb-4 text-center border-b border-rose-100 pb-3">
+                        ${item.meaning}
+                    </p>
+                    <p class="text-xs text-rose-500 font-medium text-center">
+                        <span class="font-bold uppercase text-[10px] text-gray-400 block mb-1">Virtue</span>
+                        ${item.desc}
+                    </p>
+                </div>
+            </div>
+        `
+      )
+      .join("");
+
+    // Toggle Function
+    window.togglePetalCard = function (element) {
+      // Close all others
+      document.querySelectorAll(".petal-card").forEach((card) => {
+        if (card !== element) card.classList.remove("active");
+      });
+      // Toggle clicked
+      element.classList.toggle("active");
+    };
+  }
+})();

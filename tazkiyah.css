@@ -3122,3 +3122,101 @@ body {
     display: inline-block;
     margin-bottom: 0.5rem;
 }
+/* =========================================
+   HEALING PETALS (DUA) STYLES
+   ========================================= */
+
+/* Reuse .bg-floral-pattern */
+
+.petal-card {
+    /* Organic Petal Shape */
+    border-radius: 2rem 2rem 2rem 0; /* Leaf/Petal shape */
+    background: white;
+    border: 1px solid #ffe4e6; /* rose-100 */
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 320px;
+}
+
+.petal-card:hover {
+    transform: translateY(-8px);
+    border-color: #f43f5e; /* rose-500 */
+    box-shadow: 0 20px 40px -5px rgba(244, 63, 94, 0.15);
+    border-radius: 2rem; /* Smooths out on hover */
+}
+
+/* Active State */
+.petal-card.active {
+    background-color: #f0fdfa; /* teal-50 (Calming color) */
+    border-color: #99f6e4; /* teal-200 */
+    border-radius: 2rem;
+}
+
+/* Heart Icon with Pulse */
+.heart-icon-wrapper {
+    width: 60px;
+    height: 60px;
+    background: #fff1f2; /* rose-50 */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+/* The Pulse Animation */
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    15% { transform: scale(1.15); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.15); }
+    60% { transform: scale(1); }
+}
+
+.petal-card:hover .heart-icon-wrapper {
+    animation: heartbeat 2s infinite;
+    background: #ffe4e6;
+    color: #e11d48;
+}
+
+/* Content Reveal */
+.petal-content {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.6s ease;
+}
+
+.petal-card.active .petal-content {
+    max-height: 400px;
+    opacity: 1;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px dashed #ccfbf1; /* teal-100 */
+}
+
+/* Mood Badge */
+.mood-badge {
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 5px 12px;
+    border-radius: 99px;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    background: #f3f4f6;
+    color: #6b7280;
+}
+
+.petal-card.active .mood-badge {
+    background: #ccfbf1; /* teal-100 */
+    color: #0f766e; /* teal-700 */
+}
