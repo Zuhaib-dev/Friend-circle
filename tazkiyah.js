@@ -5321,3 +5321,94 @@ document.addEventListener("contextmenu", function (event) {
     };
   }
 })();
+// ==========================================
+// FRUITS OF CHARACTER LOGIC
+// ==========================================
+(function () {
+  const characterData = [
+    {
+      name: "Sabr",
+      arabic: "الصبر",
+      title: "Patience",
+      desc: "Restraining the soul from complaining during hardships. It is bitter at first, but its fruit is sweeter than honey.",
+      taste: "Inner Peace",
+      benefit: "Allah is with the patient.",
+      icon: "🌵", // Cactus/Resilience (or 🍋 Lemon for bitter/sweet)
+    },
+    {
+      name: "Shukr",
+      arabic: "الشكر",
+      title: "Gratitude",
+      desc: "Recognizing that every blessing is from Allah. It is the seed of abundance; the more you give thanks, the more He gives.",
+      taste: "Abundance",
+      benefit: "If you are grateful, I will increase you.",
+      icon: "🍇", // Grapes/Abundance
+    },
+    {
+      name: "Tawadu",
+      arabic: "التواضع",
+      title: "Humility",
+      desc: "Lowering one's wing to others and rejecting arrogance. Whoever humbles himself for Allah, Allah raises him in rank.",
+      taste: "Elevation",
+      benefit: "The closest to the Prophet ﷺ on Judgment Day.",
+      icon: "🌱", // Sprout/Low to ground
+    },
+    {
+      name: "Hilm",
+      arabic: "الحلم",
+      title: "Forbearance",
+      desc: "Controlling anger when one has the power to punish. It is the mark of true strength and leadership.",
+      taste: "Dignity",
+      benefit: "Allah loves the doers of good.",
+      icon: "🍯", // Honey/Sweetness
+    },
+  ];
+
+  const fruitGrid = document.getElementById("character-fruit-grid");
+
+  if (fruitGrid) {
+    fruitGrid.innerHTML = characterData
+      .map(
+        (item) => `
+            <div class="fruit-card bg-floral-pattern p-8 cursor-pointer group text-center" onclick="toggleFruitCard(this)">
+                
+                <div class="fruit-icon-wrapper">
+                    ${item.icon}
+                </div>
+
+                <div class="relative z-10">
+                    <h3 class="text-xl font-bold text-rose-900 font-amiri mb-1">${item.name}</h3>
+                    <span class="text-rose-400 font-amiri text-lg block mb-2">(${item.arabic})</span>
+                    <p class="text-xs text-rose-500 font-bold uppercase tracking-widest">${item.title}</p>
+                </div>
+
+                <div class="fruit-content">
+                    <span class="taste-tag">Taste: ${item.taste}</span>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                        ${item.desc}
+                    </p>
+                    <div class="bg-white/60 p-3 rounded-xl border border-rose-100 inline-block w-full">
+                        <span class="block text-[10px] text-gray-400 uppercase font-bold mb-1">The Reward</span>
+                        <p class="text-xs text-rose-700 font-bold italic">"${item.benefit}"</p>
+                    </div>
+                </div>
+
+                <div class="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span class="text-[10px] text-rose-300 font-bold uppercase">Harvest Fruit</span>
+                </div>
+            </div>
+        `
+      )
+      .join("");
+
+    // Toggle Function
+    window.toggleFruitCard = function (element) {
+      // Close all others
+      document.querySelectorAll(".fruit-card").forEach((card) => {
+        if (card !== element) card.classList.remove("active");
+      });
+      // Toggle clicked
+      element.classList.toggle("active");
+    };
+  }
+})();
