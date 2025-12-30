@@ -502,89 +502,140 @@ body {
 
 /* Spotlight Card Effect */
 .shade-card {
-    background-color: rgba(255, 255, 255, 1);
-    position: relative;
-    border-radius: 1.5rem; /* rounded-3xl */
-    overflow: hidden;
-    /* Create a transparent border area */
-    border: 1px solid #e5e7eb; 
+  background-color: rgba(255, 255, 255, 1);
+  position: relative;
+  border-radius: 1.5rem; /* rounded-3xl */
+  overflow: hidden;
+  /* Create a transparent border area */
+  border: 1px solid #e5e7eb;
 }
 
 /* The "Light" blob that follows mouse */
 .shade-card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 1.5rem;
-    padding: 2px; /* Border width */
-    width: 100%;
-    background: radial-gradient(
-        800px circle at var(--mouse-x) var(--mouse-y),
-        rgba(79, 70, 229, 0.4),
-        transparent 40%
-    );
-    -webkit-mask: 
-        linear-gradient(#fff 0 0) content-box, 
-        linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.5s;
-    z-index: 10;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 1.5rem;
+  padding: 2px; /* Border width */
+  width: 100%;
+  background: radial-gradient(
+    800px circle at var(--mouse-x) var(--mouse-y),
+    rgba(79, 70, 229, 0.4),
+    transparent 40%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s;
+  z-index: 10;
 }
 
 /* Show light on group hover */
 #shade-grid:hover .shade-card::before {
-    opacity: 1;
+  opacity: 1;
 }
 
 /* Inner content styling */
 .shade-content {
-    height: 100%;
-    border-radius: 1.4rem; /* Slightly less than parent */
-    background: linear-gradient(to bottom right, #ffffff, #f8fafc);
-    position: relative;
-    z-index: 20;
+  height: 100%;
+  border-radius: 1.4rem; /* Slightly less than parent */
+  background: linear-gradient(to bottom right, #ffffff, #f8fafc);
+  position: relative;
+  z-index: 20;
 }
 /* Jannah */
 /* The Arch Shape */
-        .gate-arch {
-            border-radius: 10rem 10rem 1rem 1rem;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid #d1fae5; /* emerald-100 */
-        }
+.gate-arch {
+  border-radius: 10rem 10rem 1rem 1rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid #d1fae5; /* emerald-100 */
+}
 
-        /* Golden Border Gradient */
-        .gate-arch::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 10rem 10rem 1rem 1rem;
-            padding: 2px; /* Border width */
-            background: linear-gradient(to bottom, #fbbf24, transparent); 
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            opacity: 0.5;
-            transition: opacity 0.5s;
-        }
+/* Golden Border Gradient */
+.gate-arch::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 10rem 10rem 1rem 1rem;
+  padding: 2px; /* Border width */
+  background: linear-gradient(to bottom, #fbbf24, transparent);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.5;
+  transition: opacity 0.5s;
+}
 
-        .gate-arch:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px -5px rgba(5, 150, 105, 0.15); /* emerald shadow */
-        }
-        
-        .gate-arch:hover::after {
-            opacity: 1; /* Bright gold on hover */
-        }
+.gate-arch:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px -5px rgba(5, 150, 105, 0.15); /* emerald shadow */
+}
 
-        /* Background Pattern */
-        .bg-pattern-islamic {
-            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 20.5V18H0v-2h20v-2H0v-2h20v-2H0V8h20V6H0V4h20V2H0V0h22v20h2V0h2v20h2V0h2v20h2V0h2v20h2v2h-20v2h20v2h-20v2h20v2h-20v2h20v2h-20v2h20v2h-20v2h20v2H0v-2h20v-2H0v-2h20v-2H0v-2h20z' fill='%23064e3b' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/g%3E%3C/svg%3E");
-        }
+.gate-arch:hover::after {
+  opacity: 1; /* Bright gold on hover */
+}
+
+/* Background Pattern */
+.bg-pattern-islamic {
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 20.5V18H0v-2h20v-2H0v-2h20v-2H0V8h20V6H0V4h20V2H0V0h22v20h2V0h2v20h2V0h2v20h2V0h2v20h2v2h-20v2h20v2h-20v2h20v2h-20v2h20v2h-20v2h20v2h-20v2h20v2H0v-2h20v-2H0v-2h20v-2H0v-2h20z' fill='%23064e3b' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/g%3E%3C/svg%3E");
+}
+/* Prophetic legacy */
+/* Container for the card content */
+.prophetic-card-box {
+  position: relative;
+  background: white;
+  z-index: 20;
+}
+
+/* Desktop Arrows */
+@media (min-width: 768px) {
+  .prophetic-arrow-right::after {
+    content: "";
+    position: absolute;
+    top: 20px;
+    right: -10px;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid white;
+  }
+  .prophetic-arrow-left::after {
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: -10px;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid white;
+  }
+}
+
+/* Mobile Arrows (Always Left) */
+@media (max-width: 767px) {
+  .prophetic-card-box::after {
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: -10px;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid white;
+  }
+}
+
+/* The Animation Class */
+.prophetic-item-animate {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.prophetic-item-visible {
+  opacity: 1;
+  transform: translateY(0);
+}

@@ -3752,62 +3752,62 @@ document.addEventListener("DOMContentLoaded", () => {
 // ==========================================
 // THE 7 UNDER THE SHADE (SPOTLIGHT EFFECT)
 // ==========================================
-(function() {
-    const shadeData = [
-        {
-            title: "The Just Leader",
-            desc: "A ruler or leader (Imam Adil) who governed with absolute justice and fairness.",
-            icon: "⚖️",
-            color: "text-indigo-600"
-        },
-        {
-            title: "The Devout Youth",
-            desc: "A young person who grew up in the worship of Allah, resisting peer pressure and desires.",
-            icon: "🌱",
-            color: "text-emerald-600"
-        },
-        {
-            title: "The Heart Attached",
-            desc: "A person whose heart is attached to the Mosques. They find peace only in the House of Allah.",
-            icon: "🕌",
-            color: "text-amber-600"
-        },
-        {
-            title: "Love for Allah",
-            desc: "Two people who love each other for Allah's sake, meeting for that and parting for that.",
-            icon: "🤝",
-            color: "text-rose-600"
-        },
-        {
-            title: "The Chaste Soul",
-            desc: "A man invited by a woman of beauty and status for sin, but says: 'I fear Allah.'",
-            icon: "🛡️",
-            color: "text-slate-600"
-        },
-        {
-            title: "The Secret Giver",
-            desc: "Someone who gives charity so secretly that their left hand does not know what their right hand gave.",
-            icon: "🤫",
-            color: "text-teal-600"
-        },
-        {
-            title: "The Weeping Eye",
-            desc: "A person who remembers Allah in private and their eyes flood with tears.",
-            icon: "💧",
-            color: "text-blue-500"
-        }
-    ];
+(function () {
+  const shadeData = [
+    {
+      title: "The Just Leader",
+      desc: "A ruler or leader (Imam Adil) who governed with absolute justice and fairness.",
+      icon: "⚖️",
+      color: "text-indigo-600",
+    },
+    {
+      title: "The Devout Youth",
+      desc: "A young person who grew up in the worship of Allah, resisting peer pressure and desires.",
+      icon: "🌱",
+      color: "text-emerald-600",
+    },
+    {
+      title: "The Heart Attached",
+      desc: "A person whose heart is attached to the Mosques. They find peace only in the House of Allah.",
+      icon: "🕌",
+      color: "text-amber-600",
+    },
+    {
+      title: "Love for Allah",
+      desc: "Two people who love each other for Allah's sake, meeting for that and parting for that.",
+      icon: "🤝",
+      color: "text-rose-600",
+    },
+    {
+      title: "The Chaste Soul",
+      desc: "A man invited by a woman of beauty and status for sin, but says: 'I fear Allah.'",
+      icon: "🛡️",
+      color: "text-slate-600",
+    },
+    {
+      title: "The Secret Giver",
+      desc: "Someone who gives charity so secretly that their left hand does not know what their right hand gave.",
+      icon: "🤫",
+      color: "text-teal-600",
+    },
+    {
+      title: "The Weeping Eye",
+      desc: "A person who remembers Allah in private and their eyes flood with tears.",
+      icon: "💧",
+      color: "text-blue-500",
+    },
+  ];
 
-    const grid = document.getElementById('shade-grid');
+  const grid = document.getElementById("shade-grid");
 
-    if (grid) {
-        
-        // 1. Render Cards
-        grid.innerHTML = shadeData.map((item, index) => {
-            // Logic to make the last item span full width on tablets if odd number
-            const spanClass = (index === 6) ? 'md:col-span-2 lg:col-span-1' : '';
-            
-            return `
+  if (grid) {
+    // 1. Render Cards
+    grid.innerHTML = shadeData
+      .map((item, index) => {
+        // Logic to make the last item span full width on tablets if odd number
+        const spanClass = index === 6 ? "md:col-span-2 lg:col-span-1" : "";
+
+        return `
             <div class="shade-card group/card cursor-default ${spanClass}">
                 <div class="shade-content p-8 flex flex-col items-center text-center h-full transition-colors duration-300 hover:bg-indigo-50/30">
                     
@@ -3815,7 +3815,9 @@ document.addEventListener("DOMContentLoaded", () => {
                         ${item.icon}
                     </div>
 
-                    <h3 class="text-xl font-bold text-gray-800 mb-3 font-amiri group-hover/card:${item.color} transition-colors">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 font-amiri group-hover/card:${
+                      item.color
+                    } transition-colors">
                         ${item.title}
                     </h3>
                     
@@ -3829,88 +3831,91 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
             </div>
             `;
-        }).join('');
+      })
+      .join("");
 
-        // 2. Spotlight Logic
-        grid.onmousemove = e => {
-            for(const card of document.getElementsByClassName("shade-card")) {
-                const rect = card.getBoundingClientRect(),
-                      x = e.clientX - rect.left,
-                      y = e.clientY - rect.top;
+    // 2. Spotlight Logic
+    grid.onmousemove = (e) => {
+      for (const card of document.getElementsByClassName("shade-card")) {
+        const rect = card.getBoundingClientRect(),
+          x = e.clientX - rect.left,
+          y = e.clientY - rect.top;
 
-                card.style.setProperty("--mouse-x", `${x}px`);
-                card.style.setProperty("--mouse-y", `${y}px`);
-            };
-        };
-    }
+        card.style.setProperty("--mouse-x", `${x}px`);
+        card.style.setProperty("--mouse-y", `${y}px`);
+      }
+    };
+  }
 })();
 // ==========================================
 // THE 8 GATES OF JANNAH (ARCH DESIGN)
 // ==========================================
-(function() {
-    const gatesData = [
-        {
-            arabic: "باب الصلاة",
-            name: "Baab As-Salah",
-            title: "The Gate of Prayer",
-            desc: "For those who were punctual in their prayers and perfected their wudu and khushu.",
-            icon: "🕌"
-        },
-        {
-            arabic: "باب الريان",
-            name: "Baab Ar-Rayyan",
-            title: "The Gate of Fasting",
-            desc: "The 'Gate of Quenching Thirst.' Reserved strictly for those who fasted often for Allah.",
-            icon: "💧"
-        },
-        {
-            arabic: "باب الصدقة",
-            name: "Baab As-Sadaqah",
-            title: "The Gate of Charity",
-            desc: "For the charitable, who gave from their wealth to help the poor and needy.",
-            icon: "🤲"
-        },
-        {
-            arabic: "باب الجهاد",
-            name: "Baab Al-Jihad",
-            title: "The Gate of Striving",
-            desc: "For those who strove hard in the path of Allah with their lives and wealth.",
-            icon: "🛡️"
-        },
-        {
-            arabic: "باب الحج",
-            name: "Baab Al-Hajj",
-            title: "The Gate of Pilgrimage",
-            desc: "For those who completed the pilgrimage to Makkah with sincerity.",
-            icon: "🕋"
-        },
-        {
-            arabic: "باب الكاظمين",
-            name: "Baab Al-Kazimeen",
-            title: "Gate of Forgiveness",
-            desc: "For those who swallow their anger and forgive people when they have the power to punish.",
-            icon: "🕊️"
-        },
-        {
-            arabic: "باب الأيمن",
-            name: "Baab Al-Ayman",
-            title: "The Gate of Faith",
-            desc: "For those who enter Paradise without reckoning (Hisab) due to complete Tawakkul.",
-            icon: "✨"
-        },
-        {
-            arabic: "باب الذكر",
-            name: "Baab Adh-Dhikr",
-            title: "Gate of Remembrance",
-            desc: "For those who constantly remembered Allah in every situation.",
-            icon: "📿"
-        }
-    ];
+(function () {
+  const gatesData = [
+    {
+      arabic: "باب الصلاة",
+      name: "Baab As-Salah",
+      title: "The Gate of Prayer",
+      desc: "For those who were punctual in their prayers and perfected their wudu and khushu.",
+      icon: "🕌",
+    },
+    {
+      arabic: "باب الريان",
+      name: "Baab Ar-Rayyan",
+      title: "The Gate of Fasting",
+      desc: "The 'Gate of Quenching Thirst.' Reserved strictly for those who fasted often for Allah.",
+      icon: "💧",
+    },
+    {
+      arabic: "باب الصدقة",
+      name: "Baab As-Sadaqah",
+      title: "The Gate of Charity",
+      desc: "For the charitable, who gave from their wealth to help the poor and needy.",
+      icon: "🤲",
+    },
+    {
+      arabic: "باب الجهاد",
+      name: "Baab Al-Jihad",
+      title: "The Gate of Striving",
+      desc: "For those who strove hard in the path of Allah with their lives and wealth.",
+      icon: "🛡️",
+    },
+    {
+      arabic: "باب الحج",
+      name: "Baab Al-Hajj",
+      title: "The Gate of Pilgrimage",
+      desc: "For those who completed the pilgrimage to Makkah with sincerity.",
+      icon: "🕋",
+    },
+    {
+      arabic: "باب الكاظمين",
+      name: "Baab Al-Kazimeen",
+      title: "Gate of Forgiveness",
+      desc: "For those who swallow their anger and forgive people when they have the power to punish.",
+      icon: "🕊️",
+    },
+    {
+      arabic: "باب الأيمن",
+      name: "Baab Al-Ayman",
+      title: "The Gate of Faith",
+      desc: "For those who enter Paradise without reckoning (Hisab) due to complete Tawakkul.",
+      icon: "✨",
+    },
+    {
+      arabic: "باب الذكر",
+      name: "Baab Adh-Dhikr",
+      title: "Gate of Remembrance",
+      desc: "For those who constantly remembered Allah in every situation.",
+      icon: "📿",
+    },
+  ];
 
-    const container = document.getElementById('jannah-gates-grid');
+  const container = document.getElementById("jannah-gates-grid");
 
-    if (container) {
-        container.innerHTML = gatesData.map(gate => `
+  if (container) {
+    container.innerHTML = gatesData
+      .map(
+        (gate) => `
             <div class="gate-arch bg-white h-[320px] group cursor-default relative shadow-sm">
                 
                 <div class="absolute inset-0 bg-pattern-islamic opacity-100 group-hover:opacity-0 transition-opacity duration-500"></div>
@@ -3945,6 +3950,171 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 </div>
             </div>
-        `).join('');
-    }
+        `
+      )
+      .join("");
+  }
 })();
+// ==========================================
+// PROPHETIC LEGACY TIMELINE (UNIQUE IDs)
+// ==========================================
+document.addEventListener("DOMContentLoaded", function () {
+  // Unique Data Array
+  const propheticData = [
+    {
+      name: "Adam (AS)",
+      title: "The First Human",
+      trait: "Repentance",
+      desc: "Taught us that mistakes are human, but turning back to Allah immediately is divine.",
+      location: "Earth",
+      icon: "🌍",
+    },
+    {
+      name: "Nuh (AS)",
+      title: "The Grateful Servant",
+      trait: "Perseverance",
+      desc: "Preached for 950 years with unwavering patience, teaching us never to give up on guidance.",
+      location: "Iraq",
+      icon: "⛵",
+    },
+    {
+      name: "Ibrahim (AS)",
+      title: "Friend of Allah",
+      trait: "Trust (Tawakkul)",
+      desc: "Was thrown into fire and asked to sacrifice his son. Taught us complete trust in Allah.",
+      location: "Makkah",
+      icon: "🔥",
+    },
+    {
+      name: "Yusuf (AS)",
+      title: "The Truthful",
+      trait: "Forgiveness",
+      desc: "Betrayed by family, enslaved, and imprisoned, yet he forgave when he had power.",
+      location: "Egypt",
+      icon: "👑",
+    },
+    {
+      name: "Musa (AS)",
+      title: "Spoke to Allah",
+      trait: "Bravery",
+      desc: "Stood against the tyrant Pharaoh. Taught us to speak truth to power.",
+      location: "Sinai",
+      icon: "🌊",
+    },
+    {
+      name: "Isa (AS)",
+      title: "Spirit of Allah",
+      trait: "Humility",
+      desc: "Healed the blind. Taught us to detach from materialism and purify the heart.",
+      location: "Palestine",
+      icon: "🕊️",
+    },
+    {
+      name: "Muhammad ﷺ",
+      title: "Seal of Prophets",
+      trait: "Mercy",
+      desc: "The final messenger who perfected character and completed the religion for all humanity.",
+      location: "Madinah",
+      icon: "🕌",
+    },
+  ];
+
+  const pContainer = document.getElementById("prophetic-container");
+  const pLineFill = document.getElementById("prophetic-line-fill");
+  const pWrapper = document.getElementById("prophetic-wrapper");
+
+  if (pContainer) {
+    // 1. RENDER ITEMS
+    pContainer.innerHTML = propheticData
+      .map((item, index) => {
+        const isLeft = index % 2 === 0;
+        const arrowClass = isLeft
+          ? "prophetic-arrow-right"
+          : "prophetic-arrow-left";
+
+        return `
+                <div class="prophetic-item-animate flex w-full md:items-center ${
+                  isLeft ? "md:flex-row" : "md:flex-row-reverse"
+                } gap-8">
+                    
+                    <div class="flex-1 ml-16 md:ml-0">
+                        <div class="prophetic-card-box p-6 rounded-2xl shadow-lg border border-emerald-50 ${arrowClass} hover:-translate-y-1 transition-transform duration-300">
+                            
+                            <div class="flex justify-between items-start mb-2">
+                                <div>
+                                    <span class="text-[10px] font-bold text-emerald-500 uppercase tracking-widest block mb-1">${
+                                      item.trait
+                                    }</span>
+                                    <h3 class="text-xl font-bold text-emerald-900 font-amiri">${
+                                      item.name
+                                    }</h3>
+                                </div>
+                                <span class="text-2xl filter grayscale opacity-50">${
+                                  item.icon
+                                }</span>
+                            </div>
+                            
+                            <p class="text-xs text-yellow-600 font-bold uppercase mb-3">${
+                              item.title
+                            } • ${item.location}</p>
+                            
+                            <p class="text-sm text-gray-500 leading-relaxed">
+                                ${item.desc}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="absolute left-8 md:left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full bg-emerald-100 border-4 border-white flex items-center justify-center z-10 shadow-md prophetic-dot transition-colors duration-500">
+                        <div class="w-2.5 h-2.5 rounded-full bg-gray-300 transition-colors"></div>
+                    </div>
+
+                    <div class="flex-1 hidden md:block"></div>
+
+                </div>
+            `;
+      })
+      .join("");
+
+    // 2. SCROLL OBSERVER (Reveal Items)
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("prophetic-item-visible");
+
+            // Light up dot
+            const dot = entry.target.querySelector(".prophetic-dot div");
+            if (dot) {
+              dot.classList.remove("bg-gray-300");
+              dot.classList.add("bg-emerald-500");
+            }
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    document.querySelectorAll(".prophetic-item-animate").forEach((item) => {
+      observer.observe(item);
+    });
+
+    // 3. LINE FILL LOGIC
+    window.addEventListener("scroll", () => {
+      if (!pWrapper) return;
+      const rect = pWrapper.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      // Start filling when the top of the section hits the middle of viewport
+      if (rect.top < windowHeight) {
+        const totalHeight = rect.height;
+        const scrolled = windowHeight * 0.6 - rect.top;
+
+        let percent = (scrolled / totalHeight) * 100;
+        percent = Math.max(0, Math.min(100, percent));
+
+        if (pLineFill) pLineFill.style.height = `${percent}%`;
+      }
+    });
+  }
+});
