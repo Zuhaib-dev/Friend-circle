@@ -3991,3 +3991,107 @@ document.addEventListener("DOMContentLoaded", () => {
         };
     }
 })();
+// ==========================================
+// THE 8 GATES OF JANNAH (ARCH DESIGN)
+// ==========================================
+(function() {
+    const gatesData = [
+        {
+            arabic: "باب الصلاة",
+            name: "Baab As-Salah",
+            title: "The Gate of Prayer",
+            desc: "For those who were punctual in their prayers and perfected their wudu and khushu.",
+            icon: "🕌"
+        },
+        {
+            arabic: "باب الريان",
+            name: "Baab Ar-Rayyan",
+            title: "The Gate of Fasting",
+            desc: "The 'Gate of Quenching Thirst.' Reserved strictly for those who fasted often for Allah.",
+            icon: "💧"
+        },
+        {
+            arabic: "باب الصدقة",
+            name: "Baab As-Sadaqah",
+            title: "The Gate of Charity",
+            desc: "For the charitable, who gave from their wealth to help the poor and needy.",
+            icon: "🤲"
+        },
+        {
+            arabic: "باب الجهاد",
+            name: "Baab Al-Jihad",
+            title: "The Gate of Striving",
+            desc: "For those who strove hard in the path of Allah with their lives and wealth.",
+            icon: "🛡️"
+        },
+        {
+            arabic: "باب الحج",
+            name: "Baab Al-Hajj",
+            title: "The Gate of Pilgrimage",
+            desc: "For those who completed the pilgrimage to Makkah with sincerity.",
+            icon: "🕋"
+        },
+        {
+            arabic: "باب الكاظمين",
+            name: "Baab Al-Kazimeen",
+            title: "Gate of Forgiveness",
+            desc: "For those who swallow their anger and forgive people when they have the power to punish.",
+            icon: "🕊️"
+        },
+        {
+            arabic: "باب الأيمن",
+            name: "Baab Al-Ayman",
+            title: "The Gate of Faith",
+            desc: "For those who enter Paradise without reckoning (Hisab) due to complete Tawakkul.",
+            icon: "✨"
+        },
+        {
+            arabic: "باب الذكر",
+            name: "Baab Adh-Dhikr",
+            title: "Gate of Remembrance",
+            desc: "For those who constantly remembered Allah in every situation.",
+            icon: "📿"
+        }
+    ];
+
+    const container = document.getElementById('jannah-gates-grid');
+
+    if (container) {
+        container.innerHTML = gatesData.map(gate => `
+            <div class="gate-arch bg-white h-[320px] group cursor-default relative shadow-sm">
+                
+                <div class="absolute inset-0 bg-pattern-islamic opacity-100 group-hover:opacity-0 transition-opacity duration-500"></div>
+
+                <div class="absolute inset-0 bg-gradient-to-b from-emerald-900 to-teal-900 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                <div class="relative z-10 h-full flex flex-col items-center justify-center p-6 text-center">
+                    
+                    <div class="w-16 h-16 rounded-full bg-emerald-50 border border-emerald-100 flex items-center justify-center text-3xl mb-6 shadow-sm group-hover:bg-white/10 group-hover:border-white/20 group-hover:scale-110 transition-all duration-500">
+                        ${gate.icon}
+                    </div>
+
+                    <h3 class="font-amiri text-2xl text-emerald-900/20 group-hover:text-white/10 absolute top-8 transition-colors duration-500 select-none">
+                        ${gate.arabic}
+                    </h3>
+
+                    <h4 class="text-xl font-bold text-emerald-900 group-hover:text-white transition-colors duration-300 mb-2">
+                        ${gate.name}
+                    </h4>
+
+                    <span class="text-[10px] font-bold text-amber-500 uppercase tracking-widest mb-4 group-hover:text-amber-300 transition-colors">
+                        ${gate.title}
+                    </span>
+
+                    <div class="h-0 opacity-0 overflow-hidden group-hover:h-auto group-hover:opacity-100 transition-all duration-500 delay-75">
+                        <p class="text-xs text-emerald-100 leading-relaxed px-2">
+                            ${gate.desc}
+                        </p>
+                    </div>
+                    
+                    <div class="w-12 h-1 bg-emerald-100 rounded-full mt-6 group-hover:bg-amber-500 transition-colors duration-500"></div>
+
+                </div>
+            </div>
+        `).join('');
+    }
+})();
