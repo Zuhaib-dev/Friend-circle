@@ -4913,54 +4913,56 @@ document.addEventListener("DOMContentLoaded", function () {
 // ==========================================
 // 5 PILLARS SECTION LOGIC
 // ==========================================
-(function() {
-    const pillarsData = [
-        {
-            number: "1",
-            name: "Shahada",
-            arabic: "الشهادة",
-            title: "The Declaration",
-            icon: "☝️",
-            desc: "To testify that there is no god but Allah and that Muhammad ﷺ is His Messenger. It is the key to Paradise and the foundation of all other deeds."
-        },
-        {
-            number: "2",
-            name: "Salah",
-            arabic: "الصلاة",
-            title: "The Prayer",
-            icon: "🕌",
-            desc: "The five daily prayers. It is the first thing a person will be held accountable for on the Day of Judgment and the connection between the servant and his Lord."
-        },
-        {
-            number: "3",
-            name: "Zakat",
-            arabic: "الزكاة",
-            title: "The Almsgiving",
-            icon: "🤲",
-            desc: "Purifying one's wealth by giving 2.5% of savings to the poor. It cleanses the soul from greed and circulates wealth in the community."
-        },
-        {
-            number: "4",
-            name: "Sawm",
-            arabic: "الصوم",
-            title: "The Fasting",
-            icon: "🌙",
-            desc: "Fasting during the month of Ramadan. It teaches self-discipline, empathy for the hungry, and creates a shield against sins."
-        },
-        {
-            number: "5",
-            name: "Hajj",
-            arabic: "الحج",
-            title: "The Pilgrimage",
-            icon: "🕋",
-            desc: "The pilgrimage to Makkah once in a lifetime for those who are physically and financially able. It is a rebirth, returning as sinless as a newborn."
-        }
-    ];
+(function () {
+  const pillarsData = [
+    {
+      number: "1",
+      name: "Shahada",
+      arabic: "الشهادة",
+      title: "The Declaration",
+      icon: "☝️",
+      desc: "To testify that there is no god but Allah and that Muhammad ﷺ is His Messenger. It is the key to Paradise and the foundation of all other deeds.",
+    },
+    {
+      number: "2",
+      name: "Salah",
+      arabic: "الصلاة",
+      title: "The Prayer",
+      icon: "🕌",
+      desc: "The five daily prayers. It is the first thing a person will be held accountable for on the Day of Judgment and the connection between the servant and his Lord.",
+    },
+    {
+      number: "3",
+      name: "Zakat",
+      arabic: "الزكاة",
+      title: "The Almsgiving",
+      icon: "🤲",
+      desc: "Purifying one's wealth by giving 2.5% of savings to the poor. It cleanses the soul from greed and circulates wealth in the community.",
+    },
+    {
+      number: "4",
+      name: "Sawm",
+      arabic: "الصوم",
+      title: "The Fasting",
+      icon: "🌙",
+      desc: "Fasting during the month of Ramadan. It teaches self-discipline, empathy for the hungry, and creates a shield against sins.",
+    },
+    {
+      number: "5",
+      name: "Hajj",
+      arabic: "الحج",
+      title: "The Pilgrimage",
+      icon: "🕋",
+      desc: "The pilgrimage to Makkah once in a lifetime for those who are physically and financially able. It is a rebirth, returning as sinless as a newborn.",
+    },
+  ];
 
-    const pillarsGrid = document.getElementById('pillars-grid');
+  const pillarsGrid = document.getElementById("pillars-grid");
 
-    if (pillarsGrid) {
-        pillarsGrid.innerHTML = pillarsData.map((pillar) => `
+  if (pillarsGrid) {
+    pillarsGrid.innerHTML = pillarsData
+      .map(
+        (pillar) => `
             <div class="pillar-card bg-floral-pattern p-6 rounded-3xl border border-rose-100 cursor-pointer hover:shadow-lg group flex-grow" onclick="togglePillarCard(this)">
                 
                 <div class="flex items-center justify-between mb-4">
@@ -4989,62 +4991,68 @@ document.addEventListener("DOMContentLoaded", function () {
                     <div class="w-8 h-1 bg-rose-200 rounded-full group-hover:w-16 transition-all duration-300"></div>
                 </div>
             </div>
-        `).join('');
+        `
+      )
+      .join("");
 
-        // Toggle Function
-        window.togglePillarCard = function(element) {
-            // Close all others
-            document.querySelectorAll('.pillar-card').forEach(card => {
-                if(card !== element) card.classList.remove('active');
-            });
-            // Toggle clicked
-            element.classList.toggle('active');
-        };
-    }
+    // Toggle Function
+    window.togglePillarCard = function (element) {
+      // Close all others
+      document.querySelectorAll(".pillar-card").forEach((card) => {
+        if (card !== element) card.classList.remove("active");
+      });
+      // Toggle clicked
+      element.classList.toggle("active");
+    };
+  }
 })();
 // ==========================================
 // GARDEN OF NAMES LOGIC
 // ==========================================
-(function() {
-    const namesData = [
-        {
-            arabic: "الودود",
-            transliteration: "Al-Wadud",
-            meaning: "The Most Loving",
-            desc: "He who loves His believing servants and is beloved to them. His love is not just a feeling, but an active pursuit of your benefit.",
-            reflection: "Love Him by obeying Him, and show affection to His creation.",
-            icon: "❤️"
-        },
-        {
-            arabic: "اللطيف",
-            transliteration: "Al-Latif",
-            meaning: "The Subtle & Gentle",
-            desc: "He who is kind to His servants in ways they do not perceive. He arranges your affairs with delicate precision and gentleness.",
-            reflection: "Trust His plan even when you cannot see the way out.",
-            icon: "🌿"
-        },
-        {
-            arabic: "الشكور",
-            transliteration: "Ash-Shakur",
-            meaning: "The Appreciative",
-            desc: "He who gives abundant rewards for small deeds. He appreciates your effort, even if you fail to achieve the result.",
-            reflection: "Never belittle a good deed; He notices even a smile.",
-            icon: "💎"
-        },
-        {
-            arabic: "الحليم",
-            transliteration: "Al-Halim",
-            meaning: "The Forbearing",
-            desc: "He who does not rush to punish. He sees your mistakes and gives you time (respite) to return and repent.",
-            reflection: "Be patient with people's faults as He is patient with yours.",
-            icon: "🛡️"
-        }
-    ];
+(function () {
+  const namesData = [
+    {
+      arabic: "الودود",
+      transliteration: "Al-Wadud",
+      meaning: "The Most Loving",
+      desc: "He who loves His believing servants and is beloved to them. His love is not just a feeling, but an active pursuit of your benefit.",
+      reflection:
+        "Love Him by obeying Him, and show affection to His creation.",
+      icon: "❤️",
+    },
+    {
+      arabic: "اللطيف",
+      transliteration: "Al-Latif",
+      meaning: "The Subtle & Gentle",
+      desc: "He who is kind to His servants in ways they do not perceive. He arranges your affairs with delicate precision and gentleness.",
+      reflection: "Trust His plan even when you cannot see the way out.",
+      icon: "🌿",
+    },
+    {
+      arabic: "الشكور",
+      transliteration: "Ash-Shakur",
+      meaning: "The Appreciative",
+      desc: "He who gives abundant rewards for small deeds. He appreciates your effort, even if you fail to achieve the result.",
+      reflection: "Never belittle a good deed; He notices even a smile.",
+      icon: "💎",
+    },
+    {
+      arabic: "الحليم",
+      transliteration: "Al-Halim",
+      meaning: "The Forbearing",
+      desc: "He who does not rush to punish. He sees your mistakes and gives you time (respite) to return and repent.",
+      reflection:
+        "Be patient with people's faults as He is patient with yours.",
+      icon: "🛡️",
+    },
+  ];
 
-    const namesGrid = document.getElementById('names-grid');
+  const namesGrid = document.getElementById("names-grid");
 
-    if (namesGrid) {
-        namesGrid.innerHTML = namesData.map(item => `
+  if (namesGrid) {
+    namesGrid.innerHTML = namesData
+      .map(
+        (item) => `
             <div class="name-card bg-white rounded-3xl p-6 cursor-pointer group" onclick="toggleNameCard(this)">
                 
                 <div class="name-watermark">${item.arabic}</div>
@@ -5076,48 +5084,140 @@ document.addEventListener("DOMContentLoaded", function () {
                     </div>
                 </div>
             </div>
-        `).join('');
+        `
+      )
+      .join("");
 
-        // Toggle Function
-        window.toggleNameCard = function(element) {
-            // Close all others
-            document.querySelectorAll('.name-card').forEach(card => {
-                if(card !== element) card.classList.remove('active');
-            });
-            // Toggle clicked
-            element.classList.toggle('active');
-        };
-    }
+    // Toggle Function
+    window.toggleNameCard = function (element) {
+      // Close all others
+      document.querySelectorAll(".name-card").forEach((card) => {
+        if (card !== element) card.classList.remove("active");
+      });
+      // Toggle clicked
+      element.classList.toggle("active");
+    };
+  }
 })();
 // ==========================================
 // CLOSE MENU ON CLICK OUTSIDE
 // ==========================================
-document.addEventListener('click', function(event) {
-    
-    // 1. Define your Menu and Button IDs
-    // Change these IDs to match your actual HTML
-    const menu = document.getElementById('mobile-menu'); 
-    const toggleBtn = document.getElementById('menu-toggle-btn'); 
+document.addEventListener("click", function (event) {
+  // 1. Define your Menu and Button IDs
+  // Change these IDs to match your actual HTML
+  const menu = document.getElementById("mobile-menu");
+  const toggleBtn = document.getElementById("menu-toggle-btn");
 
-    // 2. Check if the menu exists and is currently open (doesn't have 'hidden' class)
-    if (menu && !menu.classList.contains('hidden')) {
+  // 2. Check if the menu exists and is currently open (doesn't have 'hidden' class)
+  if (menu && !menu.classList.contains("hidden")) {
+    // 3. Check if the click happened OUTSIDE the menu AND the button
+    const isClickInsideMenu = menu.contains(event.target);
+    const isClickOnButton = toggleBtn && toggleBtn.contains(event.target);
 
-        // 3. Check if the click happened OUTSIDE the menu AND the button
-        const isClickInsideMenu = menu.contains(event.target);
-        const isClickOnButton = toggleBtn && toggleBtn.contains(event.target);
+    if (!isClickInsideMenu && !isClickOnButton) {
+      // 4. Force close the menu
+      menu.classList.add("hidden");
 
-        if (!isClickInsideMenu && !isClickOnButton) {
-            // 4. Force close the menu
-            menu.classList.add('hidden');
-            
-            // Optional: If you use an 'active' class for animation, remove it too
-            // menu.classList.remove('active');
-        }
+      // Optional: If you use an 'active' class for animation, remove it too
+      // menu.classList.remove('active');
     }
+  }
 });
 // ==========================================
 // DISABLE RIGHT-CLICK MENU
 // ==========================================
-document.addEventListener('contextmenu', function(event) {
-    event.preventDefault(); // This stops the menu from appearing
+document.addEventListener("contextmenu", function (event) {
+  event.preventDefault(); // This stops the menu from appearing
 });
+// ==========================================
+// GARDENS OF REMEMBRANCE LOGIC
+// ==========================================
+(function () {
+  const dhikrData = [
+    {
+      title: "The Palm Tree",
+      arabicTitle: "سُبْحَانَ اللَّهِ الْعَظِيمِ وَبِحَمْدِهِ",
+      translit: "SubhanAllahil 'Azim wa bihamdihi",
+      meaning: "Glory be to Allah the Mighty and praise be to Him.",
+      reward: "A palm tree is planted for you in Paradise.",
+      icon: "🌴",
+      type: "Planting",
+    },
+    {
+      title: "The Treasure",
+      arabicTitle: "لاَ حَوْلَ وَلاَ قُوَّةَ إِلاَّ بِاللَّهِ",
+      translit: "La hawla wa la quwwata illa billah",
+      meaning: "There is no might nor power except with Allah.",
+      reward: "A treasure from the treasures of Paradise.",
+      icon: "💎",
+      type: "Wealth",
+    },
+    {
+      title: "The Eraser",
+      arabicTitle: "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ",
+      translit: "SubhanAllahi wa bihamdihi",
+      meaning: "Glory be to Allah and praise be to Him.",
+      reward: "Recite 100x: Sins forgiven even if like the foam of the sea.",
+      icon: "🌊",
+      type: "Purification",
+    },
+    {
+      title: "The Heavy Scale",
+      arabicTitle: "الْحَمْدُ لِلَّهِ",
+      translit: "Alhamdulillah",
+      meaning: "All praise is due to Allah.",
+      reward: "It fills the scales (Mizan) on Judgment Day.",
+      icon: "⚖️",
+      type: "Weight",
+    },
+  ];
+
+  const gardenGrid = document.getElementById("dhikr-garden-grid");
+
+  if (gardenGrid) {
+    gardenGrid.innerHTML = dhikrData
+      .map(
+        (item) => `
+            <div class="garden-card rounded-3xl p-8 cursor-pointer group text-center" onclick="toggleGardenCard(this)">
+                
+                <div class="garden-leaf">🍃</div>
+
+                <div class="seed-icon-box">
+                    ${item.icon}
+                </div>
+
+                <div class="relative z-10">
+                    <span class="text-[10px] font-bold text-rose-400 uppercase tracking-widest border border-rose-100 px-3 py-1 rounded-full bg-rose-50 mb-3 inline-block">
+                        ${item.type}
+                    </span>
+                    <h3 class="text-xl font-bold text-rose-950 font-amiri mb-1">${item.title}</h3>
+                    <p class="text-xs text-gray-400 italic">Tap to Plant</p>
+                </div>
+
+                <div class="garden-bloom-content">
+                    <p class="text-2xl font-amiri text-rose-600 mb-2 leading-relaxed dir-rtl">${item.arabicTitle}</p>
+                    <p class="text-sm font-bold text-gray-600 mb-2">${item.translit}</p>
+                    <p class="text-xs text-gray-500 italic mb-4">"${item.meaning}"</p>
+                    
+                    <div class="bg-emerald-50 p-3 rounded-xl border border-emerald-100">
+                        <span class="block text-[10px] text-emerald-600 uppercase font-bold mb-1">The Reward</span>
+                        <p class="text-xs text-emerald-800 font-bold">${item.reward}</p>
+                    </div>
+                </div>
+
+            </div>
+        `
+      )
+      .join("");
+
+    // Toggle Function
+    window.toggleGardenCard = function (element) {
+      // Close all others
+      document.querySelectorAll(".garden-card").forEach((card) => {
+        if (card !== element) card.classList.remove("active");
+      });
+      // Toggle clicked
+      element.classList.toggle("active");
+    };
+  }
+})();
