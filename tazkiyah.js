@@ -6500,7 +6500,7 @@ document.addEventListener("contextmenu", function (event) {
     document.body.classList.add('loading');
 
     const preloader = document.getElementById('site-preloader');
-    const minLoadTime = 2500; // Minimum time in ms (2.5 seconds)
+    const minLoadTime = 2000; // Minimum time in ms (2.5 seconds)
     const startTime = Date.now();
 
     function hidePreloader() {
