@@ -1725,3 +1725,75 @@ body {
     box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
   }
 }
+/* =========================================
+   FAQ SECTION STYLES
+   ========================================= */
+
+/* The FAQ Card */
+.faq-item {
+  background: white;
+  border: 1px solid #e5e7eb; /* gray-200 */
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+  border-color: #d1fae5; /* emerald-100 */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+}
+
+/* Active State (When Open) */
+.faq-item.active {
+  border-color: #10b981; /* emerald-500 */
+  box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.1);
+}
+
+/* The Question Button */
+.faq-question {
+  width: 100%;
+  text-align: left;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  background: transparent;
+}
+
+.faq-title {
+  font-weight: 700;
+  color: #1f2937; /* gray-800 */
+  font-size: 1.1rem;
+  transition: color 0.3s;
+}
+
+.faq-item.active .faq-title {
+  color: #059669; /* emerald-600 */
+}
+
+/* The Arrow Icon */
+.faq-icon {
+  color: #9ca3af; /* gray-400 */
+  transition: transform 0.3s ease, color 0.3s;
+}
+
+.faq-item.active .faq-icon {
+  transform: rotate(180deg);
+  color: #059669;
+}
+
+/* The Answer Content (Collapsible) */
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0, 1, 0, 1);
+  background-color: #f9fafb; /* gray-50 */
+}
+
+.faq-answer-inner {
+  padding: 0 1.5rem 1.5rem 1.5rem;
+  color: #4b5563; /* gray-600 */
+  font-size: 0.95rem;
+  line-height: 1.6;
+}

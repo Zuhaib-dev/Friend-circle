@@ -4736,3 +4736,81 @@ document.addEventListener("DOMContentLoaded", function () {
       .join("");
   }
 })();
+// ==========================================
+// FAQ SECTION LOGIC
+// ==========================================
+(function () {
+  const faqs = [
+    {
+      question: "What is Tazkiyah?",
+      answer:
+        "Tazkiyah means 'Purification of the Soul'. It is the process of cleansing the heart from spiritual diseases (like envy, arrogance, and greed) and adorning it with virtues (like patience, gratitude, and humility) to draw closer to Allah.",
+    },
+    {
+      question: "Are the sources on this website authentic?",
+      answer:
+        "Yes. We prioritize authenticity. All Hadith are sourced from Sahih Bukhari, Muslim, Tirmidhi, and other reliable collections. Quranic verses are referenced directly from the Mushaf.",
+    },
+    {
+      question: "How do I use the Spiritual Pharmacy?",
+      answer:
+        "The Spiritual Pharmacy is a tool for diagnosis. Identify how you are feeling (e.g., Anxious or Angry), click the symptom, and follow the 'Prescription' which includes specific Dhikr and actions recommended by the Prophet ﷺ.",
+    },
+    {
+      question: "Does the Qada Tracker save my data?",
+      answer:
+        "Yes, the Qada Tracker uses your browser's local storage. This means your numbers are saved on your device so you can return later and continue tracking. However, if you clear your browser cache, the data will be reset.",
+    },
+    {
+      question: "Can I use this app on my phone?",
+      answer:
+        "Absolutely. Tazkiyah is fully responsive and designed to work beautifully on desktops, tablets, and mobile phones, allowing you to connect with your faith wherever you are.",
+    },
+  ];
+
+  const faqContainer = document.getElementById("faq-container");
+
+  if (faqContainer) {
+    // 1. Render FAQs
+    faqContainer.innerHTML = faqs
+      .map(
+        (item, index) => `
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    <span class="faq-title">${item.question}</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        ${item.answer}
+                    </div>
+                </div>
+            </div>
+        `
+      )
+      .join("");
+
+    // 2. Toggle Logic (Accordion Style)
+    window.toggleFaq = function (btn) {
+      const item = btn.parentElement;
+      const answer = item.querySelector(".faq-answer");
+
+      // Check if already active
+      const isActive = item.classList.contains("active");
+
+      // Close all others
+      document.querySelectorAll(".faq-item").forEach((el) => {
+        el.classList.remove("active");
+        el.querySelector(".faq-answer").style.maxHeight = null;
+      });
+
+      // If it wasn't active before, open it now
+      if (!isActive) {
+        item.classList.add("active");
+        answer.style.maxHeight = answer.scrollHeight + "px";
+      }
+    };
+  }
+})();
