@@ -5678,3 +5678,96 @@ document.addEventListener("contextmenu", function (event) {
     };
   }
 })();
+// ==========================================
+// POISONED ROOTS (SIHR) LOGIC
+// ==========================================
+(function () {
+  const sihrData = [
+    {
+      title: "The Sale",
+      arabic: "بيع الدين",
+      concept: "Selling the Soul",
+      punishment: "Kufr (Disbelief)",
+      desc: "Magic cannot be performed without worshiping the Jinn. It is an immediate exit from the fold of Islam.",
+      verse:
+        "They (angels) said: 'We are a test, so do not disbelieve.' (2:102)",
+      icon: "⚖️", // Scales (selling)
+    },
+    {
+      title: "The Exclusion",
+      arabic: "لا خلاق له",
+      concept: "No Share in Jannah",
+      punishment: "Banned from Paradise",
+      desc: "Allah states clearly that the one who purchases magic has absolutely no share (Khalaq) in the Hereafter.",
+      verse:
+        "Indeed they knew that whoever buys it has no share in the Hereafter. (2:102)",
+      icon: "🚫",
+    },
+    {
+      title: "The Knot",
+      arabic: "النفاثات",
+      concept: "Binding Knots",
+      punishment: "Eternal Regret",
+      desc: "The practitioner ties knots to bind others, but in reality, they are tying the noose of Hellfire around their own neck.",
+      verse: "And from the evil of the blowers in knots. (113:4)",
+      icon: "🪢", // Knot
+    },
+    {
+      title: "The Failure",
+      arabic: "لا يفلح",
+      concept: "Ultimate Defeat",
+      punishment: "Humiliation in Both Worlds",
+      desc: "Magic creates illusions, not reality. The magician lives in fear, chaos, and misery in this life before the next.",
+      verse: "And the magician will not succeed wherever he is. (20:69)",
+      icon: "🥀", // Withered Flower
+    },
+  ];
+
+  const sihrGrid = document.getElementById("sihr-grid");
+
+  if (sihrGrid) {
+    sihrGrid.innerHTML = sihrData
+      .map(
+        (item) => `
+            <div class="root-card p-8 cursor-pointer group text-center" onclick="toggleRootCard(this)">
+                
+                <div class="root-icon-box">
+                    ${item.icon}
+                </div>
+
+                <div class="relative z-10">
+                    <h3 class="text-xl font-bold text-indigo-900 font-amiri mb-1">${item.title}</h3>
+                    <span class="text-indigo-400 font-amiri text-lg block mb-2">(${item.arabic})</span>
+                    <p class="text-xs text-gray-500 font-bold uppercase tracking-widest">${item.concept}</p>
+                </div>
+
+                <div class="root-content">
+                    <span class="saza-badge">Penalty: ${item.punishment}</span>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4 mt-2">
+                        ${item.desc}
+                    </p>
+                    <div class="bg-indigo-50 p-3 rounded-xl border border-indigo-100 inline-block w-full">
+                        <span class="block text-[10px] text-indigo-400 uppercase font-bold mb-1">Divine Decree</span>
+                        <p class="text-xs text-indigo-800 font-bold italic">"${item.verse}"</p>
+                    </div>
+                </div>
+
+                <div class="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span class="text-[10px] text-indigo-400 font-bold uppercase">Reveal Consequence</span>
+                </div>
+            </div>
+        `
+      )
+      .join("");
+
+    // Toggle Function
+    window.toggleRootCard = function (element) {
+      // Close all others
+      document.querySelectorAll(".root-card").forEach((card) => {
+        if (card !== element) card.classList.remove("active");
+      });
+      // Toggle clicked
+      element.classList.toggle("active");
+    };
+  }
+})();

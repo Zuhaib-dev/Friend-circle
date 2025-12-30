@@ -2475,3 +2475,86 @@ body {
 .thorn-card:hover .warning-badge {
   background: #ef4444; /* red-500 */
 }
+
+/* =========================================
+   POISONED ROOTS (SIHR) STYLES
+   ========================================= */
+
+/* Darker Theme for Warning */
+.root-card {
+  background: #fdfbff; /* Very light indigo tint */
+  border: 1px solid #e0e7ff; /* indigo-100 */
+  border-radius: 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Hover: Deep Indigo Warning */
+.root-card:hover {
+  transform: translateY(-5px);
+  border-color: #4f46e5; /* indigo-600 */
+  box-shadow: 0 15px 30px -5px rgba(79, 70, 229, 0.2);
+  background: white;
+}
+
+/* Active State */
+.root-card.active {
+  border-color: #4338ca; /* indigo-700 */
+  background-color: #eef2ff; /* indigo-50 */
+}
+
+/* Icon Container (The Knot) */
+.root-icon-box {
+  width: 65px;
+  height: 65px;
+  margin: 0 auto 1.5rem auto;
+  background: #e0e7ff; /* indigo-100 */
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; /* Organic Blob Shape */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: #3730a3; /* indigo-800 */
+  transition: all 0.5s ease;
+  border: 1px solid #c7d2fe;
+}
+
+/* Hover Animation: Unraveling */
+.root-card:hover .root-icon-box {
+  border-radius: 50%; /* Becomes circle */
+  background: #312e81; /* indigo-900 */
+  color: #fff;
+  transform: rotate(360deg) scale(1.1);
+}
+
+/* Reveal Content */
+.root-content {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.5s ease;
+  text-align: center;
+}
+
+.root-card.active .root-content {
+  max-height: 250px;
+  opacity: 1;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px dashed #a5b4fc; /* indigo-300 */
+}
+
+/* Punishment Badge */
+.saza-badge {
+  background: #312e81; /* indigo-900 */
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 5px 12px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
