@@ -27,6 +27,10 @@
       rel="canonical"
       href="https://friendcirclee.netlify.app/tazkiyah.html"
     />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     <meta property="og:type" content="website" />
@@ -73,10 +77,10 @@
     <link rel="apple-touch-icon" href="Favicon1.png" />
     <link rel="me" href="https://www.zuhaibrashid.com/" />
     <link rel="stylesheet" href="tazkiyah.css" />
+    <script src="tazkiyah.js" defer></script>
   </head>
 
   <body>
-    <!-- Header  -->
     <div
       class="min-h-screen bg-gray-50 text-gray-800 font-sans relative overflow-hidden"
     >
@@ -144,16 +148,14 @@
             </div>
           </div>
         </section>
-        <!-- Islamic utilities starts from here -->
-
+        
         <section class="max-w-6xl mx-auto my-12 px-4">
           <h2
             class="text-3xl font-bold text-emerald-900 mb-10 text-center font-amiri"
           >
             Islamic Utilities
           </h2>
-          <!-- Prayer times -->
-
+          
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div
               class="bg-white rounded-xl shadow-sm border border-emerald-100 overflow-hidden hover:shadow-md transition duration-300 h-[360px]"
@@ -172,44 +174,45 @@
                   title="Prayer Widget"
                   src="https://www.islamicfinder.org/prayer-widget/1255634/hanfi/3/0/18.0/18.0"
                   style="border: none; width: 100%; height: 100%"
+                  width="100%"
+                  height="100%"
                   scrolling="no"
                   loading="lazy"
                 ></iframe>
               </div>
             </div>
-            <!-- Quran Majeed -->
-         <div id="quran-card-trigger" class="group bg-white rounded-xl p-6 shadow-sm border border-emerald-100 relative overflow-hidden flex flex-col justify-between h-[300px] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer">
-    <div class="absolute top-0 right-0 bg-emerald-500 text-gray-800 text-[12px] font-bold px-3 py-1 rounded-bl-lg uppercase tracking-wider">Interactive</div>
-    <div class="mt-4">
-        <div class="h-14 w-14 bg-emerald-100 rounded-2xl flex items-center justify-center mb-6 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-300 shadow-sm">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-            </svg>
-        </div>
-        <h3 class="text-xl font-bold text-gray-800 mb-2 group-hover:text-emerald-700 transition-colors">Quran Explorer</h3>
-        <p class="text-gray-500 text-sm leading-relaxed">Listen to and read all 114 Surahs with translations and audio recitations.</p>
-    </div>
-    <div class="div.text-emerald-700.text-sm.font-semibold.flex.items-center.gap-2.group-hover:gap-3.transition-all
-">Open Explorer <span>&rarr;</span></div>
-</div>
+            
+            <div id="quran-card-trigger" role="button" tabindex="0" class="group bg-white rounded-xl p-6 shadow-sm border border-emerald-100 relative overflow-hidden flex flex-col justify-between h-[300px] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+              <div class="absolute top-0 right-0 bg-emerald-500 text-gray-800 text-[12px] font-bold px-3 py-1 rounded-bl-lg uppercase tracking-wider">Interactive</div>
+              <div class="mt-4">
+                  <div class="h-14 w-14 bg-emerald-100 rounded-2xl flex items-center justify-center mb-6 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-300 shadow-sm">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                      </svg>
+                  </div>
+                  <h3 class="text-xl font-bold text-gray-800 mb-2 group-hover:text-emerald-700 transition-colors">Quran Explorer</h3>
+                  <p class="text-gray-500 text-sm leading-relaxed">Listen to and read all 114 Surahs with translations and audio recitations.</p>
+              </div>
+              <div class="text-emerald-700 text-sm font-semibold flex items-center gap-2 group-hover:gap-3 transition-all">Open Explorer <span>&rarr;</span></div>
+            </div>
 
-<div id="quran-modal" class="fixed inset-0 z-[100] hidden bg-white overflow-hidden flex flex-col">
-    <header class="bg-emerald-900 text-white px-6 py-4 flex justify-between items-center">
-        <div class="flex items-center gap-4">
-            <button id="close-quran" class="text-2xl hover:text-emerald-300">&times;</button>
-            <h2 class="text-xl font-bold">Al-Quran Explorer</h2>
-        </div>
-        <button id="back-to-list" class="hidden bg-emerald-800 px-4 py-1 rounded text-sm hover:bg-emerald-700 transition">Back to Surahs</button>
-    </header>
-    <div id="quran-view-container" class="flex-1 overflow-y-auto bg-gray-50 p-6">
-        <div id="surah-list-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto"></div>
-        <div id="reading-view" class="hidden max-w-4xl mx-auto pb-20">
-            <div id="reading-header" class="text-center mb-10"></div>
-            <div id="ayah-list" class="space-y-6"></div>
-        </div>
-    </div>
-</div>
-            <!-- 99 names of Allah -->
+            <div id="quran-modal" class="fixed inset-0 z-[100] hidden bg-white overflow-hidden flex flex-col">
+                <header class="bg-emerald-900 text-white px-6 py-4 flex justify-between items-center">
+                    <div class="flex items-center gap-4">
+                        <button id="close-quran" aria-label="Close Quran Explorer" class="text-2xl hover:text-emerald-300">&times;</button>
+                        <h2 class="text-xl font-bold">Al-Quran Explorer</h2>
+                    </div>
+                    <button id="back-to-list" class="hidden bg-emerald-800 px-4 py-1 rounded text-sm hover:bg-emerald-700 transition">Back to Surahs</button>
+                </header>
+                <div id="quran-view-container" class="flex-1 overflow-y-auto bg-gray-50 p-6">
+                    <div id="surah-list-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto"></div>
+                    <div id="reading-view" class="hidden max-w-4xl mx-auto pb-20">
+                        <div id="reading-header" class="text-center mb-10"></div>
+                        <div id="ayah-list" class="space-y-6"></div>
+                    </div>
+                </div>
+            </div>
+
             <div
               class="bg-white rounded-xl shadow-sm border border-emerald-100 overflow-hidden h-[300px] relative flex flex-col group hover:shadow-md transition duration-300"
             >
@@ -229,7 +232,7 @@
                 ></div>
               </div>
             </div>
-            <!-- Digital Tasbih -->
+
             <div
               class="bg-white rounded-xl shadow-sm border border-emerald-100 relative overflow-hidden h-[300px] flex flex-col"
             >
@@ -257,6 +260,7 @@
                 </h3>
                 <button
                   id="tasbih-reset"
+                  aria-label="Reset Counter"
                   class="text-xs text-gray-400 hover:text-red-500 transition flex items-center gap-1"
                 >
                   <svg
@@ -302,7 +306,7 @@
                   </div>
 
                   <button
-                  aria-label="change tasbih"
+                  aria-label="Change Tasbih Dhikr"
                     id="tasbih-change"
                     class="absolute right-0 top-1/2 -translate-y-1/2 p-2 text-gray-300 hover:text-emerald-600 transition"
                   >
@@ -325,6 +329,7 @@
 
                 <button
                   id="tasbih-btn"
+                  aria-label="Count"
                   class="group relative w-32 h-32 rounded-full bg-emerald-50 border-4 border-emerald-100 flex items-center justify-center shadow-inner hover:bg-emerald-100 hover:border-emerald-200 active:scale-95 active:shadow-none transition-all duration-100 select-none outline-none -mt-2"
                 >
                   <div class="absolute inset-0 rounded-full overflow-hidden">
@@ -350,7 +355,7 @@
                 </p>
               </div>
             </div>
-            <!-- Daily Duas  -->
+
             <div
               class="bg-white rounded-xl shadow-sm border border-emerald-100 overflow-hidden h-[300px] relative flex flex-col group hover:shadow-md transition duration-300"
             >
@@ -371,45 +376,45 @@
 
           <div class="bg-white rounded-xl shadow-sm border border-emerald-100 relative overflow-hidden h-[400px] flex flex-col group hover:shadow-md transition duration-300">
     
-    <div class="bg-emerald-50 px-4 py-2 border-b border-emerald-100 flex justify-between items-center h-10 shrink-0 z-10">
-        <h3 class="font-bold text-emerald-800 text-sm">Qibla Direction</h3>
-        <span class="text-[10px] text-emerald-600 bg-white px-2 py-0.5 rounded-full">Augmented Reality</span>
-    </div>
-
-    <div class="flex-1 relative flex flex-col items-center justify-center p-6 bg-emerald-50/30">
-        
-        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#059669 1px, transparent 1px); background-size: 20px 20px;"></div>
-
-        <div class="relative w-40 h-40 mb-6">
-            <div class="absolute inset-0 border-4 border-emerald-200 rounded-full"></div>
-            <div class="absolute inset-2 border-2 border-dashed border-emerald-300 rounded-full"></div>
-            
-            <div class="absolute inset-0 flex items-center justify-center animate-compass-sway">
-                <div class="w-4 h-28 relative">
-                    <div class="absolute top-0 left-0 w-full h-1/2 bg-red-500 rounded-t-full shadow-sm"></div>
-                    <div class="absolute bottom-0 left-0 w-full h-1/2 bg-gray-300 rounded-b-full shadow-sm"></div>
-                    <div class="absolute top-1/2 left-1/2 w-3 h-3 bg-white rounded-full border-2 border-emerald-500 -translate-x-1/2 -translate-y-1/2 z-10"></div>
-                </div>
+            <div class="bg-emerald-50 px-4 py-2 border-b border-emerald-100 flex justify-between items-center h-10 shrink-0 z-10">
+                <h3 class="font-bold text-emerald-800 text-sm">Qibla Direction</h3>
+                <span class="text-[10px] text-emerald-600 bg-white px-2 py-0.5 rounded-full">Augmented Reality</span>
             </div>
 
-            <div class="absolute top-2 right-6 text-emerald-800 animate-pulse">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M2 9l10-7 10 7v11a2 2 0 01-2 2H4a2 2 0 01-2-2V9z"/></svg>
+            <div class="flex-1 relative flex flex-col items-center justify-center p-6 bg-emerald-50/30">
+                
+                <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#059669 1px, transparent 1px); background-size: 20px 20px;"></div>
+
+                <div class="relative w-40 h-40 mb-6">
+                    <div class="absolute inset-0 border-4 border-emerald-200 rounded-full"></div>
+                    <div class="absolute inset-2 border-2 border-dashed border-emerald-300 rounded-full"></div>
+                    
+                    <div class="absolute inset-0 flex items-center justify-center animate-compass-sway">
+                        <div class="w-4 h-28 relative">
+                            <div class="absolute top-0 left-0 w-full h-1/2 bg-red-500 rounded-t-full shadow-sm"></div>
+                            <div class="absolute bottom-0 left-0 w-full h-1/2 bg-gray-300 rounded-b-full shadow-sm"></div>
+                            <div class="absolute top-1/2 left-1/2 w-3 h-3 bg-white rounded-full border-2 border-emerald-500 -translate-x-1/2 -translate-y-1/2 z-10"></div>
+                        </div>
+                    </div>
+
+                    <div class="absolute top-2 right-6 text-emerald-800 animate-pulse">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M2 9l10-7 10 7v11a2 2 0 01-2 2H4a2 2 0 01-2-2V9z"/></svg>
+                    </div>
+                </div>
+
+                <h3 class="text-lg font-bold text-gray-800 mb-2">Locate the Kaaba</h3>
+                <p class="text-sm text-gray-500 text-center mb-6 max-w-[200px]">
+                    Use your camera and GPS to find the exact Qibla direction.
+                </p>
+
+                <a href="https://qiblafinder.withgoogle.com/" target="_blank" rel="noopener noreferrer" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 px-6 rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2 text-sm z-10">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                    Open Finder
+                </a>
             </div>
         </div>
-
-        <h3 class="text-lg font-bold text-gray-800 mb-2">Locate the Kaaba</h3>
-        <p class="text-sm text-gray-500 text-center mb-6 max-w-[200px]">
-            Use your camera and GPS to find the exact Qibla direction.
-        </p>
-
-        <a href="https://qiblafinder.withgoogle.com/" target="_blank" rel="noopener noreferrer" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 px-6 rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2 text-sm z-10">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-            Open Finder
-        </a>
-    </div>
-</div>
         </section>
-        <!-- Form here i will put a more section  -->
+        
         <section class="max-w-6xl mx-auto my-20 px-4">
           <div
             class="bg-emerald-900 rounded-3xl p-8 md:p-12 relative overflow-hidden shadow-2xl"
@@ -478,7 +483,7 @@
                 </h3>
 
                 <div class="space-y-3" id="sunnah-list">
-                  <div
+                  <div role="checkbox" aria-checked="false" tabindex="0"
                     class="sunnah-item group cursor-pointer flex items-center justify-between bg-emerald-800/50 hover:bg-emerald-700/50 border border-emerald-700/30 rounded-xl p-4 transition-all duration-300"
                   >
                     <div class="flex items-center gap-4">
@@ -506,7 +511,7 @@
                     </div>
                   </div>
 
-                  <div
+                  <div role="checkbox" aria-checked="false" tabindex="0"
                     class="sunnah-item group cursor-pointer flex items-center justify-between bg-emerald-800/50 hover:bg-emerald-700/50 border border-emerald-700/30 rounded-xl p-4 transition-all duration-300"
                   >
                     <div class="flex items-center gap-4">
@@ -534,7 +539,7 @@
                     </div>
                   </div>
 
-                  <div
+                  <div role="checkbox" aria-checked="false" tabindex="0"
                     class="sunnah-item group cursor-pointer flex items-center justify-between bg-emerald-800/50 hover:bg-emerald-700/50 border border-emerald-700/30 rounded-xl p-4 transition-all duration-300"
                   >
                     <div class="flex items-center gap-4">
@@ -562,7 +567,7 @@
                     </div>
                   </div>
 
-                  <div
+                  <div role="checkbox" aria-checked="false" tabindex="0"
                     class="sunnah-item group cursor-pointer flex items-center justify-between bg-emerald-800/50 hover:bg-emerald-700/50 border border-emerald-700/30 rounded-xl p-4 transition-all duration-300"
                   >
                     <div class="flex items-center gap-4">
@@ -590,7 +595,7 @@
                     </div>
                   </div>
 
-                  <div
+                  <div role="checkbox" aria-checked="false" tabindex="0"
                     class="sunnah-item group cursor-pointer flex items-center justify-between bg-emerald-800/50 hover:bg-emerald-700/50 border border-emerald-700/30 rounded-xl p-4 transition-all duration-300"
                   >
                     <div class="flex items-center gap-4">
@@ -622,6 +627,7 @@
             </div>
           </div>
         </section>
+        
         <section class="max-w-6xl mx-auto my-20 px-4">
   <div class="bg-gradient-to-br from-teal-900 to-emerald-900 rounded-3xl p-8 md:p-16 relative overflow-hidden shadow-2xl text-center">
     
@@ -648,7 +654,7 @@
         <div id="breath-ring-1" class="absolute w-64 h-64 border border-emerald-500/30 rounded-full scale-50 opacity-0 transition-transform duration-[4000ms]"></div>
         <div id="breath-ring-2" class="absolute w-80 h-80 border border-teal-400/20 rounded-full scale-50 opacity-0 transition-transform duration-[4000ms] delay-75"></div>
 
-        <div id="breath-circle" class="relative w-48 h-48 bg-gradient-to-b from-emerald-400 to-teal-600 rounded-full shadow-[0_0_50px_rgba(16,185,129,0.4)] flex flex-col items-center justify-center cursor-pointer hover:scale-105 transition-transform duration-300 group z-20">
+        <div id="breath-circle" role="button" tabindex="0" aria-label="Start breathing exercise" class="relative w-48 h-48 bg-gradient-to-b from-emerald-400 to-teal-600 rounded-full shadow-[0_0_50px_rgba(16,185,129,0.4)] flex flex-col items-center justify-center cursor-pointer hover:scale-105 transition-transform duration-300 group z-20">
             
           <div id="breath-play-icon" class="absolute inset-0 flex items-center justify-center transition-opacity duration-300">
              <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-white drop-shadow-md pl-2" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
@@ -667,6 +673,7 @@
     </div>
   </div>
 </section>
+
 <section class="max-w-5xl mx-auto my-24 px-4">
     <div class="text-center mb-10">
         <h2 class="text-3xl md:text-4xl font-bold text-emerald-900 font-amiri mb-3">
@@ -720,6 +727,7 @@
         </div>
     </div>
 </section>
+
 <section class="max-w-4xl mx-auto my-24 px-4">
     <div class="bg-white rounded-3xl shadow-xl border border-emerald-100 overflow-hidden relative">
         
@@ -737,10 +745,11 @@
 
         <div class="p-8">
             <div class="flex flex-col md:flex-row gap-4 mb-8">
+                <label for="shukr-input" class="sr-only">What are you grateful for?</label>
                 <input type="text" id="shukr-input" placeholder="Ya Allah, I am grateful for..." 
                     class="flex-1 bg-gray-50 text-gray-700 border border-gray-200 rounded-xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white transition-all placeholder-gray-400 text-sm md:text-base">
                 
-                <button id="shukr-btn" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-8 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
+                <button id="shukr-btn" aria-label="Save Gratitude" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-8 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
                     <span>Save</span>
                 </button>
@@ -760,6 +769,7 @@
         </div>
     </div>
 </section>
+
 <section class="max-w-5xl mx-auto my-24 px-4">
     <div class="relative group">
         <div class="absolute -inset-1 bg-gradient-to-r from-emerald-100 to-yellow-100 rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
@@ -809,6 +819,7 @@
                         </div>
 
                         <div class="relative">
+                            <label for="custom-niyyah" class="sr-only">Custom Intention</label>
                             <input type="text" id="custom-niyyah" placeholder="Type your own..." 
                                 class="w-full bg-emerald-800/50 border border-emerald-700 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-yellow-400 text-white placeholder-emerald-500">
                         </div>
@@ -819,6 +830,7 @@
         </div>
     </div>
 </section>
+
 <section class="max-w-6xl mx-auto my-24 px-4">
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
@@ -828,12 +840,12 @@
             
             <div class="space-y-4">
                 <div>
-                    <label class="text-[10px] font-bold text-emerald-600 uppercase tracking-widest block mb-2">Goal Name</label>
+                    <label for="goal-input" class="text-[10px] font-bold text-emerald-600 uppercase tracking-widest block mb-2">Goal Name</label>
                     <input type="text" id="goal-input" placeholder="e.g., Read 5 pages of Quran" 
                         class="w-full bg-emerald-50/50 border border-emerald-100 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all">
                 </div>
                 <div>
-                    <label class="text-[10px] font-bold text-emerald-600 uppercase tracking-widest block mb-2">Target Count</label>
+                    <label for="target-input" class="text-[10px] font-bold text-emerald-600 uppercase tracking-widest block mb-2">Target Count</label>
                     <input type="number" id="target-input" value="1" min="1"
                         class="w-full bg-emerald-50/50 border border-emerald-100 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all">
                 </div>
@@ -874,6 +886,7 @@
 
     </div>
 </section>
+
 <section class="max-w-6xl mx-auto my-24 px-4">
     <div class="bg-gradient-to-br from-emerald-900 to-emerald-950 rounded-[3rem] p-8 md:p-16 text-center relative overflow-hidden shadow-2xl">
         <div class="absolute top-0 left-0 w-64 h-64 bg-emerald-500/5 rounded-full -ml-32 -mt-32"></div>
@@ -892,7 +905,7 @@
                 <button id="pomodoro-start" class="bg-white text-emerald-900 px-10 py-4 rounded-2xl font-bold hover:bg-emerald-50 transition-all active:scale-95 flex items-center gap-2">
                     Start Session
                 </button>
-                <button id="pomodoro-pip" class="bg-emerald-800 text-white p-4 rounded-2xl hover:bg-emerald-700 transition-all" title="Picture in Picture">
+                <button id="pomodoro-pip" aria-label="Picture in Picture Mode" class="bg-emerald-800 text-white p-4 rounded-2xl hover:bg-emerald-700 transition-all" title="Picture in Picture">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                     </svg>
@@ -909,6 +922,7 @@
         </div>
     </div>
 </section>
+
 <section class="max-w-6xl mx-auto my-24 px-4 pb-20">
     <div class="relative bg-white border border-emerald-100 rounded-[3rem] p-8 md:p-16 shadow-xl overflow-hidden">
         <div class="absolute -top-24 -right-24 w-64 h-64 bg-emerald-50 rounded-full opacity-50"></div>
@@ -971,6 +985,7 @@
         </div>
     </div>
 </section>
+
 <section class="max-w-6xl mx-auto my-24 px-4">
   <div class="text-center mb-12">
     <span class="text-emerald-600 font-bold text-xs uppercase tracking-[0.3em] mb-4 block">The Key to Worship</span>
@@ -984,7 +999,7 @@
 
   <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
     
-    <div onclick="openGuide('wudu')" class="group relative bg-white rounded-3xl p-8 border border-emerald-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden cursor-pointer">
+    <div onclick="openGuide('wudu')" role="button" tabindex="0" aria-label="Open Wudu Guide" class="group relative bg-white rounded-3xl p-8 border border-emerald-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden cursor-pointer">
       <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
@@ -1004,7 +1019,7 @@
       </div>
     </div>
 
-    <div onclick="openGuide('ghusl')" class="group relative bg-white rounded-3xl p-8 border border-emerald-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden cursor-pointer">
+    <div onclick="openGuide('ghusl')" role="button" tabindex="0" aria-label="Open Ghusl Guide" class="group relative bg-white rounded-3xl p-8 border border-emerald-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden cursor-pointer">
       <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
@@ -1024,7 +1039,7 @@
       </div>
     </div>
 
-    <div onclick="openGuide('tayammum')" class="group relative bg-white rounded-3xl p-8 border border-emerald-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden cursor-pointer">
+    <div onclick="openGuide('tayammum')" role="button" tabindex="0" aria-label="Open Tayammum Guide" class="group relative bg-white rounded-3xl p-8 border border-emerald-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden cursor-pointer">
       <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -1057,7 +1072,7 @@
           <h3 id="guide-title" class="text-2xl md:text-3xl font-bold text-emerald-900 font-amiri">Guide Title</h3>
           <p id="guide-subtitle" class="text-sm text-emerald-600 mt-1">Step by step instructions</p>
         </div>
-        <button onclick="closeGuide()" class="h-10 w-10 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-red-500 hover:bg-red-50 transition shadow-sm cursor-pointer z-50">
+        <button onclick="closeGuide()" aria-label="Close Guide" class="h-10 w-10 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-red-500 hover:bg-red-50 transition shadow-sm cursor-pointer z-50">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
         </button>
       </div>
@@ -1077,6 +1092,7 @@
       </div>
   </div>
 </div>
+
 <section class="max-w-6xl mx-auto my-24 px-4">
     <div class="text-center mb-12">
         <span class="text-emerald-600 font-bold text-xs uppercase tracking-[0.3em] mb-4 block">Daily Protection</span>
@@ -1090,7 +1106,7 @@
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         
-        <div onclick="openAdhkar('morning')" class="group relative overflow-hidden rounded-3xl cursor-pointer hover:-translate-y-2 transition-transform duration-500 shadow-lg border border-orange-100">
+        <div onclick="openAdhkar('morning')" role="button" tabindex="0" aria-label="Open Morning Adhkar" class="group relative overflow-hidden rounded-3xl cursor-pointer hover:-translate-y-2 transition-transform duration-500 shadow-lg border border-orange-100">
             <div class="absolute inset-0 bg-gradient-to-br from-orange-50 to-amber-100 opacity-100 transition-opacity"></div>
             <div class="absolute inset-0 bg-gradient-to-br from-orange-400 to-amber-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             
@@ -1108,7 +1124,7 @@
             </div>
         </div>
 
-        <div onclick="openAdhkar('evening')" class="group relative overflow-hidden rounded-3xl cursor-pointer hover:-translate-y-2 transition-transform duration-500 shadow-lg border border-indigo-100">
+        <div onclick="openAdhkar('evening')" role="button" tabindex="0" aria-label="Open Evening Adhkar" class="group relative overflow-hidden rounded-3xl cursor-pointer hover:-translate-y-2 transition-transform duration-500 shadow-lg border border-indigo-100">
             <div class="absolute inset-0 bg-gradient-to-br from-indigo-50 to-blue-50 opacity-100 transition-opacity"></div>
             <div class="absolute inset-0 bg-gradient-to-br from-indigo-500 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             
@@ -1126,7 +1142,7 @@
             </div>
         </div>
 
-        <div onclick="openAdhkar('sleep')" class="group relative overflow-hidden rounded-3xl cursor-pointer hover:-translate-y-2 transition-transform duration-500 shadow-lg border border-slate-100">
+        <div onclick="openAdhkar('sleep')" role="button" tabindex="0" aria-label="Open Sleep Adhkar" class="group relative overflow-hidden rounded-3xl cursor-pointer hover:-translate-y-2 transition-transform duration-500 shadow-lg border border-slate-100">
             <div class="absolute inset-0 bg-gradient-to-br from-slate-50 to-gray-100 opacity-100 transition-opacity"></div>
             <div class="absolute inset-0 bg-gradient-to-br from-slate-700 to-gray-800 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             
@@ -1146,6 +1162,7 @@
 
     </div>
 </section>
+
 <section class="max-w-6xl mx-auto my-24 px-4 relative">
   <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
     <div class="absolute top-10 left-10 w-32 h-32 bg-emerald-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
@@ -1189,6 +1206,7 @@
     </div>
   </div>
 </section>
+
 <section class="max-w-6xl mx-auto my-24 px-4">
     <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
         <div class="text-left">
@@ -1210,6 +1228,7 @@
     <div id="foods-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         </div>
 </section>
+<!-- Till Here -->
 <section class="max-w-5xl mx-auto my-24 px-4">
     <div class="text-center mb-12">
         <span class="text-emerald-600 font-bold text-xs uppercase tracking-[0.3em] mb-4 block">Spiritual Pharmacy</span>
