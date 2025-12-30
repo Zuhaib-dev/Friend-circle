@@ -3027,3 +3027,98 @@ body {
   opacity: 1;
   transform: translateY(0);
 }
+/* =========================================
+   GUIDING STARS (SAHABA) STYLES
+   ========================================= */
+
+/* Reuse .bg-floral-pattern */
+
+.star-card {
+    background: white;
+    border: 1px solid #ffe4e6; /* rose-100 */
+    border-radius: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+}
+
+/* Hover: Lift and Gold Glow */
+.star-card:hover {
+    transform: translateY(-8px);
+    border-color: #fcd34d; /* amber-300 */
+    box-shadow: 0 20px 40px -5px rgba(251, 191, 36, 0.15); /* Soft Amber Shadow */
+}
+
+/* Background Constellation Pattern (Subtle) */
+.star-bg-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(#fbbf24 1px, transparent 1px);
+    background-size: 20px 20px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.star-card:hover .star-bg-pattern {
+    opacity: 0.1; /* Reveal stars on hover */
+}
+
+/* The Main Icon Wrapper */
+.star-icon-wrapper {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 1.5rem auto;
+    background: #fff;
+    border: 2px solid #fecdd3; /* rose-200 */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    position: relative;
+    z-index: 10;
+    transition: all 0.5s ease;
+}
+
+.star-card:hover .star-icon-wrapper {
+    border-color: #fbbf24; /* amber-400 */
+    background: #fffbeb; /* amber-50 */
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(251, 191, 36, 0.3); /* Glowing Ring */
+}
+
+/* Content Reveal */
+.star-content {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.5s ease;
+}
+
+.star-card.active .star-content {
+    max-height: 250px;
+    opacity: 1;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px dashed #fcd34d; /* amber-300 */
+}
+
+/* Title Badge */
+.title-badge {
+    background: #fffbeb; /* amber-50 */
+    color: #b45309; /* amber-700 */
+    border: 1px solid #fde68a; /* amber-200 */
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 4px 12px;
+    border-radius: 99px;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+}

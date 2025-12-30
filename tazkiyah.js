@@ -6180,3 +6180,214 @@ document.addEventListener("contextmenu", function (event) {
       .join("");
   }
 })();
+// ==========================================
+// GUIDING STARS (SAHABA) LOGIC
+// ==========================================
+(function () {
+  const sahabaData = [
+    {
+      name: "Abu Bakr",
+      arabic: "أبو بكر الصديق",
+      title: "As-Siddiq (The Truthful)",
+      virtue:
+        "First adult male to believe. The Prophet's closest friend and companion in the Cave.",
+      legacy: "Unwavering faith and softness of heart.",
+      icon: "✨",
+    },
+    {
+      name: "Umar ibn Al-Khattab",
+      arabic: "عمر بن الخطاب",
+      title: "Al-Faruq (The Distinguisher)",
+      virtue:
+        "His acceptance of Islam strengthened the Ummah. Shaytan would flee from his path.",
+      legacy: "Strict justice and immense strength.",
+      icon: "⚖️",
+    },
+    {
+      name: "Uthman ibn Affan",
+      arabic: "عثمان بن عفان",
+      title: "Dhun-Nurayn (Possessor of Two Lights)",
+      virtue:
+        "Married two daughters of the Prophet ﷺ. Known for his extreme shyness and generosity.",
+      legacy: "Compiler of the Quran and modesty.",
+      icon: "📜",
+    },
+    {
+      name: "Ali ibn Abi Talib",
+      arabic: "علي بن أبي طالب",
+      title: "Asadullah (Lion of Allah)",
+      virtue:
+        "The first youth to believe. Renowned for his bravery, wisdom, and eloquence.",
+      legacy: "Gateway to the City of Knowledge.",
+      icon: "⚔️",
+    },
+  ];
+
+  const sahabaGrid = document.getElementById("sahaba-grid");
+
+  if (sahabaGrid) {
+    sahabaGrid.innerHTML = sahabaData
+      .map(
+        (item) => `
+            <div class="star-card group cursor-pointer" onclick="toggleStarCard(this)">
+                
+                <div class="star-bg-pattern"></div>
+
+                <div class="relative z-10">
+                    <div class="star-icon-wrapper">
+                        ${item.icon}
+                    </div>
+
+                    <h3 class="text-xl font-bold text-rose-950 font-amiri mb-1">${item.name}</h3>
+                    <span class="text-amber-500 font-amiri text-lg block mb-2">(${item.arabic})</span>
+                    <span class="title-badge">${item.title}</span>
+                </div>
+
+                <div class="star-content relative z-10">
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                        ${item.virtue}
+                    </p>
+                    <div class="bg-amber-50 p-3 rounded-xl border border-amber-100 shadow-sm">
+                        <span class="block text-[10px] text-amber-400 uppercase font-bold mb-1">Key Legacy</span>
+                        <p class="text-xs text-amber-800 font-bold italic">"${item.legacy}"</p>
+                    </div>
+                </div>
+
+                <div class="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span class="text-[10px] text-amber-400 font-bold uppercase">Tap for Virtue</span>
+                </div>
+            </div>
+        `
+      )
+      .join("");
+
+    // Toggle Function
+    window.toggleStarCard = function (element) {
+      // Close all others
+      document.querySelectorAll(".star-card").forEach((card) => {
+        if (card !== element) card.classList.remove("active");
+      });
+      // Toggle clicked
+      element.classList.toggle("active");
+    };
+  }
+})();
+// ==========================================
+// GUIDING STARS (SAHABA) LOGIC
+// ==========================================
+(function () {
+  const sahabaData = [
+    {
+      name: "Abu Bakr",
+      arabic: "أبو بكر الصديق",
+      title: "As-Siddiq (The Truthful)",
+      virtue:
+        "The first to embrace Islam outside the family. His unwavering faith and support during the Hijra made him 'Allah's Friend'.",
+      legacy: "Immense generosity & Trust.",
+      icon: "✨",
+    },
+    {
+      name: "Umar ibn Al-Khattab",
+      arabic: "عمر بن الخطاب",
+      title: "Al-Farooq (The Distinguisher)",
+      virtue:
+        "Known for strength, justice, and wisdom. A crucial advisor who stood through trials and organized the Islamic state.",
+      legacy: "Strict Justice & Structure.",
+      icon: "⚖️",
+    },
+    {
+      name: "Uthman ibn Affan",
+      arabic: "عثمان بن عفان",
+      title: "Dhun-Nurayn (Two Lights)",
+      virtue:
+        "The third Caliph. Known for his extreme modesty and generosity in financing the community's needs.",
+      legacy: "Modesty & Compilation of Quran.",
+      icon: "🕯️",
+    },
+    {
+      name: "Ali ibn Abi Talib",
+      arabic: "علي بن أبي طالب",
+      title: "Asadullah (Lion of Allah)",
+      virtue:
+        "The Prophet's cousin and son-in-law. Known for courage, knowledge, and piety, earning deep affection from the Prophet.",
+      legacy: "Gateway to Knowledge.",
+      icon: "⚔️",
+    },
+    {
+      name: "Abu Hurayrah",
+      arabic: "أبو هريرة",
+      title: "The Preserver",
+      virtue:
+        "Became a highly trusted companion and the most prolific narrator of Hadith due to his constant presence by the Prophet's side.",
+      legacy: "Preservation of Sunnah.",
+      icon: "📚",
+    },
+    {
+      name: "Talha & Zubayr",
+      arabic: "طلحة والزبير",
+      title: "The Hawari (Disciples)",
+      virtue:
+        "Both were among the ten promised Paradise. Known for their immense bravery and defense of the Prophet in battle.",
+      legacy: "Unwavering Bravery.",
+      icon: "🛡️",
+    },
+    {
+      name: "Abd al-Rahman & Sa'd",
+      arabic: "عبد الرحمن وسعد",
+      title: "The Vanguards",
+      virtue:
+        "Among the ten promised Paradise. They were significant figures in the early community, known for sacrifice and leadership.",
+      legacy: "Sacrifice & Leadership.",
+      icon: "🏹",
+    },
+  ];
+
+  const sahabaGrid = document.getElementById("sahaba-grid");
+
+  if (sahabaGrid) {
+    sahabaGrid.innerHTML = sahabaData
+      .map(
+        (item) => `
+            <div class="star-card group cursor-pointer" onclick="toggleStarCard(this)">
+                
+                <div class="star-bg-pattern"></div>
+
+                <div class="relative z-10">
+                    <div class="star-icon-wrapper">
+                        ${item.icon}
+                    </div>
+
+                    <h3 class="text-xl font-bold text-rose-950 font-amiri mb-1">${item.name}</h3>
+                    <span class="text-amber-500 font-amiri text-lg block mb-2">(${item.arabic})</span>
+                    <span class="title-badge">${item.title}</span>
+                </div>
+
+                <div class="star-content relative z-10">
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                        ${item.virtue}
+                    </p>
+                    <div class="bg-amber-50 p-3 rounded-xl border border-amber-100 shadow-sm">
+                        <span class="block text-[10px] text-amber-400 uppercase font-bold mb-1">Key Trait</span>
+                        <p class="text-xs text-amber-800 font-bold italic">"${item.legacy}"</p>
+                    </div>
+                </div>
+
+                <div class="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span class="text-[10px] text-amber-400 font-bold uppercase">Tap for Virtue</span>
+                </div>
+            </div>
+        `
+      )
+      .join("");
+
+    // Toggle Function
+    window.toggleStarCard = function (element) {
+      // Close all others
+      document.querySelectorAll(".star-card").forEach((card) => {
+        if (card !== element) card.classList.remove("active");
+      });
+      // Toggle clicked
+      element.classList.toggle("active");
+    };
+  }
+})();
