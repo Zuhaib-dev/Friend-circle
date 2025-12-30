@@ -3637,3 +3637,115 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   }
 })();
+// ==========================================
+// THE 40 RABBANAS (QURANIC PLEAS)
+// ==========================================
+(function () {
+  const rabbanaData = [
+    {
+      verse: "2:201",
+      surah: "Al-Baqarah",
+      arabic:
+        "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+      trans:
+        "Rabbana atina fid-dunya hasanatan wa fil 'akhirati hasanatan waqina 'adhaban-nar.",
+      meaning:
+        "Our Lord, give us in this world [that which is] good and in the Hereafter [that which is] good and protect us from the punishment of the Fire.",
+      tag: "The Ultimate Success",
+    },
+    {
+      verse: "3:8",
+      surah: "Ali 'Imran",
+      arabic:
+        "رَبَّنَا لاَ تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِن لَّدُنكَ رَحْمَةً",
+      trans:
+        "Rabbana la tuzigh qulubana ba'da idh hadaitana wa hab lana min ladunka rahmatan.",
+      meaning:
+        "Our Lord, let not our hearts deviate after You have guided us and grant us from Yourself mercy.",
+      tag: "Steadfastness",
+    },
+    {
+      verse: "3:16",
+      surah: "Ali 'Imran",
+      arabic:
+        "رَبَّنَا إِنَّنَا آمَنَّا فَاغْفِرْ لَنَا ذُنُوبَنَا وَقِنَا عَذَابَ النَّارِ",
+      trans:
+        "Rabbana innana amanna faghfir lana dhunubana wa qina 'adhaban-nar.",
+      meaning:
+        "Our Lord, indeed we have believed, so forgive us our sins and protect us from the punishment of the Fire.",
+      tag: "Forgiveness",
+    },
+    {
+      verse: "14:40",
+      surah: "Ibrahim",
+      arabic:
+        "رَبِّ اجْعَلْنِي مُقِيمَ الصَّلاَةِ وَمِن ذُرِّيَّتِي رَبَّنَا وَتَقَبَّلْ دُعَاء",
+      trans:
+        "Rabbij 'alni muqimas-salati wa min dhurriyyati, Rabbana wa taqabbal du'a.",
+      meaning:
+        "My Lord, make me an establisher of prayer, and [many] from my descendants. Our Lord, and accept my supplication.",
+      tag: "Family & Salah",
+    },
+    {
+      verse: "23:109",
+      surah: "Al-Mu'minun",
+      arabic:
+        "رَبَّنَا آمَنَّا فَاغْفِرْ لَنَا وَارْحَمْنَا وَأَنتَ خَيْرُ الرَّاحِمِينَ",
+      trans: "Rabbana amanna faghfir lana warhamna wa anta khairur-rahimeen.",
+      meaning:
+        "Our Lord, we have believed, so forgive us and have mercy upon us, and You are the best of the merciful.",
+      tag: "Mercy",
+    },
+    {
+      verse: "66:11",
+      surah: "At-Tahrim",
+      arabic: "رَبِّ ابْنِ لِي عِندَكَ بَيْتًا فِي الْجَنَّةِ",
+      trans: "Rabbib ni li 'indaka baitan fil jannah.",
+      meaning: "My Lord, build for me near You a house in Paradise.",
+      tag: "Jannah (Dua of Asiya)",
+    },
+  ];
+
+  const container = document.getElementById("rabbana-grid");
+
+  if (container) {
+    container.innerHTML = rabbanaData
+      .map(
+        (item) => `
+            <div class="bg-paper rounded-2xl p-8 border border-amber-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 relative group overflow-hidden">
+                
+                <div class="absolute top-0 right-0 bg-amber-100 px-4 py-1.5 rounded-bl-2xl text-[10px] font-bold text-amber-800 uppercase tracking-widest">
+                    ${item.tag}
+                </div>
+
+                <div class="mb-6 flex items-center gap-2">
+                    <span class="w-8 h-8 rounded-full bg-amber-200/50 flex items-center justify-center text-[10px] font-bold text-amber-900 border border-amber-200">
+                        ${item.verse.split(":")[1]}
+                    </span>
+                    <span class="text-xs font-bold text-amber-800/60 uppercase tracking-wider">${
+                      item.surah
+                    } ${item.verse}</span>
+                </div>
+
+                <h3 class="font-amiri text-2xl md:text-3xl text-gray-800 leading-[2.2] dir-rtl mb-4 group-hover:text-emerald-800 transition-colors">
+                    ${item.arabic}
+                </h3>
+
+                <div class="w-full h-px bg-amber-200/50 my-4"></div>
+
+                <div class="space-y-2">
+                    <p class="text-xs text-emerald-600 font-medium italic">${
+                      item.trans
+                    }</p>
+                    <p class="text-sm text-gray-600 leading-relaxed font-serif">"${
+                      item.meaning
+                    }"</p>
+                </div>
+
+                <div class="absolute bottom-0 right-0 w-16 h-16 bg-gradient-to-tl from-amber-100 to-transparent opacity-30 rounded-tl-full"></div>
+            </div>
+        `
+      )
+      .join("");
+  }
+})();
