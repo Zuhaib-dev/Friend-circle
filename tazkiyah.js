@@ -3749,3 +3749,245 @@ document.addEventListener("DOMContentLoaded", () => {
       .join("");
   }
 })();
+// ==========================================
+// PROPHETIC TIMELINE (LEGACY OF LIGHT)
+// ==========================================
+(function() {
+    const timelineData = [
+        {
+            name: "Adam (AS)",
+            title: "The First Human",
+            trait: "Repentance (Tawbah)",
+            desc: "Taught us that mistakes are human, but turning back to Allah immediately is divine.",
+            location: "Earth",
+            icon: "🌍"
+        },
+        {
+            name: "Nuh (AS)",
+            title: "The Grateful Servant",
+            trait: "Perseverance (Sabr)",
+            desc: "Preached for 950 years with unwavering patience, teaching us never to give up on guidance.",
+            location: "Ancient Iraq",
+            icon: "⛵"
+        },
+        {
+            name: "Ibrahim (AS)",
+            title: "Khalilullah (Friend of Allah)",
+            trait: "Submission (Tawakkul)",
+            desc: "Was thrown into fire and asked to sacrifice his son. He taught us complete trust in Allah's plan.",
+            location: "Babylon / Makkah",
+            icon: "🔥"
+        },
+        {
+            name: "Yusuf (AS)",
+            title: "The Truthful",
+            trait: "Purity & Forgiveness",
+            desc: "Betrayed by family, enslaved, and imprisoned, yet he forgave when he had power.",
+            location: "Egypt",
+            icon: "👑"
+        },
+        {
+            name: "Musa (AS)",
+            title: "Kalimullah (Spoke to Allah)",
+            trait: "Bravery & Justice",
+            desc: "Stood against the tyrant Pharaoh. Taught us to speak truth to power.",
+            location: "Sinai / Egypt",
+            icon: "🌊"
+        },
+        {
+            name: "Isa (AS)",
+            title: "Ruhullah (Spirit of Allah)",
+            trait: "Humility & Detachment",
+            desc: "Healed the blind and lepers. Taught us to detach from materialism and purify the heart.",
+            location: "Palestine",
+            icon: "🕊️"
+        },
+        {
+            name: "Muhammad ﷺ",
+            title: "Khatam an-Nabiyyin",
+            trait: "Mercy to the Worlds",
+            desc: "The final messenger who perfected character and completed the religion for all humanity.",
+            location: "Makkah / Madinah",
+            icon: "🕌"
+        }
+    ];
+
+    const container = document.getElementById('timeline-container');
+    const lineFill = document.getElementById('timeline-fill');
+    const wrapper = document.getElementById('timeline-wrapper');
+
+    if (container) {
+        
+        // 1. Render Items
+        container.innerHTML = timelineData.map((item, index) => {
+            const isLeft = index % 2 === 0;
+            // Desktop: Alternating Left/Right. Mobile: Always Right content, Left Line.
+            
+            return `
+                <div class="timeline-item relative flex md:items-center ${isLeft ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 opacity-0 translate-y-10">
+                    
+                    <div class="flex-1 ml-16 md:ml-0">
+                        <div class="bg-white p-6 rounded-2xl shadow-lg border border-emerald-50 relative hover:-translate-y-1 transition-transform duration-300 ${isLeft ? 'timeline-arrow-left md:mr-8' : 'timeline-arrow-right md:ml-8'}">
+                            
+                            <div class="flex justify-between items-start mb-2">
+                                <div>
+                                    <span class="text-[10px] font-bold text-emerald-500 uppercase tracking-widest block mb-1">${item.trait}</span>
+                                    <h3 class="text-xl font-bold text-emerald-900 font-amiri">${item.name}</h3>
+                                </div>
+                                <span class="text-2xl filter grayscale opacity-50">${item.icon}</span>
+                            </div>
+                            
+                            <p class="text-xs text-yellow-600 font-bold uppercase mb-3">${item.title} • ${item.location}</p>
+                            
+                            <p class="text-sm text-gray-500 leading-relaxed">
+                                ${item.desc}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="absolute left-8 md:left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full bg-emerald-100 border-4 border-white flex items-center justify-center z-10 shadow-md timeline-dot">
+                        <div class="w-2.5 h-2.5 rounded-full bg-gray-300 transition-colors duration-500"></div>
+                    </div>
+
+                    <div class="flex-1 hidden md:block"></div>
+
+                </div>
+            `;
+        }).join('');
+
+        // 2. Scroll Animation Logic
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: "0px 0px -100px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal-visible');
+                    
+                    // Light up the dot
+                    const dot = entry.target.querySelector('.timeline-dot div');
+                    if(dot) {
+                        dot.classList.remove('bg-gray-300');
+                        dot.classList.add('bg-emerald-500');
+                    }
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            observer.observe(item);
+        });
+
+        // 3. Line Drawing Logic
+        window.addEventListener('scroll', () => {
+            const rect = wrapper.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            
+            // Calculate how much of the section is visible
+            let percentage = (windowHeight - rect.top) / rect.height * 100;
+            
+            // Clamp between 0 and 100
+            percentage = Math.max(0, Math.min(100, percentage));
+            
+            // Adjust to align with the cards better (optional tuning)
+            lineFill.style.height = `${percentage}%`;
+        });
+    }
+})();
+// ==========================================
+// THE 7 UNDER THE SHADE (SPOTLIGHT EFFECT)
+// ==========================================
+(function() {
+    const shadeData = [
+        {
+            title: "The Just Leader",
+            desc: "A ruler or leader (Imam Adil) who governed with absolute justice and fairness.",
+            icon: "⚖️",
+            color: "text-indigo-600"
+        },
+        {
+            title: "The Devout Youth",
+            desc: "A young person who grew up in the worship of Allah, resisting peer pressure and desires.",
+            icon: "🌱",
+            color: "text-emerald-600"
+        },
+        {
+            title: "The Heart Attached",
+            desc: "A person whose heart is attached to the Mosques. They find peace only in the House of Allah.",
+            icon: "🕌",
+            color: "text-amber-600"
+        },
+        {
+            title: "Love for Allah",
+            desc: "Two people who love each other for Allah's sake, meeting for that and parting for that.",
+            icon: "🤝",
+            color: "text-rose-600"
+        },
+        {
+            title: "The Chaste Soul",
+            desc: "A man invited by a woman of beauty and status for sin, but says: 'I fear Allah.'",
+            icon: "🛡️",
+            color: "text-slate-600"
+        },
+        {
+            title: "The Secret Giver",
+            desc: "Someone who gives charity so secretly that their left hand does not know what their right hand gave.",
+            icon: "🤫",
+            color: "text-teal-600"
+        },
+        {
+            title: "The Weeping Eye",
+            desc: "A person who remembers Allah in private and their eyes flood with tears.",
+            icon: "💧",
+            color: "text-blue-500"
+        }
+    ];
+
+    const grid = document.getElementById('shade-grid');
+
+    if (grid) {
+        
+        // 1. Render Cards
+        grid.innerHTML = shadeData.map((item, index) => {
+            // Logic to make the last item span full width on tablets if odd number
+            const spanClass = (index === 6) ? 'md:col-span-2 lg:col-span-1' : '';
+            
+            return `
+            <div class="shade-card group/card cursor-default ${spanClass}">
+                <div class="shade-content p-8 flex flex-col items-center text-center h-full transition-colors duration-300 hover:bg-indigo-50/30">
+                    
+                    <div class="w-16 h-16 rounded-2xl bg-gray-50 flex items-center justify-center text-3xl mb-6 shadow-sm border border-gray-100 group-hover/card:scale-110 transition-transform duration-300">
+                        ${item.icon}
+                    </div>
+
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 font-amiri group-hover/card:${item.color} transition-colors">
+                        ${item.title}
+                    </h3>
+                    
+                    <p class="text-sm text-gray-500 leading-relaxed">
+                        ${item.desc}
+                    </p>
+
+                    <span class="absolute top-4 right-6 text-6xl font-bold text-gray-100 -z-10 select-none opacity-50 group-hover/card:opacity-100 transition-opacity">
+                        ${index + 1}
+                    </span>
+                </div>
+            </div>
+            `;
+        }).join('');
+
+        // 2. Spotlight Logic
+        grid.onmousemove = e => {
+            for(const card of document.getElementsByClassName("shade-card")) {
+                const rect = card.getBoundingClientRect(),
+                      x = e.clientX - rect.left,
+                      y = e.clientY - rect.top;
+
+                card.style.setProperty("--mouse-x", `${x}px`);
+                card.style.setProperty("--mouse-y", `${y}px`);
+            };
+        };
+    }
+})();
