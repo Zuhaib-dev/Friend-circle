@@ -2864,3 +2864,47 @@ body {
   text-align: center;
   z-index: 10;
 }
+/* =========================================
+   NEWSLETTER SECTION STYLES
+   ========================================= */
+
+/* Reuse .bg-floral-pattern */
+
+/* Float Animation for Icon */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Success Message Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+/* Input Placeholder Color override (Tailwind handles this mostly, but just in case) */
+#newsletter-email::placeholder {
+  color: #fda4af; /* rose-300 */
+  opacity: 1;
+}

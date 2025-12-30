@@ -6029,3 +6029,65 @@ document.addEventListener("contextmenu", function (event) {
       .join("");
   }
 })();
+// ==========================================
+// NEWSLETTER FORM LOGIC (FORMSPREE AJAX)
+// ==========================================
+(function () {
+  const form = document.getElementById("newsletter-form");
+  const successMsg = document.getElementById("newsletter-success");
+
+  if (form) {
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault(); // Stop default redirect
+
+      const btn = form.querySelector("button");
+      const originalBtnContent = btn.innerHTML;
+
+      // 1. Loading State
+      btn.innerHTML = "<span>Planting...</span>";
+      btn.style.opacity = "0.7";
+      btn.disabled = true;
+
+      // 2. Prepare Data
+      const formData = new FormData(form);
+
+      try {
+        // 3. Send to Formspree
+        const response = await fetch(form.action, {
+          method: "POST",
+          body: formData,
+          headers: {
+            Accept: "application/json",
+          },
+        });
+
+        if (response.ok) {
+          // 4. Success State
+          form.style.display = "none"; // Hide form
+          successMsg.classList.remove("hidden"); // Show success message
+
+          // Optional: Save to local storage
+          localStorage.setItem("tazkiyah_subscribed", "true");
+        } else {
+          // Handle Formspree errors (rare)
+          const data = await response.json();
+          if (Object.hasOwn(data, "errors")) {
+            alert(data.errors.map((error) => error.message).join(", "));
+          } else {
+            alert("Oops! There was a problem planting your seed.");
+          }
+          // Reset Button
+          btn.innerHTML = originalBtnContent;
+          btn.style.opacity = "1";
+          btn.disabled = false;
+        }
+      } catch (error) {
+        // Network error
+        alert("Oops! There was a problem connecting to the garden.");
+        btn.innerHTML = originalBtnContent;
+        btn.style.opacity = "1";
+        btn.disabled = false;
+      }
+    });
+  }
+})();
