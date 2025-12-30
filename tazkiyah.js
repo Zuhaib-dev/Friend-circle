@@ -4910,3 +4910,95 @@ document.addEventListener("DOMContentLoaded", function () {
   // Initialize
   if (taskList) renderTasks();
 })();
+// ==========================================
+// 5 PILLARS SECTION LOGIC
+// ==========================================
+(function() {
+    const pillarsData = [
+        {
+            number: "1",
+            name: "Shahada",
+            arabic: "الشهادة",
+            title: "The Declaration",
+            icon: "☝️",
+            desc: "To testify that there is no god but Allah and that Muhammad ﷺ is His Messenger. It is the key to Paradise and the foundation of all other deeds."
+        },
+        {
+            number: "2",
+            name: "Salah",
+            arabic: "الصلاة",
+            title: "The Prayer",
+            icon: "🕌",
+            desc: "The five daily prayers. It is the first thing a person will be held accountable for on the Day of Judgment and the connection between the servant and his Lord."
+        },
+        {
+            number: "3",
+            name: "Zakat",
+            arabic: "الزكاة",
+            title: "The Almsgiving",
+            icon: "🤲",
+            desc: "Purifying one's wealth by giving 2.5% of savings to the poor. It cleanses the soul from greed and circulates wealth in the community."
+        },
+        {
+            number: "4",
+            name: "Sawm",
+            arabic: "الصوم",
+            title: "The Fasting",
+            icon: "🌙",
+            desc: "Fasting during the month of Ramadan. It teaches self-discipline, empathy for the hungry, and creates a shield against sins."
+        },
+        {
+            number: "5",
+            name: "Hajj",
+            arabic: "الحج",
+            title: "The Pilgrimage",
+            icon: "🕋",
+            desc: "The pilgrimage to Makkah once in a lifetime for those who are physically and financially able. It is a rebirth, returning as sinless as a newborn."
+        }
+    ];
+
+    const pillarsGrid = document.getElementById('pillars-grid');
+
+    if (pillarsGrid) {
+        pillarsGrid.innerHTML = pillarsData.map((pillar) => `
+            <div class="pillar-card bg-floral-pattern p-6 rounded-3xl border border-rose-100 cursor-pointer hover:shadow-lg group flex-grow" onclick="togglePillarCard(this)">
+                
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 rounded-full bg-white border border-rose-200 flex items-center justify-center text-xl shadow-sm group-hover:scale-110 transition-transform">
+                        ${pillar.icon}
+                    </div>
+                    <span class="text-2xl font-bold text-rose-200 font-amiri opacity-50">
+                        ${pillar.number}
+                    </span>
+                </div>
+
+                <div class="mb-2">
+                    <h3 class="text-2xl font-bold text-rose-900 font-amiri inline-block mr-2">${pillar.name}</h3>
+                    <span class="text-rose-400 font-amiri text-lg">(${pillar.arabic})</span>
+                </div>
+                
+                <p class="text-xs text-rose-500 font-bold uppercase tracking-wide mb-1">${pillar.title}</p>
+
+                <div class="pillar-card-content">
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        ${pillar.desc}
+                    </p>
+                </div>
+
+                <div class="mt-4 flex justify-center">
+                    <div class="w-8 h-1 bg-rose-200 rounded-full group-hover:w-16 transition-all duration-300"></div>
+                </div>
+            </div>
+        `).join('');
+
+        // Toggle Function
+        window.togglePillarCard = function(element) {
+            // Close all others
+            document.querySelectorAll('.pillar-card').forEach(card => {
+                if(card !== element) card.classList.remove('active');
+            });
+            // Toggle clicked
+            element.classList.toggle('active');
+        };
+    }
+})();

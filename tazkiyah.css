@@ -1899,3 +1899,42 @@ body {
   color: #9a3412;
   border: 1px solid #fed7aa;
 } /* Orange */
+/* =========================================
+   5 PILLARS (FLORAL THEME) STYLES
+   ========================================= */
+
+/* Reuse Floral Pattern (If not already defined) */
+.bg-floral-pattern {
+  background-color: #fff1f2; /* rose-50 */
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23fb7185' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Accordion Animation for Pillars */
+.pillar-card-content {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.pillar-card.active .pillar-card-content {
+  max-height: 200px; /* Adjust if text gets cut off */
+  opacity: 1;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px dashed #fecdd3; /* rose-200 */
+}
+
+/* Active State Styling */
+.pillar-card {
+  transition: all 0.3s ease;
+  width: 100%;
+  max-width: 350px; /* Ensures cards aren't too wide */
+}
+
+.pillar-card.active {
+  border-color: #f43f5e; /* rose-500 */
+  background-color: white; /* Clean white background when open */
+  box-shadow: 0 10px 25px -5px rgba(244, 63, 94, 0.15);
+  transform: translateY(-4px);
+}
