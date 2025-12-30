@@ -3220,3 +3220,57 @@ body {
     background: #ccfbf1; /* teal-100 */
     color: #0f766e; /* teal-700 */
 }
+/* =========================================
+   PRELOADER STYLES
+   ========================================= */
+
+/* Prevent scrolling while loading */
+body.loading {
+    overflow: hidden;
+}
+
+/* 1. Slow Spin for the Outer Star */
+@keyframes spinSlow {
+    from { transform: rotate(45deg); }
+    to { transform: rotate(405deg); } /* 45 + 360 */
+}
+
+.animate-spin-slow {
+    animation: spinSlow 8s infinite linear;
+}
+
+/* 2. Reverse Spin for the Second Square */
+@keyframes spinReverse {
+    from { transform: rotate(12deg); }
+    to { transform: rotate(-348deg); } /* 12 - 360 */
+}
+
+.animate-spin-reverse {
+    animation: spinReverse 10s infinite linear;
+}
+
+/* 3. Soft Pulse for the Heart/Flower */
+@keyframes pulseSlow {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(0.85); opacity: 0.7; }
+}
+
+.animate-pulse-slow {
+    animation: pulseSlow 3s infinite ease-in-out;
+}
+
+/* 4. Text Fade Up Entry */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-up {
+    animation: fadeUp 1s ease-out forwards;
+}
+
+/* 5. The Exit Class (Added by JS) */
+.preloader-hidden {
+    opacity: 0;
+    pointer-events: none; /* Allows user to click things underneath */
+}

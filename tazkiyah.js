@@ -6492,3 +6492,39 @@ document.addEventListener("contextmenu", function (event) {
     };
   }
 })();
+// ==========================================
+// SMART PRELOADER LOGIC
+// ==========================================
+(function() {
+    // 1. Lock the scroll immediately
+    document.body.classList.add('loading');
+
+    const preloader = document.getElementById('site-preloader');
+    const minLoadTime = 2500; // Minimum time in ms (2.5 seconds)
+    const startTime = Date.now();
+
+    function hidePreloader() {
+        // Calculate how much time has passed
+        const elapsedTime = Date.now() - startTime;
+        
+        // Calculate remaining time to meet the minimum
+        const remainingTime = Math.max(0, minLoadTime - elapsedTime);
+
+        // Wait for the remaining time, then fade out
+        setTimeout(() => {
+            if (preloader) {
+                // Add the CSS class to fade it out
+                preloader.classList.add('preloader-hidden');
+
+                // Wait for the CSS transition (0.7s) to finish, then remove from DOM
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                    document.body.classList.remove('loading'); // Unlock scroll
+                }, 700);
+            }
+        }, remainingTime);
+    }
+
+    // Listen for the window load event (when all images/scripts are done)
+    window.addEventListener('load', hidePreloader);
+})();
