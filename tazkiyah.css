@@ -2085,3 +2085,59 @@ body {
   transform: rotate(90deg) scale(1.2);
   opacity: 0.1;
 }
+/* =========================================
+   SPRING OF HEARTS STYLES
+   ========================================= */
+
+/* Reuse .bg-floral-pattern from previous sections */
+
+.surah-card {
+    position: relative;
+    border: 1px solid #ffe4e6; /* rose-100 */
+    background: white;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    border-left: 6px solid #f43f5e; /* rose-500 (The Book Spine) */
+}
+
+.surah-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px -5px rgba(244, 63, 94, 0.15);
+}
+
+/* Active State */
+.surah-card.active {
+    background-color: #fff1f2; /* rose-50 */
+    border-color: #fda4af; /* rose-300 */
+    border-left-width: 8px;
+    box-shadow: 0 20px 40px -5px rgba(244, 63, 94, 0.2);
+}
+
+/* Content Reveal */
+.surah-card-content {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.5s ease;
+}
+
+.surah-card.active .surah-card-content {
+    max-height: 250px;
+    opacity: 1;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px dashed #fecdd3; /* rose-200 */
+}
+
+/* Badge Style */
+.surah-badge {
+    background: #fff;
+    border: 1px solid #fecdd3;
+    color: #e11d48;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 99px;
+    letter-spacing: 0.05em;
+}

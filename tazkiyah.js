@@ -5221,3 +5221,103 @@ document.addEventListener("contextmenu", function (event) {
     };
   }
 })();
+// ==========================================
+// SPRING OF HEARTS LOGIC
+// ==========================================
+(function () {
+  const surahData = [
+    {
+      name: "Surah Al-Mulk",
+      arabic: "الملك",
+      title: "The Shield",
+      benefit: "Protects from the punishment of the grave.",
+      time: "Every Night before sleep",
+      desc: "The Prophet ﷺ said: 'There is a Surah of 30 verses which intercedes for a man until he is forgiven.'",
+      icon: "🛡️",
+    },
+    {
+      name: "Surah Al-Kahf",
+      arabic: "الكهف",
+      title: "The Light",
+      benefit: "Illuminates light between two Fridays & protects from Dajjal.",
+      time: "Every Friday",
+      desc: "The Prophet ﷺ said: 'Whoever reads Al-Kahf on Friday, he will be illuminated with light between the two Fridays.'",
+      icon: "✨",
+    },
+    {
+      name: "Surah Al-Baqarah",
+      arabic: "البقرة",
+      title: "The Defender",
+      benefit: "Shaytan flees from the house where it is recited.",
+      time: "Frequently / Every 3 Days",
+      desc: "The Prophet ﷺ said: 'Do not turn your houses into graveyards; surely Satan flees from the house in which Surat Al-Baqarah is read.'",
+      icon: "🏰",
+    },
+    {
+      name: "Surah Al-Waqi'ah",
+      arabic: "الواقعة",
+      title: "The Provider",
+      benefit: "Protection against poverty and financial hardship.",
+      time: "Every Night",
+      desc: "Abdullah ibn Mas'ud (RA) reported that the Prophet ﷺ advised reciting it nightly to never face poverty.",
+      icon: "🌾",
+    },
+  ];
+
+  const springGrid = document.getElementById("quran-spring-grid");
+
+  if (springGrid) {
+    springGrid.innerHTML = surahData
+      .map(
+        (item) => `
+            <div class="surah-card bg-floral-pattern p-6 rounded-r-3xl rounded-l-md cursor-pointer group" onclick="toggleSurahCard(this)">
+                
+                <div class="flex justify-between items-start mb-2">
+                    <span class="surah-badge">${item.title}</span>
+                    <div class="text-rose-200 text-4xl opacity-20 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 transform rotate-12">
+                        ${item.icon}
+                    </div>
+                </div>
+
+                <div class="mb-1">
+                    <h3 class="text-xl font-bold text-rose-900 font-amiri">${item.name}</h3>
+                    <span class="text-rose-400 font-amiri text-lg">(${item.arabic})</span>
+                </div>
+                
+                <p class="text-xs text-gray-500 font-semibold mb-2">
+                    <span class="text-rose-500">Recite:</span> ${item.time}
+                </p>
+
+                <div class="surah-card-content">
+                    <div class="bg-rose-50 p-3 rounded-xl border border-rose-100 mb-3">
+                        <span class="block text-[10px] text-rose-400 uppercase font-bold mb-1">Key Benefit</span>
+                        <p class="text-xs text-rose-800 font-bold leading-relaxed">${item.benefit}</p>
+                    </div>
+                    <p class="text-gray-500 text-xs italic leading-relaxed">
+                        "${item.desc}"
+                    </p>
+                </div>
+
+                <div class="mt-4 text-center">
+                    <div class="inline-flex items-center gap-1 text-[10px] font-bold text-rose-300 uppercase tracking-widest group-hover:text-rose-500 transition-colors">
+                        <span>Read More</span>
+                        <svg class="w-3 h-3 group-hover:translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                </div>
+
+            </div>
+        `
+      )
+      .join("");
+
+    // Toggle Function
+    window.toggleSurahCard = function (element) {
+      // Close all others
+      document.querySelectorAll(".surah-card").forEach((card) => {
+        if (card !== element) card.classList.remove("active");
+      });
+      // Toggle clicked
+      element.classList.toggle("active");
+    };
+  }
+})();
