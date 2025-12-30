@@ -4494,3 +4494,65 @@ document.addEventListener("DOMContentLoaded", function () {
   if (displayDescription) displayDescription.classList.add("active");
   if (displaySource) displaySource.classList.add("active");
 });
+// ==========================================
+// THE UNSEEN COMPANIONS (ANGELS)
+// ==========================================
+document.addEventListener("DOMContentLoaded", function () {
+  const angelsData = [
+    {
+      name: "Kiraman Katibin",
+      role: "The Honorable Scribes",
+      desc: "Two angels sit on your shoulders. The one on the right records good deeds instantly. The one on the left waits before recording a sin, hoping you will repent.",
+      icon: "🪶", // Feather
+    },
+    {
+      name: "Al-Mu'aqqibat",
+      role: "The Guardians",
+      desc: "Angels who guard you by Allah's command from the front and behind, protecting you from harm until the decree of Allah arrives.",
+      icon: "🛡️", // Shield
+    },
+    {
+      name: "The Sayyahun",
+      role: "The Seekers",
+      desc: "Angels who roam the earth looking for circles of Dhikr. When they find one, they call out: 'Come to your need!' and surround the gathering with their wings.",
+      icon: "💫", // Dizzy/Orbit
+    },
+    {
+      name: "Shift of Fajr & Asr",
+      role: "The Witnesses",
+      desc: "Angels of the night and day meet at Fajr and Asr. They ascend to Allah and testify: 'We left them while they were praying, and came to them while they were praying.'",
+      icon: "🌅", // Sunrise
+    },
+    {
+      name: "Mikaeel (AS)",
+      role: "The Provider",
+      desc: "In charge of rain and vegetation. Every drop of rain is accompanied by an angel who places it exactly where Allah has commanded.",
+      icon: "🌧️", // Cloud/Rain
+    },
+    {
+      name: "The Visitors of Friday",
+      role: "The Gatekeepers",
+      desc: "On Friday, angels stand at the doors of the Mosque, recording the people in order of arrival. When the Imam sits, they close their scrolls to listen.",
+      icon: "📜", // Scroll
+    },
+  ];
+
+  const angelsGrid = document.getElementById("angels-grid");
+
+  if (angelsGrid) {
+    angelsGrid.innerHTML = angelsData
+      .map(
+        (angel) => `
+            <div class="angel-card">
+                <div class="angel-icon-box">
+                    ${angel.icon}
+                </div>
+                <h3 class="angel-name">${angel.name}</h3>
+                <span class="angel-role">${angel.role}</span>
+                <p class="angel-desc">${angel.desc}</p>
+            </div>
+        `
+      )
+      .join("");
+  }
+});

@@ -1429,3 +1429,207 @@ body {
   opacity: 1;
   transform: translateY(0);
 }
+/* =========================================
+   THE UNSEEN COMPANIONS (ANGELS SECTION)
+   ========================================= */
+.angels-section {
+  position: relative;
+  max-width: 1200px;
+  margin: 6rem auto;
+  padding: 4rem 2rem;
+  background: #f8fafc; /* Slate 50 */
+  border-radius: 3rem;
+  overflow: hidden;
+  /* Create a subtle mesh gradient background */
+  background: radial-gradient(circle at top left, #f0f9ff, #e0f2fe, #f8fafc);
+}
+
+/* Header Styling */
+.angels-header {
+  text-align: center;
+  margin-bottom: 4rem;
+  position: relative;
+  z-index: 10;
+}
+
+.angels-subtitle {
+  color: #0ea5e9; /* Sky 500 */
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.angels-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #0f172a; /* Slate 900 */
+  font-family: "Amiri", serif;
+}
+
+.highlight-light {
+  color: #38bdf8; /* Sky 400 */
+  text-shadow: 0 0 30px rgba(56, 189, 248, 0.3);
+}
+
+.angels-desc {
+  color: #64748b; /* Slate 500 */
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Background Glowing Orbs */
+.angel-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.6;
+  z-index: 0;
+  animation: floatOrb 10s infinite alternate ease-in-out;
+}
+
+.orb-1 {
+  width: 300px;
+  height: 300px;
+  background: #bae6fd; /* Sky 200 */
+  top: -50px;
+  left: -50px;
+}
+
+.orb-2 {
+  width: 400px;
+  height: 400px;
+  background: #e0f2fe; /* Sky 100 */
+  bottom: -100px;
+  right: -100px;
+  animation-delay: -5s;
+}
+
+.orb-3 {
+  width: 200px;
+  height: 200px;
+  background: #f0f9ff;
+  top: 40%;
+  left: 40%;
+  opacity: 0.4;
+}
+
+@keyframes floatOrb {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(30px, 40px);
+  }
+}
+
+/* The Grid */
+.angels-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  position: relative;
+  z-index: 10;
+}
+
+/* Glass Card */
+.angel-card {
+  background: rgba(255, 255, 255, 0.6); /* Semi-transparent white */
+  backdrop-filter: blur(12px); /* Frost effect */
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: default;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Hover Effect: Illumination */
+.angel-card:hover {
+  transform: translateY(-8px);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 20px 40px -5px rgba(14, 165, 233, 0.15); /* Sky blue shadow */
+  border-color: #bae6fd;
+}
+
+/* Icon Container */
+.angel-icon-box {
+  width: 60px;
+  height: 60px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.4s;
+  color: #0ea5e9;
+}
+
+.angel-card:hover .angel-icon-box {
+  transform: scale(1.1) rotate(10deg);
+  color: #0284c7; /* Darker Sky */
+}
+
+/* Text */
+.angel-name {
+  font-family: "Amiri", serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.5rem;
+}
+
+.angel-role {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #64748b;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.angel-desc {
+  font-size: 0.9rem;
+  color: #475569;
+  line-height: 1.6;
+}
+
+/* Shine Effect on Hover */
+.angel-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.8),
+    transparent
+  );
+  transform: skewX(-25deg);
+  transition: 0.5s;
+  opacity: 0;
+}
+
+.angel-card:hover::after {
+  left: 150%;
+  opacity: 1;
+  transition: 0.7s;
+}
