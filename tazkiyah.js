@@ -5588,3 +5588,93 @@ document.addEventListener("contextmenu", function (event) {
     };
   }
 })();
+// ==========================================
+// WITHERED THORNS (BID'AH) LOGIC
+// ==========================================
+(function () {
+  const thornsData = [
+    {
+      title: "Al-Mardud",
+      arabic: "المردود",
+      meaning: "The Rejected",
+      saza: "Deeds are not accepted.",
+      desc: "The Prophet ﷺ said: 'Whoever introduces something into this affair of ours (Islam) that is not from it, it will be rejected.' (Bukhari)",
+      action: "Stick to the Sunnah.",
+      icon: "🚫",
+    },
+    {
+      title: "Al-Hawd",
+      arabic: "الحوض",
+      meaning: "The Barrier",
+      saza: "Turned away from the Fountain.",
+      desc: "On Judgment Day, some people will be pushed away from the Prophet's fountain. Angels will say: 'You do not know what they innovated after you.'",
+      action: "Do not change the religion.",
+      icon: "🚱", // No Water
+    },
+    {
+      title: "Ad-Dalalah",
+      arabic: "الضلالة",
+      meaning: "The Misguidance",
+      saza: "Leading to the Fire.",
+      desc: "The Prophet ﷺ warned: 'Beware of newly invented matters, for every invented matter is an innovation, and every innovation is misguidance.'",
+      action: "Follow, do not innovate.",
+      icon: "🔥",
+    },
+    {
+      title: "Al-Wizr",
+      arabic: "الوزْر",
+      meaning: "The Burden",
+      saza: "Carrying the sins of others.",
+      desc: "Whoever starts a bad practice (Bid'ah) will bear its burden and the burden of all who follow it until the Day of Judgment.",
+      action: "Be a key to goodness, not evil.",
+      icon: "🎒", // Backpack/Weight
+    },
+  ];
+
+  const thornsGrid = document.getElementById("thorns-grid");
+
+  if (thornsGrid) {
+    thornsGrid.innerHTML = thornsData
+      .map(
+        (item) => `
+            <div class="thorn-card p-8 cursor-pointer group text-center" onclick="toggleThornCard(this)">
+                
+                <div class="thorn-icon-box">
+                    ${item.icon}
+                </div>
+
+                <div class="relative z-10">
+                    <h3 class="text-xl font-bold text-stone-700 group-hover:text-red-700 transition-colors font-amiri mb-1">${item.title}</h3>
+                    <span class="text-stone-400 font-amiri text-lg block mb-2">(${item.arabic})</span>
+                    <span class="warning-badge">${item.meaning}</span>
+                </div>
+
+                <div class="thorn-content">
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                        ${item.desc}
+                    </p>
+                    <div class="bg-red-50 p-3 rounded-xl border border-red-100 inline-block w-full">
+                        <span class="block text-[10px] text-red-400 uppercase font-bold mb-1">The Consequence</span>
+                        <p class="text-xs text-red-700 font-bold italic">"${item.saza}"</p>
+                    </div>
+                </div>
+
+                <div class="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span class="text-[10px] text-stone-400 group-hover:text-red-400 font-bold uppercase">Click to Identify</span>
+                </div>
+            </div>
+        `
+      )
+      .join("");
+
+    // Toggle Function
+    window.toggleThornCard = function (element) {
+      // Close all others
+      document.querySelectorAll(".thorn-card").forEach((card) => {
+        if (card !== element) card.classList.remove("active");
+      });
+      // Toggle clicked
+      element.classList.toggle("active");
+    };
+  }
+})();

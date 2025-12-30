@@ -2386,3 +2386,92 @@ body {
   padding-top: 1rem;
   border-top: 1px dashed #fecdd3;
 }
+/* =========================================
+   WITHERED THORNS (BID'AH) STYLES
+   ========================================= */
+
+/* Reuse .bg-floral-pattern but maybe with a grayscale filter if possible, 
+   or just keep it subtle. */
+
+.thorn-card {
+  background: #fafaf9; /* stone-50 (Dry look) */
+  border: 1px solid #e7e5e4; /* stone-200 */
+  border-radius: 2rem; /* Keep rounded theme */
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Hover: Turn Red (Warning) */
+.thorn-card:hover {
+  transform: translateY(-5px);
+  border-color: #ef4444; /* red-500 */
+  box-shadow: 0 15px 30px -5px rgba(239, 68, 68, 0.15);
+  background: white;
+}
+
+/* Active State */
+.thorn-card.active {
+  border-color: #f87171; /* red-400 */
+  background-color: #fef2f2; /* red-50 */
+}
+
+/* The "Thorn" Icon Wrapper */
+.thorn-icon-box {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 1.5rem auto;
+  background: #f5f5f4; /* stone-100 */
+  border: 2px dashed #a8a29e; /* stone-400 */
+  border-radius: 50%; /* Circle */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  transition: all 0.5s ease;
+  color: #78716c; /* stone-500 */
+}
+
+.thorn-card:hover .thorn-icon-box {
+  border-color: #ef4444; /* red-500 */
+  border-style: solid;
+  background: #fee2e2; /* red-100 */
+  color: #b91c1c; /* red-700 */
+  transform: rotate(180deg) scale(1.1); /* "Uprooting" animation */
+}
+
+/* Reveal Content */
+.thorn-content {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.5s ease;
+  text-align: center;
+}
+
+.thorn-card.active .thorn-content {
+  max-height: 250px;
+  opacity: 1;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px dashed #fca5a5; /* red-300 */
+}
+
+/* "Warning" Badge */
+.warning-badge {
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #fff;
+  background: #78716c; /* stone-500 */
+  padding: 4px 12px;
+  border-radius: 99px;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  transition: background 0.3s;
+}
+
+.thorn-card:hover .warning-badge {
+  background: #ef4444; /* red-500 */
+}
