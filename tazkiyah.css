@@ -2563,86 +2563,200 @@ body {
    ========================================= */
 
 .seed-card {
-    /* Seed Shape: Rounded top, Pointed bottom */
-    border-radius: 50% 50% 50% 0;
-    transform: rotate(-45deg); /* Tilted to look like a seed */
-    background: white;
-    border: 1px solid #ffe4e6; /* rose-100 */
-    position: relative;
-    overflow: hidden;
-    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-    
-    /* FIX: Use min-height instead of fixed height */
-    min-height: 300px; 
-    margin: 2rem 1rem; /* Add margin so rotation doesn't clip */
-    box-shadow: 0 10px 20px -5px rgba(0,0,0,0.05);
-    
-    /* Flex alignment */
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  /* Seed Shape: Rounded top, Pointed bottom */
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg); /* Tilted to look like a seed */
+  background: white;
+  border: 1px solid #ffe4e6; /* rose-100 */
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* FIX: Use min-height instead of fixed height */
+  min-height: 300px;
+  margin: 2rem 1rem; /* Add margin so rotation doesn't clip */
+  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.05);
+
+  /* Flex alignment */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Hover/Active: Upright the card and expand */
 .seed-card:hover,
 .seed-card.active {
-    transform: rotate(0deg) translateY(-10px);
-    border-radius: 2rem; /* Becomes a normal rounded card */
-    border-color: #f43f5e; /* rose-500 */
-    box-shadow: 0 20px 40px -5px rgba(244, 63, 94, 0.2);
-    z-index: 10;
+  transform: rotate(0deg) translateY(-10px);
+  border-radius: 2rem; /* Becomes a normal rounded card */
+  border-color: #f43f5e; /* rose-500 */
+  box-shadow: 0 20px 40px -5px rgba(244, 63, 94, 0.2);
+  z-index: 10;
 }
 
 /* Active State Colors */
 .seed-card.active {
-    background-color: #fff1f2; /* rose-50 */
-    border-color: #fda4af; /* rose-300 */
+  background-color: #fff1f2; /* rose-50 */
+  border-color: #fda4af; /* rose-300 */
 }
 
 /* Inner Container */
 .seed-inner {
-    transform: rotate(45deg); /* Counter-rotate text initially */
-    transition: all 0.5s ease;
-    width: 100%;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+  transform: rotate(45deg); /* Counter-rotate text initially */
+  transition: all 0.5s ease;
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 /* Reset inner rotation on hover/active */
-.seed-card:hover .seed-inner, 
+.seed-card:hover .seed-inner,
 .seed-card.active .seed-inner {
-    transform: rotate(0deg);
+  transform: rotate(0deg);
 }
 
 /* Icon Styling */
 .aqeedah-icon {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    transition: transform 0.4s;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  transition: transform 0.4s;
 }
 
 .seed-card:hover .aqeedah-icon {
-    transform: scale(1.2);
+  transform: scale(1.2);
 }
 
 /* Content Reveal */
 .seed-content {
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-    transition: all 0.5s ease;
-    width: 100%;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.5s ease;
+  width: 100%;
 }
 
 /* FIX: Allow content to expand fully */
 .seed-card.active .seed-content {
-    max-height: 500px; /* Increased max-height */
-    opacity: 1;
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px dashed #fecdd3;
+  max-height: 500px; /* Increased max-height */
+  opacity: 1;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px dashed #fecdd3;
+}
+/* =========================================
+   RIVERS OF PARADISE STYLES
+   ========================================= */
+
+/* Reuse .bg-floral-pattern */
+
+.river-card {
+  /* Vessel Shape: Tall Pill */
+  border-radius: 100px;
+  background: white;
+  border: 4px solid white;
+  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+  height: 420px; /* Tall vertical shape */
+  transition: all 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 3rem;
+  z-index: 1;
+}
+
+.river-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px -5px rgba(244, 63, 94, 0.15);
+}
+
+/* The Liquid Container */
+.river-liquid-wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1; /* Behind text */
+  border-radius: 0 0 100px 100px;
+}
+
+/* The Wave Animation */
+.river-wave {
+  position: absolute;
+  bottom: -120%; /* Start hidden/low */
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  border-radius: 40%;
+  animation: rotateWave 6s infinite linear;
+  opacity: 0.8;
+  transition: bottom 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.river-card:hover .river-wave {
+  bottom: -60%; /* Rise up on hover */
+}
+
+@keyframes rotateWave {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Liquid Colors (Pastels) */
+.liquid-water {
+  background: linear-gradient(to top, #bae6fd, #e0f2fe);
+} /* Blue */
+.liquid-milk {
+  background: linear-gradient(to top, #f1f5f9, #ffffff);
+  border: 1px solid #e2e8f0;
+} /* White/Gray */
+.liquid-wine {
+  background: linear-gradient(to top, #fbcfe8, #fce7f3);
+} /* Pink/Rose (Non-intoxicating) */
+.liquid-honey {
+  background: linear-gradient(to top, #fde68a, #fef3c7);
+} /* Amber/Gold */
+
+/* Text & Icon Styling */
+.river-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  z-index: 10;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  transition: transform 0.5s ease;
+}
+
+.river-card:hover .river-icon {
+  transform: scale(1.2);
+}
+
+.river-content-box {
+  text-align: center;
+  padding: 0 1.5rem;
+  z-index: 10;
+}
+
+.river-desc {
+  font-size: 0.85rem;
+  color: #64748b;
+  line-height: 1.6;
+  margin-top: 1rem;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
+
+.river-card:hover .river-desc {
+  opacity: 1;
+  color: #475569; /* Darker on hover for readability against liquid */
 }

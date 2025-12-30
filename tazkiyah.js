@@ -5863,3 +5863,80 @@ document.addEventListener("contextmenu", function (event) {
     };
   }
 })();
+// ==========================================
+// RIVERS OF PARADISE LOGIC
+// ==========================================
+(function () {
+  const riversData = [
+    {
+      name: "Anhar min Ma'",
+      english: "Rivers of Water",
+      desc: "Water that never stagnates, alters, or becomes impure. It is the source of eternal life and absolute purity.",
+      colorClass: "liquid-water",
+      icon: "💧",
+      symbol: "Purity",
+    },
+    {
+      name: "Anhar min Laban",
+      english: "Rivers of Milk",
+      desc: "Milk the taste of which never changes. Pure nourishment that provides strength and comfort without spoiling.",
+      colorClass: "liquid-milk",
+      icon: "🥛",
+      symbol: "Nourishment",
+    },
+    {
+      name: "Anhar min Khamr",
+      english: "Rivers of Wine",
+      desc: "Delicious to the drinkers. Unlike worldly wine, it causes no headache, no intoxication, and no madness.",
+      colorClass: "liquid-wine",
+      icon: "🍷",
+      symbol: "Delight",
+    },
+    {
+      name: "Anhar min 'Asal",
+      english: "Rivers of Honey",
+      desc: "Purified and clarified. It contains healing and sweetness, representing the sweet fruits of your patience in dunya.",
+      colorClass: "liquid-honey",
+      icon: "🍯",
+      symbol: "Sweetness",
+    },
+  ];
+
+  const riversGrid = document.getElementById("rivers-grid");
+
+  if (riversGrid) {
+    riversGrid.innerHTML = riversData
+      .map(
+        (item) => `
+            <div class="river-card bg-floral-pattern cursor-pointer group">
+                
+                <div class="river-liquid-wrapper">
+                    <div class="river-wave ${item.colorClass}"></div>
+                </div>
+
+                <div class="river-icon">
+                    ${item.icon}
+                </div>
+
+                <div class="river-content-box">
+                    <h3 class="text-xl font-bold text-rose-950 font-amiri mb-1">${item.english}</h3>
+                    <span class="text-rose-400 font-amiri text-lg block mb-3">(${item.name})</span>
+                    
+                    <span class="text-[10px] text-rose-500 font-bold uppercase tracking-widest border border-rose-200 px-3 py-1 rounded-full bg-white/50 backdrop-blur-sm">
+                        ${item.symbol}
+                    </span>
+
+                    <p class="river-desc">
+                        ${item.desc}
+                    </p>
+                </div>
+
+                <div class="mt-auto pb-8 opacity-40 text-[10px] uppercase tracking-widest text-rose-400 group-hover:text-rose-800 font-bold transition-colors">
+                    Hover to Fill
+                </div>
+            </div>
+        `
+      )
+      .join("");
+  }
+})();
