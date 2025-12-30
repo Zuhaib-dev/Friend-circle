@@ -6500,7 +6500,7 @@ document.addEventListener("contextmenu", function (event) {
     document.body.classList.add('loading');
 
     const preloader = document.getElementById('site-preloader');
-    const minLoadTime = 2000; // Minimum time in ms (2.5 seconds)
+    const minLoadTime = 1500; // Minimum time in ms (1.5 seconds)
     const startTime = Date.now();
 
     function hidePreloader() {
@@ -6516,11 +6516,11 @@ document.addEventListener("contextmenu", function (event) {
                 // Add the CSS class to fade it out
                 preloader.classList.add('preloader-hidden');
 
-                // Wait for the CSS transition (0.7s) to finish, then remove from DOM
+                // Wait for the CSS transition (0.5s) to finish, then remove from DOM
                 setTimeout(() => {
                     preloader.style.display = 'none';
                     document.body.classList.remove('loading'); // Unlock scroll
-                }, 700);
+                }, 500);
             }
         }, remainingTime);
     }
