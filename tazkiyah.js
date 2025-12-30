@@ -5412,3 +5412,85 @@ document.addEventListener("contextmenu", function (event) {
     };
   }
 })();
+// ==========================================
+// BLOSSOMS OF SUNNAH LOGIC
+// ==========================================
+(function () {
+  const sunnahData = [
+    {
+      title: "The Smile",
+      arabic: "التبسم",
+      desc: "Smiling in the face of your brother is charity. It brings joy to hearts and costs nothing.",
+      habit: "Smile at your family/colleagues today.",
+      icon: "🌸", // Cherry Blossom
+    },
+    {
+      title: "The Siwak",
+      arabic: "السواك",
+      desc: "The Siwak purifies the mouth and pleases the Lord. It was the first thing the Prophet ﷺ did upon entering his home.",
+      habit: "Use it before prayer or reading Quran.",
+      icon: "🌿", // Herb/Stick
+    },
+    {
+      title: "The Salam",
+      arabic: "السلام",
+      desc: "Spread peace to those you know and those you do not know. It is the key to mutual love.",
+      habit: "Say 'Assalamu Alaikum' clearly.",
+      icon: "🕊️", // Dove/Peace (or use 🌺 Hibiscus)
+    },
+    {
+      title: "The Right Side",
+      arabic: "اليمين",
+      desc: "Using the right hand for eating, drinking, and giving. It honors the blessing and differentiates from Shaytan.",
+      habit: "Pause and check your hand before eating.",
+      icon: "🌷", // Tulip
+    },
+  ];
+
+  const sunnahGrid = document.getElementById("sunnah-grid");
+
+  if (sunnahGrid) {
+    sunnahGrid.innerHTML = sunnahData
+      .map(
+        (item) => `
+            <div class="blossom-card bg-floral-pattern p-6 cursor-pointer group text-center flex flex-col items-center" onclick="toggleBlossomCard(this)">
+                
+                <div class="blossom-icon mb-4">
+                    ${item.icon}
+                </div>
+
+                <div class="relative z-10 w-full">
+                    <h3 class="text-xl font-bold text-rose-900 font-amiri mb-1">${item.title}</h3>
+                    <span class="text-rose-400 font-amiri text-lg block mb-2">(${item.arabic})</span>
+                </div>
+
+                <div class="blossom-content w-full">
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                        ${item.desc}
+                    </p>
+                    <div class="bg-white/80 p-3 rounded-xl border border-rose-100 shadow-sm">
+                        <span class="block text-[10px] text-gray-400 uppercase font-bold mb-1">Action Item</span>
+                        <p class="text-xs text-rose-600 font-bold italic">"${item.habit}"</p>
+                    </div>
+                </div>
+
+                <div class="mt-auto pt-6 w-full">
+                     <div class="blossom-stem"></div>
+                     <span class="text-[10px] text-rose-300 font-bold uppercase mt-2 block opacity-0 group-hover:opacity-100 transition-opacity">Click to Water</span>
+                </div>
+            </div>
+        `
+      )
+      .join("");
+
+    // Toggle Function
+    window.toggleBlossomCard = function (element) {
+      // Close all others
+      document.querySelectorAll(".blossom-card").forEach((card) => {
+        if (card !== element) card.classList.remove("active");
+      });
+      // Toggle clicked
+      element.classList.toggle("active");
+    };
+  }
+})();

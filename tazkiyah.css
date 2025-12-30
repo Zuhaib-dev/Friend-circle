@@ -2222,3 +2222,72 @@ body {
     display: inline-block;
     margin-bottom: 0.5rem;
 }
+/* =========================================
+   BLOSSOMS OF SUNNAH STYLES
+   ========================================= */
+
+/* Reuse .bg-floral-pattern */
+
+.blossom-card {
+    /* Petal Shape: Rounded top, slightly less rounded bottom */
+    border-radius: 50% 50% 20px 20px / 40px 40px 20px 20px;
+    background: white;
+    border: 1px solid #ffe4e6; /* rose-100 */
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    padding-top: 3rem; /* Space for the curve */
+}
+
+.blossom-card:hover {
+    transform: translateY(-10px);
+    border-color: #f43f5e; /* rose-500 */
+    box-shadow: 0 20px 40px -5px rgba(244, 63, 94, 0.2);
+}
+
+/* Active State */
+.blossom-card.active {
+    background-color: #fff1f2; /* rose-50 */
+    border-color: #fda4af; /* rose-300 */
+}
+
+/* The Flower Icon */
+.blossom-icon {
+    font-size: 3rem;
+    transition: transform 0.5s ease;
+    filter: drop-shadow(0 4px 6px rgba(244, 63, 94, 0.2));
+}
+
+.blossom-card:hover .blossom-icon {
+    transform: scale(1.2) rotate(10deg);
+}
+
+/* Content Reveal */
+.blossom-content {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.5s ease;
+}
+
+.blossom-card.active .blossom-content {
+    max-height: 250px;
+    opacity: 1;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px dashed #fecdd3;
+}
+
+/* Decorative Stem/Line at bottom */
+.blossom-stem {
+    height: 4px;
+    width: 0%;
+    background: #f43f5e; /* rose-500 */
+    margin: 0 auto;
+    transition: width 0.4s ease;
+    border-radius: 99px;
+}
+
+.blossom-card:hover .blossom-stem {
+    width: 50%;
+}
