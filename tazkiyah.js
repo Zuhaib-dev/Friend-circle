@@ -5940,3 +5940,92 @@ document.addEventListener("contextmenu", function (event) {
       .join("");
   }
 })();
+// ==========================================
+// PROPHETIC CURES LOGIC
+// ==========================================
+(function () {
+  const curesData = [
+    {
+      name: "Asal (Honey)",
+      arabic: "العسل",
+      title: "The Healer",
+      desc: "A remedy for every illness. It contains antioxidants and healing properties mentioned directly in the Quran.",
+      hadith:
+        "'Healing is in three things: A gulp of honey, cupping, and branding with fire (cauterizing). But I forbid my followers to use branding.' (Bukhari)",
+      icon: "🍯",
+    },
+    {
+      name: "Habbatus Sauda",
+      arabic: "الحبة السوداء",
+      title: "Black Seed",
+      desc: "The black cumin seed (Nigella Sativa). An immune booster and a miraculous cure used for centuries.",
+      hadith:
+        "'Use this black seed, for indeed it contains a cure for every disease except As-Sam (death).' (Bukhari)",
+      icon: "🌱",
+    },
+    {
+      name: "Ajwa Dates",
+      arabic: "عجوة",
+      title: "The Protector",
+      desc: "Specific dates from Madinah. They provide energy and spiritual protection against harm.",
+      hadith:
+        "'He who eats seven Ajwa dates every morning will not be affected by poison or magic on that day.' (Bukhari)",
+      icon: "🌴",
+    },
+    {
+      name: "Zayt (Olive Oil)",
+      arabic: "زيت الزيتون",
+      title: "The Blessed Oil",
+      desc: "From a blessed tree (Mubarakah). Used for cooking, moisturizing, and healing inflammation.",
+      hadith:
+        "'Eat the oil (of olives) and use it on your hair and skin, for it comes from a blessed tree.' (Tirmidhi)",
+      icon: "🫒",
+    },
+  ];
+
+  const curesGrid = document.getElementById("cures-grid");
+
+  if (curesGrid) {
+    curesGrid.innerHTML = curesData
+      .map(
+        (item) => `
+            <div class="cure-card group">
+                
+                <div class="cure-lid"></div>
+
+                <div class="cure-label-wrapper">
+                    <div class="cure-label-inner">
+                        
+                        <div class="cure-front">
+                            <div class="cure-icon mb-2">${item.icon}</div>
+                            <span class="text-xs text-rose-400 font-bold uppercase tracking-widest">Natural Remedy</span>
+                        </div>
+
+                        <div class="cure-back">
+                            <span class="text-[10px] text-gray-400 uppercase font-bold mb-1">Prophetic Narration</span>
+                            <p class="text-xs text-rose-800 font-medium italic leading-relaxed">
+                                ${item.hadith}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cure-details">
+                    <h3 class="text-xl font-bold text-rose-950 font-amiri mb-1">${item.name}</h3>
+                    <span class="text-rose-400 font-amiri text-lg block mb-2">(${item.arabic})</span>
+                    
+                    <p class="text-gray-500 text-xs leading-relaxed mb-4">
+                        ${item.desc}
+                    </p>
+                </div>
+
+                <div class="mt-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                     <span class="text-[10px] text-rose-300 font-bold uppercase">Hover to Read Hadith</span>
+                </div>
+
+            </div>
+        `
+      )
+      .join("");
+  }
+})();

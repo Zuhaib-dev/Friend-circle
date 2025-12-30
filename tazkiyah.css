@@ -2760,3 +2760,107 @@ body {
   opacity: 1;
   color: #475569; /* Darker on hover for readability against liquid */
 }
+/* =========================================
+   PROPHETIC CURES STYLES
+   ========================================= */
+
+/* Reuse .bg-floral-pattern */
+
+.cure-card {
+  /* Jar Shape: Slightly rounded corners, distinct look */
+  border-radius: 2rem 2rem 1rem 1rem;
+  background: rgba(255, 255, 255, 0.8); /* Semi-transparent */
+  backdrop-filter: blur(10px); /* Frosted Glass effect */
+  border: 2px solid rgba(254, 205, 211, 0.5); /* rose-200 transparent */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05),
+    inset 0 0 20px rgba(255, 255, 255, 0.8); /* Inner shine */
+  position: relative;
+  overflow: hidden;
+  height: 380px;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+}
+
+.cure-card:hover {
+  transform: translateY(-8px);
+  border-color: #f43f5e; /* rose-500 */
+  box-shadow: 0 20px 40px -5px rgba(244, 63, 94, 0.15);
+  background: white;
+}
+
+/* The "Cork/Lid" Visual at top */
+.cure-lid {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 8px;
+  background: #f43f5e; /* rose-500 */
+  border-radius: 0 0 10px 10px;
+  opacity: 0.5;
+}
+
+/* The Rotating Label */
+.cure-label-wrapper {
+  width: 100%;
+  height: 180px; /* Specific height for the flip area */
+  perspective: 1000px; /* Enable 3D flip */
+  margin-bottom: 1.5rem;
+}
+
+.cure-label-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.cure-card:hover .cure-label-inner {
+  transform: rotateY(180deg);
+}
+
+/* Front and Back of the Label */
+.cure-front,
+.cure-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden; /* Hide back when facing away */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1.5rem;
+}
+
+/* Front: The Icon */
+.cure-front {
+  background: #fff1f2; /* rose-50 */
+  border: 1px dashed #fda4af;
+}
+
+/* Back: The Hadith Text */
+.cure-back {
+  background: #fff;
+  border: 1px solid #f43f5e;
+  transform: rotateY(180deg);
+  padding: 1rem;
+}
+
+/* Icon Styling */
+.cure-icon {
+  font-size: 3.5rem;
+  filter: drop-shadow(0 4px 6px rgba(244, 63, 94, 0.1));
+}
+
+/* Text Content */
+.cure-details {
+  text-align: center;
+  z-index: 10;
+}
