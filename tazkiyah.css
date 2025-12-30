@@ -1797,3 +1797,124 @@ body {
   font-size: 0.95rem;
   line-height: 1.6;
 }
+/* =========================================
+   NIYYAH PLANNER STYLES
+   ========================================= */
+
+/* Blob Animation */
+@keyframes blob {
+    0% { transform: translate(0px, 0px) scale(1); }
+    33% { transform: translate(30px, -50px) scale(1.1); }
+    66% { transform: translate(-20px, 20px) scale(0.9); }
+    100% { transform: translate(0px, 0px) scale(1); }
+}
+.animate-blob {
+    animation: blob 7s infinite;
+}
+.animation-delay-2000 {
+    animation-delay: 2s;
+}
+
+/* Filter Buttons */
+.filter-btn {
+    padding: 0.5rem 1.25rem;
+    border-radius: 99px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #9f1239; /* rose-800 */
+    background: transparent;
+    border: 1px solid transparent;
+    transition: all 0.3s;
+    white-space: nowrap;
+}
+.filter-btn:hover {
+    background: #fff1f2; /* rose-50 */
+}
+.filter-btn.active {
+    background: #ffe4e6; /* rose-100 */
+    color: #881337; /* rose-900 */
+    border-color: #fecdd3; /* rose-200 */
+    box-shadow: 0 2px 5px rgba(244, 63, 94, 0.1);
+}
+
+/* Task Item Animation */
+.task-item {
+    animation: slideIn 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    transform-origin: left center;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-10px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.task-item.removing {
+    animation: slideOut 0.3s forwards;
+}
+
+@keyframes slideOut {
+    to { opacity: 0; transform: translateX(20px); }
+}
+
+/* Custom Checkbox (The Rose Bloom) */
+.custom-checkbox {
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border: 2px solid #fda4af; /* rose-300 */
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.custom-checkbox:checked {
+    background-color: #f43f5e; /* rose-500 */
+    border-color: #f43f5e;
+    transform: scale(1.1);
+    animation: pulseCheck 0.3s;
+}
+
+.custom-checkbox:checked::after {
+    content: '✔';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 12px;
+}
+
+@keyframes pulseCheck {
+    0% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(244, 63, 94, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0); }
+}
+
+/* Strikethrough Animation */
+.task-text {
+    position: relative;
+    transition: color 0.3s;
+}
+.task-text::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #f43f5e; /* rose-500 */
+    transition: width 0.3s ease-in-out;
+}
+.task-completed .task-text {
+    color: #fda4af; /* rose-300 */
+}
+.task-completed .task-text::after {
+    width: 100%;
+}
+
+/* Badge Colors */
+.badge-deen { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; } /* Green */
+.badge-dunya { background: #e0f2fe; color: #075985; border: 1px solid #bae6fd; } /* Blue */
+.badge-family { background: #fae8ff; color: #86198f; border: 1px solid #f0abfc; } /* Purple */
+.badge-self { background: #ffedd5; color: #9a3412; border: 1px solid #fed7aa; } /* Orange */

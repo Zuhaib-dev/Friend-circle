@@ -4814,3 +4814,158 @@ document.addEventListener("DOMContentLoaded", function () {
     };
   }
 })();
+// ==========================================
+// NIYYAH PLANNER LOGIC
+// ==========================================
+(function() {
+    // DOM Elements
+    const taskInput = document.getElementById('task-input');
+    const taskCategory = document.getElementById('task-category');
+    const taskList = document.getElementById('task-list');
+    const emptyState = document.getElementById('empty-state');
+    const countPending = document.getElementById('pending-count');
+    const countCompleted = document.getElementById('completed-count');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+
+    // State
+    let tasks = JSON.parse(localStorage.getItem('tazkiyah_tasks')) || [];
+    let currentFilter = 'all';
+
+    // Category Config
+    const categories = {
+        deen: { label: 'Deen', class: 'badge-deen' },
+        dunya: { label: 'Dunya', class: 'badge-dunya' },
+        family: { label: 'Family', class: 'badge-family' },
+        self: { label: 'Self', class: 'badge-self' }
+    };
+
+    // 1. Render Function
+    function renderTasks() {
+        if (!taskList) return;
+        taskList.innerHTML = '';
+
+        // Filter Logic
+        let filteredTasks = tasks;
+        if (currentFilter === 'active') filteredTasks = tasks.filter(t => !t.completed);
+        if (currentFilter === 'completed') filteredTasks = tasks.filter(t => t.completed);
+
+        // Sort: Pending first, then by date
+        filteredTasks.sort((a, b) => (a.completed === b.completed) ? 0 : a.completed ? 1 : -1);
+
+        // Empty State Toggle
+        if (filteredTasks.length === 0) {
+            emptyState.classList.remove('hidden');
+            emptyState.classList.add('flex');
+        } else {
+            emptyState.classList.add('hidden');
+            emptyState.classList.remove('flex');
+        }
+
+        // Generate HTML
+        filteredTasks.forEach(task => {
+            const li = document.createElement('li');
+            li.className = `task-item bg-white p-4 rounded-2xl border border-rose-100 flex items-center justify-between group shadow-sm hover:shadow-md hover:border-rose-200 transition-all ${task.completed ? 'task-completed opacity-75' : ''}`;
+            
+            const badge = categories[task.category];
+
+            li.innerHTML = `
+                <div class="flex items-center gap-4 overflow-hidden">
+                    <input type="checkbox" class="custom-checkbox flex-shrink-0" 
+                        onchange="toggleTask(${task.id})" ${task.completed ? 'checked' : ''}>
+                    
+                    <div class="flex flex-col">
+                        <span class="task-text font-medium text-rose-950 text-lg transition-colors truncate pr-4">
+                            ${task.text}
+                        </span>
+                        <div class="flex items-center gap-2 mt-1">
+                            <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md ${badge.class}">
+                                ${badge.label}
+                            </span>
+                            <span class="text-[10px] text-gray-400 font-mono">${new Date(task.id).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="deleteTask(${task.id}, this)" class="text-gray-300 hover:text-rose-500 p-2 rounded-lg hover:bg-rose-50 transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                </button>
+            `;
+            taskList.appendChild(li);
+        });
+
+        updateStats();
+    }
+
+    // 2. Add Task
+    window.addTask = function() {
+        const text = taskInput.value.trim();
+        if (!text) return;
+
+        const newTask = {
+            id: Date.now(),
+            text: text,
+            category: taskCategory.value,
+            completed: false
+        };
+
+        tasks.unshift(newTask); // Add to top
+        saveAndRender();
+        taskInput.value = '';
+        taskInput.focus();
+    };
+
+    // 3. Toggle Complete
+    window.toggleTask = function(id) {
+        const index = tasks.findIndex(t => t.id === id);
+        if (index !== -1) {
+            tasks[index].completed = !tasks[index].completed;
+            
+            // Audio Feedback (Optional but nice)
+            // const audio = new Audio('pop.mp3'); audio.play(); 
+            
+            saveAndRender();
+        }
+    };
+
+    // 4. Delete Task
+    window.deleteTask = function(id, btnElement) {
+        const li = btnElement.closest('li');
+        li.classList.add('removing'); // Animation
+        
+        setTimeout(() => {
+            tasks = tasks.filter(t => t.id !== id);
+            saveAndRender();
+        }, 300); // Wait for animation
+    };
+
+    // 5. Filter Logic
+    window.filterTasks = function(filterType) {
+        currentFilter = filterType;
+        
+        // Update Buttons UI
+        filterBtns.forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.textContent.toLowerCase().includes(filterType === 'active' ? 'pending' : filterType === 'completed' ? 'harvested' : 'all')) {
+                btn.classList.add('active');
+            }
+        });
+
+        renderTasks();
+    };
+
+    // Helpers
+    function updateStats() {
+        if(countPending) countPending.textContent = tasks.filter(t => !t.completed).length;
+        if(countCompleted) countCompleted.textContent = tasks.filter(t => t.completed).length;
+    }
+
+    function saveAndRender() {
+        localStorage.setItem('tazkiyah_tasks', JSON.stringify(tasks));
+        renderTasks();
+    }
+
+    // Initialize
+    if (taskList) renderTasks();
+})();
