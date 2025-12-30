@@ -6091,3 +6091,92 @@ document.addEventListener("contextmenu", function (event) {
     });
   }
 })();
+// ==========================================
+// FRAGRANCE OF BLESSINGS LOGIC
+// ==========================================
+(function () {
+  const salawatData = [
+    {
+      title: "The Tenfold",
+      arabic: "صلى الله عليه وسلم",
+      desc: "The simplest form. Short, easy, and powerful.",
+      reward:
+        "Allah sends 10 blessings upon you, forgives 10 sins, and raises you 10 degrees.",
+      hadith:
+        "Whoever sends blessings upon me once, Allah will send blessings upon him tenfold.",
+      icon: "🌹",
+    },
+    {
+      title: "The Relief",
+      arabic: "كفاية الهم",
+      desc: "Sending Salawat when you are worried or anxious.",
+      reward: "Your concerns will be taken care of and your sins forgiven.",
+      hadith:
+        "When Ubayy bin Ka'b asked about dedicating all his dua to Salawat, the Prophet ﷺ said: 'Then your worries will be sufficient for you.'",
+      icon: "💨", // Wind/Relief
+    },
+    {
+      title: "The Intercession",
+      arabic: "الوسيلة",
+      desc: "Asking Allah to grant the Prophet ﷺ the station of Wasilah after the Adhan.",
+      reward: "My Intercession becomes due for him on the Day of Resurrection.",
+      hadith: "Whoever asks Allah to grant me the Wasilah...",
+      icon: "🤲",
+    },
+    {
+      title: "The Friday Gift",
+      arabic: "يوم الجمعة",
+      desc: "Increasing Salawat specifically on the day of Jumu'ah.",
+      reward: "Your Salawat is presented directly to him ﷺ.",
+      hadith:
+        "Increase your supplications for me on Friday, for your supplications are presented to me.",
+      icon: "🕌",
+    },
+  ];
+
+  const salawatGrid = document.getElementById("salawat-grid");
+
+  if (salawatGrid) {
+    salawatGrid.innerHTML = salawatData
+      .map(
+        (item) => `
+            <div class="bottle-card group cursor-pointer">
+                
+                <div class="bottle-stopper"></div>
+                <div class="bottle-neck"></div>
+                <div class="bottle-liquid"></div>
+                <div class="scent-mist"></div>
+
+                <div class="bottle-content">
+                    
+                    <div class="mt-8">
+                        <div class="text-4xl mb-4 filter drop-shadow-sm transition-transform duration-500 group-hover:scale-110 group-hover:rotate-12">
+                            ${item.icon}
+                        </div>
+                        <h3 class="text-xl font-bold text-rose-950 font-amiri mb-1">${item.title}</h3>
+                        <span class="text-rose-400 font-amiri text-lg block opacity-80">(${item.arabic})</span>
+                    </div>
+
+                    <p class="text-gray-500 text-xs leading-relaxed px-2">
+                        ${item.desc}
+                    </p>
+
+                    <div class="bottle-reward-box">
+                        <div class="w-full h-px bg-rose-100 my-3"></div>
+                        <span class="block text-[10px] text-rose-400 uppercase font-bold mb-1">The Reward</span>
+                        <p class="text-xs text-rose-700 font-bold italic leading-relaxed">
+                            "${item.reward}"
+                        </p>
+                    </div>
+
+                    <div class="mt-4 opacity-100 group-hover:opacity-0 transition-opacity duration-300 text-[10px] uppercase tracking-widest text-rose-300 font-bold absolute bottom-0 left-0 w-full">
+                        Uncork Bottle
+                    </div>
+
+                </div>
+            </div>
+        `
+      )
+      .join("");
+  }
+})();
