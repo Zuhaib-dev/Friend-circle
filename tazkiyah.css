@@ -1218,3 +1218,214 @@ body {
   transform: scale(1.1);
   box-shadow: 0 0 10px rgba(251, 191, 36, 0.4);
 }
+/* =========================================
+   PROPHETIC PORTRAIT SECTION
+   ========================================= */
+.prophetic-portrait-section {
+  max-width: 1200px;
+  margin: 6rem auto;
+  padding: 0 1rem;
+  position: relative;
+  font-family: "Poppins", sans-serif; /* Or your preferred elegant font */
+}
+
+.portrait-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.portrait-subtitle {
+  color: #047857; /* Emerald 700 */
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.portrait-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #064e3b; /* Emerald 900 */
+  font-family: "Amiri", serif;
+  line-height: 1.2;
+}
+
+.portrait-title .highlight {
+  color: #b45309; /* Amber 700 */
+}
+
+.portrait-desc {
+  color: #6b7280; /* Gray 500 */
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  font-style: italic;
+}
+
+/* Grid Container for Attributes and Display */
+.portrait-grid-container {
+  display: flex;
+  flex-direction: column; /* Stack on mobile */
+  gap: 2.5rem;
+}
+
+@media (min-width: 900px) {
+  .portrait-grid-container {
+    flex-direction: row; /* Side-by-side on desktop */
+    align-items: flex-start;
+  }
+}
+
+/* Attributes Grid */
+.portrait-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(140px, 1fr)
+  ); /* Responsive columns */
+  gap: 1rem;
+  background: #f0fdf4; /* Emerald 50 */
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  border: 1px solid #d1fae5; /* Emerald 100 */
+}
+
+/* Attribute Card */
+.attribute-card {
+  background: white;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid #e0e7e9; /* Light gray-blue */
+  text-align: center;
+  font-weight: 600;
+  color: #1f2937; /* Gray 800 */
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.attribute-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    45deg,
+    #a7f3d0,
+    #ecfdf5
+  ); /* Gentle emerald glow */
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 0;
+}
+
+.attribute-card:hover {
+  transform: translateY(-5px) scale(1.03);
+  border-color: #34d399; /* Emerald 300 */
+  box-shadow: 0 10px 20px rgba(52, 211, 153, 0.1);
+}
+
+.attribute-card:hover::before {
+  opacity: 1;
+}
+
+.attribute-card-text {
+  position: relative;
+  z-index: 1;
+  font-size: 0.9rem;
+}
+
+/* Display Frame */
+.portrait-display-frame {
+  flex: 1.5; /* Takes more space on desktop */
+  min-height: 300px; /* Ensure it has height on mobile */
+  background: #f9fafb; /* Light gray */
+  border: 1px solid #e5e7eb; /* Gray 200 */
+  border-radius: 1.5rem;
+  position: relative;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Frame Decorations (Islamic Motif Corners) */
+.frame-decor {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border: 3px solid #d4b067; /* Gold-like color */
+  border-radius: 4px; /* Slight roundness */
+}
+.top-left {
+  top: 15px;
+  left: 15px;
+  border-right: none;
+  border-bottom: none;
+}
+.top-right {
+  top: 15px;
+  right: 15px;
+  border-left: none;
+  border-bottom: none;
+}
+.bottom-left {
+  bottom: 15px;
+  left: 15px;
+  border-right: none;
+  border-top: none;
+}
+.bottom-right {
+  bottom: 15px;
+  right: 15px;
+  border-left: none;
+  border-top: none;
+}
+
+.frame-content {
+  max-width: 500px; /* Constrain text width */
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.description-text {
+  font-size: 1.1rem;
+  color: #374151; /* Gray 700 */
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  font-family: "Amiri", serif;
+  font-style: italic;
+  opacity: 0; /* Hidden by default for JS fade-in */
+  transform: translateY(10px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.description-source {
+  font-size: 0.8rem;
+  color: #9ca3af; /* Gray 400 */
+  font-style: normal;
+  font-weight: 500;
+  opacity: 0; /* Hidden by default for JS fade-in */
+  transform: translateY(10px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  transition-delay: 0.1s; /* Slightly delayed fade for source */
+}
+
+/* Active description state */
+.description-text.active,
+.description-source.active {
+  opacity: 1;
+  transform: translateY(0);
+}

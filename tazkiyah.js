@@ -4350,3 +4350,147 @@ document.addEventListener("DOMContentLoaded", function () {
     renderShawwal();
   }
 });
+// ==========================================
+// PROPHETIC PORTRAIT (ASH-SHAMA'IL)
+// ==========================================
+document.addEventListener("DOMContentLoaded", function () {
+  // Data for Prophetic Attributes
+  const propheticAttributes = [
+    {
+      name: "His Countenance",
+      description:
+        "His face shone like the moon on a full moon night. He was neither excessively tall nor short, neither dark nor very fair. His hair was neither curly nor straight. He had broad shoulders and his gait was vigorous.",
+      source: "Bukhari, Muslim, Tirmidhi",
+    },
+    {
+      name: "His Character",
+      description:
+        "He was the most generous, the bravest, and the most truthful. He never refused anyone who asked him for something.",
+      source: "Bukhari",
+    },
+    {
+      name: "His Mercy",
+      description:
+        "He was sent as a mercy to all of mankind. His mercy encompassed believers and even those who harmed him.",
+      source: "Qur'an 21:107",
+    },
+    {
+      name: "His Humility",
+      description:
+        "He would milk his own goat, mend his own shoes, and serve his family. He would sit with the poor and visit the sick.",
+      source: "Tirmidhi",
+    },
+    {
+      name: "His Speech",
+      description:
+        "His speech was clear, precise, and comprehensive. He would speak slowly, repeating words so they could be understood, and used few words to convey much meaning.",
+      source: "Bukhari, Abu Dawud",
+    },
+    {
+      name: "His Generosity",
+      description:
+        "He never kept money for himself; whatever came to him was distributed. He often gave so much that the recipient would become rich.",
+      source: "Bukhari",
+    },
+    {
+      name: "His Smile",
+      description:
+        "He was always cheerful and his smile was radiant. He would often smile and laugh without making a sound, just showing his teeth.",
+      source: "Tirmidhi",
+    },
+    {
+      name: "His Patience",
+      description:
+        "He faced immense hardships, persecution, and personal loss with unwavering patience and trust in Allah.",
+      source: "Qur'an 2:153",
+    },
+    {
+      name: "His Justice",
+      description:
+        "He was just in all his dealings, whether with Muslims or non-Muslims. He forbade all forms of oppression.",
+      source: "Bukhari",
+    },
+    {
+      name: "His Leadership",
+      description:
+        "He was a leader who consulted his companions, took care of the weakest among his people, and led by example.",
+      source: "Qur'an 3:159",
+    },
+  ];
+
+  // DOM Elements
+  const attributesGrid = document.getElementById("prophetic-attributes-grid");
+  const displayDescription = document.getElementById("portrait-description");
+  const displaySource = document.getElementById("portrait-source");
+
+  // Default Display Text
+  const defaultDescription =
+    "Hover over an attribute on the left to learn more about the Prophet Muhammad ﷺ.";
+  const defaultSource = "";
+
+  // 1. Render Attribute Cards
+  function renderAttributes() {
+    if (!attributesGrid) return;
+
+    attributesGrid.innerHTML = propheticAttributes
+      .map(
+        (attr, index) => `
+            <div class="attribute-card" data-index="${index}">
+                <span class="attribute-card-text">${attr.name}</span>
+            </div>
+        `
+      )
+      .join("");
+
+    // Add event listeners
+    document.querySelectorAll(".attribute-card").forEach((card) => {
+      card.addEventListener("mouseenter", handleMouseEnter);
+      card.addEventListener("mouseleave", handleMouseLeave);
+    });
+  }
+
+  // 2. Handle Mouse Enter (Display Description)
+  function handleMouseEnter(event) {
+    const index = event.currentTarget.dataset.index;
+    const attr = propheticAttributes[index];
+
+    // Update content
+    if (displayDescription) {
+      displayDescription.textContent = attr.description;
+      displayDescription.classList.remove("active"); // Remove to re-trigger transition
+      void displayDescription.offsetWidth; // Force reflow
+      displayDescription.classList.add("active");
+    }
+    if (displaySource) {
+      displaySource.textContent = attr.source;
+      displaySource.classList.remove("active");
+      void displaySource.offsetWidth;
+      displaySource.classList.add("active");
+    }
+  }
+
+  // 3. Handle Mouse Leave (Reset Description)
+  function handleMouseLeave() {
+    if (displayDescription) {
+      displayDescription.classList.remove("active");
+      // Wait for fade-out before changing text
+      setTimeout(() => {
+        displayDescription.textContent = defaultDescription;
+        displayDescription.classList.add("active"); // Fade default back in
+      }, 400);
+    }
+    if (displaySource) {
+      displaySource.classList.remove("active");
+      setTimeout(() => {
+        displaySource.textContent = defaultSource;
+        displaySource.classList.add("active");
+      }, 400);
+    }
+  }
+
+  // Initialize the section
+  renderAttributes();
+  // Set initial default text visible
+  if (displayDescription) displayDescription.classList.add("active");
+  if (displaySource) displaySource.classList.add("active");
+});
