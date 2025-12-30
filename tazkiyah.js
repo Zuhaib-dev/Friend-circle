@@ -4649,94 +4649,6 @@ document.addEventListener("DOMContentLoaded", function () {
 })();
 
 // ==========================================
-// 4. SACRED GEOGRAPHY LOGIC
-// ==========================================
-(function () {
-  const places = [
-    {
-      name: "Al-Masjid Al-Haram",
-      city: "Makkah",
-      reward: "100,000x Prayers",
-      feature: "The Kaaba",
-      desc: "The first House appointed for mankind. It contains the Black Stone (from Heaven) and the Station of Ibrahim.",
-      imageColor: "bg-stone-800", // Fallback color
-      icon: "🕋",
-    },
-    {
-      name: "Al-Masjid An-Nabawi",
-      city: "Madinah",
-      reward: "1,000x Prayers",
-      feature: "The Green Dome",
-      desc: "The sanctuary of the Prophet ﷺ. Between his house and his minbar is a Garden (Rawdah) from the Gardens of Paradise.",
-      imageColor: "bg-emerald-900",
-      icon: "🕌",
-    },
-    {
-      name: "Al-Masjid Al-Aqsa",
-      city: "Jerusalem",
-      reward: "500x Prayers",
-      feature: "Dome of the Rock",
-      desc: "The first Qibla and the site of Isra wal-Mi'raj. The land is blessed and holy.",
-      imageColor: "bg-blue-900",
-      icon: "🏛️",
-    },
-  ];
-
-  const geoGrid = document.getElementById("geo-grid");
-
-  if (geoGrid) {
-    geoGrid.innerHTML = places
-      .map(
-        (place) => `
-            <div class="geo-window h-[450px] relative group cursor-default">
-                
-                <div class="absolute inset-0 ${place.imageColor} opacity-50 transition-opacity duration-500 group-hover:opacity-30"></div>
-                
-                <div class="absolute inset-0 opacity-10" style="background-image: url('https://www.transparenttextures.com/patterns/arabesque.png');"></div>
-
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-8xl opacity-20 group-hover:opacity-0 transition-all duration-500 group-hover:scale-150 transform">
-                    ${place.icon}
-                </div>
-
-                <div class="geo-overlay absolute inset-0 flex flex-col justify-end p-8">
-                    
-                    <div class="mb-2">
-                        <div class="flex justify-between items-end">
-                            <h3 class="text-2xl font-bold font-amiri text-white">${place.name}</h3>
-                            <div class="bg-black/50 backdrop-blur-sm px-2 py-1 rounded text-[10px] text-amber-500 uppercase font-bold border border-amber-500/30">
-                                <span class="live-dot mr-1"></span> Live
-                            </div>
-                        </div>
-                        <p class="text-stone-400 text-xs font-bold uppercase tracking-widest">${place.city}</p>
-                    </div>
-
-                    <div class="geo-details space-y-4">
-                        <div class="w-full h-px bg-gradient-to-r from-amber-500 to-transparent"></div>
-                        
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <span class="text-[10px] text-gray-500 uppercase block">Reward</span>
-                                <span class="text-amber-400 font-bold text-sm">${place.reward}</span>
-                            </div>
-                            <div>
-                                <span class="text-[10px] text-gray-500 uppercase block">Landmark</span>
-                                <span class="text-white font-bold text-sm">${place.feature}</span>
-                            </div>
-                        </div>
-
-                        <p class="text-sm text-gray-300 leading-relaxed">
-                            ${place.desc}
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-        `
-      )
-      .join("");
-  }
-})();
-// ==========================================
 // FAQ SECTION LOGIC
 // ==========================================
 (function () {
@@ -4817,155 +4729,184 @@ document.addEventListener("DOMContentLoaded", function () {
 // ==========================================
 // NIYYAH PLANNER LOGIC
 // ==========================================
-(function() {
-    // DOM Elements
-    const taskInput = document.getElementById('task-input');
-    const taskCategory = document.getElementById('task-category');
-    const taskList = document.getElementById('task-list');
-    const emptyState = document.getElementById('empty-state');
-    const countPending = document.getElementById('pending-count');
-    const countCompleted = document.getElementById('completed-count');
-    const filterBtns = document.querySelectorAll('.filter-btn');
+(function () {
+  // DOM Elements
+  const taskInput = document.getElementById("task-input");
+  const taskCategory = document.getElementById("task-category");
+  const taskList = document.getElementById("task-list");
+  const emptyState = document.getElementById("empty-state");
+  const countPending = document.getElementById("pending-count");
+  const countCompleted = document.getElementById("completed-count");
+  const filterBtns = document.querySelectorAll(".filter-btn");
 
-    // State
-    let tasks = JSON.parse(localStorage.getItem('tazkiyah_tasks')) || [];
-    let currentFilter = 'all';
+  // State
+  let tasks = JSON.parse(localStorage.getItem("tazkiyah_tasks")) || [];
+  let currentFilter = "all";
 
-    // Category Config
-    const categories = {
-        deen: { label: 'Deen', class: 'badge-deen' },
-        dunya: { label: 'Dunya', class: 'badge-dunya' },
-        family: { label: 'Family', class: 'badge-family' },
-        self: { label: 'Self', class: 'badge-self' }
-    };
+  // Category Config
+  const categories = {
+    deen: { label: "Deen", class: "badge-deen" },
+    dunya: { label: "Dunya", class: "badge-dunya" },
+    family: { label: "Family", class: "badge-family" },
+    self: { label: "Self", class: "badge-self" },
+  };
 
-    // 1. Render Function
-    function renderTasks() {
-        if (!taskList) return;
-        taskList.innerHTML = '';
+  // 1. Render Function
+  function renderTasks() {
+    if (!taskList) return;
+    taskList.innerHTML = "";
 
-        // Filter Logic
-        let filteredTasks = tasks;
-        if (currentFilter === 'active') filteredTasks = tasks.filter(t => !t.completed);
-        if (currentFilter === 'completed') filteredTasks = tasks.filter(t => t.completed);
+    // Filter Logic
+    let filteredTasks = tasks;
+    if (currentFilter === "active")
+      filteredTasks = tasks.filter((t) => !t.completed);
+    if (currentFilter === "completed")
+      filteredTasks = tasks.filter((t) => t.completed);
 
-        // Sort: Pending first, then by date
-        filteredTasks.sort((a, b) => (a.completed === b.completed) ? 0 : a.completed ? 1 : -1);
+    // Sort: Pending first, then by date
+    filteredTasks.sort((a, b) =>
+      a.completed === b.completed ? 0 : a.completed ? 1 : -1
+    );
 
-        // Empty State Toggle
-        if (filteredTasks.length === 0) {
-            emptyState.classList.remove('hidden');
-            emptyState.classList.add('flex');
-        } else {
-            emptyState.classList.add('hidden');
-            emptyState.classList.remove('flex');
-        }
+    // Empty State Toggle
+    if (filteredTasks.length === 0) {
+      emptyState.classList.remove("hidden");
+      emptyState.classList.add("flex");
+    } else {
+      emptyState.classList.add("hidden");
+      emptyState.classList.remove("flex");
+    }
 
-        // Generate HTML
-        filteredTasks.forEach(task => {
-            const li = document.createElement('li');
-            li.className = `task-item bg-white p-4 rounded-2xl border border-rose-100 flex items-center justify-between group shadow-sm hover:shadow-md hover:border-rose-200 transition-all ${task.completed ? 'task-completed opacity-75' : ''}`;
-            
-            const badge = categories[task.category];
+    // Generate HTML
+    filteredTasks.forEach((task) => {
+      const li = document.createElement("li");
+      li.className = `task-item bg-white p-4 rounded-2xl border border-rose-100 flex items-center justify-between group shadow-sm hover:shadow-md hover:border-rose-200 transition-all ${
+        task.completed ? "task-completed opacity-75" : ""
+      }`;
 
-            li.innerHTML = `
+      const badge = categories[task.category];
+
+      li.innerHTML = `
                 <div class="flex items-center gap-4 overflow-hidden">
                     <input type="checkbox" class="custom-checkbox flex-shrink-0" 
-                        onchange="toggleTask(${task.id})" ${task.completed ? 'checked' : ''}>
+                        onchange="toggleTask(${task.id})" ${
+        task.completed ? "checked" : ""
+      }>
                     
                     <div class="flex flex-col">
                         <span class="task-text font-medium text-rose-950 text-lg transition-colors truncate pr-4">
                             ${task.text}
                         </span>
                         <div class="flex items-center gap-2 mt-1">
-                            <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md ${badge.class}">
+                            <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md ${
+                              badge.class
+                            }">
                                 ${badge.label}
                             </span>
-                            <span class="text-[10px] text-gray-400 font-mono">${new Date(task.id).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+                            <span class="text-[10px] text-gray-400 font-mono">${new Date(
+                              task.id
+                            ).toLocaleTimeString([], {
+                              hour: "2-digit",
+                              minute: "2-digit",
+                            })}</span>
                         </div>
                     </div>
                 </div>
 
-                <button onclick="deleteTask(${task.id}, this)" class="text-gray-300 hover:text-rose-500 p-2 rounded-lg hover:bg-rose-50 transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100">
+                <button onclick="deleteTask(${
+                  task.id
+                }, this)" class="text-gray-300 hover:text-rose-500 p-2 rounded-lg hover:bg-rose-50 transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                     </svg>
                 </button>
             `;
-            taskList.appendChild(li);
-        });
+      taskList.appendChild(li);
+    });
 
-        updateStats();
+    updateStats();
+  }
+
+  // 2. Add Task
+  window.addTask = function () {
+    const text = taskInput.value.trim();
+    if (!text) return;
+
+    const newTask = {
+      id: Date.now(),
+      text: text,
+      category: taskCategory.value,
+      completed: false,
+    };
+
+    tasks.unshift(newTask); // Add to top
+    saveAndRender();
+    taskInput.value = "";
+    taskInput.focus();
+  };
+
+  // 3. Toggle Complete
+  window.toggleTask = function (id) {
+    const index = tasks.findIndex((t) => t.id === id);
+    if (index !== -1) {
+      tasks[index].completed = !tasks[index].completed;
+
+      // Audio Feedback (Optional but nice)
+      // const audio = new Audio('pop.mp3'); audio.play();
+
+      saveAndRender();
     }
+  };
 
-    // 2. Add Task
-    window.addTask = function() {
-        const text = taskInput.value.trim();
-        if (!text) return;
+  // 4. Delete Task
+  window.deleteTask = function (id, btnElement) {
+    const li = btnElement.closest("li");
+    li.classList.add("removing"); // Animation
 
-        const newTask = {
-            id: Date.now(),
-            text: text,
-            category: taskCategory.value,
-            completed: false
-        };
+    setTimeout(() => {
+      tasks = tasks.filter((t) => t.id !== id);
+      saveAndRender();
+    }, 300); // Wait for animation
+  };
 
-        tasks.unshift(newTask); // Add to top
-        saveAndRender();
-        taskInput.value = '';
-        taskInput.focus();
-    };
+  // 5. Filter Logic
+  window.filterTasks = function (filterType) {
+    currentFilter = filterType;
 
-    // 3. Toggle Complete
-    window.toggleTask = function(id) {
-        const index = tasks.findIndex(t => t.id === id);
-        if (index !== -1) {
-            tasks[index].completed = !tasks[index].completed;
-            
-            // Audio Feedback (Optional but nice)
-            // const audio = new Audio('pop.mp3'); audio.play(); 
-            
-            saveAndRender();
-        }
-    };
+    // Update Buttons UI
+    filterBtns.forEach((btn) => {
+      btn.classList.remove("active");
+      if (
+        btn.textContent
+          .toLowerCase()
+          .includes(
+            filterType === "active"
+              ? "pending"
+              : filterType === "completed"
+              ? "harvested"
+              : "all"
+          )
+      ) {
+        btn.classList.add("active");
+      }
+    });
 
-    // 4. Delete Task
-    window.deleteTask = function(id, btnElement) {
-        const li = btnElement.closest('li');
-        li.classList.add('removing'); // Animation
-        
-        setTimeout(() => {
-            tasks = tasks.filter(t => t.id !== id);
-            saveAndRender();
-        }, 300); // Wait for animation
-    };
+    renderTasks();
+  };
 
-    // 5. Filter Logic
-    window.filterTasks = function(filterType) {
-        currentFilter = filterType;
-        
-        // Update Buttons UI
-        filterBtns.forEach(btn => {
-            btn.classList.remove('active');
-            if (btn.textContent.toLowerCase().includes(filterType === 'active' ? 'pending' : filterType === 'completed' ? 'harvested' : 'all')) {
-                btn.classList.add('active');
-            }
-        });
+  // Helpers
+  function updateStats() {
+    if (countPending)
+      countPending.textContent = tasks.filter((t) => !t.completed).length;
+    if (countCompleted)
+      countCompleted.textContent = tasks.filter((t) => t.completed).length;
+  }
 
-        renderTasks();
-    };
+  function saveAndRender() {
+    localStorage.setItem("tazkiyah_tasks", JSON.stringify(tasks));
+    renderTasks();
+  }
 
-    // Helpers
-    function updateStats() {
-        if(countPending) countPending.textContent = tasks.filter(t => !t.completed).length;
-        if(countCompleted) countCompleted.textContent = tasks.filter(t => t.completed).length;
-    }
-
-    function saveAndRender() {
-        localStorage.setItem('tazkiyah_tasks', JSON.stringify(tasks));
-        renderTasks();
-    }
-
-    // Initialize
-    if (taskList) renderTasks();
+  // Initialize
+  if (taskList) renderTasks();
 })();
