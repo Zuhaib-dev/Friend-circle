@@ -2,6 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <!-- Preconnect to speed up external resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="dns-prefetch" href="https://www.transparenttextures.com">
+    <link rel="dns-prefetch" href="https://www.islamicfinder.org">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -31,7 +37,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4" async></script>
 
     <meta property="og:type" content="website" />
     <meta
@@ -76,7 +82,22 @@
     <link rel="shortcut icon" href="Favicon1.png" type="image/x-icon" />
     <link rel="apple-touch-icon" href="Favicon1.png" />
     <link rel="me" href="https://www.zuhaibrashid.com/" />
-    <link rel="stylesheet" href="tazkiyah.css" />
+    <style>
+/* Critical CSS for initial render */
+body { margin: 0; font-family: system-ui, -apple-system, sans-serif; }
+.loading-screen { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+/* Prevent layout shifts */
+img, video { max-width: 100%; height: auto; }
+/* Font loading optimization */
+* { font-display: swap; }
+
+/* Performance optimizations */
+.animate-spin, .animate-pulse, .animate-bounce {
+    will-change: transform, opacity;
+}
+</style>
+    <link rel="preload" href="tazkiyah.css" fetchpriority="high" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="tazkiyah.css" fetchpriority="high"></noscript>
     <script src="tazkiyah.js" defer></script>
   </head>
 
@@ -202,7 +223,7 @@
                         <button id="close-quran" aria-label="Close Quran Explorer" class="text-2xl hover:text-emerald-300">&times;</button>
                         <h2 class="text-xl font-bold">Al-Quran Explorer</h2>
                     </div>
-                    <button id="back-to-list" class="hidden bg-emerald-800 px-4 py-1 rounded text-sm hover:bg-emerald-700 transition">Back to Surahs</button>
+                    <button id="back-to-list" class="hidden bg-emerald-800 px-4 py-1 rounded text-sm hover:bg-emerald-700 transition" aria-label="Back to Surahs">Back to Surahs</button>
                 </header>
                 <div id="quran-view-container" class="flex-1 overflow-y-auto bg-gray-50 p-6">
                     <div id="surah-list-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto"></div>
@@ -683,22 +704,22 @@
     </div>
 
     <div class="flex flex-wrap justify-center gap-3 mb-10" id="mood-buttons">
-        <button data-mood="sad" class="mood-btn px-6 py-2 rounded-full border border-emerald-200 bg-white text-emerald-700 hover:bg-emerald-500 hover:text-white hover:border-emerald-500 transition-all duration-300 shadow-sm text-sm font-medium">
+        <button data-mood="sad" class="mood-btn px-6 py-2 rounded-full border border-emerald-200 bg-white text-emerald-700 hover:bg-emerald-500 hover:text-white hover:border-emerald-500 transition-all duration-300 shadow-sm text-sm font-medium" aria-label="😔 Sad">
             😔 Sad
         </button>
-        <button data-mood="anxious" class="mood-btn px-6 py-2 rounded-full border border-emerald-200 bg-white text-emerald-700 hover:bg-emerald-500 hover:text-white hover:border-emerald-500 transition-all duration-300 shadow-sm text-sm font-medium">
+        <button data-mood="anxious" class="mood-btn px-6 py-2 rounded-full border border-emerald-200 bg-white text-emerald-700 hover:bg-emerald-500 hover:text-white hover:border-emerald-500 transition-all duration-300 shadow-sm text-sm font-medium" aria-label="😰 Anxious">
             😰 Anxious
         </button>
-        <button data-mood="lonely" class="mood-btn px-6 py-2 rounded-full border border-emerald-200 bg-white text-emerald-700 hover:bg-emerald-500 hover:text-white hover:border-emerald-500 transition-all duration-300 shadow-sm text-sm font-medium">
+        <button data-mood="lonely" class="mood-btn px-6 py-2 rounded-full border border-emerald-200 bg-white text-emerald-700 hover:bg-emerald-500 hover:text-white hover:border-emerald-500 transition-all duration-300 shadow-sm text-sm font-medium" aria-label="🌑 Lonely">
             🌑 Lonely
         </button>
-        <button data-mood="happy" class="mood-btn px-6 py-2 rounded-full border border-emerald-200 bg-white text-emerald-700 hover:bg-emerald-500 hover:text-white hover:border-emerald-500 transition-all duration-300 shadow-sm text-sm font-medium">
+        <button data-mood="happy" class="mood-btn px-6 py-2 rounded-full border border-emerald-200 bg-white text-emerald-700 hover:bg-emerald-500 hover:text-white hover:border-emerald-500 transition-all duration-300 shadow-sm text-sm font-medium" aria-label="✨ Grateful">
             ✨ Grateful
         </button>
-        <button data-mood="sinful" class="mood-btn px-6 py-2 rounded-full border border-emerald-200 bg-white text-emerald-700 hover:bg-emerald-500 hover:text-white hover:border-emerald-500 transition-all duration-300 shadow-sm text-sm font-medium">
+        <button data-mood="sinful" class="mood-btn px-6 py-2 rounded-full border border-emerald-200 bg-white text-emerald-700 hover:bg-emerald-500 hover:text-white hover:border-emerald-500 transition-all duration-300 shadow-sm text-sm font-medium" aria-label="💔 Guilty">
             💔 Guilty
         </button>
-        <button data-mood="lost" class="mood-btn px-6 py-2 rounded-full border border-emerald-200 bg-white text-emerald-700 hover:bg-emerald-500 hover:text-white hover:border-emerald-500 transition-all duration-300 shadow-sm text-sm font-medium">
+        <button data-mood="lost" class="mood-btn px-6 py-2 rounded-full border border-emerald-200 bg-white text-emerald-700 hover:bg-emerald-500 hover:text-white hover:border-emerald-500 transition-all duration-300 shadow-sm text-sm font-medium" aria-label="🌫️ Lost">
             🌫️ Lost
         </button>
     </div>
@@ -849,7 +870,7 @@
                     <input type="number" id="target-input" value="1" min="1"
                         class="w-full bg-emerald-50/50 border border-emerald-100 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all">
                 </div>
-                <button id="set-goal-btn" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 rounded-xl shadow-lg shadow-emerald-200 transition-all active:scale-95">
+                <button id="set-goal-btn" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 rounded-xl shadow-lg shadow-emerald-200 transition-all active:scale-95" aria-label="Start Tracking">
                     Start Tracking
                 </button>
             </div>
@@ -874,10 +895,10 @@
                 </div>
 
                 <div class="flex justify-center gap-4">
-                    <button id="step-btn" class="bg-white text-emerald-900 px-8 py-3 rounded-full font-bold hover:bg-emerald-50 transition-all active:scale-90">
+                    <button id="step-btn" class="bg-white text-emerald-900 px-8 py-3 rounded-full font-bold hover:bg-emerald-50 transition-all active:scale-90" aria-label="Log Progress">
                         Log Progress
                     </button>
-                    <button id="reset-goal" class="bg-emerald-800 text-emerald-300 px-6 py-3 rounded-full text-sm font-medium hover:bg-emerald-700 transition-all">
+                    <button id="reset-goal" class="bg-emerald-800 text-emerald-300 px-6 py-3 rounded-full text-sm font-medium hover:bg-emerald-700 transition-all" aria-label="New Goal">
                         New Goal
                     </button>
                 </div>
@@ -902,7 +923,7 @@
             </div>
 
             <div class="flex flex-wrap justify-center gap-4 mb-10">
-                <button id="pomodoro-start" class="bg-white text-emerald-900 px-10 py-4 rounded-2xl font-bold hover:bg-emerald-50 transition-all active:scale-95 flex items-center gap-2">
+                <button id="pomodoro-start" class="bg-white text-emerald-900 px-10 py-4 rounded-2xl font-bold hover:bg-emerald-50 transition-all active:scale-95 flex items-center gap-2" aria-label="Start Session">
                     Start Session
                 </button>
                 <button id="pomodoro-pip" aria-label="Picture in Picture Mode" class="bg-emerald-800 text-white p-4 rounded-2xl hover:bg-emerald-700 transition-all" title="Picture in Picture">
@@ -910,7 +931,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                     </svg>
                 </button>
-                <button id="pomodoro-reset" class="bg-transparent border border-emerald-700 text-emerald-400 px-6 py-4 rounded-2xl hover:bg-emerald-800 transition-all">
+                <button id="pomodoro-reset" class="bg-transparent border border-emerald-700 text-emerald-400 px-6 py-4 rounded-2xl hover:bg-emerald-800 transition-all" aria-label="Reset">
                     Reset
                 </button>
             </div>
@@ -978,7 +999,7 @@
                     </div>
                     <h4 id="score-feedback" class="text-lg font-bold text-emerald-800 mb-2">Awaiting your reflection...</h4>
                     <p class="text-sm text-emerald-600/70 mb-8">"He has succeeded who purifies the soul."</p>
-                    <button id="reset-muhasabah" class="text-xs font-bold text-emerald-400 uppercase tracking-widest hover:text-emerald-600 transition">Reset for New Day</button>
+                    <button id="reset-muhasabah" class="text-xs font-bold text-emerald-400 uppercase tracking-widest hover:text-emerald-600 transition" aria-label="Reset for New Day">Reset for New Day</button>
                 </div>
 
             </div>
@@ -1013,7 +1034,7 @@
         </div>
         <h3 class="text-xl font-bold text-gray-800 mb-2">Wudu (Ablution)</h3>
         <p class="text-sm text-gray-500 mb-6 leading-relaxed">Minor purification required for Salah. Washes away sins with every drop of water.</p>
-        <button class="text-emerald-600 text-sm font-bold uppercase tracking-widest group-hover:underline flex items-center gap-2">
+        <button class="text-emerald-600 text-sm font-bold uppercase tracking-widest group-hover:underline flex items-center gap-2" aria-label="View Steps &rarr;">
           View Steps <span>&rarr;</span>
         </button>
       </div>
@@ -1033,7 +1054,7 @@
         </div>
         <h3 class="text-xl font-bold text-gray-800 mb-2">Ghusl (Ritual Bath)</h3>
         <p class="text-sm text-gray-500 mb-6 leading-relaxed">Major purification for the whole body. Essential for purity of the soul and body.</p>
-        <button class="text-teal-600 text-sm font-bold uppercase tracking-widest group-hover:underline flex items-center gap-2">
+        <button class="text-teal-600 text-sm font-bold uppercase tracking-widest group-hover:underline flex items-center gap-2" aria-label="View Steps &rarr;">
           View Steps <span>&rarr;</span>
         </button>
       </div>
@@ -1053,7 +1074,7 @@
         </div>
         <h3 class="text-xl font-bold text-gray-800 mb-2">Tayammum</h3>
         <p class="text-sm text-gray-500 mb-6 leading-relaxed">Dry purification using clean earth/dust when water is unavailable or harmful.</p>
-        <button class="text-yellow-600 text-sm font-bold uppercase tracking-widest group-hover:underline flex items-center gap-2">
+        <button class="text-yellow-600 text-sm font-bold uppercase tracking-widest group-hover:underline flex items-center gap-2" aria-label="View Steps &rarr;">
           View Steps <span>&rarr;</span>
         </button>
       </div>
@@ -1476,7 +1497,9 @@
                 <p id="zikr-translation" class="text-gray-500 text-sm">I seek forgiveness from Allah.</p>
             </div>
 
-            <button id="tally-btn" class="hidden group relative overflow-hidden bg-emerald-600 text-white w-24 h-24 rounded-full flex-col items-center justify-center shadow-lg hover:scale-105 active:scale-95 transition-all mb-6">
+            <button id="tally-btn" class="hidden group relative overflow-hidden bg-emerald-600 text-white w-24 h-24 rounded-full flex-col items-center justify-center shadow-lg hover:scale-105 active:scale-95 transition-all mb-6" aria-label="Count
+                0
+                / 33">
                 <span class="text-xs font-bold uppercase opacity-80 mb-1">Count</span>
                 <span id="tally-count" class="text-3xl font-mono font-bold">0</span>
                 <span id="tally-target" class="text-[10px] opacity-60">/ 33</span>
@@ -1489,12 +1512,12 @@
         </div>
 
         <div class="bg-gray-50 p-6 flex justify-between items-center border-t border-gray-100">
-            <button onclick="prevZikr()" class="px-6 py-3 rounded-xl text-gray-500 font-bold hover:bg-white hover:text-gray-800 hover:shadow-sm transition-all text-sm flex items-center gap-2 disabled:opacity-30 disabled:cursor-not-allowed" id="btn-prev">
+            <button onclick="prevZikr()" class="px-6 py-3 rounded-xl text-gray-500 font-bold hover:bg-white hover:text-gray-800 hover:shadow-sm transition-all text-sm flex items-center gap-2 disabled:opacity-30 disabled:cursor-not-allowed" id="btn-prev" aria-label="Previous">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
                 Previous
             </button>
             
-            <button onclick="nextZikr()" class="px-8 py-3 rounded-xl bg-emerald-900 text-white font-bold hover:bg-emerald-800 shadow-lg hover:-translate-y-1 transition-all text-sm flex items-center gap-2" id="btn-next">
+            <button onclick="nextZikr()" class="px-8 py-3 rounded-xl bg-emerald-900 text-white font-bold hover:bg-emerald-800 shadow-lg hover:-translate-y-1 transition-all text-sm flex items-center gap-2" id="btn-next" aria-label="Next">
                 Next
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
             </button>
@@ -1587,7 +1610,7 @@
                 </div>
             </div>
 
-            <button onclick="calcZakat()" class="w-full bg-emerald-900 text-white font-bold py-4 rounded-xl shadow-lg hover:bg-emerald-800 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group">
+            <button onclick="calcZakat()" class="w-full bg-emerald-900 text-white font-bold py-4 rounded-xl shadow-lg hover:bg-emerald-800 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group" aria-label="Calculate Zakat">
                 <span class="relative z-10 flex items-center justify-center gap-2">
                     Calculate Zakat
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
@@ -1636,7 +1659,7 @@
                         </div>
                     </div>
 
-                    <button onclick="resetZakat()" class="mt-8 w-full py-3 rounded-xl border border-white/20 hover:bg-white/10 text-sm font-bold text-emerald-200 transition-colors">
+                    <button onclick="resetZakat()" class="mt-8 w-full py-3 rounded-xl border border-white/20 hover:bg-white/10 text-sm font-bold text-emerald-200 transition-colors" aria-label="Reset Calculator">
                         Reset Calculator
                     </button>
                 </div>
@@ -1761,7 +1784,7 @@
         </div>
 
     <div class="mt-12 text-center">
-        <button class="text-xs font-bold text-amber-600 uppercase tracking-widest hover:text-emerald-700 transition-colors border-b border-amber-200 pb-1">
+        <button class="text-xs font-bold text-amber-600 uppercase tracking-widest hover:text-emerald-700 transition-colors border-b border-amber-200 pb-1" aria-label="Read from Surah Al-Baqarah to At-Tahrim">
             Read from Surah Al-Baqarah to At-Tahrim
         </button>
     </div>
@@ -1867,7 +1890,7 @@
         </div>
 
     <div class="qada-footer">
-        <button class="qada-calc-btn" onclick="toggleQadaCalc()">
+        <button class="qada-calc-btn" onclick="toggleQadaCalc()" aria-label="Estimate Missed Years">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
             Estimate Missed Years
         </button>
@@ -1882,8 +1905,8 @@
                 <input type="number" id="calc-months" placeholder="Months" min="0">
             </div>
             <div class="calc-actions">
-                <button onclick="calculateQada()" class="btn-apply">Add to Trackers</button>
-                <button onclick="toggleQadaCalc()" class="btn-cancel">Cancel</button>
+                <button onclick="calculateQada()" class="btn-apply" aria-label="Add to Trackers">Add to Trackers</button>
+                <button onclick="toggleQadaCalc()" class="btn-cancel" aria-label="Cancel">Cancel</button>
             </div>
         </div>
     </div>
@@ -2058,9 +2081,9 @@
         <div class="p-6 min-h-[400px]">
             
             <div class="flex gap-4 mb-6 overflow-x-auto pb-2 scrollbar-hide">
-                <button class="filter-btn active" onclick="filterTasks('all')">All</button>
-                <button class="filter-btn" onclick="filterTasks('active')">Pending</button>
-                <button class="filter-btn" onclick="filterTasks('completed')">Harvested</button>
+                <button class="filter-btn active" onclick="filterTasks('all')" aria-label="All">All</button>
+                <button class="filter-btn" onclick="filterTasks('active')" aria-label="Pending">Pending</button>
+                <button class="filter-btn" onclick="filterTasks('completed')" aria-label="Harvested">Harvested</button>
             </div>
 
             <ul id="task-list" class="space-y-3">
@@ -2375,7 +2398,7 @@
                 <input type="email" name="email"  id="newsletter-email" placeholder="Enter your email address..." required
                     class="w-full px-6 py-4 rounded-full border border-rose-200 bg-white text-gray-700 placeholder-rose-300 focus:outline-none focus:border-rose-400 focus:ring-4 focus:ring-rose-100 transition-all shadow-sm">
                 
-                <button type="submit" class="bg-rose-500 text-white font-bold uppercase tracking-widest text-xs px-8 py-4 rounded-full shadow-lg hover:bg-rose-600 hover:scale-105 active:scale-95 transition-all duration-300 flex-shrink-0 flex items-center justify-center gap-2">
+                <button type="submit" class="bg-rose-500 text-white font-bold uppercase tracking-widest text-xs px-8 py-4 rounded-full shadow-lg hover:bg-rose-600 hover:scale-105 active:scale-95 transition-all duration-300 flex-shrink-0 flex items-center justify-center gap-2" aria-label="Subscribe">
                     <span>Subscribe</span>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                 </button>
@@ -2413,7 +2436,7 @@
     <div class="mt-12 text-center bg-emerald-50 rounded-2xl p-8 border border-emerald-100">
         <h4 class="font-bold text-emerald-900 mb-2">Still have a question?</h4>
         <p class="text-sm text-emerald-700 mb-6">We are here to help you on your path.</p>
-        <button class="bg-emerald-600 text-white px-6 py-2 rounded-full text-sm font-bold hover:bg-emerald-700 transition-colors shadow-lg hover:shadow-emerald-200">
+        <button class="bg-emerald-600 text-white px-6 py-2 rounded-full text-sm font-bold hover:bg-emerald-700 transition-colors shadow-lg hover:shadow-emerald-200" aria-label="Contact support">
             <a target="_blank" href="https://www.zuhaibrashid.com/">Contact support </a>
         </button>
     </div>
@@ -2734,6 +2757,5 @@
       </footer>
     </div>
 
-    <script src="tazkiyah.js"></script>
-  </body>
+    </body>
 </html>
