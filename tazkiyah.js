@@ -5089,3 +5089,35 @@ document.addEventListener("DOMContentLoaded", function () {
         };
     }
 })();
+// ==========================================
+// CLOSE MENU ON CLICK OUTSIDE
+// ==========================================
+document.addEventListener('click', function(event) {
+    
+    // 1. Define your Menu and Button IDs
+    // Change these IDs to match your actual HTML
+    const menu = document.getElementById('mobile-menu'); 
+    const toggleBtn = document.getElementById('menu-toggle-btn'); 
+
+    // 2. Check if the menu exists and is currently open (doesn't have 'hidden' class)
+    if (menu && !menu.classList.contains('hidden')) {
+
+        // 3. Check if the click happened OUTSIDE the menu AND the button
+        const isClickInsideMenu = menu.contains(event.target);
+        const isClickOnButton = toggleBtn && toggleBtn.contains(event.target);
+
+        if (!isClickInsideMenu && !isClickOnButton) {
+            // 4. Force close the menu
+            menu.classList.add('hidden');
+            
+            // Optional: If you use an 'active' class for animation, remove it too
+            // menu.classList.remove('active');
+        }
+    }
+});
+// ==========================================
+// DISABLE RIGHT-CLICK MENU
+// ==========================================
+document.addEventListener('contextmenu', function(event) {
+    event.preventDefault(); // This stops the menu from appearing
+});
