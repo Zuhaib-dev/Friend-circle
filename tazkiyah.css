@@ -2092,54 +2092,54 @@ body {
 /* Reuse .bg-floral-pattern from previous sections */
 
 .surah-card {
-    position: relative;
-    border: 1px solid #ffe4e6; /* rose-100 */
-    background: white;
-    overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-    border-left: 6px solid #f43f5e; /* rose-500 (The Book Spine) */
+  position: relative;
+  border: 1px solid #ffe4e6; /* rose-100 */
+  background: white;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  border-left: 6px solid #f43f5e; /* rose-500 (The Book Spine) */
 }
 
 .surah-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px -5px rgba(244, 63, 94, 0.15);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px -5px rgba(244, 63, 94, 0.15);
 }
 
 /* Active State */
 .surah-card.active {
-    background-color: #fff1f2; /* rose-50 */
-    border-color: #fda4af; /* rose-300 */
-    border-left-width: 8px;
-    box-shadow: 0 20px 40px -5px rgba(244, 63, 94, 0.2);
+  background-color: #fff1f2; /* rose-50 */
+  border-color: #fda4af; /* rose-300 */
+  border-left-width: 8px;
+  box-shadow: 0 20px 40px -5px rgba(244, 63, 94, 0.2);
 }
 
 /* Content Reveal */
 .surah-card-content {
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-    transition: all 0.5s ease;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.5s ease;
 }
 
 .surah-card.active .surah-card-content {
-    max-height: 250px;
-    opacity: 1;
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px dashed #fecdd3; /* rose-200 */
+  max-height: 250px;
+  opacity: 1;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px dashed #fecdd3; /* rose-200 */
 }
 
 /* Badge Style */
 .surah-badge {
-    background: #fff;
-    border: 1px solid #fecdd3;
-    color: #e11d48;
-    font-size: 0.65rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    padding: 2px 8px;
-    border-radius: 99px;
-    letter-spacing: 0.05em;
+  background: #fff;
+  border: 1px solid #fecdd3;
+  color: #e11d48;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 99px;
+  letter-spacing: 0.05em;
 }
 /* =========================================
    FRUITS OF CHARACTER STYLES
@@ -2148,79 +2148,79 @@ body {
 /* Reuse .bg-floral-pattern */
 
 .fruit-card {
-    border: 1px solid #ffe4e6; /* rose-100 */
-    background: white;
-    border-radius: 2rem; /* More rounded for organic feel */
-    position: relative;
-    overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: 1px solid #ffe4e6; /* rose-100 */
+  background: white;
+  border-radius: 2rem; /* More rounded for organic feel */
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .fruit-card:hover {
-    transform: translateY(-5px);
-    border-color: #f43f5e; /* rose-500 */
-    box-shadow: 0 15px 30px -5px rgba(244, 63, 94, 0.15);
+  transform: translateY(-5px);
+  border-color: #f43f5e; /* rose-500 */
+  box-shadow: 0 15px 30px -5px rgba(244, 63, 94, 0.15);
 }
 
 /* Active State */
 .fruit-card.active {
-    background-color: #fff1f2; /* rose-50 */
-    border-color: #fda4af; /* rose-300 */
-    transform: scale(1.02);
+  background-color: #fff1f2; /* rose-50 */
+  border-color: #fda4af; /* rose-300 */
+  transform: scale(1.02);
 }
 
 /* Icon Container (The "Fruit" visual) */
 .fruit-icon-wrapper {
-    width: 70px;
-    height: 70px;
-    margin: 0 auto 1rem auto;
-    background: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-    border: 2px dashed #fecdd3; /* rose-200 */
-    transition: all 0.5s ease;
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 1rem auto;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  border: 2px dashed #fecdd3; /* rose-200 */
+  transition: all 0.5s ease;
 }
 
 .fruit-card:hover .fruit-icon-wrapper {
-    background: #ffe4e6;
-    border-style: solid;
-    border-color: #f43f5e;
-    transform: rotate(15deg) scale(1.1);
+  background: #ffe4e6;
+  border-style: solid;
+  border-color: #f43f5e;
+  transform: rotate(15deg) scale(1.1);
 }
 
 /* Reveal Content */
 .fruit-content {
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-    transition: all 0.5s ease;
-    text-align: center;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.5s ease;
+  text-align: center;
 }
 
 .fruit-card.active .fruit-content {
-    max-height: 250px;
-    opacity: 1;
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px dashed #fecdd3;
+  max-height: 250px;
+  opacity: 1;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px dashed #fecdd3;
 }
 
 /* "Taste" Tag */
 .taste-tag {
-    font-size: 0.65rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: #be123c; /* rose-700 */
-    background: #ffe4e6;
-    padding: 4px 12px;
-    border-radius: 99px;
-    display: inline-block;
-    margin-bottom: 0.5rem;
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #be123c; /* rose-700 */
+  background: #ffe4e6;
+  padding: 4px 12px;
+  border-radius: 99px;
+  display: inline-block;
+  margin-bottom: 0.5rem;
 }
 /* =========================================
    BLOSSOMS OF SUNNAH STYLES
@@ -2229,65 +2229,160 @@ body {
 /* Reuse .bg-floral-pattern */
 
 .blossom-card {
-    /* Petal Shape: Rounded top, slightly less rounded bottom */
-    border-radius: 50% 50% 20px 20px / 40px 40px 20px 20px;
-    background: white;
-    border: 1px solid #ffe4e6; /* rose-100 */
-    position: relative;
-    overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    padding-top: 3rem; /* Space for the curve */
+  /* Petal Shape: Rounded top, slightly less rounded bottom */
+  border-radius: 50% 50% 20px 20px / 40px 40px 20px 20px;
+  background: white;
+  border: 1px solid #ffe4e6; /* rose-100 */
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  padding-top: 3rem; /* Space for the curve */
 }
 
 .blossom-card:hover {
-    transform: translateY(-10px);
-    border-color: #f43f5e; /* rose-500 */
-    box-shadow: 0 20px 40px -5px rgba(244, 63, 94, 0.2);
+  transform: translateY(-10px);
+  border-color: #f43f5e; /* rose-500 */
+  box-shadow: 0 20px 40px -5px rgba(244, 63, 94, 0.2);
 }
 
 /* Active State */
 .blossom-card.active {
-    background-color: #fff1f2; /* rose-50 */
-    border-color: #fda4af; /* rose-300 */
+  background-color: #fff1f2; /* rose-50 */
+  border-color: #fda4af; /* rose-300 */
 }
 
 /* The Flower Icon */
 .blossom-icon {
-    font-size: 3rem;
-    transition: transform 0.5s ease;
-    filter: drop-shadow(0 4px 6px rgba(244, 63, 94, 0.2));
+  font-size: 3rem;
+  transition: transform 0.5s ease;
+  filter: drop-shadow(0 4px 6px rgba(244, 63, 94, 0.2));
 }
 
 .blossom-card:hover .blossom-icon {
-    transform: scale(1.2) rotate(10deg);
+  transform: scale(1.2) rotate(10deg);
 }
 
 /* Content Reveal */
 .blossom-content {
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-    transition: all 0.5s ease;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.5s ease;
 }
 
 .blossom-card.active .blossom-content {
-    max-height: 250px;
-    opacity: 1;
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px dashed #fecdd3;
+  max-height: 250px;
+  opacity: 1;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px dashed #fecdd3;
 }
 
 /* Decorative Stem/Line at bottom */
 .blossom-stem {
-    height: 4px;
-    width: 0%;
-    background: #f43f5e; /* rose-500 */
-    margin: 0 auto;
-    transition: width 0.4s ease;
-    border-radius: 99px;
+  height: 4px;
+  width: 0%;
+  background: #f43f5e; /* rose-500 */
+  margin: 0 auto;
+  transition: width 0.4s ease;
+  border-radius: 99px;
 }
 
 .blossom-card:hover .blossom-stem {
-    width: 50%;
+  width: 50%;
+}
+/* =========================================
+   DEW OF REPENTANCE STYLES
+   ========================================= */
+
+/* Reuse .bg-floral-pattern */
+
+.dew-card {
+  background: white;
+  border: 1px solid #ffe4e6; /* rose-100 */
+  border-radius: 2rem;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+.dew-card:hover {
+  transform: translateY(-8px);
+  border-color: #f43f5e; /* rose-500 */
+  box-shadow: 0 15px 30px -5px rgba(244, 63, 94, 0.15);
+}
+
+/* Active State */
+.dew-card.active {
+  background-color: #fff1f2; /* rose-50 */
+  border-color: #fda4af; /* rose-300 */
+}
+
+/* Teardrop Icon Container */
+.dew-icon-wrapper {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 1.5rem auto;
+  /* Teardrop Shape: Pointy top, round bottom */
+  border-radius: 0 50% 50% 50%;
+  transform: rotate(45deg); /* Rotate to point up */
+  background: #fff;
+  border: 2px solid #fecdd3; /* rose-200 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: inset 0 0 10px rgba(244, 63, 94, 0.1);
+}
+
+/* Counter-rotate icon so it stays straight */
+.dew-icon {
+  transform: rotate(-45deg);
+  font-size: 1.8rem;
+  color: #e11d48; /* rose-600 */
+}
+
+.dew-card:hover .dew-icon-wrapper {
+  background: #ffe4e6; /* rose-100 */
+  border-color: #f43f5e; /* rose-500 */
+  transform: rotate(45deg) scale(1.2);
+}
+
+/* Ripple Animation Elements */
+.dew-ripple {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  background: rgba(244, 63, 94, 0.1);
+  border-radius: 50%;
+  transition: width 0.6s ease, height 0.6s ease, opacity 0.6s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.dew-card:hover .dew-ripple {
+  width: 300px;
+  height: 300px;
+  opacity: 1;
+}
+
+/* Content Reveal */
+.dew-content {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.5s ease;
+}
+
+.dew-card.active .dew-content {
+  max-height: 200px;
+  opacity: 1;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px dashed #fecdd3;
 }

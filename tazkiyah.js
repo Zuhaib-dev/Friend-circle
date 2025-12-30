@@ -5494,3 +5494,97 @@ document.addEventListener("contextmenu", function (event) {
     };
   }
 })();
+// ==========================================
+// DEW OF REPENTANCE LOGIC
+// ==========================================
+(function () {
+  const tawbahData = [
+    {
+      step: "1",
+      name: "An-Nadam",
+      arabic: "الندم",
+      title: "Regret",
+      desc: "The heart must feel genuine pain and sorrow for having disobeyed the Beloved. The Prophet ﷺ said: 'Regret is repentance.'",
+      action: "Feel the remorse in your heart.",
+      icon: "💧",
+    },
+    {
+      step: "2",
+      name: "Al-Iqla'",
+      arabic: "الإقلاع",
+      title: "Cessation",
+      desc: "One must stop the sin immediately. You cannot claim to repent while still committing the act. It is cutting the root of the weed.",
+      action: "Stop the action immediately.",
+      icon: "🛑",
+    },
+    {
+      step: "3",
+      name: "Al-Azm",
+      arabic: "العزم",
+      title: "Resolve",
+      desc: "Making a firm, unbreakable intention never to return to the sin again. It is a promise for the future.",
+      action: "Make a sincere promise to Allah.",
+      icon: "🔒",
+    },
+    {
+      step: "4",
+      name: "Rad al-Mazalim",
+      arabic: "رد المظالم",
+      title: "Restoration",
+      desc: "If the sin involved the rights of others (money, honor), you must return what was taken or seek their forgiveness.",
+      action: "Return rights to their owners.",
+      icon: "🤝",
+    },
+  ];
+
+  const tawbahGrid = document.getElementById("tawbah-grid");
+
+  if (tawbahGrid) {
+    tawbahGrid.innerHTML = tawbahData
+      .map(
+        (item) => `
+            <div class="dew-card bg-floral-pattern cursor-pointer group" onclick="toggleDewCard(this)">
+                
+                <div class="dew-ripple"></div>
+
+                <div class="relative z-10">
+                    <div class="dew-icon-wrapper">
+                        <div class="dew-icon">${item.icon}</div>
+                    </div>
+
+                    <span class="text-[10px] text-rose-400 font-bold uppercase tracking-widest block mb-2">Condition ${item.step}</span>
+                    
+                    <h3 class="text-xl font-bold text-rose-900 font-amiri mb-1">${item.name}</h3>
+                    <span class="text-rose-400 font-amiri text-lg block mb-2">(${item.arabic})</span>
+                    
+                    <p class="text-sm font-bold text-gray-700 uppercase tracking-wide mb-1">${item.title}</p>
+                </div>
+
+                <div class="dew-content relative z-10">
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                        ${item.desc}
+                    </p>
+                    <div class="bg-white/80 p-2 rounded-lg border border-rose-100 inline-block shadow-sm">
+                        <p class="text-xs text-rose-600 font-bold italic">Action: ${item.action}</p>
+                    </div>
+                </div>
+
+                <div class="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 relative z-10">
+                    <span class="text-[10px] text-rose-300 font-bold uppercase">Click to Absorb</span>
+                </div>
+            </div>
+        `
+      )
+      .join("");
+
+    // Toggle Function
+    window.toggleDewCard = function (element) {
+      // Close all others
+      document.querySelectorAll(".dew-card").forEach((card) => {
+        if (card !== element) card.classList.remove("active");
+      });
+      // Toggle clicked
+      element.classList.toggle("active");
+    };
+  }
+})();
