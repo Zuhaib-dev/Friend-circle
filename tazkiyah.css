@@ -1938,3 +1938,66 @@ body {
   box-shadow: 0 10px 25px -5px rgba(244, 63, 94, 0.15);
   transform: translateY(-4px);
 }
+/* =========================================
+   GARDEN OF NAMES STYLES
+   ========================================= */
+
+/* Reuse .bg-floral-pattern from previous sections */
+
+/* Specific Card Styling */
+.name-card {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid #ffe4e6; /* rose-100 */
+    position: relative;
+    overflow: hidden;
+}
+
+.name-card:hover {
+    transform: translateY(-8px);
+    border-color: #f43f5e; /* rose-500 */
+    box-shadow: 0 15px 30px -5px rgba(244, 63, 94, 0.2);
+}
+
+/* Calligraphy Background (Watermark) */
+.name-watermark {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    font-size: 8rem;
+    opacity: 0.05;
+    color: #f43f5e;
+    font-family: 'Amiri', serif;
+    pointer-events: none;
+    transition: transform 0.5s ease;
+}
+
+.name-card:hover .name-watermark {
+    transform: rotate(-10deg) scale(1.1);
+    opacity: 0.1;
+}
+
+/* Content Reveal */
+.name-card-details {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.5s ease;
+}
+
+.name-card.active .name-card-details {
+    max-height: 200px;
+    opacity: 1;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px dashed #fda4af; /* rose-300 */
+}
+
+/* Icon Pulse */
+.name-icon-box {
+    transition: all 0.3s ease;
+}
+.name-card:hover .name-icon-box {
+    background-color: #fff1f2; /* rose-50 */
+    color: #e11d48; /* rose-600 */
+    transform: scale(1.1);
+}

@@ -5002,3 +5002,90 @@ document.addEventListener("DOMContentLoaded", function () {
         };
     }
 })();
+// ==========================================
+// GARDEN OF NAMES LOGIC
+// ==========================================
+(function() {
+    const namesData = [
+        {
+            arabic: "الودود",
+            transliteration: "Al-Wadud",
+            meaning: "The Most Loving",
+            desc: "He who loves His believing servants and is beloved to them. His love is not just a feeling, but an active pursuit of your benefit.",
+            reflection: "Love Him by obeying Him, and show affection to His creation.",
+            icon: "❤️"
+        },
+        {
+            arabic: "اللطيف",
+            transliteration: "Al-Latif",
+            meaning: "The Subtle & Gentle",
+            desc: "He who is kind to His servants in ways they do not perceive. He arranges your affairs with delicate precision and gentleness.",
+            reflection: "Trust His plan even when you cannot see the way out.",
+            icon: "🌿"
+        },
+        {
+            arabic: "الشكور",
+            transliteration: "Ash-Shakur",
+            meaning: "The Appreciative",
+            desc: "He who gives abundant rewards for small deeds. He appreciates your effort, even if you fail to achieve the result.",
+            reflection: "Never belittle a good deed; He notices even a smile.",
+            icon: "💎"
+        },
+        {
+            arabic: "الحليم",
+            transliteration: "Al-Halim",
+            meaning: "The Forbearing",
+            desc: "He who does not rush to punish. He sees your mistakes and gives you time (respite) to return and repent.",
+            reflection: "Be patient with people's faults as He is patient with yours.",
+            icon: "🛡️"
+        }
+    ];
+
+    const namesGrid = document.getElementById('names-grid');
+
+    if (namesGrid) {
+        namesGrid.innerHTML = namesData.map(item => `
+            <div class="name-card bg-white rounded-3xl p-6 cursor-pointer group" onclick="toggleNameCard(this)">
+                
+                <div class="name-watermark">${item.arabic}</div>
+
+                <div class="relative z-10">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="name-icon-box w-12 h-12 rounded-2xl bg-rose-50 text-rose-400 flex items-center justify-center text-xl shadow-sm border border-rose-100">
+                            ${item.icon}
+                        </div>
+                        <span class="font-amiri text-3xl text-rose-900">${item.arabic}</span>
+                    </div>
+
+                    <h3 class="text-xl font-bold text-gray-800 mb-1">${item.transliteration}</h3>
+                    <p class="text-xs text-rose-500 font-bold uppercase tracking-widest mb-2">${item.meaning}</p>
+                    
+                    <p class="text-sm text-gray-500 leading-relaxed">
+                        ${item.desc}
+                    </p>
+
+                    <div class="name-card-details">
+                        <div class="bg-rose-50 p-3 rounded-xl border border-rose-100">
+                            <span class="block text-[10px] text-rose-400 uppercase font-bold mb-1">Reflection</span>
+                            <p class="text-xs text-rose-800 font-medium italic">"${item.reflection}"</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span class="text-[10px] text-rose-300 uppercase font-bold">Tap to Reflect</span>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+
+        // Toggle Function
+        window.toggleNameCard = function(element) {
+            // Close all others
+            document.querySelectorAll('.name-card').forEach(card => {
+                if(card !== element) card.classList.remove('active');
+            });
+            // Toggle clicked
+            element.classList.toggle('active');
+        };
+    }
+})();
