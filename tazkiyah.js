@@ -2258,18 +2258,29 @@ document.addEventListener("DOMContentLoaded", () => {
 // ==========================================
 (function () {
   const btn = document.getElementById("scroll-top-btn");
+  let isTicking = false; // A flag to prevent running too often
 
   if (btn) {
-    // Show button when scrolling down
     window.addEventListener("scroll", () => {
-      if (window.scrollY > 500) {
-        btn.classList.remove("translate-y-20", "opacity-0");
-      } else {
-        btn.classList.add("translate-y-20", "opacity-0");
-      }
-    });
+      // If we are already waiting for a frame, skip this event
+      if (!isTicking) {
+        window.requestAnimationFrame(() => {
+          // This runs only once per visual frame (smooth!)
+          if (window.scrollY > 500) {
+            btn.classList.remove("translate-y-20", "opacity-0");
+          } else {
+            btn.classList.add("translate-y-20", "opacity-0");
+          }
+          
+          // Reset flag so we can run again next frame
+          isTicking = false;
+        });
 
-    // Scroll to top on click
+        isTicking = true;
+      }
+    }, { passive: true }); // 'passive: true' tells browser "I promise not to stop the scroll", which boosts speed
+
+    // Scroll to top on click (This part was already fine)
     btn.addEventListener("click", () => {
       window.scrollTo({
         top: 0,
