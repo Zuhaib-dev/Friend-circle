@@ -3273,28 +3273,3 @@ body.loading {
     opacity: 0;
     pointer-events: none; /* Allows user to click things underneath */
 }
-/* Remove */
-/* =========================================
-   PERFORMANCE FIXES (Layout Stability)
-   ========================================= */
-
-/* 1. Reserve space for the Calendar */
-#calendar {
-    min-height: 140px; /* Forces browser to leave room */
-    display: block;
-    background-color: rgba(255, 255, 255, 0.5); /* Optional: placeholder color */
-}
-
-/* 2. Reserve space for the Daily Inspiration Quote */
-/* This targets the container wrapping the Arabic/English text */
-main.relative.z-10.container { 
-    min-height: 250px; /* Adjust based on your average quote size */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-/* 3. Reserve space for the English translation specifically */
-#hadith-english {
-    min-height: 60px;
-}

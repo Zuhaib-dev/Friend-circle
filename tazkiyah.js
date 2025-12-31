@@ -6540,29 +6540,3 @@ document.addEventListener("contextmenu", function (event) {
     window.addEventListener('load', hidePreloader);
 })();
 // Remove if now worked
-// ==========================================
-// OPTIMIZED NAVBAR SCROLL (No Lag)
-// ==========================================
-(function() {
-    const navbar = document.querySelector('nav');
-    let isTicking = false;
-
-    if (navbar) {
-        window.addEventListener('scroll', () => {
-            if (!isTicking) {
-                window.requestAnimationFrame(() => {
-                    // This logic now runs smoothly once per frame
-                    if (window.scrollY > 20) {
-                        navbar.classList.add('bg-white/90', 'backdrop-blur-md', 'shadow-sm');
-                        navbar.classList.remove('bg-transparent');
-                    } else {
-                        navbar.classList.remove('bg-white/90', 'backdrop-blur-md', 'shadow-sm');
-                        navbar.classList.add('bg-transparent');
-                    }
-                    isTicking = false;
-                });
-                isTicking = true;
-            }
-        }, { passive: true }); // 'passive: true' is crucial for performance
-    }
-})();
