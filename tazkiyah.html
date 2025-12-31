@@ -17,7 +17,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="tazkiyah.min.css" />
+    <link rel="preload" href="tazkiyah.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="tazkiyah.min.css"></noscript>
 
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
@@ -71,7 +72,7 @@
         <h1 class="text-3xl md:text-4xl font-amiri font-bold text-rose-950 mb-2 animate-fade-up">
             بِسْمِ الله
         </h1>
-        <p class="text-xs font-bold text-rose-400 uppercase tracking-[0.4em] animate-pulse">
+        <p class="text-xs font-bold text-rose-600 uppercase tracking-[0.4em] animate-pulse">
             Loading Journey...
         </p>
     </div>
@@ -2029,19 +2030,19 @@
             <div class="flex flex-col md:flex-row gap-4">
                 
                 <div class="relative min-w-[140px]">
-                    <select id="task-category" class="w-full h-14 pl-10 pr-4 bg-white border border-rose-200 rounded-2xl text-rose-900 font-bold focus:outline-none focus:ring-2 focus:ring-rose-400 appearance-none cursor-pointer transition-shadow shadow-sm">
+                    <select aria-label="Select task-category" id="task-category" class="w-full h-14 pl-10 pr-4 bg-white border border-rose-200 rounded-2xl text-rose-900 font-bold focus:outline-none focus:ring-2 focus:ring-rose-600 appearance-none cursor-pointer transition-shadow shadow-sm">
                         <option value="deen">Deen 🕌</option>
                         <option value="dunya">Dunya 💼</option>
                         <option value="family">Family ❤️</option>
                         <option value="self">Self 🌱</option>
                     </select>
                     <span class="absolute left-4 top-1/2 -translate-y-1/2 text-lg pointer-events-none">🏷️</span>
-                    <span class="absolute right-4 top-1/2 -translate-y-1/2 text-rose-400 pointer-events-none text-xs">▼</span>
+                    <span class="absolute right-4 top-1/2 -translate-y-1/2 text-rose-600 pointer-events-none text-xs">▼</span>
                 </div>
 
                 <div class="flex-1 relative">
                     <input type="text" id="task-input" placeholder="Bismillah, what is your intention today?" 
-                        class="w-full h-14 pl-6 pr-14 bg-white border border-rose-200 rounded-2xl text-gray-700 placeholder-rose-300/70 focus:outline-none focus:ring-2 focus:ring-rose-400 transition-shadow shadow-sm"
+                        class="w-full h-14 pl-6 pr-14 bg-white border border-rose-200 rounded-2xl text-gray-700 placeholder-rose-500/70 focus:outline-none focus:ring-2 focus:ring-rose-600 transition-shadow shadow-sm"
                         onkeypress="if(event.key === 'Enter') addTask()">
                     
                     <button aria-label="Add Task" onclick="addTask()" class="absolute right-2 top-2 bottom-2 w-10 bg-rose-500 text-white rounded-xl flex items-center justify-center hover:bg-rose-600 hover:scale-105 active:scale-95 transition-all shadow-md group">
@@ -2369,7 +2370,7 @@
             <form action="https://formspree.io/f/xnjqyyaq"   method="POST" id="newsletter-form" class="flex flex-col md:flex-row gap-4 relative">
                 
                 <input type="email" name="email"  id="newsletter-email" placeholder="Enter your email address..." required
-                    class="w-full px-6 py-4 rounded-full border border-rose-200 bg-white text-gray-700 placeholder-rose-300 focus:outline-none focus:border-rose-400 focus:ring-4 focus:ring-rose-100 transition-all shadow-sm">
+                    class="w-full px-6 py-4 rounded-full border border-rose-200 bg-white text-gray-700 placeholder-rose-500 focus:outline-none focus:border-rose-600 focus:ring-4 focus:ring-rose-100 transition-all shadow-sm">
                 
                 <button type="submit" class="bg-rose-500 text-white font-bold uppercase tracking-widest text-xs px-8 py-4 rounded-full shadow-lg hover:bg-rose-600 hover:scale-105 active:scale-95 transition-all duration-300 flex-shrink-0 flex items-center justify-center gap-2">
                     <span>Subscribe</span>
@@ -2381,7 +2382,7 @@
                 <span class="text-lg mr-2">🌿</span> JazakAllah Khair! You have been added to the garden.
             </div>
 
-            <p class="text-xs text-rose-300 mt-6 font-medium">
+            <p class="text-xs text-rose-500 mt-6 font-medium">
                 No spam, only calmness. Unsubscribe anytime.
             </p>
         </div>
