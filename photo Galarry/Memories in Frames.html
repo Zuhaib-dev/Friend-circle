@@ -1,305 +1,266 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
   <head>
-    <!-- Basics -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Canonical + Identity -->
-    <link rel="canonical" href="https://friendcirclee.netlify.app/photo%20galarry/memories%20in%20frames" />
+    <link
+      rel="canonical"
+      href="https://friendcirclee.netlify.app/photo%20galarry/memories%20in%20frames"
+    />
     <link rel="me" href="https://www.zuhaibrashid.com/" />
     <meta name="author" content="Zuhaib Rashid" />
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
 
-    <!-- Title + Description (keep title ~55–60 chars, description ~150–160) -->
     <title>Memories in Frames | Extreme Photo Gallery | Friend Circle</title>
-    <meta name="description" content="Explore Memories in Frames — an extreme adventure photo gallery by Friend Circle with offroading, trekking, and Kashmir landscapes captured by Zuhaib Rashid." />
-
-    <!-- Favicons / PWA -->
-    <link rel="shortcut icon" href="Favicon1.png" type="image/x-icon" />
-    <link rel="manifest" href="/manifest.json" />
-
-    <!-- Performance: Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap" rel="stylesheet" />
-
-    <!-- Performance: Preload main LCP image -->
-    <link rel="preload" as="image" href="main photo.jpg" />
-
-    <!-- Social Sharing: Open Graph -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://friendcirclee.netlify.app/photo%20galarry/memories%20in%20frames" />
-    <meta property="og:title" content="Memories in Frames | Extreme Photo Gallery" />
-    <meta property="og:description" content="Extreme adventure gallery from Friend Circle — offroading, trekking, camping, and scenic Kashmir moments by Zuhaib Rashid." />
-    <!-- Replace with an absolute URL to a 1200x630 image hosted on your site or CDN -->
-    <meta property="og:image" content="https://friendcirclee.netlify.app/All%20photos/group.new.jpg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-
-    <!-- Twitter Cards -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Memories in Frames | Extreme Photo Gallery" />
-    <meta name="twitter:description" content="Adventure photo gallery by Friend Circle featuring Kashmir’s offroading and trekking memories." />
-    <meta name="twitter:image" content="https://friendcirclee.netlify.app/All%20photos/group.new.jpg" />
-
-    <!-- Geo/Locale (optional) -->
-    <meta name="geo.region" content="IN-JK" />
-    <meta name="geo.placename" content="Srinagar, Budgam" />
-    <link rel="alternate" href="https://friendcirclee.netlify.app/photo%20galarry/memories%20in%20frames" hreflang="en-IN" />
-
-    <!-- Styles and Icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    <meta
+      name="description"
+      content="Explore Memories in Frames — an extreme adventure photo gallery by Friend Circle with offroading, trekking, and Kashmir landscapes."
     />
 
-    <!-- Structured Data: ImageGallery with example items -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ImageGallery",
-      "name": "Memories in Frames | Extreme Photo Gallery",
-      "url": "https://friendcirclee.netlify.app/photo%20galarry/memories%20in%20frames",
-      "description": "Extreme adventure photo gallery by Friend Circle featuring offroading, trekking, and Kashmir landscapes captured by Zuhaib Rashid.",
-      "creator": {
-        "@type": "Person",
-        "name": "Zuhaib Rashid",
-        "url": "https://www.zuhaibrashid.com/"
-      },
-      "image": [
-        {
-          "@type": "ImageObject",
-          "url": "https://friendcirclee.netlify.app/All%20photos/group.new.jpg",
-          "contentUrl": "https://friendcirclee.netlify.app/All%20photos/group.new.jpg",
-          "caption": "Offroading trail in Kashmir",
-          "width": 1920,
-          "height": 1280
-        },
-        {
-          "@type": "ImageObject",
-          "url": "https://friendcirclee.netlify.app/All%20photos/group.new.jpg",
-          "contentUrl": "https://friendcirclee.netlify.app/All%20photos/group.new.jpg",
-          "caption": "Memories in Frames cover",
-          "width": 1200,
-          "height": 630
-        }
-      ]
-    }
-    </script>
-  </head>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Memories in Frames | Friend Circle" />
+    <meta
+      property="og:description"
+      content="Kashmir adventure gallery: Offroading, trekking, and scenic moments."
+    />
+    <meta
+      property="og:image"
+      content="https://friendcirclee.netlify.app/All%20photos/group.new.jpg"
+    />
 
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              handwriting: ["Caveat", "cursive"],
+              sans: ["Inter", "sans-serif"],
+            },
+            colors: {
+              brand: "#ff4757",
+              dark: "#1e272e",
+            },
+          },
+        },
+      };
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Inter:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
 
     <style>
-      html,
-      body {
-        font-family: "Caveat", serif;
-        margin: 0;
-        padding: 0;
-        background-color: #fff;
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #555;
       }
 
-      #preloader {
-        background: url(loader.gif) no-repeat center center;
-        position: fixed;
-        height: 100vh;
-        width: 100%;
-        z-index: 1000;
+      /* Smooth Image Loading */
+      .image-placeholder {
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+      }
+      .image-loaded {
+        opacity: 1;
       }
 
-      img {
-        border-radius: 10px;
-        display: block;
-        width: 100%;
-        height: auto;
-      }
-
-      .container {
-        max-width: 1200px;
-        margin: auto;
-        padding: 1rem;
-      }
-
-      h1 {
-        text-align: center;
-        margin-bottom: 2rem;
-      }
-
-      #main-photo {
-        margin-bottom: 2rem;
-        border-radius: 10px;
-      }
-
-      /* Pinterest Masonry Gallery */
-      .gallery {
-        column-count: 3;
-        column-gap: 1rem;
-      }
-
-      @media (max-width: 900px) {
-        .gallery {
-          column-count: 2;
-        }
-      }
-
-      @media (max-width: 600px) {
-        .gallery {
-          column-count: 1;
-        }
-      }
-
-      .gallery-img {
-        margin-bottom: 1rem;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        cursor: pointer;
-        width: 100%;
-        display: inline-block;
-      }
-
-      .gallery-img:hover {
-        transform: scale(1.03);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-      }
-
-      .modal {
-        display: none;
-        position: fixed;
-        z-index: 2000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.9);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: auto;
-        padding: 1rem; /* optional for small screens */
-      }
-
-      .modal-content {
-        max-width: 90%;
-        max-height: 90%;
-        margin: auto;
-        display: block;
-        border-radius: 10px;
-        object-fit: contain; /* Keeps image proportional */
-      }
-
-      .close {
-        position: absolute;
-        top: 20px;
-        right: 35px;
-        color: #fff;
-        font-size: 40px;
-        font-weight: bold;
-        cursor: pointer;
-      }
-
-      .caption {
-        text-align: center;
-        margin: 2rem auto;
-      }
-
-      footer {
-        background: #222;
-        color: #fff;
-        padding: 2rem 0;
-      }
-
-      footer a {
-        color: #fff;
-        text-decoration: none;
-      }
-
-      footer a:hover {
-        text-decoration: underline;
+      /* Hide scrollbar for modal */
+      .no-scroll {
+        overflow: hidden;
       }
     </style>
   </head>
 
-  <body>
-    <!-- Preloader -->
-    <div id="preloader"></div>
-
-    <!-- Main Content -->
-    <div class="container">
-      <h1>Extreme Photo Gallery</h1>
-
-      <img
-        id="main-photo"
-        src="../All photos/group.new.jpg"
-        alt="Wandering where the WiFi is weak and the views are strong - Yousmarg📍"
-        width="600"
-        height="400"
-        fetchpriority="high"
-        loading="eager"
-      />
-
-      <div class="gallery" id="gallery"></div>
+  <body class="bg-gray-50 text-gray-800 font-sans antialiased">
+    <div
+      id="preloader"
+      class="fixed inset-0 z-[9999] flex items-center justify-center bg-white transition-opacity duration-500"
+    >
+      <div class="animate-pulse flex flex-col items-center">
+        <i class="fas fa-camera-retro text-4xl text-gray-400 mb-2"></i>
+        <p class="font-handwriting text-2xl text-gray-500">
+          Loading Memories...
+        </p>
+      </div>
     </div>
+    <header class="py-12 px-4 text-center bg-white shadow-sm mb-8">
+      <h1
+        class="font-handwriting text-5xl md:text-6xl font-bold text-gray-900 mb-4"
+      >
+        Extreme Photo Gallery
+      </h1>
+      <p class="text-gray-500 max-w-2xl mx-auto font-handwriting text-2xl">
+        "Wandering where the WiFi is weak and the views are strong."
+      </p>
+    </header>
 
-    <!-- Modal -->
-    <div class="modal" id="modal">
-      <span class="close" id="close">&times;</span>
-      <img class="modal-content" id="modalImg" />
-      <div id="caption"></div>
-    </div>
+    <main class="container mx-auto px-4 pb-20 max-w-7xl">
+      <div class="mb-12 rounded-2xl overflow-hidden shadow-2xl relative group">
+        <img
+          src="../All photos/group.new.jpg"
+          alt="Main Group Photo"
+          class="w-full h-auto max-h-[80vh] object-contain md:object-cover object-top bg-gray-100"
+        />
 
-    <h4 class="caption">
-      Stay tuned for more exciting moments and adventures. We’re constantly
-      updating with new photos and experiences, so check back often to see
-      what’s new!
-    </h4>
-
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="container">
-        <div class="footer-content">
-          <div class="footer-section about">
-            <h3>About Friend Circle</h3>
-            <p>
-              Join us in our adventures as we explore the beauty of Kashmir, one
-              journey at a time.
-            </p>
-          </div>
-          <div class="footer-section links">
-            <h3>Quick Links</h3>
-            <ul>
-              <li>
-                <a href="https://friendcirclee.netlify.app/index.html">Home</a>
-              </li>
-              <li><a href="https://friendcirclee.netlify.app/viedo%20gallary/video">Video Gallery</a></li>
-              <li><a href="http://zuhaibrashid.com/">My Portfolio</a></li>
-            </ul>
-          </div>
-          <div class="footer-section social">
-            <h3>Follow Us</h3>
-            <a
-              href="https://www.linkedin.com/in/zuhaib-rashid-661345318/"
-              target="_blank"
-              ><i class="fab fa-linkedin"></i
-            ></a>
-            <a href="https://github.com/Zuhaib-dev/" target="_blank"
-              ><i class="fab fa-github"></i
-            ></a>
-            <a href="https://www.instagram.com/zoh.aib__/" target="_blank"
-              ><i class="fab fa-instagram"></i
-            ></a>
-            <a href="https://x.com/xuhaib_x9" target="_blank"
-              ><i class="fab fa-twitter"></i
-            ></a>
-            <a href="mailto:xuvaxuva006@gmail.com"
-              ><i class="fas fa-envelope"></i
-            ></a>
-            <a href="tel:+916006414088"><i class="fas fa-phone"></i></a>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          <p>&copy; 2026 Friend Circle. All Rights Reserved.</p>
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8"
+        >
+          <h2 class="text-white font-handwriting text-4xl drop-shadow-md">
+            The Journey Begins Here
+          </h2>
         </div>
       </div>
+
+      <div
+        id="gallery"
+        class="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4"
+      ></div>
+    </main>
+
+    <div id="modal" class="fixed inset-0 z-50 hidden" aria-hidden="true">
+      <div
+        class="absolute inset-0 bg-black/90 backdrop-blur-sm transition-opacity opacity-0"
+        id="modalBackdrop"
+      ></div>
+
+      <div
+        class="relative w-full h-full flex flex-col items-center justify-center p-4"
+      >
+        <button
+          id="close"
+          class="absolute top-4 right-4 text-white hover:text-red-400 transition-colors z-50 p-2"
+        >
+          <i class="fas fa-times text-3xl"></i>
+        </button>
+
+        <img
+          id="modalImg"
+          class="max-h-[85vh] max-w-full rounded shadow-2xl transform scale-95 opacity-0 transition-all duration-300"
+          src=""
+          alt=""
+        />
+
+        <p
+          id="caption"
+          class="mt-4 text-white font-handwriting text-2xl text-center max-w-3xl px-4 drop-shadow-md"
+        ></p>
+      </div>
+    </div>
+
+    <div class="text-center py-10 px-4">
+      <h4 class="font-handwriting text-3xl text-gray-600">
+        Stay tuned for more exciting moments...
+      </h4>
+    </div>
+
+    <footer class="bg-gray-900 text-gray-300 py-12 border-t border-gray-800">
+      <div
+        class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left"
+      >
+        <div>
+          <h3
+            class="text-white text-xl font-bold mb-4 font-handwriting text-3xl"
+          >
+            Friend Circle
+          </h3>
+          <p class="text-gray-400 text-sm leading-relaxed">
+            Join us in our adventures as we explore the beauty of Kashmir, one
+            journey at a time. Capturing moments that last forever.
+          </p>
+        </div>
+
+        <div>
+          <h3
+            class="text-white text-xl font-bold mb-4 font-handwriting text-3xl"
+          >
+            Quick Links
+          </h3>
+          <ul class="space-y-2 text-sm">
+            <li>
+              <a
+                href="https://friendcirclee.netlify.app/index.html"
+                class="hover:text-white transition-colors"
+                >Home</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://friendcirclee.netlify.app/viedo%20gallary/video"
+                class="hover:text-white transition-colors"
+                >Video Gallery</a
+              >
+            </li>
+            <li>
+              <a
+                href="http://zuhaibrashid.com/"
+                class="hover:text-white transition-colors"
+                >My Portfolio</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3
+            class="text-white text-xl font-bold mb-4 font-handwriting text-3xl"
+          >
+            Connect
+          </h3>
+          <div class="flex justify-center md:justify-start space-x-4">
+            <a
+              href="https://www.instagram.com/zoh.aib__/"
+              target="_blank"
+              class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-pink-600 hover:text-white transition-all"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a
+              href="https://github.com/Zuhaib-dev/"
+              target="_blank"
+              class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-gray-700 hover:text-white transition-all"
+              ><i class="fab fa-github"></i
+            ></a>
+            <a
+              href="https://x.com/xuhaib_x9"
+              target="_blank"
+              class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-400 hover:text-white transition-all"
+              ><i class="fab fa-twitter"></i
+            ></a>
+            <a
+              href="mailto:xuvaxuva006@gmail.com"
+              class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-red-500 hover:text-white transition-all"
+              ><i class="fas fa-envelope"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="border-t border-gray-800 mt-8 pt-8 text-center text-xs text-gray-500"
+      >
+        &copy; 2026 Friend Circle. All Rights Reserved.
+      </div>
     </footer>
-    <script src="scripts.js" defer></script>
+
+    <script src="scripts.js"></script>
   </body>
 </html>
