@@ -2,14 +2,14 @@
 const tours = [
   {
     name: "Gurez Valley",
-    date: " 2025",
+    date: " 2026",
     abouttheplace:
       "We've explored Gurez Valley multiple times, captivated by its stunning landscapes, serene rivers, and welcoming locals. We're eagerly planning another visit in 2025 to create more unforgettable memories.",
     image: "gurez valley.jpg",
   },
   {
     name: "Ladakh",
-    date: "2025",
+    date: "2026",
     abouttheplace:
       "Ladakh is a stunning region in northern India, known for its dramatic landscapes, high-altitude deserts, and serene monasteries. I've visited several times and always been amazed by its breathtaking beauty. I’m excited to explore Ladakh again in 2025, eager to experience its unique charm once more.",
     image:
