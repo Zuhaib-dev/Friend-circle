@@ -107,6 +107,135 @@ document.addEventListener("DOMContentLoaded", () => {
       urdu: "جو کسی نیکی کی رہنمائی کرے اسے بھی وہی اجر ملتا ہے۔",
       source: "Sahih Muslim",
     },
+    {
+      arabic: "إِنَّمَا الْأَعْمَالُ بِالنِّيَّاتِ",
+      urdu: "تمام اعمال کا دارومدار نیت پر ہے۔",
+      source: "Sahih Al-Bukhari",
+    },
+    {
+      arabic: "خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ",
+      urdu: "تم میں سے بہترین وہ ہے جو قرآن سیکھے اور سکھائے۔",
+      source: "Sahih Al-Bukhari",
+    },
+    {
+      arabic:
+        "لَا يُؤْمِنُ أَحَدُكُمْ حَتَّى يُحِبَّ لِأَخِيهِ مَا يُحِبُّ لِنَفْسِهِ",
+      urdu: "تم میں سے کوئی مومن نہیں ہو سکتا جب تک وہ اپنے بھائی کے لیے وہی پسند نہ کرے جو اپنے لیے پسند کرتا ہے۔",
+      source: "Sahih Muslim",
+    },
+    {
+      arabic: "الدُّنْيَا سِجْنُ الْمُؤْمِنِ وَجَنَّةُ الْكَافِرِ",
+      urdu: "دنیا مومن کے لیے قید خانہ اور کافر کے لیے جنت ہے۔",
+      source: "Sahih Muslim",
+    },
+    {
+      arabic: "أَكْمَلُ الْمُؤْمِنِينَ إِيمَانًا أَحْسَنُهُمْ خُلُقًا",
+      urdu: "مومنوں میں سب سے کامل ایمان والا وہ ہے جس کا اخلاق سب سے اچھا ہو۔",
+      source: "Sunan Abu Dawood",
+    },
+
+    // ===== NEW HADITH (ADDED 25+) =====
+    {
+      arabic: "يَسِّرُوا وَلَا تُعَسِّرُوا",
+      urdu: "آسانی پیدا کرو، سختی نہ کرو۔",
+      source: "Sahih Al-Bukhari",
+    },
+    {
+      arabic: "الْمُسْلِمُ مَنْ سَلِمَ الْمُسْلِمُونَ مِنْ لِسَانِهِ وَيَدِهِ",
+      urdu: "مسلمان وہ ہے جس کی زبان اور ہاتھ سے دوسرے مسلمان محفوظ رہیں۔",
+      source: "Sahih Al-Bukhari",
+    },
+    {
+      arabic: "أَفْضَلُ الصَّدَقَةِ سَقْيُ الْمَاءِ",
+      urdu: "سب سے بہترین صدقہ پانی پلانا ہے۔",
+      source: "Musnad Ahmad",
+    },
+    {
+      arabic: "إِنَّ مِنْ أَحَبِّكُمْ إِلَيَّ أَحْسَنَكُمْ أَخْلَاقًا",
+      urdu: "تم میں سے مجھے سب سے زیادہ محبوب وہ ہے جس کا اخلاق سب سے اچھا ہو۔",
+      source: "Jami` at-Tirmidhi",
+    },
+    {
+      arabic: "الْكَلِمَةُ الطَّيِّبَةُ صَدَقَةٌ",
+      urdu: "اچھی بات کہنا صدقہ ہے۔",
+      source: "Sahih Muslim",
+    },
+    {
+      arabic: "مَنْ غَشَّنَا فَلَيْسَ مِنَّا",
+      urdu: "جس نے دھوکہ دیا وہ ہم میں سے نہیں۔",
+      source: "Sahih Muslim",
+    },
+    {
+      arabic: "الرِّفْقُ لَا يَكُونُ فِي شَيْءٍ إِلَّا زَانَهُ",
+      urdu: "نرمی جس چیز میں ہوتی ہے اسے خوبصورت بنا دیتی ہے۔",
+      source: "Sahih Muslim",
+    },
+    {
+      arabic: "طَلَبُ الْعِلْمِ فَرِيضَةٌ عَلَى كُلِّ مُسْلِمٍ",
+      urdu: "علم حاصل کرنا ہر مسلمان پر فرض ہے۔",
+      source: "Sunan Ibn Majah",
+    },
+    {
+      arabic: "الدَّالُّ عَلَى الْخَيْرِ كَفَاعِلِهِ",
+      urdu: "نیکی کی طرف رہنمائی کرنے والا نیکی کرنے والے جیسا ہے۔",
+      source: "Jami` at-Tirmidhi",
+    },
+    {
+      arabic: "مَنْ حَسُنَ إِسْلَامُهُ تَرَكَ مَا لَا يَعْنِيهِ",
+      urdu: "جس کا اسلام اچھا ہو وہ فضول چیزیں چھوڑ دیتا ہے۔",
+      source: "Jami` at-Tirmidhi",
+    },
+    {
+      arabic: "لَا تَغْضَبْ",
+      urdu: "غصہ نہ کرو۔",
+      source: "Sahih Al-Bukhari",
+    },
+    {
+      arabic: "أَحَبُّ الْأَعْمَالِ إِلَى اللَّهِ أَدْوَمُهَا",
+      urdu: "اللہ کو سب سے زیادہ پسند وہ عمل ہے جو مستقل ہو۔",
+      source: "Sahih Muslim",
+    },
+    {
+      arabic: "إِنَّ الصِّدْقَ يَهْدِي إِلَى الْبِرِّ",
+      urdu: "سچائی نیکی کی طرف لے جاتی ہے۔",
+      source: "Sahih Al-Bukhari",
+    },
+    {
+      arabic: "الظُّلْمُ ظُلُمَاتٌ يَوْمَ الْقِيَامَةِ",
+      urdu: "ظلم قیامت کے دن اندھیروں کا سبب ہوگا۔",
+      source: "Sahih Muslim",
+    },
+    {
+      arabic: "مَنْ أَحَبَّ أَنْ يُبْسَطَ لَهُ فِي رِزْقِهِ",
+      urdu: "جو رزق میں وسعت چاہے وہ صلہ رحمی کرے۔",
+      source: "Sahih Al-Bukhari",
+    },
+    {
+      arabic: "أَقْرَبُكُمْ مِنِّي مَجْلِسًا أَحَاسِنُكُمْ أَخْلَاقًا",
+      urdu: "تم میں قیامت کے دن میرے سب سے قریب وہ ہوں گے جن کا اخلاق اچھا ہوگا۔",
+      source: "Jami` at-Tirmidhi",
+    },
+    {
+      arabic: "الْحَيَاءُ مِنَ الْإِيمَانِ",
+      urdu: "حیا ایمان کا حصہ ہے۔",
+      source: "Sahih Al-Bukhari",
+    },
+    {
+      arabic: "اتَّقُوا النَّارَ وَلَوْ بِشِقِّ تَمْرَةٍ",
+      urdu: "جہنم سے بچو چاہے آدھی کھجور دے کر ہی کیوں نہ ہو۔",
+      source: "Sahih Al-Bukhari",
+    },
+    {
+      arabic: "مَنْ سَلَكَ طَرِيقًا يَلْتَمِسُ فِيهِ عِلْمًا",
+      urdu: "جو علم کے لیے راستہ اختیار کرتا ہے اللہ اس کے لیے جنت کا راستہ آسان کر دیتا ہے۔",
+      source: "Sahih Muslim",
+    },
+    {
+      arabic:
+        "إِنَّ اللَّهَ يُحِبُّ إِذَا عَمِلَ أَحَدُكُمْ عَمَلًا أَنْ يُتْقِنَهُ",
+      urdu: "اللہ پسند کرتا ہے کہ جب تم کوئی کام کرو تو اسے بہترین طریقے سے کرو۔",
+      source: "Al-Bayhaqi",
+    },
   ];
   const arabicEl = document.getElementById("hadith-arabic");
   const urduEl = document.getElementById("hadith-urdu");
@@ -2261,24 +2390,28 @@ document.addEventListener("DOMContentLoaded", () => {
   let isTicking = false; // A flag to prevent running too often
 
   if (btn) {
-    window.addEventListener("scroll", () => {
-      // If we are already waiting for a frame, skip this event
-      if (!isTicking) {
-        window.requestAnimationFrame(() => {
-          // This runs only once per visual frame (smooth!)
-          if (window.scrollY > 500) {
-            btn.classList.remove("translate-y-20", "opacity-0");
-          } else {
-            btn.classList.add("translate-y-20", "opacity-0");
-          }
-          
-          // Reset flag so we can run again next frame
-          isTicking = false;
-        });
+    window.addEventListener(
+      "scroll",
+      () => {
+        // If we are already waiting for a frame, skip this event
+        if (!isTicking) {
+          window.requestAnimationFrame(() => {
+            // This runs only once per visual frame (smooth!)
+            if (window.scrollY > 500) {
+              btn.classList.remove("translate-y-20", "opacity-0");
+            } else {
+              btn.classList.add("translate-y-20", "opacity-0");
+            }
 
-        isTicking = true;
-      }
-    }, { passive: true }); // 'passive: true' tells browser "I promise not to stop the scroll", which boosts speed
+            // Reset flag so we can run again next frame
+            isTicking = false;
+          });
+
+          isTicking = true;
+        }
+      },
+      { passive: true }
+    ); // 'passive: true' tells browser "I promise not to stop the scroll", which boosts speed
 
     // Scroll to top on click (This part was already fine)
     btn.addEventListener("click", () => {
@@ -6506,37 +6639,37 @@ document.addEventListener("contextmenu", function (event) {
 // ==========================================
 // SMART PRELOADER LOGIC
 // ==========================================
-(function() {
-    // 1. Lock the scroll immediately
-    document.body.classList.add('loading');
+(function () {
+  // 1. Lock the scroll immediately
+  document.body.classList.add("loading");
 
-    const preloader = document.getElementById('site-preloader');
-    const minLoadTime = 1500; // Minimum time in ms (1.5 seconds)
-    const startTime = Date.now();
+  const preloader = document.getElementById("site-preloader");
+  const minLoadTime = 1500; // Minimum time in ms (1.5 seconds)
+  const startTime = Date.now();
 
-    function hidePreloader() {
-        // Calculate how much time has passed
-        const elapsedTime = Date.now() - startTime;
-        
-        // Calculate remaining time to meet the minimum
-        const remainingTime = Math.max(0, minLoadTime - elapsedTime);
+  function hidePreloader() {
+    // Calculate how much time has passed
+    const elapsedTime = Date.now() - startTime;
 
-        // Wait for the remaining time, then fade out
+    // Calculate remaining time to meet the minimum
+    const remainingTime = Math.max(0, minLoadTime - elapsedTime);
+
+    // Wait for the remaining time, then fade out
+    setTimeout(() => {
+      if (preloader) {
+        // Add the CSS class to fade it out
+        preloader.classList.add("preloader-hidden");
+
+        // Wait for the CSS transition (0.5s) to finish, then remove from DOM
         setTimeout(() => {
-            if (preloader) {
-                // Add the CSS class to fade it out
-                preloader.classList.add('preloader-hidden');
+          preloader.style.display = "none";
+          document.body.classList.remove("loading"); // Unlock scroll
+        }, 500);
+      }
+    }, remainingTime);
+  }
 
-                // Wait for the CSS transition (0.5s) to finish, then remove from DOM
-                setTimeout(() => {
-                    preloader.style.display = 'none';
-                    document.body.classList.remove('loading'); // Unlock scroll
-                }, 500);
-            }
-        }, remainingTime);
-    }
-
-    // Listen for the window load event (when all images/scripts are done)
-    window.addEventListener('load', hidePreloader);
+  // Listen for the window load event (when all images/scripts are done)
+  window.addEventListener("load", hidePreloader);
 })();
 // Remove if now worked
