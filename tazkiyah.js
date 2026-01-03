@@ -6792,3 +6792,184 @@ document.addEventListener("contextmenu", function (event) {
     fetchPrayerTimes();
 
 })();
+// ==========================================
+// FIQH SECTION LOGIC (HANAFI)
+// ==========================================
+(function() {
+    // 1. Data Structure (Hanafi School)
+    const fiqhData = {
+        wudu: {
+            icon: "💧",
+            label: "Wudu (Ablution)",
+            categories: {
+                farz: [
+                    "Washing the entire face once.",
+                    "Washing both arms up to and including elbows.",
+                    "Masah (wiping) of one-quarter of the head.",
+                    "Washing both feet up to and including ankles."
+                ],
+                sunnah: [
+                    "Making Niyyah (Intention).",
+                    "Reciting Bismillah.",
+                    "Washing hands up to wrists three times.",
+                    "Using Miswak (cleaning teeth).",
+                    "Gargling (Madmadah) three times.",
+                    "Rinsing the nose (Istinshaq) three times.",
+                    "Khilal (passing wet fingers) through beard & fingers.",
+                    "Doing everything in order (Tartib)."
+                ],
+                breakers: [
+                    "Discharge of anything from private parts (urine, stool, wind).",
+                    "Flowing of blood or pus from any part of the body.",
+                    "Vomiting a mouthful.",
+                    "Sleeping while lying down or leaning.",
+                    "Fainting or insanity.",
+                    "Laughter during Salah."
+                ]
+            }
+        },
+        ghusl: {
+            icon: "🚿",
+            label: "Ghusl (Bath)",
+            categories: {
+                farz: [
+                    "Rinsing the mouth thoroughly (Gargling).",
+                    "Rinsing the nose up to the soft bone.",
+                    "Washing the entire body so no dry spot remains."
+                ],
+                sunnah: [
+                    "Intention (Niyyah) to purify.",
+                    "Washing hands first.",
+                    "Washing private parts.",
+                    "Performing Wudu before the bath.",
+                    "Pouring water over the head 3 times.",
+                    "Pouring water over right shoulder then left (3x)."
+                ],
+                wajib: [
+                    "Necessary after Janabah (sexual relation/discharge).",
+                    "Necessary after Menstruation (Haid) ends.",
+                    "Necessary after Post-natal bleeding (Nifas) ends."
+                ]
+            }
+        },
+        salah: {
+            icon: "🕌",
+            label: "Salah (Prayer)",
+            categories: {
+                farz: [
+                    "Takbir Tahrimah (Opening Takbir).",
+                    "Qiyam (Standing).",
+                    "Qira'at (Recitation of Quran).",
+                    "Ruku (Bowing).",
+                    "Sujud (Prostration - twice).",
+                    "Qa'dah Akhirah (Final Sitting)."
+                ],
+                wajib: [
+                    "Reciting Surah Fatiha.",
+                    "Adding a Surah after Fatiha (in first 2 rakats).",
+                    "Qa'dah Ula (First Sitting in 3/4 rakat prayer).",
+                    "Reciting Tashahhud.",
+                    "Ending with Salam."
+                ],
+                breakers: [
+                    "Talking intentionally or by mistake.",
+                    "Eating or drinking.",
+                    "Turning chest away from Qibla.",
+                    "Breaking Wudu.",
+                    "Laughing aloud.",
+                    "Missing a Farz act."
+                ]
+            }
+        }
+    };
+
+    // Elements
+    const subjectContainer = document.getElementById('fiqh-subjects');
+    const catContainer = document.getElementById('fiqh-categories');
+    const listContainer = document.getElementById('fiqh-list');
+    const titleEl = document.getElementById('fiqh-title');
+    const subtitleEl = document.getElementById('fiqh-subtitle');
+
+    let currentSubject = 'wudu';
+    let currentCategory = 'farz';
+
+    if (subjectContainer && listContainer) {
+        
+        // 2. Render Subjects (Left Side)
+        function renderSubjects() {
+            subjectContainer.innerHTML = Object.keys(fiqhData).map(key => `
+                <div class="fiqh-subject-btn ${key === currentSubject ? 'active' : ''}" 
+                     onclick="changeSubject('${key}')">
+                    <span class="text-2xl">${fiqhData[key].icon}</span>
+                    <span class="text-sm md:text-base">${fiqhData[key].label}</span>
+                </div>
+            `).join('');
+        }
+
+        // 3. Render Categories (Top Tabs)
+        function renderCategories() {
+            const categories = Object.keys(fiqhData[currentSubject].categories);
+            
+            // Ensure current category exists in new subject, else switch to first one
+            if (!categories.includes(currentCategory)) {
+                currentCategory = categories[0];
+            }
+
+            catContainer.innerHTML = categories.map(cat => `
+                <button class="fiqh-cat-tab ${cat === currentCategory ? 'active' : ''}" 
+                        onclick="changeCategory('${cat}')">
+                    ${formatLabel(cat)}
+                </button>
+            `).join('');
+
+            updateContent();
+        }
+
+        // 4. Update Main Content (The List)
+        function updateContent() {
+            const data = fiqhData[currentSubject];
+            const items = data.categories[currentCategory];
+
+            // Update Header
+            titleEl.textContent = `${data.label} - ${formatLabel(currentCategory)}`;
+            subtitleEl.textContent = `There are ${items.length} points in this category according to Hanafi Fiqh.`;
+
+            // Render List with Staggered Animation
+            listContainer.innerHTML = items.map((item, index) => `
+                <li class="fiqh-item" style="animation-delay: ${index * 0.05}s">
+                    <div class="min-w-[24px] h-6 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center text-xs font-bold">
+                        ${index + 1}
+                    </div>
+                    <span class="text-gray-700 text-sm leading-relaxed">${item}</span>
+                </li>
+            `).join('');
+        }
+
+        // Helper: Format "farz" -> "Farz (Obligatory)"
+        function formatLabel(key) {
+            const labels = {
+                farz: "Farz (Obligatory)",
+                sunnah: "Sunnah",
+                wajib: "Wajib (Necessary)",
+                breakers: "Nullifiers (Breakers)"
+            };
+            return labels[key] || key;
+        }
+
+        // Global Change Functions
+        window.changeSubject = (subj) => {
+            currentSubject = subj;
+            renderSubjects();
+            renderCategories();
+        };
+
+        window.changeCategory = (cat) => {
+            currentCategory = cat;
+            renderCategories(); // Re-renders tabs to update active state
+        };
+
+        // Initialize
+        renderSubjects();
+        renderCategories();
+    }
+})();

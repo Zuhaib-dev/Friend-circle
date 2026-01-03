@@ -3273,3 +3273,91 @@ body.loading {
     opacity: 0;
     pointer-events: none; /* Allows user to click things underneath */
 }
+/* =========================================
+   FIQH SECTION STYLES
+   ========================================= */
+
+/* Hide scrollbar for the mobile subject menu */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Subject Button Styles */
+.fiqh-subject-btn {
+    padding: 1rem;
+    border-radius: 1.5rem;
+    text-align: center; /* Center text on mobile */
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid transparent;
+    font-weight: bold;
+    color: #9ca3af; /* Gray-400 */
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    white-space: nowrap;
+}
+
+/* Active Subject */
+.fiqh-subject-btn.active {
+    background: white;
+    color: #be123c; /* rose-700 */
+    box-shadow: 0 10px 20px -5px rgba(244, 63, 94, 0.15);
+    border-color: #fecdd3; /* rose-200 */
+    transform: scale(1.02);
+}
+
+/* Category Tab Styles */
+.fiqh-cat-tab {
+    padding: 0.5rem 1.25rem;
+    border-radius: 99px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+    color: #6b7280;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.fiqh-cat-tab:hover {
+    background: white;
+    color: #be123c;
+}
+
+/* Active Category */
+.fiqh-cat-tab.active {
+    background: #be123c; /* rose-700 */
+    color: white;
+    box-shadow: 0 4px 12px rgba(190, 18, 60, 0.3);
+}
+
+/* List Item Animation */
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.fiqh-item {
+    background: white;
+    padding: 1rem;
+    border-radius: 1rem;
+    border: 1px solid #ffe4e6;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    animation: slideInRight 0.4s ease forwards;
+    opacity: 0; /* Start hidden for animation */
+    transition: transform 0.2s;
+}
+
+.fiqh-item:hover {
+    border-color: #f43f5e;
+    transform: translateX(5px);
+}
