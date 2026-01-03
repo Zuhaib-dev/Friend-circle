@@ -142,17 +142,15 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- 3. DYNAMIC TEAM RENDERER ---
   renderTeamGrid();
 });
-
 function renderTeamGrid() {
   const teamGrid = document.getElementById("team-grid");
   if (!teamGrid) return;
 
-  // --- DATA ---
   const teamMembers = [
     {
       name: "Zuhaib Rashid",
-      role: "Founder & Dev",
-      desc: "Passionate about web dev and leading the crew into the unknown. The brain behind the digital circle.",
+      role: "Founder & Adventurer",
+      desc: "Passionate about web development and adventure. Leads the crew with a love for exploring new places and exciting projects.",
       img: "profile picturs/xuhaib.gif.gif",
       color: "rose",
       instagram: "https://www.instagram.com/zoh.aib__/",
@@ -161,47 +159,15 @@ function renderTeamGrid() {
     {
       name: "Aqib",
       role: "Offroad Specialist",
-      desc: "A multi-talented friend with a knack for offroad biking, fishing, and cooking wild feasts.",
+      desc: "Multi-talented with a knack for offroad biking, fishing, and cooking. An adventurous soul.",
       img: "profile picturs/aqib 1.jpg",
       color: "emerald",
       instagram: "https://www.instagram.com/itx_aqib_45",
     },
     {
-      name: "Tehseen Bin Akbar",
-      role: "Filmmaker",
-      desc: "The eye behind the lens. Passionate about filmmaking, exploring, and event management.",
-      img: "profile picturs/tehseen.jpg",
-      color: "purple",
-      instagram: "https://www.instagram.com/tehseenbinakba",
-    },
-    {
-      name: "Musaib",
-      role: "Spiritual Guide",
-      desc: "A respected Imam known for guiding the crew spiritually and leading prayers with deep faith.",
-      img: "profile picturs/musaib.jpg",
-      color: "emerald",
-      instagram: "https://www.instagram.com/musaebahmed",
-    },
-    {
-      name: "Haziq",
-      role: "Head Chef",
-      desc: "The master of meals during tours. He brings creativity and passion to every dish he prepares.",
-      img: "profile picturs/Haziq.webp",
-      color: "orange",
-      instagram: "https://www.instagram.com/hazik__lone",
-    },
-    {
-      name: "Naveed",
-      role: "Motorhead",
-      desc: "Loves cars, offroading, and vehicles. His enthusiasm for machines adds energy to the trip.",
-      img: "profile picturs/naveed.webp",
-      color: "blue",
-      instagram: "https://www.instagram.com/nav_jatt____",
-    },
-    {
-      name: "Sahil",
+      name: "Sahil Mushtaq",
       role: "Gamer & Athlete",
-      desc: "Loves online games and volleyball. An energetic spirit who keeps the mood engaging.",
+      desc: "Loves online games and volleyball. His energetic spirit makes him fun and engaging.",
       img: "profile picturs/Sahil mushtaq.jpg",
       color: "slate",
       instagram: "https://www.instagram.com/sahill_2032",
@@ -209,20 +175,132 @@ function renderTeamGrid() {
     {
       name: "Furqan",
       role: "Sportsman",
-      desc: "Shines in cricket and volleyball. His refined taste in food adds elegance to his personality.",
+      desc: "Excels in cricket and volleyball. His refined taste in food adds elegance to his personality.",
       img: "profile picturs/Furqan.jpg",
       color: "teal",
       instagram: "https://www.instagram.com/fasu20790",
     },
     {
+      name: "Tehseen Bin Akbar",
+      role: "Filmmaker",
+      desc: "Passionate about filmmaking, photography, traveling, and event management.",
+      img: "profile picturs/tehseen.jpg",
+      color: "purple",
+      instagram: "https://www.instagram.com/tehseenbinakba",
+    },
+    {
+      name: "Musaib",
+      role: "Spiritual Guide",
+      desc: "A respected Imam known for guiding the crew spiritually and leading prayers with dedication.",
+      img: "profile picturs/musaib.jpg",
+      color: "emerald",
+      instagram: "https://www.instagram.com/musaebahmed",
+    },
+    {
+      name: "Sahil Javeed",
+      role: "Explorer",
+      desc: "Known for his great sense of humor and love for adventures and fishing.",
+      img: "profile picturs/sahil javeed.jpg",
+      color: "cyan",
+      instagram: "https://www.instagram.com/sahil.4024",
+    },
+    {
+      name: "Zubair",
+      role: "Explorer",
+      desc: "Adventurous and curious. Loves exploring new places and has a kind nature.",
+      img: "profile picturs/zubair.jpg",
+      color: "blue",
+      facebook: "https://www.facebook.com/profile.php?id=100052350402534",
+    },
+    {
+      name: "Muhammed Mubashir",
+      role: "Jungle Tracker",
+      desc: "Adventure enthusiast who loves jungles, swimming, and tracking in nature.",
+      img: "profile picturs/mubashir.jpg",
+      color: "green",
+      facebook: "https://www.facebook.com/profile.php?id=100023662695866",
+    },
+    {
+      name: "Haziq",
+      role: "Head Chef",
+      desc: "Our chef during tours. Loves exploring, meeting new people, and cooking amazing meals.",
+      img: "profile picturs/Haziq.webp",
+      color: "orange",
+      instagram: "https://www.instagram.com/hazik__lone",
+    },
+    {
+      name: "Shahid Khan",
+      role: "Cricket Enthusiast",
+      desc: "Passionate about cricket and exploring new places.",
+      img: "profile picturs/shahid khan.jpg",
+      color: "red",
+      instagram: "https://www.instagram.com/_shahid._khan_",
+    },
+    {
+      name: "Naveed",
+      role: "Motorhead",
+      desc: "Loves cars, off-roading, and exploring new places.",
+      img: "profile picturs/naveed.webp",
+      color: "blue",
+      instagram: "https://www.instagram.com/nav_jatt____",
+    },
+    {
+      name: "Farhan",
+      role: "Gamer & Athlete",
+      desc: "Enjoys video games, volleyball, and adventure.",
+      img: "profile picturs/farhan.jpg",
+      color: "indigo",
+      instagram: "https://www.instagram.com/farhan_fayaz_71",
+    },
+    {
+      name: "Umer",
+      role: "Future Cop",
+      desc: "Loves wandering and cricket. Dreams of becoming a cop.",
+      img: "profile picturs/umar.enc",
+      color: "gray",
+      facebook: "https://www.facebook.com/profile.php?id=100076668668005",
+    },
+    {
+      name: "Sameem",
+      role: "Sportsman",
+      desc: "Talented in cricket and volleyball with a great sense of humor.",
+      img: "profile picturs/sameem.jpg",
+      color: "lime",
+      instagram: "https://www.instagram.com/captain__s123",
+    },
+    {
+      name: "Bilal Bhat",
+      role: "Nature Lover",
+      desc: "Well-skilled with a deep love for nature. Inspires the group with experience.",
+      img: "profile picturs/Bilmam.jpg",
+      color: "emerald",
+      facebook:
+        "https://media.tenor.com/WfZD9HMO5sIAAAAM/hum-pe-toh-hai-hi-nau-arpit-bala.gif",
+    },
+    {
+      name: "Mudasir Hameed",
+      role: "Photographer & Offroader",
+      desc: "Enjoys photography, exploring new places, and off-roading adventures.",
+      img: "profile picturs/Mudasir Hameed.webp",
+      color: "amber",
+      instagram: "https://www.instagram.com/_abubakar313_/",
+    },
+    {
+      name: "Amir Shafi",
+      role: "Trekker",
+      desc: "Fun-loving team player passionate about trekking and volleyball.",
+      img: "profile picturs/amir shafi (2).jpeg",
+      color: "violet",
+      instagram: "https://www.instagram.com/amir_writes2/",
+    },
+    {
       name: "Mir Mavin",
       role: "The Energy",
-      desc: "An adventurous spirit who brings fresh energy and laughter to every journey.",
+      desc: "Adventurous spirit bringing fresh energy and laughter to every journey.",
       img: "profile picturs/mavin.jpg",
       color: "yellow",
       instagram: "https://www.instagram.com/mir.mavin",
     },
-    // Add more members here easily...
   ];
 
   // --- COLOR MAP ---
@@ -367,82 +445,88 @@ function renderTeamGrid() {
     .join("");
 }
 // ==========================================
-    // SECTION 6: STATS COUNTER ANIMATION
-    // ==========================================
-    const statsSection = document.getElementById("stats");
-    const counters = document.querySelectorAll(".counter");
-    let started = false; // To ensure animation runs only once
+// SECTION 6: STATS COUNTER ANIMATION
+// ==========================================
+const statsSection = document.getElementById("stats");
+const counters = document.querySelectorAll(".counter");
+let started = false; // To ensure animation runs only once
 
-    function startCounting() {
-        counters.forEach(counter => {
-            const target = +counter.getAttribute("data-target");
-            const speed = 200; // Lower is slower
-            
-            const updateCount = () => {
-                const count = +counter.innerText;
-                const inc = target / speed;
+function startCounting() {
+  counters.forEach((counter) => {
+    const target = +counter.getAttribute("data-target");
+    const speed = 200; // Lower is slower
 
-                if (count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(updateCount, 20); // Speed of refresh
-                } else {
-                    counter.innerText = target;
-                }
-            };
-            updateCount();
-        });
-    }
+    const updateCount = () => {
+      const count = +counter.innerText;
+      const inc = target / speed;
 
-    if (statsSection) {
-        const observer = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting && !started) {
-                startCounting();
-                started = true;
-            }
-        }, { threshold: 0.5 }); // Start when 50% of section is visible
+      if (count < target) {
+        counter.innerText = Math.ceil(count + inc);
+        setTimeout(updateCount, 20); // Speed of refresh
+      } else {
+        counter.innerText = target;
+      }
+    };
+    updateCount();
+  });
+}
 
-        observer.observe(statsSection);
-    }
-    // ==========================================
-    // SECTION 7: PRAYER TIMES WIDGET
-    // ==========================================
-    const prayerGrid = document.getElementById('prayer-times-grid');
-    const hijriEl = document.getElementById('hijri-date');
-    const gregEl = document.getElementById('gregorian-date');
-    const nextTimerEl = document.getElementById('next-prayer-timer');
+if (statsSection) {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      if (entries[0].isIntersecting && !started) {
+        startCounting();
+        started = true;
+      }
+    },
+    { threshold: 0.5 }
+  ); // Start when 50% of section is visible
 
-    if (prayerGrid) {
-        async function fetchPrayerTimes() {
-            try {
-                // Srinagar, India | Method 1 (Karachi) | School 1 (Hanafi)
-                const res = await fetch(`https://api.aladhan.com/v1/timingsByCity?city=Srinagar&country=India&method=1&school=1`);
-                const data = await res.json();
-                
-                if(data.code === 200) {
-                    const timings = data.data.timings;
-                    const date = data.data.date;
-                    
-                    // 1. Update Dates
-                    hijriEl.textContent = `${date.hijri.day} ${date.hijri.month.en} ${date.hijri.year}`;
-                    gregEl.textContent = date.readable;
+  observer.observe(statsSection);
+}
+// ==========================================
+// SECTION 7: PRAYER TIMES WIDGET
+// ==========================================
+const prayerGrid = document.getElementById("prayer-times-grid");
+const hijriEl = document.getElementById("hijri-date");
+const gregEl = document.getElementById("gregorian-date");
+const nextTimerEl = document.getElementById("next-prayer-timer");
 
-                    // 2. Render Times
-                    const prayers = [
-                        { name: 'Fajr', time: timings.Fajr, icon: '🌅' },
-                        { name: 'Dhuhr', time: timings.Dhuhr, icon: '☀️' },
-                        { name: 'Asr', time: timings.Asr, icon: '🌤️' },
-                        { name: 'Maghrib', time: timings.Maghrib, icon: '🌇' },
-                        { name: 'Isha', time: timings.Isha, icon: '🌙' }
-                    ];
+if (prayerGrid) {
+  async function fetchPrayerTimes() {
+    try {
+      // Srinagar, India | Method 1 (Karachi) | School 1 (Hanafi)
+      const res = await fetch(
+        `https://api.aladhan.com/v1/timingsByCity?city=Srinagar&country=India&method=1&school=1`
+      );
+      const data = await res.json();
 
-                    prayerGrid.innerHTML = prayers.map(p => {
-                        // Simple 12h converter
-                        let [h, m] = p.time.split(':');
-                        let suffix = h >= 12 ? 'PM' : 'AM';
-                        h = h % 12 || 12;
-                        let time12 = `${h}:${m} ${suffix}`;
+      if (data.code === 200) {
+        const timings = data.data.timings;
+        const date = data.data.date;
 
-                        return `
+        // 1. Update Dates
+        hijriEl.textContent = `${date.hijri.day} ${date.hijri.month.en} ${date.hijri.year}`;
+        gregEl.textContent = date.readable;
+
+        // 2. Render Times
+        const prayers = [
+          { name: "Fajr", time: timings.Fajr, icon: "🌅" },
+          { name: "Dhuhr", time: timings.Dhuhr, icon: "☀️" },
+          { name: "Asr", time: timings.Asr, icon: "🌤️" },
+          { name: "Maghrib", time: timings.Maghrib, icon: "🌇" },
+          { name: "Isha", time: timings.Isha, icon: "🌙" },
+        ];
+
+        prayerGrid.innerHTML = prayers
+          .map((p) => {
+            // Simple 12h converter
+            let [h, m] = p.time.split(":");
+            let suffix = h >= 12 ? "PM" : "AM";
+            h = h % 12 || 12;
+            let time12 = `${h}:${m} ${suffix}`;
+
+            return `
                         <div class="flex justify-between items-center p-3 rounded-xl hover:bg-white hover:shadow-sm transition-all border border-transparent hover:border-emerald-100 group">
                             <div class="flex items-center gap-3">
                                 <span class="text-xl group-hover:scale-110 transition-transform">${p.icon}</span>
@@ -451,43 +535,45 @@ function renderTeamGrid() {
                             <span class="font-mono font-medium text-emerald-700 bg-emerald-50 px-3 py-1 rounded-lg">${time12}</span>
                         </div>
                         `;
-                    }).join('');
+          })
+          .join("");
 
-                    // 3. Logic for "Next Prayer"
-                    updateNextPrayer(timings);
-                }
-            } catch (e) {
-                prayerGrid.innerHTML = '<p class="text-center text-rose-500">Failed to load prayer times.</p>';
-            }
-        }
-
-        function updateNextPrayer(timings) {
-            const now = new Date();
-            const currentMinutes = now.getHours() * 60 + now.getMinutes();
-            
-            const prayerList = [
-                { name: 'Fajr', val: timeToMin(timings.Fajr) },
-                { name: 'Dhuhr', val: timeToMin(timings.Dhuhr) },
-                { name: 'Asr', val: timeToMin(timings.Asr) },
-                { name: 'Maghrib', val: timeToMin(timings.Maghrib) },
-                { name: 'Isha', val: timeToMin(timings.Isha) }
-            ];
-
-            let next = prayerList.find(p => p.val > currentMinutes);
-            if (!next) next = prayerList[0]; // Next day Fajr
-
-            nextTimerEl.textContent = next.name;
-        }
-
-        function timeToMin(timeStr) {
-            const [h, m] = timeStr.split(':').map(Number);
-            return h * 60 + m;
-        }
-
-        fetchPrayerTimes();
+        // 3. Logic for "Next Prayer"
+        updateNextPrayer(timings);
+      }
+    } catch (e) {
+      prayerGrid.innerHTML =
+        '<p class="text-center text-rose-500">Failed to load prayer times.</p>';
     }
+  }
+
+  function updateNextPrayer(timings) {
+    const now = new Date();
+    const currentMinutes = now.getHours() * 60 + now.getMinutes();
+
+    const prayerList = [
+      { name: "Fajr", val: timeToMin(timings.Fajr) },
+      { name: "Dhuhr", val: timeToMin(timings.Dhuhr) },
+      { name: "Asr", val: timeToMin(timings.Asr) },
+      { name: "Maghrib", val: timeToMin(timings.Maghrib) },
+      { name: "Isha", val: timeToMin(timings.Isha) },
+    ];
+
+    let next = prayerList.find((p) => p.val > currentMinutes);
+    if (!next) next = prayerList[0]; // Next day Fajr
+
+    nextTimerEl.textContent = next.name;
+  }
+
+  function timeToMin(timeStr) {
+    const [h, m] = timeStr.split(":").map(Number);
+    return h * 60 + m;
+  }
+
+  fetchPrayerTimes();
+}
 // PWA Script
-  const CACHE_NAME = "friendcircle-cache-v1";
+const CACHE_NAME = "friendcircle-cache-v1";
 const urlsToCache = [
   "/",
   "/index.html",
@@ -496,21 +582,20 @@ const urlsToCache = [
   // add other assets you want cached
 ];
 
-self.addEventListener("install", event => {
+self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => {
-        return cache.addAll(urlsToCache);
-      })
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.addAll(urlsToCache);
+    })
   );
 });
 
-self.addEventListener("activate", event => {
+self.addEventListener("activate", (event) => {
   // optional: cleanup old caches
   event.waitUntil(
-    caches.keys().then(cacheNames => {
+    caches.keys().then((cacheNames) => {
       return Promise.all(
-        cacheNames.map(cn => {
+        cacheNames.map((cn) => {
           if (cn !== CACHE_NAME) {
             return caches.delete(cn);
           }
@@ -520,9 +605,9 @@ self.addEventListener("activate", event => {
   );
 });
 
-self.addEventListener("fetch", event => {
+self.addEventListener("fetch", (event) => {
   event.respondWith(
-    caches.match(event.request).then(response => {
+    caches.match(event.request).then((response) => {
       return response || fetch(event.request);
     })
   );
