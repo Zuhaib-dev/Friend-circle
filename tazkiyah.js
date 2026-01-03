@@ -937,6 +937,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!trigger) return;
 
+  // --- Event Listeners ---
   trigger.onclick = () => {
     modal.classList.remove("hidden");
     document.body.style.overflow = "hidden";
@@ -954,6 +955,7 @@ document.addEventListener("DOMContentLoaded", () => {
     backBtn.classList.add("hidden");
   };
 
+  // --- 1. Fetch Surah List (Keeps English/Arabic names for navigation) ---
   async function fetchSurahList() {
     if (listGrid.innerHTML !== "") return;
     listGrid.innerHTML =
@@ -964,11 +966,11 @@ document.addEventListener("DOMContentLoaded", () => {
       listGrid.innerHTML = data.data
         .map(
           (s) => `
-                <div onclick="openSurah(${s.number})" class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm cursor-pointer hover:border-emerald-500 transition-all flex justify-between items-center">
+                <div onclick="openSurah(${s.number})" class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm cursor-pointer hover:border-emerald-500 transition-all flex justify-between items-center group">
                     <div class="flex items-center gap-4">
-                        <div class="w-8 h-8 bg-emerald-100 rounded text-emerald-700 flex items-center justify-center font-bold text-xs">${s.number}</div>
+                        <div class="w-8 h-8 bg-emerald-100 group-hover:bg-emerald-600 group-hover:text-white transition-colors rounded text-emerald-700 flex items-center justify-center font-bold text-xs">${s.number}</div>
                         <div>
-                            <h4 class="font-bold text-gray-800">${s.englishName}</h4>
+                            <h4 class="font-bold text-gray-800 group-hover:text-emerald-700 transition-colors">${s.englishName}</h4>
                             <p class="text-[10px] text-gray-400 uppercase">${s.englishNameTranslation}</p>
                         </div>
                     </div>
@@ -982,6 +984,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // --- 2. Open Surah (The Logic Change) ---
   window.openSurah = async function (num) {
     listGrid.classList.add("hidden");
     readingView.classList.remove("hidden");
@@ -990,23 +993,28 @@ document.addEventListener("DOMContentLoaded", () => {
     const ayahsContainer = document.getElementById("ayah-list");
     ayahsContainer.innerHTML =
       '<div class="text-center py-20 text-emerald-600 animate-pulse font-bold">Opening Surah...</div>';
+
     document
       .getElementById("quran-view-container")
       .scrollTo({ top: 0, behavior: "smooth" });
 
     try {
-      const [arRes, enRes] = await Promise.all([
+      // FIX: Fetch 'ur.junagarhi' (Urdu) instead of 'en.sahih'
+      const [arRes, urRes] = await Promise.all([
         fetch(`https://api.alquran.cloud/v1/surah/${num}`),
-        fetch(`https://api.alquran.cloud/v1/surah/${num}/en.sahih`),
+        fetch(`https://api.alquran.cloud/v1/surah/${num}/ur.junagarhi`),
       ]);
 
       const arData = await arRes.json();
-      const enData = await enRes.json();
+      const urData = await urRes.json(); // Data is now Urdu
       const surah = arData.data;
 
-      // 1. Uniform Header for all Surahs
-      const bismillahText = "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ";
+      // Urdu Bismillah Text
+      const bismillahArabic = "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ";
+      const bismillahUrdu =
+        "شروع اللہ کے نام سے جو بڑا مہربان نہایت رحم والا ہے";
 
+      // --- Render Header ---
       document.getElementById("reading-header").innerHTML = `
             <div class="mb-12 text-center">
                 <span class="bg-emerald-100 text-emerald-700 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest border border-emerald-200">Surah ${surah.number}</span>
@@ -1014,8 +1022,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 <p class="text-gray-500 mb-8">${surah.englishName} • ${surah.numberOfAyahs} Ayahs</p>
                 
                 <div class="py-4">
-                    <p class="font-amiri text-4xl text-emerald-800">${bismillahText}</p>
-                    <p class="text-[11px] text-gray-400 mt-2 italic">In the name of Allah, the Entirely Merciful, the Especially Merciful</p>
+                    <p class="font-amiri text-4xl text-emerald-800">${bismillahArabic}</p>
+                    <p class="text-sm text-gray-500 mt-3 font-amiri" dir="rtl">${bismillahUrdu}</p>
                 </div>
 
                 <div class="mt-8 bg-white p-3 rounded-2xl shadow-sm border border-emerald-50 max-w-xs mx-auto">
@@ -1026,37 +1034,39 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
         `;
 
-      // 2. Render Ayahs without repeating Bismillah
+      // --- Render Ayahs (Urdu Layout) ---
       ayahsContainer.innerHTML = surah.ayahs
         .map((ayah, i) => {
           let arabicText = ayah.text;
 
-          // Remove Bismillah from the first ayah if it's not Surah Al-Fatiha (1) or At-Tawbah (9)
-          // The API usually includes it in the text of the first ayah
+          // Remove Bismillah from Arabic text if it's not Surah 1 or 9
           if (num !== 1 && num !== 9 && i === 0) {
-            // This regex removes the Bismillah string if it appears at the start
-            arabicText = arabicText.replace(bismillahText, "").trim();
+            arabicText = arabicText.replace(bismillahArabic, "").trim();
           }
 
           return `
-                <div class="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm">
-                    <div class="flex flex-col gap-6">
+                <div class="bg-white p-6 md:p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex flex-col gap-8">
+                        
                         <h2 class="font-amiri text-3xl md:text-4xl text-right leading-[2.6] text-gray-800" dir="rtl">
                             ${arabicText} <span class="text-emerald-500/50 font-serif ml-2 text-2xl">۝</span>
                         </h2>
-                        <div class="border-l-2 border-emerald-100 pl-4 py-1">
-                            <span class="text-[10px] font-bold text-emerald-300 uppercase mb-1 block">Verse ${ayah.numberInSurah}</span>
-                            <p class="text-gray-600 text-sm md:text-base italic leading-relaxed">
-                                ${enData.data.ayahs[i].text}
+
+                        <div class="border-r-4 border-emerald-100 pr-5 py-2 text-right">
+                            <span class="text-[16px] font-bold text-emerald-400 uppercase mb-2 block font-amiri">آیت ${ayah.numberInSurah}</span>
+                            <p class="text-gray-600 text-lg md:text-xl leading-loose font-amiri" dir="rtl">
+                                ${urData.data.ayahs[i].text}
                             </p>
                         </div>
+
                     </div>
                 </div>
             `;
         })
         .join("");
     } catch (e) {
-      ayahsContainer.innerHTML = `<p class="text-center text-red-500">Error loading Surah.</p>`;
+      console.error(e);
+      ayahsContainer.innerHTML = `<p class="text-center text-red-500 py-10">Network error. Could not load Urdu translation.</p>`;
     }
   };
 })();
