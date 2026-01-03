@@ -1,0 +1,221 @@
+/* GLOBAL RESETS & UTILITIES */
+
+/* 1. Base Font Settings */
+html {
+  font-size: 16px;
+  scroll-padding-top: 80px; /* Accounts for fixed navbar */
+}
+
+/* 2. Custom Scrollbar (Floral Theme) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fff1f2; /* rose-50 */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #f43f5e; /* rose-500 */
+  border-radius: 5px;
+  border: 2px solid #fff1f2;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #be123c; /* rose-700 */
+}
+
+/* 3. Utility Classes */
+.text-shadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+/* NAVBAR STYLES */
+
+/* Desktop Links */
+.nav-link {
+  padding: 0.5rem 0.75rem;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: #064e3b; /* emerald-900 */
+  border-radius: 999px;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  background-color: #fff1f2; /* rose-50 */
+  color: #e11d48; /* rose-600 */
+}
+
+/* Mobile Links */
+.mobile-link {
+  display: block;
+  padding: 1rem;
+  font-family: "Amiri", serif; /* Elegant font for mobile */
+  font-size: 1.1rem;
+  color: #064e3b;
+  border-radius: 0.75rem;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+}
+
+.mobile-link:hover {
+  background-color: white;
+  color: #e11d48;
+  padding-left: 1.5rem; /* Slide effect */
+  border-color: #fecdd3; /* rose-200 */
+  box-shadow: 0 4px 6px -1px rgba(244, 63, 94, 0.1);
+}
+/* HERO ANIMATIONS */
+
+/* 1. Blob Animation (Background movement) */
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+/* 2. Float Animation (Images hovering) */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Utilities for delays */
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+/* Font Utilities */
+.font-display {
+  font-family: "Syne", sans-serif;
+}
+.font-serif {
+  font-family: "Amiri", serif;
+}
+/* MISSION SECTION ANIMATIONS */
+
+/* Slow Spin for the "Compass/Star" */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 12s linear infinite;
+}
+/* ADVENTURE GRID UTILITIES */
+.line-clamp-2 {
+  display: -webkit-box;
+  --webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Hover Zoom effect is handled by Tailwind 'group-hover:scale-110' class */
+/* TEAM SECTION ANIMATIONS */
+
+/* 1. The Shimmer Sweep Effect */
+@keyframes shimmer-sweep {
+  0% {
+    transform: translateX(-150%) skewX(-15deg);
+  }
+  100% {
+    transform: translateX(150%) skewX(-15deg);
+  }
+}
+
+.group:hover .animate-shimmer-sweep {
+  animation: shimmer-sweep 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 2. Floating Flower Animation */
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(5deg);
+  }
+}
+
+.animate-float-flower {
+  animation: float-slow 8s ease-in-out infinite;
+}
+/* Staggered Fade In for Team Cards */
+@keyframes fadeInUpShort {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.team-card-animate {
+  animation: fadeInUpShort 0.6s ease-out forwards;
+  opacity: 0; /* Start hidden */
+}
+/* INFINITE SCROLL ANIMATION */
+@keyframes scroll-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } /* Moves half way (because content is duplicated) */
+}
+
+.animate-scroll {
+    animation: scroll-left 40s linear infinite;
+}
+
+.animate-scroll:hover {
+    animation-play-state: paused;
+}
+
+/* VIDEO PULSE */
+@keyframes ping-slow {
+    75%, 100% { transform: scale(2); opacity: 0; }
+}
+.animate-ping-slow {
+    animation: ping-slow 3s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
