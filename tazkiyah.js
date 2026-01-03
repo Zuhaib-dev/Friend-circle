@@ -6682,4 +6682,113 @@ document.addEventListener("contextmenu", function (event) {
   // Listen for the window load event (when all images/scripts are done)
   window.addEventListener("load", hidePreloader);
 })();
-// Remove if now worked
+// ==========================================
+// PRAYER TIMES WIDGET (ALADHAN API)
+// ==========================================
+(function() {
+    const grid = document.getElementById('prayer-times-grid');
+    const dateEl = document.getElementById('hijri-date');
+    const nextTimerEl = document.getElementById('next-prayer-timer');
+
+    if (!grid) return;
+
+    // Configuration for Srinagar, Hanafi
+    const CITY = 'Srinagar';
+    const COUNTRY = 'India';
+    const METHOD = 1; // 1 = University of Islamic Sciences, Karachi (Standard for India)
+    const SCHOOL = 1; // 0 = Shafi, 1 = Hanafi (This is crucial for Asr)
+
+    async function fetchPrayerTimes() {
+        try {
+            // Fetch directly from AlAdhan API
+            const res = await fetch(`https://api.aladhan.com/v1/timingsByCity?city=${CITY}&country=${COUNTRY}&method=${METHOD}&school=${SCHOOL}`);
+            const data = await res.json();
+            
+            if(data.code === 200) {
+                const timings = data.data.timings;
+                const hijri = data.data.date.hijri;
+                
+                // 1. Update Date
+                dateEl.textContent = `${hijri.day} ${hijri.month.en}, ${hijri.year} AH`;
+
+                // 2. Render Times (Fajr, Dhuhr, Asr, Maghrib, Isha)
+                const prayers = [
+                    { name: 'Fajr', time: timings.Fajr, icon: '🌅' },
+                    { name: 'Dhuhr', time: timings.Dhuhr, icon: '☀️' },
+                    { name: 'Asr', time: timings.Asr, icon: '🌤️' },
+                    { name: 'Maghrib', time: timings.Maghrib, icon: '🌇' },
+                    { name: 'Isha', time: timings.Isha, icon: '🌙' }
+                ];
+
+                grid.innerHTML = prayers.map(p => {
+                    // Convert 24h to 12h format
+                    const time12 = convertTo12Hour(p.time);
+                    const isNext = checkNextPrayer(p.name, p.time); 
+                    
+                    return `
+                        <div class="flex justify-between items-center p-2 rounded-lg ${isNext ? 'bg-rose-50 border border-rose-200' : 'hover:bg-gray-50'} transition-colors">
+                            <div class="flex items-center gap-2">
+                                <span class="text-lg">${p.icon}</span>
+                                <span class="text-sm font-bold ${isNext ? 'text-rose-700' : 'text-gray-600'}">${p.name}</span>
+                            </div>
+                            <span class="font-mono text-sm ${isNext ? 'text-rose-700 font-bold' : 'text-gray-500'}">${time12}</span>
+                        </div>
+                    `;
+                }).join('');
+
+                // Update "Next Prayer" text
+                updateNextPrayerLogic(timings);
+            }
+        } catch (e) {
+            grid.innerHTML = '<p class="text-rose-500 text-xs text-center">Failed to load times.</p>';
+        }
+    }
+
+    // --- Helper: Convert "14:30" to "02:30 PM" ---
+    function convertTo12Hour(time24) {
+        let [h, m] = time24.split(':');
+        h = parseInt(h);
+        const ampm = h >= 12 ? 'PM' : 'AM';
+        h = h % 12;
+        h = h ? h : 12; // the hour '0' should be '12'
+        return `${h}:${m} <span class="text-[10px] text-gray-400">${ampm}</span>`;
+    }
+
+    // --- Helper: Simple logic to highlight next prayer ---
+    function checkNextPrayer(name, time24) {
+        // This is a purely visual highlight for now
+        // You can expand this with real-time comparison if needed
+        return false; 
+    }
+
+    function updateNextPrayerLogic(timings) {
+        // Find the next prayer based on current system time
+        const now = new Date();
+        const currentTime = now.getHours() * 60 + now.getMinutes();
+        
+        const prayerList = [
+            { name: 'Fajr', val: timeToMinutes(timings.Fajr) },
+            { name: 'Dhuhr', val: timeToMinutes(timings.Dhuhr) },
+            { name: 'Asr', val: timeToMinutes(timings.Asr) },
+            { name: 'Maghrib', val: timeToMinutes(timings.Maghrib) },
+            { name: 'Isha', val: timeToMinutes(timings.Isha) }
+        ];
+
+        // Find first prayer that is greater than current time
+        let next = prayerList.find(p => p.val > currentTime);
+        
+        // If none found (after Isha), next is Fajr tomorrow
+        if (!next) next = prayerList[0]; 
+
+        nextTimerEl.textContent = next.name;
+    }
+
+    function timeToMinutes(timeStr) {
+        const [h, m] = timeStr.split(':').map(Number);
+        return h * 60 + m;
+    }
+
+    // Run on Load
+    fetchPrayerTimes();
+
+})();
