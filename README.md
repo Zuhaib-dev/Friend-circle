@@ -85,4 +85,4 @@ Give your friends a hug today.
 Because **Friend Circle > Social Media** ❤️
 next will gonna add more and more features
 Added a Quran pop up model to show all the surhas of the Quran Majeed with the translation and also Audi recitation. Next will gonna and more features and one is in my mind right now is to add a pomodoro timer ⌛. Added pomodoro timer today , next will gonna add more featurees.New Day Nothing new adding now will do more from monday.Will gonna enhance the ui to load faster it is already having a great web vitals still we manage to make it load faster than now so will, make sure to add aria-label for better acesibility.
-Started building a new home page or i can say the landing page with new style ,new Vibe and better looks 
+Started building a new home page or i can say the landing page with new style ,new Vibe and better looks cause the old design was very old
