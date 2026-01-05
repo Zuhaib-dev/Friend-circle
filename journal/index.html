@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Circle Journal | Stories of Kashmir</title>
+    <meta
+      name="description"
+      content="The official journal of Friend Circle. Documenting unseen trails, spiritual journeys, and the brotherhood of Kashmir."
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,400;500;700&family=Syne:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              rose: {
+                50: "#fff1f2",
+                100: "#ffe4e6",
+                500: "#f43f5e",
+                600: "#e11d48",
+              },
+              emerald: { 50: "#ecfdf5", 900: "#064e3b", 950: "#022c22" },
+            },
+            fontFamily: {
+              sans: ['"DM Sans"', "sans-serif"],
+              serif: ['"Amiri"', "serif"],
+              display: ['"Syne"', "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body
+    class="bg-rose-50 text-slate-800 antialiased selection:bg-rose-500 selection:text-white"
+  >
+    <nav
+      class="fixed w-full z-50 top-0 bg-white/80 backdrop-blur-md border-b border-rose-100 transition-all duration-300"
+    >
+      <div
+        class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center"
+      >
+        <a
+          href="../index.html"
+          class="group flex items-center gap-2 font-bold text-emerald-950 hover:text-rose-600 transition-colors"
+        >
+          <span class="group-hover:-translate-x-1 transition-transform">←</span>
+          <span class="hidden md:inline">Back to Circle</span>
+        </a>
+
+        <span
+          class="font-display font-bold text-xl tracking-tight text-emerald-950"
+        >
+          The Circle
+          <span class="text-rose-600 italic font-serif">Journal</span>
+        </span>
+
+        <a
+          href="http://zuhaibrashid.com"
+          target="_blank"
+          class="text-xs font-bold uppercase tracking-widest text-emerald-900 hover:text-rose-600"
+        >
+          Portfolio ↗
+        </a>
+      </div>
+    </nav>
+
+    <header class="pt-40 pb-20 px-6 relative overflow-hidden">
+      <div
+        class="absolute top-0 right-0 w-64 h-64 bg-emerald-100 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-pulse"
+      ></div>
+      <div
+        class="absolute bottom-0 left-0 w-64 h-64 bg-rose-100 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-pulse"
+      ></div>
+
+      <div class="max-w-4xl mx-auto text-center relative z-10">
+        <span
+          class="inline-block py-1 px-3 rounded-full bg-white border border-rose-100 text-rose-600 font-bold tracking-widest uppercase text-[10px] mb-6 shadow-sm"
+        >
+          Est. 2025
+        </span>
+        <h1
+          class="font-display text-5xl md:text-7xl font-bold text-emerald-950 mb-6 leading-tight"
+        >
+          Chronicles of the <br />
+          <span class="italic font-serif text-rose-600 relative inline-block">
+            Unknown
+            <svg
+              class="absolute w-full h-3 -bottom-1 left-0 text-rose-200 -z-10"
+              viewBox="0 0 100 10"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M0 5 Q 50 10 100 5"
+                stroke="currentColor"
+                stroke-width="8"
+                fill="none"
+              />
+            </svg>
+          </span>
+        </h1>
+        <p
+          class="text-gray-500 text-lg md:text-xl max-w-2xl mx-auto font-serif italic"
+        >
+          "We write to taste life twice, in the moment and in retrospect."
+        </p>
+      </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-6 mb-12">
+      <div class="flex flex-wrap justify-center gap-4">
+        <button
+          class="px-6 py-2 bg-emerald-950 text-white rounded-full text-sm font-bold shadow-lg shadow-emerald-900/20"
+        >
+          All Stories
+        </button>
+        <button
+          class="px-6 py-2 bg-white text-emerald-900 border border-emerald-100 rounded-full text-sm font-bold hover:bg-rose-50 transition"
+        >
+          Trekking
+        </button>
+        <button
+          class="px-6 py-2 bg-white text-emerald-900 border border-emerald-100 rounded-full text-sm font-bold hover:bg-rose-50 transition"
+        >
+          Spiritual
+        </button>
+        <button
+          class="px-6 py-2 bg-white text-emerald-900 border border-emerald-100 rounded-full text-sm font-bold hover:bg-rose-50 transition"
+        >
+          Guide
+        </button>
+      </div>
+    </div>
+
+    <main class="max-w-7xl mx-auto px-6 pb-32">
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12"
+      >
+        <article class="group cursor-pointer flex flex-col h-full">
+          <div
+            class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-emerald-900/10 transition-all duration-500"
+          >
+            <img
+              src="../Diskhal/Diskhal1.jpg"
+              alt="Post Image"
+              class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700"
+            />
+            <div class="absolute top-4 left-4">
+              <span
+                class="bg-white/90 backdrop-blur text-emerald-950 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider"
+              >
+                Featured
+              </span>
+            </div>
+          </div>
+
+          <div class="flex-1 flex flex-col">
+            <div
+              class="flex items-center gap-3 text-xs font-bold text-rose-500 uppercase tracking-widest mb-3"
+            >
+              <span>Oct 12, 2025</span>
+              <span class="w-1 h-1 rounded-full bg-rose-300"></span>
+              <span>Trekking</span>
+            </div>
+
+            <h2
+              class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors"
+            >
+              <a href="post-1.html">The Hidden Meadows of Diskhal: A Guide</a>
+            </h2>
+
+            <p class="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-3">
+              Most people stop at Doodhpathri. We kept walking upstream for 4
+              hours. What we found changed our perspective on Budgam forever.
+            </p>
+
+            <div
+              class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4"
+            >
+              <div class="flex items-center gap-2">
+                <img
+                  src="../profile picturs/zuhaib.jpg"
+                  alt="Zuhaib"
+                  class="w-8 h-8 rounded-full object-cover border border-rose-200"
+                />
+                <span class="text-xs font-bold text-emerald-900"
+                  >Zuhaib Rashid</span
+                >
+              </div>
+              <span class="text-xs text-gray-400 font-medium">5 Min Read</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="group cursor-pointer flex flex-col h-full">
+          <div
+            class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-emerald-900/10 transition-all duration-500"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=800&q=80"
+              alt="Snow"
+              class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700"
+            />
+          </div>
+
+          <div class="flex-1 flex flex-col">
+            <div
+              class="flex items-center gap-3 text-xs font-bold text-rose-500 uppercase tracking-widest mb-3"
+            >
+              <span>Dec 05, 2025</span>
+              <span class="w-1 h-1 rounded-full bg-rose-300"></span>
+              <span>Survival</span>
+            </div>
+
+            <h2
+              class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors"
+            >
+              <a href="#">Surviving a -10°C Night in a Tent</a>
+            </h2>
+
+            <p class="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-3">
+              Our gear froze, the wood was wet, but the tea was hot. Lessons
+              learned from a winter expedition in the Pir Panjal range.
+            </p>
+
+            <div
+              class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4"
+            >
+              <div class="flex items-center gap-2">
+                <img
+                  src="../profile picturs/zuhaib.jpg"
+                  alt="Zuhaib"
+                  class="w-8 h-8 rounded-full object-cover border border-rose-200"
+                />
+                <span class="text-xs font-bold text-emerald-900"
+                  >Zuhaib Rashid</span
+                >
+              </div>
+              <span class="text-xs text-gray-400 font-medium">8 Min Read</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="group cursor-pointer flex flex-col h-full">
+          <div
+            class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-emerald-900/10 transition-all duration-500"
+          >
+            <div
+              class="absolute inset-0 bg-emerald-950 flex items-center justify-center text-white p-8 text-center"
+            >
+              <h3 class="font-display text-2xl">
+                "The mountains are calling..."
+              </h3>
+            </div>
+          </div>
+
+          <div class="flex-1 flex flex-col">
+            <div
+              class="flex items-center gap-3 text-xs font-bold text-rose-500 uppercase tracking-widest mb-3"
+            >
+              <span>Sep 20, 2025</span>
+              <span class="w-1 h-1 rounded-full bg-rose-300"></span>
+              <span>Spiritual</span>
+            </div>
+
+            <h2
+              class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors"
+            >
+              <a href="#">Tazkiyah: Purifying the Soul Through Nature</a>
+            </h2>
+
+            <p class="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-3">
+              Why we don't just hike for fitness. We hike to detach from the
+              chaos and reconnect with our Creator.
+            </p>
+
+            <div
+              class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4"
+            >
+              <div class="flex items-center gap-2">
+                <img
+                  src="../profile picturs/zuhaib.jpg"
+                  alt="Zuhaib"
+                  class="w-8 h-8 rounded-full object-cover border border-rose-200"
+                />
+                <span class="text-xs font-bold text-emerald-900"
+                  >Zuhaib Rashid</span
+                >
+              </div>
+              <span class="text-xs text-gray-400 font-medium">4 Min Read</span>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="mt-20 text-center">
+        <p class="text-emerald-900/50 font-serif italic text-lg">
+          More stories are being written...
+        </p>
+      </div>
+    </main>
+
+    <footer class="bg-emerald-950 py-12 border-t border-emerald-900">
+      <div
+        class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6"
+      >
+        <div class="text-center md:text-left">
+          <span class="font-display font-bold text-white text-xl tracking-tight"
+            >The Circle Journal</span
+          >
+          <p class="text-emerald-400/60 text-xs mt-1">
+            © 2026 Friend Circle • Kashmir
+          </p>
+        </div>
+        <div class="flex gap-6">
+          <a
+            href="../index.html"
+            class="text-emerald-200 hover:text-white text-sm"
+            >Home</a
+          >
+          <a
+            href="http://zuhaibrashid.com"
+            class="text-rose-400 hover:text-white text-sm font-bold"
+            >Portfolio</a
+          >
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

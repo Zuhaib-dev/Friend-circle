@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hidden Meadows of Diskhal | The Circle Journal</title>
+    <meta name="description" content="A complete trekking guide to Diskhal meadows in Budgam." />
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,400;500;700&family=Syne:wght@400;700&display=swap" rel="stylesheet" />
+    
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              rose: { 50: "#fff1f2", 500: "#f43f5e", 600: "#e11d48" },
+              emerald: { 950: "#022c22" },
+            },
+            fontFamily: {
+              sans: ['"DM Sans"', "sans-serif"],
+              serif: ['"Amiri"', "serif"],
+              display: ['"Syne"', "sans-serif"],
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="bg-rose-50 text-slate-800 antialiased">
+
+    <div id="progressBar" class="fixed top-0 left-0 h-1 bg-rose-600 z-[60] w-0 transition-all duration-100"></div>
+
+    <nav class="fixed top-6 left-6 z-50">
+        <a href="index.html" class="bg-white/90 backdrop-blur-md px-5 py-2.5 rounded-full shadow-lg shadow-emerald-900/10 text-emerald-950 text-sm font-bold hover:bg-emerald-950 hover:text-white transition-all flex items-center gap-2 group">
+            <span class="group-hover:-translate-x-1 transition-transform">←</span> Journal
+        </a>
+    </nav>
+
+    <header class="relative w-full h-[65vh]">
+        <img src="../Diskhal/Diskhal1.jpg" alt="Diskhal View" class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-emerald-950 via-emerald-950/40 to-transparent"></div>
+        
+        <div class="absolute bottom-0 left-0 w-full p-6 md:p-16">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="bg-rose-600 text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-widest">Trekking</span>
+                    <span class="text-emerald-200 text-sm font-medium">Oct 12, 2025</span>
+                </div>
+                <h1 class="font-display text-4xl md:text-6xl font-bold text-white leading-tight mb-6">
+                    The Hidden Meadows of Diskhal
+                </h1>
+                <div class="flex items-center gap-4">
+                    <img src="../profile picturs/zuhaib.jpg" class="w-12 h-12 rounded-full border-2 border-white object-cover">
+                    <div class="text-white">
+                        <p class="font-bold text-sm">Zuhaib Rashid</p>
+                        <p class="text-xs text-white/60">Founder • 5 Min Read</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <article class="max-w-3xl mx-auto px-6 py-16">
+        
+        <div class="prose prose-lg prose-emerald prose-headings:font-display prose-headings:font-bold prose-headings:text-emerald-950 prose-p:text-gray-600 prose-p:leading-relaxed prose-a:text-rose-600 prose-img:rounded-3xl prose-blockquote:border-rose-500 prose-blockquote:bg-white prose-blockquote:py-2 prose-blockquote:not-italic prose-blockquote:font-serif">
+            
+            <p class="lead text-xl text-emerald-900 font-medium">
+                Everyone knows Doodhpathri. It's beautiful, but it's crowded. But if you walk just 4 kilometers upstream, the noise fades, the plastic wrappers disappear, and you enter Diskhal.
+            </p>
+
+            <p>
+                The air gets thinner here. The only sound is the Shaliganga river crashing against rocks miles below. This isn't just a picnic spot; it's a sanctuary.
+            </p>
+
+            <h3>The Route</h3>
+            <p>
+                We started at 6:00 AM from the main bridge. The ascent is gradual but deceptive. You pass through dense pine forests where the sunlight struggles to touch the ground.
+            </p>
+
+            <blockquote>
+                "In the silence of the woods, you don't find loneliness. You find yourself."
+            </blockquote>
+
+            <p>
+                By 9:00 AM, we breached the tree line. The view opened up to reveal the massive peaks of the Pir Panjal range staring right back at us.
+            </p>
+
+            <img src="../photo Galarry/photo1.jpg" alt="Group sitting" class="w-full shadow-xl my-8">
+
+            <h3>Why We Go?</h3>
+            <p>
+                People ask us why we carry heavy bags and sleep on cold ground. The answer is simple: comfort breeds complacency. Out here, with <strong>Friend Circle</strong>, we remember what it means to be alive.
+            </p>
+
+        </div>
+
+        <div class="mt-20 p-8 bg-emerald-50 rounded-[2rem] border border-emerald-100 flex flex-col md:flex-row gap-8 items-center md:items-start text-center md:text-left">
+            <div class="relative shrink-0">
+                <img src="../profile picturs/zuhaib.jpg" class="w-24 h-24 rounded-full object-cover border-4 border-white shadow-md">
+                <div class="absolute bottom-0 right-0 text-xl">✨</div>
+            </div>
+            <div>
+                <h3 class="font-display text-xl font-bold text-emerald-950">Written by Zuhaib Rashid</h3>
+                <p class="text-sm text-gray-600 mt-2 mb-4 leading-relaxed">
+                    Filmmaker, developer, and founder of Friend Circle. I document the raw beauty of Kashmir and the stories of the people who call it home.
+                </p>
+                <div class="flex flex-wrap gap-3 justify-center md:justify-start">
+                    <a href="http://zuhaibrashid.com" target="_blank" class="px-4 py-2 bg-emerald-950 text-white rounded-full text-xs font-bold hover:bg-rose-600 transition">
+                        Visit Portfolio
+                    </a>
+                    <a href="https://instagram.com/zoh.aib__" target="_blank" class="px-4 py-2 bg-white border border-emerald-200 text-emerald-900 rounded-full text-xs font-bold hover:bg-emerald-50 transition">
+                        Instagram
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </article>
+
+    <script>
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("progressBar").style.width = scrolled + "%";
+        };
+    </script>
+</body>
+</html>
