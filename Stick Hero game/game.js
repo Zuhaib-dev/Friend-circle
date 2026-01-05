@@ -55,17 +55,28 @@ class AudioController {
     this.playTone(400, "sine", 0.2);
   }
   playFall() {
-    // Descending slide
+    // 1. Ensure audio context is active (browsers sometimes sleep it)
+    if (this.ctx.state === "suspended") this.ctx.resume();
+
     const osc = this.ctx.createOscillator();
     const gain = this.ctx.createGain();
-    osc.frequency.setValueAtTime(300, this.ctx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(50, this.ctx.currentTime + 0.5);
-    gain.gain.setValueAtTime(0.5, this.ctx.currentTime);
-    gain.gain.linearRampToValueAtTime(0, this.ctx.currentTime + 0.5);
+
+    // 2. Use 'sawtooth' for a buzzier, arcade-style sound
+    osc.type = "sawtooth";
+
+    // 3. Start High (800Hz) and drop Low (100Hz) - Classic cartoon fall
+    osc.frequency.setValueAtTime(800, this.ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(100, this.ctx.currentTime + 0.6);
+
+    // 4. Volume control
+    gain.gain.setValueAtTime(0.3, this.ctx.currentTime);
+    gain.gain.linearRampToValueAtTime(0, this.ctx.currentTime + 0.6);
+
     osc.connect(gain);
     gain.connect(this.masterGain);
+
     osc.start();
-    osc.stop(this.ctx.currentTime + 0.5);
+    osc.stop(this.ctx.currentTime + 0.6);
   }
 }
 
@@ -380,14 +391,19 @@ function animate(timestamp) {
           phase = "transitioning";
         }
       } else {
-        // Walking on stick (or falling)
+        // Walking on stick (and about to fall)
         const maxHeroX = sticks.last().x + sticks.last().length + heroWidth;
         if (heroX > maxHeroX) {
           heroX = maxHeroX;
+
+          // --- THIS IS THE TRIGGER ---
           audio.playFall();
+          // ---------------------------
+
           phase = "falling";
         }
       }
+      break;
       break;
     case "transitioning":
       sceneOffset += dt / transitioningSpeed;
