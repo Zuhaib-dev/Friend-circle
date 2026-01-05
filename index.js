@@ -612,3 +612,42 @@ self.addEventListener("fetch", (event) => {
     })
   );
 });
+document.addEventListener("DOMContentLoaded", () => {
+  const timelineSection = document.getElementById("journey-timeline");
+  const progressLine = document.getElementById("timeline-progress");
+  const timelineItems = document.querySelectorAll(".timeline-item");
+
+  if (timelineSection && progressLine) {
+    window.addEventListener("scroll", () => {
+      const sectionTop = timelineSection.offsetTop;
+      const sectionHeight = timelineSection.offsetHeight;
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+
+      // 1. Handle Progress Line Height
+      // Start filling when the section hits the middle of the screen
+      const startPoint = sectionTop - windowHeight / 2;
+      const endPoint = sectionTop + sectionHeight - windowHeight / 2;
+
+      let percentage = (scrollY - startPoint) / (endPoint - startPoint);
+
+      // Clamp between 0 and 1
+      percentage = Math.max(0, Math.min(1, percentage));
+
+      // Update height
+      progressLine.style.height = `${percentage * 100}%`;
+
+      // 2. Handle Item Activation (Fade in)
+      timelineItems.forEach((item) => {
+        const itemTop = item.getBoundingClientRect().top;
+        // Trigger when item is in the bottom 20% of the viewport
+        if (itemTop < windowHeight * 0.8) {
+          item.classList.add("active");
+        } else {
+          // Optional: Remove class to make it fade out when scrolling back up
+          // item.classList.remove("active");
+        }
+      });
+    });
+  }
+});
