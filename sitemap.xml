@@ -58,7 +58,15 @@
   </url>
   <url>
     <loc>https://friendcirclee.netlify.app/journal/post-8.html</loc>
-    <lastmod>2026-01-08</lastmod>
+    <lastmod>2026-01-09</lastmod>
+    <priority>0.80</priority>
+  </url>
+    <loc>https://friendcirclee.netlify.app/journal/post-9.html</loc>
+    <lastmod>2026-01-09</lastmod>
+    <priority>0.80</priority>
+  </url>
+    <loc>https://friendcirclee.netlify.app/journal/post-10.html</loc>
+    <lastmod>2026-01-10</lastmod>
     <priority>0.80</priority>
   </url>
 
