@@ -23,67 +23,79 @@
   </url>
 
   <url>
-  <loc>https://friendcirclee.netlify.app/journal/post-2.html</loc>
-  <lastmod>2025-12-05</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.8</priority>
- </url>
+    <loc>https://friendcirclee.netlify.app/journal/post-2.html</loc>
+    <lastmod>2025-12-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 
   <url>
-  <loc>https://friendcirclee.netlify.app/journal/post-3.html</loc>
-  <lastmod>2025-09-20</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.8</priority>
-</url>
+    <loc>https://friendcirclee.netlify.app/journal/post-3.html</loc>
+    <lastmod>2025-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 
-<url>
+  <url>
     <loc>https://friendcirclee.netlify.app/journal/post-4.html</loc>
     <lastmod>2026-01-07</lastmod>
     <priority>0.80</priority>
   </url>
+
   <url>
     <loc>https://friendcirclee.netlify.app/journal/post-5.html</loc>
     <lastmod>2026-01-07</lastmod>
     <priority>0.80</priority>
   </url>
+
   <url>
     <loc>https://friendcirclee.netlify.app/journal/post-6.html</loc>
     <lastmod>2026-01-07</lastmod>
     <priority>0.80</priority>
   </url>
+
   <url>
     <loc>https://friendcirclee.netlify.app/journal/post-7.html</loc>
     <lastmod>2026-01-08</lastmod>
     <priority>0.80</priority>
   </url>
+
   <url>
     <loc>https://friendcirclee.netlify.app/journal/post-8.html</loc>
     <lastmod>2026-01-09</lastmod>
     <priority>0.80</priority>
   </url>
+
+  <url>
     <loc>https://friendcirclee.netlify.app/journal/post-9.html</loc>
     <lastmod>2026-01-09</lastmod>
     <priority>0.80</priority>
   </url>
+
+  <url>
     <loc>https://friendcirclee.netlify.app/journal/post-10.html</loc>
     <lastmod>2026-01-10</lastmod>
     <priority>0.80</priority>
   </url>
+
   <url>
     <loc>https://friendcirclee.netlify.app/journal/post-11.html</loc>
     <lastmod>2026-02-01</lastmod>
     <priority>0.90</priority>
   </url>
+
   <url>
     <loc>https://friendcirclee.netlify.app/journal/post-12.html</loc>
     <lastmod>2026-02-05</lastmod>
     <priority>0.80</priority>
   </url>
+
   <url>
     <loc>https://friendcirclee.netlify.app/journal/post-13.html</loc>
     <lastmod>2026-02-05</lastmod>
     <priority>0.80</priority>
   </url>
+
   <url>
     <loc>https://friendcirclee.netlify.app/journal/post-14.html</loc>
     <lastmod>2026-02-05</lastmod>
@@ -98,56 +110,56 @@
   </url>
 
   <url>
-    <loc>https://friendcirclee.netlify.app/about</loc>
+    <loc>https://friendcirclee.netlify.app/about.html</loc>
     <lastmod>2025-09-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://friendcirclee.netlify.app/viedo%20gallary/video</loc>
+    <loc>https://friendcirclee.netlify.app/viedo%20gallary/video.html</loc>
     <lastmod>2025-09-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://friendcirclee.netlify.app/photo%20galarry/memories%20in%20frames</loc>
+    <loc>https://friendcirclee.netlify.app/photo%20galarry/memories%20in%20frames.html</loc>
     <lastmod>2025-09-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://friendcirclee.netlify.app/tour</loc>
+    <loc>https://friendcirclee.netlify.app/tour.html</loc>
     <lastmod>2025-09-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://friendcirclee.netlify.app/test</loc>
+    <loc>https://friendcirclee.netlify.app/test.html</loc>
     <lastmod>2025-09-27</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://friendcirclee.netlify.app/adventure</loc>
+    <loc>https://friendcirclee.netlify.app/adventure.html</loc>
     <lastmod>2025-09-27</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://friendcirclee.netlify.app/stick%20hero%20game/game</loc>
+    <loc>https://friendcirclee.netlify.app/stick%20hero%20game/game.html</loc>
     <lastmod>2025-09-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://friendcirclee.netlify.app/apk</loc>
+    <loc>https://friendcirclee.netlify.app/apk.html</loc>
     <lastmod>2025-09-27</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
