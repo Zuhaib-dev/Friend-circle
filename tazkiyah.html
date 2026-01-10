@@ -2404,6 +2404,65 @@
         </div>
 
 </section>
+<!-- bukhari  -->
+ <section class="py-20 px-6 bg-emerald-50 relative overflow-hidden">
+    
+    <div class="absolute inset-0 opacity-5 pointer-events-none" 
+         style="background-image: url('https://www.transparenttextures.com/patterns/arabesque.png');">
+    </div>
+
+    <div class="max-w-4xl mx-auto relative z-10">
+        
+        <div class="text-center mb-10">
+            <span class="text-emerald-600 font-bold tracking-[0.2em] uppercase text-xs block mb-2">Authentic Traditions</span>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 font-serif">Pearls from <span class="text-emerald-700 italic">Al-Bukhari</span></h2>
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-xl shadow-emerald-900/5 border border-emerald-100 overflow-hidden relative min-h-[300px] flex flex-col justify-between">
+            
+            <div class="bg-emerald-900 px-6 py-3 flex justify-between items-center">
+                <span class="text-emerald-100 text-xs font-bold tracking-widest uppercase">Sahih Al-Bukhari</span>
+                <span class="text-emerald-100 text-xs opacity-70" id="hadith-ref">Loading Ref...</span>
+            </div>
+
+            <div class="p-8 md:p-12 flex-1 flex flex-col justify-center items-center text-center space-y-8" id="hadith-content-area">
+                
+                <div id="loader" class="flex flex-col items-center gap-4">
+                    <div class="w-12 h-12 border-4 border-emerald-100 border-t-emerald-600 rounded-full animate-spin"></div>
+                    <p class="text-sm text-emerald-600 animate-pulse">Retrieving Wisdom...</p>
+                </div>
+
+                <div id="text-container" class="hidden w-full">
+                    <p class="text-xl md:text-2xl text-gray-700 font-serif leading-loose" id="hadith-text">
+                        ...
+                    </p>
+                    
+                    <div class="w-16 h-1 bg-emerald-100 mx-auto mt-8 rounded-full"></div>
+                    
+                    <p class="text-sm text-gray-400 mt-4 italic" id="hadith-narrator">
+                        ...
+                    </p>
+                </div>
+
+                <div id="error-message" class="hidden text-rose-500">
+                    <p>Could not connect to the source. Please try again.</p>
+                </div>
+
+            </div>
+
+            <div class="bg-gray-50 px-6 py-4 border-t border-gray-100 flex justify-center">
+                <button onclick="fetchHadith()" 
+                        class="group relative inline-flex items-center justify-center gap-2 px-8 py-3 bg-emerald-700 hover:bg-emerald-800 text-white rounded-full font-medium transition-all shadow-lg hover:shadow-emerald-900/20 hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed"
+                        id="new-hadith-btn">
+                    <span>Read Another Gem</span>
+                    <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+</section>
 <!-- Subscibe Form-->
  <section class="max-w-4xl mx-auto my-24 px-4" id="fragrant-letter">
     

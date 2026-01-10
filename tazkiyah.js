@@ -6973,3 +6973,47 @@ document.addEventListener("contextmenu", function (event) {
         renderCategories();
     }
 })();
+// Bukhari
+document.addEventListener('DOMContentLoaded', () => {
+            fetchHadith();
+        });
+
+        async function fetchHadith() {
+            const loader = document.getElementById('loader');
+            const textContainer = document.getElementById('text-container');
+            const errorMsg = document.getElementById('error-message');
+            const btn = document.getElementById('new-hadith-btn');
+            
+            const elText = document.getElementById('hadith-text');
+            const elNarrator = document.getElementById('hadith-narrator');
+            const elRef = document.getElementById('hadith-ref');
+
+            // 1. Set Loading State
+            loader.classList.remove('hidden');
+            textContainer.classList.add('hidden');
+            errorMsg.classList.add('hidden');
+            btn.disabled = true;
+
+            try {
+                // Using a reliable random Hadith generator API
+                const response = await fetch('https://random-hadith-generator.vercel.app/bukhari/');
+                const data = await response.json();
+
+                // 2. Update Content
+                // Note: The API returns 'hadith_english' and 'header' (often the narrator)
+                elText.textContent = `"${data.data.hadith_english}"`;
+                elNarrator.textContent = data.data.header ? data.data.header : "Sahih Al-Bukhari";
+                elRef.textContent = `Ref: ${data.data.refno}`;
+
+                // 3. Show Content
+                loader.classList.add('hidden');
+                textContainer.classList.remove('hidden');
+                
+            } catch (error) {
+                console.error("Hadith Fetch Error:", error);
+                loader.classList.add('hidden');
+                errorMsg.classList.remove('hidden');
+            } finally {
+                btn.disabled = false;
+            }
+        }
