@@ -57,6 +57,11 @@
       content="https://friendcirclee.netlify.app/Diskhal/Diskhal1.jpg"
     />
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" />
+    <link rel="preconnect" href="https://images.unsplash.com" />
+
     <link rel="shortcut icon" href="../Favicon1.png" type="image/x-icon" />
     <link rel="apple-touch-icon" href="../Favicon1.png" />
 
@@ -65,6 +70,21 @@
       href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,400;500;700&family=Syne:wght@400;700&display=swap"
       rel="stylesheet"
     />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "name": "The Circle Journal",
+        "url": "https://friendcirclee.netlify.app/journal/",
+        "description": "Documenting unseen trails, spiritual journeys, and the brotherhood of Kashmir.",
+        "author": {
+          "@type": "Person",
+          "name": "Zuhaib Rashid",
+          "url": "http://zuhaibrashid.com"
+        }
+      }
+    </script>
 
     <script>
       tailwind.config = {
@@ -101,6 +121,7 @@
         <a
           href="../index.html"
           class="group flex items-center gap-2 font-bold text-emerald-950 hover:text-rose-600 transition-colors"
+          aria-label="Go back to home"
         >
           <span class="group-hover:-translate-x-1 transition-transform">←</span>
           <span class="hidden md:inline">Back to Circle</span>
@@ -116,6 +137,7 @@
         <a
           href="http://zuhaibrashid.com"
           target="_blank"
+          rel="noopener noreferrer"
           class="text-xs font-bold uppercase tracking-widest text-emerald-900 hover:text-rose-600"
         >
           Portfolio ↗
@@ -200,8 +222,12 @@
           >
             <img
               src="../Diskhal/Diskhal1.jpg"
-              alt="Post Image"
+              alt="Green meadows of Diskhal trekking trail"
               class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700"
+              loading="eager"
+              fetchpriority="high"
+              width="800"
+              height="600"
             />
             <div class="absolute top-4 left-4">
               <span
@@ -240,6 +266,9 @@
                   src="../profile picturs/zuhaib.jpg"
                   alt="Zuhaib"
                   class="w-8 h-8 rounded-full object-cover border border-rose-200"
+                  loading="lazy"
+                  width="32"
+                  height="32"
                 />
                 <span class="text-xs font-bold text-emerald-900"
                   >Zuhaib Rashid</span
@@ -256,8 +285,12 @@
           >
             <img
               src="https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=800&q=80"
-              alt="Snow"
+              alt="Winter camping tent in snow"
               class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700"
+              loading="lazy"
+              decoding="async"
+              width="800"
+              height="600"
             />
           </div>
 
@@ -289,6 +322,9 @@
                   src="../profile picturs/zuhaib.jpg"
                   alt="Zuhaib"
                   class="w-8 h-8 rounded-full object-cover border border-rose-200"
+                  loading="lazy"
+                  width="32"
+                  height="32"
                 />
                 <span class="text-xs font-bold text-emerald-900"
                   >Zuhaib Rashid</span
@@ -298,77 +334,123 @@
             </div>
           </div>
         </article>
-<article class="group cursor-pointer flex flex-col h-full">
-  <div class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-emerald-900/10 transition-all duration-500">
-    
-    <img
-      src="https://friendcirclee.netlify.app/images/og-image.jpg"
-      alt="Tazkiyah Nature"
-      class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700"
-    />
-    
-    <div class="absolute inset-0 bg-emerald-950/10 group-hover:bg-transparent transition-colors duration-500"></div>
-  </div>
 
-  <div class="flex-1 flex flex-col">
-    <div class="flex items-center gap-3 text-xs font-bold text-rose-500 uppercase tracking-widest mb-3">
-      <span>Sep 20, 2025</span>
-      <span class="w-1 h-1 rounded-full bg-rose-300"></span>
-      <span>Spiritual</span>
-    </div>
-
-    <h2 class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors">
-      <a href="./post-3.html">Tazkiyah: Purifying the Soul Through Nature</a>
-    </h2>
-
-    <p class="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-3">
-      Why we don't just hike for fitness. We hike to detach from the
-      chaos and reconnect with our Creator.
-    </p>
-
-    <div class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4">
-      <div class="flex items-center gap-2">
-        <img
-          src="../profile picturs/zuhaib.jpg"
-          alt="Zuhaib"
-          class="w-8 h-8 rounded-full object-cover border border-rose-200"
-        />
-        <span class="text-xs font-bold text-emerald-900">Zuhaib Rashid</span>
-      </div>
-      <span class="text-xs text-gray-400 font-medium">4 Min Read</span>
-    </div>
-
-</article>
-<article class="group cursor-pointer flex flex-col h-full">
-          <div class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-emerald-900/10 transition-all duration-500">
-            <img 
-              src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=800&q=80" 
-              alt="Scenic winding road leading to Gurez Valley Kashmir" 
+        <article class="group cursor-pointer flex flex-col h-full">
+          <div
+            class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-emerald-900/10 transition-all duration-500"
+          >
+            <img
+              src="https://friendcirclee.netlify.app/images/og-image.jpg"
+              alt="Tazkiyah Nature landscape"
               class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700"
               loading="lazy"
+              decoding="async"
+              width="800"
+              height="600"
             />
-            <div class="absolute inset-0 bg-emerald-950/10 group-hover:bg-transparent transition-colors duration-500"></div>
+            <div
+              class="absolute inset-0 bg-emerald-950/10 group-hover:bg-transparent transition-colors duration-500"
+            ></div>
           </div>
 
           <div class="flex-1 flex flex-col">
-            <div class="flex items-center gap-3 text-xs font-bold text-rose-500 uppercase tracking-widest mb-3">
+            <div
+              class="flex items-center gap-3 text-xs font-bold text-rose-500 uppercase tracking-widest mb-3"
+            >
+              <span>Sep 20, 2025</span>
+              <span class="w-1 h-1 rounded-full bg-rose-300"></span>
+              <span>Spiritual</span>
+            </div>
+
+            <h2
+              class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors"
+            >
+              <a href="./post-3.html"
+                >Tazkiyah: Purifying the Soul Through Nature</a
+              >
+            </h2>
+
+            <p class="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-3">
+              Why we don't just hike for fitness. We hike to detach from the
+              chaos and reconnect with our Creator.
+            </p>
+
+            <div
+              class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4"
+            >
+              <div class="flex items-center gap-2">
+                <img
+                  src="../profile picturs/zuhaib.jpg"
+                  alt="Zuhaib"
+                  class="w-8 h-8 rounded-full object-cover border border-rose-200"
+                  loading="lazy"
+                  width="32"
+                  height="32"
+                />
+                <span class="text-xs font-bold text-emerald-900"
+                  >Zuhaib Rashid</span
+                >
+              </div>
+              <span class="text-xs text-gray-400 font-medium">4 Min Read</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="group cursor-pointer flex flex-col h-full">
+          <div
+            class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-emerald-900/10 transition-all duration-500"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=800&q=80"
+              alt="Scenic winding road leading to Gurez Valley Kashmir"
+              class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700"
+              loading="lazy"
+              decoding="async"
+              width="800"
+              height="600"
+            />
+            <div
+              class="absolute inset-0 bg-emerald-950/10 group-hover:bg-transparent transition-colors duration-500"
+            ></div>
+          </div>
+
+          <div class="flex-1 flex flex-col">
+            <div
+              class="flex items-center gap-3 text-xs font-bold text-rose-500 uppercase tracking-widest mb-3"
+            >
               <span>Jan 07, 2026</span>
               <span class="w-1 h-1 rounded-full bg-rose-300"></span>
               <span>Road Trip</span>
             </div>
 
-            <h2 class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors">
-              <a href="post-4.html" aria-label="Read article: The Road to Gurez">The Road to Gurez: Beyond the Line of Control</a>
+            <h2
+              class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors"
+            >
+              <a href="post-4.html" aria-label="Read article: The Road to Gurez"
+                >The Road to Gurez: Beyond the Line of Control</a
+              >
             </h2>
 
             <p class="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-3">
-              A journey into the Dawar valley, exploring the Habba Khatoon peak and the untouched culture of the Dard Shins.
+              A journey into the Dawar valley, exploring the Habba Khatoon peak
+              and the untouched culture of the Dard Shins.
             </p>
 
-            <div class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4">
+            <div
+              class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4"
+            >
               <div class="flex items-center gap-2">
-                <img src="../profile picturs/zuhaib.jpg" alt="Zuhaib Rashid" class="w-8 h-8 rounded-full object-cover border border-rose-200" loading="lazy" />
-                <span class="text-xs font-bold text-emerald-900">Zuhaib Rashid</span>
+                <img
+                  src="../profile picturs/zuhaib.jpg"
+                  alt="Zuhaib Rashid"
+                  class="w-8 h-8 rounded-full object-cover border border-rose-200"
+                  loading="lazy"
+                  width="32"
+                  height="32"
+                />
+                <span class="text-xs font-bold text-emerald-900"
+                  >Zuhaib Rashid</span
+                >
               </div>
               <span class="text-xs text-gray-400 font-medium">6 Min Read</span>
             </div>
@@ -376,35 +458,62 @@
         </article>
 
         <article class="group cursor-pointer flex flex-col h-full">
-          <div class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-emerald-900/10 transition-all duration-500">
-            <img 
-              src="https://images.unsplash.com/photo-1493787039806-2edcbe808750?w=600&auto=format&fit=crop&q=60" 
-              alt="Trout fishing gear and net in the flowing waters of Kashmir" 
+          <div
+            class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-emerald-900/10 transition-all duration-500"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1493787039806-2edcbe808750?w=600&auto=format&fit=crop&q=60"
+              alt="Trout fishing gear and net in the flowing waters of Kashmir"
               class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700"
               loading="lazy"
+              decoding="async"
+              width="800"
+              height="600"
             />
-            <div class="absolute inset-0 bg-emerald-950/10 group-hover:bg-transparent transition-colors duration-500"></div>
+            <div
+              class="absolute inset-0 bg-emerald-950/10 group-hover:bg-transparent transition-colors duration-500"
+            ></div>
           </div>
 
           <div class="flex-1 flex flex-col">
-            <div class="flex items-center gap-3 text-xs font-bold text-rose-500 uppercase tracking-widest mb-3">
+            <div
+              class="flex items-center gap-3 text-xs font-bold text-rose-500 uppercase tracking-widest mb-3"
+            >
               <span>Jan 07, 2026</span>
               <span class="w-1 h-1 rounded-full bg-rose-300"></span>
               <span>Angling</span>
             </div>
 
-            <h2 class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors">
-              <a href="post-5.html" aria-label="Read article: Patience and Trout Fishing">Patience & Trout: Fishing in the Bringi River</a>
+            <h2
+              class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors"
+            >
+              <a
+                href="post-5.html"
+                aria-label="Read article: Patience and Trout Fishing"
+                >Patience & Trout: Fishing in the Bringi River</a
+              >
             </h2>
 
             <p class="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-3">
-              Why fishing is less about the catch and more about the waiting. A quiet day by the riverside teaching us patience.
+              Why fishing is less about the catch and more about the waiting. A
+              quiet day by the riverside teaching us patience.
             </p>
 
-            <div class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4">
+            <div
+              class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4"
+            >
               <div class="flex items-center gap-2">
-                <img src="../profile picturs/zuhaib.jpg" alt="Zuhaib Rashid" class="w-8 h-8 rounded-full object-cover border border-rose-200" loading="lazy" />
-                <span class="text-xs font-bold text-emerald-900">Zuhaib Rashid</span>
+                <img
+                  src="../profile picturs/zuhaib.jpg"
+                  alt="Zuhaib Rashid"
+                  class="w-8 h-8 rounded-full object-cover border border-rose-200"
+                  loading="lazy"
+                  width="32"
+                  height="32"
+                />
+                <span class="text-xs font-bold text-emerald-900"
+                  >Zuhaib Rashid</span
+                >
               </div>
               <span class="text-xs text-gray-400 font-medium">5 Min Read</span>
             </div>
@@ -412,140 +521,252 @@
         </article>
 
         <article class="group cursor-pointer flex flex-col h-full">
-          <div class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-emerald-900/10 transition-all duration-500">
-            <img 
-              src="https://images.unsplash.com/photo-1628895272659-c9c1642b9471?w=600&auto=format&fit=crop&q=60" 
-              alt="Pristine blue Alpine Great Lakes in Kashmir high altitude mountains" 
+          <div
+            class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-emerald-900/10 transition-all duration-500"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1628895272659-c9c1642b9471?w=600&auto=format&fit=crop&q=60"
+              alt="Pristine blue Alpine Great Lakes in Kashmir high altitude mountains"
               class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700"
               loading="lazy"
+              decoding="async"
+              width="800"
+              height="600"
             />
-            <div class="absolute inset-0 bg-emerald-950/10 group-hover:bg-transparent transition-colors duration-500"></div>
+            <div
+              class="absolute inset-0 bg-emerald-950/10 group-hover:bg-transparent transition-colors duration-500"
+            ></div>
           </div>
 
           <div class="flex-1 flex flex-col">
-            <div class="flex items-center gap-3 text-xs font-bold text-rose-500 uppercase tracking-widest mb-3">
+            <div
+              class="flex items-center gap-3 text-xs font-bold text-rose-500 uppercase tracking-widest mb-3"
+            >
               <span>Jan 07, 2026</span>
               <span class="w-1 h-1 rounded-full bg-rose-300"></span>
               <span>Expedition</span>
             </div>
 
-            <h2 class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors">
-              <a href="post-6.html" aria-label="Read article: The Great Lakes Expedition">The Great Lakes: 7 Days in Heaven</a>
+            <h2
+              class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors"
+            >
+              <a
+                href="post-6.html"
+                aria-label="Read article: The Great Lakes Expedition"
+                >The Great Lakes: 7 Days in Heaven</a
+              >
             </h2>
 
             <p class="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-3">
-              The ultimate test of endurance. Traversing the high altitude lakes of Kashmir that few get to see, crossing the Nicholsar pass.
+              The ultimate test of endurance. Traversing the high altitude lakes
+              of Kashmir that few get to see, crossing the Nicholsar pass.
             </p>
 
-            <div class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4">
+            <div
+              class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4"
+            >
               <div class="flex items-center gap-2">
-                <img src="../profile picturs/zuhaib.jpg" alt="Zuhaib Rashid" class="w-8 h-8 rounded-full object-cover border border-rose-200" loading="lazy" />
-                <span class="text-xs font-bold text-emerald-900">Zuhaib Rashid</span>
+                <img
+                  src="../profile picturs/zuhaib.jpg"
+                  alt="Zuhaib Rashid"
+                  class="w-8 h-8 rounded-full object-cover border border-rose-200"
+                  loading="lazy"
+                  width="32"
+                  height="32"
+                />
+                <span class="text-xs font-bold text-emerald-900"
+                  >Zuhaib Rashid</span
+                >
               </div>
               <span class="text-xs text-gray-400 font-medium">8 Min Read</span>
             </div>
           </div>
         </article>
+
         <article class="group cursor-pointer flex flex-col h-full">
-          <div class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-emerald-900/10 transition-all duration-500">
-            <img 
-              src="https://images.unsplash.com/photo-1593118845043-359e5f628214?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8bGFkYWtofGVufDB8fDB8fHww" 
-              alt="Breathtaking landscape of Ladakh mountains and valleys" 
+          <div
+            class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-emerald-900/10 transition-all duration-500"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1593118845043-359e5f628214?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8bGFkYWtofGVufDB8fDB8fHww"
+              alt="Breathtaking landscape of Ladakh mountains and valleys"
               class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700"
               loading="lazy"
+              decoding="async"
+              width="800"
+              height="600"
             />
-            <div class="absolute inset-0 bg-emerald-950/10 group-hover:bg-transparent transition-colors duration-500"></div>
+            <div
+              class="absolute inset-0 bg-emerald-950/10 group-hover:bg-transparent transition-colors duration-500"
+            ></div>
           </div>
 
           <div class="flex-1 flex flex-col">
-            <div class="flex items-center gap-3 text-xs font-bold text-rose-500 uppercase tracking-widest mb-3">
+            <div
+              class="flex items-center gap-3 text-xs font-bold text-rose-500 uppercase tracking-widest mb-3"
+            >
               <span>Jan 08, 2026</span>
               <span class="w-1 h-1 rounded-full bg-rose-300"></span>
               <span>Adventure</span>
             </div>
 
-            <h2 class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors">
-              <a href="post-7.html" aria-label="Read article: Ladakh Hidden Gems">Ladakh: Beyond the Usual Peaks - Discovering Hidden Gems</a>
+            <h2
+              class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors"
+            >
+              <a href="post-7.html" aria-label="Read article: Ladakh Hidden Gems"
+                >Ladakh: Beyond the Usual Peaks - Discovering Hidden Gems</a
+              >
             </h2>
 
             <p class="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-3">
-              Explore Ladakh beyond the tourist spots. From the apricot orchards of Turtuk to the starry nights of Hanle and the rugged Zanskar valley.
+              Explore Ladakh beyond the tourist spots. From the apricot orchards
+              of Turtuk to the starry nights of Hanle and the rugged Zanskar
+              valley.
             </p>
 
-            <div class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4">
+            <div
+              class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4"
+            >
               <div class="flex items-center gap-2">
-                <img src="../profile picturs/zuhaib.jpg" alt="Zuhaib Rashid" class="w-8 h-8 rounded-full object-cover border border-rose-200" loading="lazy" />
-                <span class="text-xs font-bold text-emerald-900">Zuhaib Rashid</span>
+                <img
+                  src="../profile picturs/zuhaib.jpg"
+                  alt="Zuhaib Rashid"
+                  class="w-8 h-8 rounded-full object-cover border border-rose-200"
+                  loading="lazy"
+                  width="32"
+                  height="32"
+                />
+                <span class="text-xs font-bold text-emerald-900"
+                  >Zuhaib Rashid</span
+                >
               </div>
               <span class="text-xs text-gray-400 font-medium">10 Min Read</span>
             </div>
           </div>
         </article>
+
         <article class="group cursor-pointer flex flex-col h-full">
-          <div class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-emerald-900/10 transition-all duration-500">
-            <img 
-              src="../images/Kashmir's_Tourism_Crisis__Before_and_After_the_Pahalgam_Terror_Attack.png" 
-              alt="Kashmir's Tourism Crisis: Before and After the Pahalgam Terror Attac" 
+          <div
+            class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-emerald-900/10 transition-all duration-500"
+          >
+            <img
+              src="../images/Kashmir's_Tourism_Crisis__Before_and_After_the_Pahalgam_Terror_Attack.png"
+              alt="Kashmir's Tourism Crisis: Before and After the Pahalgam Terror Attac"
               class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700 grayscale-[30%] group-hover:grayscale-0"
               loading="lazy"
+              decoding="async"
+              width="800"
+              height="600"
             />
-            <div class="absolute inset-0 bg-emerald-950/10 group-hover:bg-transparent transition-colors duration-500"></div>
+            <div
+              class="absolute inset-0 bg-emerald-950/10 group-hover:bg-transparent transition-colors duration-500"
+            ></div>
           </div>
 
           <div class="flex-1 flex flex-col">
-            <div class="flex items-center gap-3 text-xs font-bold text-rose-500 uppercase tracking-widest mb-3">
+            <div
+              class="flex items-center gap-3 text-xs font-bold text-rose-500 uppercase tracking-widest mb-3"
+            >
               <span>Jan 15, 2026</span>
               <span class="w-1 h-1 rounded-full bg-rose-300"></span>
               <span>Analysis</span>
             </div>
 
-            <h2 class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors">
-              <a href="post-8.html" aria-label="Read article: When Paradise Fell Silent">When Paradise Fell Silent: The Economic Devastation of Kashmir</a>
+            <h2
+              class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors"
+            >
+              <a
+                href="post-8.html"
+                aria-label="Read article: When Paradise Fell Silent"
+                >When Paradise Fell Silent: The Economic Devastation of
+                Kashmir</a
+              >
             </h2>
 
             <p class="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-3">
-              26 lives lost. 90,000 jobs gone. ₹10,000 Crore wiped out. An in-depth look at how one event silenced the valley's economic engines.
+              26 lives lost. 90,000 jobs gone. ₹10,000 Crore wiped out. An
+              in-depth look at how one event silenced the valley's economic
+              engines.
             </p>
 
-            <div class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4">
+            <div
+              class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4"
+            >
               <div class="flex items-center gap-2">
-                <img src="../profile picturs/zuhaib.jpg" alt="Zuhaib Rashid" class="w-8 h-8 rounded-full object-cover border border-rose-200" loading="lazy" />
-                <span class="text-xs font-bold text-emerald-900">Zuhaib Rashid</span>
+                <img
+                  src="../profile picturs/zuhaib.jpg"
+                  alt="Zuhaib Rashid"
+                  class="w-8 h-8 rounded-full object-cover border border-rose-200"
+                  loading="lazy"
+                  width="32"
+                  height="32"
+                />
+                <span class="text-xs font-bold text-emerald-900"
+                  >Zuhaib Rashid</span
+                >
               </div>
               <span class="text-xs text-gray-400 font-medium">12 Min Read</span>
             </div>
           </div>
         </article>
+
         <article class="group cursor-pointer flex flex-col h-full">
-          <div class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-emerald-900/10 transition-all duration-500">
-            <img 
-              src="../images/harisa.png" 
-              alt="Traditional Harissa Kashmiri Food preparation" 
+          <div
+            class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-emerald-900/10 transition-all duration-500"
+          >
+            <img
+              src="../images/harisa.png"
+              alt="Traditional Harissa Kashmiri Food preparation"
               class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700"
               loading="lazy"
+              decoding="async"
+              width="800"
+              height="600"
             />
-            <div class="absolute inset-0 bg-emerald-950/10 group-hover:bg-transparent transition-colors duration-500"></div>
+            <div
+              class="absolute inset-0 bg-emerald-950/10 group-hover:bg-transparent transition-colors duration-500"
+            ></div>
           </div>
 
           <div class="flex-1 flex flex-col">
-            <div class="flex items-center gap-3 text-xs font-bold text-rose-500 uppercase tracking-widest mb-3">
+            <div
+              class="flex items-center gap-3 text-xs font-bold text-rose-500 uppercase tracking-widest mb-3"
+            >
               <span>Jan 18, 2026</span>
               <span class="w-1 h-1 rounded-full bg-rose-300"></span>
               <span>Culture</span>
             </div>
 
-            <h2 class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors">
-              <a href="post-9.html" aria-label="Read article: The Warmth of Harissa">The Warmth of Harissa: A Winter Ritual</a>
+            <h2
+              class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors"
+            >
+              <a
+                href="post-9.html"
+                aria-label="Read article: The Warmth of Harissa"
+                >The Warmth of Harissa: A Winter Ritual</a
+              >
             </h2>
 
             <p class="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-3">
-              Why waking up at 5 AM for this delicacy in Downtown Srinagar is a spiritual experience for the stomach and soul.
+              Why waking up at 5 AM for this delicacy in Downtown Srinagar is a
+              spiritual experience for the stomach and soul.
             </p>
 
-            <div class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4">
+            <div
+              class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4"
+            >
               <div class="flex items-center gap-2">
-                <img src="../profile picturs/zuhaib.jpg" alt="Zuhaib Rashid" class="w-8 h-8 rounded-full object-cover border border-rose-200" loading="lazy" />
-                <span class="text-xs font-bold text-emerald-900">Zuhaib Rashid</span>
+                <img
+                  src="../profile picturs/zuhaib.jpg"
+                  alt="Zuhaib Rashid"
+                  class="w-8 h-8 rounded-full object-cover border border-rose-200"
+                  loading="lazy"
+                  width="32"
+                  height="32"
+                />
+                <span class="text-xs font-bold text-emerald-900"
+                  >Zuhaib Rashid</span
+                >
               </div>
               <span class="text-xs text-gray-400 font-medium">5 Min Read</span>
             </div>
@@ -553,606 +774,1096 @@
         </article>
 
         <article class="group cursor-pointer flex flex-col h-full">
-          <div class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-emerald-900/10 transition-all duration-500">
-            <img 
-              src="https://images.unsplash.com/photo-1551524559-8af4e6624178?auto=format&fit=crop&w=800&q=80" 
-              alt="Snowshoeing in deep winter snow" 
+          <div
+            class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-emerald-900/10 transition-all duration-500"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1551524559-8af4e6624178?auto=format&fit=crop&w=800&q=80"
+              alt="Snowshoeing in deep winter snow"
               class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700"
               loading="lazy"
+              decoding="async"
+              width="800"
+              height="600"
             />
-            <div class="absolute inset-0 bg-emerald-950/10 group-hover:bg-transparent transition-colors duration-500"></div>
+            <div
+              class="absolute inset-0 bg-emerald-950/10 group-hover:bg-transparent transition-colors duration-500"
+            ></div>
           </div>
 
           <div class="flex-1 flex flex-col">
-            <div class="flex items-center gap-3 text-xs font-bold text-rose-500 uppercase tracking-widest mb-3">
+            <div
+              class="flex items-center gap-3 text-xs font-bold text-rose-500 uppercase tracking-widest mb-3"
+            >
               <span>Jan 22, 2026</span>
               <span class="w-1 h-1 rounded-full bg-rose-300"></span>
               <span>Adventure</span>
             </div>
 
-            <h2 class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors">
-              <a href="post-10.html" aria-label="Read article: Snowshoeing in Yusmarg">Snowshoeing in Yusmarg: Walking on Clouds</a>
+            <h2
+              class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors"
+            >
+              <a
+                href="post-10.html"
+                aria-label="Read article: Snowshoeing in Yusmarg"
+                >Snowshoeing in Yusmarg: Walking on Clouds</a
+              >
             </h2>
 
             <p class="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-3">
-              When the snow is 4 feet deep, you don't stop walking. You float. A guide to exploring the frozen Doodhganga.
+              When the snow is 4 feet deep, you don't stop walking. You float. A
+              guide to exploring the frozen Doodhganga.
             </p>
 
-            <div class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4">
+            <div
+              class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4"
+            >
               <div class="flex items-center gap-2">
-                <img src="../profile picturs/zuhaib.jpg" alt="Zuhaib Rashid" class="w-8 h-8 rounded-full object-cover border border-rose-200" loading="lazy" />
-                <span class="text-xs font-bold text-emerald-900">Zuhaib Rashid</span>
+                <img
+                  src="../profile picturs/zuhaib.jpg"
+                  alt="Zuhaib Rashid"
+                  class="w-8 h-8 rounded-full object-cover border border-rose-200"
+                  loading="lazy"
+                  width="32"
+                  height="32"
+                />
+                <span class="text-xs font-bold text-emerald-900"
+                  >Zuhaib Rashid</span
+                >
               </div>
               <span class="text-xs text-gray-400 font-medium">6 Min Read</span>
             </div>
           </div>
         </article>
+
         <article class="group cursor-pointer flex flex-col h-full">
-          <div class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-emerald-900/10 transition-all duration-500">
-            <img 
-              src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=800&q=80" 
-              alt="Scales of justice and legal documents representing policy" 
+          <div
+            class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-emerald-900/10 transition-all duration-500"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=800&q=80"
+              alt="Scales of justice and legal documents representing policy"
               class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700 grayscale-[30%] group-hover:grayscale-0"
               loading="lazy"
+              decoding="async"
+              width="800"
+              height="600"
             />
-            <div class="absolute inset-0 bg-emerald-950/10 group-hover:bg-transparent transition-colors duration-500"></div>
+            <div
+              class="absolute inset-0 bg-emerald-950/10 group-hover:bg-transparent transition-colors duration-500"
+            ></div>
           </div>
 
           <div class="flex-1 flex flex-col">
-            <div class="flex items-center gap-3 text-xs font-bold text-rose-500 uppercase tracking-widest mb-3">
+            <div
+              class="flex items-center gap-3 text-xs font-bold text-rose-500 uppercase tracking-widest mb-3"
+            >
               <span>Feb 01, 2026</span>
               <span class="w-1 h-1 rounded-full bg-rose-300"></span>
               <span>Analysis</span>
             </div>
 
-            <h2 class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors">
-              <a href="post-11.html" aria-label="Read analysis: The New Reservation Map in J&K">The New Reservation Map in J&K: A Data-Driven Analysis</a>
+            <h2
+              class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors"
+            >
+              <a
+                href="post-11.html"
+                aria-label="Read analysis: The New Reservation Map in J&K"
+                >The New Reservation Map in J&K: A Data-Driven Analysis</a
+              >
             </h2>
 
             <p class="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-3">
-              When reservation hit 70%, it wasn't just a number. A deep dive into certificate data revealing how the new policy structurally advantages Jammu over Kashmir.
+              When reservation hit 70%, it wasn't just a number. A deep dive
+              into certificate data revealing how the new policy structurally
+              advantages Jammu over Kashmir.
             </p>
 
-            <div class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4">
+            <div
+              class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4"
+            >
               <div class="flex items-center gap-2">
-                <img src="../profile picturs/zuhaib.jpg" alt="Zuhaib Rashid" class="w-8 h-8 rounded-full object-cover border border-rose-200" loading="lazy" />
-                <span class="text-xs font-bold text-emerald-900">Zuhaib Rashid</span>
+                <img
+                  src="../profile picturs/zuhaib.jpg"
+                  alt="Zuhaib Rashid"
+                  class="w-8 h-8 rounded-full object-cover border border-rose-200"
+                  loading="lazy"
+                  width="32"
+                  height="32"
+                />
+                <span class="text-xs font-bold text-emerald-900"
+                  >Zuhaib Rashid</span
+                >
               </div>
               <span class="text-xs text-gray-400 font-medium">10 Min Read</span>
             </div>
           </div>
         </article>
+
         <article class="group cursor-pointer flex flex-col h-full">
-          <div class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-emerald-900/10 transition-all duration-500">
-            <img 
-              src="https://images.unsplash.com/photo-1595039838779-f3780873afdd?auto=format&fit=crop&w=800&q=80" 
-              alt="Kashmiri Wedding Jewelry Symbolic" 
+          <div
+            class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-emerald-900/10 transition-all duration-500"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1595039838779-f3780873afdd?auto=format&fit=crop&w=800&q=80"
+              alt="Kashmiri Wedding Jewelry Symbolic"
               class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700 grayscale-[20%] group-hover:grayscale-0"
               loading="lazy"
+              decoding="async"
+              width="800"
+              height="600"
             />
-            <div class="absolute inset-0 bg-emerald-950/10 group-hover:bg-transparent transition-colors duration-500"></div>
+            <div
+              class="absolute inset-0 bg-emerald-950/10 group-hover:bg-transparent transition-colors duration-500"
+            ></div>
           </div>
 
           <div class="flex-1 flex flex-col">
-            <div class="flex items-center gap-3 text-xs font-bold text-rose-500 uppercase tracking-widest mb-3">
+            <div
+              class="flex items-center gap-3 text-xs font-bold text-rose-500 uppercase tracking-widest mb-3"
+            >
               <span>Feb 05, 2026</span>
               <span class="w-1 h-1 rounded-full bg-rose-300"></span>
               <span>Society</span>
             </div>
 
-            <h2 class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors">
-              <a href="post-12.html" aria-label="Read article: Kashmir's Marriage Crisis">Kashmir's Marriage Crisis: The Demographic Time Bomb</a>
+            <h2
+              class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors"
+            >
+              <a
+                href="post-12.html"
+                aria-label="Read article: Kashmir's Marriage Crisis"
+                >Kashmir's Marriage Crisis: The Demographic Time Bomb</a
+              >
             </h2>
 
             <p class="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-3">
-              With average marriage ages soaring and fertility rates dropping to 1.4, Kashmir faces a silent social revolution driven by unemployment and wedding costs.
+              With average marriage ages soaring and fertility rates dropping to
+              1.4, Kashmir faces a silent social revolution driven by
+              unemployment and wedding costs.
             </p>
 
-            <div class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4">
+            <div
+              class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4"
+            >
               <div class="flex items-center gap-2">
-                <img src="../profile picturs/zuhaib.jpg" alt="Zuhaib Rashid" class="w-8 h-8 rounded-full object-cover border border-rose-200" loading="lazy" />
-                <span class="text-xs font-bold text-emerald-900">Zuhaib Rashid</span>
+                <img
+                  src="../profile picturs/zuhaib.jpg"
+                  alt="Zuhaib Rashid"
+                  class="w-8 h-8 rounded-full object-cover border border-rose-200"
+                  loading="lazy"
+                  width="32"
+                  height="32"
+                />
+                <span class="text-xs font-bold text-emerald-900"
+                  >Zuhaib Rashid</span
+                >
               </div>
               <span class="text-xs text-gray-400 font-medium">8 Min Read</span>
             </div>
           </div>
         </article>
+
         <article class="group cursor-pointer flex flex-col h-full">
-          <div class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-emerald-900/10 transition-all duration-500">
-            <img 
-              src="../images/Dying_rivers.png" 
-              alt="Excavator mining in riverbed" 
+          <div
+            class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-emerald-900/10 transition-all duration-500"
+          >
+            <img
+              src="../images/Dying_rivers.png"
+              alt="Excavator mining in riverbed"
               class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700 grayscale-[30%] group-hover:grayscale-0"
               loading="lazy"
+              decoding="async"
+              width="800"
+              height="600"
             />
-            <div class="absolute inset-0 bg-emerald-950/10 group-hover:bg-transparent transition-colors duration-500"></div>
+            <div
+              class="absolute inset-0 bg-emerald-950/10 group-hover:bg-transparent transition-colors duration-500"
+            ></div>
           </div>
 
           <div class="flex-1 flex flex-col">
-            <div class="flex items-center gap-3 text-xs font-bold text-rose-500 uppercase tracking-widest mb-3">
+            <div
+              class="flex items-center gap-3 text-xs font-bold text-rose-500 uppercase tracking-widest mb-3"
+            >
               <span>Jan 09, 2026</span>
               <span class="w-1 h-1 rounded-full bg-rose-300"></span>
               <span>Environment</span>
             </div>
 
-            <h2 class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors">
-              <a href="post-13.html" aria-label="Read article: The River Massacre">The River Massacre: How Kashmir's Lifelines Are Being Murdered</a>
+            <h2
+              class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors"
+            >
+              <a
+                href="post-13.html"
+                aria-label="Read article: The River Massacre"
+                >The River Massacre: How Kashmir's Lifelines Are Being
+                Murdered</a
+              >
             </h2>
 
             <p class="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-3">
-              Not by guns, but by excavators. An exposé on the illegal sand mining nexus and Dr. Raja Muzaffar Bhat's crusade to stop it.
+              Not by guns, but by excavators. An exposé on the illegal sand
+              mining nexus and Dr. Raja Muzaffar Bhat's crusade to stop it.
             </p>
 
-            <div class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4">
+            <div
+              class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4"
+            >
               <div class="flex items-center gap-2">
-                <img src="../profile picturs/zuhaib.jpg" alt="Zuhaib Rashid" class="w-8 h-8 rounded-full object-cover border border-rose-200" loading="lazy" />
-                <span class="text-xs font-bold text-emerald-900">Zuhaib Rashid</span>
+                <img
+                  src="../profile picturs/zuhaib.jpg"
+                  alt="Zuhaib Rashid"
+                  class="w-8 h-8 rounded-full object-cover border border-rose-200"
+                  loading="lazy"
+                  width="32"
+                  height="32"
+                />
+                <span class="text-xs font-bold text-emerald-900"
+                  >Zuhaib Rashid</span
+                >
               </div>
               <span class="text-xs text-gray-400 font-medium">15 Min Read</span>
             </div>
           </div>
         </article>
+
         <article class="group cursor-pointer flex flex-col h-full">
-          <div class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-red-900/10 transition-all duration-500">
-            <img 
-              src="../images/air_pollution.png" 
-              alt="Smog covering a city landscape" 
+          <div
+            class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-red-900/10 transition-all duration-500"
+          >
+            <img
+              src="../images/air_pollution.png"
+              alt="Smog covering a city landscape"
               class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700 grayscale-[40%] group-hover:grayscale-0"
               loading="lazy"
+              decoding="async"
+              width="800"
+              height="600"
             />
-            <div class="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-colors duration-500"></div>
+            <div
+              class="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-colors duration-500"
+            ></div>
           </div>
 
           <div class="flex-1 flex flex-col">
-            <div class="flex items-center gap-3 text-xs font-bold text-red-500 uppercase tracking-widest mb-3">
+            <div
+              class="flex items-center gap-3 text-xs font-bold text-red-500 uppercase tracking-widest mb-3"
+            >
               <span>Jan 09, 2026</span>
               <span class="w-1 h-1 rounded-full bg-red-300 animate-pulse"></span>
               <span>Crisis</span>
             </div>
 
-            <h2 class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors">
-              <a href="post-14.html" aria-label="Read article: Kashmir's Invisible Killer">Kashmir's Invisible Killer: When Paradise Chokes on Poison</a>
+            <h2
+              class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors"
+            >
+              <a
+                href="post-14.html"
+                aria-label="Read article: Kashmir's Invisible Killer"
+                >Kashmir's Invisible Killer: When Paradise Chokes on Poison</a
+              >
             </h2>
 
             <p class="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-3">
-              With AQI hitting 300+, the air we breathe is becoming a silent assassin. Introducing Kilamate: Your shield against the smog.
+              With AQI hitting 300+, the air we breathe is becoming a silent
+              assassin. Introducing Kilamate: Your shield against the smog.
             </p>
 
-            <div class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4">
+            <div
+              class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4"
+            >
               <div class="flex items-center gap-2">
-                <img src="../profile picturs/zuhaib.jpg" alt="Zuhaib Rashid" class="w-8 h-8 rounded-full object-cover border border-rose-200" loading="lazy" />
-                <span class="text-xs font-bold text-emerald-900">Zuhaib Rashid</span>
+                <img
+                  src="../profile picturs/zuhaib.jpg"
+                  alt="Zuhaib Rashid"
+                  class="w-8 h-8 rounded-full object-cover border border-rose-200"
+                  loading="lazy"
+                  width="32"
+                  height="32"
+                />
+                <span class="text-xs font-bold text-emerald-900"
+                  >Zuhaib Rashid</span
+                >
               </div>
               <span class="text-xs text-gray-400 font-medium">7 Min Read</span>
             </div>
           </div>
         </article>
+
         <article class="group cursor-pointer flex flex-col h-full">
-          <div class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-slate-900/10 transition-all duration-500">
-            <img 
-              src="../images/unemployment_cover.png" 
-              alt="Lonely figure walking down an empty street" 
+          <div
+            class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-slate-900/10 transition-all duration-500"
+          >
+            <img
+              src="../images/unemployment_cover.png"
+              alt="Lonely figure walking down an empty street"
               class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700 grayscale-[50%] group-hover:grayscale-0"
               loading="lazy"
+              decoding="async"
+              width="800"
+              height="600"
             />
-            <div class="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors duration-500"></div>
+            <div
+              class="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors duration-500"
+            ></div>
           </div>
 
           <div class="flex-1 flex flex-col">
-            <div class="flex items-center gap-3 text-xs font-bold text-rose-500 uppercase tracking-widest mb-3">
+            <div
+              class="flex items-center gap-3 text-xs font-bold text-rose-500 uppercase tracking-widest mb-3"
+            >
               <span>Jan 11, 2026</span>
               <span class="w-1 h-1 rounded-full bg-rose-300"></span>
               <span>Economy</span>
             </div>
 
-            <h2 class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors">
-              <a href="post-15.html" aria-label="Read article: The Silent Crisis">The Silent Crisis: Understanding the Rising Unemployment Epidemic</a>
+            <h2
+              class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors"
+            >
+              <a href="post-15.html" aria-label="Read article: The Silent Crisis"
+                >The Silent Crisis: Understanding the Rising Unemployment
+                Epidemic</a
+              >
             </h2>
 
             <p class="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-3">
-              32% of urban youth are jobless. 20% of women are unemployed. A deep dive into the human tragedy behind the statistics.
+              32% of urban youth are jobless. 20% of women are unemployed. A
+              deep dive into the human tragedy behind the statistics.
             </p>
 
-            <div class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4">
+            <div
+              class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4"
+            >
               <div class="flex items-center gap-2">
-                <img src="../profile picturs/zuhaib.jpg" alt="Zuhaib Rashid" class="w-8 h-8 rounded-full object-cover border border-rose-200" loading="lazy" />
-                <span class="text-xs font-bold text-emerald-900">Zuhaib Rashid</span>
+                <img
+                  src="../profile picturs/zuhaib.jpg"
+                  alt="Zuhaib Rashid"
+                  class="w-8 h-8 rounded-full object-cover border border-rose-200"
+                  loading="lazy"
+                  width="32"
+                  height="32"
+                />
+                <span class="text-xs font-bold text-emerald-900"
+                  >Zuhaib Rashid</span
+                >
               </div>
               <span class="text-xs text-gray-400 font-medium">12 Min Read</span>
             </div>
           </div>
         </article>
+
         <article class="group cursor-pointer flex flex-col h-full">
-          <div class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-emerald-900/10 transition-all duration-500">
-            <img 
-              src="../images/tourism_cover_image.png" 
-              alt="Beautiful view of Dal Lake Kashmir with boat" 
+          <div
+            class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-emerald-900/10 transition-all duration-500"
+          >
+            <img
+              src="../images/tourism_cover_image.png"
+              alt="Beautiful view of Dal Lake Kashmir with boat"
               class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700"
               loading="lazy"
+              decoding="async"
+              width="800"
+              height="600"
             />
-            <div class="absolute inset-0 bg-emerald-950/10 group-hover:bg-transparent transition-colors duration-500"></div>
+            <div
+              class="absolute inset-0 bg-emerald-950/10 group-hover:bg-transparent transition-colors duration-500"
+            ></div>
           </div>
 
           <div class="flex-1 flex flex-col">
-            <div class="flex items-center gap-3 text-xs font-bold text-rose-500 uppercase tracking-widest mb-3">
+            <div
+              class="flex items-center gap-3 text-xs font-bold text-rose-500 uppercase tracking-widest mb-3"
+            >
               <span>Jan 12, 2026</span>
               <span class="w-1 h-1 rounded-full bg-rose-300"></span>
               <span>Vision</span>
             </div>
 
-            <h2 class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors">
-              <a href="post-16.html" aria-label="Read article: Paradise Rebuilt">Paradise Rebuilt: The Roadmap to Recovery</a>
+            <h2
+              class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors"
+            >
+              <a
+                href="post-16.html"
+                aria-label="Read article: Paradise Rebuilt"
+                >Paradise Rebuilt: The Roadmap to Recovery</a
+              >
             </h2>
 
             <p class="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-3">
-              Kashmir's tourism stumbled, but it's rising again. A strategic look at how infrastructure, digital presence, and community empowerment are reshaping the future.
+              Kashmir's tourism stumbled, but it's rising again. A strategic
+              look at how infrastructure, digital presence, and community
+              empowerment are reshaping the future.
             </p>
 
-            <div class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4">
+            <div
+              class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4"
+            >
               <div class="flex items-center gap-2">
-                <img src="../profile picturs/zuhaib.jpg" alt="Zuhaib Rashid" class="w-8 h-8 rounded-full object-cover border border-rose-200" loading="lazy" />
-                <span class="text-xs font-bold text-emerald-900">Zuhaib Rashid</span>
+                <img
+                  src="../profile picturs/zuhaib.jpg"
+                  alt="Zuhaib Rashid"
+                  class="w-8 h-8 rounded-full object-cover border border-rose-200"
+                  loading="lazy"
+                  width="32"
+                  height="32"
+                />
+                <span class="text-xs font-bold text-emerald-900"
+                  >Zuhaib Rashid</span
+                >
               </div>
               <span class="text-xs text-gray-400 font-medium">10 Min Read</span>
             </div>
           </div>
         </article>
+
         <article class="group cursor-pointer flex flex-col h-full">
-          <div class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-gray-900/10 transition-all duration-500">
-            <img 
-              src="../images/drug_addiction.png" 
-              alt="Conceptual image of addiction and shadow" 
+          <div
+            class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-gray-900/10 transition-all duration-500"
+          >
+            <img
+              src="../images/drug_addiction.png"
+              alt="Conceptual image of addiction and shadow"
               class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700 grayscale-[80%] group-hover:grayscale-0"
               loading="lazy"
+              decoding="async"
+              width="800"
+              height="600"
             />
-            <div class="absolute inset-0 bg-gray-900/20 group-hover:bg-transparent transition-colors duration-500"></div>
+            <div
+              class="absolute inset-0 bg-gray-900/20 group-hover:bg-transparent transition-colors duration-500"
+            ></div>
           </div>
 
           <div class="flex-1 flex flex-col">
-            <div class="flex items-center gap-3 text-xs font-bold text-rose-500 uppercase tracking-widest mb-3">
+            <div
+              class="flex items-center gap-3 text-xs font-bold text-rose-500 uppercase tracking-widest mb-3"
+            >
               <span>Jan 13, 2026</span>
               <span class="w-1 h-1 rounded-full bg-rose-300"></span>
               <span>Society</span>
             </div>
 
-            <h2 class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors">
-              <a href="post-17.html" aria-label="Read article: Shadows in the Valley">Shadows in the Valley: The Silent Epidemic of Drug Addiction</a>
+            <h2
+              class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors"
+            >
+              <a
+                href="post-17.html"
+                aria-label="Read article: Shadows in the Valley"
+                >Shadows in the Valley: The Silent Epidemic of Drug Addiction</a
+              >
             </h2>
 
             <p class="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-3">
-              It is not bullets taking our youth anymore. A deep dive into the drug crisis, the rising toll on women, and the urgent need for compassion.
+              It is not bullets taking our youth anymore. A deep dive into the
+              drug crisis, the rising toll on women, and the urgent need for
+              compassion.
             </p>
 
-            <div class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4">
+            <div
+              class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4"
+            >
               <div class="flex items-center gap-2">
-                <img src="../profile picturs/zuhaib.jpg" alt="Zuhaib Rashid" class="w-8 h-8 rounded-full object-cover border border-rose-200" loading="lazy" />
-                <span class="text-xs font-bold text-emerald-900">Zuhaib Rashid</span>
+                <img
+                  src="../profile picturs/zuhaib.jpg"
+                  alt="Zuhaib Rashid"
+                  class="w-8 h-8 rounded-full object-cover border border-rose-200"
+                  loading="lazy"
+                  width="32"
+                  height="32"
+                />
+                <span class="text-xs font-bold text-emerald-900"
+                  >Zuhaib Rashid</span
+                >
               </div>
               <span class="text-xs text-gray-400 font-medium">10 Min Read</span>
             </div>
           </div>
         </article>
+
         <article class="group cursor-pointer flex flex-col h-full">
-          <div class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-indigo-900/10 transition-all duration-500">
-            <img 
-              src="../images/atheism_cover.png" 
-              alt="Person in deep thought" 
+          <div
+            class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-indigo-900/10 transition-all duration-500"
+          >
+            <img
+              src="../images/atheism_cover.png"
+              alt="Person in deep thought"
               class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700 grayscale-[40%] group-hover:grayscale-0"
               loading="lazy"
+              decoding="async"
+              width="800"
+              height="600"
             />
-            <div class="absolute inset-0 bg-indigo-900/10 group-hover:bg-transparent transition-colors duration-500"></div>
+            <div
+              class="absolute inset-0 bg-indigo-900/10 group-hover:bg-transparent transition-colors duration-500"
+            ></div>
           </div>
 
           <div class="flex-1 flex flex-col">
-            <div class="flex items-center gap-3 text-xs font-bold text-indigo-500 uppercase tracking-widest mb-3">
+            <div
+              class="flex items-center gap-3 text-xs font-bold text-indigo-500 uppercase tracking-widest mb-3"
+            >
               <span>Jan 13, 2026</span>
               <span class="w-1 h-1 rounded-full bg-indigo-300"></span>
               <span>Philosophy</span>
             </div>
 
-            <h2 class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors">
-              <a href="post-18.html" aria-label="Read article: The Quiet Question">The Quiet Question: Exploring the Rise of Skepticism</a>
+            <h2
+              class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors"
+            >
+              <a
+                href="post-18.html"
+                aria-label="Read article: The Quiet Question"
+                >The Quiet Question: Exploring the Rise of Skepticism</a
+              >
             </h2>
 
             <p class="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-3">
-              In the land of saints, a new generation is asking difficult questions. An exploration of the silent rise of atheism and agnosticism among Kashmir's youth.
+              In the land of saints, a new generation is asking difficult
+              questions. An exploration of the silent rise of atheism and
+              agnosticism among Kashmir's youth.
             </p>
 
-            <div class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4">
+            <div
+              class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4"
+            >
               <div class="flex items-center gap-2">
-                <img src="../profile picturs/zuhaib.jpg" alt="Zuhaib Rashid" class="w-8 h-8 rounded-full object-cover border border-rose-200" loading="lazy" />
-                <span class="text-xs font-bold text-emerald-900">Zuhaib Rashid</span>
+                <img
+                  src="../profile picturs/zuhaib.jpg"
+                  alt="Zuhaib Rashid"
+                  class="w-8 h-8 rounded-full object-cover border border-rose-200"
+                  loading="lazy"
+                  width="32"
+                  height="32"
+                />
+                <span class="text-xs font-bold text-emerald-900"
+                  >Zuhaib Rashid</span
+                >
               </div>
               <span class="text-xs text-gray-400 font-medium">9 Min Read</span>
             </div>
           </div>
         </article>
+
         <article class="group cursor-pointer flex flex-col h-full">
-          <div class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-amber-900/10 transition-all duration-500">
-            <img 
-              src="../images/kahmiri_hospitality.png" 
-              alt="Warm Kashmiri hospitality tea" 
+          <div
+            class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-amber-900/10 transition-all duration-500"
+          >
+            <img
+              src="../images/kahmiri_hospitality.png"
+              alt="Warm Kashmiri hospitality tea"
               class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700"
               loading="lazy"
+              decoding="async"
+              width="800"
+              height="600"
             />
-            <div class="absolute inset-0 bg-amber-900/10 group-hover:bg-transparent transition-colors duration-500"></div>
+            <div
+              class="absolute inset-0 bg-amber-900/10 group-hover:bg-transparent transition-colors duration-500"
+            ></div>
           </div>
 
           <div class="flex-1 flex flex-col">
-            <div class="flex items-center gap-3 text-xs font-bold text-amber-600 uppercase tracking-widest mb-3">
+            <div
+              class="flex items-center gap-3 text-xs font-bold text-amber-600 uppercase tracking-widest mb-3"
+            >
               <span>Jan 14, 2026</span>
               <span class="w-1 h-1 rounded-full bg-amber-300"></span>
               <span>Culture</span>
             </div>
 
-            <h2 class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors">
-              <a href="post-19.html" aria-label="Read article: The Heart of the Valley">The Heart of the Valley: Kashmiri Hospitality</a>
+            <h2
+              class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors"
+            >
+              <a
+                href="post-19.html"
+                aria-label="Read article: The Heart of the Valley"
+                >The Heart of the Valley: Kashmiri Hospitality</a
+              >
             </h2>
 
             <p class="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-3">
-              You come for the mountains, but you stay for the people. Stories of radical honesty, faith, and the unwritten law of Mehman Nawazi.
+              You come for the mountains, but you stay for the people. Stories
+              of radical honesty, faith, and the unwritten law of Mehman Nawazi.
             </p>
 
-            <div class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4">
+            <div
+              class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4"
+            >
               <div class="flex items-center gap-2">
-                <img src="../profile picturs/zuhaib.jpg" alt="Zuhaib Rashid" class="w-8 h-8 rounded-full object-cover border border-rose-200" loading="lazy" />
-                <span class="text-xs font-bold text-emerald-900">Zuhaib Rashid</span>
+                <img
+                  src="../profile picturs/zuhaib.jpg"
+                  alt="Zuhaib Rashid"
+                  class="w-8 h-8 rounded-full object-cover border border-rose-200"
+                  loading="lazy"
+                  width="32"
+                  height="32"
+                />
+                <span class="text-xs font-bold text-emerald-900"
+                  >Zuhaib Rashid</span
+                >
               </div>
               <span class="text-xs text-gray-400 font-medium">8 Min Read</span>
             </div>
           </div>
         </article>
+
         <article class="group cursor-pointer flex flex-col h-full">
-          <div class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-indigo-900/10 transition-all duration-500">
-            <img 
-              src="../images/cover_gap.png" 
-              alt="Digital lock representing internet shutdown" 
+          <div
+            class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-indigo-900/10 transition-all duration-500"
+          >
+            <img
+              src="../images/cover_gap.png"
+              alt="Digital lock representing internet shutdown"
               class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700 grayscale-[60%] group-hover:grayscale-0"
               loading="lazy"
+              decoding="async"
+              width="800"
+              height="600"
             />
-            <div class="absolute inset-0 bg-indigo-900/10 group-hover:bg-transparent transition-colors duration-500"></div>
+            <div
+              class="absolute inset-0 bg-indigo-900/10 group-hover:bg-transparent transition-colors duration-500"
+            ></div>
           </div>
 
           <div class="flex-1 flex flex-col">
-            <div class="flex items-center gap-3 text-xs font-bold text-indigo-500 uppercase tracking-widest mb-3">
+            <div
+              class="flex items-center gap-3 text-xs font-bold text-indigo-500 uppercase tracking-widest mb-3"
+            >
               <span>Jan 15, 2026</span>
               <span class="w-1 h-1 rounded-full bg-indigo-300"></span>
               <span>Education</span>
             </div>
 
-            <h2 class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors">
-              <a href="post-20.html" aria-label="Read article: The Silenced Valley">The Silenced Valley: Kashmir's Technology Education Gap</a>
+            <h2
+              class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors"
+            >
+              <a href="post-20.html" aria-label="Read article: The Silenced Valley"
+                >The Silenced Valley: Kashmir's Technology Education Gap</a
+              >
             </h2>
 
             <p class="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-3">
-              552 days of silence. A generation lost to 2G. An in-depth analysis of how the internet shutdown erased educational opportunities for 2.5 million students.
+              552 days of silence. A generation lost to 2G. An in-depth analysis
+              of how the internet shutdown erased educational opportunities for
+              2.5 million students.
             </p>
 
-            <div class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4">
+            <div
+              class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4"
+            >
               <div class="flex items-center gap-2">
-                <img src="../profile picturs/zuhaib.jpg" alt="Zuhaib Rashid" class="w-8 h-8 rounded-full object-cover border border-rose-200" loading="lazy" />
-                <span class="text-xs font-bold text-emerald-900">Zuhaib Rashid</span>
+                <img
+                  src="../profile picturs/zuhaib.jpg"
+                  alt="Zuhaib Rashid"
+                  class="w-8 h-8 rounded-full object-cover border border-rose-200"
+                  loading="lazy"
+                  width="32"
+                  height="32"
+                />
+                <span class="text-xs font-bold text-emerald-900"
+                  >Zuhaib Rashid</span
+                >
               </div>
               <span class="text-xs text-gray-400 font-medium">15 Min Read</span>
             </div>
           </div>
         </article>
+
         <article class="group cursor-pointer flex flex-col h-full">
-          <div class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-slate-900/10 transition-all duration-500">
-            <img 
-              src="../images/youthbehind_bars.png" 
-              alt="Prison bars silhouette" 
+          <div
+            class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-slate-900/10 transition-all duration-500"
+          >
+            <img
+              src="../images/youthbehind_bars.png"
+              alt="Prison bars silhouette"
               class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700 grayscale-[80%] group-hover:grayscale-0"
               loading="lazy"
+              decoding="async"
+              width="800"
+              height="600"
             />
-            <div class="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors duration-500"></div>
+            <div
+              class="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors duration-500"
+            ></div>
           </div>
 
           <div class="flex-1 flex flex-col">
-            <div class="flex items-center gap-3 text-xs font-bold text-slate-500 uppercase tracking-widest mb-3">
+            <div
+              class="flex items-center gap-3 text-xs font-bold text-slate-500 uppercase tracking-widest mb-3"
+            >
               <span>Jan 16, 2026</span>
               <span class="w-1 h-1 rounded-full bg-slate-300"></span>
               <span>Justice</span>
             </div>
 
-            <h2 class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors">
-              <a href="post-21.html" aria-label="Read article: Behind the Bars">Behind the Bars Without a Crime: The Forgotten Stories</a>
+            <h2
+              class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors"
+            >
+              <a
+                href="post-21.html"
+                aria-label="Read article: Behind the Bars"
+                >Behind the Bars Without a Crime: The Forgotten Stories</a
+              >
             </h2>
 
             <p class="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-3">
-              A staggering 0.8% conviction rate. Thousands detained without evidence. An investigative look at the youth lost to PSA and UAPA.
+              A staggering 0.8% conviction rate. Thousands detained without
+              evidence. An investigative look into the youth lost to PSA and
+              UAPA.
             </p>
 
-            <div class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4">
+            <div
+              class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4"
+            >
               <div class="flex items-center gap-2">
-                <img src="../profile picturs/zuhaib.jpg" alt="Zuhaib Rashid" class="w-8 h-8 rounded-full object-cover border border-rose-200" loading="lazy" />
-                <span class="text-xs font-bold text-emerald-900">Zuhaib Rashid</span>
+                <img
+                  src="../profile picturs/zuhaib.jpg"
+                  alt="Zuhaib Rashid"
+                  class="w-8 h-8 rounded-full object-cover border border-rose-200"
+                  loading="lazy"
+                  width="32"
+                  height="32"
+                />
+                <span class="text-xs font-bold text-emerald-900"
+                  >Zuhaib Rashid</span
+                >
               </div>
               <span class="text-xs text-gray-400 font-medium">12 Min Read</span>
             </div>
           </div>
         </article>
+
         <article class="group cursor-pointer flex flex-col h-full">
-          <div class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-red-900/10 transition-all duration-500">
-            <img 
-              src="../images/jkbose_cover.png" 
-              alt="Digital glitch and server failure concept" 
+          <div
+            class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-red-900/10 transition-all duration-500"
+          >
+            <img
+              src="../images/jkbose_cover.png"
+              alt="Digital glitch and server failure concept"
               class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700 grayscale-[80%] group-hover:grayscale-0"
               loading="lazy"
+              decoding="async"
+              width="800"
+              height="600"
             />
-            <div class="absolute inset-0 bg-red-900/10 group-hover:bg-transparent transition-colors duration-500"></div>
+            <div
+              class="absolute inset-0 bg-red-900/10 group-hover:bg-transparent transition-colors duration-500"
+            ></div>
           </div>
 
           <div class="flex-1 flex flex-col">
-            <div class="flex items-center gap-3 text-xs font-bold text-red-500 uppercase tracking-widest mb-3">
+            <div
+              class="flex items-center gap-3 text-xs font-bold text-red-500 uppercase tracking-widest mb-3"
+            >
               <span>Jan 15, 2026</span>
               <span class="w-1 h-1 rounded-full bg-red-300"></span>
               <span>Technology</span>
             </div>
 
-            <h2 class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors">
-              <a href="post-22.html" aria-label="Read article: The Digital Tragedy">The Digital Tragedy: JKBOSE's Decades-Long Server Suicide</a>
+            <h2
+              class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors"
+            >
+              <a
+                href="post-22.html"
+                aria-label="Read article: The Digital Tragedy"
+                >The Digital Tragedy: JKBOSE's Decades-Long Server Suicide</a
+              >
             </h2>
 
             <p class="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-3">
-              When hope crashes with the server. An investigative report on the annual failure of JKBOSE's website and the gaslighting of 100,000 students.
+              When hope crashes with the server. An investigative report on the
+              annual failure of JKBOSE's website and the gaslighting of 100,000
+              students.
             </p>
 
-            <div class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4">
+            <div
+              class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4"
+            >
               <div class="flex items-center gap-2">
-                <img src="../profile picturs/zuhaib.jpg" alt="Zuhaib Rashid" class="w-8 h-8 rounded-full object-cover border border-rose-200" loading="lazy" />
-                <span class="text-xs font-bold text-emerald-900">Zuhaib Rashid</span>
+                <img
+                  src="../profile picturs/zuhaib.jpg"
+                  alt="Zuhaib Rashid"
+                  class="w-8 h-8 rounded-full object-cover border border-rose-200"
+                  loading="lazy"
+                  width="32"
+                  height="32"
+                />
+                <span class="text-xs font-bold text-emerald-900"
+                  >Zuhaib Rashid</span
+                >
               </div>
               <span class="text-xs text-gray-400 font-medium">10 Min Read</span>
             </div>
           </div>
         </article>
+
         <article class="group cursor-pointer flex flex-col h-full">
-          <div class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-stone-900/10 transition-all duration-500">
-            <img 
-              src="../images/kashmiri_stag.png" 
-              alt="Kashmir Hangul Stag in the wild" 
+          <div
+            class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-stone-900/10 transition-all duration-500"
+          >
+            <img
+              src="../images/kashmiri_stag.png"
+              alt="Kashmir Hangul Stag in the wild"
               class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700 grayscale-[20%] group-hover:grayscale-0"
               loading="lazy"
+              decoding="async"
+              width="800"
+              height="600"
             />
-            <div class="absolute inset-0 bg-stone-900/10 group-hover:bg-transparent transition-colors duration-500"></div>
+            <div
+              class="absolute inset-0 bg-stone-900/10 group-hover:bg-transparent transition-colors duration-500"
+            ></div>
           </div>
 
           <div class="flex-1 flex flex-col">
-            <div class="flex items-center gap-3 text-xs font-bold text-stone-600 uppercase tracking-widest mb-3">
+            <div
+              class="flex items-center gap-3 text-xs font-bold text-stone-600 uppercase tracking-widest mb-3"
+            >
               <span>Jan 17, 2026</span>
               <span class="w-1 h-1 rounded-full bg-stone-400"></span>
               <span>Wildlife</span>
             </div>
 
-            <h2 class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors">
-              <a href="post-23.html" aria-label="Read article: The Ghost of Dachigam">The Ghost of Dachigam: The Last Stand of the Hangul</a>
+            <h2
+              class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors"
+            >
+              <a
+                href="post-23.html"
+                aria-label="Read article: The Ghost of Dachigam"
+                >The Ghost of Dachigam: The Last Stand of the Hangul</a
+              >
             </h2>
 
             <p class="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-3">
-              Once numbering in the thousands, only ~289 remain. An investigative look into the extinction crisis facing Kashmir's state animal.
+              Once numbering in the thousands, only ~289 remain. An
+              investigative look into the extinction crisis facing Kashmir's
+              state animal.
             </p>
 
-            <div class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4">
+            <div
+              class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4"
+            >
               <div class="flex items-center gap-2">
-                <img src="../profile picturs/zuhaib.jpg" alt="Zuhaib Rashid" class="w-8 h-8 rounded-full object-cover border border-rose-200" loading="lazy" />
-                <span class="text-xs font-bold text-emerald-900">Zuhaib Rashid</span>
+                <img
+                  src="../profile picturs/zuhaib.jpg"
+                  alt="Zuhaib Rashid"
+                  class="w-8 h-8 rounded-full object-cover border border-rose-200"
+                  loading="lazy"
+                  width="32"
+                  height="32"
+                />
+                <span class="text-xs font-bold text-emerald-900"
+                  >Zuhaib Rashid</span
+                >
               </div>
               <span class="text-xs text-gray-400 font-medium">10 Min Read</span>
             </div>
           </div>
         </article>
+
         <article class="group cursor-pointer flex flex-col h-full">
-          <div class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-rose-900/10 transition-all duration-500">
-            <img 
-              src="../images/hype_results.png" 
-              alt="Stressed student concept" 
+          <div
+            class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-rose-900/10 transition-all duration-500"
+          >
+            <img
+              src="../images/hype_results.png"
+              alt="Stressed student concept"
               class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700 grayscale-[60%] group-hover:grayscale-0"
               loading="lazy"
+              decoding="async"
+              width="800"
+              height="600"
             />
-            <div class="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-colors duration-500"></div>
+            <div
+              class="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-colors duration-500"
+            ></div>
           </div>
 
           <div class="flex-1 flex flex-col">
-            <div class="flex items-center gap-3 text-xs font-bold text-rose-500 uppercase tracking-widest mb-3">
+            <div
+              class="flex items-center gap-3 text-xs font-bold text-rose-500 uppercase tracking-widest mb-3"
+            >
               <span>Jan 19, 2026</span>
               <span class="w-1 h-1 rounded-full bg-rose-300"></span>
               <span>Opinion</span>
             </div>
 
-            <h2 class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors">
-              <a href="post-24.html" aria-label="Read article: The Result Day Circus">The Result Day Circus: Why Our Obsession is Killing Our Children</a>
+            <h2
+              class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors"
+            >
+              <a
+                href="post-24.html"
+                aria-label="Read article: The Result Day Circus"
+                >The Result Day Circus: Why Our Obsession is Killing Our
+                Children</a
+              >
             </h2>
 
             <p class="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-3">
-              We turned a routine academic update into a life-or-death verdict. A student hanged himself over a result in a year where 16% grace marks were given. When will we stop?
+              We turned a routine academic update into a life-or-death verdict.
+              A student hanged himself over a result in a year where 16% grace
+              marks were given. When will we stop?
             </p>
 
-            <div class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4">
+            <div
+              class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4"
+            >
               <div class="flex items-center gap-2">
-                <img src="../profile picturs/zuhaib.jpg" alt="Zuhaib Rashid" class="w-8 h-8 rounded-full object-cover border border-rose-200" loading="lazy" />
-                <span class="text-xs font-bold text-emerald-900">Zuhaib Rashid</span>
+                <img
+                  src="../profile picturs/zuhaib.jpg"
+                  alt="Zuhaib Rashid"
+                  class="w-8 h-8 rounded-full object-cover border border-rose-200"
+                  loading="lazy"
+                  width="32"
+                  height="32"
+                />
+                <span class="text-xs font-bold text-emerald-900"
+                  >Zuhaib Rashid</span
+                >
               </div>
               <span class="text-xs text-gray-400 font-medium">6 Min Read</span>
             </div>
           </div>
         </article>
+
         <article class="group cursor-pointer flex flex-col h-full">
-          <div class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-sky-900/10 transition-all duration-500">
-            <img 
-              src="../images/ski-resort-winter-tourism-mountains.jpg" 
-              alt="Gulmarg snowy landscape" 
+          <div
+            class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-sky-900/10 transition-all duration-500"
+          >
+            <img
+              src="../images/ski-resort-winter-tourism-mountains.jpg"
+              alt="Gulmarg snowy landscape"
               class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700"
               loading="lazy"
+              decoding="async"
+              width="800"
+              height="600"
             />
-            <div class="absolute inset-0 bg-sky-900/10 group-hover:bg-transparent transition-colors duration-500"></div>
+            <div
+              class="absolute inset-0 bg-sky-900/10 group-hover:bg-transparent transition-colors duration-500"
+            ></div>
           </div>
 
           <div class="flex-1 flex flex-col">
-            <div class="flex items-center gap-3 text-xs font-bold text-sky-600 uppercase tracking-widest mb-3">
+            <div
+              class="flex items-center gap-3 text-xs font-bold text-sky-600 uppercase tracking-widest mb-3"
+            >
               <span>Jan 20, 2026</span>
               <span class="w-1 h-1 rounded-full bg-sky-300"></span>
               <span>Travel</span>
             </div>
 
-            <h2 class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors">
-              <a href="post-25.html" aria-label="Read article: Gulmarg The White Lullaby">Gulmarg: The White Lullaby of Kashmir</a>
+            <h2
+              class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors"
+            >
+              <a
+                href="post-25.html"
+                aria-label="Read article: Gulmarg The White Lullaby"
+                >Gulmarg: The White Lullaby of Kashmir</a
+              >
             </h2>
 
             <p class="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-3">
-              Where the earth touches the sky. A journey into the heart of Gulmarg, exploring its ski slopes, gondola rides, and winter magic.
+              Where the earth touches the sky. A journey into the heart of
+              Gulmarg, exploring its ski slopes, gondola rides, and winter
+              magic.
             </p>
 
-            <div class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4">
+            <div
+              class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4"
+            >
               <div class="flex items-center gap-2">
-                <img src="../profile picturs/zuhaib.jpg" alt="Zuhaib Rashid" class="w-8 h-8 rounded-full object-cover border border-rose-200" loading="lazy" />
-                <span class="text-xs font-bold text-emerald-900">Zuhaib Rashid</span>
+                <img
+                  src="../profile picturs/zuhaib.jpg"
+                  alt="Zuhaib Rashid"
+                  class="w-8 h-8 rounded-full object-cover border border-rose-200"
+                  loading="lazy"
+                  width="32"
+                  height="32"
+                />
+                <span class="text-xs font-bold text-emerald-900"
+                  >Zuhaib Rashid</span
+                >
               </div>
               <span class="text-xs text-gray-400 font-medium">10 Min Read</span>
             </div>
           </div>
         </article>
+
         <article class="group cursor-pointer flex flex-col h-full">
-          <div class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-rose-900/10 transition-all duration-500">
-            <img 
-              src="https://friendcirclee.netlify.app/images/Kashmiri_tourism_places_closed.png" 
-              alt="Closed gate in a beautiful meadow" 
+          <div
+            class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/3] shadow-md group-hover:shadow-2xl group-hover:shadow-rose-900/10 transition-all duration-500"
+          >
+            <img
+              src="https://friendcirclee.netlify.app/images/Kashmiri_tourism_places_closed.png"
+              alt="Closed gate in a beautiful meadow"
               class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700 grayscale-[40%] group-hover:grayscale-0"
               loading="lazy"
+              decoding="async"
+              width="800"
+              height="600"
             />
-            <div class="absolute inset-0 bg-gray-900/10 group-hover:bg-transparent transition-colors duration-500"></div>
+            <div
+              class="absolute inset-0 bg-gray-900/10 group-hover:bg-transparent transition-colors duration-500"
+            ></div>
           </div>
 
           <div class="flex-1 flex flex-col">
-            <div class="flex items-center gap-3 text-xs font-bold text-rose-500 uppercase tracking-widest mb-3">
+            <div
+              class="flex items-center gap-3 text-xs font-bold text-rose-500 uppercase tracking-widest mb-3"
+            >
               <span>Jan 25, 2026</span>
               <span class="w-1 h-1 rounded-full bg-rose-300"></span>
               <span>Investigation</span>
             </div>
 
-            <h2 class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors">
-              <a href="post-26.html" aria-label="Read article: Nine Months of Silence">Nine Months of Silence: The Forgotten Tragedy of Closed Destinations</a>
+            <h2
+              class="font-display text-2xl md:text-3xl font-bold text-emerald-950 mb-3 leading-tight group-hover:text-rose-600 transition-colors"
+            >
+              <a
+                href="post-26.html"
+                aria-label="Read article: Nine Months of Silence"
+                >Nine Months of Silence: The Forgotten Tragedy of Closed
+                Destinations</a
+              >
             </h2>
 
             <p class="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-3">
-              It has been 270 days since Yousmarg and Doodhpathri closed. An investigative report on the hunger and desperation haunting these communities.
+              It has been 270 days since Yousmarg and Doodhpathri closed. An
+              investigative report on the hunger and desperation haunting these
+              communities.
             </p>
 
-            <div class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4">
+            <div
+              class="mt-auto flex items-center justify-between border-t border-rose-100 pt-4"
+            >
               <div class="flex items-center gap-2">
-                <img src="../profile picturs/zuhaib.jpg" alt="Zuhaib Rashid" class="w-8 h-8 rounded-full object-cover border border-rose-200" loading="lazy" />
-                <span class="text-xs font-bold text-emerald-900">Zuhaib Rashid</span>
+                <img
+                  src="../profile picturs/zuhaib.jpg"
+                  alt="Zuhaib Rashid"
+                  class="w-8 h-8 rounded-full object-cover border border-rose-200"
+                  loading="lazy"
+                  width="32"
+                  height="32"
+                />
+                <span class="text-xs font-bold text-emerald-900"
+                  >Zuhaib Rashid</span
+                >
               </div>
               <span class="text-xs text-gray-400 font-medium">12 Min Read</span>
             </div>
           </div>
         </article>
-      <div class="mt-20 text-center">
-        <p class="text-emerald-900/50 font-serif italic text-lg">
-          More stories are being written...
-        </p>
+
+        <div class="mt-20 text-center">
+          <p class="text-emerald-900/50 font-serif italic text-lg">
+            More stories are being written...
+          </p>
+        </div>
       </div>
     </main>
+
     <footer
       class="bg-emerald-950 pt-20 pb-10 border-t border-emerald-900 relative overflow-hidden"
     >
@@ -1205,6 +1916,7 @@
             href="https://www.instagram.com/zoh.aib__/"
             target="_blank"
             class="group bg-emerald-900/30 border border-white/5 hover:border-rose-500/30 rounded-2xl p-4 flex items-center gap-4 transition-all hover:bg-emerald-900/50"
+            aria-label="Instagram"
           >
             <div
               class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white group-hover:bg-rose-500 group-hover:scale-110 transition-all"
@@ -1225,6 +1937,7 @@
             href="https://www.linkedin.com/in/zuhaib-rashid-661345318/"
             target="_blank"
             class="group bg-emerald-900/30 border border-white/5 hover:border-blue-500/30 rounded-2xl p-4 flex items-center gap-4 transition-all hover:bg-emerald-900/50"
+            aria-label="LinkedIn"
           >
             <div
               class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white group-hover:bg-blue-500 group-hover:scale-110 transition-all"
@@ -1245,6 +1958,7 @@
             href="https://x.com/xuhaibx9"
             target="_blank"
             class="group bg-emerald-900/30 border border-white/5 hover:border-gray-500/30 rounded-2xl p-4 flex items-center gap-4 transition-all hover:bg-emerald-900/50"
+            aria-label="Twitter / X"
           >
             <div
               class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white group-hover:bg-black group-hover:scale-110 transition-all"
@@ -1265,6 +1979,7 @@
             href="http://zuhaibrashid.com"
             target="_blank"
             class="group bg-emerald-900/30 border border-white/5 hover:border-rose-500/30 rounded-2xl p-4 flex items-center gap-4 transition-all hover:bg-emerald-900/50"
+            aria-label="Portfolio"
           >
             <div
               class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white group-hover:bg-rose-600 group-hover:scale-110 transition-all"
