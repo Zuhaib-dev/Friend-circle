@@ -57,6 +57,27 @@ export default function AdminPage() {
     const tick = () => setClock(new Date().toISOString().slice(11, 19));
     tick();
     const id = setInterval(tick, 1000);
+
+    // Fetch live pending operators
+    const fetchOps = async () => {
+      try {
+        const res = await fetch("/api/admin/users");
+        if (res.ok) {
+          const users = await res.json();
+          setOperators(users.map((u: any) => ({
+            id: u._id,
+            callsign: u.name?.split(" ")[0] || "UNKNOWN",
+            name: u.teamMemberDetails || "No details provided",
+            email: u.email,
+            ts: new Date(u.updatedAt || u.createdAt || Date.now()).getTime(),
+          })));
+        }
+      } catch (err) {
+        console.error("Failed to fetch operators:", err);
+      }
+    };
+    fetchOps();
+
     return () => clearInterval(id);
   }, []);
 
@@ -152,13 +173,33 @@ export default function AdminPage() {
               {view === "operators" && (
                 <OperatorsView
                   operators={operators}
-                  onGrant={(op) => {
-                    setOperators((l) => l.filter((x) => x.id !== op.id));
-                    pushLog(`OPERATOR · ${op.callsign} · clearance granted`, "ok");
+                  onGrant={async (op) => {
+                    try {
+                      const res = await fetch("/api/admin/users", {
+                        method: "PATCH",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ userId: op.id, action: "APPROVE" })
+                      });
+                      if (!res.ok) throw new Error("Failed to grant clearance");
+                      setOperators((l) => l.filter((x) => x.id !== op.id));
+                      pushLog(`OPERATOR · ${op.callsign} · clearance granted`, "ok");
+                    } catch (err) {
+                      pushLog(`SYS · error granting clearance to ${op.callsign}`, "warn");
+                    }
                   }}
-                  onPurge={(op) => {
-                    setOperators((l) => l.filter((x) => x.id !== op.id));
-                    pushLog(`OPERATOR · ${op.callsign} · enlistment denied`, "warn");
+                  onPurge={async (op) => {
+                    try {
+                      const res = await fetch("/api/admin/users", {
+                        method: "PATCH",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ userId: op.id, action: "REJECT" })
+                      });
+                      if (!res.ok) throw new Error("Failed to purge");
+                      setOperators((l) => l.filter((x) => x.id !== op.id));
+                      pushLog(`OPERATOR · ${op.callsign} · enlistment denied`, "warn");
+                    } catch (err) {
+                      pushLog(`SYS · error purging ${op.callsign}`, "warn");
+                    }
                   }}
                 />
               )}
