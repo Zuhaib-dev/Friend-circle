@@ -314,7 +314,7 @@ function FrameCard({
           src={frame.src}
           alt={frame.caption}
           loading="lazy"
-          className="block w-full h-auto grayscale opacity-80 transition-[filter,opacity,transform] duration-500 ease-out group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-[1.02]"
+          className="block w-full h-auto transition-[filter,opacity,transform] duration-500 ease-out group-hover:scale-[1.02]"
         />
 
         {/* scan line on hover */}
