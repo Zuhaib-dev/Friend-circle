@@ -167,10 +167,11 @@ export function RadarSvg() {
         <line x1="100" y1="10" x2="100" y2="190" stroke="currentColor" strokeWidth="0.5" opacity="0.4" />
         <g clipPath="url(#radar-clip)">
           <motion.g
-            style={{ transformOrigin: "100px 100px" }}
+            style={{ transformOrigin: "center", transformBox: "fill-box" }}
             animate={{ rotate: 360 }}
             transition={{ duration: 4, ease: "linear", repeat: Infinity }}
           >
+            <rect width="200" height="200" fill="none" />
             <path d="M100,100 L190,100 A90,90 0 0,0 163,36 Z" fill="url(#sweep)" />
           </motion.g>
         </g>
