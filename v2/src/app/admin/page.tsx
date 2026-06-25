@@ -76,7 +76,28 @@ export default function AdminPage() {
         console.error("Failed to fetch operators:", err);
       }
     };
+    
+    // Fetch live pending intel (posts)
+    const fetchIntel = async () => {
+      try {
+        const res = await fetch("/api/admin/posts");
+        if (res.ok) {
+          const posts = await res.json();
+          setIntel(posts.map((p: any) => ({
+            id: p._id,
+            uploader: p.author?.name?.split(" ")[0].toUpperCase() || "UNKNOWN",
+            url: p.imageUrl,
+            ts: new Date(p.createdAt).getTime(),
+            size: "1.2 MB", // Using approximate compressed size since it's not stored in DB
+          })));
+        }
+      } catch (err) {
+        console.error("Failed to fetch intel:", err);
+      }
+    };
+
     fetchOps();
+    fetchIntel();
 
     return () => clearInterval(id);
   }, []);
@@ -206,13 +227,33 @@ export default function AdminPage() {
               {view === "intel" && (
                 <IntelView
                   items={intel}
-                  onVerify={(it) => {
-                    setIntel((l) => l.filter((x) => x.id !== it.id));
-                    pushLog(`INTEL · #${it.id.split("-")[1]} · verified`, "ok");
+                  onVerify={async (it) => {
+                    try {
+                      const res = await fetch("/api/admin/posts", {
+                        method: "PATCH",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ postId: it.id, action: "APPROVE" })
+                      });
+                      if (!res.ok) throw new Error("Failed to verify intel");
+                      setIntel((l) => l.filter((x) => x.id !== it.id));
+                      pushLog(`INTEL · #${it.id.slice(-5).toUpperCase()} · verified`, "ok");
+                    } catch (err) {
+                      pushLog(`SYS · error verifying intel`, "warn");
+                    }
                   }}
-                  onClassify={(it) => {
-                    setIntel((l) => l.filter((x) => x.id !== it.id));
-                    pushLog(`INTEL · #${it.id.split("-")[1]} · classified · purged`, "warn");
+                  onClassify={async (it) => {
+                    try {
+                      const res = await fetch("/api/admin/posts", {
+                        method: "PATCH",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ postId: it.id, action: "REJECT" })
+                      });
+                      if (!res.ok) throw new Error("Failed to classify intel");
+                      setIntel((l) => l.filter((x) => x.id !== it.id));
+                      pushLog(`INTEL · #${it.id.slice(-5).toUpperCase()} · classified · purged`, "warn");
+                    } catch (err) {
+                      pushLog(`SYS · error purging intel`, "warn");
+                    }
                   }}
                 />
               )}
