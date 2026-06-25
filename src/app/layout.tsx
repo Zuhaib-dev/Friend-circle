@@ -15,16 +15,20 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://friendcirclee.netlify.app"),
   title: "Friend Circle | Kashmir Adventures & Tactical Brotherhood",
   description: "Friend Circle – Kashmir-based adventure community exploring trekking, camping, offroading, fishing, and photography across Budgam, Srinagar, and Chadoora.",
   keywords: ["Friend Circle", "Kashmir adventures", "Budgam travel", "Srinagar trekking", "offroading", "camping", "fishing", "Zuhaib Rashid", "Kashmir tactical"],
   authors: [{ name: "Zuhaib Rashid", url: "https://www.zuhaibrashid.com" }],
+  alternates: {
+    canonical: "https://friendcirclee.netlify.app",
+  },
   verification: {
     google: "PhC4G2XmPO_iZ5yQFaXvkOkJHHJEwRRJsjygMozyteA",
   },
   openGraph: {
     title: "Friend Circle - Kashmir Adventures & Brotherhood",
-    description: "Join Zuhaib Rashid and team on Kashmir’s most scenic and challenging adventures.",
+    description: "Join Zuhaib Rashid and team on Kashmir's most scenic and challenging adventures.",
     url: "https://friendcirclee.netlify.app/",
     siteName: "Friend Circle",
     images: [
@@ -35,6 +39,7 @@ export const metadata: Metadata = {
         alt: "Friend Circle Team in Kashmir",
       },
     ],
+    locale: "en_US",
     type: "website",
   },
   twitter: {
@@ -43,6 +48,17 @@ export const metadata: Metadata = {
     description: "Explore adventures across Kashmir with Zuhaib Rashid and friends.",
     creator: "@xuhaibx9",
     images: ["/og.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 
