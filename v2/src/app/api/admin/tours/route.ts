@@ -30,7 +30,7 @@ export async function POST(req: Request) {
     }
 
     const data = await req.json();
-    const { name, place, date, description, status, coverImage } = data;
+    const { name, place, date, description, status, coverImage, coordinates, distance, elevation, time, partySize } = data;
 
     if (!name || !place || !date) {
       return NextResponse.json({ error: "Name, place, and date are required" }, { status: 400 });
@@ -45,6 +45,11 @@ export async function POST(req: Request) {
       description,
       status: status || "UPCOMING",
       coverImage,
+      coordinates,
+      distance,
+      elevation,
+      time,
+      partySize: partySize ? Number(partySize) : undefined,
     });
     
     return NextResponse.json(tour, { status: 201 });

@@ -14,6 +14,11 @@ type Tour = {
   description: string;
   status: "UPCOMING" | "COMPLETED" | "CANCELLED";
   coverImage?: string;
+  coordinates?: string;
+  distance?: string;
+  elevation?: string;
+  time?: string;
+  partySize?: number;
 };
 
 export function ToursView() {
@@ -26,7 +31,12 @@ export function ToursView() {
     date: "",
     description: "",
     status: "UPCOMING",
-    coverImage: ""
+    coverImage: "",
+    coordinates: "",
+    distance: "",
+    elevation: "",
+    time: "",
+    partySize: ""
   });
   const [uploadingImage, setUploadingImage] = useState(false);
 
@@ -51,7 +61,7 @@ export function ToursView() {
         const newTour = await res.json();
         setTours([newTour, ...tours]);
         setShowForm(false);
-        setFormState({ name: "", place: "", date: "", description: "", status: "UPCOMING", coverImage: "" });
+        setFormState({ name: "", place: "", date: "", description: "", status: "UPCOMING", coverImage: "", coordinates: "", distance: "", elevation: "", time: "", partySize: "" });
       }
     } catch (err) {
       console.error(err);
@@ -168,20 +178,70 @@ export function ToursView() {
                   />
                 </div>
                 <div className="space-y-1">
-                  <label className="mono-label opacity-70">COORDINATES (PLACE)</label>
+                  <label className="mono-label opacity-70">GENERAL AREA (PLACE)</label>
                   <input
                     required
                     value={formState.place}
                     onChange={(e) => setFormState({ ...formState, place: e.target.value })}
                     className="w-full bg-bone hairline border-ink px-3 py-2 font-mono text-sm focus:outline-none focus:border-signal"
-                    placeholder="e.g. Sonamarg"
+                    placeholder="e.g. Sonamarg, Ganderbal"
                   />
+                </div>
+                <div className="space-y-1">
+                  <label className="mono-label opacity-70">EXACT COORDINATES</label>
+                  <input
+                    value={formState.coordinates}
+                    onChange={(e) => setFormState({ ...formState, coordinates: e.target.value })}
+                    className="w-full bg-bone hairline border-ink px-3 py-2 font-mono text-sm focus:outline-none focus:border-signal"
+                    placeholder="e.g. 34.6378° N, 74.8378° E"
+                  />
+                </div>
+                <div className="space-y-1 flex gap-2">
+                  <div className="flex-1 space-y-1">
+                    <label className="mono-label opacity-70">DISTANCE</label>
+                    <input
+                      value={formState.distance}
+                      onChange={(e) => setFormState({ ...formState, distance: e.target.value })}
+                      className="w-full bg-bone hairline border-ink px-3 py-2 font-mono text-sm focus:outline-none focus:border-signal"
+                      placeholder="286 KM"
+                    />
+                  </div>
+                  <div className="flex-1 space-y-1">
+                    <label className="mono-label opacity-70">ELEVATION</label>
+                    <input
+                      value={formState.elevation}
+                      onChange={(e) => setFormState({ ...formState, elevation: e.target.value })}
+                      className="w-full bg-bone hairline border-ink px-3 py-2 font-mono text-sm focus:outline-none focus:border-signal"
+                      placeholder="3713 M"
+                    />
+                  </div>
+                </div>
+                <div className="space-y-1 flex gap-2">
+                  <div className="flex-1 space-y-1">
+                    <label className="mono-label opacity-70">START TIME</label>
+                    <input
+                      value={formState.time}
+                      onChange={(e) => setFormState({ ...formState, time: e.target.value })}
+                      className="w-full bg-bone hairline border-ink px-3 py-2 font-mono text-sm focus:outline-none focus:border-signal"
+                      placeholder="0530 IST"
+                    />
+                  </div>
+                  <div className="flex-1 space-y-1">
+                    <label className="mono-label opacity-70">PARTY SIZE</label>
+                    <input
+                      type="number"
+                      value={formState.partySize}
+                      onChange={(e) => setFormState({ ...formState, partySize: e.target.value })}
+                      className="w-full bg-bone hairline border-ink px-3 py-2 font-mono text-sm focus:outline-none focus:border-signal"
+                      placeholder="6"
+                    />
+                  </div>
                 </div>
                 <div className="space-y-1">
                   <label className="mono-label opacity-70">EXECUTION DATE</label>
                   <input
                     required
-                    type="datetime-local"
+                    type="date"
                     value={formState.date}
                     onChange={(e) => setFormState({ ...formState, date: e.target.value })}
                     className="w-full bg-bone hairline border-ink px-3 py-2 font-mono text-sm focus:outline-none focus:border-signal"
@@ -274,10 +334,17 @@ export function ToursView() {
                       <span className={`h-1.5 w-1.5 rounded-full ${tour.status === 'UPCOMING' ? 'bg-signal animate-blink' : tour.status === 'COMPLETED' ? 'bg-ink opacity-40' : 'bg-red-500'}`} />
                       <span className="font-display text-xl truncate">{tour.name}</span>
                     </div>
-                    <div className="flex flex-wrap items-center gap-3 font-mono text-[11px] opacity-70">
-                      <span className="flex items-center gap-1"><MapPin className="h-3 w-3" /> {tour.place}</span>
-                      <span className="flex items-center gap-1"><Calendar className="h-3 w-3" /> {new Date(tour.date).toLocaleString()}</span>
+                    <div className="flex flex-wrap items-center gap-3 font-mono text-[11px] opacity-70 mt-2">
+                      <span className="flex items-center gap-1"><MapPin className="h-3 w-3" /> {tour.place} {tour.coordinates ? `(${tour.coordinates})` : ''}</span>
+                      <span className="flex items-center gap-1"><Calendar className="h-3 w-3" /> {new Date(tour.date).toLocaleDateString()} {tour.time}</span>
                     </div>
+                    {(tour.distance || tour.elevation || tour.partySize) && (
+                      <div className="flex flex-wrap items-center gap-3 font-mono text-[10px] opacity-50 mt-1">
+                        {tour.distance && <span>DIST: {tour.distance}</span>}
+                        {tour.elevation && <span>ELEV: {tour.elevation}</span>}
+                        {tour.partySize && <span>PARTY: {tour.partySize}</span>}
+                      </div>
+                    )}
                   </div>
                 </div>
                 

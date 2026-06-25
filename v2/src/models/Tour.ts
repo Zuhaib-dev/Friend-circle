@@ -7,6 +7,11 @@ export interface ITour extends Document {
   description?: string;
   status: "UPCOMING" | "COMPLETED" | "CANCELLED";
   coverImage?: string;
+  coordinates?: string;
+  distance?: string;
+  elevation?: string;
+  time?: string;
+  partySize?: number;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -23,6 +28,11 @@ const TourSchema = new mongoose.Schema<ITour>(
       default: "UPCOMING",
     },
     coverImage: { type: String },
+    coordinates: { type: String },
+    distance: { type: String },
+    elevation: { type: String },
+    time: { type: String },
+    partySize: { type: Number },
   },
   { timestamps: true }
 );
