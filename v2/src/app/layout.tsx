@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     siteName: "Friend Circle",
     images: [
       {
-        url: "https://friendcirclee.netlify.app/All%20photos/group.new.jpg",
+        url: "/og.png",
         width: 1200,
         height: 630,
         alt: "Friend Circle Team in Kashmir",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     title: "Friend Circle - Kashmir Adventures",
     description: "Explore adventures across Kashmir with Zuhaib Rashid and friends.",
     creator: "@xuhaibx9",
-    images: ["https://friendcirclee.netlify.app/All%20photos/group.new.jpg"],
+    images: ["/og.png"],
   },
 };
 
