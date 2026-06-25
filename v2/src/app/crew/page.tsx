@@ -1,30 +1,51 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
-import { useSession } from "next-auth/react";
-import { motion, AnimatePresence } from "motion/react";
+import { useEffect, useMemo, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
+import {
+  Search,
+  Link as LinkIcon,
+  ShieldCheck,
+  Radio,
+  Mail,
+  Users,
+  Activity,
+  X,
+  Crosshair,
+  AtSign,
+} from "lucide-react";
 import { TopNav } from "@/components/top-nav";
-import { Terminal, ShieldAlert, Crosshair, Network, Loader2, Barcode, ShieldCheck, Mail, Link as LinkIcon, AtSign } from "lucide-react";
-import { initialsOf } from "@/lib/utils";
-import Link from "next/link";
+import { useSession } from "next-auth/react";
+
+// Crosshairs component for the corners
+export function Crosshairs() {
+  return (
+    <>
+      <span className="ch-tl" />
+      <span className="ch-tr" />
+      <span className="ch-bl" />
+      <span className="ch-br" />
+    </>
+  );
+}
 
 type CrewMember = {
   _id: string;
   name: string;
   email: string;
-  image?: string;
   role: "ADMIN" | "TEAM_MEMBER";
-  socialHandle?: string;
+  image?: string;
   bio?: string;
+  socialHandle?: string;
 };
 
 export default function CrewPage() {
-  const { data: session, status } = useSession();
-  const userEmail = session?.user?.email;
-
+  const { data: session } = useSession();
+  const user = session?.user;
+  
   const [crew, setCrew] = useState<CrewMember[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [search, setSearch] = useState("");
+  const [query, setQuery] = useState("");
+  const [now, setNow] = useState<Date | null>(null);
 
   useEffect(() => {
     fetch("/api/crew")
@@ -33,93 +54,164 @@ export default function CrewPage() {
         if (Array.isArray(data)) {
           setCrew(data);
         }
-      })
-      .catch(console.error)
-      .finally(() => setLoading(false));
+      });
   }, []);
 
-  const filteredAndSortedCrew = useMemo(() => {
-    // Filter by search
-    let filtered = crew;
-    if (search.trim()) {
-      const s = search.toLowerCase();
-      filtered = crew.filter(
-        (c) => c.name.toLowerCase().includes(s) || c.role.toLowerCase().includes(s)
-      );
-    }
+  useEffect(() => {
+    setNow(new Date());
+    const t = setInterval(() => setNow(new Date()), 1000);
+    return () => clearInterval(t);
+  }, []);
 
-    // Sort: ADMINs first, then Logged In User, then others
-    return filtered.sort((a, b) => {
-      // 1. Admin priority
-      if (a.role === "ADMIN" && b.role !== "ADMIN") return -1;
-      if (b.role === "ADMIN" && a.role !== "ADMIN") return 1;
-
-      // 2. Logged in user priority (if both are same role)
-      if (a.email === userEmail && b.email !== userEmail) return -1;
-      if (b.email === userEmail && a.email !== userEmail) return 1;
-
-      // 3. Alphabetical name
+  const sorted = useMemo(() => {
+    const meEmail = user?.email?.toLowerCase();
+    return [...crew].sort((a, b) => {
+      const aMe = meEmail && a.email.toLowerCase() === meEmail ? 1 : 0;
+      const bMe = meEmail && b.email.toLowerCase() === meEmail ? 1 : 0;
+      const aRank = a.role === "ADMIN" ? 0 : aMe ? 1 : 2;
+      const bRank = b.role === "ADMIN" ? 0 : bMe ? 1 : 2;
+      if (aRank !== bRank) return aRank - bRank;
       return a.name.localeCompare(b.name);
     });
-  }, [crew, search, userEmail]);
+  }, [user, crew]);
+
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return sorted;
+    return sorted.filter(
+      (m) =>
+        m.name.toLowerCase().includes(q) ||
+        m.role.toLowerCase().includes(q) ||
+        (m.socialHandle && m.socialHandle.toLowerCase().includes(q))
+    );
+  }, [sorted, query]);
+
+  const utc = now
+    ? `${String(now.getUTCHours()).padStart(2, "0")}:${String(now.getUTCMinutes()).padStart(2, "0")}:${String(now.getUTCSeconds()).padStart(2, "0")} UTC`
+    : "--:--:-- UTC";
 
   return (
-    <main className="min-h-screen bg-bone text-ink relative flex flex-col overflow-hidden">
+    <main className="min-h-screen bg-bone text-ink">
       <TopNav />
-      
-      {/* Command Strip */}
-      <div className="hairline-b border-ink bg-bone sticky top-[53px] z-40">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between px-4 py-2 gap-3">
-          <div className="flex items-center gap-3">
-            <span className="brick px-2 py-px text-bone mono-label">CREW / ROSTER</span>
-            <span className="opacity-70 mono-label truncate hidden sm:inline">VERIFIED FIELD OPERATORS</span>
-          </div>
 
-          <div className="relative w-full md:w-auto min-w-[280px]">
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-signal mono-label font-bold">&gt;</span>
-            <input 
-              type="text" 
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="search_personnel.exe_"
-              className="w-full bg-ink/5 hairline border-ink pl-7 pr-3 py-1.5 font-mono text-sm placeholder:text-ink/40 focus:outline-none focus:ring-1 focus:ring-signal focus:bg-transparent transition-all"
-            />
+      {/* Page header */}
+      <section className="hairline-b border-ink relative overflow-hidden">
+        <div className="px-4 md:px-8 py-8 md:py-12 grid md:grid-cols-12 gap-6 items-end">
+          <div className="md:col-span-8">
+            <div className="flex items-center gap-2 mono-label opacity-60 mb-3">
+              <span className="brick text-bone px-2 py-[1px]">CREW / 04</span>
+              <span>·</span>
+              <span>PERSONNEL ROSTER</span>
+              <span>·</span>
+              <span className="text-signal flex items-center gap-1.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-signal animate-blink" /> LIVE
+              </span>
+            </div>
+            <h1 className="font-display text-5xl md:text-7xl leading-[0.95] tracking-tight">
+              The <span className="italic text-signal">operators</span>
+              <br />
+              behind the convoy.
+            </h1>
+            <p className="mt-4 max-w-xl text-ink/70 text-sm md:text-base">
+              Classified dossier of every soul in the Friend Circle field unit. Each card pulled live from
+              the registry. Cross-reference at your own risk.
+            </p>
+          </div>
+          <div className="md:col-span-4 grid grid-cols-3 gap-2">
+            <Stat label="UNITS" value={crew.length.toString().padStart(2, "0")} />
+            <Stat label="ACTIVE" value={crew.length.toString().padStart(2, "0")} />
+            <Stat label="UTC" value={utc.slice(0, 5)} mono />
           </div>
         </div>
-      </div>
+        {/* tick rulers */}
+        <div className="absolute inset-x-0 bottom-0 h-1.5 tick opacity-50" />
+      </section>
 
-      <div className="flex-1 p-4 md:p-8">
-        {loading ? (
-          <div className="flex flex-col items-center justify-center pt-20 text-signal opacity-60">
-            <Loader2 className="h-8 w-8 animate-spin" />
-            <span className="mono-label tracking-widest mt-4">FETCHING NETWORK ROSTER...</span>
+      {/* Command strip — terminal search */}
+      <section className="sticky top-[44px] z-40 bg-bone hairline-b border-ink">
+        <div className="px-4 md:px-8 py-3 flex flex-col md:flex-row md:items-center gap-3">
+          <div className="flex items-center gap-2 mono-label text-signal">
+            <Radio className="h-3.5 w-3.5 animate-pulse" />
+            <span>QUERY/</span>
           </div>
+          <div className="flex-1 hairline border-ink flex items-center px-3 py-2 group focus-within:border-signal focus-within:bg-acid/10 transition-colors">
+            <span className="mono-label text-signal mr-2">&gt;</span>
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="search_personnel.exe_"
+              className="flex-1 bg-transparent font-mono text-sm tracking-wider text-ink placeholder:text-ink/30 focus:outline-none"
+              spellCheck={false}
+              autoComplete="off"
+            />
+            <span className="ml-2 mono-label text-ink/40 hidden sm:inline">
+              [ESC]
+            </span>
+            {query && (
+              <button
+                onClick={() => setQuery("")}
+                className="ml-2 hairline border-ink/40 px-1.5 py-0.5 mono-label hover:bg-ink hover:text-bone transition-colors"
+                aria-label="Clear"
+              >
+                <X className="h-3 w-3" />
+              </button>
+            )}
+            <Search className="h-3.5 w-3.5 ml-3 text-ink/50" />
+          </div>
+          <div className="mono-label flex items-center gap-2">
+            <Users className="h-3.5 w-3.5 text-signal" />
+            <span>
+              MATCH <span className="text-signal">{filtered.length.toString().padStart(2, "0")}</span> /{" "}
+              {crew.length.toString().padStart(2, "0")}
+            </span>
+          </div>
+        </div>
+      </section>
+
+      {/* Roster grid */}
+      <section className="px-4 md:px-8 py-8 min-h-[400px]">
+        {filtered.length === 0 && crew.length > 0 ? (
+          <EmptyState query={query} />
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-screen-2xl mx-auto">
-            <AnimatePresence>
-              {filteredAndSortedCrew.map((member, i) => (
-                <CrewCard key={member._id} member={member} index={i} isMe={member.email === userEmail} />
+          <motion.div
+            layout
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+          >
+            <AnimatePresence mode="popLayout">
+              {filtered.map((m, i) => (
+                <DossierCard key={m._id} member={m} index={i} isMe={user?.email?.toLowerCase() === m.email.toLowerCase()} />
               ))}
-              {filteredAndSortedCrew.length === 0 && (
-                <motion.div 
-                  initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-                  className="col-span-full py-20 text-center mono-label opacity-50"
-                >
-                  <ShieldAlert className="h-8 w-8 mx-auto mb-4" />
-                  NO MATCHING OPERATORS FOUND IN DATABASE.
-                </motion.div>
-              )}
             </AnimatePresence>
-          </div>
+          </motion.div>
         )}
-      </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="hairline-t border-ink px-4 md:px-8 py-4 mono-label flex items-center justify-between flex-wrap gap-3">
+        <span className="flex items-center gap-2 opacity-70">
+          <Activity className="h-3 w-3 text-signal" />
+          REGISTRY / v4.2 · ENCRYPTED CHANNEL
+        </span>
+        <span className="opacity-60">CLEARANCE LVL 3 · {utc}</span>
+      </footer>
     </main>
   );
 }
 
-function CrewCard({ member, index, isMe }: { member: CrewMember; index: number; isMe: boolean }) {
+function Stat({ label, value, mono }: { label: string; value: string; mono?: boolean }) {
+  return (
+    <div className="hairline border-ink p-2 relative">
+      <span className="mono-label opacity-50">{label}</span>
+      <div className={`mt-1 ${mono ? "font-mono text-sm" : "font-display text-2xl"} text-ink`}>{value}</div>
+      <span className="absolute top-1 right-1 h-1 w-1 bg-signal animate-blink" />
+    </div>
+  );
+}
+
+function DossierCard({ member, index, isMe }: { member: CrewMember; index: number; isMe: boolean }) {
+  const isAdmin = member.role === "ADMIN";
+  const displayRole = isAdmin ? "ADMIN_COMMAND" : "FIELD_OPERATOR";
   
-  // Format social link if it's just a handle
   const socialUrl = useMemo(() => {
     if (!member.socialHandle) return null;
     if (member.socialHandle.startsWith("http")) return member.socialHandle;
@@ -127,90 +219,155 @@ function CrewCard({ member, index, isMe }: { member: CrewMember; index: number; 
   }, [member.socialHandle]);
 
   return (
-    <motion.div
+    <motion.article
+      layout
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay: index * 0.05, ease: "easeOut" }}
-      className="hairline border-ink bg-bone relative group overflow-hidden flex flex-col h-full"
+      exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.18 } }}
+      transition={{ duration: 0.4, delay: Math.min(index * 0.04, 0.4), ease: [0.22, 1, 0.36, 1] }}
+      whileHover="hover"
+      className="group hairline border-ink bg-bone relative overflow-hidden crosshair flex flex-col h-full"
     >
-      <div className="absolute inset-0 pointer-events-none shadow-[inset_0_0_20px_rgba(28,28,26,0.05)] z-0" />
-      
-      {/* Top Corners Accent */}
-      <div className="absolute top-2 left-2 w-3 h-3 hairline-t hairline-l border-ink/40" />
-      <div className="absolute top-2 right-2 w-3 h-3 hairline-t hairline-r border-ink/40" />
+      <Crosshairs />
 
-      {/* Header Info */}
-      <div className="p-4 flex flex-col md:flex-row gap-4 relative z-10 hairline-b border-ink/30">
-        <div className="w-20 h-24 md:w-24 md:h-28 shrink-0 relative bg-ink/5 hairline border-ink/40 overflow-hidden">
-          {member.image ? (
-            <img 
-              src={member.image} 
-              alt={member.name} 
-              className="w-full h-full object-cover grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700" 
-            />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center font-display text-4xl brick text-bone">
-              {initialsOf(member.name)}
-            </div>
-          )}
-          <div className="absolute inset-x-0 bottom-0 h-10 bg-linear-to-t from-ink/60 to-transparent pointer-events-none" />
-          <Crosshair className="absolute bottom-1 right-1 h-3 w-3 text-bone/60" />
-        </div>
-
-        <div className="flex flex-col flex-1 min-w-0">
-          <div className="font-display text-2xl truncate uppercase leading-none mt-1">
-            {member.name.split(" ")[0]}
-          </div>
-          <div className="font-display text-lg opacity-60 truncate uppercase leading-none mt-1">
-            {member.name.split(" ").slice(1).join(" ")}
-          </div>
-          
-          <div className="mt-3 inline-flex self-start mono-label text-[10px] items-center gap-1.5 hairline px-2 py-1 bg-ink/5">
-            {member.role === "ADMIN" ? (
-              <><Terminal className="h-3 w-3 text-signal" /> ADMIN_COMMAND</>
-            ) : (
-              <><ShieldCheck className="h-3 w-3 opacity-50" /> FIELD_OPERATOR</>
-            )}
-          </div>
-
-          {isMe && (
-            <span className="mono-label text-[9px] text-signal mt-2">
-              {"// THIS IS YOU"}
+      {/* Card header strip */}
+      <header className="hairline-b border-ink flex items-center justify-between px-2.5 py-1.5 bg-bone relative z-10 shrink-0">
+        <span className="mono-label opacity-60">ID/{member._id.slice(-6).toUpperCase()}</span>
+        <span className="flex items-center gap-1.5">
+          {isMe && <span className="brick text-bone px-1.5 py-[1px] mono-label">YOU</span>}
+          {isAdmin && (
+            <span className="mono-label text-signal flex items-center gap-1">
+              <ShieldCheck className="h-3 w-3" /> CMD
             </span>
           )}
-        </div>
-      </div>
+          <span className="h-1.5 w-1.5 rounded-full bg-signal animate-blink" />
+        </span>
+      </header>
 
-      {/* Bio Body */}
-      <div className="p-4 flex-1 relative z-10 text-sm font-mono opacity-80 leading-relaxed text-balance">
-        {member.bio ? (
-          <p className="whitespace-pre-wrap">{member.bio}</p>
+      {/* Portrait */}
+      <div className="relative aspect-[3/4] overflow-hidden bg-ink shrink-0">
+        {member.image ? (
+          <img
+            src={member.image}
+            alt={member.name}
+            loading="lazy"
+            className="absolute inset-0 h-full w-full object-cover grayscale opacity-70 transition-all duration-700 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105"
+          />
         ) : (
-          <span className="opacity-40 italic">Bio data redacted or unavailable for this operative.</span>
+          <div className="w-full h-full flex items-center justify-center font-display text-5xl brick text-bone">
+            {member.name.charAt(0)}
+          </div>
         )}
+        {/* noise/grid overlay */}
+        <div
+          className="absolute inset-0 opacity-30 mix-blend-multiply pointer-events-none"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(0,0,0,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.4) 1px, transparent 1px)",
+            backgroundSize: "14px 14px",
+          }}
+        />
+        {/* tactical overlay HUD */}
+        <div className="absolute top-2 left-2 mono-label text-bone/80 flex items-center gap-1">
+          <Crosshair className="h-3 w-3 text-signal" /> TRACK
+        </div>
+        <div className="absolute bottom-2 right-2 mono-label text-bone/80">
+          {displayRole.split("_")[0]}
+        </div>
+        {/* corner ticks on portrait */}
+        <span className="absolute top-0 left-0 h-2 w-2 border-t border-l border-bone/60" />
+        <span className="absolute top-0 right-0 h-2 w-2 border-t border-r border-bone/60" />
+        <span className="absolute bottom-0 left-0 h-2 w-2 border-b border-l border-bone/60" />
+        <span className="absolute bottom-0 right-0 h-2 w-2 border-b border-r border-bone/60" />
       </div>
 
-      {/* Footer Links & Barcode */}
-      <div className="p-3 hairline-t border-ink/30 bg-ink/5 relative z-10 flex items-center justify-between">
-        <div className="flex items-center gap-4 text-ink">
+      {/* Body */}
+      <div className="p-3 flex flex-col flex-1 z-10">
+        <h2 className="font-display text-2xl leading-tight uppercase truncate" title={member.name}>
+          {member.name}
+        </h2>
+        <div className="flex items-center justify-between gap-2 mt-1 mb-2">
+          <span className={`mono-label hairline border-ink px-1.5 py-[2px] ${isAdmin ? "bg-signal text-bone border-signal" : ""}`}>
+            [ {displayRole} ]
+          </span>
+          <a
+            href={`mailto:${member.email}`}
+            className="mono-label opacity-60 hover:opacity-100 hover:text-signal flex items-center gap-1 transition-colors"
+            title={member.email}
+          >
+            <Mail className="h-3 w-3" /> MAIL
+          </a>
+        </div>
+        <div className="font-mono text-[11px] leading-relaxed text-ink/75 flex-1 line-clamp-3">
+          {member.bio ? (
+             <>&gt; {member.bio}</>
+          ) : (
+             <span className="opacity-40 italic">Bio data redacted or unavailable for this operative.</span>
+          )}
+        </div>
+
+        {/* footer row */}
+        <div className="hairline-t border-ink/40 pt-2 mt-3 flex items-center justify-between gap-2 shrink-0">
           {socialUrl ? (
-            <a href={socialUrl} target="_blank" rel="noopener noreferrer" className="opacity-60 hover:opacity-100 hover:text-signal transition-colors flex items-center gap-1.5 mono-label text-[10px]">
-              {socialUrl.includes("instagram.com") ? <AtSign className="h-4 w-4" /> : <LinkIcon className="h-4 w-4" />}
-              <span className="hidden sm:inline">NETWORK_LINK</span>
+            <a
+              href={socialUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-1.5 mono-label hover:text-signal transition-colors truncate"
+            >
+              {socialUrl.includes("instagram.com") ? <AtSign className="h-3 w-3 text-signal" /> : <LinkIcon className="h-3 w-3 text-signal" />}
+              <span className="truncate">{member.socialHandle}</span>
             </a>
           ) : (
-            <span className="opacity-30 flex items-center gap-1.5 mono-label text-[10px]">
-              <LinkIcon className="h-4 w-4" /> NO_LINK
+            <span className="flex items-center gap-1.5 mono-label opacity-30 truncate">
+              <LinkIcon className="h-3 w-3" /> NO_LINK
             </span>
           )}
-        </div>
-        <div className="flex items-center gap-2">
-          <Barcode className="h-6 w-16 opacity-30 group-hover:opacity-60 transition-opacity text-ink" strokeWidth={1} />
+          
+          {/* barcode */}
+          <svg width="60" height="18" viewBox="0 0 60 18" aria-hidden className="opacity-70 shrink-0">
+            {Array.from({ length: 22 }).map((_, i) => {
+              const w = (i * 7919) % 3 === 0 ? 2 : 1;
+              const h = (i * 104729) % 5 === 0 ? 12 : 18;
+              return (
+                <rect
+                  key={i}
+                  x={i * 2.6}
+                  y={18 - h}
+                  width={w}
+                  height={h}
+                  fill="currentColor"
+                />
+              );
+            })}
+          </svg>
         </div>
       </div>
-      
-      {/* Scanning laser animation on hover */}
-      <div className="absolute inset-x-0 h-px bg-signal opacity-0 group-hover:opacity-100 group-hover:animate-scan pointer-events-none z-20" />
+
+      {/* hover sweep panel underline */}
+      <motion.div
+        variants={{ hover: { scaleX: 1 } }}
+        initial={{ scaleX: 0 }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
+        className="absolute bottom-0 left-0 right-0 h-[2px] bg-signal origin-left z-20"
+      />
+    </motion.article>
+  );
+}
+
+function EmptyState({ query }: { query: string }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="hairline border-ink p-10 text-center crosshair relative"
+    >
+      <Crosshairs />
+      <div className="mono-label text-signal mb-3 flex items-center justify-center gap-2">
+        <Radio className="h-4 w-4 animate-pulse" /> NO SIGNAL
+      </div>
+      <h3 className="font-display text-3xl">No operator matches "{query}"</h3>
+      <p className="mono-label opacity-60 mt-2">RECHECK QUERY · OR CLEAR FILTER</p>
     </motion.div>
   );
 }
