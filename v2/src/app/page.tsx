@@ -1157,16 +1157,27 @@ function TransmissionLog() {
 }
 
 function WeatherCard() {
+  const [wx, setWx] = useState<{ temp: number, wind: number, location: string, time: string } | null>(null);
+
+  useEffect(() => {
+    fetch('/api/weather')
+      .then(res => res.json())
+      .then(data => {
+        if (!data.error) setWx(data);
+      })
+      .catch(console.error);
+  }, []);
+
   return (
     <div className="hairline border-ink/60 bg-bone p-4 relative overflow-hidden">
       <div className="mono-label flex items-center justify-between">
-        <span>WX / HAIJEN PASS</span>
-        <span className="text-signal flex items-center gap-1"><Activity className="h-3 w-3" /> LIVE</span>
+        <span className="truncate pr-2">WX / {wx ? `${wx.location} · ${wx.time}` : "SRINAGAR · --:--"}</span>
+        <span className="text-signal flex items-center gap-1 shrink-0"><Activity className="h-3 w-3" /> LIVE</span>
       </div>
       <div className="grid grid-cols-3 gap-3 mt-3 items-center">
         <div>
           <div className="mono-label opacity-60">TEMP</div>
-          <div className="display-num text-4xl">-2°<span className="text-signal">.</span></div>
+          <div className="display-num text-4xl">{wx ? wx.temp : "--"}°<span className="text-signal">.</span></div>
         </div>
         <div className="relative h-20">
           <svg viewBox="0 0 100 60" className="absolute inset-0 w-full h-full">
@@ -1182,7 +1193,7 @@ function WeatherCard() {
         </div>
         <div>
           <div className="mono-label opacity-60">WIND</div>
-          <div className="display-num text-4xl">14<span className="text-base mono-label">KM/H</span></div>
+          <div className="display-num text-4xl">{wx ? wx.wind : "--"}<span className="text-base mono-label">KM/H</span></div>
           <div className="mt-1 flex gap-1">
             {[0, 1, 2, 3].map((i) => (
               <motion.span key={i} className="block h-px bg-ink"
