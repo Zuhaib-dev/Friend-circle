@@ -251,7 +251,7 @@ function DossierCard({ member, index, isMe }: { member: CrewMember; index: numbe
             src={member.image}
             alt={member.name}
             loading="lazy"
-            className="absolute inset-0 h-full w-full object-cover grayscale opacity-70 transition-all duration-700 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105"
+            className="absolute inset-0 h-full w-full object-cover transition-all duration-700 group-hover:scale-105"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center font-display text-5xl brick text-bone">
