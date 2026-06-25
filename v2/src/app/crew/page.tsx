@@ -99,7 +99,7 @@ export default function CrewPage() {
         <div className="px-4 md:px-8 py-8 md:py-12 grid md:grid-cols-12 gap-6 items-end">
           <div className="md:col-span-8">
             <div className="flex items-center gap-2 mono-label opacity-60 mb-3">
-              <span className="brick text-bone px-2 py-[1px]">CREW / 04</span>
+              <span className="brick text-bone px-2 py-px">CREW / 04</span>
               <span>·</span>
               <span>PERSONNEL ROSTER</span>
               <span>·</span>
@@ -226,7 +226,7 @@ function DossierCard({ member, index, isMe }: { member: CrewMember; index: numbe
       exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.18 } }}
       transition={{ duration: 0.4, delay: Math.min(index * 0.04, 0.4), ease: [0.22, 1, 0.36, 1] }}
       whileHover="hover"
-      className="group hairline border-ink bg-bone relative overflow-hidden crosshair flex flex-col h-full"
+      className="group hairline border-ink bg-bone overflow-hidden crosshair flex flex-col h-full"
     >
       <Crosshairs />
 
@@ -234,7 +234,7 @@ function DossierCard({ member, index, isMe }: { member: CrewMember; index: numbe
       <header className="hairline-b border-ink flex items-center justify-between px-2.5 py-1.5 bg-bone relative z-10 shrink-0">
         <span className="mono-label opacity-60">ID/{member._id.slice(-6).toUpperCase()}</span>
         <span className="flex items-center gap-1.5">
-          {isMe && <span className="brick text-bone px-1.5 py-[1px] mono-label">YOU</span>}
+          {isMe && <span className="brick text-bone px-1.5 py-px mono-label">YOU</span>}
           {isAdmin && (
             <span className="mono-label text-signal flex items-center gap-1">
               <ShieldCheck className="h-3 w-3" /> CMD
@@ -245,7 +245,7 @@ function DossierCard({ member, index, isMe }: { member: CrewMember; index: numbe
       </header>
 
       {/* Portrait */}
-      <div className="relative aspect-[3/4] overflow-hidden bg-ink shrink-0">
+      <div className="relative aspect-3/4 overflow-hidden bg-ink shrink-0">
         {member.image ? (
           <img
             src={member.image}
@@ -360,7 +360,7 @@ function EmptyState({ query }: { query: string }) {
     <motion.div
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
-      className="hairline border-ink p-10 text-center crosshair relative"
+      className="hairline border-ink p-10 text-center crosshair"
     >
       <Crosshairs />
       <div className="mono-label text-signal mb-3 flex items-center justify-center gap-2">
