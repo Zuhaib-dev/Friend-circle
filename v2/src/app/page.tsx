@@ -592,7 +592,7 @@ function SurveillanceSection() {
         </a>
       </div>
 
-      <div className="hairline border-bone/20 relative aspect-[21/9] bg-black group overflow-hidden crosshair flex flex-col items-center justify-center">
+      <div className="hairline border-bone/20 aspect-21/9 bg-black group overflow-hidden crosshair flex flex-col items-center justify-center">
          <Crosshairs />
          {/* Static background */}
          <div className="absolute inset-0 opacity-[0.03] bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmZmIiAvPgo8cmVjdCB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSIjMDAwIiAvPgo8L3N2Zz4=')] animate-pulse pointer-events-none" />
