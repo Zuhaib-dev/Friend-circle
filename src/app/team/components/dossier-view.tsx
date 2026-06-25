@@ -44,7 +44,7 @@ export function DossierView({ uploads, setUploads }: { uploads: Upload[]; setUpl
         </div>
       ) : (
         <div
-          className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-3 [column-fill:_balance]"
+          className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-3 [column-fill:balance]"
         >
           {filtered.map((u, i) => (
             <motion.figure
