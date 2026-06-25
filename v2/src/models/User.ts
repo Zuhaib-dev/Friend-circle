@@ -9,6 +9,9 @@ export interface IUser extends Document {
   otp?: string;
   otpExpires?: Date;
   authProvider: 'google' | 'credentials';
+  role: 'USER' | 'TEAM_MEMBER' | 'ADMIN';
+  teamMemberStatus: 'NONE' | 'PENDING' | 'APPROVED' | 'REJECTED';
+  teamMemberDetails?: string;
 }
 
 const UserSchema: Schema = new Schema(
@@ -44,6 +47,19 @@ const UserSchema: Schema = new Schema(
       type: String,
       enum: ['google', 'credentials'],
       required: true,
+    },
+    role: {
+      type: String,
+      enum: ['USER', 'TEAM_MEMBER', 'ADMIN'],
+      default: 'USER',
+    },
+    teamMemberStatus: {
+      type: String,
+      enum: ['NONE', 'PENDING', 'APPROVED', 'REJECTED'],
+      default: 'NONE',
+    },
+    teamMemberDetails: {
+      type: String,
     },
   },
   { timestamps: true }

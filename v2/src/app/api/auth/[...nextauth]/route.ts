@@ -72,15 +72,28 @@ export const authOptions: NextAuthOptions = {
       }
       return true;
     },
-    async jwt({ token, user, account }) {
+    async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
+      }
+      // Fetch latest role and status from DB to ensure session is up to date
+      await connectToDatabase();
+      const dbUser = token.id 
+        ? await User.findById(token.id) 
+        : await User.findOne({ email: token.email });
+        
+      if (dbUser) {
+        token.id = dbUser._id.toString();
+        token.role = dbUser.role;
+        token.teamMemberStatus = dbUser.teamMemberStatus;
       }
       return token;
     },
     async session({ session, token }) {
       if (session.user) {
         (session.user as any).id = token.id;
+        (session.user as any).role = token.role;
+        (session.user as any).teamMemberStatus = token.teamMemberStatus;
       }
       return session;
     },
