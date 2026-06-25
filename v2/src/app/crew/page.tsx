@@ -258,15 +258,7 @@ function DossierCard({ member, index, isMe }: { member: CrewMember; index: numbe
             {member.name.charAt(0)}
           </div>
         )}
-        {/* noise/grid overlay */}
-        <div
-          className="absolute inset-0 opacity-30 mix-blend-multiply pointer-events-none"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(0,0,0,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.4) 1px, transparent 1px)",
-            backgroundSize: "14px 14px",
-          }}
-        />
+
         {/* tactical overlay HUD */}
         <div className="absolute top-2 left-2 mono-label text-bone/80 flex items-center gap-1">
           <Crosshair className="h-3 w-3 text-signal" /> TRACK
