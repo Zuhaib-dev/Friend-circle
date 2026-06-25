@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "motion/react";
+import Image from "next/image";
 import {
   Circle,
   CircleDot,
@@ -287,7 +288,7 @@ function Hero() {
         {/* Right: cinematic image panel */}
         <div className="relative overflow-hidden hairline-l border-ink/80 min-h-[420px] lg:min-h-0">
           <motion.div style={{ y }} className="absolute inset-0">
-            <img src={"/hero-mountains.jpg"} alt="Kashmir ridgeline" className="h-full w-full object-cover grayscale contrast-125" />
+            <Image src="/hero-mountains.jpg" alt="Kashmir ridgeline" fill priority sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover grayscale contrast-125" />
             <div className="absolute inset-0 bg-bone/10 mix-blend-multiply" />
             <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "radial-gradient(oklch(0.13 0.01 60 / 0.18) 1px, transparent 1px)", backgroundSize: "6px 6px" }} />
           </motion.div>
@@ -435,7 +436,7 @@ function ToursSection() {
               className={`${featured ? "col-span-12 lg:col-span-8 lg:row-span-2" : "col-span-12 sm:col-span-6 lg:col-span-4"} hairline-b lg:hairline-r border-ink/50 relative bg-bone group overflow-hidden`}
             >
               <div className={`relative overflow-hidden ${featured ? "aspect-video" : "aspect-4/3"}`}>
-                <img src={t.img} alt={t.name} className="h-full w-full object-cover grayscale contrast-125 group-hover:scale-105 transition-transform duration-700" />
+                <Image src={t.img} alt={t.name} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-cover grayscale contrast-125 group-hover:scale-105 transition-transform duration-700" />
                 <div className="absolute inset-0 bg-bone/10 mix-blend-multiply" />
                 <div className="absolute top-2 left-2 right-2 flex justify-between mono-label text-bone mix-blend-difference">
                   <span>{t.code}</span>
@@ -727,11 +728,12 @@ function FrameTile({ f, index }: { f: (typeof FRAMES)[number]; index: number }) 
         animate={{ x: mouse.x, y: mouse.y }}
         transition={{ type: "spring", stiffness: 150, damping: 15 }}
       >
-        <img
+        <Image
           src={f.src}
           alt={f.cap}
-          loading="lazy"
-          className="h-full w-full object-cover grayscale contrast-125 group-hover:grayscale-0 transition-all duration-700 scale-[1.15]"
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          className="object-cover grayscale contrast-125 group-hover:grayscale-0 transition-all duration-700 scale-[1.15]"
         />
       </motion.div>
       <FrameOverlay code={f.code} cap={f.cap} meta={f.meta} isHero={isHero} />
