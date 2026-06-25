@@ -51,7 +51,7 @@ export function OperatorsView({
                   style={{ transformOrigin: "top" }}
                 />
                 <div className="grid grid-cols-2 md:grid-cols-[100px_1fr_1fr_80px_220px] gap-3 items-center px-3 py-3">
-                  <span className="mono-label opacity-70">{op.id}</span>
+                  <span className="mono-label opacity-70">OP-{op.id.slice(-5).toUpperCase()}</span>
                   <div className="min-w-0">
                     <div className="font-display text-lg leading-tight truncate">
                       {op.callsign}
