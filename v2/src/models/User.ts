@@ -73,4 +73,9 @@ const UserSchema: Schema = new Schema(
   { timestamps: true }
 );
 
-export default mongoose.models.User || mongoose.model<IUser>('User', UserSchema);
+// Delete the cached model if it exists so hot-reloading picks up new schema fields
+if (mongoose.models.User) {
+  delete mongoose.models.User;
+}
+
+export default mongoose.model<IUser>('User', UserSchema);
