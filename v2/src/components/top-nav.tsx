@@ -33,6 +33,38 @@ function Avatar({ name, src, size = 28 }: { name: string; src?: string; size?: n
   );
 }
 
+function TacticalStrip() {
+  const [time, setTime] = useState("");
+  const [wx, setWx] = useState<{ temp: number, wind: number, location: string } | null>(null);
+
+  useEffect(() => {
+    setTime(new Date().toLocaleTimeString('en-US', { hour12: false, timeZone: 'UTC' }) + ' UTC');
+    const t = setInterval(() => {
+      setTime(new Date().toLocaleTimeString('en-US', { hour12: false, timeZone: 'UTC' }) + ' UTC');
+    }, 1000);
+    return () => clearInterval(t);
+  }, []);
+
+  useEffect(() => {
+    fetch('/api/weather').then(r=>r.json()).then(d => { if (!d.error) setWx(d) }).catch(console.error);
+  }, []);
+
+  return (
+    <div className="bg-ink text-bone hairline-b border-bone/20 px-4 py-1 flex items-center justify-between mono-label text-[9px] overflow-hidden whitespace-nowrap">
+       <div className="flex items-center gap-4 shrink-0">
+          <span className="text-signal">FC/2026</span>
+          <span className="hidden sm:inline">FIELD MANUAL — REV 02.6</span>
+          <span>{time}</span>
+       </div>
+       <div className="flex items-center gap-4 shrink-0 opacity-80 overflow-x-auto no-scrollbar mask-edges">
+          <span className="hidden md:inline">34.0837°N · 74.7973°E — {wx?.location || "SRINAGAR / KMR"}</span>
+          <span>{wx ? `${wx.wind}KM/H · ${wx.temp}°C` : "--KM/H · --°C"} · QIBLA 282°</span>
+          <span className="text-signal flex items-center gap-1.5"><span className="h-1.5 w-1.5 bg-signal rounded-full animate-blink"></span>CHANNEL 7 OPEN</span>
+       </div>
+    </div>
+  )
+}
+
 export function TopNav() {
   const { data: session, status } = useSession();
   const user = session?.user;
@@ -72,6 +104,7 @@ export function TopNav() {
 
   return (
     <div className="hairline-b border-ink bg-bone sticky top-0 z-50">
+      <TacticalStrip />
       <div className="flex items-center justify-between px-4 py-2 gap-3">
         {/* Brand */}
         <Link href="/" className="flex items-center gap-2 mono-label text-ink hover:text-signal transition-colors">
