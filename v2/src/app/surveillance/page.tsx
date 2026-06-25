@@ -277,7 +277,7 @@ function EmptyState({ query }: { query: string }) {
     <motion.div
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      className="hairline border-ink bg-bone crosshair relative max-w-xl mx-auto p-8 md:p-12 text-center"
+      className="hairline border-ink bg-bone crosshair max-w-xl mx-auto p-8 md:p-12 text-center"
     >
       <Crosshairs />
       <div className="relative mx-auto h-24 w-24 mb-5">
@@ -329,7 +329,7 @@ function PlayerModal({ feed, onClose }: { feed: Feed; onClose: () => void }) {
   return (
     <motion.div
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[60] bg-black/95 backdrop-blur-sm flex items-center justify-center p-2 md:p-6"
+      className="fixed inset-0 z-60 bg-black/95 backdrop-blur-sm flex items-center justify-center p-2 md:p-6"
       onClick={onClose}
     >
       <motion.div
@@ -392,7 +392,7 @@ function PlayerModal({ feed, onClose }: { feed: Feed; onClose: () => void }) {
                 {muted ? <VolumeX className="h-3 w-3" /> : <Volume2 className="h-3 w-3" />}
                 {muted ? "MUTED" : "AUDIO"}
               </button>
-              <button onClick={fullscreen} className="hairline border-bone/40 px-2 py-1 hover:bg-signal hover:border-signal flex items-center gap-1.5 transition-colors hidden md:flex">
+              <button onClick={fullscreen} className="hairline border-bone/40 px-2 py-1 hover:bg-signal hover:border-signal hidden md:flex items-center gap-1.5 transition-colors">
                 <Maximize2 className="h-3 w-3" /> FULL
               </button>
               <span className="opacity-60 ml-2 hidden sm:block">
