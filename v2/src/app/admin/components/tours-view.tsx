@@ -199,32 +199,42 @@ export function ToursView() {
                 <div className="space-y-1 flex gap-2">
                   <div className="flex-1 space-y-1">
                     <label className="mono-label opacity-70">DISTANCE</label>
-                    <input
-                      value={formState.distance}
-                      onChange={(e) => setFormState({ ...formState, distance: e.target.value })}
-                      className="w-full bg-bone hairline border-ink px-3 py-2 font-mono text-sm focus:outline-none focus:border-signal"
-                      placeholder="286 KM"
-                    />
+                    <div className="relative">
+                      <input
+                        type="number"
+                        value={formState.distance}
+                        onChange={(e) => setFormState({ ...formState, distance: e.target.value })}
+                        className="w-full bg-bone hairline border-ink pl-3 pr-10 py-2 font-mono text-sm focus:outline-none focus:border-signal"
+                        placeholder="286"
+                      />
+                      <span className="absolute right-3 top-1/2 -translate-y-1/2 mono-label opacity-40">KM</span>
+                    </div>
                   </div>
                   <div className="flex-1 space-y-1">
                     <label className="mono-label opacity-70">ELEVATION</label>
-                    <input
-                      value={formState.elevation}
-                      onChange={(e) => setFormState({ ...formState, elevation: e.target.value })}
-                      className="w-full bg-bone hairline border-ink px-3 py-2 font-mono text-sm focus:outline-none focus:border-signal"
-                      placeholder="3713 M"
-                    />
+                    <div className="relative">
+                      <input
+                        type="number"
+                        value={formState.elevation}
+                        onChange={(e) => setFormState({ ...formState, elevation: e.target.value })}
+                        className="w-full bg-bone hairline border-ink pl-3 pr-8 py-2 font-mono text-sm focus:outline-none focus:border-signal"
+                        placeholder="3713"
+                      />
+                      <span className="absolute right-3 top-1/2 -translate-y-1/2 mono-label opacity-40">M</span>
+                    </div>
                   </div>
                 </div>
                 <div className="space-y-1 flex gap-2">
                   <div className="flex-1 space-y-1">
                     <label className="mono-label opacity-70">START TIME</label>
-                    <input
-                      value={formState.time}
-                      onChange={(e) => setFormState({ ...formState, time: e.target.value })}
-                      className="w-full bg-bone hairline border-ink px-3 py-2 font-mono text-sm focus:outline-none focus:border-signal"
-                      placeholder="0530 IST"
-                    />
+                    <div className="relative">
+                      <input
+                        type="time"
+                        value={formState.time}
+                        onChange={(e) => setFormState({ ...formState, time: e.target.value })}
+                        className="w-full bg-bone hairline border-ink px-3 py-2 font-mono text-sm focus:outline-none focus:border-signal"
+                      />
+                    </div>
                   </div>
                   <div className="flex-1 space-y-1">
                     <label className="mono-label opacity-70">PARTY SIZE</label>
@@ -340,8 +350,8 @@ export function ToursView() {
                     </div>
                     {(tour.distance || tour.elevation || tour.partySize) && (
                       <div className="flex flex-wrap items-center gap-3 font-mono text-[10px] opacity-50 mt-1">
-                        {tour.distance && <span>DIST: {tour.distance}</span>}
-                        {tour.elevation && <span>ELEV: {tour.elevation}</span>}
+                        {tour.distance && <span>DIST: {tour.distance} KM</span>}
+                        {tour.elevation && <span>ELEV: {tour.elevation} M</span>}
                         {tour.partySize && <span>PARTY: {tour.partySize}</span>}
                       </div>
                     )}

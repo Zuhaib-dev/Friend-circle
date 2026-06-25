@@ -200,8 +200,8 @@ function TourCard({ tour, index, onOpen }: { tour: Tour; index: number; onOpen: 
         <div className="grid grid-cols-3 gap-px bg-ink/15 hairline border-ink/30 mt-2">
           {[
             { k: "DATE", v: new Date(tour.date).toLocaleDateString() },
-            { k: "DIST", v: tour.distance || "—" },
-            { k: "ELEV", v: tour.elevation || "—" },
+            { k: "DIST", v: tour.distance ? `${tour.distance} KM` : "—" },
+            { k: "ELEV", v: tour.elevation ? `${tour.elevation} M` : "—" },
           ].map((s) => (
             <div key={s.k} className="bg-bone px-2 py-1.5">
               <div className="mono-label opacity-50 text-[9px]">{s.k}</div>
@@ -314,7 +314,7 @@ function TourModal({ tour, onClose }: { tour: Tour; onClose: () => void }) {
               {[
                 ["LOCATION", tour.place], ["COORDS", tour.coordinates || "—"],
                 ["DATE", new Date(tour.date).toLocaleDateString()], ["TIME", tour.time || "—"],
-                ["DISTANCE", tour.distance || "—"], ["ELEVATION", tour.elevation || "—"],
+                ["DISTANCE", tour.distance ? `${tour.distance} KM` : "—"], ["ELEVATION", tour.elevation ? `${tour.elevation} M` : "—"],
                 ["PARTY", tour.partySize ? `${tour.partySize} CREW` : "—"], ["STATUS", meta.label],
               ].map(([k, v]) => (
                 <div key={k} className="bg-bone px-2.5 py-2">
