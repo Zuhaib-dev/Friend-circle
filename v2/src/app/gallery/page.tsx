@@ -7,6 +7,7 @@ import { TopNav } from "@/components/top-nav";
 import { Crosshairs } from "@/components/crosshairs";
 import { useSession } from "next-auth/react";
 import { Trash2 } from "lucide-react";
+import { ARCHIVE_FRAMES } from "@/data/archive";
 
 type Frame = {
   id: string;
@@ -41,6 +42,20 @@ export default function GalleryPage() {
   const [mounted, setMounted] = useState(false);
   const [now, setNow] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const PAGE_SIZE = 20;
+
+  const archiveFrames: Frame[] = useMemo(() => ARCHIVE_FRAMES.map((f) => ({
+    id: f.id,
+    rawId: f.id,
+    src: f.src,
+    uploader: f.uploader,
+    caption: f.caption,
+    date: new Date("2024-01-01").getTime(), // Old date so they fall to bottom by default
+    sizeMB: 0.8,
+    w: 800,
+    h: 600,
+  })), []);
 
   useEffect(() => {
     setMounted(true);
@@ -77,9 +92,23 @@ export default function GalleryPage() {
     fetchIntel();
   }, []);
 
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        setPage((p) => p + 1);
+      }
+    }, { rootMargin: "400px" });
+    
+    const target = document.getElementById("load-more-trigger");
+    if (target) observer.observe(target);
+    return () => { if (target) observer.unobserve(target); }
+  }, [loading]);
+
+  const allFrames = useMemo(() => [...frames, ...archiveFrames], [frames, archiveFrames]);
+
   const filtered = useMemo(() => {
     const needle = q.trim().toLowerCase();
-    let out = frames.filter(
+    let out = allFrames.filter(
       (f) => !needle || f.uploader.toLowerCase().includes(needle) || f.caption.toLowerCase().includes(needle),
     );
     out = [...out].sort((a, b) => {
@@ -88,7 +117,11 @@ export default function GalleryPage() {
       return b.sizeMB - a.sizeMB;
     });
     return out;
-  }, [frames, q, sort]);
+  }, [allFrames, q, sort]);
+
+  const visibleFrames = useMemo(() => {
+    return filtered.slice(0, page * PAGE_SIZE);
+  }, [filtered, page]);
 
   const totalMB = filtered.reduce((s, f) => s + f.sizeMB, 0).toFixed(2);
 
@@ -135,12 +168,15 @@ export default function GalleryPage() {
               <Search className="h-4 w-4 text-signal shrink-0" />
               <input
                 value={q}
-                onChange={(e) => setQ(e.target.value)}
+                onChange={(e) => {
+                  setQ(e.target.value);
+                  setPage(1); // Reset pagination on search
+                }}
                 placeholder="QUERY · UPLOADER OR CAPTION…"
                 className="w-full bg-transparent px-3 py-2.5 font-mono text-sm tracking-wider placeholder:text-ink/40 focus:outline-none"
               />
               {q && (
-                <button onClick={() => setQ("")} className="mono-label opacity-60 hover:opacity-100 hover:text-signal">
+                <button onClick={() => { setQ(""); setPage(1); }} className="mono-label opacity-60 hover:opacity-100 hover:text-signal">
                   <X className="h-3.5 w-3.5" />
                 </button>
               )}
@@ -195,22 +231,31 @@ export default function GalleryPage() {
         ) : filtered.length === 0 ? (
           <EmptyState query={q} />
         ) : (
-          <div className="columns-1 md:columns-2 lg:columns-3 xl:columns-4 gap-4 [column-fill:balance]">
-            <AnimatePresence mode="popLayout">
-              {filtered.map((f, i) => (
-                <FrameCard
-                  key={f.id}
-                  frame={f}
-                  index={i}
-                  now={now}
-                  mounted={mounted}
-                  onOpen={() => setActive(f)}
-                  isAdmin={isAdmin}
-                  onDelete={() => handleDelete(f.rawId)}
-                />
-              ))}
-            </AnimatePresence>
-          </div>
+          <>
+            <div className="columns-1 md:columns-2 lg:columns-3 xl:columns-4 gap-4 [column-fill:balance]">
+              <AnimatePresence mode="popLayout">
+                {visibleFrames.map((f, i) => (
+                  <FrameCard
+                    key={f.id}
+                    frame={f}
+                    index={i % PAGE_SIZE}
+                    now={now}
+                    mounted={mounted}
+                    onOpen={() => setActive(f)}
+                    isAdmin={isAdmin && f.uploader !== "ARCHIVE"} // Don't let admins purge hardcoded archive easily from UI
+                    onDelete={() => handleDelete(f.rawId)}
+                  />
+                ))}
+              </AnimatePresence>
+            </div>
+            
+            {/* Infinite Scroll Trigger */}
+            {visibleFrames.length < filtered.length && (
+              <div id="load-more-trigger" className="py-12 flex items-center justify-center">
+                <Activity className="h-5 w-5 text-signal animate-pulse opacity-50" />
+              </div>
+            )}
+          </>
         )}
       </section>
 
