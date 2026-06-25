@@ -359,7 +359,7 @@ function FrameCard({
               e.stopPropagation();
               onDelete();
             }}
-            className="absolute top-2 left-2 bg-acid text-bone mono-label p-1.5 flex items-center justify-center opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 z-10"
+            className="absolute top-2 left-2 bg-red-500/20 text-red-500 hover:bg-red-500 hover:text-white mono-label p-1.5 flex items-center justify-center opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 z-10"
           >
             <Trash2 className="h-3.5 w-3.5 shrink-0" />
           </motion.button>
@@ -469,7 +469,7 @@ function Lightbox({
             {isAdmin && (
               <button
                 onClick={onDelete}
-                className="px-3 py-1.5 flex items-center justify-center gap-1.5 bg-acid/10 text-acid hover:bg-acid hover:text-bone transition-colors"
+                className="px-3 py-1.5 flex items-center justify-center gap-1.5 bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white transition-colors"
               >
                 <Trash2 className="h-3 w-3" /> PURGE
               </button>
