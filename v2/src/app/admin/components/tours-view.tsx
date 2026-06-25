@@ -25,6 +25,7 @@ export function ToursView() {
   const [tours, setTours] = useState<Tour[]>([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
+  const [editingId, setEditingId] = useState<string | null>(null);
   const [formState, setFormState] = useState({
     name: "",
     place: "",
@@ -52,20 +53,48 @@ export function ToursView() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      const method = editingId ? "PATCH" : "POST";
+      const payload = editingId ? { id: editingId, ...formState } : formState;
+      
       const res = await fetch("/api/admin/tours", {
-        method: "POST",
+        method,
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formState),
+        body: JSON.stringify(payload),
       });
       if (res.ok) {
-        const newTour = await res.json();
-        setTours([newTour, ...tours]);
+        if (editingId) {
+          const updatedTour = await res.json();
+          setTours(tours.map(t => t._id === editingId ? updatedTour : t));
+        } else {
+          const newTour = await res.json();
+          setTours([newTour, ...tours]);
+        }
         setShowForm(false);
+        setEditingId(null);
         setFormState({ name: "", place: "", date: "", description: "", status: "UPCOMING", coverImage: "", coordinates: "", distance: "", elevation: "", time: "", partySize: "" });
       }
     } catch (err) {
       console.error(err);
     }
+  };
+
+  const handleEdit = (tour: Tour) => {
+    setFormState({
+      name: tour.name || "",
+      place: tour.place || "",
+      date: tour.date ? new Date(tour.date).toISOString().split("T")[0] : "",
+      description: tour.description || "",
+      status: tour.status || "UPCOMING",
+      coverImage: tour.coverImage || "",
+      coordinates: tour.coordinates || "",
+      distance: tour.distance || "",
+      elevation: tour.elevation || "",
+      time: tour.time || "",
+      partySize: tour.partySize?.toString() || ""
+    });
+    setEditingId(tour._id);
+    setShowForm(true);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -144,11 +173,19 @@ export function ToursView() {
             &gt; {tours.length} ITINERARIES IN REGISTRY
           </div>
           <button
-            onClick={() => setShowForm(!showForm)}
+            onClick={() => {
+              if (showForm) {
+                setShowForm(false);
+                setEditingId(null);
+                setFormState({ name: "", place: "", date: "", description: "", status: "UPCOMING", coverImage: "", coordinates: "", distance: "", elevation: "", time: "", partySize: "" });
+              } else {
+                setShowForm(true);
+              }
+            }}
             className="hairline border-ink bg-ink text-bone px-3 py-1.5 mono-label flex items-center gap-2 hover:bg-transparent hover:text-ink transition-colors"
           >
             {showForm ? <X className="h-3 w-3" /> : <Plus className="h-3 w-3" />}
-            {showForm ? "ABORT DRAFT" : "DRAFT NEW"}
+            {showForm ? "ABORT" : "DRAFT NEW"}
           </button>
         </div>
 
@@ -163,7 +200,7 @@ export function ToursView() {
             >
               <Crosshairs />
               <div className="mono-label text-signal mb-2 flex items-center gap-2">
-                <Terminal className="h-3.5 w-3.5" /> COMPILE NEW ITINERARY
+                <Terminal className="h-3.5 w-3.5" /> {editingId ? "MODIFY ITINERARY" : "COMPILE NEW ITINERARY"}
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -316,7 +353,7 @@ export function ToursView() {
                   type="submit"
                   className="w-full hairline border-ink bg-signal text-bone py-2 mono-label flex items-center justify-center gap-2 hover:bg-ink transition-colors"
                 >
-                  <Activity className="h-3 w-3" /> LAUNCH ITINERARY
+                  <Activity className="h-3 w-3" /> {editingId ? "UPDATE ITINERARY" : "LAUNCH ITINERARY"}
                 </button>
               </div>
             </motion.form>
@@ -368,6 +405,12 @@ export function ToursView() {
                     <option value="COMPLETED">COMPLETED</option>
                     <option value="CANCELLED">CANCELLED</option>
                   </select>
+                  <button
+                    onClick={() => handleEdit(tour)}
+                    className="hairline border-ink px-2 py-1 mono-label hover:bg-ink hover:text-bone transition-colors"
+                  >
+                    EDIT
+                  </button>
                   <button
                     onClick={() => handleDelete(tour._id)}
                     className="hairline border-ink px-2 py-1 mono-label hover:bg-red-500 hover:text-white transition-colors"
