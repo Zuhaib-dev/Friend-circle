@@ -127,7 +127,7 @@ export function StatCard({
       animate={{ opacity: 1, y: 0 }}
       whileHover={{ y: -2 }}
       transition={{ duration: 0.25 }}
-      className="crosshair hairline bg-bone p-4 relative overflow-hidden group"
+      className="crosshair hairline bg-bone p-4 overflow-hidden group"
     >
       <Crosshairs />
       {/* scan line */}
