@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { LogIn, LogOut, User as UserIcon, Settings, ChevronDown, CircleDot, Menu, X, ShieldCheck, Image as ImageIcon, Radar, Terminal } from "lucide-react";
+import { LogIn, LogOut, User as UserIcon, Settings, ChevronDown, CircleDot, Menu, X, ShieldCheck, Image as ImageIcon, Radar, Terminal, Video as VideoIcon } from "lucide-react";
 import { useSession, signOut as doSignOut } from "next-auth/react";
 import { initialsOf } from "../lib/utils";
 
@@ -64,8 +64,9 @@ export function TopNav() {
 
   const navLinks = [
     { href: "/crew", label: "CREW" },
-    { href: "#tours", label: "ROUTES" },
-    { href: "#gallery", label: "FRAMES" },
+    { href: "/tours", label: "ROUTES" },
+    { href: "/gallery", label: "FRAMES" },
+    { href: "/surveillance", label: "FEEDS" },
     { href: "#tazkiyah", label: "TAZKIYAH" },
   ];
 
@@ -138,20 +139,21 @@ export function TopNav() {
                     </div>
                     <MenuItem icon={UserIcon} label="PROFILE" code="01" onClick={() => { setOpen(false); navigate.push('/profile'); }} />
                     <MenuItem icon={ImageIcon} label="GALLERY" code="02" onClick={() => { setOpen(false); navigate.push('/gallery'); }} />
+                    <MenuItem icon={VideoIcon} label="FEEDS" code="03" onClick={() => { setOpen(false); navigate.push('/surveillance'); }} />
                     
                     {(!user.role || user.role === "USER") && (
-                      <MenuItem icon={ShieldCheck} label="BECOME TEAM MEMBER" code="03" onClick={() => { setOpen(false); navigate.push('/apply-team'); }} />
+                      <MenuItem icon={ShieldCheck} label="BECOME TEAM MEMBER" code="04" onClick={() => { setOpen(false); navigate.push('/apply-team'); }} />
                     )}
 
                     {(user.role === "TEAM_MEMBER" || user.role === "ADMIN") && (
-                      <MenuItem icon={Radar} label="DOSSIER" code="04" onClick={() => { setOpen(false); navigate.push('/team'); }} />
+                      <MenuItem icon={Radar} label="DOSSIER" code="05" onClick={() => { setOpen(false); navigate.push('/team'); }} />
                     )}
 
                     {user.role === "ADMIN" && (
-                      <MenuItem icon={Terminal} label="ADMIN COMMAND" code="05" onClick={() => { setOpen(false); navigate.push('/admin'); }} />
+                      <MenuItem icon={Terminal} label="ADMIN COMMAND" code="06" onClick={() => { setOpen(false); navigate.push('/admin'); }} />
                     )}
                     
-                    <MenuItem icon={Settings} label="SETTINGS" code="06" onClick={() => { setOpen(false); }} />
+                    <MenuItem icon={Settings} label="SETTINGS" code="07" onClick={() => { setOpen(false); }} />
                     <button
                       onClick={handleLogout}
                       className="w-full flex items-center justify-between gap-3 px-3 py-2.5 hairline-t border-ink/40 mono-label text-signal hover:bg-signal hover:text-bone transition-colors group"
