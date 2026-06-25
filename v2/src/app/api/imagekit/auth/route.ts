@@ -25,7 +25,10 @@ export async function GET() {
 
     const authenticationParameters = imagekit.getAuthenticationParameters();
 
-    return NextResponse.json(authenticationParameters, { status: 200 });
+    return NextResponse.json({
+      ...authenticationParameters,
+      publicKey: process.env.IMAGEKIT_PUBLIC_KEY
+    }, { status: 200 });
   } catch (error: any) {
     console.error('ImageKit Auth error:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });

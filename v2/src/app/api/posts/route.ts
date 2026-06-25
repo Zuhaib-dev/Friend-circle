@@ -59,3 +59,40 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }
+
+// Protected endpoint to update a post's caption
+export async function PATCH(req: Request) {
+  try {
+    const session = await getServerSession(authOptions);
+    if (!session || !session.user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const { postId, caption } = await req.json();
+
+    if (!postId || caption === undefined) {
+      return NextResponse.json({ error: 'Post ID and caption are required' }, { status: 400 });
+    }
+
+    await connectToDatabase();
+
+    const post = await Post.findById(postId);
+
+    if (!post) {
+      return NextResponse.json({ error: 'Post not found' }, { status: 404 });
+    }
+
+    // Only the author or an Admin can edit the caption
+    if (post.author.toString() !== (session.user as any).id && (session.user as any).role !== 'ADMIN') {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+    }
+
+    post.caption = caption;
+    await post.save();
+
+    return NextResponse.json(post, { status: 200 });
+  } catch (error: any) {
+    console.error('Update post error:', error);
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+  }
+}
