@@ -70,8 +70,11 @@ export default function GalleryPage() {
         const res = await fetch("/api/posts");
         if (res.ok) {
           const data = await res.json();
+          // Filter for posts that actually have images
+          const imagePosts = data.filter((post: any) => post.imageUrl);
+          
           // Map MongoDB posts to Frame type
-          setFrames(data.map((post: any) => ({
+          setFrames(imagePosts.map((post: any) => ({
             id: `INTEL-${post._id.slice(-5).toUpperCase()}`, // Match the tactical aesthetic from admin
             rawId: post._id,
             src: post.imageUrl,
