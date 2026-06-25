@@ -127,7 +127,7 @@ export default function AdminPage() {
       <div className="hairline-b border-ink bg-bone">
         <div className="flex items-center justify-between px-4 py-1.5 mono-label gap-3">
           <div className="flex items-center gap-3 truncate">
-            <span className="brick px-2 py-[1px] text-bone">ADMIN · 00</span>
+            <span className="brick px-2 py-px text-bone">ADMIN · 00</span>
             <span className="opacity-70 truncate">COMMAND CONSOLE · CLEARANCE OMEGA</span>
           </div>
           <div className="hidden md:flex items-center gap-3">

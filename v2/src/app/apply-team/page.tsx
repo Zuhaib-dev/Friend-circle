@@ -23,7 +23,7 @@ export default function ApplyTeamPage() {
   const renderAvatar = () => {
     if (!user) return null;
     if (user.image) {
-      return <img src={user.image} alt={user.name || "Operator"} className="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500" />;
+      return <img src={user.image} alt={user.name || "Operator"} className="aspect-[3/4] object-cover w-full h-full grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500" />;
     }
     return (
       <div className="w-full h-full flex items-center justify-center brick text-bone font-display text-4xl">
@@ -130,7 +130,7 @@ export default function ApplyTeamPage() {
       {/* Mission strip */}
       <div className="hairline-b border-ink bg-bone">
         <div className="flex items-center px-4 py-1.5 mono-label gap-3">
-          <span className="brick px-2 py-[1px] text-bone">FORM · 04</span>
+          <span className="brick px-2 py-px text-bone">OP / ENLIST</span>
           <span className="opacity-70 truncate">OPERATOR ENLISTMENT APPLICATION</span>
         </div>
       </div>

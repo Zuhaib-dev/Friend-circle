@@ -23,7 +23,7 @@ export function IntelView({
       {items.length === 0 ? (
         <EmptyState icon={ImageIcon} label="ARCHIVE CLEAR" hint="All intel verified." />
       ) : (
-        <div className="columns-1 sm:columns-2 lg:columns-3 gap-3 [column-fill:_balance]">
+        <div className="columns-1 sm:columns-2 lg:columns-3 gap-3 [column-fill:balance]">
           <AnimatePresence initial={false}>
             {items.map((it, i) => (
               <motion.div
@@ -57,7 +57,7 @@ export function IntelView({
                         <span>{fmtAgo(it.ts)} AGO</span>
                         <span>{it.size}</span>
                       </div>
-                      <div className="mt-2 text-sm font-mono opacity-90 break-words line-clamp-3">
+                      <div className="mt-2 text-sm font-mono opacity-90 wrap-break-word line-clamp-3">
                         "{it.caption}"
                       </div>
                     </div>
