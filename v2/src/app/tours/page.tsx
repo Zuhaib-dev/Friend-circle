@@ -172,7 +172,7 @@ function TourCard({ tour, index, onOpen }: { tour: Tour; index: number; onOpen: 
       className="group relative hairline border-ink bg-bone text-left overflow-hidden focus:outline-none flex flex-col h-full"
     >
       <Crosshairs />
-      <div className="relative aspect-[16/10] overflow-hidden hairline-b border-ink bg-ink/5">
+      <div className="relative aspect-16/10 overflow-hidden hairline-b border-ink bg-ink/5">
         {tour.coverImage ? (
           <motion.img src={tour.coverImage} alt={tour.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-[filter] duration-500" whileHover={{ scale: 1.04 }} transition={{ duration: 0.6, ease: "easeOut" }} draggable={false} />
         ) : (
@@ -181,7 +181,7 @@ function TourCard({ tour, index, onOpen }: { tour: Tour; index: number; onOpen: 
           </div>
         )}
         <div className="absolute inset-0 pointer-events-none opacity-25 mix-blend-multiply" style={{ backgroundImage: "repeating-linear-gradient(0deg, rgba(0,0,0,0.4) 0 1px, transparent 1px 3px)" }} />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-ink/70 via-transparent to-transparent" />
         <div className="absolute top-2 left-2 brick text-bone mono-label px-1.5 py-0.5 flex items-center gap-1.5 uppercase">OP-{tour._id.slice(-5)}</div>
         <div className="absolute top-2 right-2 flex items-center gap-1.5 hairline border-bone/70 bg-ink/70 backdrop-blur px-1.5 py-0.5 mono-label text-bone">
           <span className={`relative h-2 w-2 ${meta.dot} ${meta.ring}`}>
@@ -281,7 +281,7 @@ function TourModal({ tour, onClose }: { tour: Tour; onClose: () => void }) {
   };
 
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} className="fixed inset-0 z-[60] bg-ink/80 backdrop-blur-sm flex items-end md:items-center justify-center p-0 md:p-6" onClick={onClose}>
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} className="fixed inset-0 z-60 bg-ink/80 backdrop-blur-sm flex items-end md:items-center justify-center p-0 md:p-6" onClick={onClose}>
       <motion.div initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 20, opacity: 0 }} transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }} onClick={(e) => e.stopPropagation()} className="relative w-full md:max-w-5xl md:max-h-[92vh] h-[95vh] md:h-auto bg-bone hairline border-ink shadow-[6px_6px_0_0_var(--signal)] flex flex-col">
         <Crosshairs />
         <div className="hairline-b border-ink px-4 py-2.5 flex items-center justify-between gap-3 shrink-0">
@@ -295,7 +295,7 @@ function TourModal({ tour, onClose }: { tour: Tour; onClose: () => void }) {
 
         <div className="grid md:grid-cols-[1.1fr_1fr] flex-1 min-h-0">
           <div className="hairline-b md:hairline-r md:hairline-b-0 border-ink/30 p-4 overflow-y-auto custom-scroll">
-            <div className="relative aspect-[16/9] overflow-hidden hairline border-ink mb-3 bg-ink/5">
+            <div className="relative aspect-video overflow-hidden hairline border-ink mb-3 bg-ink/5">
               {tour.coverImage ? (
                  <img src={tour.coverImage} alt={tour.name} className="w-full h-full object-cover" />
               ) : (
@@ -379,7 +379,7 @@ function MessageRow({ m, sessionUserId }: { m: Msg; sessionUserId?: string }) {
       )}
       <div className={`max-w-[85%] ${self ? "items-end text-right" : ""} flex flex-col`}>
         <div className="mono-label opacity-60 flex items-center gap-2"><span>{m.author.name.toUpperCase().split(' ')[0]}</span><span className="opacity-50">· {time}</span></div>
-        <div className={`mt-0.5 px-2.5 py-1.5 hairline mono-label leading-snug break-words whitespace-pre-wrap ${self ? "bg-ink text-bone border-ink" : "bg-bone border-ink/40"}`}>[ {m.text} ]</div>
+        <div className={`mt-0.5 px-2.5 py-1.5 hairline mono-label leading-snug wrap-break-word whitespace-pre-wrap ${self ? "bg-ink text-bone border-ink" : "bg-bone border-ink/40"}`}>[ {m.text} ]</div>
       </div>
     </motion.div>
   );
