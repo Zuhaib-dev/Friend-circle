@@ -12,6 +12,8 @@ export interface IUser extends Document {
   role: 'USER' | 'TEAM_MEMBER' | 'ADMIN';
   teamMemberStatus: 'NONE' | 'PENDING' | 'APPROVED' | 'REJECTED';
   teamMemberDetails?: string;
+  phone?: string;
+  socialHandle?: string;
 }
 
 const UserSchema: Schema = new Schema(
@@ -59,6 +61,12 @@ const UserSchema: Schema = new Schema(
       default: 'NONE',
     },
     teamMemberDetails: {
+      type: String,
+    },
+    phone: {
+      type: String,
+    },
+    socialHandle: {
       type: String,
     },
   },

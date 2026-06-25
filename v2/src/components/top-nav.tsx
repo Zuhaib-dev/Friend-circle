@@ -136,7 +136,7 @@ export function TopNav() {
                         <span className="text-signal">ACTIVE · SESSION</span>
                       </span>
                     </div>
-                    <MenuItem icon={UserIcon} label="PROFILE" code="01" onClick={() => { setOpen(false); }} />
+                    <MenuItem icon={UserIcon} label="PROFILE" code="01" onClick={() => { setOpen(false); navigate.push('/profile'); }} />
                     <MenuItem icon={Settings} label="SETTINGS" code="02" onClick={() => { setOpen(false); }} />
                     {(!user.role || user.role === "USER") && (
                       <MenuItem icon={ShieldCheck} label="BECOME TEAM MEMBER" code="03" onClick={() => { setOpen(false); navigate.push('/apply-team'); }} />
