@@ -1016,12 +1016,13 @@ function Footer() {
           <div className="mono-label text-bone/60 mb-3">CHANNELS</div>
           <ul className="space-y-2">
             {[
-              { i: Circle, l: "INSTAGRAM" },
-              { i: Circle, l: "GITHUB" },
-              { i: Mail, l: "MAIL" },
-            ].map(({ i: Icon, l }) => (
+              { i: Circle, l: "PORTFOLIO", href: "https://www.zuhaibrashid.com/" },
+              { i: Circle, l: "GITHUB", href: "https://github.com/Zuhaib-dev" },
+              { i: Circle, l: "X / TWITTER", href: "https://x.com/xuhaibx9" },
+              { i: Circle, l: "LINKEDIN", href: "https://www.linkedin.com/in/zuhaib-rashid-661345318/" },
+            ].map(({ i: Icon, l, href }) => (
               <li key={l}>
-                <a href="#" className="mono-label text-bone hover:text-signal flex items-center gap-2 group">
+                <a href={href} target="_blank" rel="noopener noreferrer" className="mono-label text-bone hover:text-signal flex items-center gap-2 group">
                   <Icon className="h-3.5 w-3.5" /> {l}
                   <ArrowUpRight className="h-3.5 w-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </a>
