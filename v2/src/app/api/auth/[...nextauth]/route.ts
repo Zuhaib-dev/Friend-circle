@@ -42,7 +42,7 @@ export const authOptions: NextAuthOptions = {
         return {
           id: user._id.toString(),
           name: user.name,
-          email: user.email,
+          email: user.email, role: user.role, teamMemberStatus: user.teamMemberStatus,
           image: user.image,
         };
       },
@@ -58,7 +58,7 @@ export const authOptions: NextAuthOptions = {
           if (!existingUser) {
             await User.create({
               name: user.name,
-              email: user.email,
+              email: user.email, role: user.role, teamMemberStatus: user.teamMemberStatus,
               image: user.image,
               isVerified: true, // Google users are pre-verified
               authProvider: 'google',
