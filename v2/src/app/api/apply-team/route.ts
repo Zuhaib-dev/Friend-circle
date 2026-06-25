@@ -35,6 +35,7 @@ export async function POST(req: Request) {
 
     user.teamMemberStatus = 'PENDING';
     user.teamMemberDetails = details;
+    user.phone = details; // Also save it to the official phone field
     await user.save();
 
     return NextResponse.json({ message: 'Application submitted successfully', status: user.teamMemberStatus }, { status: 200 });
