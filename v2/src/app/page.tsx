@@ -1572,7 +1572,8 @@ function LoadoutManifest() {
                 <line x1="0" y1="100" x2="200" y2="100" stroke="oklch(0.13 0.01 60)" strokeWidth="0.6" />
                 <line x1="100" y1="0" x2="100" y2="200" stroke="oklch(0.13 0.01 60)" strokeWidth="0.6" />
                 {/* sweep */}
-                <motion.g animate={{ rotate: 360 }} transition={{ duration: 4, repeat: Infinity, ease: "linear" }} style={{ transformOrigin: "100px 100px" }}>
+                <motion.g animate={{ rotate: 360 }} transition={{ duration: 4, repeat: Infinity, ease: "linear" }} style={{ transformOrigin: "100px 100px", transformBox: "view-box" }}>
+                  <circle cx="100" cy="100" r="100" fill="none" stroke="none" />
                   <defs>
                     <linearGradient id="sweep" x1="0" x2="1">
                       <stop offset="0" stopColor="oklch(0.62 0.24 28)" stopOpacity="0.6" />

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { LogIn, LogOut, User as UserIcon, Settings, ChevronDown, CircleDot, Menu, X } from "lucide-react";
+import { LogIn, LogOut, User as UserIcon, Settings, ChevronDown, CircleDot, Menu, X, ShieldCheck } from "lucide-react";
 import { useSession, signOut as doSignOut } from "next-auth/react";
 import { initialsOf } from "../lib/utils";
 
@@ -126,6 +126,7 @@ export function TopNav() {
                       <div className="min-w-0 flex-1">
                         <div className="font-display text-base text-ink leading-tight truncate">{user.name}</div>
                         <div className="mono-label opacity-60 truncate">{user.email}</div>
+                        <div className="mt-1.5"><span className="mono-label text-signal text-[10px] tracking-wider border border-signal/40 px-1.5 py-[2px]">{user.role || 'USER'}</span></div>
                       </div>
                     </div>
                     <div className="px-3 py-2 hairline-b border-ink/30 flex items-center justify-between mono-label">
@@ -137,6 +138,9 @@ export function TopNav() {
                     </div>
                     <MenuItem icon={UserIcon} label="PROFILE" code="01" onClick={() => { setOpen(false); }} />
                     <MenuItem icon={Settings} label="SETTINGS" code="02" onClick={() => { setOpen(false); }} />
+                    {(!user.role || user.role === "USER") && (
+                      <MenuItem icon={ShieldCheck} label="BECOME TEAM MEMBER" code="03" onClick={() => { setOpen(false); navigate.push('/apply-team'); }} />
+                    )}
                     <button
                       onClick={handleLogout}
                       className="w-full flex items-center justify-between gap-3 px-3 py-2.5 hairline-t border-ink/40 mono-label text-signal hover:bg-signal hover:text-bone transition-colors group"
