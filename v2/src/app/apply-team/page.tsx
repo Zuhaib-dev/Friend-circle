@@ -34,8 +34,15 @@ export default function ApplyTeamPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!details.trim()) {
-      setError("PLEASE PROVIDE ENLISTMENT DETAILS");
+    const sanitizedPhone = details.replace(/[^0-9+]/g, '');
+
+    if (!sanitizedPhone) {
+      setError("PLEASE PROVIDE A VALID PHONE NUMBER");
+      return;
+    }
+
+    if (sanitizedPhone.replace(/[^0-9]/g, '').length < 10) {
+      setError("PHONE NUMBER MUST BE AT LEAST 10 DIGITS");
       return;
     }
 
@@ -46,7 +53,7 @@ export default function ApplyTeamPage() {
       const res = await fetch("/api/apply-team", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ details }),
+        body: JSON.stringify({ details: sanitizedPhone }),
       });
 
       const data = await res.json();
@@ -189,16 +196,16 @@ export default function ApplyTeamPage() {
 
                 <div className="space-y-1">
                   <label className="mono-label text-[11px] opacity-70 flex items-center justify-between">
-                    <span>CONTACT / ENLISTMENT DETAILS</span>
+                    <span>OPERATOR CONTACT NUMBER</span>
                     <span className="text-signal">*REQUIRED</span>
                   </label>
-                  <textarea
+                  <input
+                    type="tel"
                     required
-                    rows={5}
                     value={details}
-                    onChange={(e) => setDetails(e.target.value)}
-                    placeholder="Enter phone number and why you're requesting field clearance..."
-                    className="w-full hairline border-ink bg-transparent px-3 py-2 font-mono text-sm placeholder:text-ink/30 focus:outline-none focus:ring-1 focus:ring-signal focus:border-signal resize-none transition-all"
+                    onChange={(e) => setDetails(e.target.value.replace(/[^0-9+\s-]/g, ''))}
+                    placeholder="+91 9876543210"
+                    className="w-full hairline border-ink bg-transparent px-3 py-3 font-mono text-sm placeholder:text-ink/30 focus:outline-none focus:ring-1 focus:ring-signal focus:border-signal transition-all tracking-wider"
                   />
                 </div>
 
