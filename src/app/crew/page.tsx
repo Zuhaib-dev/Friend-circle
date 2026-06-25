@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import Image from "next/image";
 import {
   Search,
   Link as LinkIcon,
@@ -247,11 +248,12 @@ function DossierCard({ member, index, isMe }: { member: CrewMember; index: numbe
       {/* Portrait */}
       <div className="relative aspect-3/4 overflow-hidden bg-ink shrink-0">
         {member.image ? (
-          <img
+          <Image
             src={member.image}
             alt={member.name}
-            loading="lazy"
-            className="absolute inset-0 h-full w-full object-cover transition-all duration-700 group-hover:scale-105"
+            fill
+            sizes="(max-width: 640px) 50vw, (max-width: 1280px) 33vw, 25vw"
+            className="object-cover transition-all duration-700 group-hover:scale-105"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center font-display text-5xl brick text-bone">

@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import Image from "next/image";
 import {
   Crosshair, Play, Pause, Download, SlidersHorizontal, X, Video as VideoIcon,
   Radar, Activity, Volume2, VolumeX, Maximize2,
@@ -209,10 +210,12 @@ function FeedCard({
       <div className="relative aspect-video overflow-hidden bg-black">
         {/* poster ghost */}
         {feed.poster && (
-          <img
+          <Image
             src={feed.poster}
             alt=""
-            className="absolute inset-0 w-full h-full object-cover opacity-30 grayscale group-hover:opacity-50 transition-opacity duration-500"
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            className="object-cover opacity-30 grayscale group-hover:opacity-50 transition-opacity duration-500"
           />
         )}
         {/* Animated Static / Scan effect if no poster */}

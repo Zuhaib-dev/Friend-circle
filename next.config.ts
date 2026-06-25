@@ -9,6 +9,17 @@ const nextConfig: NextConfig = {
     // Responsive breakpoints that match our `sizes` attributes
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 64, 96, 128, 256, 384],
+    // Allow Next.js to optimize external images from these domains
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com", // Google OAuth avatars
+      },
+      {
+        protocol: "https",
+        hostname: "ik.imagekit.io", // ImageKit CDN (gallery, crew portraits, tour covers)
+      },
+    ],
   },
 
   // Compress responses

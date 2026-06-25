@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import { TopNav } from "@/components/top-nav";
 import { motion, AnimatePresence } from "motion/react";
 import { User as UserIcon, Terminal, CheckCircle2, Loader2, Image as ImageIcon, Phone, AtSign, ShieldAlert, FileUp } from "lucide-react";
@@ -226,7 +227,7 @@ export default function ProfilePage() {
                 onClick={() => fileInputRef.current?.click()}
               >
                 {displayImage ? (
-                  <img src={displayImage} alt="Avatar" className="w-full h-full object-cover grayscale group-hover/avatar:grayscale-0 transition-all duration-500" />
+                  <Image src={displayImage} alt="Avatar" fill className="object-cover grayscale group-hover/avatar:grayscale-0 transition-all duration-500" />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center font-display text-7xl brick text-bone">
                     {initialsOf(displayName)}

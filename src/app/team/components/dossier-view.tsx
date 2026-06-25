@@ -2,6 +2,7 @@
 "use client";
 import { useState } from "react";
 import { motion } from "motion/react";
+import Image from "next/image";
 import { CheckCircle2, Clock, Trash2, Radar } from "lucide-react";
 import { Panel, type Upload } from "./shared";
 
@@ -54,7 +55,7 @@ export function DossierView({ uploads, setUploads }: { uploads: Upload[]; setUpl
               className="break-inside-avoid mb-3 group relative hairline border-ink bg-bone overflow-hidden"
             >
               <div className="relative">
-                <img src={u.url} alt={u.name} className="w-full h-auto block" />
+                <Image src={u.url} alt={u.name} width={800} height={600} sizes="(max-width: 1280px) 50vw, 25vw" className="w-full h-auto block" />
                 {/* scan sweep */}
                 <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-signal opacity-0 group-hover:opacity-100 animate-scan" />
                 {/* status chip */}

@@ -2,7 +2,9 @@
 
 import { useMemo, useState, useEffect } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import Image from "next/image";
 import { Search, Download, SlidersHorizontal, Image as ImageIcon, Radar, X, Activity } from "lucide-react";
+
 import { TopNav } from "@/components/top-nav";
 import { Crosshairs } from "@/components/crosshairs";
 import { useSession } from "next-auth/react";
@@ -313,12 +315,17 @@ function FrameCard({
 
       {/* image */}
       <div className="relative overflow-hidden">
-        <motion.img
-          src={frame.src}
-          alt={frame.caption}
-          loading="lazy"
-          className="block w-full h-auto transition-[filter,opacity,transform] duration-500 ease-out group-hover:scale-[1.02]"
-        />
+        <motion.div className="w-full" whileHover={{ scale: 1.02 }} transition={{ duration: 0.5, ease: "easeOut" }}>
+          <Image
+            src={frame.src}
+            alt={frame.caption}
+            width={800}
+            height={600}
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
+            className="block w-full h-auto transition-[filter,opacity] duration-500 ease-out"
+            loading="lazy"
+          />
+        </motion.div>
 
         {/* scan line on hover */}
         <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-signal/80 translate-y-0 group-hover:translate-y-full transition-transform duration-1400 ease-linear" />
@@ -462,7 +469,7 @@ function Lightbox({
           </button>
         </header>
         <div className="bg-ink flex-1 flex items-center justify-center min-h-0 overflow-hidden relative">
-          <img src={frame.src} alt={frame.caption} className="w-full h-full object-contain" />
+          <Image src={frame.src} alt={frame.caption} width={1200} height={900} unoptimized className="max-w-full max-h-full object-contain" />
         </div>
         <footer className="hairline-t border-ink grid grid-cols-2 md:grid-cols-4 mono-label text-[10px] shrink-0">
           <DataCell label="UPLOADER" value={frame.uploader} />

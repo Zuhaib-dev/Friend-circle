@@ -1,6 +1,7 @@
 "use client";
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import Image from "next/image";
 import { FileUp, Image as ImageIcon, Loader2, CheckCircle2 } from "lucide-react";
 import imageCompression from "browser-image-compression";
 import { Panel, type Upload } from "./shared";
@@ -167,7 +168,7 @@ export function UplinkView({ onAdd, onGo }: { onAdd: (u: Upload[]) => void; onGo
           
           {queue.filter(q => q.status === "DONE").map(q => (
             <div key={q.id} className="grid grid-cols-1 md:grid-cols-[120px_1fr] gap-4 hairline border-ink p-4 bg-bone">
-              <img src={q.url} alt="" className="w-full h-32 object-cover hairline border-ink" />
+              <Image src={q.url!} alt="" width={120} height={128} className="w-full h-32 object-cover hairline border-ink" />
               <div className="flex flex-col gap-2">
                 <div className="mono-label truncate opacity-70">{q.file.name}</div>
                 <textarea 

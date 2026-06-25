@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { TopNav } from "@/components/top-nav";
+
 import { motion, AnimatePresence } from "motion/react";
 import { ShieldAlert, Crosshair, Terminal, CheckCircle2, Loader2, Info } from "lucide-react";
 import { useSession } from "next-auth/react";
@@ -23,7 +25,7 @@ export default function ApplyTeamPage() {
   const renderAvatar = () => {
     if (!user) return null;
     if (user.image) {
-      return <img src={user.image} alt={user.name || "Operator"} className="aspect-3/4 object-cover w-full h-full grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500" />;
+      return <Image src={user.image} alt={user.name || "Operator"} width={400} height={533} className="aspect-3/4 object-cover w-full h-full grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500" />;
     }
     return (
       <div className="w-full h-full flex items-center justify-center brick text-bone font-display text-4xl">

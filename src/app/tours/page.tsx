@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import Image from "next/image";
 import {
   Search, MapPin, Calendar, X, Send, Lock, Radio,
   ChevronRight, Filter, Mountain, Compass, Tent, Fish,
@@ -174,7 +175,9 @@ function TourCard({ tour, index, onOpen }: { tour: Tour; index: number; onOpen: 
       <Crosshairs />
       <div className="relative aspect-16/10 overflow-hidden hairline-b border-ink bg-ink/5">
         {tour.coverImage ? (
-          <motion.img src={tour.coverImage} alt={tour.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-[filter] duration-500" whileHover={{ scale: 1.04 }} transition={{ duration: 0.6, ease: "easeOut" }} draggable={false} />
+          <div className="relative w-full h-full">
+            <Image src={tour.coverImage} alt={tour.name} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-cover grayscale group-hover:grayscale-0 transition-[filter] duration-500" />
+          </div>
         ) : (
           <div className="absolute inset-0 flex items-center justify-center opacity-10">
             <Mountain className="h-20 w-20" />
@@ -297,7 +300,7 @@ function TourModal({ tour, onClose }: { tour: Tour; onClose: () => void }) {
           <div className="hairline-b md:hairline-r md:hairline-b-0 border-ink/30 p-4 overflow-y-auto custom-scroll">
             <div className="relative aspect-video overflow-hidden hairline border-ink mb-3 bg-ink/5">
               {tour.coverImage ? (
-                 <img src={tour.coverImage} alt={tour.name} className="w-full h-full object-cover" />
+                 <Image src={tour.coverImage} alt={tour.name} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
               ) : (
                  <div className="absolute inset-0 flex items-center justify-center opacity-10">
                    <Mountain className="h-16 w-16" />
@@ -373,7 +376,7 @@ function MessageRow({ m, sessionUserId }: { m: Msg; sessionUserId?: string }) {
   return (
     <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} className={`flex gap-2 ${self ? "flex-row-reverse" : ""}`}>
       {m.author.image ? (
-        <img src={m.author.image} alt="" className="h-7 w-7 shrink-0 object-cover grayscale brick border border-ink/40" />
+        <Image src={m.author.image!} alt="" width={28} height={28} className="h-7 w-7 shrink-0 object-cover grayscale brick border border-ink/40" />
       ) : (
         <div className="brick text-bone mono-label h-7 w-7 flex items-center justify-center shrink-0 text-[10px]">{m.author.name.slice(0, 2).toUpperCase()}</div>
       )}

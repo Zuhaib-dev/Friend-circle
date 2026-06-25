@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
@@ -12,7 +13,7 @@ function Avatar({ name, src, size = 28 }: { name: string; src?: string; size?: n
   const [err, setErr] = useState(false);
   if (src && !err) {
     return (
-      <img
+      <Image
         src={src}
         alt={name}
         width={size}
