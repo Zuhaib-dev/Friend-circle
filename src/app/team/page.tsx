@@ -119,7 +119,7 @@ export default function TeamPage() {
               {view === "dossier" && <DossierView uploads={uploads} setUploads={setUploads} />}
               {view === "uplink" && (
                 <UplinkView
-                  onAdd={(items) => {
+                  onAdd={(items: any[]) => {
                     const next = [...items, ...uploads];
                     setUploads(next);
                   }}
