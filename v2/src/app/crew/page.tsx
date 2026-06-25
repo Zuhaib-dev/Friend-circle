@@ -4,7 +4,7 @@ import { useEffect, useState, useMemo } from "react";
 import { useSession } from "next-auth/react";
 import { motion, AnimatePresence } from "motion/react";
 import { TopNav } from "@/components/top-nav";
-import { Terminal, ShieldAlert, Crosshair, Network, Loader2, Barcode, ShieldCheck, Mail, Link as LinkIcon, Instagram } from "lucide-react";
+import { Terminal, ShieldAlert, Crosshair, Network, Loader2, Barcode, ShieldCheck, Mail, Link as LinkIcon, AtSign } from "lucide-react";
 import { initialsOf } from "@/lib/utils";
 import Link from "next/link";
 
@@ -195,7 +195,7 @@ function CrewCard({ member, index, isMe }: { member: CrewMember; index: number; 
         <div className="flex items-center gap-4 text-ink">
           {socialUrl ? (
             <a href={socialUrl} target="_blank" rel="noopener noreferrer" className="opacity-60 hover:opacity-100 hover:text-signal transition-colors flex items-center gap-1.5 mono-label text-[10px]">
-              {socialUrl.includes("instagram.com") ? <Instagram className="h-4 w-4" /> : <LinkIcon className="h-4 w-4" />}
+              {socialUrl.includes("instagram.com") ? <AtSign className="h-4 w-4" /> : <LinkIcon className="h-4 w-4" />}
               <span className="hidden sm:inline">NETWORK_LINK</span>
             </a>
           ) : (
