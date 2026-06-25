@@ -248,7 +248,17 @@ export default function ProfilePage() {
                   {isAdvanced && (
                     <>
                       <BadgeRow icon={Phone} val={form.phone || profile?.phone || "NO COMM LINK"} />
-                      <BadgeRow icon={Terminal} val={form.socialHandle || profile?.socialHandle || "NO ALIAS"} />
+                      <BadgeRow 
+                        icon={Terminal} 
+                        val={form.socialHandle || profile?.socialHandle || "NO ALIAS"} 
+                        href={
+                          (form.socialHandle || profile?.socialHandle) 
+                            ? (form.socialHandle || profile?.socialHandle || "").startsWith("http") 
+                              ? (form.socialHandle || profile?.socialHandle) 
+                              : `https://instagram.com/${(form.socialHandle || profile?.socialHandle)?.replace("@", "")}`
+                            : undefined
+                        }
+                      />
                     </>
                   )}
                 </div>
@@ -303,10 +313,11 @@ export default function ProfilePage() {
                     <label className="mono-label text-[11px] opacity-70">COMM LINK (PHONE)</label>
                     <input
                       type="tel"
+                      disabled={!!profile?.phone}
                       value={form.phone}
                       onChange={(e) => setForm({ ...form, phone: e.target.value.replace(/[^0-9+\s-]/g, '') })}
                       placeholder="+91 9876543210"
-                      className="w-full hairline border-ink bg-transparent px-3 py-2.5 font-mono text-sm placeholder:text-ink/30 focus:outline-none focus:ring-1 focus:ring-signal focus:border-signal transition-all"
+                      className="w-full hairline border-ink bg-transparent px-3 py-2.5 font-mono text-sm placeholder:text-ink/30 focus:outline-none focus:ring-1 focus:ring-signal focus:border-signal transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-ink/5"
                     />
                   </div>
 
@@ -378,11 +389,17 @@ export default function ProfilePage() {
   );
 }
 
-function BadgeRow({ icon: Icon, val }: { icon: any, val: string }) {
+function BadgeRow({ icon: Icon, val, href }: { icon: any, val: string, href?: string }) {
   return (
     <div className="flex items-center gap-2 mono-label text-xs">
       <Icon className="h-3 w-3 opacity-40 shrink-0" />
-      <span className="truncate opacity-80">{val}</span>
+      {href ? (
+        <a href={href} target="_blank" rel="noopener noreferrer" className="truncate opacity-80 hover:text-signal hover:underline">
+          {val}
+        </a>
+      ) : (
+        <span className="truncate opacity-80">{val}</span>
+      )}
     </div>
   );
 }
