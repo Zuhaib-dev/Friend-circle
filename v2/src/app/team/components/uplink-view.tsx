@@ -228,7 +228,7 @@ export function UplinkView({ onAdd, onGo }: { onAdd: (u: Upload[]) => void; onGo
               animate={{ y: "100%" }}
               exit={{ opacity: 0 }}
               transition={{ duration: 1.2, repeat: Infinity, ease: "linear" }}
-              className="pointer-events-none absolute inset-x-0 h-12 bg-gradient-to-b from-transparent via-signal/30 to-transparent"
+              className="pointer-events-none absolute inset-x-0 h-12 bg-linear-to-b from-transparent via-signal/30 to-transparent"
             />
           )}
         </AnimatePresence>

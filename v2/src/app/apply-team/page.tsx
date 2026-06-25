@@ -23,7 +23,7 @@ export default function ApplyTeamPage() {
   const renderAvatar = () => {
     if (!user) return null;
     if (user.image) {
-      return <img src={user.image} alt={user.name || "Operator"} className="aspect-[3/4] object-cover w-full h-full grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500" />;
+      return <img src={user.image} alt={user.name || "Operator"} className="aspect-3/4 object-cover w-full h-full grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500" />;
     }
     return (
       <div className="w-full h-full flex items-center justify-center brick text-bone font-display text-4xl">
@@ -166,7 +166,7 @@ export default function ApplyTeamPage() {
               {/* Left col: ID Badge */}
               <div className="flex flex-col gap-3">
                 <div className="mono-label opacity-50 flex items-center gap-1.5"><Crosshair className="h-3 w-3 text-signal" /> ID BADGE</div>
-                <div className="hairline border-ink bg-bone aspect-[3/4] relative group overflow-hidden">
+                <div className="hairline border-ink bg-bone aspect-3/4 relative group overflow-hidden">
                   <div className="absolute inset-0 z-10 pointer-events-none shadow-[inset_0_0_40px_rgba(28,28,26,0.1)]" />
                   {renderAvatar()}
                   <div className="absolute bottom-0 inset-x-0 p-2 bg-ink/80 backdrop-blur-sm text-bone mono-label text-[10px] flex items-center justify-between z-20">
