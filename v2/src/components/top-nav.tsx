@@ -57,7 +57,7 @@ function TacticalStrip() {
           <span>{time}</span>
        </div>
        <div className="flex items-center gap-4 shrink-0 opacity-80 overflow-x-auto no-scrollbar mask-edges">
-          <span className="hidden md:inline">34.0837°N · 74.7973°E — {wx?.location || "SRINAGAR / KMR"}</span>
+          <span>34.0837°N · 74.7973°E — {wx?.location || "SRINAGAR / KMR"}</span>
           <span>{wx ? `${wx.wind}KM/H · ${wx.temp}°C` : "--KM/H · --°C"} · QIBLA 282°</span>
           <span className="text-signal flex items-center gap-1.5"><span className="h-1.5 w-1.5 bg-signal rounded-full animate-blink"></span>CHANNEL 7 OPEN</span>
        </div>
@@ -271,6 +271,13 @@ export function TopNav() {
                   </Link>
                 </div>
               )}
+              <div className="p-4 hairline-t border-ink/20 mono-label text-[9px] opacity-60 space-y-1 bg-ink text-bone">
+                <div className="text-signal">34.0837°N · 74.7973°E — SRINAGAR / KMR</div>
+                <div>14KT NW · 4°C · QIBLA 282°</div>
+                <div className="flex items-center gap-1.5 mt-2 pt-2 hairline-t border-bone/20">
+                  <span className="h-1.5 w-1.5 bg-signal rounded-full animate-blink"></span>CHANNEL 7 OPEN
+                </div>
+              </div>
             </nav>
           </motion.div>
         )}
