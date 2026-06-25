@@ -16,6 +16,7 @@ type ProfileData = {
   role: string;
   phone?: string;
   socialHandle?: string;
+  bio?: string;
   teamMemberStatus?: string;
 };
 
@@ -33,6 +34,7 @@ export default function ProfilePage() {
     name: "",
     phone: "",
     socialHandle: "",
+    bio: "",
   });
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [newImageFile, setNewImageFile] = useState<File | null>(null);
@@ -60,6 +62,7 @@ export default function ProfilePage() {
           name: data.name || "",
           phone: data.phone || "",
           socialHandle: data.socialHandle || "",
+          bio: data.bio || "",
         });
       } else {
         throw new Error("Failed to load profile");
@@ -144,6 +147,7 @@ export default function ProfilePage() {
           image: finalImageUrl,
           phone: form.phone,
           socialHandle: form.socialHandle,
+          bio: form.bio,
         }),
       });
 
@@ -333,6 +337,17 @@ export default function ProfilePage() {
                         className="w-full hairline border-ink bg-transparent pl-8 pr-3 py-2.5 font-mono text-sm placeholder:text-ink/30 focus:outline-none focus:ring-1 focus:ring-signal focus:border-signal transition-all"
                       />
                     </div>
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="mono-label text-[11px] opacity-70">OPERATOR BIO (SUMMARY)</label>
+                    <textarea
+                      rows={4}
+                      value={form.bio}
+                      onChange={(e) => setForm({ ...form, bio: e.target.value })}
+                      placeholder="Brief dossier summary..."
+                      className="w-full hairline border-ink bg-transparent px-3 py-2.5 font-mono text-sm placeholder:text-ink/30 focus:outline-none focus:ring-1 focus:ring-signal focus:border-signal transition-all resize-none"
+                    />
                   </div>
                 </>
               )}

@@ -36,7 +36,7 @@ export async function PATCH(req: Request) {
     }
 
     const body = await req.json();
-    const { name, image, phone, socialHandle } = body;
+    const { name, image, phone, socialHandle, bio } = body;
 
     await connectToDatabase();
 
@@ -54,6 +54,7 @@ export async function PATCH(req: Request) {
     if (user.role === "TEAM_MEMBER" || user.role === "ADMIN") {
       if (phone !== undefined) user.phone = phone;
       if (socialHandle !== undefined) user.socialHandle = socialHandle;
+      if (bio !== undefined) user.bio = bio;
     }
 
     await user.save();

@@ -63,7 +63,7 @@ export function TopNav() {
   };
 
   const navLinks = [
-    { href: "#crew", label: "CREW" },
+    { href: "/crew", label: "CREW" },
     { href: "#tours", label: "ROUTES" },
     { href: "#gallery", label: "FRAMES" },
     { href: "#tazkiyah", label: "TAZKIYAH" },

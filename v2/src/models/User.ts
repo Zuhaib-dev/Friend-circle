@@ -14,6 +14,7 @@ export interface IUser extends Document {
   teamMemberDetails?: string;
   phone?: string;
   socialHandle?: string;
+  bio?: string;
 }
 
 const UserSchema: Schema = new Schema(
@@ -67,6 +68,9 @@ const UserSchema: Schema = new Schema(
       type: String,
     },
     socialHandle: {
+      type: String,
+    },
+    bio: {
       type: String,
     },
   },
