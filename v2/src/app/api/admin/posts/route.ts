@@ -87,6 +87,23 @@ export async function DELETE(req: Request) {
       return NextResponse.json({ error: 'Post not found' }, { status: 404 });
     }
 
+    if (deletedPost.imageKitFileId && process.env.IMAGEKIT_PRIVATE_KEY) {
+      const authHeader = 'Basic ' + Buffer.from(process.env.IMAGEKIT_PRIVATE_KEY + ':').toString('base64');
+      try {
+        const ikRes = await fetch(`https://api.imagekit.io/v1/files/${deletedPost.imageKitFileId}`, {
+          method: 'DELETE',
+          headers: {
+            Authorization: authHeader
+          }
+        });
+        if (!ikRes.ok) {
+          console.error("Failed to delete from ImageKit:", await ikRes.text());
+        }
+      } catch (e) {
+        console.error("ImageKit deletion network error:", e);
+      }
+    }
+
     return NextResponse.json({ message: 'Post permanently deleted' }, { status: 200 });
   } catch (error: any) {
     console.error('Admin DELETE post error:', error);

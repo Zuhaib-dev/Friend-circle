@@ -35,7 +35,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Only Team Members and Admins can create posts' }, { status: 403 });
     }
 
-    const { imageUrl, caption } = await req.json();
+    const { imageUrl, caption, imageKitFileId } = await req.json();
 
     if (!imageUrl) {
       return NextResponse.json({ error: 'Image URL is required' }, { status: 400 });
@@ -49,6 +49,7 @@ export async function POST(req: Request) {
     const newPost = await Post.create({
       author: (session.user as any).id,
       imageUrl,
+      imageKitFileId,
       caption,
       status: initialStatus,
     });

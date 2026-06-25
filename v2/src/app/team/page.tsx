@@ -18,7 +18,26 @@ export default function TeamPage() {
   const [clock, setClock] = useState(() => new Date());
 
   useEffect(() => {
-    setUploads(loadUploads());
+    const fetchPosts = async () => {
+      try {
+        const res = await fetch("/api/team/posts");
+        if (res.ok) {
+          const data = await res.json();
+          const mapped = data.map((p: any) => ({
+            id: p._id,
+            name: p.imageUrl.split('/').pop() || 'INTEL_FILE',
+            url: p.imageUrl,
+            size: 1024 * 500, // mock size since it's not strictly tracked
+            ts: new Date(p.createdAt).getTime(),
+            status: p.status
+          }));
+          setUploads(mapped);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchPosts();
     const id = setInterval(() => setClock(new Date()), 1000);
     return () => clearInterval(id);
   }, []);
@@ -97,13 +116,12 @@ export default function TeamPage() {
               className="space-y-6"
             >
               {view === "overview" && <OverviewView stats={stats} name={displayName} uploads={uploads} />}
-              {view === "dossier" && <DossierView uploads={uploads} setUploads={(u) => { setUploads(u); saveUploads(u); }} />}
+              {view === "dossier" && <DossierView uploads={uploads} setUploads={setUploads} />}
               {view === "uplink" && (
                 <UplinkView
                   onAdd={(items) => {
                     const next = [...items, ...uploads];
                     setUploads(next);
-                    saveUploads(next);
                   }}
                   onGo={() => setView("dossier")}
                 />

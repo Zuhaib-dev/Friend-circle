@@ -50,11 +50,6 @@ export function UplinkView({ onAdd, onGo }: { onAdd: (u: Upload[]) => void; onGo
 
   const processQueue = async (items: QueueItem[]) => {
     try {
-      // 1. Get ImageKit Auth
-      const authRes = await fetch("/api/imagekit/auth");
-      if (!authRes.ok) throw new Error("Failed to get auth");
-      const auth = await authRes.json();
-
       let currentQueue = [...items];
 
       for (let i = 0; i < currentQueue.length; i++) {
@@ -73,6 +68,11 @@ export function UplinkView({ onAdd, onGo }: { onAdd: (u: Upload[]) => void; onGo
 
         console.log(`[UPLINK] Compressed ${item.file.name}: ${(item.file.size/1024/1024).toFixed(2)}MB -> ${(compressedFile.size/1024/1024).toFixed(2)}MB`);
         
+        // Get fresh ImageKit Auth for each file because signatures are single-use
+        const authRes = await fetch("/api/imagekit/auth");
+        if (!authRes.ok) throw new Error("Failed to get auth");
+        const auth = await authRes.json();
+
         // Upload to ImageKit
         updateItem(item.id, { status: "UPLOADING", pct: 40 });
         
@@ -96,6 +96,7 @@ export function UplinkView({ onAdd, onGo }: { onAdd: (u: Upload[]) => void; onGo
 
         const uploadData = await uploadRes.json();
         const imageUrl = uploadData.url;
+        const imageKitFileId = uploadData.fileId;
 
         // Save to MongoDB Post collection
         updateItem(item.id, { status: "SAVING", pct: 80, url: imageUrl });
@@ -103,7 +104,7 @@ export function UplinkView({ onAdd, onGo }: { onAdd: (u: Upload[]) => void; onGo
         const dbRes = await fetch("/api/posts", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ imageUrl, caption: "" })
+          body: JSON.stringify({ imageUrl, imageKitFileId, caption: "" })
         });
 
         if (!dbRes.ok) {
