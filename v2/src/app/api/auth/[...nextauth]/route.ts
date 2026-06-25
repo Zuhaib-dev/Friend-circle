@@ -78,8 +78,13 @@ export const authOptions: NextAuthOptions = {
       }
       // Fetch latest role and status from DB to ensure session is up to date
       await connectToDatabase();
-      const dbUser = token.id 
-        ? await User.findById(token.id) 
+
+      // Google OAuth IDs are long numeric strings — not valid MongoDB ObjectIds.
+      // Only use findById when token.id looks like a real 24-char hex ObjectId.
+      const isObjectId = typeof token.id === 'string' && /^[a-f\d]{24}$/i.test(token.id);
+
+      const dbUser = isObjectId
+        ? await User.findById(token.id)
         : await User.findOne({ email: token.email });
         
       if (dbUser) {
