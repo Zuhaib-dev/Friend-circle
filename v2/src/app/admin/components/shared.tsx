@@ -21,7 +21,7 @@ export type Intel = {
 };
 export type LogEntry = { id: string; ts: number; text: string; kind: "ok" | "warn" | "info" };
 
-export type View = "overview" | "operators" | "intel";
+export type View = "overview" | "operators" | "intel" | "tours";
 
 
 // ---------- Shared bits ----------
