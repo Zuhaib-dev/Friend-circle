@@ -17,6 +17,7 @@ export type Intel = {
   url: string;
   ts: number;
   size: string;
+  caption: string;
 };
 export type LogEntry = { id: string; ts: number; text: string; kind: "ok" | "warn" | "info" };
 

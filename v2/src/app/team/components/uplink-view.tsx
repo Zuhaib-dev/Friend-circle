@@ -68,7 +68,10 @@ export function UplinkView({ onAdd, onGo }: { onAdd: (u: Upload[]) => void; onGo
           useWebWorker: true,
           exifOrientation: 1 // Strips EXIF by enforcing orientation
         };
-        const compressedFile = await imageCompression(item.file, options);
+        const compressedBlob = await imageCompression(item.file, options);
+        const compressedFile = new File([compressedBlob], item.file.name, { type: compressedBlob.type });
+
+        console.log(`[UPLINK] Compressed ${item.file.name}: ${(item.file.size/1024/1024).toFixed(2)}MB -> ${(compressedFile.size/1024/1024).toFixed(2)}MB`);
         
         // Upload to ImageKit
         updateItem(item.id, { status: "UPLOADING", pct: 40 });

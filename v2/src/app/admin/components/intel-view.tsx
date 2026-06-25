@@ -50,12 +50,15 @@ export function IntelView({
 
                   {/* Glass overlay on hover */}
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-ink/40 backdrop-blur-sm flex flex-col justify-end p-3 gap-2">
-                    <div className="text-bone">
+                    <div className="text-bone overflow-hidden">
                       <div className="mono-label opacity-70">CALL-SIGN</div>
                       <div className="font-display text-2xl leading-tight">{it.uploader}</div>
                       <div className="mono-label opacity-70 mt-1 flex items-center justify-between">
                         <span>{fmtAgo(it.ts)} AGO</span>
                         <span>{it.size}</span>
+                      </div>
+                      <div className="mt-2 text-sm font-mono opacity-90 break-words line-clamp-3">
+                        "{it.caption}"
                       </div>
                     </div>
                     <div className="grid grid-cols-2 gap-2 pt-2">

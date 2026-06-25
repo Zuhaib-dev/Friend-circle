@@ -23,14 +23,14 @@ const PLACEHOLDER_IMG = (seed: string, w = 400, h = 500) =>
   `https://picsum.photos/seed/${seed}/${w}/${h}`;
 
 const SEED_INTEL: Intel[] = [
-  { id: "INT-491", uploader: "GHOST", url: PLACEHOLDER_IMG("fc-int-491", 600, 800), ts: Date.now() - 1000 * 60 * 8, size: "2.4 MB" },
-  { id: "INT-492", uploader: "RAVEN", url: PLACEHOLDER_IMG("fc-int-492", 600, 400), ts: Date.now() - 1000 * 60 * 22, size: "1.8 MB" },
-  { id: "INT-493", uploader: "ECHO-9", url: PLACEHOLDER_IMG("fc-int-493", 600, 700), ts: Date.now() - 1000 * 60 * 55, size: "3.1 MB" },
-  { id: "INT-494", uploader: "VIPER", url: PLACEHOLDER_IMG("fc-int-494", 600, 500), ts: Date.now() - 1000 * 60 * 71, size: "2.0 MB" },
-  { id: "INT-495", uploader: "NOMAD", url: PLACEHOLDER_IMG("fc-int-495", 600, 900), ts: Date.now() - 1000 * 60 * 130, size: "4.2 MB" },
-  { id: "INT-496", uploader: "GHOST", url: PLACEHOLDER_IMG("fc-int-496", 600, 450), ts: Date.now() - 1000 * 60 * 188, size: "1.6 MB" },
-  { id: "INT-497", uploader: "RAVEN", url: PLACEHOLDER_IMG("fc-int-497", 600, 650), ts: Date.now() - 1000 * 60 * 240, size: "2.9 MB" },
-  { id: "INT-498", uploader: "ECHO-9", url: PLACEHOLDER_IMG("fc-int-498", 600, 550), ts: Date.now() - 1000 * 60 * 320, size: "2.2 MB" },
+  { id: "INT-491", uploader: "GHOST", url: PLACEHOLDER_IMG("fc-int-491", 600, 800), ts: Date.now() - 1000 * 60 * 8, size: "2.4 MB", caption: "RIDGE-LINE · DAWN PATROL" },
+  { id: "INT-492", uploader: "RAVEN", url: PLACEHOLDER_IMG("fc-int-492", 600, 400), ts: Date.now() - 1000 * 60 * 22, size: "1.8 MB", caption: "OFFROAD CONVOY" },
+  { id: "INT-493", uploader: "ECHO-9", url: PLACEHOLDER_IMG("fc-int-493", 600, 700), ts: Date.now() - 1000 * 60 * 55, size: "3.1 MB", caption: "TROUT STRIKE · LIDDER" },
+  { id: "INT-494", uploader: "VIPER", url: PLACEHOLDER_IMG("fc-int-494", 600, 500), ts: Date.now() - 1000 * 60 * 71, size: "2.0 MB", caption: "WAZWAN PREP" },
+  { id: "INT-495", uploader: "NOMAD", url: PLACEHOLDER_IMG("fc-int-495", 600, 900), ts: Date.now() - 1000 * 60 * 130, size: "4.2 MB", caption: "STORM ROLL" },
+  { id: "INT-496", uploader: "GHOST", url: PLACEHOLDER_IMG("fc-int-496", 600, 450), ts: Date.now() - 1000 * 60 * 188, size: "1.6 MB", caption: "QIBLA MARK · HIGH PASS" },
+  { id: "INT-497", uploader: "RAVEN", url: PLACEHOLDER_IMG("fc-int-497", 600, 650), ts: Date.now() - 1000 * 60 * 240, size: "2.9 MB", caption: "CAMPFIRE NIGHT 03" },
+  { id: "INT-498", uploader: "ECHO-9", url: PLACEHOLDER_IMG("fc-int-498", 600, 550), ts: Date.now() - 1000 * 60 * 320, size: "2.2 MB", caption: "JEEP TRACK · MUD MILE" },
 ];
 
 const SEED_LOG: LogEntry[] = [
@@ -89,6 +89,7 @@ export default function AdminPage() {
             url: p.imageUrl,
             ts: new Date(p.createdAt).getTime(),
             size: "1.2 MB", // Using approximate compressed size since it's not stored in DB
+            caption: p.caption || "NO CAPTION PROVIDED",
           })));
         }
       } catch (err) {
