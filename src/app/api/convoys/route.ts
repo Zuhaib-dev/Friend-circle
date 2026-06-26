@@ -94,12 +94,11 @@ export async function POST(req: Request) {
     await connectToDatabase();
     const body = await req.json();
     
-    // Allow updating progress and telemetry for a specific convoy
     if (body.convoyId) {
       const updated = await Convoy.findOneAndUpdate(
         { convoyId: body.convoyId },
         { $set: body },
-        { new: true }
+        { new: true, upsert: true }
       );
       return NextResponse.json(updated, { status: 200 });
     }
@@ -107,6 +106,23 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Missing convoyId' }, { status: 400 });
   } catch (error: any) {
     console.error('Update convoy error:', error);
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+  }
+}
+
+export async function DELETE(req: Request) {
+  try {
+    await connectToDatabase();
+    const { searchParams } = new URL(req.url);
+    const convoyId = searchParams.get('convoyId');
+    if (!convoyId) {
+      return NextResponse.json({ error: 'Missing convoyId' }, { status: 400 });
+    }
+    
+    await Convoy.findOneAndDelete({ convoyId });
+    return NextResponse.json({ success: true }, { status: 200 });
+  } catch (error: any) {
+    console.error('Delete convoy error:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }
