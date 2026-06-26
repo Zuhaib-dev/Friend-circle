@@ -36,6 +36,7 @@ import {
   ChevronDown,
   ChevronUp,
   ShieldCheck,
+  AtSign,
 } from "lucide-react";
 
 import { TopNav } from "@/components/top-nav";
@@ -470,7 +471,7 @@ function CrewSection() {
                           alt={c.name}
                           fill
                           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                          className="object-cover grayscale group-hover:grayscale-0 transition-[filter] duration-700"
+                          className="object-cover transition-transform duration-700 group-hover:scale-105"
                         />
                       ) : (
                         <>
@@ -520,6 +521,24 @@ function CrewSection() {
                       </div>
                       {c.bio && (
                         <p className="text-sm mt-2 text-ink/80 leading-snug line-clamp-2">{c.bio}</p>
+                      )}
+                      {/* Social link */}
+                      {c.socialHandle && (
+                        <a
+                          href={
+                            c.socialHandle.startsWith("http")
+                              ? c.socialHandle
+                              : `https://instagram.com/${c.socialHandle.replace("@", "")}`
+                          }
+                          target="_blank"
+                          rel="noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="mt-3 flex items-center gap-1.5 mono-label text-signal hover:underline truncate w-fit"
+                        >
+                          <AtSign className="h-3 w-3 shrink-0" />
+                          <span className="truncate">{c.socialHandle}</span>
+                          <ArrowUpRight className="h-3 w-3 shrink-0 opacity-60" />
+                        </a>
                       )}
                     </div>
                   </motion.article>
