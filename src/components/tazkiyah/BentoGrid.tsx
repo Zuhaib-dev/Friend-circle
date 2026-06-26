@@ -8,18 +8,24 @@ import { useAladhanData } from "./utils";
 export function BentoGrid() {
   const aladhan = useAladhanData();
   const [streak, setStreak] = React.useState<number | null>(null);
+  const [dayOfYear, setDayOfYear] = React.useState<number>(0);
+  const [mounted, setMounted] = React.useState(false);
+  const [todayHadith, setTodayHadith] = React.useState(HADITHS[0]);
+  const [todayDua, setTodayDua] = React.useState(DUAS[0]);
 
   React.useEffect(() => {
     setStreak(parseInt(localStorage.getItem("dhikr_streak") || "12"));
+    
+    const now = new Date();
+    const start = new Date(now.getFullYear(), 0, 0);
+    const diff = now.getTime() - start.getTime() + (start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000;
+    const currentDayOfYear = Math.floor(diff / (1000 * 60 * 60 * 24));
+    
+    setDayOfYear(currentDayOfYear);
+    setTodayHadith(HADITHS[currentDayOfYear % HADITHS.length]);
+    setTodayDua(DUAS[currentDayOfYear % DUAS.length]);
+    setMounted(true);
   }, []);
-
-  const now = new Date();
-  const start = new Date(now.getFullYear(), 0, 0);
-  const diff = now.getTime() - start.getTime() + (start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000;
-  const dayOfYear = Math.floor(diff / (1000 * 60 * 60 * 24));
-
-  const todayHadith = HADITHS[dayOfYear % HADITHS.length];
-  const todayDua = DUAS[dayOfYear % DUAS.length];
 
   return (
     <div className="mt-16">
