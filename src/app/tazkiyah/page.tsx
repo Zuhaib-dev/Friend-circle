@@ -14,6 +14,7 @@ import { HadithSection } from "@/components/tazkiyah/HadithSection";
 import { TasbihSection } from "@/components/tazkiyah/TasbihSection";
 import { SeerahSection } from "@/components/tazkiyah/SeerahSection";
 import { DailyAyahSpotlight } from "@/components/tazkiyah/DailyAyahSpotlight";
+import { AsmaulHusnaSection } from "@/components/tazkiyah/AsmaulHusnaSection";
 import { BentoGrid } from "@/components/tazkiyah/BentoGrid";
 import { Footer } from "@/components/tazkiyah/Footer";
 
@@ -44,6 +45,7 @@ export default function TazkiyahPage() {
             </AnimatePresence>
           </div>
           <DailyAyahSpotlight />
+          <AsmaulHusnaSection />
           <BentoGrid />
           <Footer />
         </div>
