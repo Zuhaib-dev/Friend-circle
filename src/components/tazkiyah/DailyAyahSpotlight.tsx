@@ -37,6 +37,10 @@ export function DailyAyahSpotlight() {
     return d.toLocaleDateString("en-GB", { weekday: "long", day: "2-digit", month: "short", year: "numeric" }).toUpperCase();
   }, []);
 
+  const glowBackground = useTransform([glowX, glowY], ([x, y]) =>
+    `radial-gradient(600px circle at ${x} ${y}, rgba(212,175,90,0.10), transparent 55%)`
+  );
+
   const handlePointer = (e: React.PointerEvent<HTMLDivElement>) => {
     const r = e.currentTarget.getBoundingClientRect();
     mx.set((e.clientX - r.left) / r.width - 0.5);
@@ -104,9 +108,7 @@ export function DailyAyahSpotlight() {
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-70"
           style={{
-            background: useTransform([glowX, glowY], ([x, y]) =>
-              `radial-gradient(600px circle at ${x} ${y}, rgba(212,175,90,0.10), transparent 55%)`
-            ) as any,
+            background: glowBackground as any,
           }}
         />
 
