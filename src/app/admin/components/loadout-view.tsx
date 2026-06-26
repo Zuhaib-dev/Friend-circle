@@ -285,7 +285,7 @@ export function LoadoutView() {
                       <span className="mono-label opacity-60">BASE QTY</span>
                       <input type="number" required value={itemForm.qty} onChange={e => setItemForm({...itemForm, qty: Number(e.target.value)})} className="w-full bg-transparent hairline border-ink/40 px-2 py-1.5 mono-label outline-none focus:border-ink" />
                     </label>
-                    <label className="space-y-1 block flex items-center gap-2 mt-4 cursor-pointer">
+                    <label className="flex items-center gap-2 mt-4 cursor-pointer">
                       <input type="checkbox" checked={itemForm.critical} onChange={e => setItemForm({...itemForm, critical: e.target.checked})} className="accent-signal cursor-pointer" />
                       <span className="mono-label opacity-80">CRITICAL ITEM</span>
                     </label>
