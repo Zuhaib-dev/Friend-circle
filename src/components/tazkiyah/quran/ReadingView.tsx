@@ -31,6 +31,15 @@ export function ReadingView({
         audioRef.current.src = ayah.audio;
         audioRef.current.play().catch(() => setPlaying(null));
       }
+
+      setRenderedCount((prev) => Math.max(prev, playing + 5));
+
+      setTimeout(() => {
+        const el = document.getElementById(`ayah-${playing}`);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      }, 150);
     } else if (audioRef.current) {
       audioRef.current.pause();
     }
