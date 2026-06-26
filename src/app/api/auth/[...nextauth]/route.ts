@@ -29,6 +29,10 @@ export const authOptions: NextAuthOptions = {
           throw new Error('No user found with this email');
         }
 
+        if (user.isSuspended) {
+          throw new Error('Your account has been suspended by an administrator');
+        }
+
         if (!user.isVerified) {
           throw new Error('Please verify your email first');
         }
@@ -54,6 +58,10 @@ export const authOptions: NextAuthOptions = {
         await connectToDatabase();
         try {
           const existingUser = await User.findOne({ email: user.email });
+
+          if (existingUser && existingUser.isSuspended) {
+            return "/login?error=AccessDenied";
+          }
 
           if (!existingUser) {
             await User.create({

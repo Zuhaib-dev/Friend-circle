@@ -1,8 +1,7 @@
-
 "use client";
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { Activity, Radar, ShieldCheck, Image as ImageIcon, Lock, Crosshair as CrosshairIcon } from "lucide-react";
+import { Activity, Radar, ShieldCheck, Image as ImageIcon, Lock, Crosshair as CrosshairIcon, Users } from "lucide-react";
 import { TopNav } from "@/components/top-nav";
 
 import { NavBtn, Row, type View, type Operator, type Intel, type LogEntry } from "./components/shared";
@@ -11,6 +10,7 @@ import { OperatorsView } from "./components/operators-view";
 import { IntelView } from "./components/intel-view";
 import { ToursView } from "./components/tours-view";
 import { LiveOpsView } from "./components/live-ops-view";
+import { PersonnelView } from "./components/personnel-view";
 
 // ---------- Seed data ----------
 const SEED_OPS: Operator[] = [
@@ -154,6 +154,7 @@ export default function AdminPage() {
             <NavBtn id="intel" current={view} setView={setView} icon={ImageIcon} label="MEDIA INTEL" code="03" />
             <NavBtn id="tours" current={view} setView={setView} icon={Radar} label="TOURS / DISPATCH" code="04" />
             <NavBtn id="liveops" current={view} setView={setView} icon={CrosshairIcon} label="LIVE-OPS / TRACKER" code="05" />
+            <NavBtn id="personnel" current={view} setView={setView} icon={Users} label="PERSONNEL ROSTER" code="06" />
 
             <div className="mono-label opacity-50 px-2 pt-4 pb-1">// QUEUE</div>
             <div className="hairline border-ink/40 p-2 space-y-1.5">
@@ -267,6 +268,9 @@ export default function AdminPage() {
               )}
               {view === "liveops" && (
                 <LiveOpsView />
+              )}
+              {view === "personnel" && (
+                <PersonnelView />
               )}
             </motion.div>
           </AnimatePresence>

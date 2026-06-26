@@ -15,6 +15,7 @@ export interface IUser extends Document {
   phone?: string;
   socialHandle?: string;
   bio?: string;
+  isSuspended: boolean;
 }
 
 const UserSchema: Schema = new Schema(
@@ -72,6 +73,10 @@ const UserSchema: Schema = new Schema(
     },
     bio: {
       type: String,
+    },
+    isSuspended: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true }

@@ -4,7 +4,7 @@ import { authOptions } from '../../auth/[...nextauth]/route';
 import connectToDatabase from '@/lib/mongodb';
 import User from '@/models/User';
 
-export async function GET() {
+export async function GET(req: Request) {
   try {
     const session = await getServerSession(authOptions);
 
@@ -12,12 +12,20 @@ export async function GET() {
       return NextResponse.json({ error: 'Unauthorized. Admin access required.' }, { status: 403 });
     }
 
+    const { searchParams } = new URL(req.url);
+    const view = searchParams.get('view');
+
     await connectToDatabase();
     
-    // Fetch users who applied to be team members
-    const pendingUsers = await User.find({ teamMemberStatus: 'PENDING' }).select('-password');
+    let users;
+    if (view === 'all') {
+      users = await User.find().select('-password');
+    } else {
+      // Default to pending
+      users = await User.find({ teamMemberStatus: 'PENDING' }).select('-password');
+    }
 
-    return NextResponse.json(pendingUsers, { status: 200 });
+    return NextResponse.json(users, { status: 200 });
   } catch (error: any) {
     console.error('Admin GET users error:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
@@ -32,7 +40,7 @@ export async function PATCH(req: Request) {
       return NextResponse.json({ error: 'Unauthorized. Admin access required.' }, { status: 403 });
     }
 
-    const { userId, action } = await req.json(); // action: 'APPROVE' | 'REJECT'
+    const { userId, action } = await req.json(); // action: 'APPROVE' | 'REJECT' | 'SUSPEND' | 'UNSUSPEND'
 
     if (!userId || !action) {
       return NextResponse.json({ error: 'User ID and action are required' }, { status: 400 });
@@ -52,6 +60,10 @@ export async function PATCH(req: Request) {
     } else if (action === 'REJECT') {
       user.teamMemberStatus = 'REJECTED';
       // keeping role as USER
+    } else if (action === 'SUSPEND') {
+      user.isSuspended = true;
+    } else if (action === 'UNSUSPEND') {
+      user.isSuspended = false;
     } else {
       return NextResponse.json({ error: 'Invalid action' }, { status: 400 });
     }
