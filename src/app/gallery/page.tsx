@@ -298,9 +298,9 @@ export default function GalleryPage() {
       {/* ── Grid ────────────────────────────────────────────── */}
       <section className="px-4 py-6 md:py-8">
         {loading ? (
-          /* Skeleton grid while loading */
+          /* Skeleton grid — fixed count so server & client HTML match */
           <div className="columns-1 md:columns-2 lg:columns-3 xl:columns-4 gap-4 [column-fill:balance]">
-            {Array.from({ length: PAGE_SIZE }).map((_, i) => (
+            {Array.from({ length: 8 }).map((_, i) => (
               <SkeletonCard key={i} />
             ))}
           </div>
@@ -432,7 +432,7 @@ function FrameCard({
         </motion.div>
 
         {/* scan line */}
-        <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-signal/80 translate-y-0 group-hover:translate-y-full transition-transform duration-[1400ms] ease-linear" />
+        <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-signal/80 translate-y-0 group-hover:translate-y-full transition-transform duration-1400 ease-linear" />
 
         {/* corner ticks */}
         <span className="absolute top-1 left-1 h-2 w-2 border-t border-l border-bone/80" />
