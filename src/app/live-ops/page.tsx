@@ -154,15 +154,8 @@ export default function LiveOpsPage() {
 
   const selected = useMemo(() => convoys.find((c) => c.convoyId === selectedId) || convoys[0], [selectedId, convoys]);
 
-  if (loading || !selected) {
-    return (
-      <div className="min-h-screen bg-bone text-ink flex items-center justify-center mono-label text-signal">
-        ESTABLISHING UPLINK...
-      </div>
-    );
-  }
-
   const totalElev = useMemo(() => {
+    if (!selected) return 0;
     let gain = 0;
     for (let i = 1; i < selected.path.length; i++) {
       const d = selected.path[i].elev - selected.path[i - 1].elev;
@@ -170,6 +163,14 @@ export default function LiveOpsPage() {
     }
     return gain;
   }, [selected]);
+
+  if (loading || !selected) {
+    return (
+      <div className="min-h-screen bg-bone text-ink flex items-center justify-center mono-label text-signal">
+        ESTABLISHING UPLINK...
+      </div>
+    );
+  }
 
   const currentPos = pointOnPath(selected.path, selected.progress);
 
