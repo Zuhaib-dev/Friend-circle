@@ -166,7 +166,7 @@ export default function LiveOpsPage() {
 
   if (loading || !selected) {
     return (
-      <div className="min-h-screen bg-bone text-ink flex items-center justify-center mono-label text-signal">
+      <div className="min-h-screen bg-bone flex items-center justify-center mono-label text-signal">
         ESTABLISHING UPLINK...
       </div>
     );
@@ -236,7 +236,7 @@ export default function LiveOpsPage() {
               {playing ? "LIVE" : "PAUSED"}
             </button>
           } />
-          <div className="relative aspect-[4/3] overflow-hidden">
+          <div className="relative aspect-4/3 overflow-hidden">
             <Crosshairs />
             <MapSvg
               tick={tick}
