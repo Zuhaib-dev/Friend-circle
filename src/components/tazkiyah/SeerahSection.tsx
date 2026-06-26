@@ -75,9 +75,9 @@ function SeerahReadingModal({ chapter, onClose }: { chapter: SeerahChapter | nul
     <AnimatePresence>
       {chapter && (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}
-          className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-xl flex flex-col overflow-hidden">
+          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-xl flex flex-col overflow-hidden">
           
-          <div className="flex-shrink-0 flex items-center justify-between px-6 py-5 border-b border-white/5 bg-[#0a0a0a]/50 backdrop-blur-md">
+          <div className="shrink-0 flex items-center justify-between px-6 py-5 border-b border-white/5 bg-[#0a0a0a]/50 backdrop-blur-md">
             <div className="flex items-center gap-3">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-300 animate-pulse" />
               <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-white/50">
