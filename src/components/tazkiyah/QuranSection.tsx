@@ -1,7 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Search, Bookmark, Copy, Share2, Play, Pause, Check, X } from "lucide-react";
+import { Search, Bookmark, Copy, Share2, Play, Pause, Check, X, ChevronRight } from "lucide-react";
+import Link from "next/link";
 import { SURAHS, JUZ, Surah, Ayah } from "@/data/quran-data";
 import { useQuranSurah } from "@/hooks/useQuranSurah";
 import { useLastSeen } from "@/hooks/useLastSeen";
@@ -18,8 +19,8 @@ export function QuranSection() {
   
   const filtered = SURAHS.filter((s) => `${s.number} ${s.name} ${s.meaning}`.toLowerCase().includes(query.toLowerCase()));
   return (
-    <div className="grid lg:grid-cols-[320px_1fr] gap-6">
-      <div className="rounded-sm border border-white/10 bg-[#0f0f0f] overflow-hidden">
+    <div className="grid lg:grid-cols-[320px_1fr] gap-6 relative items-start">
+      <div className="rounded-sm border border-white/10 bg-[#0f0f0f] overflow-hidden lg:sticky lg:top-24">
         <div className="p-3 border-b border-white/5">
           <div className="relative inline-flex w-full bg-[#0a0a0a] border border-white/10 rounded-sm p-1">
             {(["surahs", "juz"] as const).map((m) => (
@@ -36,7 +37,7 @@ export function QuranSection() {
               className="w-full bg-[#0a0a0a] border border-white/10 rounded-sm pl-9 pr-3 py-2 text-sm placeholder-white/30 focus:outline-none focus:border-emerald-300/50 transition-colors" />
           </div>
         </div>
-        <div className="max-h-[460px] overflow-y-auto">
+        <div className="max-h-[500px] lg:max-h-[calc(100vh-280px)] overflow-y-auto">
           {mode === "surahs" ? filtered.map((s) => (
             <motion.button key={s.number} onClick={() => setActive(s)} whileHover={{ x: 2 }}
               className={`w-full grid grid-cols-[36px_1fr_auto] items-center gap-3 px-4 py-3 text-left border-b border-white/5 transition-colors ${active.number === s.number ? "bg-emerald-300/6" : "hover:bg-white/3"}`}>
@@ -78,7 +79,7 @@ export function QuranSection() {
               <span className="animate-pulse text-xs uppercase tracking-[0.2em]">Loading ayahs...</span>
             </div>
           )}
-          {!loading && ayat && ayat.map((a, i) => (
+          {!loading && ayat && ayat.slice(0, 7).map((a, i) => (
             <motion.button key={a.n} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.02, duration: 0.4 }}
               onClick={() => setSelectedAyat(a)} className="w-full text-left px-5 sm:px-8 py-6 hover:bg-white/2 transition-colors group">
               <div className="flex items-start justify-between gap-4">
@@ -92,6 +93,14 @@ export function QuranSection() {
               </p>
             </motion.button>
           ))}
+          {!loading && ayat && ayat.length > 7 && (
+            <div className="p-6 flex justify-center border-t border-white/5 bg-[#0a0a0a]/50">
+              <Link href={`/tazkiyah/quran?surah=${active.number}`} className="group px-6 py-3 border border-emerald-300/30 bg-emerald-300/5 hover:bg-emerald-300/10 transition-colors flex items-center gap-3 rounded-sm">
+                <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-white/90">Read Full Surah</span>
+                <ChevronRight className="h-3.5 w-3.5 text-white/50 group-hover:text-emerald-300 transition-colors" />
+              </Link>
+            </div>
+          )}
         </div>
       </div>
       <AyatModal ayat={selectedAyat} surah={active} onClose={() => setSelectedAyat(null)} />
