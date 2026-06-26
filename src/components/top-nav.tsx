@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { LogIn, LogOut, User as UserIcon, Settings, ChevronDown, CircleDot, Menu, X, ShieldCheck, Image as ImageIcon, Radar, Terminal, Video as VideoIcon, Compass, Crosshair } from "lucide-react";
+import { LogIn, LogOut, User as UserIcon, Settings, ChevronDown, CircleDot, Menu, X, ShieldCheck, Image as ImageIcon, Radar, Terminal, Video as VideoIcon, Compass, Crosshair, Package } from "lucide-react";
 import { useSession, signOut as doSignOut } from "next-auth/react";
 import { initialsOf } from "../lib/utils";
 
@@ -101,6 +101,7 @@ export function TopNav() {
     { href: "/gallery", label: "FRAMES" },
     { href: "/surveillance", label: "FEEDS" },
     { href: "/live-ops", label: "LIVE-OPS" },
+    { href: "/loadout", label: "LOADOUT" },
     { href: "#tazkiyah", label: "TAZKIYAH" },
   ];
 
@@ -177,6 +178,7 @@ export function TopNav() {
                     <MenuItem icon={ImageIcon} label="GALLERY" code="03" onClick={() => { setOpen(false); navigate.push('/gallery'); }} />
                     <MenuItem icon={VideoIcon} label="FEEDS" code="04" onClick={() => { setOpen(false); navigate.push('/surveillance'); }} />
                     <MenuItem icon={Crosshair} label="LIVE-OPS" code="05" onClick={() => { setOpen(false); navigate.push('/live-ops'); }} />
+                    <MenuItem icon={Package} label="LOADOUT" code="06" onClick={() => { setOpen(false); navigate.push('/loadout'); }} />
                     
                     {(!user.role || user.role === "USER") && (
                       <MenuItem icon={ShieldCheck} label="BECOME TEAM MEMBER" code="05" onClick={() => { setOpen(false); navigate.push('/apply-team'); }} />
