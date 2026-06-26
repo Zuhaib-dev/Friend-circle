@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
   Activity,
@@ -26,98 +26,41 @@ import { Crosshairs } from "@/components/auth-shell";
 /* ------------------------------- DATA ---------------------------------- */
 
 type Convoy = {
-  id: string;
+  convoyId: string;
   callsign: string;
   status: "ACTIVE" | "HOLD" | "RTB";
   operators: number;
   vehicles: string[];
   start: string;
   destination: string;
-  // SVG path coords (0–1000 viewBox)
-  path: { x: number; y: number; label?: string; elev: number; t: string }[];
-  progress: number; // 0..1 along path
+  path: { x: number; y: number; lat: number; lon: number; label?: string; elev: number; t: string }[];
+  progress: number;
   battery: number;
   temp: number;
   wind: number;
   lastBeacon: string;
 };
 
-const CONVOYS: Convoy[] = [
-  {
-    id: "alpha",
-    callsign: "ALPHA-01",
-    status: "ACTIVE",
-    operators: 6,
-    vehicles: ["THAR-4x4", "GYPSY", "ROYAL-ENFIELD x2"],
-    start: "SRINAGAR",
-    destination: "GUREZ VALLEY",
-    path: [
-      { x: 180, y: 640, label: "SRINAGAR", elev: 1585, t: "06:12" },
-      { x: 285, y: 575, elev: 1820, t: "07:40" },
-      { x: 360, y: 520, label: "BANDIPORA", elev: 1620, t: "08:55" },
-      { x: 455, y: 430, elev: 2410, t: "10:22" },
-      { x: 540, y: 360, label: "RAZDAN PASS", elev: 3300, t: "11:48" },
-      { x: 640, y: 305, elev: 2780, t: "13:05" },
-      { x: 745, y: 248, label: "DAWAR", elev: 2440, t: "14:30" },
-    ],
-    progress: 0.62,
-    battery: 78,
-    temp: 4,
-    wind: 22,
-    lastBeacon: "00:42 AGO",
-  },
-  {
-    id: "bravo",
-    callsign: "BRAVO-02",
-    status: "HOLD",
-    operators: 4,
-    vehicles: ["THAR-4x4", "HIMALAYAN x2"],
-    start: "PAHALGAM",
-    destination: "ARU MEADOWS",
-    path: [
-      { x: 420, y: 760, label: "PAHALGAM", elev: 2130, t: "07:00" },
-      { x: 488, y: 705, elev: 2380, t: "08:15" },
-      { x: 555, y: 660, label: "ARU", elev: 2414, t: "09:30" },
-      { x: 620, y: 600, elev: 2780, t: "10:55" },
-      { x: 695, y: 540, label: "LIDDERWAT", elev: 2900, t: "12:40" },
-    ],
-    progress: 0.45,
-    battery: 54,
-    temp: 8,
-    wind: 11,
-    lastBeacon: "02:18 AGO",
-  },
-  {
-    id: "charlie",
-    callsign: "CHARLIE-03",
-    status: "RTB",
-    operators: 3,
-    vehicles: ["GYPSY", "ROYAL-ENFIELD"],
-    start: "SONMARG",
-    destination: "ZOJI LA",
-    path: [
-      { x: 565, y: 555, label: "SONMARG", elev: 2730, t: "05:45" },
-      { x: 640, y: 480, elev: 3100, t: "07:20" },
-      { x: 720, y: 420, label: "ZOJI LA", elev: 3528, t: "09:10" },
-      { x: 660, y: 470, elev: 3100, t: "11:00" },
-      { x: 590, y: 540, elev: 2780, t: "12:15" },
-    ],
-    progress: 0.88,
-    battery: 31,
-    temp: -2,
-    wind: 34,
-    lastBeacon: "00:11 AGO",
-  },
-];
+// Bounding box for mapping
+const MAP_BOUNDS = { minLat: 33.2, maxLat: 34.9, minLon: 73.5, maxLon: 75.9 };
+const SVG_W = 1000;
+const SVG_H = 750;
+
+function latLonToXY(lat: number, lon: number) {
+  const x = ((lon - MAP_BOUNDS.minLon) / (MAP_BOUNDS.maxLon - MAP_BOUNDS.minLon)) * SVG_W;
+  const y = SVG_H - ((lat - MAP_BOUNDS.minLat) / (MAP_BOUNDS.maxLat - MAP_BOUNDS.minLat)) * SVG_H;
+  return { x, y };
+}
 
 const WAYPOINTS = [
-  { x: 180, y: 640, name: "SRINAGAR", code: "BASE-01", type: "BASE" },
-  { x: 420, y: 760, name: "PAHALGAM", code: "FOB-02", type: "FOB" },
-  { x: 565, y: 555, name: "SONMARG", code: "FOB-03", type: "FOB" },
-  { x: 720, y: 420, name: "ZOJI LA", code: "PASS-04", type: "PASS" },
-  { x: 540, y: 360, name: "RAZDAN", code: "PASS-05", type: "PASS" },
-  { x: 745, y: 248, name: "DAWAR", code: "OBJ-06", type: "OBJ" },
-];
+  { lat: 34.0837, lon: 74.7973, name: "SRINAGAR", code: "BASE-01", type: "BASE" },
+  { lat: 34.0148, lon: 75.3168, name: "PAHALGAM", code: "FOB-02", type: "FOB" },
+  { lat: 34.3000, lon: 75.2800, name: "SONMARG", code: "FOB-03", type: "FOB" },
+  { lat: 34.2800, lon: 75.4500, name: "ZOJI LA", code: "PASS-04", type: "PASS" },
+  { lat: 34.6300, lon: 74.7500, name: "RAZDAN", code: "PASS-05", type: "PASS" },
+  { lat: 34.7500, lon: 74.8900, name: "DAWAR", code: "OBJ-06", type: "OBJ" },
+].map(w => ({ ...w, ...latLonToXY(w.lat, w.lon) }));
+
 
 /* ------------------------------ HELPERS -------------------------------- */
 
@@ -166,9 +109,41 @@ function useUtc() {
 
 export default function LiveOpsPage() {
   const utc = useUtc();
-  const [selectedId, setSelectedId] = useState<string>("alpha");
+  const [selectedId, setSelectedId] = useState<string>("");
   const [playing, setPlaying] = useState(true);
   const [tick, setTick] = useState(0);
+
+  const [convoys, setConvoys] = useState<Convoy[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchConvoys = useCallback(async () => {
+    try {
+      const res = await fetch('/api/convoys');
+      const data = await res.json();
+      
+      const mapped = data.map((c: any) => ({
+        ...c,
+        path: c.path.map((p: any) => ({
+          ...p,
+          ...latLonToXY(p.lat, p.lon)
+        }))
+      }));
+      setConvoys(mapped);
+      setLoading(false);
+      if (mapped.length > 0 && selectedId === "") {
+        setSelectedId(mapped[0].convoyId);
+      }
+    } catch (e) {
+      console.error(e);
+      setLoading(false);
+    }
+  }, [selectedId]);
+
+  useEffect(() => {
+    fetchConvoys();
+    const interval = setInterval(fetchConvoys, 3000);
+    return () => clearInterval(interval);
+  }, [fetchConvoys]);
 
   // sweep & breadcrumb animation tick
   useEffect(() => {
@@ -177,7 +152,15 @@ export default function LiveOpsPage() {
     return () => clearInterval(id);
   }, [playing]);
 
-  const selected = useMemo(() => CONVOYS.find((c) => c.id === selectedId)!, [selectedId]);
+  const selected = useMemo(() => convoys.find((c) => c.convoyId === selectedId) || convoys[0], [selectedId, convoys]);
+
+  if (loading || !selected) {
+    return (
+      <div className="min-h-screen bg-bone text-ink flex items-center justify-center mono-label text-signal">
+        ESTABLISHING UPLINK...
+      </div>
+    );
+  }
 
   const totalElev = useMemo(() => {
     let gain = 0;
@@ -213,7 +196,7 @@ export default function LiveOpsPage() {
             </span>
             <span className="opacity-30">·</span>
             <span className="opacity-60">CONVOYS</span>
-            <span className="text-signal">{CONVOYS.length} ACTIVE</span>
+            <span className="text-signal">{convoys.length} ACTIVE</span>
           </div>
         </div>
       </div>
@@ -257,6 +240,7 @@ export default function LiveOpsPage() {
             <MapSvg
               tick={tick}
               selected={selected}
+              convoys={convoys}
               onSelect={(id) => setSelectedId(id)}
               currentPos={currentPos}
             />
@@ -291,12 +275,12 @@ export default function LiveOpsPage() {
           <div className="hairline border-ink bg-bone">
             <PanelHeader code="// FLT-02" title="ACTIVE CONVOYS" />
             <div>
-              {CONVOYS.map((c) => (
+              {convoys.map((c) => (
                 <button
-                  key={c.id}
-                  onClick={() => setSelectedId(c.id)}
+                  key={c.convoyId}
+                  onClick={() => setSelectedId(c.convoyId)}
                   className={`w-full text-left px-3 py-3 hairline-b border-ink/30 last:border-b-0 transition-colors group ${
-                    selectedId === c.id ? "bg-ink text-bone" : "hover:bg-ink/5"
+                    selectedId === c.convoyId ? "bg-ink text-bone" : "hover:bg-ink/5"
                   }`}
                 >
                   <div className="flex items-center justify-between">
@@ -492,11 +476,13 @@ function LegendDot({ color, label, dashed }: { color: string; label: string; das
 function MapSvg({
   tick,
   selected,
+  convoys,
   onSelect,
   currentPos,
 }: {
   tick: number;
   selected: Convoy;
+  convoys: Convoy[];
   onSelect: (id: string) => void;
   currentPos: { x: number; y: number };
 }) {
@@ -568,11 +554,11 @@ function MapSvg({
       ))}
 
       {/* All convoy paths (non-selected dim) */}
-      {CONVOYS.map((c) => {
-        const isSel = c.id === selected.id;
+      {convoys.map((c) => {
+        const isSel = c.convoyId === selected.convoyId;
         const d = buildPath(c.path);
         return (
-          <g key={c.id} onClick={() => onSelect(c.id)} style={{ cursor: "pointer" }}>
+          <g key={c.convoyId} onClick={() => onSelect(c.convoyId)} style={{ cursor: "pointer" }}>
             {/* completed leg */}
             <path
               d={d}
