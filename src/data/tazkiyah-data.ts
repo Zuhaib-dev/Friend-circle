@@ -1,7 +1,37 @@
-import { Sunrise, Sun, Sunset, CloudMoon } from "lucide-react";
+import { Sunrise, Sun, Sunset, Moon, CloudMoon } from "lucide-react";
 
 export type Ayat = { n: number; ar: string; en: string; ur: string };
 export type Surah = { n: number; name: string; arName: string; meaning: string; type: "Meccan" | "Medinan"; count: number; ayats: Ayat[] };
+
+export const SPOTLIGHT_AYAHS = [
+  {
+    surah: "Ash-Sharh",
+    ref: "94 : 5-6",
+    ar: "فَإِنَّ مَعَ ٱلْعُسْرِ يُسْرًا  إِنَّ مَعَ ٱلْعُسْرِ يُسْرًا",
+    en: "So, verily, with every hardship, there is ease. Verily, with every hardship, there is ease.",
+    ur: "پس بے شک ہر تنگی کے ساتھ آسانی ہے۔ بے شک ہر تنگی کے ساتھ آسانی ہے۔",
+    revealed: "Meccan",
+    theme: "Hope · Patience",
+  },
+  {
+    surah: "Al-Baqarah",
+    ref: "2 : 286",
+    ar: "لَا يُكَلِّفُ ٱللَّهُ نَفْسًا إِلَّا وُسْعَهَا",
+    en: "Allah does not burden a soul beyond that it can bear.",
+    ur: "اللہ کسی جان پر اس کی طاقت سے بڑھ کر بوجھ نہیں ڈالتا۔",
+    revealed: "Medinan",
+    theme: "Mercy · Capacity",
+  },
+  {
+    surah: "At-Talaq",
+    ref: "65 : 3",
+    ar: "وَمَن يَتَوَكَّلْ عَلَى ٱللَّهِ فَهُوَ حَسْبُهُۥ",
+    en: "And whoever places his trust in Allah — He is sufficient for him.",
+    ur: "اور جو اللہ پر بھروسا کرے، وہ اُس کے لیے کافی ہے۔",
+    revealed: "Medinan",
+    theme: "Tawakkul · Trust",
+  },
+];
 
 export const SURAHS: Surah[] = [
   { n: 1, name: "Al-Fatihah", arName: "ٱلْفَاتِحَة", meaning: "The Opening", type: "Meccan", count: 7, ayats: [

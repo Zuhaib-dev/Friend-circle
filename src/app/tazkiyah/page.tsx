@@ -13,6 +13,7 @@ import { QuranSection } from "@/components/tazkiyah/QuranSection";
 import { HadithSection } from "@/components/tazkiyah/HadithSection";
 import { TasbihSection } from "@/components/tazkiyah/TasbihSection";
 import { SeerahSection } from "@/components/tazkiyah/SeerahSection";
+import { DailyAyahSpotlight } from "@/components/tazkiyah/DailyAyahSpotlight";
 import { BentoGrid } from "@/components/tazkiyah/BentoGrid";
 import { Footer } from "@/components/tazkiyah/Footer";
 
@@ -42,6 +43,7 @@ export default function TazkiyahPage() {
               {tab === "seerah" && <motion.div key="seerah" {...fadeUp}><SeerahSection /></motion.div>}
             </AnimatePresence>
           </div>
+          <DailyAyahSpotlight />
           <BentoGrid />
           <Footer />
         </div>
