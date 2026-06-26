@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { LogIn, LogOut, User as UserIcon, Settings, ChevronDown, CircleDot, Menu, X, ShieldCheck, Image as ImageIcon, Radar, Terminal, Video as VideoIcon, Compass, Crosshair, Package } from "lucide-react";
+import { LogIn, LogOut, User as UserIcon, Settings, ChevronDown, CircleDot, Menu, X, ShieldCheck, Image as ImageIcon, Radar, Terminal, Video as VideoIcon, Compass, Crosshair, Package, BookOpen } from "lucide-react";
 import { useSession, signOut as doSignOut } from "next-auth/react";
 import { initialsOf } from "../lib/utils";
 
@@ -95,17 +95,27 @@ export function TopNav() {
     setMobileOpen(false);
   };
 
-  const navLinks = [
-    { href: "/crew", label: "CREW" },
-    { href: "/tours", label: "ROUTES" },
-    { href: "/gallery", label: "FRAMES" },
-    { href: "/surveillance", label: "FEEDS" },
-    { href: "/live-ops", label: "LIVE-OPS" },
-    ...((user?.role === "ADMIN" || user?.role === "TEAM_MEMBER") 
-      ? [{ href: "/loadout", label: "LOADOUT" }] 
-      : []),
-    { href: "#tazkiyah", label: "TAZKIYAH" },
-  ];
+  const pathname = usePathname();
+  const isTazkiyah = pathname?.startsWith("/tazkiyah");
+
+  const navLinks = isTazkiyah
+    ? [
+        { href: "/tazkiyah", label: "OVERVIEW" },
+        { href: "/tazkiyah/quran", label: "QUR'AN" },
+        { href: "/tazkiyah", label: "SEERAH" },
+        { href: "/tazkiyah", label: "HADITH" },
+      ]
+    : [
+        { href: "/crew", label: "CREW" },
+        { href: "/tours", label: "ROUTES" },
+        { href: "/gallery", label: "FRAMES" },
+        { href: "/surveillance", label: "FEEDS" },
+        { href: "/live-ops", label: "LIVE-OPS" },
+        ...((user?.role === "ADMIN" || user?.role === "TEAM_MEMBER") 
+          ? [{ href: "/loadout", label: "LOADOUT" }] 
+          : []),
+        { href: "/tazkiyah", label: "TAZKIYAH" },
+      ];
 
   return (
     <div className="hairline-b border-ink bg-bone sticky top-0 z-50">
@@ -196,7 +206,8 @@ export function TopNav() {
                       <MenuItem icon={Terminal} label="ADMIN COMMAND" code="07" onClick={() => { setOpen(false); navigate.push('/admin'); }} />
                     )}
                     
-                    <MenuItem icon={Settings} label="SETTINGS" code="08" onClick={() => { setOpen(false); }} />
+                    <MenuItem icon={BookOpen} label="TAZKIYAH" code="08" onClick={() => { setOpen(false); navigate.push('/tazkiyah'); }} />
+                    <MenuItem icon={Settings} label="SETTINGS" code="09" onClick={() => { setOpen(false); }} />
                     <button
                       onClick={handleLogout}
                       className="w-full flex items-center justify-between gap-3 px-3 py-2.5 hairline-t border-ink/40 mono-label text-signal hover:bg-signal hover:text-bone transition-colors group"
