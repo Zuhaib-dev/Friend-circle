@@ -287,7 +287,7 @@ function Header() {
     <div className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 sm:gap-4">
       <Link
         href="/tazkiyah"
-        className="group inline-flex shrink-0 items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-[11px] text-zinc-300 backdrop-blur-md transition hover:border-emerald-300/30 hover:text-emerald-200 sm:gap-2 sm:px-3.5 sm:text-xs"
+        className="group inline-flex shrink-0 items-center gap-1.5 rounded-full border border-white/10 bg-white/3 px-3 py-1.5 text-[11px] text-zinc-300 backdrop-blur-md transition hover:border-emerald-300/30 hover:text-emerald-200 sm:gap-2 sm:px-3.5 sm:text-xs"
       >
         <ArrowLeft className="size-3.5 transition-transform group-hover:-translate-x-0.5" />
         <span className="hidden sm:inline">Back to Tazkiyah</span>
@@ -324,7 +324,7 @@ function LastSeenBanner({ onResume }: { onResume: () => void }) {
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-      className="group relative mt-8 overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-emerald-500/[0.06] via-white/[0.02] to-amber-300/[0.04] p-6 backdrop-blur-xl sm:p-8"
+      className="group relative mt-8 overflow-hidden rounded-3xl border border-white/10 bg-linear-to-br from-emerald-500/6 via-white/2 to-amber-300/4 p-6 backdrop-blur-xl sm:p-8"
     >
       <div
         aria-hidden
@@ -332,7 +332,7 @@ function LastSeenBanner({ onResume }: { onResume: () => void }) {
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -bottom-24 -left-24 size-64 rounded-full bg-amber-300/[0.06] blur-3xl"
+        className="pointer-events-none absolute -bottom-24 -left-24 size-64 rounded-full bg-amber-300/6 blur-3xl"
       />
 
       <div className="relative flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
@@ -357,7 +357,7 @@ function LastSeenBanner({ onResume }: { onResume: () => void }) {
 
           <p
             dir="rtl"
-            className="mt-4 line-clamp-2 text-right text-lg leading-[2] text-zinc-200 sm:text-xl lg:text-2xl"
+            className="mt-4 line-clamp-2 text-right text-lg leading-loose text-zinc-200 sm:text-xl lg:text-2xl"
             style={{ fontFamily: "'Amiri', serif" }}
           >
             وَلَقَدْ صَرَّفْنَا فِى هَٰذَا ٱلْقُرْءَانِ لِلنَّاسِ مِن كُلِّ مَثَلٍ ۚ
@@ -373,7 +373,7 @@ function LastSeenBanner({ onResume }: { onResume: () => void }) {
                 initial={{ width: 0 }}
                 animate={{ width: "49%" }}
                 transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-                className="h-full rounded-full bg-gradient-to-r from-emerald-300 to-amber-200 shadow-[0_0_18px_rgba(110,231,183,0.5)]"
+                className="h-full rounded-full bg-linear-to-r from-emerald-300 to-amber-200 shadow-[0_0_18px_rgba(110,231,183,0.5)]"
               />
             </div>
           </div>
@@ -383,7 +383,7 @@ function LastSeenBanner({ onResume }: { onResume: () => void }) {
           whileHover={{ y: -2 }}
           whileTap={{ scale: 0.97 }}
           onClick={onResume}
-          className="group/btn relative inline-flex w-full items-center justify-center gap-2.5 rounded-full border border-emerald-300/30 bg-emerald-300/[0.08] px-6 py-3 text-sm font-medium text-emerald-100 backdrop-blur-md transition hover:border-emerald-300/60 hover:bg-emerald-300/[0.14] hover:text-emerald-50 lg:w-auto"
+          className="group/btn relative inline-flex w-full items-center justify-center gap-2.5 rounded-full border border-emerald-300/30 bg-emerald-300/8 px-6 py-3 text-sm font-medium text-emerald-100 backdrop-blur-md transition hover:border-emerald-300/60 hover:bg-emerald-300/14 hover:text-emerald-50 lg:w-auto"
         >
           <span className="flex size-7 items-center justify-center rounded-full bg-emerald-300/20 transition group-hover/btn:bg-emerald-300/30">
             <Play className="size-3.5 translate-x-px fill-current" />
@@ -416,7 +416,7 @@ function SegmentedTabs({
     { id: "juz", label: "Juz", count: 30, icon: Hash },
   ];
   return (
-    <div className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/[0.03] p-1 backdrop-blur-md">
+    <div className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/3 p-1 backdrop-blur-md">
       {tabs.map((t) => {
         const Icon = t.icon;
         const active = tab === t.id;
@@ -430,7 +430,7 @@ function SegmentedTabs({
               <motion.span
                 layoutId="tab-pill"
                 transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                className="absolute inset-0 rounded-full bg-gradient-to-b from-white/[0.10] to-white/[0.04] ring-1 ring-emerald-300/30"
+                className="absolute inset-0 rounded-full bg-linear-to-b from-white/10 to-white/4 ring-1 ring-emerald-300/30"
               />
             )}
             <span className="relative flex items-center gap-2">
@@ -459,7 +459,7 @@ function SearchBar({ value, onChange }: { value: string; onChange: (v: string) =
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder="Search surah, meaning, number…"
-        className="w-full rounded-full border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 text-xs text-zinc-100 placeholder:text-zinc-500 backdrop-blur-md transition focus:border-emerald-300/40 focus:outline-none focus:ring-2 focus:ring-emerald-300/10"
+        className="w-full rounded-full border border-white/10 bg-white/3 py-2 pl-9 pr-3 text-xs text-zinc-100 placeholder:text-zinc-500 backdrop-blur-md transition focus:border-emerald-300/40 focus:outline-none focus:ring-2 focus:ring-emerald-300/10"
       />
     </div>
   );
@@ -487,7 +487,7 @@ function SurahCard({
       transition={{ duration: 0.4, delay: Math.min(index * 0.015, 0.25) }}
       whileHover={{ y: -2 }}
       onClick={onClick}
-      className="group relative flex w-full items-center gap-4 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.025] p-4 text-left backdrop-blur-md transition hover:border-emerald-300/30 hover:bg-white/[0.04]"
+      className="group relative flex w-full items-center gap-4 overflow-hidden rounded-2xl border border-white/10 bg-white/2.5 p-4 text-left backdrop-blur-md transition hover:border-emerald-300/30 hover:bg-white/4"
     >
       <div
         aria-hidden
@@ -543,7 +543,7 @@ function JuzCard({ juz, index }: { juz: (typeof JUZ)[number]; index: number }) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: Math.min(index * 0.02, 0.3) }}
       whileHover={{ y: -2 }}
-      className="group relative flex aspect-[5/6] flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-white/[0.025] p-4 text-left backdrop-blur-md transition hover:border-emerald-300/30 hover:bg-white/[0.04]"
+      className="group relative flex aspect-5/6 flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-white/2.5 p-4 text-left backdrop-blur-md transition hover:border-emerald-300/30 hover:bg-white/4"
     >
       <div className="flex items-start justify-between">
         <span className="text-[10px] uppercase tracking-[0.24em] text-zinc-500">Juz</span>
@@ -599,7 +599,7 @@ function ReadingView({
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.25 }}
-      className="fixed inset-0 z-[100] isolate flex items-stretch justify-end bg-black/60 backdrop-blur-md"
+      className="fixed inset-0 z-100 isolate flex items-stretch justify-end bg-black/60 backdrop-blur-md"
       onClick={onClose}
     >
       <motion.div
@@ -620,11 +620,11 @@ function ReadingView({
         />
 
         {/* Header */}
-        <div className="relative z-[130] flex items-center justify-between border-b border-white/10 bg-white/[0.02] px-5 py-4 backdrop-blur-md sm:px-7">
+        <div className="relative z-130 flex items-center justify-between border-b border-white/10 bg-white/2 px-5 py-4 backdrop-blur-md sm:px-7">
           <div className="flex items-center gap-3 min-w-0">
             <button
               onClick={onClose}
-              className="inline-flex size-8 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-zinc-300 transition hover:border-emerald-300/30 hover:text-emerald-200"
+              className="inline-flex size-8 items-center justify-center rounded-full border border-white/10 bg-white/3 text-zinc-300 transition hover:border-emerald-300/30 hover:text-emerald-200"
             >
               <ArrowLeft className="size-3.5" />
             </button>
@@ -646,7 +646,7 @@ function ReadingView({
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <div className="inline-flex items-center gap-0.5 rounded-full border border-white/10 bg-white/[0.03] p-0.5">
+            <div className="inline-flex items-center gap-0.5 rounded-full border border-white/10 bg-white/3 p-0.5">
               {([
                 { id: "en", label: "EN" },
                 { id: "ur", label: "اُردُو" },
@@ -662,7 +662,7 @@ function ReadingView({
                   {lang === opt.id && (
                     <motion.span
                       layoutId="lang-pill"
-                      className="absolute inset-0 rounded-full bg-white/[0.08] ring-1 ring-emerald-300/30"
+                      className="absolute inset-0 rounded-full bg-white/8 ring-1 ring-emerald-300/30"
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
@@ -670,11 +670,11 @@ function ReadingView({
                 </button>
               ))}
             </div>
-            <div className="relative z-[150]">
+            <div className="relative z-150">
               <button
                 onClick={() => setPrefsOpen((v) => !v)}
                 aria-label="Reading preferences"
-                className={`inline-flex size-8 shrink-0 items-center justify-center rounded-full border bg-white/[0.03] transition ${
+                className={`inline-flex size-8 shrink-0 items-center justify-center rounded-full border bg-white/3 transition ${
                   prefsOpen
                     ? "border-emerald-300/40 text-emerald-200"
                     : "border-white/10 text-zinc-400 hover:border-emerald-300/30 hover:text-emerald-200"
@@ -697,7 +697,7 @@ function ReadingView({
             </div>
             <button
               onClick={onClose}
-              className="inline-flex size-8 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-zinc-400 transition hover:border-red-300/30 hover:text-red-200"
+              className="inline-flex size-8 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/3 text-zinc-400 transition hover:border-red-300/30 hover:text-red-200"
             >
               <X className="size-3.5" />
             </button>
@@ -776,13 +776,13 @@ function PrefsPanel({
   return (
     <>
       {/* invisible click-away */}
-      <div className="fixed inset-0 z-[180]" onClick={onClose} />
+      <div className="fixed inset-0 z-180" onClick={onClose} />
       <motion.div
         initial={{ opacity: 0, y: -6, scale: 0.97 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: -6, scale: 0.97 }}
         transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
-        className="fixed left-4 right-4 top-[76px] z-[200] max-h-[calc(100svh-96px)] origin-top-right overflow-y-auto rounded-2xl border border-white/10 bg-[#0c0c0c]/95 p-4 shadow-[0_20px_70px_-10px_rgba(0,0,0,0.8)] backdrop-blur-xl sm:left-auto sm:right-7 sm:w-[320px]"
+        className="fixed left-4 right-4 top-[76px] z-200 max-h-[calc(100svh-96px)] origin-top-right overflow-y-auto rounded-2xl border border-white/10 bg-[#0c0c0c]/95 p-4 shadow-[0_20px_70px_-10px_rgba(0,0,0,0.8)] backdrop-blur-xl sm:left-auto sm:right-7 sm:w-[320px]"
         onClick={(e) => e.stopPropagation()}
       >
         <div
@@ -847,7 +847,7 @@ function PrefsPanel({
         />
 
         {/* Arabic font */}
-        <div className="mt-3 rounded-xl border border-white/10 bg-white/[0.02] p-2">
+        <div className="mt-3 rounded-xl border border-white/10 bg-white/2 p-2">
           <p className="mb-1.5 px-1 text-[9px] uppercase tracking-[0.24em] text-zinc-500">
             Arabic Font
           </p>
@@ -861,8 +861,8 @@ function PrefsPanel({
                 onClick={() => setPrefs({ ...prefs, arabicFont: f.id })}
                 className={`relative flex flex-col items-center gap-0.5 rounded-lg border px-2 py-2 transition ${
                   prefs.arabicFont === f.id
-                    ? "border-emerald-300/40 bg-emerald-300/[0.07] text-zinc-50"
-                    : "border-white/5 bg-white/[0.02] text-zinc-400 hover:border-white/15 hover:text-zinc-200"
+                    ? "border-emerald-300/40 bg-emerald-300/7 text-zinc-50"
+                    : "border-white/5 bg-white/2 text-zinc-400 hover:border-white/15 hover:text-zinc-200"
                 }`}
               >
                 <span
@@ -882,7 +882,7 @@ function PrefsPanel({
         {/* Show arabic */}
         <button
           onClick={() => setPrefs({ ...prefs, showArabic: !prefs.showArabic })}
-          className="mt-3 flex w-full items-center justify-between rounded-xl border border-white/10 bg-white/[0.02] px-3 py-2 text-left transition hover:border-emerald-300/25"
+          className="mt-3 flex w-full items-center justify-between rounded-xl border border-white/10 bg-white/2 px-3 py-2 text-left transition hover:border-emerald-300/25"
         >
           <span className="text-[11px] text-zinc-300">Show Arabic Text</span>
           <span
@@ -925,7 +925,7 @@ function Stepper({
 }) {
   const pct = ((value - min) / (max - min)) * 100;
   return (
-    <div className="mt-2 rounded-xl border border-white/10 bg-white/[0.02] p-2.5">
+    <div className="mt-2 rounded-xl border border-white/10 bg-white/2 p-2.5">
       <div className="mb-1.5 flex items-center justify-between">
         <span className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.2em] text-zinc-400">
           <span className="text-emerald-300/80">{icon}</span>
@@ -939,20 +939,20 @@ function Stepper({
       <div className="flex items-center gap-2">
         <button
           onClick={() => onChange(Math.max(min, Number((value - step).toFixed(2))))}
-          className="inline-flex size-6 items-center justify-center rounded-md border border-white/10 bg-white/[0.03] text-zinc-300 transition hover:border-emerald-300/30 hover:text-emerald-200 active:scale-90"
+          className="inline-flex size-6 items-center justify-center rounded-md border border-white/10 bg-white/3 text-zinc-300 transition hover:border-emerald-300/30 hover:text-emerald-200 active:scale-90"
         >
           <Minus className="size-3" />
         </button>
-        <div className="relative h-1 flex-1 overflow-hidden rounded-full bg-white/[0.06]">
+        <div className="relative h-1 flex-1 overflow-hidden rounded-full bg-white/6">
           <motion.div
             animate={{ width: `${pct}%` }}
             transition={{ type: "spring", stiffness: 260, damping: 30 }}
-            className="h-full rounded-full bg-gradient-to-r from-emerald-300/80 to-amber-200/70"
+            className="h-full rounded-full bg-linear-to-r from-emerald-300/80 to-amber-200/70"
           />
         </div>
         <button
           onClick={() => onChange(Math.min(max, Number((value + step).toFixed(2))))}
-          className="inline-flex size-6 items-center justify-center rounded-md border border-white/10 bg-white/[0.03] text-zinc-300 transition hover:border-emerald-300/30 hover:text-emerald-200 active:scale-90"
+          className="inline-flex size-6 items-center justify-center rounded-md border border-white/10 bg-white/3 text-zinc-300 transition hover:border-emerald-300/30 hover:text-emerald-200 active:scale-90"
         >
           <Plus className="size-3" />
         </button>
@@ -1000,7 +1000,7 @@ function AyahRow({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: Math.min(index * 0.04, 0.4) }}
       whileHover={{ y: -1 }}
-      className="group relative rounded-2xl border border-white/10 bg-white/[0.025] p-5 backdrop-blur-md transition hover:border-emerald-300/25 sm:p-6"
+      className="group relative rounded-2xl border border-white/10 bg-white/2.5 p-5 backdrop-blur-md transition hover:border-emerald-300/25 sm:p-6"
     >
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.24em] text-zinc-500">
@@ -1012,7 +1012,7 @@ function AyahRow({
             className={`inline-flex size-6 items-center justify-center rounded-full border text-[10px] tabular-nums transition ${
               bookmarked
                 ? "border-amber-300/50 bg-amber-300/15 text-amber-200 shadow-[0_0_14px_rgba(252,211,77,0.35)]"
-                : "border-emerald-300/30 bg-emerald-300/[0.06] text-emerald-200"
+                : "border-emerald-300/30 bg-emerald-300/6 text-emerald-200"
             }`}
           >
             {ayah.n}
@@ -1071,7 +1071,7 @@ function AyahRow({
         {(lang === "ur" || lang === "both") && (
           <p
             dir="rtl"
-            className="text-right leading-[2] text-zinc-300"
+            className="text-right leading-loose text-zinc-300"
             style={{
               fontFamily: "'Scheherazade New', serif",
               fontSize: `${prefs.translationSize + 2}px`,
@@ -1090,7 +1090,7 @@ function AyahRow({
             exit={{ scaleX: 0 }}
             transition={{ duration: 6, ease: "linear" }}
             style={{ transformOrigin: "left" }}
-            className="absolute bottom-0 left-0 right-0 h-[2px] rounded-full bg-gradient-to-r from-emerald-300 to-amber-200 shadow-[0_0_14px_rgba(110,231,183,0.5)]"
+            className="absolute bottom-0 left-0 right-0 h-[2px] rounded-full bg-linear-to-r from-emerald-300 to-amber-200 shadow-[0_0_14px_rgba(110,231,183,0.5)]"
           />
         )}
       </AnimatePresence>
@@ -1118,7 +1118,7 @@ function IconBtn({
       className={`inline-flex size-8 items-center justify-center rounded-full border transition ${
         active
           ? "border-emerald-300/40 bg-emerald-300/10 text-emerald-200"
-          : "border-white/10 bg-white/[0.03] text-zinc-400 hover:border-emerald-300/30 hover:text-emerald-200"
+          : "border-white/10 bg-white/3 text-zinc-400 hover:border-emerald-300/30 hover:text-emerald-200"
       }`}
     >
       {children}
