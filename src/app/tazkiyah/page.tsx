@@ -24,7 +24,7 @@ export default function TazkiyahPage() {
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(180,160,90,0.18),transparent_55%)]" />
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(60,140,110,0.12),transparent_50%)]" />
         </div>
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[length:18px_18px] opacity-40" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] bg-size-[18px_18px] opacity-40" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-8 sm:py-12">
           <Header />
           <ContinueReading />
