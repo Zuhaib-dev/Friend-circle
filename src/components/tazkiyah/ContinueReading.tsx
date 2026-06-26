@@ -6,7 +6,7 @@ import { useLastSeen } from "@/hooks/useLastSeen";
 import { SURAHS } from "@/data/quran-data";
 import { EASE } from "./utils";
 
-export function ContinueReading() {
+export function ContinueReading({ onResume }: { onResume?: (surah: number) => void }) {
   const { lastSeen, mounted } = useLastSeen();
 
   if (!mounted || !lastSeen) return null;
@@ -42,13 +42,24 @@ export function ContinueReading() {
           </div>
         </div>
         <div className="sm:self-end">
-          <Link href={`/tazkiyah/quran?surah=${lastSeen.surah}#ayah-${lastSeen.ayah}`} passHref legacyBehavior>
-            <motion.a whileHover={{ x: 4 }} whileTap={{ scale: 0.97 }}
+          {onResume ? (
+            <motion.button onClick={() => {
+              window.location.hash = `ayah-${lastSeen.ayah}`;
+              onResume(lastSeen.surah);
+            }} whileHover={{ x: 4 }} whileTap={{ scale: 0.97 }}
               className="relative inline-flex items-center gap-3 px-6 py-3.5 bg-white text-[#0a0a0a] font-mono uppercase tracking-[0.2em] text-xs hover:bg-emerald-300 transition-colors">
               <Play className="h-3.5 w-3.5 fill-current" />Resume Reading
               <motion.span animate={{ x: [0, 4, 0] }} transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}>→</motion.span>
-            </motion.a>
-          </Link>
+            </motion.button>
+          ) : (
+            <Link href={`/tazkiyah/quran?surah=${lastSeen.surah}#ayah-${lastSeen.ayah}`} passHref legacyBehavior>
+              <motion.a whileHover={{ x: 4 }} whileTap={{ scale: 0.97 }}
+                className="relative inline-flex items-center gap-3 px-6 py-3.5 bg-white text-[#0a0a0a] font-mono uppercase tracking-[0.2em] text-xs hover:bg-emerald-300 transition-colors">
+                <Play className="h-3.5 w-3.5 fill-current" />Resume Reading
+                <motion.span animate={{ x: [0, 4, 0] }} transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}>→</motion.span>
+              </motion.a>
+            </Link>
+          )}
         </div>
       </div>
     </motion.div>

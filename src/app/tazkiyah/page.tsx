@@ -1,6 +1,8 @@
 "use client";
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import { SURAHS, Surah } from "@/data/quran-data";
+import { ReadingView } from "@/components/tazkiyah/quran/ReadingView";
 import { TopNav } from "@/components/top-nav";
 import { fadeUp } from "@/components/tazkiyah/utils";
 import { Header } from "@/components/tazkiyah/Header";
@@ -16,6 +18,8 @@ import { Footer } from "@/components/tazkiyah/Footer";
 
 export default function TazkiyahPage() {
   const [tab, setTab] = useState<"quran" | "hadith" | "tasbih" | "seerah">("quran");
+  const [selectedSurah, setSelectedSurah] = useState<Surah | null>(null);
+  
   return (
     <div className="min-h-screen bg-bone text-ink">
       <TopNav />
@@ -27,7 +31,7 @@ export default function TazkiyahPage() {
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] bg-size-[18px_18px] opacity-40" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-8 sm:py-12">
           <Header />
-          <ContinueReading />
+          <ContinueReading onResume={(surahId) => setSelectedSurah(SURAHS.find(s => s.number === surahId) ?? null)} />
           <PrayerStrip />
           <Tabs tab={tab} setTab={setTab} />
           <div className="mt-8">
@@ -42,6 +46,15 @@ export default function TazkiyahPage() {
           <Footer />
         </div>
       </div>
+
+      <AnimatePresence>
+        {selectedSurah && (
+          <ReadingView
+            surah={selectedSurah}
+            onClose={() => setSelectedSurah(null)}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }
