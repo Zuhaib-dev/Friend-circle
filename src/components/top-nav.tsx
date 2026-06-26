@@ -101,7 +101,9 @@ export function TopNav() {
     { href: "/gallery", label: "FRAMES" },
     { href: "/surveillance", label: "FEEDS" },
     { href: "/live-ops", label: "LIVE-OPS" },
-    { href: "/loadout", label: "LOADOUT" },
+    ...((user?.role === "ADMIN" || user?.role === "TEAM_MEMBER") 
+      ? [{ href: "/loadout", label: "LOADOUT" }] 
+      : []),
     { href: "#tazkiyah", label: "TAZKIYAH" },
   ];
 
@@ -178,8 +180,10 @@ export function TopNav() {
                     <MenuItem icon={ImageIcon} label="GALLERY" code="03" onClick={() => { setOpen(false); navigate.push('/gallery'); }} />
                     <MenuItem icon={VideoIcon} label="FEEDS" code="04" onClick={() => { setOpen(false); navigate.push('/surveillance'); }} />
                     <MenuItem icon={Crosshair} label="LIVE-OPS" code="05" onClick={() => { setOpen(false); navigate.push('/live-ops'); }} />
-                    <MenuItem icon={Package} label="LOADOUT" code="06" onClick={() => { setOpen(false); navigate.push('/loadout'); }} />
                     
+                    {(user.role === "TEAM_MEMBER" || user.role === "ADMIN") && (
+                      <MenuItem icon={Package} label="LOADOUT" code="06" onClick={() => { setOpen(false); navigate.push('/loadout'); }} />
+                    )}
                     {(!user.role || user.role === "USER") && (
                       <MenuItem icon={ShieldCheck} label="BECOME TEAM MEMBER" code="05" onClick={() => { setOpen(false); navigate.push('/apply-team'); }} />
                     )}
