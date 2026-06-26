@@ -47,11 +47,19 @@ export function useQuranSurah(surahNumber: number) {
         const urAyahs = data[2].ayahs;
         const auAyahs = data[3].ayahs;
 
+        const BISMILLAH_PREFIX = "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ ";
+        
         const combinedAyat: Ayah[] = arAyahs.map((ar: unknown, i: number) => {
           const arObj = ar as { numberInSurah: number; text: string };
+          let text = arObj.text;
+          
+          if (surahNumber !== 1 && surahNumber !== 9 && i === 0 && text.startsWith(BISMILLAH_PREFIX)) {
+            text = text.replace(BISMILLAH_PREFIX, "");
+          }
+          
           return {
             n: arObj.numberInSurah,
-            arabic: arObj.text,
+            arabic: text,
             english: enAyahs[i]?.text || "",
             urdu: urAyahs[i]?.text || "",
             audio: auAyahs[i]?.audio || "",
