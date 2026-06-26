@@ -11,14 +11,13 @@ import { SurahCard } from "@/components/tazkiyah/quran/SurahCard";
 import { JuzCard } from "@/components/tazkiyah/quran/JuzCard";
 import { ReadingView } from "@/components/tazkiyah/quran/ReadingView";
 
+import { useLastSeen } from "@/hooks/useLastSeen";
+
 export default function QuranPage() {
   const [tab, setTab] = useState<"surah" | "juz">("surah");
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState<Surah | null>(null);
-  const [bookmark, setBookmark] = useState<{ surah: number; ayah: number } | null>({
-    surah: 18,
-    ayah: 54,
-  });
+  const { lastSeen, saveLastSeen } = useLastSeen();
 
   const filteredSurahs = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -61,7 +60,7 @@ export default function QuranPage() {
 
       <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-10 lg:py-12">
         <QuranHeader />
-        <LastSeenBanner onResume={() => setSelected(SURAHS.find((s) => s.number === 18) ?? null)} />
+        <LastSeenBanner onResume={(surahId) => setSelected(SURAHS.find((s) => s.number === surahId) ?? null)} />
 
         <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <SegmentedTabs tab={tab} setTab={setTab} />
@@ -85,7 +84,7 @@ export default function QuranPage() {
                     surah={s}
                     index={i}
                     onClick={() => setSelected(s)}
-                    bookmarked={bookmark?.surah === s.number}
+                    bookmarked={lastSeen?.surah === s.number}
                   />
                 ))}
               </motion.div>
@@ -119,8 +118,6 @@ export default function QuranPage() {
           <ReadingView
             surah={selected}
             onClose={() => setSelected(null)}
-            bookmark={bookmark}
-            setBookmark={setBookmark}
           />
         )}
       </AnimatePresence>

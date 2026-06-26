@@ -1,34 +1,48 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ArrowLeft, Play, Pause, Copy, Check, Bookmark, BookmarkCheck, Volume2, X, Settings2, Type, AlignJustify, RotateCcw, Minus, Plus } from "lucide-react";
-import { Surah, Ayah, Lang, ReaderPrefs, DEFAULT_PREFS, SAMPLE_AYAT } from "@/data/quran-data";
+import { Surah, Ayah, Lang, ReaderPrefs, DEFAULT_PREFS } from "@/data/quran-data";
+import { useQuranSurah } from "@/hooks/useQuranSurah";
+import { useLastSeen } from "@/hooks/useLastSeen";
+import { useReaderPrefs } from "@/hooks/useReaderPrefs";
 
 export function ReadingView({
   surah,
   onClose,
-  bookmark,
-  setBookmark,
 }: {
   surah: Surah;
   onClose: () => void;
-  bookmark: { surah: number; ayah: number } | null;
-  setBookmark: (b: { surah: number; ayah: number } | null) => void;
 }) {
   const [playing, setPlaying] = useState<number | null>(null);
   const [lang, setLang] = useState<Lang>("en");
-  const [prefs, setPrefs] = useState<ReaderPrefs>(DEFAULT_PREFS);
+  const { prefs, setPrefs } = useReaderPrefs();
+  const { lastSeen, saveLastSeen } = useLastSeen();
   const [prefsOpen, setPrefsOpen] = useState(false);
+  
+  const { ayat, loading, error } = useQuranSurah(surah.number);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  const ayat: Ayah[] =
-    SAMPLE_AYAT[surah.number] ??
-    Array.from({ length: Math.min(surah.ayats, 8) }, (_, i) => ({
-      n: i + 1,
-      arabic:
-        "وَمِنْ ءَايَٰتِهِۦٓ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَٰجًا لِّتَسْكُنُوٓا۟ إِلَيْهَا",
-      english:
-        "And of His signs is that He created for you from yourselves mates that you may find tranquility in them.",
-      urdu: "اور اس کی نشانیوں میں سے ہے کہ اس نے تمہارے لیے تمہی میں سے جوڑے پیدا کیے تاکہ تم ان سے سکون پاؤ۔",
-    }));
+  useEffect(() => {
+    if (playing !== null && ayat) {
+      const ayah = ayat.find((a) => a.n === playing);
+      if (ayah && ayah.audio && audioRef.current) {
+        audioRef.current.src = ayah.audio;
+        audioRef.current.play().catch(() => setPlaying(null));
+      }
+    } else if (audioRef.current) {
+      audioRef.current.pause();
+    }
+  }, [playing, ayat]);
+
+  const handleAudioEnded = () => {
+    if (!ayat || playing === null) return;
+    const currentIndex = ayat.findIndex((a) => a.n === playing);
+    if (currentIndex !== -1 && currentIndex < ayat.length - 1) {
+      setPlaying(ayat[currentIndex + 1].n); // Auto play next
+    } else {
+      setPlaying(null);
+    }
+  };
 
   return (
     <motion.div
@@ -167,29 +181,41 @@ export function ReadingView({
             </motion.div>
           )}
 
-          <div className="space-y-5">
-            {ayat.map((a, i) => (
-              <AyahRow
-                key={a.n}
-                ayah={a}
-                surahNumber={surah.number}
-                lang={lang}
-                prefs={prefs}
-                index={i}
-                playing={playing === a.n}
-                onTogglePlay={() => setPlaying(playing === a.n ? null : a.n)}
-                bookmarked={bookmark?.surah === surah.number && bookmark?.ayah === a.n}
-                onBookmark={() =>
-                  setBookmark(
-                    bookmark?.surah === surah.number && bookmark?.ayah === a.n
-                      ? null
-                      : { surah: surah.number, ayah: a.n },
-                  )
-                }
-              />
-            ))}
-          </div>
+          {loading && (
+            <div className="flex items-center justify-center py-20 text-emerald-300/50">
+              <span className="flex size-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+              <span className="ml-3 text-xs uppercase tracking-widest">Loading Ayahs...</span>
+            </div>
+          )}
+
+          {!loading && error && (
+            <div className="flex items-center justify-center py-20 text-red-400">
+              <span className="text-sm">Failed to load Surah data.</span>
+            </div>
+          )}
+
+          {!loading && ayat && (
+            <div className="space-y-5">
+              {ayat.map((a, i) => (
+                <AyahRow
+                  key={a.n}
+                  ayah={a}
+                  surahNumber={surah.number}
+                  lang={lang}
+                  prefs={prefs}
+                  index={i}
+                  playing={playing === a.n}
+                  onTogglePlay={() => setPlaying(playing === a.n ? null : a.n)}
+                  bookmarked={lastSeen?.surah === surah.number && lastSeen?.ayah === a.n}
+                  onBookmark={() =>
+                    saveLastSeen(surah.number, a.n, a.arabic)
+                  }
+                />
+              ))}
+            </div>
+          )}
         </div>
+        <audio ref={audioRef} onEnded={handleAudioEnded} className="hidden" />
       </motion.div>
     </motion.div>
   );
