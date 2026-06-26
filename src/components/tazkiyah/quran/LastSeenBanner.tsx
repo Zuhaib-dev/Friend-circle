@@ -1,3 +1,4 @@
+"use client";
 import { motion } from "motion/react";
 import { Play } from "lucide-react";
 import { useLastSeen } from "@/hooks/useLastSeen";

@@ -1,3 +1,4 @@
+"use client";
 import { Search } from "lucide-react";
 
 export function SearchBar({ value, onChange }: { value: string; onChange: (v: string) => void }) {

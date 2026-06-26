@@ -1,3 +1,4 @@
+"use client";
 import { motion } from "motion/react";
 import { BookmarkCheck, ChevronRight } from "lucide-react";
 import { Surah } from "@/data/quran-data";

@@ -1,3 +1,4 @@
+"use client";
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ArrowLeft, Play, Pause, Copy, Check, Bookmark, BookmarkCheck, Volume2, X, Settings2, Type, AlignJustify, RotateCcw, Minus, Plus } from "lucide-react";
