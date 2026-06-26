@@ -3,8 +3,11 @@ import React, { useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import { Compass, Moon, Heart } from "lucide-react";
 import { HADITH } from "@/data/tazkiyah-data";
+import { useAladhanData } from "./utils";
 
 export function BentoGrid() {
+  const aladhan = useAladhanData();
+  
   return (
     <div className="mt-16">
       <div className="flex items-center justify-between mb-6">
@@ -27,8 +30,17 @@ export function BentoGrid() {
         <BentoCard>
           <Moon className="h-5 w-5 text-amber-200/80" />
           <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-white/40 mt-3">HIJRI</div>
-          <div className="font-display text-3xl text-white mt-1">12 Muharram</div>
-          <div className="text-[10px] font-mono uppercase tracking-[0.25em] text-white/50">1447 AH</div>
+          {aladhan ? (
+            <>
+              <div className="font-display text-3xl text-white mt-1">{aladhan.hijri.day} {aladhan.hijri.month.en}</div>
+              <div className="text-[10px] font-mono uppercase tracking-[0.25em] text-white/50">{aladhan.hijri.year} {aladhan.hijri.designation.abbreviated}</div>
+            </>
+          ) : (
+            <>
+              <div className="font-display text-3xl text-white mt-1">12 Muharram</div>
+              <div className="text-[10px] font-mono uppercase tracking-[0.25em] text-white/50">1447 AH</div>
+            </>
+          )}
         </BentoCard>
         <BentoCard className="sm:col-span-2">
           <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-emerald-300/80 mb-2">HADITH · TODAY</div>
