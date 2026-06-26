@@ -492,7 +492,7 @@ function CrewSection() {
                       <div className="absolute top-2 right-2 mono-label flex items-center gap-1">
                         <span className="h-1.5 w-1.5 bg-signal rounded-full animate-blink" />
                         {isMe ? (
-                          <span className="text-signal text-bone mix-blend-difference">YOU</span>
+                          <span className="text-bone mix-blend-difference">YOU</span>
                         ) : (
                           <span className="text-bone mix-blend-difference">
                             {isAdmin ? "CMD" : "OPS"}
