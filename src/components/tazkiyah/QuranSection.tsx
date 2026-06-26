@@ -2,15 +2,19 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Search, Bookmark, Copy, Share2, Play, Pause, Check, X } from "lucide-react";
-import { SURAHS, JUZ_LIST, Surah, Ayat } from "@/data/tazkiyah-data";
+import { SURAHS, JUZ, Surah, Ayah } from "@/data/quran-data";
+import { useQuranSurah } from "@/hooks/useQuranSurah";
 
 export function QuranSection() {
   const [mode, setMode] = useState<"surahs" | "juz">("surahs");
   const [lang, setLang] = useState<"en" | "ur">("en");
-  const [active, setActive] = useState<Surah>(SURAHS[1]);
+  const [active, setActive] = useState<Surah>(SURAHS[0]);
   const [query, setQuery] = useState("");
-  const [selectedAyat, setSelectedAyat] = useState<Ayat | null>(null);
-  const filtered = SURAHS.filter((s) => `${s.n} ${s.name} ${s.meaning}`.toLowerCase().includes(query.toLowerCase()));
+  const [selectedAyat, setSelectedAyat] = useState<Ayah | null>(null);
+  
+  const { ayat, loading, error } = useQuranSurah(active.number);
+  
+  const filtered = SURAHS.filter((s) => `${s.number} ${s.name} ${s.meaning}`.toLowerCase().includes(query.toLowerCase()));
   return (
     <div className="grid lg:grid-cols-[320px_1fr] gap-6">
       <div className="rounded-sm border border-white/10 bg-[#0f0f0f] overflow-hidden">
@@ -32,23 +36,22 @@ export function QuranSection() {
         </div>
         <div className="max-h-[460px] overflow-y-auto">
           {mode === "surahs" ? filtered.map((s) => (
-            <motion.button key={s.n} onClick={() => setActive(s)} whileHover={{ x: 2 }}
-              className={`w-full grid grid-cols-[36px_1fr_auto] items-center gap-3 px-4 py-3 text-left border-b border-white/5 transition-colors ${active.n === s.n ? "bg-emerald-300/6" : "hover:bg-white/3"}`}>
-              <span className={`font-mono text-xs ${active.n === s.n ? "text-emerald-300" : "text-white/40"}`}>{String(s.n).padStart(3, "0")}</span>
+            <motion.button key={s.number} onClick={() => setActive(s)} whileHover={{ x: 2 }}
+              className={`w-full grid grid-cols-[36px_1fr_auto] items-center gap-3 px-4 py-3 text-left border-b border-white/5 transition-colors ${active.number === s.number ? "bg-emerald-300/6" : "hover:bg-white/3"}`}>
+              <span className={`font-mono text-xs ${active.number === s.number ? "text-emerald-300" : "text-white/40"}`}>{String(s.number).padStart(3, "0")}</span>
               <span>
                 <div className="text-sm text-white">{s.name}</div>
-                <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-white/40">{s.meaning} · {s.count} Ayat</div>
+                <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-white/40">{s.meaning} · {s.ayats} Ayat</div>
               </span>
-              <span className="text-right text-base text-white/80" style={{ fontFamily: "'Amiri', serif" }}>{s.arName}</span>
+              <span className="text-right text-base text-white/80" style={{ fontFamily: "'Amiri', serif" }}>{s.arabic}</span>
             </motion.button>
-          )) : JUZ_LIST.map((j) => (
-            <button key={j.n} className="w-full grid grid-cols-[36px_1fr_auto] items-center gap-3 px-4 py-3 text-left border-b border-white/5 hover:bg-white/3 transition-colors">
-              <span className="font-mono text-xs text-white/40">{String(j.n).padStart(2, "0")}</span>
+          )) : JUZ.map((j) => (
+            <button key={j.number} className="w-full grid grid-cols-[36px_1fr_auto] items-center gap-3 px-4 py-3 text-left border-b border-white/5 hover:bg-white/3 transition-colors">
+              <span className="font-mono text-xs text-white/40">{String(j.number).padStart(2, "0")}</span>
               <span>
-                <div className="text-sm text-white">Juz {j.n}</div>
+                <div className="text-sm text-white">Juz {j.number}</div>
                 <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-white/40">{j.start}</div>
               </span>
-              <span className="text-[10px] font-mono text-white/40">{j.ayats}A</span>
             </button>
           ))}
         </div>
@@ -58,27 +61,32 @@ export function QuranSection() {
         <div className="flex items-center justify-between px-5 py-3 border-b border-white/5">
           <div className="flex items-baseline gap-3">
             <span className="font-display text-xl text-white">{active.name}</span>
-            <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-white/40">{active.meaning} · {active.type}</span>
+            <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-white/40">{active.meaning} · {active.revelation}</span>
           </div>
           <LangToggle lang={lang} setLang={setLang} />
         </div>
-        {active.n !== 9 && (
+        {active.number !== 9 && (
           <div className="px-6 py-6 text-center border-b border-white/5 bg-[radial-gradient(ellipse_at_center,rgba(110,200,170,0.06),transparent_70%)]">
             <p className="text-2xl sm:text-3xl text-white/90" style={{ fontFamily: "'Amiri', serif" }} dir="rtl">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
           </div>
         )}
         <div className="divide-y divide-white/5">
-          {active.ayats.map((a, i) => (
-            <motion.button key={a.n} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06, duration: 0.4 }}
+          {loading && (
+            <div className="py-12 flex items-center justify-center text-emerald-300/50">
+              <span className="animate-pulse text-xs uppercase tracking-[0.2em]">Loading ayahs...</span>
+            </div>
+          )}
+          {!loading && ayat && ayat.map((a, i) => (
+            <motion.button key={a.n} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.02, duration: 0.4 }}
               onClick={() => setSelectedAyat(a)} className="w-full text-left px-5 sm:px-8 py-6 hover:bg-white/2 transition-colors group">
               <div className="flex items-start justify-between gap-4">
                 <span className="inline-flex items-center justify-center h-7 w-7 border border-white/15 rounded-full text-[10px] font-mono text-white/60 group-hover:border-emerald-300/50 group-hover:text-emerald-300 transition-colors shrink-0">{a.n}</span>
-                <p className="flex-1 text-right text-2xl sm:text-[28px] leading-[2.2] text-white" style={{ fontFamily: "'Amiri', serif" }} dir="rtl">{a.ar}</p>
+                <p className="flex-1 text-right text-2xl sm:text-[28px] leading-[2.2] text-white" style={{ fontFamily: "'Amiri', serif" }} dir="rtl">{a.arabic}</p>
               </div>
               <p className={`mt-3 text-sm sm:text-base text-white/65 leading-relaxed ${lang === "ur" ? "text-right" : "text-left"}`}
                 style={lang === "ur" ? { fontFamily: "'Scheherazade New', serif", fontSize: "1.1rem" } : undefined}
                 dir={lang === "ur" ? "rtl" : "ltr"}>
-                {lang === "en" ? a.en : a.ur}
+                {lang === "en" ? a.english : a.urdu}
               </p>
             </motion.button>
           ))}
@@ -103,7 +111,7 @@ function LangToggle({ lang, setLang }: { lang: "en" | "ur"; setLang: (l: "en" | 
   );
 }
 
-function AyatModal({ ayat, surah, onClose }: { ayat: Ayat | null; surah: Surah; onClose: () => void }) {
+function AyatModal({ ayat, surah, onClose }: { ayat: Ayah | null; surah: Surah; onClose: () => void }) {
   const [copied, setCopied] = useState(false);
   const [playing, setPlaying] = useState(false);
   useEffect(() => {
@@ -114,7 +122,7 @@ function AyatModal({ ayat, surah, onClose }: { ayat: Ayat | null; surah: Surah; 
   }, [ayat, onClose]);
   const copy = () => {
     if (!ayat) return;
-    navigator.clipboard?.writeText(`${ayat.ar}\n\n${ayat.en}\n— Surah ${surah.name} ${surah.n}:${ayat.n}`);
+    navigator.clipboard?.writeText(`${ayat.arabic}\n\n${ayat.english}\n— Surah ${surah.name} ${surah.number}:${ayat.n}`);
     setCopied(true); setTimeout(() => setCopied(false), 1500);
   };
   const ACTIONS = [
@@ -134,15 +142,15 @@ function AyatModal({ ayat, surah, onClose }: { ayat: Ayat | null; surah: Surah; 
             <div className="flex items-center justify-between px-5 py-3 border-b border-white/5">
               <div className="flex items-center gap-3">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-300 animate-pulse" />
-                <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-white/50">Surah {surah.name} · {surah.n}:{ayat.n}</span>
+                <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-white/50">Surah {surah.name} · {surah.number}:{ayat.n}</span>
               </div>
               <button onClick={onClose} className="h-7 w-7 grid place-items-center text-white/50 hover:text-white hover:bg-white/5 rounded-sm transition-colors">
                 <X className="h-4 w-4" />
               </button>
             </div>
             <div className="px-6 sm:px-8 py-8 bg-[radial-gradient(ellipse_at_top,rgba(110,200,170,0.07),transparent_60%)]">
-              <p className="text-right text-2xl sm:text-3xl leading-[2.2] text-white" style={{ fontFamily: "'Amiri', serif" }} dir="rtl">{ayat.ar}</p>
-              <p className="mt-5 text-white/70 italic text-base leading-relaxed">{ayat.en}</p>
+              <p className="text-right text-2xl sm:text-3xl leading-[2.2] text-white" style={{ fontFamily: "'Amiri', serif" }} dir="rtl">{ayat.arabic}</p>
+              <p className="mt-5 text-white/70 italic text-base leading-relaxed">{ayat.english}</p>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-4 border-t border-white/5 divide-x divide-white/5">
               {ACTIONS.map((a) => {

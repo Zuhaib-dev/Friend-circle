@@ -1,5 +1,6 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
 import { Sparkles } from "lucide-react";
 import { SURAHS, JUZ, Surah } from "@/data/quran-data";
@@ -18,6 +19,15 @@ export default function QuranPage() {
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState<Surah | null>(null);
   const { lastSeen, saveLastSeen } = useLastSeen();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const surahParam = searchParams.get("surah");
+    if (surahParam) {
+      const s = SURAHS.find((s) => s.number === Number(surahParam));
+      if (s) setSelected(s);
+    }
+  }, [searchParams]);
 
   const filteredSurahs = useMemo(() => {
     const q = query.trim().toLowerCase();

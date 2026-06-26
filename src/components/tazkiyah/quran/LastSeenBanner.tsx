@@ -81,9 +81,12 @@ export function LastSeenBanner({ onResume }: { onResume?: (surahId: number) => v
 
         {onResume ? (
           <motion.button
-            whileHover={{ y: -2 }}
+            whileHover={{ x: 4 }}
             whileTap={{ scale: 0.97 }}
-            onClick={handleResume}
+            onClick={() => {
+              window.location.hash = `ayah-${lastSeen.ayah}`;
+              onResume(lastSeen.surah);
+            }}
             className="group/btn relative inline-flex w-full items-center justify-center gap-2.5 rounded-full border border-emerald-300/30 bg-emerald-300/8 px-6 py-3 text-sm font-medium text-emerald-100 backdrop-blur-md transition hover:border-emerald-300/60 hover:bg-emerald-300/14 hover:text-emerald-50 lg:w-auto"
           >
             <span className="flex size-7 items-center justify-center rounded-full bg-emerald-300/20 transition group-hover/btn:bg-emerald-300/30">

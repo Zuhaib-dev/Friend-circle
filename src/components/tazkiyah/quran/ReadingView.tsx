@@ -45,6 +45,26 @@ export function ReadingView({
     }
   };
 
+  useEffect(() => {
+    if (ayat && !loading) {
+      const hash = window.location.hash;
+      if (hash && hash.startsWith("#ayah-")) {
+        const ayahId = hash.replace("#", "");
+        // Use a short timeout to ensure rendering is complete
+        setTimeout(() => {
+          const el = document.getElementById(ayahId);
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth", block: "center" });
+            el.classList.add("ring-2", "ring-emerald-400/50", "bg-emerald-300/10");
+            setTimeout(() => {
+              el.classList.remove("ring-2", "ring-emerald-400/50", "bg-emerald-300/10");
+            }, 3000);
+          }
+        }, 400);
+      }
+    }
+  }, [ayat, loading]);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -460,11 +480,12 @@ function AyahRow({
 
   return (
     <motion.div
+      id={`ayah-${ayah.n}`}
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: Math.min(index * 0.04, 0.4) }}
       whileHover={{ y: -1 }}
-      className="group relative rounded-2xl border border-white/10 bg-white/2.5 p-5 backdrop-blur-md transition hover:border-emerald-300/25 sm:p-6"
+      className="group relative rounded-2xl border border-white/10 bg-white/2.5 p-5 backdrop-blur-md transition-all duration-700 hover:border-emerald-300/25 sm:p-6"
     >
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.24em] text-zinc-500">
