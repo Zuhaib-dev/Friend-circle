@@ -90,14 +90,6 @@ export const DUAS = [
   }
 ];
 
-export const SEERAH_CHAPTERS = [
-  { n: "01", title: "The Year of the Elephant", meta: "570 CE · Makkah", desc: "Birth in the city of light, in the year Abraha's army fell." },
-  { n: "02", title: "The Cave of Hira", meta: "610 CE · Jabal an-Nour", desc: "The first revelation — 'Iqra' bismi rabbika alladhi khalaq.'" },
-  { n: "03", title: "The Hijrah", meta: "622 CE · Makkah → Madinah", desc: "A journey that became the dawn of an Ummah." },
-  { n: "04", title: "Treaty of Hudaybiyyah", meta: "628 CE", desc: "A patience that history would call a clear victory." },
-  { n: "05", title: "The Farewell Sermon", meta: "632 CE · Arafat", desc: "A final, luminous testament to mercy and justice." },
-];
-
 export const PRAYERS = [
   { name: "Fajr", time: "04:42", icon: Sunrise },
   { name: "Dhuhr", time: "12:38", icon: Sun },
