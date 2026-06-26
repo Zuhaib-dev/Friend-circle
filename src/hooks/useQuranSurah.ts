@@ -8,6 +8,8 @@ export type Ayah = {
   audio: string;
 };
 
+const surahCache = new Map<number, Ayah[]>();
+
 export function useQuranSurah(surahNumber: number) {
   const [ayat, setAyat] = useState<Ayah[] | null>(null);
   const [loading, setLoading] = useState(false);
@@ -17,6 +19,12 @@ export function useQuranSurah(surahNumber: number) {
     let mounted = true;
 
     async function fetchSurah() {
+      if (surahCache.has(surahNumber)) {
+        setAyat(surahCache.get(surahNumber)!);
+        setLoading(false);
+        return;
+      }
+
       setLoading(true);
       setError(null);
       setAyat(null);
@@ -49,6 +57,8 @@ export function useQuranSurah(surahNumber: number) {
             audio: auAyahs[i]?.audio || "",
           };
         });
+
+        surahCache.set(surahNumber, combinedAyat);
 
         if (mounted) {
           setAyat(combinedAyat);

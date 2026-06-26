@@ -1,5 +1,5 @@
 "use client";
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
 import { Sparkles } from "lucide-react";
@@ -14,7 +14,7 @@ import { ReadingView } from "@/components/tazkiyah/quran/ReadingView";
 
 import { useLastSeen } from "@/hooks/useLastSeen";
 
-export default function QuranPage() {
+function QuranPageContent() {
   const [tab, setTab] = useState<"surah" | "juz">("surah");
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState<Surah | null>(null);
@@ -132,6 +132,14 @@ export default function QuranPage() {
         )}
       </AnimatePresence>
     </div>
+  );
+}
+
+export default function QuranPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[#0a0a0a]" />}>
+      <QuranPageContent />
+    </Suspense>
   );
 }
 

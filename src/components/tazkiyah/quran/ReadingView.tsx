@@ -22,6 +22,7 @@ export function ReadingView({
   
   const { ayat, loading, error } = useQuranSurah(surah.number);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [renderedCount, setRenderedCount] = useState(15);
 
   useEffect(() => {
     if (playing !== null && ayat) {
@@ -48,11 +49,27 @@ export function ReadingView({
   useEffect(() => {
     if (ayat && !loading) {
       const hash = window.location.hash;
+      let targetAyah = 0;
       if (hash && hash.startsWith("#ayah-")) {
-        const ayahId = hash.replace("#", "");
+        targetAyah = parseInt(hash.replace("#ayah-", ""));
+      }
+
+      setRenderedCount(targetAyah > 0 ? Math.min(ayat.length, targetAyah + 5) : 15);
+
+      const interval = setInterval(() => {
+        setRenderedCount((prev) => {
+          if (prev >= ayat.length) {
+            clearInterval(interval);
+            return prev;
+          }
+          return prev + 15;
+        });
+      }, 100);
+
+      if (targetAyah > 0) {
         // Use a short timeout to ensure rendering is complete
         setTimeout(() => {
-          const el = document.getElementById(ayahId);
+          const el = document.getElementById(hash.replace("#", ""));
           if (el) {
             el.scrollIntoView({ behavior: "smooth", block: "center" });
             el.classList.add("ring-2", "ring-emerald-400/50", "bg-emerald-300/10");
@@ -62,6 +79,7 @@ export function ReadingView({
           }
         }, 400);
       }
+      return () => clearInterval(interval);
     }
   }, [ayat, loading]);
 
@@ -217,7 +235,7 @@ export function ReadingView({
 
           {!loading && ayat && (
             <div className="space-y-5">
-              {ayat.map((a, i) => (
+              {ayat.slice(0, renderedCount).map((a, i) => (
                 <AyahRow
                   key={a.n}
                   ayah={a}
