@@ -1202,10 +1202,11 @@ function GalleryDiagramTile({ delay }: { delay: number }) {
         {/* aperture blades */}
         {Array.from({ length: 8 }).map((_, i) => {
           const angle = (i * 45 * Math.PI) / 180;
-          const x1 = 100 + Math.cos(angle) * 40;
-          const y1 = 60 + Math.sin(angle) * 40;
-          const x2 = 100 + Math.cos(angle + Math.PI / 8) * 35;
-          const y2 = 60 + Math.sin(angle + Math.PI / 8) * 35;
+          const r = (n: number) => Math.round(n * 1e4) / 1e4;
+          const x1 = r(100 + Math.cos(angle) * 40);
+          const y1 = r(60 + Math.sin(angle) * 40);
+          const x2 = r(100 + Math.cos(angle + Math.PI / 8) * 35);
+          const y2 = r(60 + Math.sin(angle + Math.PI / 8) * 35);
           return (
             <motion.line
               key={i}
@@ -1573,10 +1574,11 @@ function CompassDial() {
         {Array.from({ length: 60 }).map((_, i) => {
           const a = (i * 6 * Math.PI) / 180;
           const r1 = i % 5 === 0 ? 82 : 87;
-          const x1 = 100 + Math.cos(a) * r1;
-          const y1 = 100 + Math.sin(a) * r1;
-          const x2 = 100 + Math.cos(a) * 92;
-          const y2 = 100 + Math.sin(a) * 92;
+          const r = (n: number) => Math.round(n * 1e4) / 1e4;
+          const x1 = r(100 + Math.cos(a) * r1);
+          const y1 = r(100 + Math.sin(a) * r1);
+          const x2 = r(100 + Math.cos(a) * 92);
+          const y2 = r(100 + Math.sin(a) * 92);
           return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="currentColor" strokeWidth="1" className="text-ink" />;
         })}
         {["N", "E", "S", "W"].map((d, i) => {
@@ -1618,7 +1620,8 @@ function ElevationProfile() {
       const ridge = -Math.abs(i - 12) * 2.2 + 28;
       return 70 - (a + b + ridge);
     });
-    return xs.map((x, i) => `${(x / 23) * 380 + 10},${ys[i] + 10}`).join(" ");
+    const r2 = (n: number) => Math.round(n * 100) / 100;
+    return xs.map((x, i) => `${r2((x / 23) * 380 + 10)},${r2(ys[i] + 10)}`).join(" ");
   }, []);
   return (
     <div ref={ref} className="relative">
