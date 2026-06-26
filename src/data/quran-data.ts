@@ -78,7 +78,7 @@ export const JUZ = Array.from({ length: 30 }, (_, i) => ({
   start: SAMPLE_JUZ_STARTS[i] ?? "—",
 }));
 
-export type Ayah = { n: number; arabic: string; english: string; urdu: string };
+export type Ayah = { n: number; arabic: string; english: string; urdu: string; audio?: string };
 
 export const SAMPLE_AYAT: Record<number, Ayah[]> = {
   1: [

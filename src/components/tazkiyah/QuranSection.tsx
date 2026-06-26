@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from "motion/react";
 import { Search, Bookmark, Copy, Share2, Play, Pause, Check, X } from "lucide-react";
 import { SURAHS, JUZ, Surah, Ayah } from "@/data/quran-data";
 import { useQuranSurah } from "@/hooks/useQuranSurah";
+import { useLastSeen } from "@/hooks/useLastSeen";
+import { useRef } from "react";
 
 export function QuranSection() {
   const [mode, setMode] = useState<"surahs" | "juz">("surahs");
@@ -114,21 +116,49 @@ function LangToggle({ lang, setLang }: { lang: "en" | "ur"; setLang: (l: "en" | 
 function AyatModal({ ayat, surah, onClose }: { ayat: Ayah | null; surah: Surah; onClose: () => void }) {
   const [copied, setCopied] = useState(false);
   const [playing, setPlaying] = useState(false);
+  const { saveLastSeen } = useLastSeen();
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
   useEffect(() => {
     if (!ayat) return;
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
   }, [ayat, onClose]);
+
+  useEffect(() => {
+    if (playing && ayat?.audio && audioRef.current) {
+      audioRef.current.src = ayat.audio;
+      audioRef.current.play().catch(() => setPlaying(false));
+    } else if (audioRef.current) {
+      audioRef.current.pause();
+    }
+  }, [playing, ayat]);
+
   const copy = () => {
     if (!ayat) return;
     navigator.clipboard?.writeText(`${ayat.arabic}\n\n${ayat.english}\n— Surah ${surah.name} ${surah.number}:${ayat.n}`);
     setCopied(true); setTimeout(() => setCopied(false), 1500);
   };
+
+  const share = async () => {
+    if (!ayat) return;
+    const text = `${ayat.arabic}\n\n${ayat.english}\n— Surah ${surah.name} ${surah.number}:${ayat.n}`;
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: "Quran Ayat", text });
+      } catch (e) {
+        // user cancelled or failed
+      }
+    } else {
+      copy();
+    }
+  };
+
   const ACTIONS = [
-    { icon: Bookmark, label: "Mark as Last Read", code: "01", onClick: () => {} },
+    { icon: Bookmark, label: "Mark as Last Read", code: "01", onClick: () => { if (ayat) { saveLastSeen(surah.number, ayat.n, ayat.arabic); onClose(); } } },
     { icon: copied ? Check : Copy, label: copied ? "Copied" : "Copy Ayat", code: "02", onClick: copy },
-    { icon: Share2, label: "Share", code: "03", onClick: () => {} },
+    { icon: Share2, label: "Share", code: "03", onClick: share },
     { icon: playing ? Pause : Play, label: playing ? "Pause Audio" : "Play Audio", code: "04", onClick: () => setPlaying((p) => !p) },
   ];
   return (
@@ -166,6 +196,7 @@ function AyatModal({ ayat, surah, onClose }: { ayat: Ayah | null; surah: Surah; 
               })}
             </div>
           </motion.div>
+          <audio ref={audioRef} onEnded={() => setPlaying(false)} className="hidden" />
         </motion.div>
       )}
     </AnimatePresence>

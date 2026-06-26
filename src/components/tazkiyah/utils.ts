@@ -46,6 +46,7 @@ export type AladhanResponse = {
     year: string;
     designation: { abbreviated: string };
   };
+  qibla?: number;
 };
 
 let aladhanCache: AladhanResponse | null = null;
@@ -66,6 +67,7 @@ export function useAladhanData() {
           const res = {
             timings: json.data.timings,
             hijri: json.data.date.hijri,
+            qibla: json.data.meta?.qibla,
           };
           aladhanCache = res;
           return res;

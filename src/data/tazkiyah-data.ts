@@ -44,11 +44,51 @@ export const JUZ_LIST = Array.from({ length: 30 }, (_, i) => ({
   ayats: 200 + ((i * 37) % 80),
 }));
 
-export const HADITH = {
-  text: "The most beloved of deeds to Allah are those that are most consistent, even if they are few.",
-  narrator: "Narrated by Aisha (R.A)",
-  source: "Sahih al-Bukhari 6464",
-};
+export const HADITHS = [
+  {
+    text: "The most beloved of deeds to Allah are those that are most consistent, even if they are few.",
+    source: "Sahih al-Bukhari 6464",
+  },
+  {
+    text: "None of you truly believes until he loves for his brother what he loves for himself.",
+    source: "Sahih al-Bukhari 13",
+  },
+  {
+    text: "He who does not show mercy to others will not be shown mercy.",
+    source: "Sahih Muslim 2318",
+  },
+  {
+    text: "A good word is charity.",
+    source: "Sahih al-Bukhari 2989",
+  },
+  {
+    text: "The strong man is not the good wrestler, but the strong man is he who controls himself when he is angry.",
+    source: "Sahih al-Bukhari 6114",
+  }
+];
+
+export const DUAS = [
+  {
+    ar: "ٱللَّهُمَّ بِكَ أَصْبَحْنَا وَبِكَ أَمْسَيْنَا",
+    en: "O Allah, by You we enter the morning and by You we enter the evening...",
+    ref: "Hisn al-Muslim · 76",
+  },
+  {
+    ar: "رَبِّ زِدْنِي عِلْمًا",
+    en: "My Lord, increase me in knowledge.",
+    ref: "Surah Ta-Ha · 114",
+  },
+  {
+    ar: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً",
+    en: "Our Lord, give us in this world [that which is] good...",
+    ref: "Surah Al-Baqarah · 201",
+  },
+  {
+    ar: "رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا",
+    en: "Our Lord, let not our hearts deviate after You have guided us...",
+    ref: "Surah Ali 'Imran · 8",
+  }
+];
 
 export const SEERAH_CHAPTERS = [
   { n: "01", title: "The Year of the Elephant", meta: "570 CE · Makkah", desc: "Birth in the city of light, in the year Abraha's army fell." },
