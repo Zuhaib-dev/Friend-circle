@@ -127,7 +127,7 @@ export default function TazkiyahPage() {
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(180,160,90,0.18),transparent_55%)]" />
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(60,140,110,0.12),transparent_50%)]" />
         </div>
-        <div className="pointer-events-none absolute inset-0 [background-image:radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:18px_18px] opacity-40" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[length:18px_18px] opacity-40" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-8 sm:py-12">
           <Header />
           <ContinueReading />
@@ -158,7 +158,7 @@ function Header() {
         <span className="hidden sm:flex items-center gap-2"><Compass className="h-3 w-3" />QIBLA · 294° NW</span>
       </div>
       <div className="relative">
-        <div className="pointer-events-none absolute -top-6 right-0 text-[140px] sm:text-[220px] leading-none text-white/[0.04] select-none" style={{ fontFamily: "'Amiri', serif" }}>تزكية</div>
+        <div className="pointer-events-none absolute -top-6 right-0 text-[140px] sm:text-[220px] leading-none text-white/4 select-none" style={{ fontFamily: "'Amiri', serif" }}>تزكية</div>
         <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: EASE }}
           className="font-display font-black tracking-tight text-[14vw] sm:text-[10vw] md:text-[8rem] leading-[0.85] text-white">Tazkiyah</motion.h1>
         <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15, duration: 0.6 }}
@@ -166,7 +166,7 @@ function Header() {
           A quiet room inside our digital campfire. Read, remember, return — at your own pace.
         </motion.p>
         <motion.div initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ delay: 0.3, duration: 0.9, ease: [0.65,0,0.35,1] as [number,number,number,number] }}
-          className="mt-6 h-px w-full bg-gradient-to-r from-transparent via-emerald-300/40 to-transparent origin-left" />
+          className="mt-6 h-px w-full bg-linear-to-r from-transparent via-emerald-300/40 to-transparent origin-left" />
       </div>
     </div>
   );
@@ -186,14 +186,14 @@ function ContinueReading() {
             <h2 className="font-display text-3xl sm:text-4xl text-white">Surah Al-Kahf</h2>
             <span className="text-white/40 text-sm font-mono">AYAT 10 / 110</span>
           </div>
-          <p className="mt-4 text-right text-2xl sm:text-3xl leading-[2] text-white/90" style={{ fontFamily: "'Amiri', serif" }} dir="rtl">
+          <p className="mt-4 text-right text-2xl sm:text-3xl leading-loose text-white/90" style={{ fontFamily: "'Amiri', serif" }} dir="rtl">
             إِذْ أَوَى ٱلْفِتْيَةُ إِلَى ٱلْكَهْفِ...
           </p>
           <p className="mt-2 text-white/55 text-sm italic">"When the youths retreated to the cave..."</p>
           <div className="mt-5">
             <div className="h-[2px] w-full bg-white/10 overflow-hidden">
               <motion.div initial={{ width: 0 }} animate={{ width: "9%" }} transition={{ delay: 0.6, duration: 1.4, ease: "easeOut" }}
-                className="h-full bg-gradient-to-r from-emerald-300 to-amber-200" />
+                className="h-full bg-linear-to-r from-emerald-300 to-amber-200" />
             </div>
             <div className="mt-1.5 flex justify-between text-[10px] font-mono uppercase tracking-[0.25em] text-white/40">
               <span>9% COMPLETE</span><span>100 AYAT REMAINING</span>
@@ -237,7 +237,7 @@ function PrayerStrip() {
           const isNext = i === nextIdx && nowM != null;
           return (
             <motion.div key={p.name} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 + i * 0.06 }}
-              className={`relative px-2 sm:px-4 py-4 sm:py-5 text-center ${isNext ? "bg-emerald-300/[0.05]" : ""}`}>
+              className={`relative px-2 sm:px-4 py-4 sm:py-5 text-center ${isNext ? "bg-emerald-300/5" : ""}`}>
               {isNext && <motion.span layoutId="prayer-pulse" className="absolute inset-0 ring-1 ring-inset ring-emerald-300/40" />}
               <Icon className={`h-4 w-4 mx-auto mb-2 ${isNext ? "text-emerald-300" : "text-white/40"}`} />
               <div className={`text-[10px] font-mono uppercase tracking-[0.25em] ${isNext ? "text-emerald-300" : "text-white/50"}`}>{p.name}</div>
@@ -285,7 +285,7 @@ function QuranSection() {
   const [active, setActive] = useState<Surah>(SURAHS[1]);
   const [query, setQuery] = useState("");
   const [selectedAyat, setSelectedAyat] = useState<Ayat | null>(null);
-  const filtered = SURAHS.filter((s) => \`\${s.n} \${s.name} \${s.meaning}\`.toLowerCase().includes(query.toLowerCase()));
+  const filtered = SURAHS.filter((s) => `${s.n} ${s.name} ${s.meaning}`.toLowerCase().includes(query.toLowerCase()));
   return (
     <div className="grid lg:grid-cols-[320px_1fr] gap-6">
       <div className="rounded-sm border border-white/10 bg-[#0f0f0f] overflow-hidden">
@@ -308,8 +308,8 @@ function QuranSection() {
         <div className="max-h-[460px] overflow-y-auto">
           {mode === "surahs" ? filtered.map((s) => (
             <motion.button key={s.n} onClick={() => setActive(s)} whileHover={{ x: 2 }}
-              className={\`w-full grid grid-cols-[36px_1fr_auto] items-center gap-3 px-4 py-3 text-left border-b border-white/5 transition-colors \${active.n === s.n ? "bg-emerald-300/[0.06]" : "hover:bg-white/[0.03]"}\`}>
-              <span className={\`font-mono text-xs \${active.n === s.n ? "text-emerald-300" : "text-white/40"}\`}>{String(s.n).padStart(3, "0")}</span>
+              className={`w-full grid grid-cols-[36px_1fr_auto] items-center gap-3 px-4 py-3 text-left border-b border-white/5 transition-colors ${active.n === s.n ? "bg-emerald-300/6" : "hover:bg-white/3"}`}>
+              <span className={`font-mono text-xs ${active.n === s.n ? "text-emerald-300" : "text-white/40"}`}>{String(s.n).padStart(3, "0")}</span>
               <span>
                 <div className="text-sm text-white">{s.name}</div>
                 <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-white/40">{s.meaning} · {s.count} Ayat</div>
@@ -317,7 +317,7 @@ function QuranSection() {
               <span className="text-right text-base text-white/80" style={{ fontFamily: "'Amiri', serif" }}>{s.arName}</span>
             </motion.button>
           )) : JUZ_LIST.map((j) => (
-            <button key={j.n} className="w-full grid grid-cols-[36px_1fr_auto] items-center gap-3 px-4 py-3 text-left border-b border-white/5 hover:bg-white/[0.03] transition-colors">
+            <button key={j.n} className="w-full grid grid-cols-[36px_1fr_auto] items-center gap-3 px-4 py-3 text-left border-b border-white/5 hover:bg-white/3 transition-colors">
               <span className="font-mono text-xs text-white/40">{String(j.n).padStart(2, "0")}</span>
               <span>
                 <div className="text-sm text-white">Juz {j.n}</div>
@@ -345,12 +345,12 @@ function QuranSection() {
         <div className="divide-y divide-white/5">
           {active.ayats.map((a, i) => (
             <motion.button key={a.n} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06, duration: 0.4 }}
-              onClick={() => setSelectedAyat(a)} className="w-full text-left px-5 sm:px-8 py-6 hover:bg-white/[0.02] transition-colors group">
+              onClick={() => setSelectedAyat(a)} className="w-full text-left px-5 sm:px-8 py-6 hover:bg-white/2 transition-colors group">
               <div className="flex items-start justify-between gap-4">
                 <span className="inline-flex items-center justify-center h-7 w-7 border border-white/15 rounded-full text-[10px] font-mono text-white/60 group-hover:border-emerald-300/50 group-hover:text-emerald-300 transition-colors shrink-0">{a.n}</span>
                 <p className="flex-1 text-right text-2xl sm:text-[28px] leading-[2.2] text-white" style={{ fontFamily: "'Amiri', serif" }} dir="rtl">{a.ar}</p>
               </div>
-              <p className={\`mt-3 text-sm sm:text-base text-white/65 leading-relaxed \${lang === "ur" ? "text-right" : "text-left"}\`}
+              <p className={`mt-3 text-sm sm:text-base text-white/65 leading-relaxed ${lang === "ur" ? "text-right" : "text-left"}`}
                 style={lang === "ur" ? { fontFamily: "'Scheherazade New', serif", fontSize: "1.1rem" } : undefined}
                 dir={lang === "ur" ? "rtl" : "ltr"}>
                 {lang === "en" ? a.en : a.ur}
@@ -390,7 +390,7 @@ function AyatModal({ ayat, surah, onClose }: { ayat: Ayat | null; surah: Surah; 
   }, [ayat, onClose]);
   const copy = () => {
     if (!ayat) return;
-    navigator.clipboard?.writeText(\`\${ayat.ar}\n\n\${ayat.en}\n— Surah \${surah.name} \${surah.n}:\${ayat.n}\`);
+    navigator.clipboard?.writeText(`${ayat.ar}\n\n${ayat.en}\n— Surah ${surah.name} ${surah.n}:${ayat.n}`);
     setCopied(true); setTimeout(() => setCopied(false), 1500);
   };
   const ACTIONS = [
@@ -403,7 +403,7 @@ function AyatModal({ ayat, surah, onClose }: { ayat: Ayat | null; surah: Surah; 
     <AnimatePresence>
       {ayat && (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}
-          className="fixed inset-0 z-[60] bg-black/80 backdrop-blur-md flex items-end sm:items-center justify-center p-0 sm:p-6" onClick={onClose}>
+          className="fixed inset-0 z-60 bg-black/80 backdrop-blur-md flex items-end sm:items-center justify-center p-0 sm:p-6" onClick={onClose}>
           <motion.div initial={{ y: 60, opacity: 0, scale: 0.98 }} animate={{ y: 0, opacity: 1, scale: 1 }} exit={{ y: 30, opacity: 0, scale: 0.98 }}
             transition={{ type: "spring", stiffness: 320, damping: 32 }} onClick={(e) => e.stopPropagation()}
             className="w-full sm:max-w-2xl bg-[#0f0f0f] border border-white/10 rounded-t-lg sm:rounded-sm overflow-hidden shadow-2xl">
@@ -425,7 +425,7 @@ function AyatModal({ ayat, surah, onClose }: { ayat: Ayat | null; surah: Surah; 
                 const Icon = a.icon;
                 return (
                   <button key={a.label} onClick={a.onClick}
-                    className="group px-4 py-4 flex flex-col items-center gap-2 hover:bg-white/[0.04] transition-colors text-center">
+                    className="group px-4 py-4 flex flex-col items-center gap-2 hover:bg-white/4 transition-colors text-center">
                     <Icon className="h-4 w-4 text-white/60 group-hover:text-emerald-300 transition-colors" />
                     <span className="text-[10px] font-mono uppercase tracking-[0.22em] text-white/70 group-hover:text-white">{a.label}</span>
                     <span className="text-[9px] font-mono text-white/30">{a.code}</span>
@@ -444,7 +444,7 @@ function AyatModal({ ayat, surah, onClose }: { ayat: Ayat | null; surah: Surah; 
 function HadithSection() {
   return (
     <div className="rounded-sm border border-white/10 bg-[#0f0f0f] p-8 sm:p-12 relative overflow-hidden">
-      <Quote className="absolute -top-4 -left-4 h-32 w-32 text-white/[0.03]" />
+      <Quote className="absolute -top-4 -left-4 h-32 w-32 text-white/3" />
       <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-emerald-300/80 mb-6 flex items-center gap-2">
         <span className="h-1.5 w-1.5 rounded-full bg-emerald-300" />HADITH OF THE DAY · {HADITH.source}
       </div>
@@ -521,17 +521,17 @@ function TasbihSection() {
             const c = counts[i]; const done = c >= p.target; const ratio = Math.min(1, c / p.target);
             return (
               <button key={p.tr} onClick={() => setPhraseIdx(i)}
-                className={\`w-full p-4 text-left border rounded-sm transition-colors \${phraseIdx === i ? "border-emerald-300/40 bg-emerald-300/[0.05]" : "border-white/10 hover:border-white/30"}\`}>
+                className={`w-full p-4 text-left border rounded-sm transition-colors ${phraseIdx === i ? "border-emerald-300/40 bg-emerald-300/5" : "border-white/10 hover:border-white/30"}`}>
                 <div className="flex items-baseline justify-between mb-2">
                   <div>
                     <span className="text-xl text-white" style={{ fontFamily: "'Amiri', serif" }} dir="rtl">{p.ar}</span>
                     <span className="ml-3 text-[10px] font-mono uppercase tracking-[0.25em] text-white/50">{p.tr}</span>
                   </div>
-                  <span className={\`text-sm font-mono tabular-nums \${done ? "text-emerald-300" : "text-white/60"}\`}>{c} / {p.target}</span>
+                  <span className={`text-sm font-mono tabular-nums ${done ? "text-emerald-300" : "text-white/60"}`}>{c} / {p.target}</span>
                 </div>
                 <div className="h-[2px] bg-white/10 overflow-hidden">
-                  <motion.div animate={{ width: \`\${ratio * 100}%\` }} transition={{ type: "spring", stiffness: 120, damping: 22 }}
-                    className={\`h-full \${done ? "bg-emerald-300" : "bg-white/60"}\`} />
+                  <motion.div animate={{ width: `${ratio * 100}%` }} transition={{ type: "spring", stiffness: 120, damping: 22 }}
+                    className={`h-full ${done ? "bg-emerald-300" : "bg-white/60"}`} />
                 </div>
               </button>
             );
@@ -570,13 +570,13 @@ function SeerahSection() {
             const sel = i === active;
             return (
               <button key={c.n} onClick={() => setActive(i)}
-                className={\`w-full grid grid-cols-[44px_1fr_auto] items-center gap-3 px-5 py-4 text-left border-b border-white/5 transition-colors \${sel ? "bg-emerald-300/[0.06]" : "hover:bg-white/[0.03]"}\`}>
-                <span className={\`font-mono text-xs \${sel ? "text-emerald-300" : "text-white/40"}\`}>{c.n}</span>
+                className={`w-full grid grid-cols-[44px_1fr_auto] items-center gap-3 px-5 py-4 text-left border-b border-white/5 transition-colors ${sel ? "bg-emerald-300/6" : "hover:bg-white/3"}`}>
+                <span className={`font-mono text-xs ${sel ? "text-emerald-300" : "text-white/40"}`}>{c.n}</span>
                 <span>
                   <div className="text-sm text-white">{c.title}</div>
                   <div className="text-[10px] font-mono uppercase tracking-[0.22em] text-white/40">{c.meta}</div>
                 </span>
-                <ChevronRight className={\`h-3.5 w-3.5 \${sel ? "text-emerald-300" : "text-white/30"}\`} />
+                <ChevronRight className={`h-3.5 w-3.5 ${sel ? "text-emerald-300" : "text-white/30"}`} />
               </button>
             );
           })}
@@ -589,12 +589,12 @@ function SeerahSection() {
         <p className="mt-4 text-white/65 leading-relaxed text-base">{ch.desc}</p>
         <div className="mt-8 grid grid-cols-3 gap-3">
           {["Read", "Listen", "Reflect"].map((label, i) => (
-            <button key={label} className="px-4 py-3 border border-white/10 rounded-sm hover:border-emerald-300/40 hover:bg-emerald-300/[0.04] text-[10px] font-mono uppercase tracking-[0.25em] text-white/70 hover:text-emerald-300 transition-colors">
+            <button key={label} className="px-4 py-3 border border-white/10 rounded-sm hover:border-emerald-300/40 hover:bg-emerald-300/4 text-[10px] font-mono uppercase tracking-[0.25em] text-white/70 hover:text-emerald-300 transition-colors">
               0{i + 1} · {label}
             </button>
           ))}
         </div>
-        <div className="pointer-events-none absolute -bottom-10 -right-6 text-[180px] text-white/[0.03] select-none" style={{ fontFamily: "'Amiri', serif" }}>ﷺ</div>
+        <div className="pointer-events-none absolute -bottom-10 -right-6 text-[180px] text-white/3 select-none" style={{ fontFamily: "'Amiri', serif" }}>ﷺ</div>
       </motion.div>
     </div>
   );
@@ -655,7 +655,7 @@ function BentoCard({ children, className = "", tone = "default" }:
       onMouseLeave={() => { mx.set(0); my.set(0); }}
       style={{ rotateX: rx, rotateY: ry, transformStyle: "preserve-3d" }}
       whileHover={{ y: -2 }}
-      className={\`group relative rounded-sm border border-white/10 bg-[#0f0f0f] p-5 flex flex-col hover:border-emerald-300/30 transition-colors overflow-hidden \${className}\`}>
+      className={`group relative rounded-sm border border-white/10 bg-[#0f0f0f] p-5 flex flex-col hover:border-emerald-300/30 transition-colors overflow-hidden ${className}`}>
       {tone === "emerald" && <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(110,200,170,0.08),transparent_60%)] pointer-events-none" />}
       <div className="relative flex-1 flex flex-col">{children}</div>
       <span className="absolute top-2 right-2 text-[9px] font-mono text-white/20 group-hover:text-emerald-300/70 transition-colors">◆</span>
