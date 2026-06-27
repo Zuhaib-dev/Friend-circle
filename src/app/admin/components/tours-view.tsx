@@ -394,7 +394,7 @@ export function ToursView() {
                 <div className="flex items-center gap-2 w-full md:w-auto mt-3 md:mt-0">
                   <select
                     value={tour.status}
-                    onChange={(e) => updateStatus(tour._id, e.target.value)}
+                    onChange={(e) => updateStatus(tour._id, e.target.value as Tour["status"])}
                     className="bg-transparent hairline border-ink px-2 py-1 font-mono text-[10px] uppercase appearance-none"
                   >
                     <option value="UPCOMING">UPCOMING</option>

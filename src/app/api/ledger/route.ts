@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from '@/lib/authOptions';
 import connectToDatabase from "@/lib/mongodb";
 import Mission from "@/models/Mission";
 import Expense from "@/models/Expense";
