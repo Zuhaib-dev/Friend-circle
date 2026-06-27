@@ -16,7 +16,7 @@ export function RouteTraceSection({ waypoints }: { waypoints: any[] }) {
 
   return (
     <section className="px-4 md:px-8 mt-12">
-      <motion.div {...fadeUp} className="crosshair hairline border-ink bg-bone relative">
+      <motion.div {...fadeUp} className="crosshair hairline border-ink bg-bone">
         <Crosshairs />
         <PanelHeader
           code="TRACE / 08"

@@ -281,7 +281,7 @@ export function MemoriesView() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {memories.map((mem) => (
               <div key={mem._id} className="hairline border-ink bg-bone p-3 flex flex-col gap-3 group">
-                <div className="aspect-[3/1] bg-ink/10 relative overflow-hidden hairline border-ink/30">
+                <div className="aspect-3/1 bg-ink/10 relative overflow-hidden hairline border-ink/30">
                   {mem.bannerImage && <img src={mem.bannerImage} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />}
                   <div className="absolute top-2 left-2 brick px-1.5 py-0.5 text-bone mono-label text-[10px]">{mem.code}</div>
                 </div>

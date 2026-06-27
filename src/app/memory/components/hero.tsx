@@ -8,7 +8,7 @@ export function HeroBanner({ bannerImage, coordinates, code, elevation }: { bann
   return (
     <motion.div {...fadeUp} className="crosshair hairline border-ink overflow-hidden group">
       <Crosshairs />
-      <div className="relative aspect-[7/3] md:aspect-[3/1] overflow-hidden bg-ink">
+      <div className="relative aspect-7/3 md:aspect-3/1 overflow-hidden bg-ink">
         <img
           src={bannerImage || "https://picsum.photos/seed/pahalgam-banner-fc/2000/800"}
           alt="Banner"

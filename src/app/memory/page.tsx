@@ -54,7 +54,7 @@ export default function MemoriesIndexPage() {
             {memories.map(mem => (
               <Link key={mem._id} href={`/memory/${mem._id}`} className="group block crosshair hairline border-ink bg-ink/5 overflow-hidden">
                 <Crosshairs />
-                <div className="aspect-[7/3] bg-ink relative overflow-hidden">
+                <div className="aspect-7/3 bg-ink relative overflow-hidden">
                   {mem.bannerImage && (
                     <img src={mem.bannerImage} alt={mem.title} className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
                   )}
