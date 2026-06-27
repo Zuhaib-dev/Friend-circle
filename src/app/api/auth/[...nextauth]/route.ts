@@ -8,8 +8,8 @@ import User from '@/models/User';
 export const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID || process.env.AUTH_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET || process.env.AUTH_SECRET as string,
+      clientId: process.env.GOOGLE_CLIENT_ID as string,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }),
     CredentialsProvider({
       name: 'Credentials',

@@ -38,6 +38,10 @@ MONGODB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/your-db?retr
 NEXTAUTH_SECRET=your_super_secret_string
 NEXTAUTH_URL=http://localhost:3000
 
+# Google OAuth Configuration
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+
 # ImageKit Configuration
 NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT=https://ik.imagekit.io/your_id
 NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY=your_public_key
