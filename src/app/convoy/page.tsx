@@ -81,7 +81,14 @@ export default function ConvoyPage() {
     <main className="min-h-screen bg-bone text-ink">
       <TopNav />
 
-      <Header utc={utc} />
+      <Header 
+        utc={utc} 
+        missionId={mission?.missionId || "MSN-11"}
+        name={mission?.name || "Mission Pahalgam"}
+        description={mission?.description || "convoy / dawn rally."}
+        status={mission?.status || "PLANNING"}
+        rosterSize={activeRoster.length}
+      />
 
       {/* META STRIP */}
       <section className="hairline-b border-ink grid grid-cols-2 md:grid-cols-5">

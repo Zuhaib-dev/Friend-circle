@@ -17,7 +17,13 @@ export function ConvoyView() {
   const [users, setUsers] = useState<UserData[]>([]);
   const [missionId, setMissionId] = useState("MSN-11");
   const [name, setName] = useState("Pahalgam Rally");
+  const [description, setDescription] = useState("convoy / dawn rally.");
   const [status, setStatus] = useState<"PLANNING" | "LIVE" | "COMPLETED">("PLANNING");
+  const [waypoints, setWaypoints] = useState<any[]>(WAYPOINTS);
+  const [foodDuties, setFoodDuties] = useState<any[]>(FOOD_DUTIES);
+  const [prayers, setPrayers] = useState<any[]>(PRAYERS);
+  const [gearPersonal, setGearPersonal] = useState<string[]>(GEAR_PERSONAL);
+  const [gearConvoy, setGearConvoy] = useState<string[]>(GEAR_CONVOY);
 
   const [roster, setRoster] = useState<any[]>([]);
   const [search, setSearch] = useState("");
@@ -43,6 +49,12 @@ export function ConvoyView() {
           setName(data.name);
           setStatus(data.status);
           setRoster(data.roster || []);
+          if (data.description) setDescription(data.description);
+          if (data.waypoints) setWaypoints(data.waypoints);
+          if (data.foodDuties) setFoodDuties(data.foodDuties);
+          if (data.prayers) setPrayers(data.prayers);
+          if (data.gearPersonal) setGearPersonal(data.gearPersonal);
+          if (data.gearConvoy) setGearConvoy(data.gearConvoy);
         }
       });
 
@@ -95,6 +107,7 @@ export function ConvoyView() {
       const payload = {
         missionId,
         name,
+        description,
         status,
         roster: roster.map(r => ({
           user: r.user._id || r.user,
@@ -105,11 +118,11 @@ export function ConvoyView() {
           plate: r.plate,
           pickup: r.pickup,
         })),
-        waypoints: WAYPOINTS,
-        foodDuties: FOOD_DUTIES,
-        gearPersonal: GEAR_PERSONAL,
-        gearConvoy: GEAR_CONVOY,
-        prayers: PRAYERS,
+        waypoints,
+        foodDuties,
+        gearPersonal,
+        gearConvoy,
+        prayers,
       };
       const res = await fetch("/api/admin/convoys", {
         method: "POST",
@@ -129,7 +142,7 @@ export function ConvoyView() {
   return (
     <div className="space-y-6">
       <Panel code="CNV/01" title="Mission Parameters" right={<Route className="h-4 w-4" />}>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
           <label className="block">
             <span className="mono-label opacity-60 block mb-1">MISSION ID</span>
             <input
@@ -146,6 +159,15 @@ export function ConvoyView() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="w-full hairline bg-bone px-3 py-2 font-display uppercase tracking-widest focus:bg-acid/20 focus:outline-none"
+            />
+          </label>
+          <label className="block">
+            <span className="mono-label opacity-60 block mb-1">DESCRIPTION</span>
+            <input
+              type="text"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              className="w-full hairline bg-bone px-3 py-2 font-mono text-sm focus:bg-acid/20 focus:outline-none"
             />
           </label>
           <label className="block">
@@ -279,7 +301,109 @@ export function ConvoyView() {
           </div>
         </div>
 
-        <div className="mt-8 flex justify-end">
+        
+      <Panel code="LOG/03" title="Logistics Configuration">
+        <div className="space-y-8">
+          {/* WAYPOINTS */}
+          <div>
+            <div className="flex items-center justify-between mb-3">
+              <span className="mono-label opacity-50">WAYPOINTS ({waypoints.length})</span>
+              <button onClick={() => setWaypoints([...waypoints, { code: "WP-X", name: "", kind: "PICKUP", time: "00:00", km: 0 }])} className="text-signal hover:underline mono-label">+ ADD STOP</button>
+            </div>
+            <div className="space-y-2">
+              {waypoints.map((w, i) => (
+                <div key={i} className="hairline p-2 bg-bone flex items-center gap-2">
+                  <input type="text" value={w.code} onChange={e => {const nw = [...waypoints]; nw[i].code = e.target.value; setWaypoints(nw)}} className="w-20 hairline px-2 py-1 font-mono text-xs uppercase" placeholder="WP-00" />
+                  <input type="text" value={w.name} onChange={e => {const nw = [...waypoints]; nw[i].name = e.target.value; setWaypoints(nw)}} className="flex-1 hairline px-2 py-1 font-mono text-xs" placeholder="Location Name" />
+                  <select value={w.kind} onChange={e => {const nw = [...waypoints]; nw[i].kind = e.target.value; setWaypoints(nw)}} className="w-24 hairline px-2 py-1 font-mono text-xs uppercase">
+                    <option>RALLY</option><option>PICKUP</option><option>FUEL</option><option>BREAK</option><option>OBJ</option>
+                  </select>
+                  <input type="text" value={w.time} onChange={e => {const nw = [...waypoints]; nw[i].time = e.target.value; setWaypoints(nw)}} className="w-20 hairline px-2 py-1 font-mono text-xs" placeholder="00:00" />
+                  <input type="number" value={w.km} onChange={e => {const nw = [...waypoints]; nw[i].km = parseInt(e.target.value)||0; setWaypoints(nw)}} className="w-16 hairline px-2 py-1 font-mono text-xs" placeholder="KM" />
+                  <button onClick={() => setWaypoints(waypoints.filter((_, idx) => idx !== i))} className="p-1 hover:text-signal"><Trash2 className="h-4 w-4" /></button>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* FOOD DUTIES */}
+          <div>
+            <div className="flex items-center justify-between mb-3">
+              <span className="mono-label opacity-50">FOOD DUTIES ({foodDuties.length})</span>
+              <button onClick={() => setFoodDuties([...foodDuties, { item: "", who: roster[0]?.callsign || "OP", crit: false }])} className="text-signal hover:underline mono-label">+ ADD DUTY</button>
+            </div>
+            <div className="space-y-2">
+              {foodDuties.map((f, i) => (
+                <div key={i} className="hairline p-2 bg-bone flex items-center gap-2">
+                  <input type="text" value={f.item} onChange={e => {const nf = [...foodDuties]; nf[i].item = e.target.value; setFoodDuties(nf)}} className="flex-1 hairline px-2 py-1 font-mono text-xs" placeholder="Item (e.g. Kahwa, Water)" />
+                  <select value={f.who?.callsign || f.who || ""} onChange={e => {const nf = [...foodDuties]; nf[i].who = e.target.value; setFoodDuties(nf)}} className="w-32 hairline px-2 py-1 font-mono text-xs uppercase">
+                    {roster.map(r => <option key={r.user._id||r.user} value={r.callsign}>{r.callsign}</option>)}
+                  </select>
+                  <label className="flex items-center gap-1 mono-label text-xs cursor-pointer px-2">
+                    <input type="checkbox" checked={f.crit} onChange={e => {const nf = [...foodDuties]; nf[i].crit = e.target.checked; setFoodDuties(nf)}} /> CRIT
+                  </label>
+                  <button onClick={() => setFoodDuties(foodDuties.filter((_, idx) => idx !== i))} className="p-1 hover:text-signal"><Trash2 className="h-4 w-4" /></button>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* PRAYERS */}
+          <div>
+            <div className="flex items-center justify-between mb-3">
+              <span className="mono-label opacity-50">PRAYER STOPS ({prayers.length})</span>
+              <button onClick={() => setPrayers([...prayers, { code: "FAJR", time: "00:00", wp: "WP-00", status: "PRE-DEP" }])} className="text-signal hover:underline mono-label">+ ADD SALAH</button>
+            </div>
+            <div className="space-y-2">
+              {prayers.map((p, i) => (
+                <div key={i} className="hairline p-2 bg-bone flex items-center gap-2">
+                  <select value={p.code} onChange={e => {const np = [...prayers]; np[i].code = e.target.value; setPrayers(np)}} className="w-28 hairline px-2 py-1 font-mono text-xs uppercase">
+                    <option>FAJR</option><option>ZUHR</option><option>ASR</option><option>MAGHRIB</option><option>ISHA</option>
+                  </select>
+                  <input type="text" value={p.time} onChange={e => {const np = [...prayers]; np[i].time = e.target.value; setPrayers(np)}} className="w-20 hairline px-2 py-1 font-mono text-xs" placeholder="00:00" />
+                  <input type="text" value={p.wp} onChange={e => {const np = [...prayers]; np[i].wp = e.target.value; setPrayers(np)}} className="w-20 hairline px-2 py-1 font-mono text-xs" placeholder="WP-00" />
+                  <input type="text" value={p.status} onChange={e => {const np = [...prayers]; np[i].status = e.target.value; setPrayers(np)}} className="flex-1 hairline px-2 py-1 font-mono text-xs" placeholder="Status (e.g. PRE-DEP, AT OBJ)" />
+                  <button onClick={() => setPrayers(prayers.filter((_, idx) => idx !== i))} className="p-1 hover:text-signal"><Trash2 className="h-4 w-4" /></button>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* GEAR */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <span className="mono-label opacity-50">PERSONAL GEAR</span>
+                <button onClick={() => setGearPersonal([...gearPersonal, ""])} className="text-signal hover:underline mono-label">+ ADD ITEM</button>
+              </div>
+              <div className="space-y-2">
+                {gearPersonal.map((g, i) => (
+                  <div key={i} className="hairline p-1 bg-bone flex items-center gap-1">
+                    <input type="text" value={g} onChange={e => {const ng = [...gearPersonal]; ng[i] = e.target.value; setGearPersonal(ng)}} className="flex-1 hairline px-2 py-1 font-mono text-xs" placeholder="Gear Item" />
+                    <button onClick={() => setGearPersonal(gearPersonal.filter((_, idx) => idx !== i))} className="p-1 hover:text-signal"><Trash2 className="h-4 w-4" /></button>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <span className="mono-label opacity-50">CONVOY GEAR</span>
+                <button onClick={() => setGearConvoy([...gearConvoy, ""])} className="text-signal hover:underline mono-label">+ ADD ITEM</button>
+              </div>
+              <div className="space-y-2">
+                {gearConvoy.map((g, i) => (
+                  <div key={i} className="hairline p-1 bg-bone flex items-center gap-1">
+                    <input type="text" value={g} onChange={e => {const ng = [...gearConvoy]; ng[i] = e.target.value; setGearConvoy(ng)}} className="flex-1 hairline px-2 py-1 font-mono text-xs" placeholder="Gear Item" />
+                    <button onClick={() => setGearConvoy(gearConvoy.filter((_, idx) => idx !== i))} className="p-1 hover:text-signal"><Trash2 className="h-4 w-4" /></button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </Panel>
+
+      <div className="mt-8 flex justify-end">
           <button 
             onClick={saveConvoy} 
             disabled={saving}

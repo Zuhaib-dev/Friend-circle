@@ -3,24 +3,38 @@
 import { Flag } from "lucide-react";
 import { ROSTER } from "../data";
 
-export function Header({ utc }: { utc: string }) {
+export function Header({
+  utc,
+  missionId,
+  name,
+  description,
+  status,
+  rosterSize,
+}: {
+  utc: string;
+  missionId: string;
+  name: string;
+  description: string;
+  status: string;
+  rosterSize: number;
+}) {
   return (
     <section className="hairline-b border-ink relative overflow-hidden">
       <div className="px-4 md:px-8 py-8 md:py-12 grid md:grid-cols-12 gap-6 items-end">
         <div className="md:col-span-8">
           <div className="flex items-center gap-2 mono-label opacity-60 mb-3 flex-wrap">
-            <span className="brick text-bone px-2 py-px">MSN / 11</span>
+            <span className="brick text-bone px-2 py-px">{missionId || "MSN / 11"}</span>
             <span>·</span>
             <span>CONVOY PLANNER</span>
             <span>·</span>
             <span className="text-signal flex items-center gap-1.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-signal animate-blink" /> PLANNING
+              <span className="h-1.5 w-1.5 rounded-full bg-signal animate-blink" /> {status || "PLANNING"}
             </span>
           </div>
           <h1 className="font-display text-5xl md:text-7xl leading-[0.95] tracking-tight">
-            Mission <span className="italic text-signal">Pahalgam</span>
+            {name.split(" ")[0]} <span className="italic text-signal">{name.split(" ").slice(1).join(" ")}</span>
             <br />
-            convoy / dawn rally.
+            {description}
           </h1>
           <p className="mt-4 max-w-xl text-ink/70 text-sm md:text-base">
             Lock the roster. Sync the rigs. Stage food, fuel, prayer stops and gear in one tactical board
@@ -28,7 +42,7 @@ export function Header({ utc }: { utc: string }) {
           </p>
         </div>
         <div className="md:col-span-4 grid grid-cols-2 gap-2">
-          <BigStat label="UNITS" value={ROSTER.length.toString().padStart(2, "0")} />
+          <BigStat label="UNITS" value={rosterSize.toString().padStart(2, "0")} />
           <BigStat label="UTC" value={utc.slice(0, 5)} mono />
         </div>
       </div>
