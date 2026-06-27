@@ -140,10 +140,16 @@ export function ConvoyView() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-      if (!res.ok) alert("Failed to save convoy");
-      else alert("Convoy saved to database!");
+      if (!res.ok) {
+        const errorData = await res.json();
+        console.error("Backend Error:", errorData);
+        alert(`Failed to save convoy: ${errorData.error}`);
+      } else {
+        alert("Convoy saved to database!");
+      }
     } catch (err) {
-      console.error(err);
+      console.error("Network/Client Error:", err);
+      alert("Network error: failed to save convoy");
     }
     setSaving(false);
   };
