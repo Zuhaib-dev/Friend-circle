@@ -54,7 +54,7 @@ export default function ConvoyPage() {
   }, [mission]);
 
   const sortedRoster = useMemo(
-    () => [...activeRoster].sort((a, b) => ROLE_RANK[a.role] - ROLE_RANK[b.role]),
+    () => [...activeRoster].sort((a, b) => ROLE_RANK[a.role as keyof typeof ROLE_RANK] - ROLE_RANK[b.role as keyof typeof ROLE_RANK]),
     [activeRoster],
   );
 

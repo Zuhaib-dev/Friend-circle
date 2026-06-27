@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { Activity, Radar, ShieldCheck, Image as ImageIcon, Lock, Crosshair as CrosshairIcon, Users, Package } from "lucide-react";
+import { Activity, Radar, ShieldCheck, Image as ImageIcon, Lock, Crosshair as CrosshairIcon, Users, Package, MapPin, Route } from "lucide-react";
 import { TopNav } from "@/components/top-nav";
 
 import { NavBtn, Row, type View, type Operator, type Intel, type LogEntry } from "./components/shared";
