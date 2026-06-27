@@ -15,7 +15,7 @@ export async function GET() {
 
     await connectToDatabase();
     // Fetch the currently active or planning mission
-    const mission = await Mission.findOne({ status: { $in: ["PLANNING", "LIVE"] } })
+    const mission = await Mission.findOne({ status: { $in: ["PLANNING", "LIVE"] } }).sort({ createdAt: -1 })
       .populate("roster.user", "name email phone image teamMemberDetails bio callsign")
       .populate("foodDuties.who", "name callsign");
 

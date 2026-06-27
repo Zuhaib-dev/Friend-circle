@@ -11,7 +11,7 @@ export async function GET() {
     if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
     await connectToDatabase();
-    const mission = await Mission.findOne({ status: { $in: ["PLANNING", "LIVE"] } })
+    const mission = await Mission.findOne({ status: { $in: ["PLANNING", "LIVE"] } }).sort({ createdAt: -1 })
       .populate("roster.user", "name email");
 
     if (!mission) {
@@ -35,7 +35,7 @@ export async function POST(req: Request) {
     const body = await req.json();
     await connectToDatabase();
 
-    const mission = await Mission.findOne({ status: { $in: ["PLANNING", "LIVE"] } });
+    const mission = await Mission.findOne({ status: { $in: ["PLANNING", "LIVE"] } }).sort({ createdAt: -1 });
     if (!mission) return NextResponse.json({ error: "No active mission" }, { status: 400 });
     
     body.missionId = mission._id;

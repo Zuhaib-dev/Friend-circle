@@ -15,6 +15,7 @@ type UserData = {
 export function ConvoyView() {
   const [loading, setLoading] = useState(true);
   const [users, setUsers] = useState<UserData[]>([]);
+  const [dbId, setDbId] = useState("");
   const [missionId, setMissionId] = useState("MSN-11");
   const [name, setName] = useState("Pahalgam Rally");
   const [description, setDescription] = useState("convoy / dawn rally.");
@@ -45,6 +46,7 @@ export function ConvoyView() {
       .then((r) => r.json())
       .then((data) => {
         if (data && data.missionId) {
+          if (data._id) setDbId(data._id);
           setMissionId(data.missionId);
           setName(data.name);
           setStatus(data.status);
@@ -105,6 +107,7 @@ export function ConvoyView() {
     setSaving(true);
     try {
       const payload = {
+        _id: dbId || undefined,
         missionId,
         name,
         description,

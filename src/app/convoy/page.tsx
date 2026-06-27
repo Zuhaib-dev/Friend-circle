@@ -48,8 +48,8 @@ export default function ConvoyPage() {
       plate: r.plate || "TBA",
       pickup: r.pickup,
       phone: r.user?.phone || r.user?.teamMemberDetails || "N/A",
-      ice: { name: "TBA", phone: "0000000000" },
-      image: r.user?.image || "https://picsum.photos/seed/default/400/400",
+      ice: { name: r.user?.name || "TBA", phone: r.user?.phone || r.user?.teamMemberDetails || "0000000000" },
+      img: r.user?.image || `https://api.dicebear.com/7.x/initials/svg?seed=${r.callsign}&backgroundColor=1c1917&textColor=f5f5f4`,
     }));
   }, [mission]);
 
