@@ -7,7 +7,7 @@ import { Header, MetaCell } from "./components/Header";
 import { Section } from "./components/Shared";
 import { OperatorCard } from "./components/Roster";
 import { FoodPanel, FuelPanel, GearPanel, PrayerPanel, WaypointPanel } from "./components/LogisticsGrid";
-import { GEAR_CONVOY, GEAR_PERSONAL, ROLE_RANK, ROSTER, WAYPOINTS } from "./data";
+import { GEAR_CONVOY, GEAR_PERSONAL, ROLE_RANK, ROSTER, WAYPOINTS, FOOD_DUTIES, PRAYERS } from "./data";
 
 export default function ConvoyPage() {
   const [now, setNow] = useState<Date | null>(null);
@@ -58,7 +58,13 @@ export default function ConvoyPage() {
     [activeRoster],
   );
 
-  const totalKm = WAYPOINTS[WAYPOINTS.length - 1].km;
+  const activeWaypoints = useMemo(() => mission?.waypoints?.length ? mission.waypoints : WAYPOINTS, [mission]);
+  const activeFood = useMemo(() => mission?.foodDuties?.length ? mission.foodDuties : FOOD_DUTIES, [mission]);
+  const activeGearPersonal = useMemo(() => mission?.gearPersonal?.length ? mission.gearPersonal : GEAR_PERSONAL, [mission]);
+  const activeGearConvoy = useMemo(() => mission?.gearConvoy?.length ? mission.gearConvoy : GEAR_CONVOY, [mission]);
+  const activePrayers = useMemo(() => mission?.prayers?.length ? mission.prayers : PRAYERS, [mission]);
+
+  const totalKm = activeWaypoints[activeWaypoints.length - 1]?.km || 0;
   const fuelPerKm = 8.4; // INR / km approx
   const totalFuel = Math.round(totalKm * fuelPerKm * 2); // round trip
   const perHead = activeRoster.length > 0 ? Math.round(totalFuel / activeRoster.length) : 0;
@@ -98,12 +104,12 @@ export default function ConvoyPage() {
       {/* BENTO LOGISTICS */}
       <Section code="LOG / 02" title="Logistics Grid" tag="BENTO">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-3">
-          <div className="lg:col-span-7"><WaypointPanel /></div>
-          <div className="lg:col-span-5"><FuelPanel total={totalFuel} perHead={perHead} km={totalKm} /></div>
-          <div className="lg:col-span-5"><FoodPanel /></div>
-          <div className="lg:col-span-7"><PrayerPanel /></div>
-          <div className="lg:col-span-6"><GearPanel title="Personal Gear" code="GR-P" items={GEAR_PERSONAL} /></div>
-          <div className="lg:col-span-6"><GearPanel title="Convoy Gear" code="GR-C" items={GEAR_CONVOY} /></div>
+          <div className="lg:col-span-7"><WaypointPanel waypoints={activeWaypoints} /></div>
+          <div className="lg:col-span-5"><FuelPanel total={totalFuel} perHead={perHead} km={totalKm} roster={activeRoster} /></div>
+          <div className="lg:col-span-5"><FoodPanel foodDuties={activeFood} /></div>
+          <div className="lg:col-span-7"><PrayerPanel prayers={activePrayers} /></div>
+          <div className="lg:col-span-6"><GearPanel title="Personal Gear" code="GR-P" items={activeGearPersonal} /></div>
+          <div className="lg:col-span-6"><GearPanel title="Convoy Gear" code="GR-C" items={activeGearConvoy} /></div>
         </div>
       </Section>
 

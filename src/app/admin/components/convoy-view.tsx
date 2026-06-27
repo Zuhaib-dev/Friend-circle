@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Panel, EmptyState } from "./shared";
 import { Route, Plus, Search, Trash2, Check, User, Save } from "lucide-react";
+import { WAYPOINTS, FOOD_DUTIES, GEAR_PERSONAL, GEAR_CONVOY, PRAYERS } from "../../convoy/data";
 
 type UserData = {
   _id: string;
@@ -104,10 +105,11 @@ export function ConvoyView() {
           plate: r.plate,
           pickup: r.pickup,
         })),
-        waypoints: [], // To be implemented
-        foodDuties: [], // To be implemented
-        gearPersonal: [],
-        gearConvoy: [],
+        waypoints: WAYPOINTS,
+        foodDuties: FOOD_DUTIES,
+        gearPersonal: GEAR_PERSONAL,
+        gearConvoy: GEAR_CONVOY,
+        prayers: PRAYERS,
       };
       const res = await fetch("/api/admin/convoys", {
         method: "POST",

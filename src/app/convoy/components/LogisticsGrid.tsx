@@ -4,10 +4,9 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { AlertTriangle, Check, Fuel, Gauge, MapPin, Route as RouteIcon, Thermometer, Zap } from "lucide-react";
 import { Panel } from "./Shared";
-import { FOOD_DUTIES, PRAYERS, ROSTER, WAYPOINTS } from "../data";
 import { Crosshairs } from "@/components/auth-shell";
 
-export function WaypointPanel() {
+export function WaypointPanel({ waypoints }: { waypoints: any[] }) {
   const WP_KIND_COLOR: Record<string, string> = {
     RALLY: "bg-signal",
     PICKUP: "bg-ink",
@@ -17,10 +16,10 @@ export function WaypointPanel() {
   };
 
   return (
-    <Panel code="RT-01" title="Route Waypoints" right={`${WAYPOINTS.length} STOPS`}>
+    <Panel code="RT-01" title="Route Waypoints" right={`${waypoints.length} STOPS`}>
       <ol className="relative pl-6">
         <span className="absolute left-[7px] top-1 bottom-1 w-px bg-ink/30" />
-        {WAYPOINTS.map((w, i) => (
+        {waypoints.map((w, i) => (
           <motion.li
             key={w.code}
             initial={{ opacity: 0, x: -6 }}
@@ -51,7 +50,7 @@ export function WaypointPanel() {
   );
 }
 
-export function FuelPanel({ total, perHead, km }: { total: number; perHead: number; km: number }) {
+export function FuelPanel({ total, perHead, km, roster }: { total: number; perHead: number; km: number, roster: any[] }) {
   const cap = 18000;
   const pct = Math.min(100, Math.round((total / cap) * 100));
   return (
@@ -59,7 +58,7 @@ export function FuelPanel({ total, perHead, km }: { total: number; perHead: numb
       <div className="grid grid-cols-3 gap-2 mb-4">
         <FuelStat label="DIST RT" value={`${km * 2}KM`} icon={RouteIcon} />
         <FuelStat label="PER HEAD" value={`₹${perHead}`} icon={Gauge} />
-        <FuelStat label="UNITS" value={ROSTER.length.toString()} icon={Fuel} />
+        <FuelStat label="UNITS" value={roster.length.toString()} icon={Fuel} />
       </div>
 
       <div className="mono-label flex items-center justify-between mb-1.5">
@@ -83,14 +82,14 @@ export function FuelPanel({ total, perHead, km }: { total: number; perHead: numb
       </div>
 
       <div className="hairline-t border-ink/40 mt-4 pt-3 grid grid-cols-2 gap-2">
-        {ROSTER.slice(0, 4).map((o) => (
+        {roster.slice(0, 4).map((o) => (
           <div key={o.id} className="flex items-center justify-between mono-label">
             <span className="opacity-70 truncate">{o.callsign}</span>
             <span className="text-ink">₹{perHead}</span>
           </div>
         ))}
-        {ROSTER.length > 4 && (
-          <div className="col-span-2 mono-label opacity-50">+ {ROSTER.length - 4} MORE OPERATORS</div>
+        {roster.length > 4 && (
+          <div className="col-span-2 mono-label opacity-50">+ {roster.length - 4} MORE OPERATORS</div>
         )}
       </div>
     </Panel>
@@ -108,9 +107,9 @@ function FuelStat({ label, value, icon: Icon }: { label: string; value: string; 
   );
 }
 
-export function FoodPanel() {
+export function FoodPanel({ foodDuties }: { foodDuties: any[] }) {
   const [done, setDone] = useState<Record<number, boolean>>({});
-  const total = FOOD_DUTIES.length;
+  const total = foodDuties.length;
   const ok = Object.values(done).filter(Boolean).length;
   return (
     <Panel
@@ -119,7 +118,7 @@ export function FoodPanel() {
       right={`${ok.toString().padStart(2, "0")}/${total.toString().padStart(2, "0")}`}
     >
       <ul className="divide-y divide-ink/15">
-        {FOOD_DUTIES.map((f, i) => {
+        {foodDuties.map((f, i) => {
           const checked = !!done[i];
           return (
             <li key={f.item}>
@@ -166,7 +165,7 @@ export function FoodPanel() {
                     <AlertTriangle className="h-3 w-3" /> CRIT
                   </span>
                 )}
-                <span className="mono-label opacity-60 shrink-0">[{f.who}]</span>
+                <span className="mono-label opacity-60 shrink-0">[{f.who?.name?.split(" ")[0].toUpperCase() || f.who || "OP"}]</span>
               </button>
             </li>
           );
@@ -176,12 +175,14 @@ export function FoodPanel() {
   );
 }
 
-export function PrayerPanel() {
+export function PrayerPanel({ prayers }: { prayers: any[] }) {
   return (
     <Panel code="PR-04" title="Prayer Stops" right="SALAH SYNC">
       <div className="grid grid-cols-1 sm:grid-cols-5 gap-2">
-        {PRAYERS.map((p, i) => {
-          const Icon = p.icon;
+        {prayers.map((p, i) => {
+          // Hardcode lucide icons mapping if needed, or just use a generic icon for now
+          // Assuming p.icon was passed in data.ts, but from DB it will be string.
+          // Let's just render a generic MapPin or parse based on code.
           return (
             <motion.div
               key={p.code}
@@ -193,7 +194,7 @@ export function PrayerPanel() {
               <Crosshairs />
               <div className="flex items-center justify-between">
                 <span className="mono-label">{p.code}</span>
-                <Icon className="h-3.5 w-3.5 text-signal" />
+                <MapPin className="h-3.5 w-3.5 text-signal" />
               </div>
               <div className="font-display text-xl mt-1 leading-none">{p.time}</div>
               <div className="mono-label opacity-60 mt-1.5 flex items-center gap-1">
