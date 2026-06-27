@@ -4,28 +4,23 @@ import { Navigation, MapPin, Clock, Flag, TrendingUp } from "lucide-react";
 import { Crosshairs } from "@/components/crosshairs";
 import { fadeUp, PanelHeader } from "./shared";
 
-const WAYPOINTS = [
-  { id: "WP-01", name: "LAL CHOWK", t: "04:30", km: 0, elev: 1585, x: 60, y: 240 },
-  { id: "WP-02", name: "PAMPORE", t: "05:12", km: 18, elev: 1610, x: 140, y: 220 },
-  { id: "WP-03", name: "AVANTIPORA", t: "06:05", km: 42, elev: 1640, x: 230, y: 235 },
-  { id: "WP-04", name: "BIJBEHARA", t: "07:18", km: 78, elev: 1675, x: 340, y: 210 },
-  { id: "WP-05", name: "ANANTNAG", t: "08:02", km: 95, elev: 1720, x: 430, y: 180 },
-  { id: "WP-06", name: "PAHALGAM", t: "09:12", km: 142, elev: 2130, x: 560, y: 130 },
-  { id: "WP-07", name: "ARU VALLEY", t: "11:40", km: 168, elev: 2414, x: 660, y: 90 },
-  { id: "WP-08", name: "SNOW PATCH", t: "13:55", km: 188, elev: 2740, x: 740, y: 55 },
-];
+export function RouteTraceSection({ waypoints }: { waypoints: any[] }) {
+  const ROUTE_PATH = "M 60 240 Q 110 215 140 220 T 230 235 Q 285 245 340 210 T 430 180 Q 495 155 560 130 T 660 90 Q 710 70 740 55";
+  // Fallback coords on the path for up to 8 waypoints
+  const fallbackCoords = [
+    {x:60,y:240}, {x:140,y:220}, {x:230,y:235}, {x:340,y:210}, 
+    {x:430,y:180}, {x:560,y:130}, {x:660,y:90}, {x:740,y:55}
+  ];
+  const wps = (waypoints || []).map((w, i) => ({ ...w, x: fallbackCoords[i%8].x, y: fallbackCoords[i%8].y }));
+  const totalKm = wps.length > 0 ? wps[wps.length-1].km : 0;
 
-const ROUTE_PATH =
-  "M 60 240 Q 110 215 140 220 T 230 235 Q 285 245 340 210 T 430 180 Q 495 155 560 130 T 660 90 Q 710 70 740 55";
-
-export function RouteTraceSection() {
   return (
     <section className="px-4 md:px-8 mt-12">
       <motion.div {...fadeUp} className="crosshair hairline border-ink bg-bone relative">
         <Crosshairs />
         <PanelHeader
           code="TRACE / 08"
-          title="CONVOY ROUTE · 08 WAYPOINTS · 188 KM"
+          title={`CONVOY ROUTE · ${String(wps.length).padStart(2, "0")} WAYPOINTS · ${totalKm} KM`}
           right={
             <span className="flex items-center gap-1.5 mono-label">
               <Navigation className="h-3 w-3 text-signal" />
@@ -112,7 +107,7 @@ export function RouteTraceSection() {
                   transition={{ duration: 2.4, ease: "easeInOut" }}
                 />
 
-                {WAYPOINTS.map((w, i) => (
+                {wps.map((w, i) => (
                   <motion.g
                     key={w.id}
                     initial={{ opacity: 0, scale: 0 }}
@@ -156,7 +151,7 @@ export function RouteTraceSection() {
                       cy={w.y}
                       r="3.5"
                       fill={
-                        i === 0 || i === WAYPOINTS.length - 1
+                        i === 0 || i === wps.length - 1
                           ? "oklch(0.62 0.24 28)"
                           : "oklch(0.88 0.2 110)"
                       }
@@ -231,9 +226,9 @@ export function RouteTraceSection() {
 
               <div className="mt-2 grid grid-cols-3 gap-2 text-bone">
                 {[
-                  { l: "DEPLOYED", v: "04:30 UTC", I: Clock },
-                  { l: "RECOVERED", v: "22:52 UTC", I: Flag },
-                  { l: "PEAK ELEV", v: "2,740 M", I: TrendingUp },
+                  { l: "DEPLOYED", v: wps.length > 0 ? wps[0].time : "--:--", I: Clock },
+                  { l: "RECOVERED", v: wps.length > 0 ? wps[wps.length-1].time : "--:--", I: Flag },
+                  { l: "PEAK ELEV", v: wps.length > 0 ? Math.max(...wps.map(w => w.elev)) + " M" : "-- M", I: TrendingUp },
                 ].map((c) => (
                   <div key={c.l} className="hairline border-bone/30 px-2 py-1.5">
                     <div className="mono-label text-bone/60 flex items-center gap-1.5">
@@ -251,11 +246,13 @@ export function RouteTraceSection() {
             <div className="hairline-b border-ink p-3 md:p-4">
               <div className="flex items-center justify-between mono-label opacity-60 mb-2">
                 <span>ELEVATION PROFILE</span>
-                <span>1585 → 2740 M</span>
+                <span>{wps.length > 0 ? wps[0].elev : 0} → {wps.length > 0 ? wps[wps.length-1].elev : 0} M</span>
               </div>
               <div className="flex items-end gap-1 h-20">
-                {WAYPOINTS.map((w, i) => {
-                  const pct = ((w.elev - 1500) / (2800 - 1500)) * 100;
+                {wps.map((w, i) => {
+                  const maxElev = Math.max(...wps.map(w => w.elev), 2000);
+                  const minElev = Math.min(...wps.map(w => w.elev), 1000);
+                  const pct = ((w.elev - minElev) / (maxElev - minElev)) * 100;
                   return (
                     <motion.div
                       key={w.id}
@@ -275,8 +272,8 @@ export function RouteTraceSection() {
                 })}
               </div>
               <div className="hairline-t border-ink/30 mt-1 pt-1 flex justify-between mono-label opacity-50 text-[9px]">
-                <span>WP-01</span>
-                <span>WP-08</span>
+                <span>{wps.length > 0 ? wps[0].id : "WP-01"}</span>
+                <span>{wps.length > 0 ? wps[wps.length-1].id : "WP-END"}</span>
               </div>
             </div>
 
@@ -284,7 +281,7 @@ export function RouteTraceSection() {
               <div className="mono-label opacity-60 mb-2">WAYPOINT LOG</div>
               <ol className="relative">
                 <span className="absolute left-[7px] top-1 bottom-1 w-px bg-ink/30" />
-                {WAYPOINTS.map((w, i) => (
+                {wps.map((w, i) => (
                   <motion.li
                     key={w.id}
                     initial={{ opacity: 0, x: -8 }}
@@ -295,7 +292,7 @@ export function RouteTraceSection() {
                   >
                     <span
                       className={`absolute left-0 top-1/2 -translate-y-1/2 h-[15px] w-[15px] hairline border-ink ${
-                        i === 0 || i === WAYPOINTS.length - 1 ? "bg-signal" : "bg-acid"
+                        i === 0 || i === wps.length - 1 ? "bg-signal" : "bg-acid"
                       } flex items-center justify-center mono-label text-[8px] text-ink`}
                     >
                       {String(i + 1).padStart(2, "0")}

@@ -4,8 +4,8 @@ import { motion } from "motion/react";
 import { Quote, Wallet, Utensils, Wrench, CloudLightning, Camera, Gauge, Volume2, Calendar } from "lucide-react";
 import { fadeUp, PanelHeader } from "./shared";
 
-export function LogisticsSummary() {
-  const items = [
+export function LogisticsSummary({ logistics }: any) {
+  const defaultItems = [
     { icon: Wallet, label: "TOTAL EXPENSE", value: "₹ 18,420", code: "FIN-01", tint: "text-signal" },
     { icon: Utensils, label: "FOOD / WAWAN", value: "₹ 4,200", code: "FIN-02" },
     { icon: Wrench, label: "MECH CASUALTIES", value: "02 UNITS", code: "MEC-01", tint: "text-signal" },
@@ -20,8 +20,8 @@ export function LogisticsSummary() {
       <motion.div {...fadeUp} className="hairline border-ink bg-bone">
         <PanelHeader code="LOG / 07" title="LOGISTICS & EXPENSE READOUT" />
         <div className="grid grid-cols-2 md:grid-cols-4">
-          {items.map((it, i) => {
-            const Icon = it.icon;
+          {(logistics?.length > 0 ? logistics : defaultItems).map((it: any, i: number) => {
+            const Icon = it.icon || Wallet;
             const isRightEdge = (i + 1) % 4 === 0;
             const isMobileRightEdge = (i + 1) % 2 === 0;
             return (

@@ -13,6 +13,7 @@ import { LiveOpsView } from "./components/live-ops-view";
 import { PersonnelView } from "./components/personnel-view";
 import { LoadoutView } from "./components/loadout-view";
 import { ConvoyView } from "./components/convoy-view";
+import { MemoriesView } from "./components/memories-view";
 
 // ---------- Seed data ----------
 const SEED_OPS: Operator[] = [
@@ -163,6 +164,7 @@ export default function AdminPage() {
             <NavBtn id="personnel" current={view} setView={setView} icon={Users} label="PERSONNEL ROSTER" code="06" />
             <NavBtn id="loadout" current={view} setView={setView} icon={Package} label="LOADOUT" code="07" />
             <NavBtn id="convoy" current={view} setView={setView} icon={Route} label="CONVOY" code="08" />
+            <NavBtn id="memories" current={view} setView={setView} icon={MapPin} label="AAR LOGS" code="09" />
 
             <div className="mono-label opacity-50 px-2 pt-4 pb-1">// QUEUE</div>
             <div className="hairline border-ink/40 p-2 space-y-1.5">
@@ -285,6 +287,9 @@ export default function AdminPage() {
               )}
               {view === "convoy" && (
                 <ConvoyView />
+              )}
+              {view === "memories" && (
+                <MemoriesView />
               )}
             </motion.div>
           </AnimatePresence>

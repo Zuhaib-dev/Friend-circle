@@ -1,8 +1,8 @@
 "use client";
 import { motion } from "motion/react";
-import { fadeUp, PanelHeader, CREW } from "./shared";
+import { fadeUp, PanelHeader } from "./shared";
 
-function CrewCard({ m, i }: { m: (typeof CREW)[number]; i: number }) {
+function CrewCard({ m, i }: { m: any, i: number }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 12 }}
@@ -18,7 +18,7 @@ function CrewCard({ m, i }: { m: (typeof CREW)[number]; i: number }) {
           alt={m.callsign}
           className="absolute inset-0 h-full w-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
         />
-        <div className="absolute top-1.5 left-1.5 mono-label text-bone bg-ink/80 px-1.5 py-[1px]">
+        <div className="absolute top-1.5 left-1.5 mono-label text-bone bg-ink/80 px-1.5 py-px">
           {String(i + 1).padStart(2, "0")}
         </div>
         <div className="absolute bottom-0 inset-x-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 bg-signal text-bone px-2 py-1 mono-label flex items-center justify-between">
@@ -35,14 +35,14 @@ function CrewCard({ m, i }: { m: (typeof CREW)[number]; i: number }) {
   );
 }
 
-export function CrewManifest() {
+export function CrewManifest({ crew }: { crew: any[] }) {
   return (
     <section className="px-4 md:px-8 mt-12">
       <motion.div {...fadeUp} className="hairline border-ink bg-bone">
-        <PanelHeader code="MANIFEST / 02" title="CREW · 06 OPERATORS DEPLOYED" />
+        <PanelHeader code="MANIFEST / 02" title={`CREW · ${String(crew?.length || 0).padStart(2, "0")} OPERATORS DEPLOYED`} />
         <div className="p-3 md:p-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 md:gap-3">
-          {CREW.map((m, i) => (
-            <CrewCard key={m.callsign} m={m} i={i} />
+          {crew?.map((m, i) => (
+            <CrewCard key={m.callsign + i} m={m} i={i} />
           ))}
         </div>
       </motion.div>

@@ -2,9 +2,9 @@
 import { motion } from "motion/react";
 import { Radio, ShieldCheck } from "lucide-react";
 import { Crosshairs } from "@/components/crosshairs";
-import { fadeUp, PanelHeader, QUOTES } from "./shared";
+import { fadeUp, PanelHeader } from "./shared";
 
-export function IntelSection() {
+export function IntelSection({ story, bestMoment, quotes }: any) {
   return (
     <section className="px-4 md:px-8 mt-12 grid grid-cols-1 lg:grid-cols-3 gap-4">
       <motion.div {...fadeUp} className="lg:col-span-2 hairline border-ink bg-bone">
@@ -34,7 +34,7 @@ export function IntelSection() {
               </span>
               <span className="text-signal animate-blink">● REC</span>
             </div>
-            {QUOTES.map((q, i) => (
+            {(quotes || []).map((q: any, i: number) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, x: -6 }}
