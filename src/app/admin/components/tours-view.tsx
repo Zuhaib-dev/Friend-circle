@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Map, Calendar, Search, MapPin, Loader2, Plus, Terminal, Activity, X, Info, ImageIcon, CheckCircle2 } from "lucide-react";
-import imageCompression from "browser-image-compression";
+import { Map, Calendar, MapPin, Loader2, Plus, Terminal, Activity, X, Info, ImageIcon, CheckCircle2 } from "lucide-react";
+import { uploadCompressedImageToImageKit, formatBytes } from "@/lib/image-upload";
 import { Panel, Crosshairs } from "./shared";
 
 type Tour = {
@@ -40,6 +40,7 @@ export function ToursView() {
     partySize: ""
   });
   const [uploadingImage, setUploadingImage] = useState(false);
+  const [coverCompression, setCoverCompression] = useState("");
 
   useEffect(() => {
     fetch("/api/admin/tours")
@@ -71,6 +72,7 @@ export function ToursView() {
         }
         setShowForm(false);
         setEditingId(null);
+        setCoverCompression("");
         setFormState({ name: "", place: "", date: "", description: "", status: "UPCOMING", coverImage: "", coordinates: "", distance: "", elevation: "", time: "", partySize: "" });
       }
     } catch (err) {
@@ -93,6 +95,7 @@ export function ToursView() {
       partySize: tour.partySize?.toString() || ""
     });
     setEditingId(tour._id);
+    setCoverCompression("");
     setShowForm(true);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -102,32 +105,18 @@ export function ToursView() {
     if (!file) return;
 
     setUploadingImage(true);
+    setCoverCompression("");
     try {
-      const options = { maxSizeMB: 1, maxWidthOrHeight: 1920, useWebWorker: true };
-      const compressedBlob = await imageCompression(file, options);
-      const compressedFile = new File([compressedBlob], file.name, { type: compressedBlob.type });
-
-      const authRes = await fetch("/api/imagekit/auth");
-      if (!authRes.ok) throw new Error("Failed to get auth");
-      const auth = await authRes.json();
-
-      const formData = new FormData();
-      formData.append("file", compressedFile);
-      formData.append("fileName", file.name);
-      formData.append("publicKey", auth.publicKey);
-      formData.append("signature", auth.signature);
-      formData.append("expire", auth.expire.toString());
-      formData.append("token", auth.token);
-
-      const uploadRes = await fetch("https://upload.imagekit.io/api/v1/files/upload", {
-        method: "POST",
-        body: formData,
-      });
-
-      if (!uploadRes.ok) throw new Error("Upload failed");
-      const uploadData = await uploadRes.json();
+      const upload = await uploadCompressedImageToImageKit(file, "tourCover");
       
-      setFormState((prev) => ({ ...prev, coverImage: uploadData.url }));
+      setFormState((prev) => ({ ...prev, coverImage: upload.url }));
+      setCoverCompression(
+        `${formatBytes(upload.compression.originalSize)} -> ${formatBytes(upload.compression.compressedSize)} · -${upload.compression.savedPercent}%`
+      );
+      console.info(
+        `[IMAGE] Tour cover compressed: ${formatBytes(upload.compression.originalSize)} -> ` +
+        `${formatBytes(upload.compression.compressedSize)} (${upload.compression.savedPercent}% smaller)`
+      );
     } catch (err) {
       console.error("Image upload failed:", err);
       alert("Failed to upload image. Please try again.");
@@ -146,7 +135,7 @@ export function ToursView() {
     }
   };
 
-  const updateStatus = async (id: string, newStatus: string) => {
+  const updateStatus = async (id: string, newStatus: Tour["status"]) => {
     try {
       const res = await fetch("/api/admin/tours", {
         method: "PATCH",
@@ -154,7 +143,7 @@ export function ToursView() {
         body: JSON.stringify({ id, status: newStatus }),
       });
       if (res.ok) {
-        setTours((l) => l.map((t) => t._id === id ? { ...t, status: newStatus as any } : t));
+        setTours((l) => l.map((t) => t._id === id ? { ...t, status: newStatus } : t));
       }
     } catch (err) {
       console.error(err);
@@ -177,9 +166,11 @@ export function ToursView() {
               if (showForm) {
                 setShowForm(false);
                 setEditingId(null);
+                setCoverCompression("");
                 setFormState({ name: "", place: "", date: "", description: "", status: "UPCOMING", coverImage: "", coordinates: "", distance: "", elevation: "", time: "", partySize: "" });
               } else {
                 setShowForm(true);
+                setCoverCompression("");
               }
             }}
             className="hairline border-ink bg-ink text-bone px-3 py-1.5 mono-label flex items-center gap-2 hover:bg-transparent hover:text-ink transition-colors"
@@ -298,7 +289,7 @@ export function ToursView() {
                   <label className="mono-label opacity-70">INITIAL STATUS</label>
                   <select
                     value={formState.status}
-                    onChange={(e) => setFormState({ ...formState, status: e.target.value as any })}
+                    onChange={(e) => setFormState({ ...formState, status: e.target.value as Tour["status"] })}
                     className="w-full bg-bone hairline border-ink px-3 py-2 font-mono text-sm focus:outline-none focus:border-signal appearance-none rounded-none"
                   >
                     <option value="UPCOMING">UPCOMING</option>
@@ -323,7 +314,7 @@ export function ToursView() {
                 <div className="flex items-center gap-3">
                   <div className="h-16 w-16 hairline border-ink/50 bg-ink/5 flex items-center justify-center shrink-0 overflow-hidden relative">
                     {formState.coverImage ? (
-                      <img src={formState.coverImage} className="w-full h-full object-cover" />
+                      <img src={formState.coverImage} alt="Tour cover preview" className="w-full h-full object-cover" />
                     ) : (
                       <ImageIcon className="h-5 w-5 opacity-40" />
                     )}
@@ -343,6 +334,11 @@ export function ToursView() {
                     />
                     {formState.coverImage && (
                       <div className="mono-label text-[9px] text-signal mt-1 flex items-center gap-1"><CheckCircle2 className="h-3 w-3" /> UPLOADED TO CLOUD</div>
+                    )}
+                    {coverCompression && (
+                      <div className="mono-label text-[9px] text-ink/50 mt-1">
+                        COMPRESSED · {coverCompression} · EXIF STRIPPED
+                      </div>
                     )}
                   </div>
                 </div>
@@ -371,7 +367,7 @@ export function ToursView() {
                 <div className="flex items-center gap-4 flex-1 min-w-0">
                   <div className="h-12 w-12 shrink-0 hairline border-ink/40 bg-ink/10 overflow-hidden flex items-center justify-center">
                     {tour.coverImage ? (
-                      <img src={tour.coverImage} className="h-full w-full object-cover grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all" />
+                      <img src={tour.coverImage} alt={`${tour.name} cover`} className="h-full w-full object-cover grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all" />
                     ) : (
                       <ImageIcon className="h-4 w-4 opacity-30" />
                     )}

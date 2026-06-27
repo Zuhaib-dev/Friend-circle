@@ -1,14 +1,14 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import { TopNav } from "@/components/top-nav";
 import { motion, AnimatePresence } from "motion/react";
-import { User as UserIcon, Terminal, CheckCircle2, Loader2, Image as ImageIcon, Phone, AtSign, ShieldAlert, FileUp } from "lucide-react";
+import { User as UserIcon, Terminal, CheckCircle2, Loader2, Phone, AtSign, ShieldAlert, FileUp, type LucideIcon } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { initialsOf } from "@/lib/utils";
-import imageCompression from "browser-image-compression";
+import { uploadCompressedImageToImageKit } from "@/lib/image-upload";
 
 type ProfileData = {
   name: string;
@@ -20,6 +20,10 @@ type ProfileData = {
   bio?: string;
   teamMemberStatus?: string;
 };
+
+function errorMessage(error: unknown) {
+  return error instanceof Error ? error.message : "Something went wrong";
+}
 
 export default function ProfilePage() {
   const { data: session, update } = useSession();
@@ -45,15 +49,7 @@ export default function ProfilePage() {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    if (user) {
-      fetchProfile();
-    } else if (session === null) {
-      router.push("/login");
-    }
-  }, [user, session, router]);
-
-  const fetchProfile = async () => {
+  const fetchProfile = useCallback(async () => {
     try {
       const res = await fetch("/api/profile");
       if (res.ok) {
@@ -68,12 +64,20 @@ export default function ProfilePage() {
       } else {
         throw new Error("Failed to load profile");
       }
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      setError(errorMessage(err));
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    if (user) {
+      void Promise.resolve().then(fetchProfile);
+    } else if (session === null) {
+      router.push("/login");
+    }
+  }, [user, session, router, fetchProfile]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -93,38 +97,12 @@ export default function ProfilePage() {
   };
 
   const uploadImageToImageKit = async (file: File): Promise<string> => {
-    // Compress
-    const options = {
-      maxSizeMB: 0.5,
-      maxWidthOrHeight: 800,
-      useWebWorker: true,
-      exifOrientation: 1
-    };
-    const compressedBlob = await imageCompression(file, options);
-    const compressedFile = new File([compressedBlob], file.name, { type: compressedBlob.type });
-
-    // Auth
-    const authRes = await fetch("/api/imagekit/auth");
-    if (!authRes.ok) throw new Error("Image upload auth failed");
-    const auth = await authRes.json();
-
-    // Upload
-    const formData = new FormData();
-    formData.append("file", compressedFile);
-    formData.append("fileName", file.name);
-    formData.append("publicKey", auth.publicKey);
-    formData.append("signature", auth.signature);
-    formData.append("expire", auth.expire.toString());
-    formData.append("token", auth.token);
-
-    const uploadRes = await fetch("https://upload.imagekit.io/api/v1/files/upload", {
-      method: "POST",
-      body: formData,
-    });
-
-    if (!uploadRes.ok) throw new Error("Image upload failed");
-    const data = await uploadRes.json();
-    return data.url;
+    const upload = await uploadCompressedImageToImageKit(file, "avatar");
+    console.info(
+      `[IMAGE] Profile compressed: ${upload.compression.savedPercent}% smaller ` +
+      `(${upload.compression.originalSize} -> ${upload.compression.compressedSize} bytes)`
+    );
+    return upload.url;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -170,8 +148,8 @@ export default function ProfilePage() {
       });
 
       setTimeout(() => setSuccessMsg(""), 3000);
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      setError(errorMessage(err));
     } finally {
       setSaving(false);
     }
@@ -405,7 +383,7 @@ export default function ProfilePage() {
   );
 }
 
-function BadgeRow({ icon: Icon, val, href }: { icon: any, val: string, href?: string }) {
+function BadgeRow({ icon: Icon, val, href }: { icon: LucideIcon, val: string, href?: string }) {
   return (
     <div className="flex items-center gap-2 mono-label text-xs">
       <Icon className="h-3 w-3 opacity-40 shrink-0" />

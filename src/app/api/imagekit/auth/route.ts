@@ -9,6 +9,10 @@ const imagekit = new ImageKit({
   urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT as string,
 });
 
+function errorMessage(error: unknown) {
+  return error instanceof Error ? error.message : error;
+}
+
 export async function GET() {
   try {
     const session = await getServerSession(authOptions);
@@ -17,20 +21,14 @@ export async function GET() {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const role = (session.user as any).role;
-    
-    if (role !== 'TEAM_MEMBER' && role !== 'ADMIN') {
-      return NextResponse.json({ error: 'Only Team Members and Admins can upload images' }, { status: 403 });
-    }
-
     const authenticationParameters = imagekit.getAuthenticationParameters();
 
     return NextResponse.json({
       ...authenticationParameters,
       publicKey: process.env.IMAGEKIT_PUBLIC_KEY
     }, { status: 200 });
-  } catch (error: any) {
-    console.error('ImageKit Auth error:', error);
+  } catch (error: unknown) {
+    console.error('ImageKit Auth error:', errorMessage(error));
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }

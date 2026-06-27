@@ -9,7 +9,11 @@ import { ShieldAlert, Crosshair, Terminal, CheckCircle2, Loader2, Info } from "l
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { initialsOf } from "@/lib/utils";
-import imageCompression from "browser-image-compression";
+import { uploadCompressedImageToImageKit } from "@/lib/image-upload";
+
+function errorMessage(error: unknown) {
+  return error instanceof Error ? error.message : "Something went wrong";
+}
 
 export default function ApplyTeamPage() {
   const { data: session, update } = useSession();
@@ -67,30 +71,12 @@ export default function ApplyTeamPage() {
   };
 
   const uploadImageToImageKit = async (file: File): Promise<string> => {
-    const options = { maxSizeMB: 0.5, maxWidthOrHeight: 800, useWebWorker: true, exifOrientation: 1 };
-    const compressedBlob = await imageCompression(file, options);
-    const compressedFile = new File([compressedBlob], file.name, { type: compressedBlob.type });
-
-    const authRes = await fetch("/api/imagekit/auth");
-    if (!authRes.ok) throw new Error("Image upload auth failed");
-    const auth = await authRes.json();
-
-    const formData = new FormData();
-    formData.append("file", compressedFile);
-    formData.append("fileName", file.name);
-    formData.append("publicKey", auth.publicKey);
-    formData.append("signature", auth.signature);
-    formData.append("expire", auth.expire.toString());
-    formData.append("token", auth.token);
-
-    const uploadRes = await fetch("https://upload.imagekit.io/api/v1/files/upload", {
-      method: "POST",
-      body: formData,
-    });
-
-    if (!uploadRes.ok) throw new Error("Image upload failed");
-    const data = await uploadRes.json();
-    return data.url;
+    const upload = await uploadCompressedImageToImageKit(file, "avatar");
+    console.info(
+      `[IMAGE] Application image compressed: ${upload.compression.savedPercent}% smaller ` +
+      `(${upload.compression.originalSize} -> ${upload.compression.compressedSize} bytes)`
+    );
+    return upload.url;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -141,8 +127,8 @@ export default function ApplyTeamPage() {
         router.push("/");
       }, 3000);
 
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      setError(errorMessage(err));
     } finally {
       setLoading(false);
     }

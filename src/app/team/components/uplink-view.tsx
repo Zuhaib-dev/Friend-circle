@@ -3,7 +3,7 @@ import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
 import { FileUp, Image as ImageIcon, Loader2, CheckCircle2 } from "lucide-react";
-import imageCompression from "browser-image-compression";
+import { compressImageForUpload, formatBytes } from "@/lib/image-upload";
 import { Panel, type Upload } from "./shared";
 
 type QueueItem = {
@@ -15,6 +15,7 @@ type QueueItem = {
   postId?: string;
   caption?: string;
   captionSaved?: boolean;
+  compressionLabel?: string;
 };
 
 export function UplinkView({ onAdd, onGo }: { onAdd: (u: Upload[]) => void; onGo: () => void }) {
@@ -51,23 +52,23 @@ export function UplinkView({ onAdd, onGo }: { onAdd: (u: Upload[]) => void; onGo
 
   const processQueue = async (items: QueueItem[]) => {
     try {
-      let currentQueue = [...items];
+      const currentQueue = [...items];
 
       for (let i = 0; i < currentQueue.length; i++) {
         const item = currentQueue[i];
         
         // Compress
         updateItem(item.id, { status: "COMPRESSING", pct: 10 });
-        const options = {
-          maxSizeMB: 1, // aggressively compress to 1MB
-          maxWidthOrHeight: 1920,
-          useWebWorker: true,
-          exifOrientation: 1 // Strips EXIF by enforcing orientation
-        };
-        const compressedBlob = await imageCompression(item.file, options);
-        const compressedFile = new File([compressedBlob], item.file.name, { type: compressedBlob.type });
+        const compression = await compressImageForUpload(item.file, "gallery");
+        const compressedFile = compression.file;
+        updateItem(item.id, {
+          compressionLabel: `${formatBytes(compression.originalSize)} -> ${formatBytes(compression.compressedSize)} · -${compression.savedPercent}%`,
+        });
 
-        console.log(`[UPLINK] Compressed ${item.file.name}: ${(item.file.size/1024/1024).toFixed(2)}MB -> ${(compressedFile.size/1024/1024).toFixed(2)}MB`);
+        console.info(
+          `[UPLINK] Compressed ${item.file.name}: ${formatBytes(compression.originalSize)} -> ` +
+          `${formatBytes(compression.compressedSize)} (${compression.savedPercent}% smaller)`
+        );
         
         // Get fresh ImageKit Auth for each file because signatures are single-use
         const authRes = await fetch("/api/imagekit/auth");
@@ -124,7 +125,7 @@ export function UplinkView({ onAdd, onGo }: { onAdd: (u: Upload[]) => void; onGo
           name: item.file.name,
           url: imageUrl,
           size: compressedFile.size,
-          ts: Date.now(),
+          ts: dbPost.createdAt ? new Date(dbPost.createdAt).getTime() : item.file.lastModified,
           status: "PENDING" // since team members upload as pending
         }]);
       }
@@ -285,7 +286,7 @@ export function UplinkView({ onAdd, onGo }: { onAdd: (u: Upload[]) => void; onGo
 
       {queue.length > 0 && phase === "PROCESSING" && (
         <div className="mt-5 space-y-2">
-          <div className="mono-label opacity-60">// ACTIVE TRANSMISSIONS · {queue.length}</div>
+          <div className="mono-label opacity-60">{"//"} ACTIVE TRANSMISSIONS · {queue.length}</div>
           {queue.map((q) => {
             const blocks = 20;
             const filled = Math.round((q.pct / 100) * blocks);
@@ -297,13 +298,18 @@ export function UplinkView({ onAdd, onGo }: { onAdd: (u: Upload[]) => void; onGo
                 className="hairline border-ink p-3 flex items-center gap-3"
               >
                 <div className="h-10 w-10 hairline border-ink/40 grid place-items-center shrink-0">
-                  {q.url ? <img src={q.url} className="w-full h-full object-cover" /> : <ImageIcon className="h-4 w-4 opacity-60" />}
+                  {q.url ? <img src={q.url} alt="" className="w-full h-full object-cover" /> : <ImageIcon className="h-4 w-4 opacity-60" />}
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between mono-label">
                     <span className="truncate">{q.file.name}</span>
                     <span className="text-signal tabular-nums">{q.status} · {Math.round(q.pct)}%</span>
                   </div>
+                  {q.compressionLabel && (
+                    <div className="mt-1 mono-label text-[9px] text-ink/50">
+                      COMPRESSED · {q.compressionLabel} · EXIF STRIPPED
+                    </div>
+                  )}
                   <div className="mt-1 font-mono text-xs tracking-tight leading-none flex">
                     <span className="text-ink">[</span>
                     <span className="text-signal whitespace-pre">{"|".repeat(filled)}</span>
