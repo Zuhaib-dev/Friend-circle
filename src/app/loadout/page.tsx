@@ -244,7 +244,7 @@ export default function LoadoutPage() {
             </div>
 
             {trip && (
-              <div className="hairline border-ink grid grid-cols-3 divide-x divide-ink/20 min-w-[280px]">
+              <div className="hairline border-ink grid grid-cols-3 divide-x divide-ink/20 w-full sm:w-auto sm:min-w-[280px]">
                 <HudStat label="UTC" value={utc} />
                 <HudStat label="TRIP" value={trip.code} />
                 <HudStat label="HZRD" value={trip.hazard} accent={trip.hazard === "HIGH"} />
@@ -264,8 +264,8 @@ export default function LoadoutPage() {
             transition={{ duration: 0.25, ease: "easeOut" }}
             className="hairline-b border-signal bg-signal/10 overflow-hidden"
           >
-            <div className="max-w-7xl mx-auto px-4 py-3 flex items-center gap-3 flex-wrap">
-              <div className="flex items-center gap-2 mono-label text-signal">
+            <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col sm:flex-row sm:items-center gap-3">
+              <div className="flex items-center gap-2 mono-label text-signal shrink-0">
                 <motion.span
                   animate={{ opacity: [1, 0.3, 1] }}
                   transition={{ duration: 1.2, repeat: Infinity }}
@@ -274,7 +274,7 @@ export default function LoadoutPage() {
                 </motion.span>
                 MISSING CRITICAL · {totals.criticalMissing.length} ITEM{totals.criticalMissing.length > 1 ? "S" : ""}
               </div>
-              <div className="flex gap-1.5 flex-wrap flex-1">
+              <div className="flex gap-1.5 flex-wrap flex-1 w-full">
                 {totals.criticalMissing.slice(0, 6).map((i) => (
                   <span key={i.itemId} className="mono-label hairline border-signal text-signal px-2 py-0.5 text-[10px]">
                     {i.code}
@@ -288,7 +288,7 @@ export default function LoadoutPage() {
               </div>
               <button
                 onClick={packAllCritical}
-                className="brick text-bone px-3 py-1.5 mono-label hover:bg-signal hover:border-signal transition-colors"
+                className="brick text-bone px-3 py-1.5 mono-label hover:bg-signal hover:border-signal transition-colors w-full sm:w-auto text-center"
               >
                 PACK ALL CRITICAL →
               </button>
@@ -322,7 +322,7 @@ export default function LoadoutPage() {
       {/* MAIN GRID */}
       <section className="max-w-7xl mx-auto px-4 py-6 grid lg:grid-cols-[1fr_320px] gap-6">
         {/* LEFT: items */}
-        <div className="space-y-4">
+        <div className="space-y-4 order-2 lg:order-1">
           {/* Filter bar */}
           <div className="hairline border-ink p-3 flex flex-col md:flex-row gap-3 md:items-center">
             <div className="flex items-center gap-2 flex-1 hairline border-ink/40 px-2 py-1.5">
@@ -383,7 +383,7 @@ export default function LoadoutPage() {
         </div>
 
         {/* RIGHT: telemetry */}
-        <aside className="space-y-4 lg:sticky lg:top-20 self-start">
+        <aside className="space-y-4 lg:sticky lg:top-20 self-start order-1 lg:order-2">
           {/* Weight gauge */}
           <div className="hairline border-ink">
             <div className="hairline-b border-ink/40 px-3 py-2 mono-label flex items-center justify-between">
