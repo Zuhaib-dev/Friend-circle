@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { LogIn, LogOut, User as UserIcon, Settings, ChevronDown, CircleDot, Menu, X, ShieldCheck, Image as ImageIcon, Radar, Terminal, Video as VideoIcon, Compass, Crosshair, Package, BookOpen } from "lucide-react";
+import { LogIn, LogOut, User as UserIcon, Settings, ChevronDown, CircleDot, Menu, X, ShieldCheck, Image as ImageIcon, Radar, Terminal, Video as VideoIcon, Compass, Crosshair, Package, BookOpen, Database } from "lucide-react";
 import { useSession, signOut as doSignOut } from "next-auth/react";
 import { initialsOf } from "../lib/utils";
 
@@ -189,7 +189,8 @@ export function TopNav() {
                     <MenuItem icon={Compass} label="ROUTES" code="02" onClick={() => { setOpen(false); navigate.push('/tours'); }} />
                     <MenuItem icon={ImageIcon} label="GALLERY" code="03" onClick={() => { setOpen(false); navigate.push('/gallery'); }} />
                     <MenuItem icon={VideoIcon} label="FEEDS" code="04" onClick={() => { setOpen(false); navigate.push('/surveillance'); }} />
-                    <MenuItem icon={Crosshair} label="LIVE-OPS" code="05" onClick={() => { setOpen(false); navigate.push('/live-ops'); }} />
+                    <MenuItem icon={Database} label="MEMORY" code="05" onClick={() => { setOpen(false); navigate.push('/memory'); }} />
+                    <MenuItem icon={Crosshair} label="LIVE-OPS" code="06" onClick={() => { setOpen(false); navigate.push('/live-ops'); }} />
                     
                     {(user.role === "TEAM_MEMBER" || user.role === "ADMIN") && (
                       <>
