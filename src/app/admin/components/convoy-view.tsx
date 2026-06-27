@@ -119,7 +119,16 @@ export function ConvoyView() {
           pickup: r.pickup,
         })),
         waypoints,
-        foodDuties,
+        foodDuties: foodDuties.map(f => {
+          let whoId = f.who;
+          if (typeof f.who === 'string') {
+            const member = roster.find(r => r.callsign === f.who);
+            if (member) whoId = member.user._id || member.user;
+          } else if (f.who && f.who._id) {
+            whoId = f.who._id;
+          }
+          return { ...f, who: whoId };
+        }),
         gearPersonal,
         gearConvoy,
         prayers,
@@ -336,7 +345,7 @@ export function ConvoyView() {
               {foodDuties.map((f, i) => (
                 <div key={i} className="hairline p-2 bg-bone flex items-center gap-2">
                   <input type="text" value={f.item} onChange={e => {const nf = [...foodDuties]; nf[i].item = e.target.value; setFoodDuties(nf)}} className="flex-1 hairline px-2 py-1 font-mono text-xs" placeholder="Item (e.g. Kahwa, Water)" />
-                  <select value={f.who?.callsign || f.who || ""} onChange={e => {const nf = [...foodDuties]; nf[i].who = e.target.value; setFoodDuties(nf)}} className="w-32 hairline px-2 py-1 font-mono text-xs uppercase">
+                  <select value={typeof f.who === 'object' ? f.who.callsign || f.who._id : f.who} onChange={e => {const nf = [...foodDuties]; nf[i].who = e.target.value; setFoodDuties(nf)}} className="w-32 hairline px-2 py-1 font-mono text-xs uppercase">
                     {roster.map(r => <option key={r.user._id||r.user} value={r.callsign}>{r.callsign}</option>)}
                   </select>
                   <label className="flex items-center gap-1 mono-label text-xs cursor-pointer px-2">
