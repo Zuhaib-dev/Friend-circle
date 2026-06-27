@@ -28,6 +28,7 @@ export default withAuth(
       // If the user is entirely unauthenticated, authorized returns false and automatically redirects to /login (because of NextAuth default behavior).
       authorized: ({ token }) => !!token,
     },
+    secret: process.env.NEXTAUTH_SECRET || process.env.AUTH_SECRET,
   }
 );
 
