@@ -48,7 +48,7 @@ export default function ConvoyPage() {
       plate: r.plate || "TBA",
       pickup: r.pickup,
       phone: r.user?.phone || r.user?.teamMemberDetails || "N/A",
-      ice: "TBA",
+      ice: { name: "TBA", phone: "0000000000" },
       image: r.user?.image || "https://picsum.photos/seed/default/400/400",
     }));
   }, [mission]);
