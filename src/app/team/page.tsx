@@ -5,10 +5,11 @@ import { AnimatePresence, motion } from "motion/react";
 import { Activity, Radar, LayoutGrid, Upload as UploadIcon, Lock } from "lucide-react";
 import { TopNav } from "@/components/top-nav";
 import { useSession } from "next-auth/react";
-import { NavBtn, Row, type View, type Upload, loadUploads, saveUploads } from "./components/shared";
+import { NavBtn, LinkBtn, Row, type View, type Upload, loadUploads, saveUploads } from "./components/shared";
 import { OverviewView } from "./components/overview-view";
 import { UplinkView } from "./components/uplink-view";
 import { DossierView } from "./components/dossier-view";
+import { Map, Wallet } from "lucide-react";
 
 export default function TeamPage() {
   const { data: session } = useSession();
@@ -83,6 +84,10 @@ export default function TeamPage() {
             <NavBtn id="overview" current={view} setView={setView} icon={Radar} label="OVERVIEW" code="01" />
             <NavBtn id="dossier" current={view} setView={setView} icon={LayoutGrid} label="DOSSIER" code="02" />
             <NavBtn id="uplink" current={view} setView={setView} icon={UploadIcon} label="UPLINK" code="03" />
+
+            <div className="mono-label opacity-50 px-2 pt-4 pb-1">// OPERATIONS</div>
+            <LinkBtn href="/convoy" icon={Map} label="CONVOY" code="04" />
+            <LinkBtn href="/ledger" icon={Wallet} label="LEDGER" code="05" />
 
             <div className="mono-label opacity-50 px-2 pt-4 pb-1">// STATUS</div>
             <div className="hairline border-ink/40 p-2 space-y-1.5">

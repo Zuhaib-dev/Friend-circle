@@ -192,7 +192,11 @@ export function TopNav() {
                     <MenuItem icon={Crosshair} label="LIVE-OPS" code="05" onClick={() => { setOpen(false); navigate.push('/live-ops'); }} />
                     
                     {(user.role === "TEAM_MEMBER" || user.role === "ADMIN") && (
-                      <MenuItem icon={Package} label="LOADOUT" code="06" onClick={() => { setOpen(false); navigate.push('/loadout'); }} />
+                      <>
+                        <MenuItem icon={Package} label="LOADOUT" code="06" onClick={() => { setOpen(false); navigate.push('/loadout'); }} />
+                        <MenuItem icon={Radar} label="CONVOY" code="07" onClick={() => { setOpen(false); navigate.push('/convoy'); }} />
+                        <MenuItem icon={UserIcon} label="LEDGER" code="08" onClick={() => { setOpen(false); navigate.push('/ledger'); }} />
+                      </>
                     )}
                     {(!user.role || user.role === "USER") && (
                       <MenuItem icon={ShieldCheck} label="BECOME TEAM MEMBER" code="05" onClick={() => { setOpen(false); navigate.push('/apply-team'); }} />

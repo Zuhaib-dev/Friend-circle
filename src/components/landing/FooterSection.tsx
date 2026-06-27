@@ -19,6 +19,7 @@ export function FooterSection() {
               { i: Circle, l: "GITHUB", href: "https://github.com/Zuhaib-dev" },
               { i: Circle, l: "X / TWITTER", href: "https://x.com/xuhaibx9" },
               { i: Circle, l: "LINKEDIN", href: "https://www.linkedin.com/in/zuhaib-rashid-661345318/" },
+              { i: Circle, l: "DISPATCH TICKET", href: "/contact" },
             ].map(({ i: Icon, l, href }) => (
               <li key={l}>
                 <a href={href} target="_blank" rel="noopener noreferrer" className="mono-label text-bone hover:text-signal flex items-center gap-2 group">
