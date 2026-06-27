@@ -29,7 +29,7 @@ export function WaypointPanel() {
             className="relative pb-3 last:pb-0 group"
           >
             <span
-              className={`absolute -left-[1px] top-1.5 h-3.5 w-3.5 hairline border-ink ${WP_KIND_COLOR[w.kind] || "bg-bone"}`}
+              className={`absolute -left-px top-1.5 h-3.5 w-3.5 hairline border-ink ${WP_KIND_COLOR[w.kind] || "bg-bone"}`}
             />
             <div className="flex items-baseline justify-between gap-2 flex-wrap">
               <div className="flex items-baseline gap-2 min-w-0">
@@ -188,7 +188,7 @@ export function PrayerPanel() {
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: i * 0.06 }}
-              className="hairline border-ink p-2.5 relative bg-bone hover:bg-acid/15 transition-colors crosshair"
+              className="hairline border-ink p-2.5 bg-bone hover:bg-acid/15 transition-colors crosshair"
             >
               <Crosshairs />
               <div className="flex items-center justify-between">

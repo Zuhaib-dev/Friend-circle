@@ -9,7 +9,7 @@ export function Header({ utc }: { utc: string }) {
       <div className="px-4 md:px-8 py-8 md:py-12 grid md:grid-cols-12 gap-6 items-end">
         <div className="md:col-span-8">
           <div className="flex items-center gap-2 mono-label opacity-60 mb-3 flex-wrap">
-            <span className="brick text-bone px-2 py-[1px]">MSN / 11</span>
+            <span className="brick text-bone px-2 py-px">MSN / 11</span>
             <span>·</span>
             <span>CONVOY PLANNER</span>
             <span>·</span>

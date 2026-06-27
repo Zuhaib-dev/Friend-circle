@@ -23,7 +23,7 @@ export function OperatorCard({ op, index }: { op: Operator; index: number }) {
       onFocus={() => setFlip(true)}
       onBlur={() => setFlip(false)}
       tabIndex={0}
-      className="group hairline border-ink bg-bone crosshair relative outline-none focus-visible:bg-acid/20"
+      className="group hairline border-ink bg-bone crosshair outline-none focus-visible:bg-acid/20"
     >
       <Crosshairs />
       <header className="hairline-b border-ink flex items-center justify-between px-2.5 py-1.5">
