@@ -199,7 +199,7 @@ export function TopNav() {
                     )}
 
                     {(user.role === "TEAM_MEMBER" || user.role === "ADMIN") && (
-                      <MenuItem icon={Radar} label="DOSSIER" code="06" onClick={() => { setOpen(false); navigate.push('/team'); }} />
+                      <MenuItem icon={Radar} label="TEAM" code="06" onClick={() => { setOpen(false); navigate.push('/team'); }} />
                     )}
 
                     {user.role === "ADMIN" && (
