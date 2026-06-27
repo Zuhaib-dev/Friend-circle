@@ -120,14 +120,16 @@ export function ConvoyView() {
         })),
         waypoints,
         foodDuties: foodDuties.map(f => {
-          let whoId = f.who;
+          let whoId = null;
           if (typeof f.who === 'string') {
             const member = roster.find(r => r.callsign === f.who);
             if (member) whoId = member.user._id || member.user;
           } else if (f.who && f.who._id) {
             whoId = f.who._id;
+          } else if (f.who) {
+            whoId = f.who;
           }
-          return { ...f, who: whoId };
+          return { ...f, who: whoId || undefined };
         }),
         gearPersonal,
         gearConvoy,
