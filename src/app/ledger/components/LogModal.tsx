@@ -1,22 +1,26 @@
 "use client";
 import { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion } from "motion/react";
 import { Check, X, Plus } from "lucide-react";
-import { Cat, SQUAD } from "../data";
+import { Cat, SquadMember } from "../data";
 import { Crosshairs } from "@/components/auth-shell";
 
 export function LogModal({ 
+  me,
+  squad,
   onClose, 
   onSave 
 }: { 
+  me: string;
+  squad: SquadMember[];
   onClose: () => void; 
   onSave: (cat: Cat, desc: string, amt: number, paidBy: string, split: string[]) => void;
 }) {
   const [cat, setCat] = useState<Cat>("FUEL");
   const [desc, setDesc] = useState("");
   const [amt, setAmt] = useState("");
-  const [paidBy, setPaidBy] = useState<string>("ALPHA");
-  const [split, setSplit] = useState<string[]>(SQUAD.map(s => s.call));
+  const [paidBy, setPaidBy] = useState<string>(me || (squad[0]?.call ?? "ALPHA"));
+  const [split, setSplit] = useState<string[]>(squad.map(s => s.call));
 
   const toggleSplit = (call: string) => {
     if (split.includes(call)) setSplit(split.filter(s => s !== call));
@@ -86,13 +90,13 @@ export function LogModal({
           <div>
             <label className="mono-label opacity-60 block mb-2">PAID BY</label>
             <div className="flex flex-wrap gap-2">
-              {SQUAD.map(s => (
+              {squad.map(s => (
                 <button 
                   key={s.call}
                   onClick={() => setPaidBy(s.call)}
                   className={`hairline border-ink px-3 py-1.5 mono-label text-xs transition-colors ${paidBy === s.call ? "bg-ink text-bone" : "bg-bone hover:bg-acid/20"}`}
                 >
-                  {s.call}
+                  {s.name}
                 </button>
               ))}
             </div>
@@ -106,7 +110,7 @@ export function LogModal({
             </div>
             
             <div className="space-y-2">
-              {SQUAD.map(s => {
+              {squad.map(s => {
                 const checked = split.includes(s.call);
                 return (
                   <button 
@@ -122,7 +126,7 @@ export function LogModal({
                         {s.call.slice(0, 2)}
                       </span>
                       <span className={`font-mono text-xs uppercase tracking-wider ${!checked && "opacity-50"}`}>
-                        {s.call} · {s.name}
+                        {s.name} · {s.call}
                       </span>
                     </div>
                   </button>

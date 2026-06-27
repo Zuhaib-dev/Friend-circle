@@ -1,10 +1,10 @@
 "use client";
 import { motion } from "motion/react";
 import { Check, ArrowRight } from "lucide-react";
-import { inr, SQUAD } from "../data";
+import { inr, SquadMember } from "../data";
 
-function Callsign({ c, size = 26 }: { c: string; size?: number }) {
-  const s = SQUAD.find((x) => x.call === c);
+function Callsign({ c, squad, size = 26 }: { c: string; squad: SquadMember[]; size?: number }) {
+  const s = squad.find((x) => x.call === c);
   const initials = s?.call.slice(0, 2) ?? c.slice(0, 2);
   return (
     <span
@@ -18,9 +18,11 @@ function Callsign({ c, size = 26 }: { c: string; size?: number }) {
 }
 
 export function Settlements({ 
+  squad,
   settlements, 
   onSettleDebt 
 }: { 
+  squad: SquadMember[];
   settlements: { from: string; to: string; amt: number }[];
   onSettleDebt: (from: string, to: string) => void;
 }) {
@@ -53,17 +55,17 @@ export function Settlements({
               
               <div className="flex items-center justify-between mb-4">
                 <div className="flex flex-col items-center gap-1">
-                  <Callsign c={s.from} size={32} />
+                  <Callsign c={s.from} squad={squad} size={32} />
                   <span className="mono-label text-[10px] opacity-60">FROM</span>
-                  <span className="font-mono text-xs uppercase font-bold">{s.from}</span>
+                  <span className="font-mono text-xs uppercase font-bold">{squad.find(x => x.call === s.from)?.name || s.from}</span>
                 </div>
                 
                 <ArrowRight className="h-4 w-4 opacity-30 text-signal group-hover:opacity-100 transition-opacity" />
                 
                 <div className="flex flex-col items-center gap-1">
-                  <Callsign c={s.to} size={32} />
+                  <Callsign c={s.to} squad={squad} size={32} />
                   <span className="mono-label text-[10px] opacity-60">TO</span>
-                  <span className="font-mono text-xs uppercase font-bold">{s.to}</span>
+                  <span className="font-mono text-xs uppercase font-bold">{squad.find(x => x.call === s.to)?.name || s.to}</span>
                 </div>
               </div>
 

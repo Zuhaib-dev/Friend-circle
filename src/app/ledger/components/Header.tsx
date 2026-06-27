@@ -1,6 +1,6 @@
 "use client";
 import { Radio, Plus, Activity, Lock } from "lucide-react";
-import { inr, SQUAD } from "../data";
+import { inr } from "../data";
 
 function StatCell({ code, label, value, accent }: { code: string; label: string; value: string; accent?: string }) {
   return (
@@ -13,7 +13,19 @@ function StatCell({ code, label, value, accent }: { code: string; label: string;
   );
 }
 
-export function Header({ total, pending, onLog }: { total: number; pending: number; onLog: () => void }) {
+export function Header({ 
+  missionName,
+  squadSize,
+  total, 
+  pending, 
+  onLog 
+}: { 
+  missionName: string;
+  squadSize: number;
+  total: number; 
+  pending: number; 
+  onLog: () => void;
+}) {
   return (
     <section className="hairline-b border-ink">
       <div className="px-4 md:px-8 py-6 md:py-10 relative">
@@ -24,8 +36,8 @@ export function Header({ total, pending, onLog }: { total: number; pending: numb
               <span>SECURE CHANNEL · ENCRYPTED</span>
               <span className="hidden sm:inline opacity-50">// FC/FIN/v2.0</span>
             </div>
-            <h1 className="font-display font-black text-5xl sm:text-7xl md:text-8xl leading-[0.85] tracking-tight mt-2">
-              LEDGER<span className="text-signal">/</span>MSN-11
+            <h1 className="font-display font-black text-5xl sm:text-7xl md:text-8xl leading-[0.85] tracking-tight mt-2 uppercase">
+              LEDGER<span className="text-signal">/</span>{missionName.split(" ")[0] || "MSN"}
             </h1>
             <p className="mono-label opacity-70 mt-2">TACTICAL EXPENSE SPLITTER · SQUAD-05</p>
           </div>
@@ -42,7 +54,7 @@ export function Header({ total, pending, onLog }: { total: number; pending: numb
       <div className="grid grid-cols-2 md:grid-cols-4 hairline-t border-ink">
         <StatCell code="01" label="TOTAL EXPENSE" value={inr(total)} />
         <StatCell code="02" label="OUTSTANDING" value={inr(pending)} accent="text-signal" />
-        <StatCell code="03" label="ACTIVE SQUAD" value={`${SQUAD.length} UNIT`} />
+        <StatCell code="03" label="ACTIVE SQUAD" value={`${squadSize} UNIT(S)`} />
         <div className="p-3 sm:p-4 flex items-center justify-between">
           <div>
             <div className="mono-label opacity-60">CHANNEL</div>

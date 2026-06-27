@@ -2,10 +2,10 @@
 import { motion } from "motion/react";
 import { TrendingDown, TrendingUp, ArrowRight, Wallet } from "lucide-react";
 import { Crosshairs } from "@/components/auth-shell";
-import { inr, SQUAD, ME } from "../data";
+import { inr, SquadMember } from "../data";
 
-function Callsign({ c, size = 26 }: { c: string; size?: number }) {
-  const s = SQUAD.find((x) => x.call === c);
+function Callsign({ c, squad, size = 26 }: { c: string; squad: SquadMember[]; size?: number }) {
+  const s = squad.find((x) => x.call === c);
   const initials = s?.call.slice(0, 2) ?? c.slice(0, 2);
   return (
     <span
@@ -19,13 +19,17 @@ function Callsign({ c, size = 26 }: { c: string; size?: number }) {
 }
 
 export function Balances({ 
+  me,
+  squad,
   bal, 
   settlements 
 }: { 
+  me: string;
+  squad: SquadMember[];
   bal: Record<string, number>;
   settlements: { from: string; to: string; amt: number }[];
 }) {
-  const myBal = bal[ME] ?? 0;
+  const myBal = bal[me] ?? 0;
   const youOwe = myBal < 0 ? Math.round(-myBal) : 0;
   const youOwed = myBal > 0 ? Math.round(myBal) : 0;
 
@@ -38,9 +42,11 @@ export function Balances({
         <Crosshairs />
         <header className="hairline-b border-ink flex items-center justify-between px-3 py-2">
           <span className="mono-label">BAL / 01 · OPERATOR DASHBOARD</span>
-          <span className="flex items-center gap-1.5 mono-label">
-            <Callsign c={ME} size={18} /> <span>{ME} · YOU</span>
-          </span>
+          {me && (
+            <span className="flex items-center gap-1.5 mono-label">
+              <Callsign c={me} squad={squad} size={18} /> <span>{squad.find(x => x.call === me)?.name || me} · YOU</span>
+            </span>
+          )}
         </header>
 
         <div className="grid grid-cols-1 md:grid-cols-2">
@@ -54,7 +60,7 @@ export function Balances({
               {inr(youOwe)}
             </div>
             <div className="mono-label opacity-60 mt-3 flex items-center gap-1.5">
-              <ArrowRight className="h-3 w-3" /> DISPATCH TO {settlements.find(s => s.from === ME)?.to ?? "—"}
+              <ArrowRight className="h-3 w-3" /> DISPATCH TO {settlements.find(s => s.from === me)?.to ?? "—"}
             </div>
           </motion.div>
 
@@ -68,7 +74,7 @@ export function Balances({
               <span className="bg-acid text-ink px-2 -mx-2">{inr(youOwed)}</span>
             </div>
             <div className="mono-label opacity-60 mt-3 flex items-center gap-1.5">
-              <Wallet className="h-3 w-3" /> {settlements.filter(s => s.to === ME).length} INCOMING SETTLEMENT(S)
+              <Wallet className="h-3 w-3" /> {settlements.filter(s => s.to === me).length} INCOMING SETTLEMENT(S)
             </div>
           </motion.div>
         </div>
@@ -89,10 +95,10 @@ export function Balances({
       >
         <header className="hairline-b border-ink flex items-center justify-between px-3 py-2">
           <span className="mono-label">BAL / 02 · SQUAD NET</span>
-          <span className="mono-label opacity-60">{SQUAD.length} UNITS</span>
+          <span className="mono-label opacity-60">{squad.length} UNITS</span>
         </header>
-        <ul>
-          {SQUAD.map((s, i) => {
+        <ul className="max-h-[300px] overflow-y-auto">
+          {squad.map((s, i) => {
             const v = Math.round(bal[s.call] ?? 0);
             const pos = v > 0, neg = v < 0;
             return (
@@ -102,8 +108,8 @@ export function Balances({
                 className="flex items-center justify-between gap-3 px-3 py-2.5 hairline-b border-ink/20 last:border-b-0 hover:bg-acid/20 transition-colors"
               >
                 <span className="flex items-center gap-2 min-w-0">
-                  <Callsign c={s.call} size={22} />
-                  <span className="mono-label truncate">{s.call} · {s.name}</span>
+                  <Callsign c={s.call} squad={squad} size={22} />
+                  <span className="mono-label truncate">{s.name} · {s.call}</span>
                 </span>
                 <span className={`mono-label tabular-nums ${pos ? "text-ink" : neg ? "text-signal" : "opacity-50"}`}>
                   {pos ? "+" : neg ? "−" : ""}{inr(Math.abs(v))}

@@ -5,12 +5,16 @@ import { Receipt, Check, Banknote } from "lucide-react";
 import { Txn, CAT_ICON, inr } from "../data";
 
 export function Transactions({ 
+  squad,
   txns, 
   onSettle 
 }: { 
+  squad: import('../data').SquadMember[];
   txns: Txn[]; 
   onSettle: (id: string) => void;
 }) {
+  const getName = (call: string) => squad.find(s => s.call === call)?.name || call;
+
   const [filter, setFilter] = useState<"ALL" | "PENDING" | "SETTLED">("ALL");
 
   const visible = txns.filter((t) =>
@@ -43,7 +47,7 @@ export function Transactions({
             {visible.map((t, i) => {
               const Icon = CAT_ICON[t.cat];
               return (
-                <motion.li key={t.id} layout
+                <motion.li key={t._id || t.id} layout
                   initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
                   transition={{ duration: 0.25, delay: i * 0.03 }}
                   className="group hairline-b border-ink/20 last:border-b-0 hover:bg-acid/10 transition-colors"
@@ -55,13 +59,13 @@ export function Transactions({
                       <Icon className="h-4 w-4 text-ink" />
                     </span>
                     <span className="font-mono text-sm uppercase tracking-wide truncate">{t.desc}</span>
-                    <span className="mono-label">{t.paidBy}</span>
+                    <span className="mono-label">{getName(t.paidBy)}</span>
                     <span className="text-right font-display text-lg leading-none">{inr(t.amount)}</span>
                     <div className="flex justify-end">
                       {t.settled ? (
                         <span className="flex items-center gap-1 mono-label text-ink/50"><Check className="h-3.5 w-3.5" /> SETTLED</span>
                       ) : (
-                        <button onClick={() => onSettle(t.id)} className="flex items-center gap-1 mono-label text-signal hover:underline">
+                        <button onClick={() => onSettle(t._id || t.id || "")} className="flex items-center gap-1 mono-label text-signal hover:underline">
                           <Banknote className="h-3.5 w-3.5" /> SETTLE
                         </button>
                       )}
@@ -80,11 +84,11 @@ export function Transactions({
                       <span className="font-display text-lg">{inr(t.amount)}</span>
                     </div>
                     <div className="flex items-center justify-between mt-1">
-                      <span className="mono-label opacity-60">{t.ts} · {t.paidBy}</span>
+                      <span className="mono-label opacity-60">{t.ts} · {getName(t.paidBy)}</span>
                       {t.settled ? (
                         <span className="flex items-center gap-1 mono-label text-ink/50"><Check className="h-3.5 w-3.5" /> SETTLED</span>
                       ) : (
-                        <button onClick={() => onSettle(t.id)} className="flex items-center gap-1 mono-label text-signal hover:underline">
+                        <button onClick={() => onSettle(t._id || t.id || "")} className="flex items-center gap-1 mono-label text-signal hover:underline">
                           <Banknote className="h-3.5 w-3.5" /> SETTLE
                         </button>
                       )}
