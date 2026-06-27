@@ -3,65 +3,43 @@ import nodemailer from "nodemailer";
 
 export async function POST(req: Request) {
   try {
-    const { email, message } = await req.json();
+    const body = await req.json();
+    const { name, email, dispatchId, subject, message } = body;
 
-    if (!email || !message) {
-      return NextResponse.json(
-        { error: "Email and message are required." },
-        { status: 400 }
-      );
+    if (!name || !email || !subject || !message) {
+      return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
-    // Ensure environment variables are loaded
-    const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_FROM_EMAIL, ADMIN_EMAIL } = process.env;
-
-    if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS || !SMTP_FROM_EMAIL || !ADMIN_EMAIL) {
-      console.error("Missing SMTP credentials in environment variables.");
-      return NextResponse.json(
-        { error: "Server misconfiguration. Cannot send email." },
-        { status: 500 }
-      );
-    }
-
-    // Create a Nodemailer transporter
     const transporter = nodemailer.createTransport({
-      host: SMTP_HOST,
-      port: parseInt(SMTP_PORT || "465"),
-      secure: parseInt(SMTP_PORT || "465") === 465, // true for 465, false for other ports
+      service: "gmail",
       auth: {
-        user: SMTP_USER,
-        pass: SMTP_PASS,
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
       },
     });
 
-    // 1. Alert Admin Email
-    const adminMailOptions = {
-      from: `Friend Circle Communications <${SMTP_FROM_EMAIL}>`,
-      to: ADMIN_EMAIL,
-      subject: `[TRX 7 UPLINK] New Coordinate Dropped by ${email}`,
-      text: `TRANSMISSION INTERCEPTED:\n\nSender: ${email}\n\nMessage:\n${message}`,
+    const mailOptions = {
+      from: `"${name}" <${email}>`,
+      to: process.env.EMAIL_USER, // Sending to the admin email
+      subject: `[FC Dispatch] ${subject} ${dispatchId ? `(${dispatchId})` : ""}`,
+      text: `Dispatch Ticket: ${dispatchId || "N/A"}\nFrom: ${name} (${email})\nSubject: ${subject}\n\nMessage:\n${message}`,
+      html: `
+        <div style="font-family: monospace; padding: 20px; border: 1px solid #1c1917; background: #f5f5f4; color: #1c1917;">
+          <h2 style="text-transform: uppercase; border-bottom: 1px solid #1c1917; padding-bottom: 10px;">DISPATCH TICKET ${dispatchId ? `(${dispatchId})` : ""}</h2>
+          <p><strong>OPERATOR:</strong> ${name} &lt;${email}&gt;</p>
+          <p><strong>SUBJECT:</strong> ${subject}</p>
+          <p><strong>MESSAGE:</strong></p>
+          <div style="background: #ffffff; padding: 15px; border: 1px solid #1c1917; white-space: pre-wrap;">${message}</div>
+          <p style="margin-top: 20px; font-size: 10px; color: #78716c;">Filed via Friend Circle HQ</p>
+        </div>
+      `,
     };
 
-    // 2. Auto-reply to User Email
-    const userMailOptions = {
-      from: `Friend Circle <${SMTP_FROM_EMAIL}>`,
-      to: email,
-      subject: "Transmission Received — Friend Circle",
-      text: `OPEN CHANNEL · TRX 7\n\nYour transmission has been securely logged.\n\nWe don't promise a reply — we promise we'll read it by the fire.\n\nStay sharp.\n\n— Friend Circle Core Unit\n34.0837°N · 74.7973°E`,
-    };
-
-    // Dispatch both emails asynchronously
-    await Promise.all([
-      transporter.sendMail(adminMailOptions),
-      transporter.sendMail(userMailOptions),
-    ]);
-
-    return NextResponse.json({ success: true, message: "Transmission sent." });
-  } catch (error: any) {
-    console.error("Error processing contact form:", error);
-    return NextResponse.json(
-      { error: "Failed to transmit message.", details: error.message },
-      { status: 500 }
-    );
+    await transporter.sendMail(mailOptions);
+    
+    return NextResponse.json({ success: true });
+  } catch (err: any) {
+    console.error("Nodemailer error:", err);
+    return NextResponse.json({ error: "Failed to process ticket" }, { status: 500 });
   }
 }
