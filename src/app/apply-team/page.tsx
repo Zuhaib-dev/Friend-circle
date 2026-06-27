@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
 import { TopNav } from "@/components/top-nav";
 
@@ -9,12 +9,18 @@ import { ShieldAlert, Crosshair, Terminal, CheckCircle2, Loader2, Info } from "l
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { initialsOf } from "@/lib/utils";
+import imageCompression from "browser-image-compression";
 
 export default function ApplyTeamPage() {
   const { data: session, update } = useSession();
   const router = useRouter();
   
   const [details, setDetails] = useState("");
+  const [socialHandle, setSocialHandle] = useState("");
+  const [bio, setBio] = useState("");
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [newImageFile, setNewImageFile] = useState<File | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
@@ -24,14 +30,67 @@ export default function ApplyTeamPage() {
   // Render Avatar
   const renderAvatar = () => {
     if (!user) return null;
-    if (user.image) {
-      return <Image src={user.image} alt={user.name || "Operator"} width={400} height={533} className="aspect-3/4 object-cover w-full h-full grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500" />;
+    const displayImage = imagePreview || user.image;
+    if (displayImage) {
+      return (
+        <Image 
+          src={displayImage} 
+          alt={user.name || "Operator"} 
+          width={400} 
+          height={533} 
+          className="aspect-3/4 object-cover w-full h-full grayscale opacity-60 group-hover/avatar:grayscale-0 group-hover/avatar:opacity-100 transition-all duration-500" 
+        />
+      );
     }
     return (
       <div className="w-full h-full flex items-center justify-center brick text-bone font-display text-4xl">
         {initialsOf(user.name || "Operator")}
       </div>
     );
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    
+    if (!file.type.startsWith("image/")) {
+      setError("Please select a valid image file.");
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      setError("Image size should be less than 5MB.");
+      return;
+    }
+
+    setNewImageFile(file);
+    setImagePreview(URL.createObjectURL(file));
+  };
+
+  const uploadImageToImageKit = async (file: File): Promise<string> => {
+    const options = { maxSizeMB: 0.5, maxWidthOrHeight: 800, useWebWorker: true, exifOrientation: 1 };
+    const compressedBlob = await imageCompression(file, options);
+    const compressedFile = new File([compressedBlob], file.name, { type: compressedBlob.type });
+
+    const authRes = await fetch("/api/imagekit/auth");
+    if (!authRes.ok) throw new Error("Image upload auth failed");
+    const auth = await authRes.json();
+
+    const formData = new FormData();
+    formData.append("file", compressedFile);
+    formData.append("fileName", file.name);
+    formData.append("publicKey", auth.publicKey);
+    formData.append("signature", auth.signature);
+    formData.append("expire", auth.expire.toString());
+    formData.append("token", auth.token);
+
+    const uploadRes = await fetch("https://upload.imagekit.io/api/v1/files/upload", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (!uploadRes.ok) throw new Error("Image upload failed");
+    const data = await uploadRes.json();
+    return data.url;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -52,10 +111,20 @@ export default function ApplyTeamPage() {
     setError("");
 
     try {
+      let finalImageUrl = undefined;
+      if (newImageFile) {
+        finalImageUrl = await uploadImageToImageKit(newImageFile);
+      }
+
       const res = await fetch("/api/apply-team", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ details: sanitizedPhone }),
+        body: JSON.stringify({ 
+          details: sanitizedPhone,
+          socialHandle,
+          bio,
+          image: finalImageUrl
+        }),
       });
 
       const data = await res.json();
@@ -168,14 +237,30 @@ export default function ApplyTeamPage() {
               {/* Left col: ID Badge */}
               <div className="flex flex-col gap-3">
                 <div className="mono-label opacity-50 flex items-center gap-1.5"><Crosshair className="h-3 w-3 text-signal" /> ID BADGE</div>
-                <div className="hairline border-ink bg-bone aspect-3/4 relative group overflow-hidden">
+                <div 
+                  className="hairline border-ink bg-bone aspect-3/4 relative group/avatar overflow-hidden cursor-pointer"
+                  onClick={() => fileInputRef.current?.click()}
+                >
                   <div className="absolute inset-0 z-10 pointer-events-none shadow-[inset_0_0_40px_rgba(28,28,26,0.1)]" />
                   {renderAvatar()}
-                  <div className="absolute bottom-0 inset-x-0 p-2 bg-ink/80 backdrop-blur-sm text-bone mono-label text-[10px] flex items-center justify-between z-20">
+                  
+                  <div className="absolute inset-0 bg-ink/60 backdrop-blur-sm opacity-0 group-hover/avatar:opacity-100 transition-opacity flex flex-col items-center justify-center text-bone gap-2 z-20">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-file-up h-6 w-6"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M12 12v6"/><path d="m9 15 3-3 3 3"/></svg>
+                    <span className="mono-label text-xs">UPDATE IMAGE</span>
+                  </div>
+
+                  <div className="absolute bottom-0 inset-x-0 p-2 bg-ink/80 backdrop-blur-sm text-bone mono-label text-[10px] flex items-center justify-between z-30 pointer-events-none">
                     <span className="truncate pr-2">{user.name}</span>
                     <span className="text-signal">UNVERIFIED</span>
                   </div>
                 </div>
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  ref={fileInputRef}
+                  onChange={handleFileChange}
+                />
                 <div className="hairline border-ink/30 p-2 mono-label text-[10px] text-ink/60 flex items-start gap-1.5">
                   <Info className="h-3 w-3 shrink-0 mt-0.5" />
                   Your current profile photo will be used for your Operator ID.
@@ -208,6 +293,31 @@ export default function ApplyTeamPage() {
                     onChange={(e) => setDetails(e.target.value.replace(/[^0-9+\s-]/g, ''))}
                     placeholder="+91 9876543210"
                     className="w-full hairline border-ink bg-transparent px-3 py-3 font-mono text-sm placeholder:text-ink/30 focus:outline-none focus:ring-1 focus:ring-signal focus:border-signal transition-all tracking-wider"
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label className="mono-label text-[11px] opacity-70">EXTERNAL ALIAS (SOCIAL HANDLE)</label>
+                  <div className="relative flex items-center">
+                    <span className="absolute left-3 mono-label text-ink/40">@</span>
+                    <input
+                      type="text"
+                      value={socialHandle}
+                      onChange={(e) => setSocialHandle(e.target.value)}
+                      placeholder="instagram_handle"
+                      className="w-full hairline border-ink bg-transparent pl-8 pr-3 py-3 font-mono text-sm placeholder:text-ink/30 focus:outline-none focus:ring-1 focus:ring-signal focus:border-signal transition-all"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-1">
+                  <label className="mono-label text-[11px] opacity-70">OPERATOR BIO (SUMMARY)</label>
+                  <textarea
+                    rows={3}
+                    value={bio}
+                    onChange={(e) => setBio(e.target.value)}
+                    placeholder="Brief dossier summary..."
+                    className="w-full hairline border-ink bg-transparent px-3 py-3 font-mono text-sm placeholder:text-ink/30 focus:outline-none focus:ring-1 focus:ring-signal focus:border-signal transition-all resize-none"
                   />
                 </div>
 

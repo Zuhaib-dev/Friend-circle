@@ -10,6 +10,10 @@ export type Operator = {
   name: string;
   email: string;
   ts: number;
+  phone?: string;
+  socialHandle?: string;
+  bio?: string;
+  image?: string;
 };
 export type Intel = {
   id: string;

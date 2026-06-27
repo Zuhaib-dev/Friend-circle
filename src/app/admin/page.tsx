@@ -70,9 +70,13 @@ export default function AdminPage() {
           setOperators(users.map((u: any) => ({
             id: u._id,
             callsign: u.name?.split(" ")[0] || "UNKNOWN",
-            name: u.teamMemberDetails || "No details provided",
+            name: u.name || "No details provided",
             email: u.email,
             ts: new Date(u.updatedAt || u.createdAt || Date.now()).getTime(),
+            phone: u.phone || u.teamMemberDetails || "",
+            socialHandle: u.socialHandle || "",
+            bio: u.bio || "",
+            image: u.image || "",
           })));
         }
       } catch (err) {

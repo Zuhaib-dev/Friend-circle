@@ -12,7 +12,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const { details } = await req.json();
+    const { details, socialHandle, bio, image } = await req.json();
 
     if (!details) {
       return NextResponse.json({ error: 'Please provide application details' }, { status: 400 });
@@ -36,6 +36,11 @@ export async function POST(req: Request) {
     user.teamMemberStatus = 'PENDING';
     user.teamMemberDetails = details;
     user.phone = details; // Also save it to the official phone field
+    
+    if (socialHandle !== undefined) user.socialHandle = socialHandle;
+    if (bio !== undefined) user.bio = bio;
+    if (image !== undefined) user.image = image;
+
     await user.save();
 
     return NextResponse.json({ message: 'Application submitted successfully', status: user.teamMemberStatus }, { status: 200 });
