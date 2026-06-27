@@ -12,6 +12,7 @@ import { ToursView } from "./components/tours-view";
 import { LiveOpsView } from "./components/live-ops-view";
 import { PersonnelView } from "./components/personnel-view";
 import { LoadoutView } from "./components/loadout-view";
+import { ConvoyView } from "./components/convoy-view";
 
 // ---------- Seed data ----------
 const SEED_OPS: Operator[] = [
@@ -157,10 +158,11 @@ export default function AdminPage() {
             <NavBtn id="overview" current={view} setView={setView} icon={Radar} label="OVERVIEW" code="01" />
             <NavBtn id="operators" current={view} setView={setView} icon={ShieldCheck} label="OPERATORS" code="02" />
             <NavBtn id="intel" current={view} setView={setView} icon={ImageIcon} label="MEDIA INTEL" code="03" />
-            <NavBtn id="tours" current={view} setView={setView} icon={Radar} label="TOURS / DISPATCH" code="04" />
+            <NavBtn id="tours" current={view} setView={setView} icon={MapPin} label="TOURS / DISPATCH" code="04" />
             <NavBtn id="liveops" current={view} setView={setView} icon={CrosshairIcon} label="LIVE-OPS / TRACKER" code="05" />
             <NavBtn id="personnel" current={view} setView={setView} icon={Users} label="PERSONNEL ROSTER" code="06" />
             <NavBtn id="loadout" current={view} setView={setView} icon={Package} label="LOADOUT" code="07" />
+            <NavBtn id="convoy" current={view} setView={setView} icon={Route} label="CONVOY" code="08" />
 
             <div className="mono-label opacity-50 px-2 pt-4 pb-1">// QUEUE</div>
             <div className="hairline border-ink/40 p-2 space-y-1.5">
@@ -280,6 +282,9 @@ export default function AdminPage() {
               )}
               {view === "loadout" && (
                 <LoadoutView />
+              )}
+              {view === "convoy" && (
+                <ConvoyView />
               )}
             </motion.div>
           </AnimatePresence>

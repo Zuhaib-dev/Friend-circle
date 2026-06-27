@@ -12,11 +12,23 @@ import { GEAR_CONVOY, GEAR_PERSONAL, ROLE_RANK, ROSTER, WAYPOINTS } from "./data
 export default function ConvoyPage() {
   const [now, setNow] = useState<Date | null>(null);
   const [mounted, setMounted] = useState(false);
+  const [mission, setMission] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setMounted(true);
     setNow(new Date());
     const t = setInterval(() => setNow(new Date()), 1000);
+
+    fetch("/api/convoys/active")
+      .then((r) => r.json())
+      .then((data) => {
+        if (data && !data.error && !data.message) {
+          setMission(data);
+        }
+        setLoading(false);
+      });
+
     return () => clearInterval(t);
   }, []);
 
@@ -24,15 +36,40 @@ export default function ConvoyPage() {
     ? `${String(now.getUTCHours()).padStart(2, "0")}:${String(now.getUTCMinutes()).padStart(2, "0")}:${String(now.getUTCSeconds()).padStart(2, "0")}`
     : "--:--:--";
 
+  const activeRoster = useMemo(() => {
+    if (!mission || !mission.roster) return ROSTER; // Fallback to static if none
+    return mission.roster.map((r: any) => ({
+      id: r.user?._id || Math.random().toString(),
+      name: r.user?.name || "Unknown",
+      callsign: r.callsign,
+      role: r.role,
+      rig: r.rig,
+      vehicle: r.vehicle,
+      plate: r.plate || "TBA",
+      pickup: r.pickup,
+      phone: r.user?.phone || r.user?.teamMemberDetails || "N/A",
+      ice: "TBA",
+      image: r.user?.image || "https://picsum.photos/seed/default/400/400",
+    }));
+  }, [mission]);
+
   const sortedRoster = useMemo(
-    () => [...ROSTER].sort((a, b) => ROLE_RANK[a.role] - ROLE_RANK[b.role]),
-    [],
+    () => [...activeRoster].sort((a, b) => ROLE_RANK[a.role] - ROLE_RANK[b.role]),
+    [activeRoster],
   );
 
   const totalKm = WAYPOINTS[WAYPOINTS.length - 1].km;
   const fuelPerKm = 8.4; // INR / km approx
   const totalFuel = Math.round(totalKm * fuelPerKm * 2); // round trip
-  const perHead = Math.round(totalFuel / ROSTER.length);
+  const perHead = activeRoster.length > 0 ? Math.round(totalFuel / activeRoster.length) : 0;
+
+  if (loading) {
+    return (
+      <main className="min-h-screen bg-bone text-ink flex items-center justify-center mono-label">
+        <Radio className="h-4 w-4 animate-pulse mr-2 text-signal" /> ESTABLISHING SECURE UPLINK...
+      </main>
+    );
+  }
 
   return (
     <main className="min-h-screen bg-bone text-ink">
@@ -42,7 +79,7 @@ export default function ConvoyPage() {
 
       {/* META STRIP */}
       <section className="hairline-b border-ink grid grid-cols-2 md:grid-cols-5">
-        <MetaCell label="DATE" value="27·JUN·26" icon={Flag} />
+        <MetaCell label="DATE" value={mission?.date ? new Date(mission.date).toLocaleDateString() : "27·JUN·26"} icon={Flag} />
         <MetaCell label="ETA / OBJ" value="09:15 IST" icon={Activity} />
         <MetaCell label="DIST" value={`${totalKm} KM`} icon={RouteIcon} />
         <MetaCell label="WX / PHLG" value="14°C · CLR" icon={CloudSun} />
@@ -50,7 +87,7 @@ export default function ConvoyPage() {
       </section>
 
       {/* ROSTER */}
-      <Section code="RSTR / 01" title="Roster & Rigs" tag={`${ROSTER.length} OPERATORS`}>
+      <Section code="RSTR / 01" title="Roster & Rigs" tag={`${activeRoster.length} OPERATORS`}>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {sortedRoster.map((op, i) => (
             <OperatorCard key={op.id} op={op} index={i} />
