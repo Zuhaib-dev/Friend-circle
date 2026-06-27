@@ -320,26 +320,26 @@ export default function LoadoutPage() {
       </section>
 
       {/* MAIN GRID */}
-      <section className="max-w-7xl mx-auto px-4 py-6 grid lg:grid-cols-[1fr_320px] gap-6">
+      <section className="max-w-7xl mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-6">
         {/* LEFT: items */}
-        <div className="space-y-4 order-2 lg:order-1">
+        <div className="space-y-4 order-2 lg:order-1 min-w-0">
           {/* Filter bar */}
-          <div className="hairline border-ink p-3 flex flex-col md:flex-row gap-3 md:items-center">
-            <div className="flex items-center gap-2 flex-1 hairline border-ink/40 px-2 py-1.5">
-              <Search className="h-3.5 w-3.5 opacity-60" />
+          <div className="hairline border-ink p-3 flex flex-col md:flex-row gap-3 md:items-center w-full min-w-0">
+            <div className="flex items-center gap-2 flex-1 hairline border-ink/40 px-2 py-1.5 w-full">
+              <Search className="h-3.5 w-3.5 opacity-60 shrink-0" />
               <input
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="SEARCH GEAR / CODE..."
-                className="bg-transparent outline-none mono-label text-ink placeholder:text-ink/40 w-full"
+                className="bg-transparent outline-none mono-label text-ink placeholder:text-ink/40 w-full min-w-0"
               />
               {query && (
-                <button onClick={() => setQuery("")} className="mono-label opacity-60 hover:text-signal">
+                <button onClick={() => setQuery("")} className="mono-label opacity-60 hover:text-signal shrink-0">
                   CLR
                 </button>
               )}
             </div>
-            <div className="flex items-center gap-1 overflow-x-auto">
+            <div className="flex items-center gap-1 overflow-x-auto w-full md:w-auto pb-1 -mb-1 no-scrollbar">
               <CatChip active={filter === "ALL"} onClick={() => setFilter("ALL")} label="ALL" code="00" />
               {CATEGORIES.map((c) => (
                 <CatChip
@@ -383,7 +383,7 @@ export default function LoadoutPage() {
         </div>
 
         {/* RIGHT: telemetry */}
-        <aside className="space-y-4 lg:sticky lg:top-20 self-start order-1 lg:order-2">
+        <aside className="space-y-4 lg:sticky lg:top-20 self-start order-1 lg:order-2 min-w-0">
           {/* Weight gauge */}
           <div className="hairline border-ink">
             <div className="hairline-b border-ink/40 px-3 py-2 mono-label flex items-center justify-between">
@@ -462,9 +462,9 @@ export default function LoadoutPage() {
                   >
                     <Icon className="h-3.5 w-3.5 text-signal" />
                     <div className="flex-1 min-w-0">
-                      <div className="mono-label flex justify-between">
-                        <span>{c.label}</span>
-                        <span className="opacity-60">{data.packed}/{data.total}</span>
+                      <div className="mono-label flex justify-between gap-2">
+                        <span className="truncate">{c.label}</span>
+                        <span className="opacity-60 shrink-0">{data.packed}/{data.total}</span>
                       </div>
                       <div className="h-1 mt-1 bg-ink/10 relative overflow-hidden">
                         <motion.div
