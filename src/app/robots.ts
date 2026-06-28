@@ -7,7 +7,21 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: "*",
-        allow: ["/", "/team", "/crew", "/tours", "/gallery", "/apply-team"],
+        allow: [
+          "/",
+          "/team",
+          "/crew",
+          "/tours",
+          "/gallery",
+          "/apply-team",
+          "/live-ops",
+          "/convoy",
+          "/memory",
+          "/tazkiyah",
+          "/tazkiyah/quran",
+          "/contact",
+          "/loadout",
+        ],
         disallow: [
           "/admin",
           "/admin/",
@@ -15,6 +29,7 @@ export default function robots(): MetadataRoute.Robots {
           "/profile",
           "/surveillance",
           "/verify-otp",
+          "/ledger",
         ],
       },
       {
