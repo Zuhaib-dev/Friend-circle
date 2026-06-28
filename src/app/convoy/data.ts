@@ -10,7 +10,7 @@ export type Operator = {
   role: Role;
   rig: Rig;
   vehicle: string;
-  plate: string;
+  plate: string; 
   ice: { name: string; phone: string };
   pickup: string;
   img?: string;
