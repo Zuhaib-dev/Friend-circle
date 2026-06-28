@@ -76,7 +76,7 @@ export default function MemoriesIndexPage() {
                     <div className="mono-label opacity-70">{new Date(mem.date).toLocaleDateString()}</div>
                   </div>
                 </div>
-              </Link>
+              </Link> 
             ))}
           </div>
         )}
