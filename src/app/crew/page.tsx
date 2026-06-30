@@ -19,7 +19,7 @@ import { TopNav } from "@/components/top-nav";
 import { useSession } from "next-auth/react";
 
 // Crosshairs component for the corners
-export function Crosshairs() {
+function Crosshairs() {
   return (
     <>
       <span className="ch-tl" />

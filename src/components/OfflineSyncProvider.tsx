@@ -1,12 +1,15 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { processOfflineQueue } from "@/lib/offline-sync";
 import { Wifi, WifiOff } from "lucide-react";
 
-export function OfflineSyncProvider({ children }: { children: React.ReactNode }) {
+export default function OfflineSyncProvider({ children }: { children: React.ReactNode }) {
+  const [mounted, setMounted] = useState(false);
+
   useEffect(() => {
+    setMounted(true);
     const handleOnline = async () => {
       toast("You are back online", {
         icon: <Wifi className="w-4 h-4 text-emerald-400" />,
@@ -32,7 +35,6 @@ export function OfflineSyncProvider({ children }: { children: React.ReactNode })
     window.addEventListener("online", handleOnline);
     window.addEventListener("offline", handleOffline);
 
-    // Initial check on mount in case they come back online after closing the app
     if (navigator.onLine) {
       processOfflineQueue().then((result) => {
         if (result.success > 0) {
@@ -46,6 +48,8 @@ export function OfflineSyncProvider({ children }: { children: React.ReactNode })
       window.removeEventListener("offline", handleOffline);
     };
   }, []);
+
+  if (!mounted) return <>{children}</>;
 
   return <>{children}</>;
 }
