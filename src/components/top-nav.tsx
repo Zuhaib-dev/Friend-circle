@@ -8,6 +8,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { LogIn, LogOut, User as UserIcon, Settings, ChevronDown, CircleDot, Menu, X, ShieldCheck, Image as ImageIcon, Radar, Terminal, Video as VideoIcon, Compass, Crosshair, Package, BookOpen, Database } from "lucide-react";
 import { useSession, signOut as doSignOut } from "next-auth/react";
 import { initialsOf } from "../lib/utils";
+import { QiblaDialog } from "@/components/QiblaDialog";
 
 function Avatar({ name, src, size = 28 }: { name: string; src?: string; size?: number }) {
   const [err, setErr] = useState(false);
@@ -73,6 +74,7 @@ export function TopNav() {
   const navigate = useRouter();
   const [open, setOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [qiblaOpen, setQiblaOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -246,6 +248,15 @@ export function TopNav() {
             </>
           )}
 
+          {/* Global Qibla Trigger */}
+          <button
+            onClick={() => setQiblaOpen(true)}
+            className="hairline border-ink p-1.5 hover:bg-ink hover:text-bone transition-colors text-ink"
+            aria-label="Qibla Finder"
+          >
+            <Compass className="h-4 w-4" />
+          </button>
+
           {/* Mobile menu trigger */}
           <button
             onClick={() => setMobileOpen((o) => !o)}
@@ -308,6 +319,8 @@ export function TopNav() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      <QiblaDialog open={qiblaOpen} onClose={() => setQiblaOpen(false)} />
     </div>
   );
 }
