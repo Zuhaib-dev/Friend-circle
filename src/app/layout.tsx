@@ -3,6 +3,7 @@ import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "@/components/AuthProvider";
+import { OfflineSyncProvider } from "@/components/OfflineSyncProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -99,7 +100,9 @@ export default function RootLayout({
             ]
           })
         }} />
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+          <OfflineSyncProvider>{children}</OfflineSyncProvider>
+        </AuthProvider>
       </body>
     </html>
   );
