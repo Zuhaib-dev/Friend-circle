@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
-import { Minus, Plus, BookOpen, Clock, Compass, Flame } from "lucide-react";
+import { Minus, Plus, BookOpen, Clock, Compass, Flame, Target } from "lucide-react";
+import { QiblaDialog } from "@/components/QiblaDialog";
 import { SectionHead, Panel, Marker } from "./primitives";
 
 type PrayerTimes = {
@@ -58,6 +59,7 @@ export function TazkiyahSection() {
 
   const [prayers, setPrayers] = useState<PrayerTimes | null>(null);
   const [prayerLoading, setPrayerLoading] = useState(true);
+  const [qiblaOpen, setQiblaOpen] = useState(false);
   const [nowMs, setNowMs] = useState(Date.now());
   const [hijriDate, setHijriDate] = useState("");
   const [compassHeading, setCompassHeading] = useState<number | null>(null);
@@ -243,63 +245,23 @@ export function TazkiyahSection() {
         {/* ── Qibla Panel ───────────────────────────────── */}
         <Panel code="QBL / 02" title="QIBLA DIRECTION" signal="ON">
           <div className="flex flex-col items-center">
-            {/* Compass rose */}
-            <div className="relative h-48 w-48 hairline border-ink rounded-full bg-bone mb-4">
-              <div className="absolute inset-2 hairline border-ink/40 rounded-full" />
+            
+            <div className="relative h-48 w-48 hairline border-ink rounded-full bg-bone mb-6 flex flex-col items-center justify-center cursor-pointer hover:bg-bone/80 transition-colors group" onClick={() => setQiblaOpen(true)}>
+              <div className="absolute inset-2 hairline border-ink/40 rounded-full border-dashed group-hover:rotate-45 transition-transform duration-700" />
               <div className="absolute inset-6 hairline border-ink/30 rounded-full" />
-
-              {/* Cardinal labels */}
-              <div className="absolute top-1 left-1/2 -translate-x-1/2 mono-label text-[11px]">N</div>
-              <div className="absolute bottom-1 left-1/2 -translate-x-1/2 mono-label text-[11px]">S</div>
-              <div className="absolute left-1 top-1/2 -translate-y-1/2 mono-label text-[11px]">W</div>
-              <div className="absolute right-1 top-1/2 -translate-y-1/2 mono-label text-[11px]">E</div>
-              {/* Intercardinal */}
-              <div className="absolute top-[14%] right-[14%] mono-label text-[9px] opacity-50">NE</div>
-              <div className="absolute bottom-[14%] right-[14%] mono-label text-[9px] opacity-50">SE</div>
-              <div className="absolute bottom-[14%] left-[14%] mono-label text-[9px] opacity-50">SW</div>
-              <div className="absolute top-[14%] left-[14%] mono-label text-[9px] opacity-50">NW</div>
-
-              {/* Qibla needle — rotates to face Mecca */}
-              <motion.div
-                className="absolute top-1/2 left-1/2 origin-bottom"
-                style={{ translateX: "-50%", translateY: "-100%" }}
-                animate={{ rotate: qiblaNeedleAngle }}
-                transition={{ type: "spring", stiffness: 60, damping: 12 }}
-              >
-                {/* Arrow head */}
-                <div className="w-0 h-0 mx-auto mb-0.5"
-                  style={{
-                    borderLeft: "4px solid transparent",
-                    borderRight: "4px solid transparent",
-                    borderBottom: "8px solid #16a34a",
-                  }}
-                />
-                <div className="w-0.5 h-20 bg-signal mx-auto" />
-              </motion.div>
-
-              {/* Centre dot */}
-              <div className="absolute top-1/2 left-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-signal border-2 border-bone" />
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 mono-label text-signal text-[10px]">
-                QIBLA {QIBLA_BEARING}°
-              </div>
+              
+              <Compass className="h-10 w-10 text-signal mb-2" />
+              <span className="mono-label text-[10px] text-ink">TAP TO INITIATE</span>
+              <span className="mono-label text-[10px] text-ink/60">LIVE AR HUD</span>
             </div>
 
-            {/* Compass status */}
-            <div className="mono-label text-[11px] opacity-60 text-center mb-3">
-              {compassHeading != null
-                ? `DEVICE HEADING · ${Math.round(compassHeading)}° · LIVE`
-                : "SRINAGAR FIXED BEARING · 267.5° W"}
-            </div>
-
-            {/* iOS permission prompt */}
-            {compassSupported === false && (
-              <button
-                onClick={requestCompass}
-                className="mono-label text-[11px] brick text-bone px-3 py-1.5 hover:bg-signal transition-colors"
-              >
-                ENABLE LIVE COMPASS
-              </button>
-            )}
+            <button
+              onClick={() => setQiblaOpen(true)}
+              className="mono-label text-[11px] brick text-bone px-3 py-1.5 hover:bg-signal transition-colors mb-6 flex items-center gap-2"
+            >
+              <Target className="h-3 w-3" />
+              LAUNCH QIBLA SYSTEM
+            </button>
 
             <div className="hairline-t border-ink/40 pt-3 w-full">
               <div className="mono-label mb-1">HADITH / DAY</div>
@@ -348,6 +310,7 @@ export function TazkiyahSection() {
           </div>
         ))}
       </div>
+      <QiblaDialog open={qiblaOpen} onClose={() => setQiblaOpen(false)} />
     </section>
   );
 }

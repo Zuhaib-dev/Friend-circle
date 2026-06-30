@@ -4,6 +4,7 @@ import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import { Compass, Moon, Heart } from "lucide-react";
 import { HADITHS, DUAS } from "@/data/tazkiyah-data";
 import { useAladhanData } from "./utils";
+import { QiblaDialog } from "@/components/QiblaDialog";
 
 export function BentoGrid() {
   const aladhan = useAladhanData();
@@ -12,6 +13,7 @@ export function BentoGrid() {
   const [mounted, setMounted] = React.useState(false);
   const [todayHadith, setTodayHadith] = React.useState(HADITHS[0]);
   const [todayDua, setTodayDua] = React.useState(DUAS[0]);
+  const [qiblaOpen, setQiblaOpen] = React.useState(false);
 
   React.useEffect(() => {
     setStreak(parseInt(localStorage.getItem("dhikr_streak") || "12"));
@@ -40,8 +42,8 @@ export function BentoGrid() {
           <p className="mt-4 text-white/60 italic text-sm">"{todayDua.en}"</p>
           <div className="mt-auto pt-6 text-[10px] font-mono uppercase tracking-[0.25em] text-white/40">{todayDua.ref}</div>
         </BentoCard>
-        <BentoCard>
-          <Compass className="h-5 w-5 text-emerald-300/80" />
+        <BentoCard className="cursor-pointer group" onClick={() => setQiblaOpen(true)}>
+          <Compass className="h-5 w-5 text-emerald-300/80 group-hover:rotate-45 transition-transform duration-700" />
           <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-white/40 mt-3">QIBLA</div>
           <div className="font-display text-4xl text-white mt-1">
             {aladhan?.qibla ? Math.round(aladhan.qibla) : "294"}°
@@ -77,18 +79,20 @@ export function BentoGrid() {
           <div className="text-[10px] font-mono uppercase tracking-[0.25em] text-white/50">CONSISTENT DHIKR</div>
         </BentoCard>
       </div>
+      <QiblaDialog open={qiblaOpen} onClose={() => setQiblaOpen(false)} />
     </div>
   );
 }
 
-function BentoCard({ children, className = "", tone = "default" }:
-  { children: React.ReactNode; className?: string; tone?: "default" | "emerald" }) {
+function BentoCard({ children, className = "", tone = "default", onClick }:
+  { children: React.ReactNode; className?: string; tone?: "default" | "emerald"; onClick?: () => void }) {
   const ref = useRef<HTMLDivElement>(null);
   const mx = useMotionValue(0); const my = useMotionValue(0);
   const rx = useSpring(useTransform(my, [-50, 50], [4, -4]), { stiffness: 200, damping: 20 });
   const ry = useSpring(useTransform(mx, [-50, 50], [-4, 4]), { stiffness: 200, damping: 20 });
   return (
     <motion.div ref={ref}
+      onClick={onClick}
       onMouseMove={(e) => { const r = ref.current!.getBoundingClientRect(); mx.set(e.clientX - r.left - r.width / 2); my.set(e.clientY - r.top - r.height / 2); }}
       onMouseLeave={() => { mx.set(0); my.set(0); }}
       style={{ rotateX: rx, rotateY: ry, transformStyle: "preserve-3d" }}
