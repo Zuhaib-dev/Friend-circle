@@ -45,11 +45,17 @@ export function BentoGrid() {
         <BentoCard className="cursor-pointer group" onClick={() => setQiblaOpen(true)}>
           <Compass className="h-5 w-5 text-emerald-300/80 group-hover:rotate-45 transition-transform duration-700" />
           <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-white/40 mt-3">QIBLA</div>
-          <div className="font-display text-4xl text-white mt-1">
+          <div className="font-display text-4xl text-white mt-1 group-hover:opacity-20 transition-opacity">
             {aladhan?.qibla ? Math.round(aladhan.qibla) : "294"}°
           </div>
-          <div className="text-[10px] font-mono uppercase tracking-[0.25em] text-white/50">
+          <div className="text-[10px] font-mono uppercase tracking-[0.25em] text-white/50 group-hover:opacity-20 transition-opacity">
             {aladhan?.qibla ? "FROM NORTH" : "NW · MAKKAH"}
+          </div>
+          
+          <div className="absolute inset-0 bg-[#0a0a0a]/80 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm z-10">
+            <Compass className="h-8 w-8 text-emerald-400 mb-2 group-hover:rotate-45 transition-transform duration-700" />
+            <span className="font-mono text-[10px] tracking-widest text-white uppercase">TAP TO INITIATE</span>
+            <span className="font-mono text-[10px] tracking-widest text-emerald-400/60 uppercase mt-1">LIVE AR HUD</span>
           </div>
         </BentoCard>
         <BentoCard>
