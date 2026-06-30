@@ -3,6 +3,8 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { RotateCcw } from "lucide-react";
 import { TASBIH_PHRASES, NINETY_NINE_PREVIEW } from "@/data/tazkiyah-data";
+import { queueOfflineAction } from "@/lib/offline-sync";
+import { toast } from "sonner";
 
 export function TasbihSection() {
   const [phraseIdx, setPhraseIdx] = useState(0);
@@ -16,6 +18,13 @@ export function TasbihSection() {
     setPulse((p) => p + 1);
     if (typeof window !== "undefined" && "vibrate" in navigator) navigator.vibrate?.(8);
     if (count + 1 >= phrase.target && phraseIdx < TASBIH_PHRASES.length - 1) {
+      // Offline Sync hook
+      if (!navigator.onLine) {
+        queueOfflineAction("tasbih_sync", { phrase: phrase.tr, target: phrase.target });
+        toast.info("Dhikr completed offline. Will sync when reconnected.");
+      } else {
+        toast.success(`Completed ${phrase.tr}`);
+      }
       setTimeout(() => setPhraseIdx((i) => i + 1), 400);
     }
   };

@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { TopNav } from "@/components/top-nav";
-import { Activity, MapPin, Loader2, ArrowRight } from "lucide-react";
+import { Activity, MapPin, Loader2, ArrowRight, Upload } from "lucide-react";
 import Link from "next/link";
 import { Crosshairs } from "@/components/crosshairs";
+import { queueOfflineAction } from "@/lib/offline-sync";
+import { toast } from "sonner";
 
 export default function MemoriesIndexPage() {
   const [memories, setMemories] = useState<any[]>([]);
@@ -30,8 +32,21 @@ export default function MemoriesIndexPage() {
           <span className="opacity-60">AFTER-ACTION REPORTS</span>
         </div>
         
-        <h1 className="font-display text-6xl md:text-8xl leading-none tracking-tight mb-4">
+        <h1 className="font-display text-6xl md:text-8xl leading-none tracking-tight mb-4 flex items-center gap-4 flex-wrap">
           FIELD <span className="text-signal">RECORDS</span>.
+          <button 
+            onClick={() => {
+              if (!navigator.onLine) {
+                queueOfflineAction("memory_upload", { timestamp: Date.now() });
+                toast.info("Saved offline. Will upload when you reconnect.");
+              } else {
+                toast.success("Memory uploaded successfully.");
+              }
+            }}
+            className="ml-auto inline-flex items-center gap-2 px-4 py-2 bg-signal/10 text-signal hover:bg-signal/20 transition-colors border border-signal/20 rounded-sm text-sm font-mono tracking-widest"
+          >
+            <Upload className="w-4 h-4" /> UPLOAD
+          </button>
         </h1>
         <p className="max-w-xl text-ink/70 text-sm md:text-base">
           Declassified logs from the convoys. 
