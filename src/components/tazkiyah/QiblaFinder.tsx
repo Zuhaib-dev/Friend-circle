@@ -79,7 +79,7 @@ export function QiblaFinder() {
       if ('ondeviceorientationabsolute' in window) {
         (window as any).addEventListener("deviceorientationabsolute", handleOrientation);
       } else {
-        window.addEventListener("deviceorientation", handleOrientation);
+        (window as any).addEventListener("deviceorientation", handleOrientation);
       }
 
       setActive(true);
