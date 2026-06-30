@@ -13,13 +13,14 @@ import { QuranSection } from "@/components/tazkiyah/QuranSection";
 import { HadithSection } from "@/components/tazkiyah/HadithSection";
 import { TasbihSection } from "@/components/tazkiyah/TasbihSection";
 import { SeerahSection } from "@/components/tazkiyah/SeerahSection";
+import { QiblaFinder } from "@/components/tazkiyah/QiblaFinder";
 import { DailyAyahSpotlight } from "@/components/tazkiyah/DailyAyahSpotlight";
 import { AsmaulHusnaSection } from "@/components/tazkiyah/AsmaulHusnaSection";
 import { BentoGrid } from "@/components/tazkiyah/BentoGrid";
 import { Footer } from "@/components/tazkiyah/Footer";
 
 export default function TazkiyahPage() {
-  const [tab, setTab] = useState<"quran" | "hadith" | "tasbih" | "seerah">("quran");
+  const [tab, setTab] = useState<"quran" | "hadith" | "tasbih" | "seerah" | "qibla">("quran");
   const [selectedSurah, setSelectedSurah] = useState<Surah | null>(null);
   
   return (
@@ -42,6 +43,7 @@ export default function TazkiyahPage() {
               {tab === "hadith" && <motion.div key="hadith" {...fadeUp}><HadithSection /></motion.div>}
               {tab === "tasbih" && <motion.div key="tasbih" {...fadeUp}><TasbihSection /></motion.div>}
               {tab === "seerah" && <motion.div key="seerah" {...fadeUp}><SeerahSection /></motion.div>}
+              {tab === "qibla" && <motion.div key="qibla" {...fadeUp}><QiblaFinder /></motion.div>}
             </AnimatePresence>
           </div>
           <DailyAyahSpotlight />

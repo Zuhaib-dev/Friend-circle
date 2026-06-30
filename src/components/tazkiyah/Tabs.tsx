@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "motion/react";
-import { BookOpen, Quote, Heart, Sparkles } from "lucide-react";
+import { BookOpen, Quote, Heart, Sparkles, Compass } from "lucide-react";
 
 export function Tabs({ tab, setTab }: { tab: string; setTab: (t: any) => void }) {
   const TABS = [
@@ -8,6 +8,7 @@ export function Tabs({ tab, setTab }: { tab: string; setTab: (t: any) => void })
     { id: "hadith", label: "Hadith", icon: Quote },
     { id: "tasbih", label: "Tasbih", icon: Heart },
     { id: "seerah", label: "Seerah", icon: Sparkles },
+    { id: "qibla", label: "Qibla", icon: Compass },
   ] as const;
   return (
     <div className="mt-10 inline-flex rounded-sm border border-white/10 bg-[#101010] p-1 relative">
