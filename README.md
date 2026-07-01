@@ -94,7 +94,7 @@ Navigate to `http://localhost:3000` to access the command console.
 
 I build high-performance, aesthetically striking web applications. Friend Circle is a testament to blending complex system architecture with premium, immersive design.
 
-- 🌐 **Portfolio:** [zuhaib.dev](https://zuhaib.dev) *(Update this link)*
+- 🌐 **Portfolio:** [zuhaibrashid.com](https://zuhaibrashid.com)
 - 🐙 **GitHub:** [@Zuhaib-dev](https://github.com/Zuhaib-dev)
 - 💼 **LinkedIn:** [linkedin.com/in/zuhaib](https://linkedin.com/in/zuhaib) *(Update this link)*
 - 𝕏 **Twitter/X:** [@zuhaib_dev](https://twitter.com/zuhaib_dev) *(Update this link)*
