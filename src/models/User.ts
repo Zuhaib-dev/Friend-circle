@@ -16,6 +16,13 @@ export interface IUser extends Document {
   socialHandle?: string;
   bio?: string;
   isSuspended: boolean;
+  activeSessions: {
+    sessionId: string;
+    userAgent: string;
+    ip: string;
+    lastActive: Date;
+    status: 'ACTIVE' | 'REVOKED';
+  }[];
 }
 
 const UserSchema: Schema = new Schema(
@@ -78,6 +85,15 @@ const UserSchema: Schema = new Schema(
       type: Boolean,
       default: false,
     },
+    activeSessions: [
+      {
+        sessionId: { type: String, required: true },
+        userAgent: { type: String, default: 'Unknown' },
+        ip: { type: String, default: 'Unknown' },
+        lastActive: { type: Date, default: Date.now },
+        status: { type: String, enum: ['ACTIVE', 'REVOKED'], default: 'ACTIVE' },
+      }
+    ],
   },
   { timestamps: true }
 );

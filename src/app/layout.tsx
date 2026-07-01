@@ -3,6 +3,7 @@ import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "@/components/AuthProvider";
+import { SessionTracker } from "@/components/SessionTracker";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -100,6 +101,7 @@ export default function RootLayout({
           })
         }} />
         <AuthProvider>
+          <SessionTracker />
           {children}
         </AuthProvider>
       </body>

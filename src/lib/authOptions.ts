@@ -87,6 +87,9 @@ export const authOptions: NextAuthOptions = {
       }
       if (user) {
         token.id = user.id;
+        if (!token.sessionId) {
+          token.sessionId = crypto.randomUUID();
+        }
       }
       // Fetch latest role and status from DB to ensure session is up to date
       await connectToDatabase();
@@ -100,6 +103,21 @@ export const authOptions: NextAuthOptions = {
         : await User.findOne({ email: token.email });
         
       if (dbUser) {
+        // Handle Session Revocation
+        if (token.sessionId) {
+          const sessionIndex = dbUser.activeSessions?.findIndex((s: any) => s.sessionId === token.sessionId);
+          if (sessionIndex === -1 || sessionIndex === undefined) {
+            // New session, add placeholder (ping will fill the rest)
+            await User.updateOne(
+              { _id: dbUser._id },
+              { $push: { activeSessions: { sessionId: token.sessionId, lastActive: new Date(), status: 'ACTIVE' } } }
+            );
+          } else if (dbUser.activeSessions[sessionIndex].status === 'REVOKED') {
+            // Token is revoked! Return empty token to log user out.
+            return {} as any;
+          }
+        }
+
         token.id = dbUser._id.toString();
         token.role = dbUser.role;
         token.teamMemberStatus = dbUser.teamMemberStatus;
@@ -113,6 +131,7 @@ export const authOptions: NextAuthOptions = {
         (session.user as any).id = token.id;
         (session.user as any).role = token.role;
         (session.user as any).teamMemberStatus = token.teamMemberStatus;
+        (session.user as any).sessionId = token.sessionId;
         if (token.name) session.user.name = token.name;
         if (token.picture) session.user.image = token.picture as string;
       }
