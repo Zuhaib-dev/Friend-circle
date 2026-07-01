@@ -97,7 +97,7 @@ I build high-performance, aesthetically striking web applications. Friend Circle
 - 🌐 **Portfolio:** [zuhaibrashid.com](https://zuhaibrashid.com)
 - 🐙 **GitHub:** [@Zuhaib-dev](https://github.com/Zuhaib-dev)
 - 💼 **LinkedIn:** [linkedin.com/in/zuhaib](https://www.linkedin.com/in/zuhaib-rashid-661345318/)
-- 𝕏 **Twitter/X:** [@zuhaib_dev](https://twitter.com/zuhaib_dev) *(Update this link)*
+- 𝕏 **Twitter/X:** [@xuhaib_x9](https://x.com/xuhaib_x9)
 
 ---
 <div align="center">
