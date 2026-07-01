@@ -22,8 +22,22 @@
 <div align="center">
   <img src="./public/hero-mountains.jpg" width="100%" style="border-radius: 8px;" alt="Friend Circle Hero" />
   <br/>
-  <i>No ridge is bigger than Fajr.</i>
+  <i>No ridge is bigger than Fajr. Exploring Kashmir, Budgam, and Srinagar.</i>
 </div>
+
+---
+
+## 📑 Table of Contents
+
+- [System Overview](#-system-overview)
+- [Core Modules & Features](#-core-modules--features)
+- [The Aesthetic Philosophy](#-the-aesthetic-philosophy)
+- [System Architecture](#-system-architecture)
+- [Directory Structure](#-directory-structure)
+- [Mission Logs & Expeditions](#-mission-logs--expeditions)
+- [Future Roadmap](#-future-roadmap)
+- [Local Setup & Installation](#-local-setup--installation)
+- [Author & Architect](#-author--architect)
 
 ---
 
@@ -68,6 +82,42 @@ Friend Circle is built on a modern **MERN stack** adapted for the serverless edg
 - **Authentication:** Highly secure `NextAuth.js` implementation supporting Credentials (OTP) and OAuth providers.
 - **Media Optimization:** `ImageKit.io` integration combined with on-device browser image compression to handle high-res expedition photos efficiently.
 - **Edge Deployment:** Configured with `netlify.toml` for seamless edge deployment and caching on Netlify.
+
+---
+
+## 📂 Directory Structure
+
+A look under the hood at how the Next.js App Router is organized:
+
+```bash
+Friend-circle/
+├── src/
+│   ├── app/                # Next.js 15 App Router (Pages, Layouts, API routes)
+│   │   ├── admin/          # Admin Command Console (Live-Ops)
+│   │   ├── api/            # Serverless API routes (Auth, Telemetry, Weather)
+│   │   ├── convoy/         # Convoy loadout & tracking
+│   │   ├── memory/         # Expedition logs and ImageKit galleries
+│   │   └── tazkiyah/       # Islamic lifestyle module (Quran, Qibla, Tasbih)
+│   ├── components/         # Reusable UI components (Framer Motion, Glassmorphism)
+│   ├── lib/                # Database connections, utility functions, auth logic
+│   ├── models/             # Mongoose Schemas (User, TripMemory, Ledger)
+│   └── types/              # TypeScript type definitions
+├── public/                 # Static assets, PWA manifest, service workers
+├── next.config.mjs         # Next.js configuration
+├── netlify.toml            # Deployment and Edge runtime config
+└── tailwind.config.ts      # Custom utility classes and color palette
+```
+
+---
+
+## 🏔️ Mission Logs & Expeditions
+
+Friend Circle is rooted in real-world exploration. The platform serves as the digital headquarters for our physical expeditions across the breathtaking landscapes of Kashmir:
+
+- **Trekking & Hiking:** Scaling ridges across Srinagar and Chadoora.
+- **Offroading & Convoys:** Coordinating 4x4 operations in remote Budgam territories.
+- **Camping & Survival:** Managing loadouts and gear distribution for multi-day camps.
+- **Photography & Memory Logging:** High-res archival of our fishing and outdoor operations.
 
 ---
 
