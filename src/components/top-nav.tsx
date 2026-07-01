@@ -168,7 +168,7 @@ export function TopNav() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -4 }}
                     transition={{ duration: 0.15, ease: "easeOut" }}
-                    className="absolute right-0 top-full mt-1 w-64 hairline border-ink bg-bone shadow-[4px_4px_0_0_oklch(0.13_0.01_60)] z-50"
+                    className="absolute right-0 top-full mt-1 w-64 hairline border-ink bg-bone shadow-[4px_4px_0_0_oklch(0.13_0.01_60)] z-50 text-ink"
                     role="menu"
                   >
                     {/* user card */}
