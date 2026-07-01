@@ -83,7 +83,7 @@ export default function SettingsPage() {
         <section className="space-y-4">
           <div className="flex items-center gap-3">
             <span className="text-signal mono-label text-xs">SEC / 01</span>
-            <div className="h-[1px] flex-1 bg-bone/20"></div>
+            <div className="h-px flex-1 bg-bone/20"></div>
           </div>
           <div>
             <h1 className="text-3xl sm:text-5xl font-serif tracking-tight text-bone">Security Protocol.</h1>
@@ -97,7 +97,7 @@ export default function SettingsPage() {
         <section className="space-y-6">
           <div className="flex items-center gap-3">
             <span className="text-signal mono-label text-xs">SYS / 02</span>
-            <div className="h-[1px] flex-1 bg-bone/20"></div>
+            <div className="h-px flex-1 bg-bone/20"></div>
           </div>
           
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-bone/20 pb-4">
@@ -111,10 +111,6 @@ export default function SettingsPage() {
                 Authorized Sessions: {sessions.length}
               </div>
             </div>
-            {/* Placeholder for future passkey logic */}
-            <button className="brick px-4 py-2 mono-label text-[10px] text-bone hover:bg-bone hover:text-ink transition-colors hidden sm:block">
-              ADD NEW PASSKEY
-            </button>
           </div>
 
           <div className="overflow-x-auto">
