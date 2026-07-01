@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=16a34a&height=250&section=header&text=Friend%20Circle&fontSize=90&fontColor=ffffff&animation=fadeIn&desc=No%20Ridge%20Is%20Bigger%20Than%20Fajr&descAlign=Ypos&descAlignY=70&descSize=20" alt="Friend Circle Banner" />
+  <img src="./public/og.png" alt="Friend Circle Banner" width="100%" style="border-radius: 8px; margin-bottom: 20px;" />
 
   **A Next-Generation Tactical Adventure & Islamic Lifestyle Platform**
 
@@ -20,9 +20,9 @@
 **Friend Circle** is a high-performance, full-stack web application engineered for the modern Muslim adventurer. Built with a highly premium, "military command console" aesthetic (bone, ink, and signal colors), it seamlessly bridges the gap between tactical outdoor coordination (offroading, hiking, convoys) and daily spiritual discipline (Tazkiyah).
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/Zuhaib-dev/Friend-circle/main/public/manifest-icon-512.png" width="400" alt="App Logo" />
+  <img src="./public/hero-mountains.jpg" width="100%" style="border-radius: 8px;" alt="Friend Circle Hero" />
   <br/>
-  <i>(Note: Replace this image block with a high-quality GIF of your dashboard or mobile view in action!)</i>
+  <i>No ridge is bigger than Fajr.</i>
 </div>
 
 ---
@@ -51,7 +51,9 @@ Friend Circle isn't just an app; it's an experience. The UI/UX is deeply inspire
 - **Micro-interactions:** Extensive use of `framer-motion` for spring-physics animations, blurred backdrops (glassmorphism), and CRT-style scanline overlays.
 
 <div align="center">
-  <img src="https://via.placeholder.com/800x400/101010/16a34a?text=AR+Qibla+HUD+Demo+GIF+Goes+Here" alt="Qibla GIF" />
+  <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExc3I3cnYyeXo3dW84MWI5ZjJ1ZGhmcXQ2emZzaWlxMWl5cmMxcXRlNyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/11Tsyjflf2xq2A/giphy.gif" alt="Tactical HUD Demo" width="600" style="border-radius: 8px; border: 1px solid #333;" />
+  <br/>
+  <i>(Tactical HUD & AR Systems)</i>
 </div>
 
 ---
