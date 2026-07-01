@@ -138,7 +138,10 @@ export default function AdminPage() {
         <div className="flex items-center justify-between px-4 py-1.5 mono-label gap-3">
           <div className="flex items-center gap-3 truncate">
             <span className="brick px-2 py-px text-bone">ADMIN · 00</span>
-            <span className="opacity-70 truncate">COMMAND CONSOLE · CLEARANCE OMEGA</span>
+            <span className="opacity-70 truncate hidden sm:inline">COMMAND CONSOLE · CLEARANCE OMEGA</span>
+            <a href="https://app.netlify.com/projects/friendcirclee/deploys" target="_blank" rel="noopener noreferrer" className="ml-2 opacity-80 hover:opacity-100 transition-opacity">
+              <img src="https://api.netlify.com/api/v1/badges/9c6c1328-4011-42f4-8821-7062bdbd1f58/deploy-status" alt="Netlify Status" />
+            </a>
           </div>
           <div className="hidden md:flex items-center gap-3">
             <span className="opacity-60">UTC</span>
