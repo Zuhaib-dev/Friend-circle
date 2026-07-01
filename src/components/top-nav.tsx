@@ -152,7 +152,7 @@ export function TopNav() {
             <div ref={menuRef} className="relative">
               <button
                 onClick={() => setOpen((o) => !o)}
-                className="flex items-center gap-2 hairline border-ink px-1.5 py-1 hover:bg-ink hover:text-bone transition-colors group"
+                className="flex items-center gap-2 hairline border-ink px-1.5 py-1 hover:bg-ink hover:text-bone transition-colors group text-ink"
                 aria-haspopup="menu"
                 aria-expanded={open}
               >
@@ -188,6 +188,7 @@ export function TopNav() {
                       </span>
                     </div>
                     <MenuItem icon={UserIcon} label="PROFILE" code="01" onClick={() => { setOpen(false); navigate.push('/profile'); }} />
+                    <MenuItem icon={Settings} label="SECURITY" code="01B" onClick={() => { setOpen(false); navigate.push('/settings'); }} />
                     <MenuItem icon={Compass} label="ROUTES" code="02" onClick={() => { setOpen(false); navigate.push('/tours'); }} />
                     <MenuItem icon={ImageIcon} label="GALLERY" code="03" onClick={() => { setOpen(false); navigate.push('/gallery'); }} />
                     <MenuItem icon={VideoIcon} label="FEEDS" code="04" onClick={() => { setOpen(false); navigate.push('/surveillance'); }} />
