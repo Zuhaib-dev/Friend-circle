@@ -1,87 +1,105 @@
-# Friend Circle
+<div align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=16a34a&height=200&section=header&text=Friend%20Circle&fontSize=80&fontColor=ffffff&animation=fadeIn" alt="Friend Circle Banner" />
 
-A next-generation, high-performance web application built with a modern tech stack. Designed with a sleek, operator-style UI ("CMD"), it integrates advanced dashboards, live telemetry simulations, authentication, and a dedicated Islamic lifestyle module (Tazkiyah).
+  **A Next-Generation Tactical Adventure & Islamic Lifestyle Platform**
 
-## ✨ Features
+  [![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+  [![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)](https://mongodb.com)
+  [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+  [![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white)](https://framer.com/motion/)
+  [![Progressive Web App](https://img.shields.io/badge/PWA-Ready-5a0fc8?style=for-the-badge&logo=pwa&logoColor=white)]()
+</div>
 
-- **Advanced UI/UX**: Sleek, operator-themed interface with smooth Framer Motion micro-animations, glassmorphism, and a highly responsive layout.
-- **Tazkiyah Module**: 
-  - Comprehensive Quran Reader with Arabic fonts and auto-scrolling audio.
-  - Interactive 99 Names of Allah (Asma-ul-Husna) with immersive 3D/holographic styling.
-  - Live Prayer Times (Aladhan API integration) and Qibla Compass.
-- **Live Ops & Surveillance**: Real-time mock telemetry, convoy tracking, and weather data visualizations.
-- **Loadout System**: Dynamic payload calculation and gear packing lists.
-- **Team & Operator Management**: 
-  - Users can apply to join the "Crew" by uploading a dossier (Profile Picture, Bio, Social links).
-  - **Admin Command Console**: Admins can review pending operators, verify their details, and grant clearance.
-- **Media Uploads**: Integrated with ImageKit for optimized, compressed image handling.
+<br />
 
-## 🛠 Tech Stack
+## 📖 Overview
 
-- **Framework**: [Next.js](https://nextjs.org/) (App Router, React 19)
-- **Styling**: Tailwind CSS v4 (with custom utility classes and animations)
-- **Database**: MongoDB (via Mongoose)
-- **Authentication**: NextAuth.js (Credentials/OTP-based authentication)
-- **Animations**: Framer Motion
-- **Icons**: Lucide React
-- **Media**: ImageKit & Browser Image Compression
+**Friend Circle** is a high-performance web application engineered for the modern Muslim adventurer. Built with a highly premium, "military command console" aesthetic (bone, ink, and signal colors), it seamlessly bridges the gap between tactical outdoor coordination (offroading, hiking, convoys) and daily spiritual discipline (Tazkiyah).
 
-## ⚙️ Environment Variables
+![Platform Preview](https://raw.githubusercontent.com/Zuhaib-dev/Friend-circle/main/public/manifest-icon-512.png) 
+*(Note: Replace the image URL above with a GIF of your actual app in action!)*
 
-To run this project locally, create a `.env.local` file in the root directory and add the following variables:
+---
 
+## ✨ Core Modules & Features
+
+### ⚔️ Tactical & Live-Ops
+- **Admin Command Console:** A heavily stylized dashboard for live-ops tracking, operator verification, and telemetry.
+- **Analytics Dashboard:** Integrated with `recharts` to provide actionable, visual insights on financial health, tours, and engagement.
+- **Convoy & Loadout System:** Dynamic payload calculation, gear packing lists, and real-time mock telemetry for tracking off-road convoys.
+- **Progressive Web App (PWA):** Fully installable on iOS and Android devices with offline-mode capabilities using Service Workers and IndexedDB.
+
+### 🕌 Tazkiyah (Spiritual Discipline)
+- **Live AR Qibla Finder:** A custom-built, device-hardware powered Augmented Reality HUD that uses geodesic math and phone magnetometers to point operators precisely to Makkah.
+- **Advanced Quran Reader:** Features beautiful Arabic typography and immersive reading views.
+- **Daily Companions:** Interactive Asma-ul-Husna (99 Names of Allah), Daily Hadith, and digital Tasbih.
+- **Prayer Times:** Live integration with the Aladhan API to track prayer times globally.
+
+---
+
+## 🏗 System Architecture
+
+Friend Circle is built on a modern **MERN stack** adapted for the serverless era:
+
+- **Frontend & Routing:** React 19 and Next.js (App Router) for hybrid Server-Side Rendering (SSR) and Client-Side rendering.
+- **State & Animations:** Heavy utilization of `framer-motion` for complex micro-animations and layout transitions, creating a fluid, app-like feel.
+- **Database Layer:** MongoDB with Mongoose ODMs, featuring optimized schema designs for Trip Memories, Operator Profiles, and Ledger finances.
+- **Authentication:** Highly secure `NextAuth.js` implementation supporting Credentials (OTP) and OAuth providers.
+- **Media Optimization:** `ImageKit.io` integration combined with on-device browser image compression to handle high-res expedition photos efficiently.
+- **Edge Deployment:** Configured with `netlify.toml` for seamless edge deployment and caching on Netlify.
+
+---
+
+## ⚙️ Local Setup & Installation
+
+**1. Clone the repository:**
+```bash
+git clone https://github.com/Zuhaib-dev/Friend-circle.git
+cd Friend-circle
+```
+
+**2. Install dependencies:**
+```bash
+npm install
+```
+
+**3. Configure Environment Variables:**
+Create a `.env.local` file in the root directory:
 ```env
-# MongoDB Connection String
-MONGODB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/your-db?retryWrites=true&w=majority
+# Database
+MONGODB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/friend-circle
 
-# NextAuth Configuration
+# Authentication
 NEXTAUTH_SECRET=your_super_secret_string
 NEXTAUTH_URL=http://localhost:3000
 
-# Google OAuth Configuration
-GOOGLE_CLIENT_ID=your_google_client_id
-GOOGLE_CLIENT_SECRET=your_google_client_secret
-
-# ImageKit Configuration
+# Media Handling
 NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT=https://ik.imagekit.io/your_id
 NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY=your_public_key
 IMAGEKIT_PRIVATE_KEY=your_private_key
 ```
 
-## 🚀 Local Setup
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/Zuhaib-dev/Friend-circle.git
-   cd Friend-circle
-   ```
-
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
-
-3. **Run the development server:**
-   ```bash
-   npm run dev
-   ```
-
-4. **Open your browser:**
-   Navigate to [http://localhost:3000](http://localhost:3000) to see the application in action.
-
-## 🚢 Deployment
-
-This project is optimized for deployment on modern edge platforms like **Netlify** or **Vercel**. 
-
-- If deploying to Netlify, ensure your `middleware.ts` is correctly configured at the root of the `src` directory, and that `NEXTAUTH_URL` is set to your production domain (e.g., `https://your-domain.netlify.app`).
-- Set all the environment variables in your hosting provider's dashboard.
-
-## 🛡 Admin / Team Flow
-
-1. **User Registration:** Users sign up using OTP verification.
-2. **Enlistment:** Users navigate to `/apply-team` to submit their Operator application (Photo, Bio, Phone, Social Handle).
-3. **Verification:** An Admin logs into the Command Console (`/admin`), navigates to **OPERATORS**, reviews the expanded dossiers, and clicks **GRANT CLEARANCE**.
-4. **Access:** Approved team members gain access to exclusive `/team` dossier intel and capabilities.
+**4. Engage Systems:**
+```bash
+npm run dev
+```
+Navigate to `http://localhost:3000` to access the command console.
 
 ---
-*Built with precision and purpose.*
+
+## 👨‍💻 Author & Architect
+
+**Zuhaib**  
+*Full-Stack Engineer & UI/UX Designer*
+
+I build high-performance, aesthetically striking web applications. Friend Circle is a testament to blending complex system architecture with premium, immersive design.
+
+- 🌐 **Portfolio:** [zuhaib.dev](https://zuhaib.dev) *(Update this link)*
+- 🐙 **GitHub:** [@Zuhaib-dev](https://github.com/Zuhaib-dev)
+- 💼 **LinkedIn:** [linkedin.com/in/zuhaib](https://linkedin.com/in/zuhaib) *(Update this link)*
+- 𝕏 **Twitter/X:** [@zuhaib_dev](https://twitter.com/zuhaib_dev) *(Update this link)*
+
+---
+<div align="center">
+  <i>Built with precision and purpose. No ridge is bigger than Fajr.</i>
+</div>
