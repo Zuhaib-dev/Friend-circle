@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=16a34a&height=200&section=header&text=Friend%20Circle&fontSize=80&fontColor=ffffff&animation=fadeIn" alt="Friend Circle Banner" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=16a34a&height=250&section=header&text=Friend%20Circle&fontSize=90&fontColor=ffffff&animation=fadeIn&desc=No%20Ridge%20Is%20Bigger%20Than%20Fajr&descAlign=Ypos&descAlignY=70&descSize=20" alt="Friend Circle Banner" />
 
   **A Next-Generation Tactical Adventure & Islamic Lifestyle Platform**
 
@@ -8,45 +8,73 @@
   [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
   [![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white)](https://framer.com/motion/)
   [![Progressive Web App](https://img.shields.io/badge/PWA-Ready-5a0fc8?style=for-the-badge&logo=pwa&logoColor=white)]()
+  
+  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+  [![Status](https://img.shields.io/badge/Status-Active_Deployment-success?style=for-the-badge&logo=vercel)]()
 </div>
 
 <br />
 
-## 📖 Overview
+## 📖 System Overview
 
-**Friend Circle** is a high-performance web application engineered for the modern Muslim adventurer. Built with a highly premium, "military command console" aesthetic (bone, ink, and signal colors), it seamlessly bridges the gap between tactical outdoor coordination (offroading, hiking, convoys) and daily spiritual discipline (Tazkiyah).
+**Friend Circle** is a high-performance, full-stack web application engineered for the modern Muslim adventurer. Built with a highly premium, "military command console" aesthetic (bone, ink, and signal colors), it seamlessly bridges the gap between tactical outdoor coordination (offroading, hiking, convoys) and daily spiritual discipline (Tazkiyah).
 
-![Platform Preview](https://raw.githubusercontent.com/Zuhaib-dev/Friend-circle/main/public/manifest-icon-512.png) 
-*(Note: Replace the image URL above with a GIF of your actual app in action!)*
+<div align="center">
+  <img src="https://raw.githubusercontent.com/Zuhaib-dev/Friend-circle/main/public/manifest-icon-512.png" width="400" alt="App Logo" />
+  <br/>
+  <i>(Note: Replace this image block with a high-quality GIF of your dashboard or mobile view in action!)</i>
+</div>
 
 ---
 
 ## ✨ Core Modules & Features
 
-### ⚔️ Tactical & Live-Ops
-- **Admin Command Console:** A heavily stylized dashboard for live-ops tracking, operator verification, and telemetry.
-- **Analytics Dashboard:** Integrated with `recharts` to provide actionable, visual insights on financial health, tours, and engagement.
+### ⚔️ Tactical & Live-Ops (Command Console)
+- **Admin Dashboard:** A heavily stylized, operator-style UI for live-ops tracking, user verification, and telemetry.
+- **Analytics & Telemetry:** Integrated with `recharts` to provide actionable, visual insights on financial health, tours, and engagement.
 - **Convoy & Loadout System:** Dynamic payload calculation, gear packing lists, and real-time mock telemetry for tracking off-road convoys.
 - **Progressive Web App (PWA):** Fully installable on iOS and Android devices with offline-mode capabilities using Service Workers and IndexedDB.
 
 ### 🕌 Tazkiyah (Spiritual Discipline)
-- **Live AR Qibla Finder:** A custom-built, device-hardware powered Augmented Reality HUD that uses geodesic math and phone magnetometers to point operators precisely to Makkah.
-- **Advanced Quran Reader:** Features beautiful Arabic typography and immersive reading views.
-- **Daily Companions:** Interactive Asma-ul-Husna (99 Names of Allah), Daily Hadith, and digital Tasbih.
-- **Prayer Times:** Live integration with the Aladhan API to track prayer times globally.
+- **Live AR Qibla Finder:** A custom-built, device-hardware powered Augmented Reality HUD. It uses geodesic math and phone magnetometers/gyroscopes to point operators precisely to Makkah in real-time.
+- **Advanced Quran Reader:** Features beautiful Arabic typography, clean layouts, and immersive reading views.
+- **Daily Companions:** Interactive Asma-ul-Husna (99 Names of Allah), Daily Hadith, and digital Tasbih with haptic-like animations.
+- **Live Prayer Times:** Live integration with the Aladhan API to track prayer times globally, complete with a tactical countdown to the next prayer.
+
+---
+
+## 🎨 The Aesthetic Philosophy
+
+Friend Circle isn't just an app; it's an experience. The UI/UX is deeply inspired by military HUDs, terminal interfaces, and high-end tactical gear. 
+- **Typography:** Monospace fonts for data readouts paired with elegant serifs for Arabic text.
+- **Color Palette:** High contrast "Ink" (deep black), "Bone" (off-white), and "Signal" (tactical green/orange).
+- **Micro-interactions:** Extensive use of `framer-motion` for spring-physics animations, blurred backdrops (glassmorphism), and CRT-style scanline overlays.
+
+<div align="center">
+  <img src="https://via.placeholder.com/800x400/101010/16a34a?text=AR+Qibla+HUD+Demo+GIF+Goes+Here" alt="Qibla GIF" />
+</div>
 
 ---
 
 ## 🏗 System Architecture
 
-Friend Circle is built on a modern **MERN stack** adapted for the serverless era:
+Friend Circle is built on a modern **MERN stack** adapted for the serverless edge:
 
 - **Frontend & Routing:** React 19 and Next.js (App Router) for hybrid Server-Side Rendering (SSR) and Client-Side rendering.
-- **State & Animations:** Heavy utilization of `framer-motion` for complex micro-animations and layout transitions, creating a fluid, app-like feel.
+- **State & Animations:** Heavy utilization of `framer-motion` for complex micro-animations and layout transitions.
 - **Database Layer:** MongoDB with Mongoose ODMs, featuring optimized schema designs for Trip Memories, Operator Profiles, and Ledger finances.
 - **Authentication:** Highly secure `NextAuth.js` implementation supporting Credentials (OTP) and OAuth providers.
 - **Media Optimization:** `ImageKit.io` integration combined with on-device browser image compression to handle high-res expedition photos efficiently.
 - **Edge Deployment:** Configured with `netlify.toml` for seamless edge deployment and caching on Netlify.
+
+---
+
+## 🚀 Future Roadmap
+
+- [ ] **Real-Time GPS Tracking:** WebSocket integration for live convoy tracking on a tactical map.
+- [ ] **Offline Maps Integration:** Mapbox GL integration with downloadable regions for deep-wilderness operations.
+- [ ] **Enhanced Admin Roles:** Granular permissions for "Commanders", "Medics", and "Operators".
+- [ ] **Push Notifications:** Web Push API integration for prayer time alerts and convoy distress signals.
 
 ---
 
