@@ -34,14 +34,17 @@ export function LogModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink/80 backdrop-blur-sm overflow-y-auto">
+      {/* Click outside to close */}
+      <div className="absolute inset-0" onClick={onClose} />
+      
       <motion.div 
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
-        className="bg-bone hairline border-ink w-full max-w-md p-6 relative crosshair my-8"
+        className="bg-bone hairline border-ink w-full max-w-md p-6 relative crosshair my-8 z-10"
       >
         <Crosshairs />
-        <button onClick={onClose} className="absolute top-4 right-4 mono-label hover:text-signal p-2 flex items-center gap-1"><X className="h-4 w-4" /> CLOSE</button>
+        <button type="button" onClick={onClose} className="absolute top-4 right-4 z-50 mono-label hover:text-signal p-2 flex items-center gap-1 cursor-pointer"><X className="h-4 w-4" /> CLOSE</button>
         
         <div className="mono-label opacity-60 mb-2">LOG / NEW · TRANSACTION INTAKE</div>
         

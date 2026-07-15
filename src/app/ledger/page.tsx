@@ -154,16 +154,17 @@ export default function LedgerPage() {
         onSettleDebt={settleDebt}
       />
       
-      {logOpen && (
-        <AnimatePresence>
+      <AnimatePresence>
+        {logOpen && (
           <LogModal 
+            key="log-modal"
             squad={squad}
             me={ME}
             onClose={() => setLogOpen(false)} 
             onSave={handleLogExpense} 
           />
-        </AnimatePresence>
-      )}
+        )}
+      </AnimatePresence>
     </main>
   );
 }
