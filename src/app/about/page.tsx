@@ -155,6 +155,49 @@ export default function AboutPage() {
             ))}
           </div>
         </div>
+        {/* Founder Section */}
+        <ScrollReveal>
+          <div className="mb-24">
+            <div className="mono-label tracking-[0.25em] uppercase text-signal mb-8 flex items-center gap-2">
+              <Asterisk className="h-3 w-3 animate-spin-slow" /> The Architect
+            </div>
+            
+            <div className="hairline border-ink bg-bone flex flex-col md:flex-row group hover:shadow-[8px_8px_0_0_oklch(0.13_0.01_60)] transition-all duration-500 hover:-translate-y-1 hover:-translate-x-1 overflow-hidden">
+              <div className="md:w-1/3 relative h-64 md:h-auto border-b md:border-b-0 md:border-r border-ink bg-ink overflow-hidden">
+                <img 
+                  src="https://github.com/Zuhaib-dev.png" 
+                  alt="Zuhaib Rashid" 
+                  className="absolute inset-0 w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 ease-out group-hover:scale-105"
+                />
+                <div className="absolute top-0 left-0 right-0 p-4 flex justify-between items-start text-bone mix-blend-difference z-10">
+                  <div className="mono-label text-[10px] tracking-[0.2em]">ID: 001</div>
+                </div>
+              </div>
+              
+              <div className="md:w-2/3 p-8 sm:p-12 flex flex-col justify-center relative">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-signal/5 rounded-full blur-3xl group-hover:bg-signal/10 transition-colors duration-700" />
+                
+                <h3 className="font-display text-4xl sm:text-5xl uppercase font-black tracking-tight leading-none mb-2">Zuhaib Rashid</h3>
+                <div className="mono-label text-xs tracking-widest px-2 py-1 bg-acid/20 border border-ink/10 inline-block w-fit mb-6 text-signal">
+                  FOUNDER / ENGINEER / ADVENTURER
+                </div>
+                
+                <p className="font-serif text-xl leading-relaxed text-ink/80 mb-8 max-w-xl relative z-10">
+                  The original architect of the Friend Circle. Blending the precision of software engineering with the chaotic beauty of offroad expeditions. Building digital systems by day, chasing the next mountain pass by night.
+                </p>
+                
+                <div className="flex flex-wrap gap-4 mt-auto relative z-10">
+                  <a href="https://zuhaibrashid.com" target="_blank" rel="noopener noreferrer" className="group/link inline-flex items-center gap-3 pl-4 pr-2 py-1.5 mono-label tracking-[0.2em] uppercase text-ink border border-ink/30 hover:border-ink transition-colors bg-bone">
+                    <span className="text-[10px]">Portfolio / Commits</span>
+                    <span className="grid h-6 w-6 place-items-center bg-acid/20 text-ink group-hover/link:bg-signal group-hover/link:text-bone transition-colors">
+                      <ArrowRight className="h-3 w-3 transition-transform group-hover/link:translate-x-0.5" />
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ScrollReveal>
         
         {/* Call to Action */}
         <ScrollReveal>
