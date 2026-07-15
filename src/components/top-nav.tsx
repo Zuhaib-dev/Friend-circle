@@ -188,36 +188,40 @@ export function TopNav() {
                         <span className="text-signal">ACTIVE · SESSION</span>
                       </span>
                     </div>
+                    {/* Primary Engagement */}
                     <MenuItem icon={UserIcon} label="PROFILE" code="01" onClick={() => { setOpen(false); navigate.push('/profile'); }} />
-                    <MenuItem icon={Info} label="ABOUT" code="01A" onClick={() => { setOpen(false); navigate.push('/about'); }} />
-                    <MenuItem icon={Settings} label="SECURITY" code="01B" onClick={() => { setOpen(false); navigate.push('/settings'); }} />
                     <MenuItem icon={Compass} label="ROUTES" code="02" onClick={() => { setOpen(false); navigate.push('/tours'); }} />
                     <MenuItem icon={ImageIcon} label="GALLERY" code="03" onClick={() => { setOpen(false); navigate.push('/gallery'); }} />
-                    <MenuItem icon={VideoIcon} label="FEEDS" code="04" onClick={() => { setOpen(false); navigate.push('/surveillance'); }} />
-                    <MenuItem icon={Database} label="MEMORY" code="05" onClick={() => { setOpen(false); navigate.push('/memory'); }} />
+                    <MenuItem icon={Database} label="MEMORY" code="04" onClick={() => { setOpen(false); navigate.push('/memory'); }} />
+                    <MenuItem icon={VideoIcon} label="FEEDS" code="05" onClick={() => { setOpen(false); navigate.push('/surveillance'); }} />
+                    
+                    {/* Operations */}
                     <MenuItem icon={Crosshair} label="LIVE-OPS" code="06" onClick={() => { setOpen(false); navigate.push('/live-ops'); }} />
                     
                     {(user.role === "TEAM_MEMBER" || user.role === "ADMIN") && (
                       <>
-                        <MenuItem icon={Package} label="LOADOUT" code="06" onClick={() => { setOpen(false); navigate.push('/loadout'); }} />
-                        <MenuItem icon={Radar} label="CONVOY" code="07" onClick={() => { setOpen(false); navigate.push('/convoy'); }} />
-                        <MenuItem icon={UserIcon} label="LEDGER" code="08" onClick={() => { setOpen(false); navigate.push('/ledger'); }} />
+                        <MenuItem icon={Package} label="LOADOUT" code="07A" onClick={() => { setOpen(false); navigate.push('/loadout'); }} />
+                        <MenuItem icon={Radar} label="CONVOY" code="07B" onClick={() => { setOpen(false); navigate.push('/convoy'); }} />
+                        <MenuItem icon={UserIcon} label="LEDGER" code="07C" onClick={() => { setOpen(false); navigate.push('/ledger'); }} />
+                        <MenuItem icon={Radar} label="TEAM" code="07D" onClick={() => { setOpen(false); navigate.push('/team'); }} />
                       </>
                     )}
+                    
                     {(!user.role || user.role === "USER") && (
-                      <MenuItem icon={ShieldCheck} label="BECOME TEAM MEMBER" code="05" onClick={() => { setOpen(false); navigate.push('/apply-team'); }} />
-                    )}
-
-                    {(user.role === "TEAM_MEMBER" || user.role === "ADMIN") && (
-                      <MenuItem icon={Radar} label="TEAM" code="06" onClick={() => { setOpen(false); navigate.push('/team'); }} />
+                      <MenuItem icon={ShieldCheck} label="BECOME TEAM MEMBER" code="07" onClick={() => { setOpen(false); navigate.push('/apply-team'); }} />
                     )}
 
                     {user.role === "ADMIN" && (
-                      <MenuItem icon={Terminal} label="ADMIN COMMAND" code="07" onClick={() => { setOpen(false); navigate.push('/admin'); }} />
+                      <MenuItem icon={Terminal} label="ADMIN COMMAND" code="08" onClick={() => { setOpen(false); navigate.push('/admin'); }} />
                     )}
                     
-                    <MenuItem icon={BookOpen} label="TAZKIYAH" code="08" onClick={() => { setOpen(false); navigate.push('/tazkiyah'); }} />
-                    <MenuItem icon={Settings} label="SETTINGS" code="09" onClick={() => { setOpen(false); }} />
+                    {/* Culture & Info */}
+                    <MenuItem icon={BookOpen} label="TAZKIYAH" code="09" onClick={() => { setOpen(false); navigate.push('/tazkiyah'); }} />
+                    <MenuItem icon={Info} label="ABOUT" code="10" onClick={() => { setOpen(false); navigate.push('/about'); }} />
+                    
+                    {/* Settings & Security */}
+                    <MenuItem icon={Settings} label="SECURITY" code="11" onClick={() => { setOpen(false); navigate.push('/settings'); }} />
+                    <MenuItem icon={Settings} label="SETTINGS" code="12" onClick={() => { setOpen(false); }} />
                     <button
                       onClick={handleLogout}
                       className="w-full flex items-center justify-between gap-3 px-3 py-2.5 hairline-t border-ink/40 mono-label text-signal hover:bg-signal hover:text-bone transition-colors group"
