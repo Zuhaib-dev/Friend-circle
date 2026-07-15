@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "@/components/AuthProvider";
 import { SessionTracker } from "@/components/SessionTracker";
+import NextTopLoader from 'nextjs-toploader';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -101,6 +102,18 @@ export default function RootLayout({
           })
         }} />
         <AuthProvider>
+          <NextTopLoader 
+            color="#E53E1F"
+            initialPosition={0.08}
+            crawlSpeed={200}
+            height={3}
+            crawl={true}
+            showSpinner={false}
+            easing="ease"
+            speed={200}
+            shadow="0 0 10px #E53E1F,0 0 5px #E53E1F"
+            zIndex={1600}
+          />
           <SessionTracker />
           {children}
         </AuthProvider>
