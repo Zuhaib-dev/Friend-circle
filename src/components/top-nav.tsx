@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { LogIn, LogOut, User as UserIcon, Settings, ChevronDown, CircleDot, Menu, X, ShieldCheck, Image as ImageIcon, Radar, Terminal, Video as VideoIcon, Compass, Crosshair, Package, BookOpen, Database, Info } from "lucide-react";
+import { LogIn, LogOut, User as UserIcon, Settings, ChevronDown, CircleDot, Menu, X, ShieldCheck, Image as ImageIcon, Radar, Terminal, Video as VideoIcon, Compass, Crosshair, Package, BookOpen, Database, Info, MessageSquare } from "lucide-react";
 import { useSession, signOut as doSignOut } from "next-auth/react";
 import { initialsOf } from "../lib/utils";
 import { QiblaDialog } from "@/components/QiblaDialog";
@@ -109,6 +109,7 @@ export function TopNav() {
       ]
     : [
         { href: "/about", label: "ABOUT" },
+        { href: "/testimonials", label: "VOICES" },
         { href: "/crew", label: "CREW" },
         { href: "/tours", label: "ROUTES" },
         { href: "/gallery", label: "FRAMES" },
@@ -218,6 +219,7 @@ export function TopNav() {
                     {/* Culture & Info */}
                     <MenuItem icon={BookOpen} label="TAZKIYAH" code="09" onClick={() => { setOpen(false); navigate.push('/tazkiyah'); }} />
                     <MenuItem icon={Info} label="ABOUT" code="10" onClick={() => { setOpen(false); navigate.push('/about'); }} />
+                    <MenuItem icon={MessageSquare} label="VOICES" code="10B" onClick={() => { setOpen(false); navigate.push('/testimonials'); }} />
                     
                     {/* Settings & Security */}
                     <MenuItem icon={Settings} label="SECURITY" code="11" onClick={() => { setOpen(false); navigate.push('/settings'); }} />
