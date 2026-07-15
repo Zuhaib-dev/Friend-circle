@@ -108,9 +108,6 @@ export function TopNav() {
         { href: "/tazkiyah#hadith", label: "HADITH" },
       ]
     : [
-        { href: "/about", label: "ABOUT" },
-        { href: "/testimonials", label: "VOICES" },
-        { href: "/crew", label: "CREW" },
         { href: "/tours", label: "ROUTES" },
         { href: "/gallery", label: "FRAMES" },
         { href: "/surveillance", label: "FEEDS" },
@@ -118,6 +115,9 @@ export function TopNav() {
         ...((user?.role === "ADMIN" || user?.role === "TEAM_MEMBER") 
           ? [{ href: "/loadout", label: "LOADOUT" }] 
           : []),
+        { href: "/crew", label: "CREW" },
+        { href: "/about", label: "ABOUT" },
+        { href: "/testimonials", label: "VOICES" },
         { href: "/tazkiyah", label: "TAZKIYAH" },
       ];
 
