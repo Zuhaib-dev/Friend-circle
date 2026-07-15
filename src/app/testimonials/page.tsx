@@ -9,37 +9,37 @@ export default function TestimonialsPage() {
       name: "Aqib",
       role: "The Motorhead · RECON / LEAD",
       quote: "The bike is just an excuse. The real route is the people.",
-      img: "/adv-bike.jpg"
+      img: "https://friendcirclee.netlify.app/archive/archive-073.jpg"
     },
     {
       name: "Sahil",
       role: "The Chef · WAZWAN / SUPPLY",
       quote: "Rogan josh holding temperature. If the food is cold, the trip never happened.",
-      img: "/adv-camp.jpg"
+      img: "https://friendcirclee.netlify.app/archive/archive-081.jpg"
     },
     {
       name: "Furqan",
       role: "The Comedian · MORALE / OPS",
       quote: "We don't have a Wi-Fi password. If you're here, you're already in.",
-      img: "/adv-offroad.jpg"
+      img: "https://ik.imagekit.io/xuhaib/file_00000000182c720787473fb70bcc1874_YllZmbcTY.png"
     },
     {
       name: "Sameem",
       role: "The Archivist · OPTICS / DOC",
       quote: "Every photo I took, somebody was laughing. That's the whole archive.",
-      img: "/adv-srinagar.jpg"
+      img: "https://friendcirclee.netlify.app/archive/archive-183.webp"
     },
     {
       name: "Naveed",
       role: "The Navigator · ROUTE / MAP",
       quote: "I know shortcuts that aren't on Google. Trust the process, trust the ridge.",
-      img: "/adv-forest.jpg"
+      img: "https://friendcirclee.netlify.app/archive/archive-165.webp"
     },
     {
       name: "Farhan",
       role: "The Angler · RIVERCRAFT",
       quote: "Three trout. The river is generous today. Patience is the only gear you need.",
-      img: "/adv-fishing.jpg"
+      img: "https://friendcirclee.netlify.app/archive/archive-186.jpg"
     }
   ];
 
@@ -97,7 +97,7 @@ function TestimonialCard({ data, index }: { data: any, index: number }) {
         <div className="flex items-center gap-4 hairline-t border-ink/20 pt-6 mt-auto">
           <div className="h-12 w-12 shrink-0 rounded-full hairline border-ink overflow-hidden bg-acid/20 flex items-center justify-center">
             {data.img ? (
-              <Image src={data.img} alt={data.name} width={48} height={48} className="object-cover w-full h-full grayscale group-hover:grayscale-0 transition-all" />
+              <img src={data.img} alt={data.name} className="object-cover w-full h-full grayscale group-hover:grayscale-0 transition-all" />
             ) : (
               <span className="font-display text-xl">{data.name.charAt(0)}</span>
             )}
