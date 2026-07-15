@@ -160,7 +160,7 @@ export default function AboutPage() {
         <ScrollReveal>
           <div className="hairline border-ink bg-bone relative overflow-hidden group">
             {/* Background interactive gradient */}
-            <div className="absolute inset-0 bg-gradient-to-br from-signal/0 to-signal/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+            <div className="absolute inset-0 bg-linear-to-br from-signal/0 to-signal/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
             
             <div className="p-8 sm:p-12 text-center relative z-10">
               <motion.h2 
