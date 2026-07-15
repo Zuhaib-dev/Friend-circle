@@ -68,7 +68,7 @@ export default function TestimonialsPage() {
 
   // Stagger for the title words
   const titleWords = ["The", "Voices", "Of", "The", "Field."];
-  const titleVariants = {
+  const titleVariants: any = {
     hidden: { opacity: 0, y: 50, rotateX: 45 },
     visible: (i: number) => ({
       opacity: 1,
