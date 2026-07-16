@@ -43,9 +43,9 @@ export function Header({
           </div>
           <button
             onClick={onLog}
-            className="hidden sm:inline-flex brick text-bone px-4 py-2.5 mono-label hairline border-ink items-center gap-2 hover:bg-signal transition-colors"
+            className="inline-flex brick text-bone px-3 sm:px-4 py-2 sm:py-2.5 mono-label hairline border-ink items-center gap-2 hover:bg-signal transition-colors"
           >
-            <Plus className="h-3.5 w-3.5" /> LOG EXPENSE
+            <Plus className="h-3.5 w-3.5" /> <span className="hidden sm:inline">LOG EXPENSE</span><span className="sm:hidden">LOG</span>
           </button>
         </div>
       </div>
