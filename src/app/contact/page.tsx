@@ -87,7 +87,7 @@ function ContactForm() {
 
       <div className="p-6 sm:p-8 grid sm:grid-cols-2 gap-5">
         <Field label="Operator name" placeholder="Zuhaib Rashid" value={formData.name} onChange={(v) => setFormData({...formData, name: v})} required />
-        <Field label="Email" type="email" placeholder="yusuf@example.com" value={formData.email} onChange={(v) => setFormData({...formData, email: v})} required />
+        <Field label="Email" type="email" placeholder="zuhaibrashid01@gmail.com" value={formData.email} onChange={(v) => setFormData({...formData, email: v})} required />
         <Field label="Dispatch ID (opt.)" placeholder="FC-00481" value={formData.dispatchId} onChange={(v) => setFormData({...formData, dispatchId: v})} />
         <div className="sm:col-span-2">
           <Field label="Subject" placeholder="Late dispatch · Boulevard run" value={formData.subject} onChange={(v) => setFormData({...formData, subject: v})} required />
