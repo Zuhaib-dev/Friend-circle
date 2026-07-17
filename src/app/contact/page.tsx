@@ -164,7 +164,7 @@ function FieldOfficeCard() {
 
           <div className="hairline-t border-ink/40 pt-5 space-y-4">
             <Line icon={MapPin}>Friend Circle Basecamp<br />Srinagar 190001<br />Jammu & Kashmir</Line>
-            <Line icon={Phone}>+91 194 555 0142</Line>
+            <Line icon={Phone}>+91 6006414088</Line>
             <Line icon={Mail}>hello@friendcircle.in</Line>
             <Line icon={Clock}>We ride often. Responses may take time.</Line>
           </div>
