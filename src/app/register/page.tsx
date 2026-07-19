@@ -14,6 +14,7 @@ export default function RegisterPage() {
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
   const [loading, setLoading] = useState<"google" | "email" | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const onGoogle = async () => {
     setLoading("google");
@@ -25,10 +26,28 @@ export default function RegisterPage() {
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
     setLoading("email");
-    await new Promise((r) => setTimeout(r, 1100));
-    setLoading(null);
-    router.push(`/verify-otp?email=${email}&name=${name}`);
+    try {
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, password: pwd }),
+      });
+      const data = await res.json();
+      
+      if (!res.ok) {
+        setError(data.error || "Registration failed");
+        setLoading(null);
+        return;
+      }
+      
+      setLoading(null);
+      router.push(`/verify-otp?email=${encodeURIComponent(email)}&name=${encodeURIComponent(name)}`);
+    } catch (err) {
+      setError("Network error. Please try again.");
+      setLoading(null);
+    }
   };
 
   return (
@@ -115,6 +134,16 @@ export default function RegisterPage() {
             </div>
             <div className="mono-label opacity-50 mt-1">USE 8+ CHARS · MIX SIGNAL & NOISE</div>
           </FieldRow>
+
+          {error && (
+            <motion.div
+              initial={{ opacity: 0, y: -4 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="hairline border-signal bg-signal/10 px-3 py-2 mono-label text-signal"
+            >
+              ⚠ {error}
+            </motion.div>
+          )}
 
           <motion.button
             whileTap={{ scale: 0.99 }}

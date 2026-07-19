@@ -70,20 +70,48 @@ function VerifyOtpContent() {
     if (!complete) return;
     setError(null);
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 1200));
-    setLoading(false);
-    if (code === "000000") {
-      setError("INVALID PACKET · TRY AGAIN");
-      return;
+    try {
+      const res = await fetch("/api/auth/verify-otp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, otp: code }),
+      });
+      const data = await res.json();
+      
+      if (!res.ok) {
+        setError(data.error || "INVALID PACKET · TRY AGAIN");
+        setLoading(false);
+        return;
+      }
+      
+      setLoading(false);
+      router.push("/login");
+    } catch (err) {
+      setError("Network error. Please try again.");
+      setLoading(false);
     }
-    router.push("/login");
   };
 
-  const onResend = () => {
+  const onResend = async () => {
     if (cooldown > 0) return;
-    setCooldown(30);
-    setDigits(Array(6).fill(""));
-    refs.current[0]?.focus();
+    setError(null);
+    try {
+      const res = await fetch("/api/auth/resend-otp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setError(data.error || "Failed to resend code");
+        return;
+      }
+      setCooldown(30);
+      setDigits(Array(6).fill(""));
+      refs.current[0]?.focus();
+    } catch (err) {
+      setError("Network error. Please try again.");
+    }
   };
 
   return (
