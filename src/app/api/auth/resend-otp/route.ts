@@ -4,17 +4,20 @@ import User from '@/models/User';
 import { sendOTPVerificationEmail } from '@/lib/mailer';
 import otpGenerator from 'otp-generator';
 
+export const runtime = 'nodejs';
+
 export async function POST(req: Request) {
   try {
     const { email } = await req.json();
+    const normalizedEmail = typeof email === 'string' ? email.trim().toLowerCase() : '';
 
-    if (!email) {
+    if (!normalizedEmail) {
       return NextResponse.json({ error: 'Please provide email' }, { status: 400 });
     }
 
     await connectToDatabase();
 
-    const user = await User.findOne({ email, authProvider: 'credentials' });
+    const user = await User.findOne({ email: normalizedEmail, authProvider: 'credentials' });
 
     if (!user) {
       return NextResponse.json({ error: 'User not found' }, { status: 404 });
@@ -31,7 +34,7 @@ export async function POST(req: Request) {
     user.otpExpires = otpExpires;
     await user.save();
 
-    const emailResponse = await sendOTPVerificationEmail(email, otp);
+    const emailResponse = await sendOTPVerificationEmail(normalizedEmail, otp);
 
     if (!emailResponse.success) {
       return NextResponse.json({ error: 'Failed to send verification email' }, { status: 500 });

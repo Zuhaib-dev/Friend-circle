@@ -2,17 +2,21 @@ import { NextResponse } from 'next/server';
 import connectToDatabase from '@/lib/mongodb';
 import User from '@/models/User';
 
+export const runtime = 'nodejs';
+
 export async function POST(req: Request) {
   try {
     const { email, otp } = await req.json();
+    const normalizedEmail = typeof email === 'string' ? email.trim().toLowerCase() : '';
+    const normalizedOtp = typeof otp === 'string' ? otp.trim() : '';
 
-    if (!email || !otp) {
+    if (!normalizedEmail || !normalizedOtp) {
       return NextResponse.json({ error: 'Please provide email and OTP' }, { status: 400 });
     }
 
     await connectToDatabase();
 
-    const user = await User.findOne({ email, authProvider: 'credentials' });
+    const user = await User.findOne({ email: normalizedEmail, authProvider: 'credentials' });
 
     if (!user) {
       return NextResponse.json({ error: 'User not found' }, { status: 404 });
@@ -22,7 +26,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'User is already verified' }, { status: 400 });
     }
 
-    if (user.otp !== otp) {
+    if (user.otp !== normalizedOtp) {
       return NextResponse.json({ error: 'Invalid OTP' }, { status: 400 });
     }
 

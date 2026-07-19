@@ -153,6 +153,14 @@ MONGODB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/friend-circl
 NEXTAUTH_SECRET=your_super_secret_string
 NEXTAUTH_URL=http://localhost:3000
 
+# Email / OTP delivery
+# For Gmail, use a Google App Password, not your normal Gmail password.
+EMAIL_USER=your_email@gmail.com
+EMAIL_PASS=your_16_character_app_password
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=465
+SMTP_SECURE=true
+
 # Media Handling
 NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT=https://ik.imagekit.io/your_id
 NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY=your_public_key
@@ -183,4 +191,3 @@ I build high-performance, aesthetically striking web applications. Friend Circle
 <div align="center">
   <i>Built with precision and purpose. No ridge is bigger than Fajr.</i>
 </div>
- 

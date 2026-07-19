@@ -1,18 +1,41 @@
 import nodemailer from 'nodemailer';
 
+const getMailerConfig = () => {
+  const user = process.env.EMAIL_USER?.trim();
+  const pass = process.env.EMAIL_PASS?.replace(/\s+/g, '');
+  const host = process.env.SMTP_HOST?.trim() || 'smtp.gmail.com';
+  const port = Number(process.env.SMTP_PORT || 465);
+  const secure = process.env.SMTP_SECURE
+    ? process.env.SMTP_SECURE === 'true'
+    : port === 465;
+
+  if (!user || !pass) {
+    throw new Error('Missing EMAIL_USER or EMAIL_PASS environment variable');
+  }
+
+  return { user, pass, host, port, secure };
+};
+
 export const sendOTPVerificationEmail = async (email: string, otp: string) => {
+  const to = email.trim().toLowerCase();
   console.log('[MAILER] Starting OTP email send...');
-  console.log('[MAILER] EMAIL_USER present:', !!process.env.EMAIL_USER);
-  console.log('[MAILER] EMAIL_PASS present:', !!process.env.EMAIL_PASS);
-  console.log('[MAILER] Sending to:', email);
+  console.log('[MAILER] Sending to:', to);
+
+  let config;
+  try {
+    config = getMailerConfig();
+  } catch (error) {
+    console.error('[MAILER] Configuration error:', error);
+    return { success: false, error };
+  }
 
   const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 587,
-    secure: false,
+    host: config.host,
+    port: config.port,
+    secure: config.secure,
     auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
+      user: config.user,
+      pass: config.pass,
     },
   });
 
@@ -26,9 +49,10 @@ export const sendOTPVerificationEmail = async (email: string, otp: string) => {
   }
 
   const mailOptions = {
-    from: `"Friend Circle" <${process.env.EMAIL_USER}>`,
-    to: email,
+    from: `"Friend Circle" <${config.user}>`,
+    to,
     subject: 'Friend Circle - Verify Your Email',
+    text: `Your Friend Circle verification OTP is ${otp}. This OTP is valid for 10 minutes.`,
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e2e8f0; border-radius: 10px; background-color: #0f172a; color: #f8fafc;">
         <h2 style="color: #38bdf8; text-align: center;">Welcome to Friend Circle!</h2>

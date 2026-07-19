@@ -5,16 +5,13 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
-import { Loader2, RefreshCw, ShieldCheck, ArrowRight } from "lucide-react";
+import { AlertCircle, Loader2, RefreshCw, ShieldCheck, ArrowRight } from "lucide-react";
 import { AuthShell, AuthPanel } from "@/components/auth-shell";
-
-type Search = { email?: string; name?: string };
 
 function VerifyOtpContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const email = searchParams.get("email") || "";
-  const name = searchParams.get("name") || "";
   const [digits, setDigits] = useState<string[]>(Array(6).fill(""));
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -32,6 +29,7 @@ function VerifyOtpContent() {
   }, [cooldown]);
 
   const setAt = (i: number, v: string) => {
+    if (error) setError(null);
     const clean = v.replace(/\D/g, "");
     if (!clean) {
       const next = [...digits];
@@ -79,14 +77,20 @@ function VerifyOtpContent() {
       const data = await res.json();
       
       if (!res.ok) {
-        setError(data.error || "INVALID PACKET · TRY AGAIN");
+        setError(
+          data.error === "Invalid OTP"
+            ? "Wrong OTP. Please enter the code again."
+            : data.error || "INVALID PACKET · TRY AGAIN"
+        );
+        setDigits(Array(6).fill(""));
+        refs.current[0]?.focus();
         setLoading(false);
         return;
       }
       
       setLoading(false);
       router.push("/login");
-    } catch (err) {
+    } catch {
       setError("Network error. Please try again.");
       setLoading(false);
     }
@@ -109,7 +113,7 @@ function VerifyOtpContent() {
       setCooldown(30);
       setDigits(Array(6).fill(""));
       refs.current[0]?.focus();
-    } catch (err) {
+    } catch {
       setError("Network error. Please try again.");
     }
   };
@@ -157,9 +161,21 @@ function VerifyOtpContent() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.04, duration: 0.25 }}
                   className="hairline bg-bone aspect-square text-center font-display text-3xl font-black text-ink focus:outline-none focus:bg-acid/30 focus:border-signal transition-colors caret-signal"
+                  aria-invalid={!!error}
                 />
               ))}
             </div>
+            {error && (
+              <motion.div
+                initial={{ opacity: 0, y: -4 }}
+                animate={{ opacity: 1, y: 0 }}
+                role="alert"
+                className="mt-3 flex items-center gap-2 text-sm font-semibold text-red-700"
+              >
+                <AlertCircle className="h-4 w-4 shrink-0" />
+                <span>{error}</span>
+              </motion.div>
+            )}
             <div className="flex items-center justify-between mt-2">
               <span className="mono-label opacity-50">
                 {complete ? "PACKET COMPLETE · READY" : `${code.length}/6 DIGITS`}
@@ -175,16 +191,6 @@ function VerifyOtpContent() {
               </button>
             </div>
           </div>
-
-          {error && (
-            <motion.div
-              initial={{ opacity: 0, y: -4 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="hairline border-signal bg-signal/10 px-3 py-2 mono-label text-signal"
-            >
-              ⚠ {error}
-            </motion.div>
-          )}
 
           <motion.button
             whileTap={{ scale: 0.99 }}

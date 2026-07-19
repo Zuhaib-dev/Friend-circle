@@ -5,12 +5,16 @@ import connectToDatabase from '@/lib/mongodb';
 import User from '@/models/User';
 import { sendOTPVerificationEmail } from '@/lib/mailer';
 
+export const runtime = 'nodejs';
+
 export async function POST(req: Request) {
   try {
     console.log("Registration started");
     const { name, email, password } = await req.json();
+    const normalizedName = typeof name === 'string' ? name.trim() : '';
+    const normalizedEmail = typeof email === 'string' ? email.trim().toLowerCase() : '';
 
-    if (!name || !email || !password) {
+    if (!normalizedName || !normalizedEmail || !password) {
       console.log("Missing fields");
       return NextResponse.json({ error: 'Please provide all fields' }, { status: 400 });
     }
@@ -19,7 +23,7 @@ export async function POST(req: Request) {
     await connectToDatabase();
     console.log("Connected to DB, checking existing user");
 
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ email: normalizedEmail });
     console.log("Existing user checked");
 
     if (existingUser) {
@@ -36,22 +40,19 @@ export async function POST(req: Request) {
     const otp = otpGenerator.generate(6, { upperCaseAlphabets: false, specialChars: false, lowerCaseAlphabets: false });
     const otpExpires = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
 
-    let user;
-
     if (existingUser && !existingUser.isVerified) {
       // Update unverified user
-      existingUser.name = name;
+      existingUser.name = normalizedName;
       existingUser.password = hashedPassword;
       existingUser.otp = otp;
       existingUser.otpExpires = otpExpires;
       await existingUser.save();
-      user = existingUser;
     } else {
       // Create new user
       console.log("Creating new user in DB");
-      user = await User.create({
-        name,
-        email,
+      await User.create({
+        name: normalizedName,
+        email: normalizedEmail,
         password: hashedPassword,
         isVerified: false,
         otp,
@@ -62,14 +63,14 @@ export async function POST(req: Request) {
     }
 
     console.log("Sending OTP verification email");
-    const emailResponse = await sendOTPVerificationEmail(email, otp);
+    const emailResponse = await sendOTPVerificationEmail(normalizedEmail, otp);
     console.log("Email response:", emailResponse);
 
     if (!emailResponse.success) {
       return NextResponse.json({ error: 'Failed to send verification email' }, { status: 500 });
     }
 
-    return NextResponse.json({ message: 'User registered. Please check your email for OTP.', email }, { status: 201 });
+    return NextResponse.json({ message: 'User registered. Please check your email for OTP.', email: normalizedEmail }, { status: 201 });
 
   } catch (error: any) {
     console.error('Registration Error:', error);
