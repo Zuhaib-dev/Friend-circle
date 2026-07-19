@@ -1,6 +1,11 @@
 import nodemailer from 'nodemailer';
 
 export const sendOTPVerificationEmail = async (email: string, otp: string) => {
+  console.log('[MAILER] Starting OTP email send...');
+  console.log('[MAILER] EMAIL_USER present:', !!process.env.EMAIL_USER);
+  console.log('[MAILER] EMAIL_PASS present:', !!process.env.EMAIL_PASS);
+  console.log('[MAILER] Sending to:', email);
+
   const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 587,
@@ -10,6 +15,16 @@ export const sendOTPVerificationEmail = async (email: string, otp: string) => {
       pass: process.env.EMAIL_PASS,
     },
   });
+
+  // Verify SMTP connection first
+  try {
+    await transporter.verify();
+    console.log('[MAILER] SMTP connection verified successfully');
+  } catch (verifyError) {
+    console.error('[MAILER] SMTP verification FAILED:', verifyError);
+    return { success: false, error: verifyError };
+  }
+
   const mailOptions = {
     from: `"Friend Circle" <${process.env.EMAIL_USER}>`,
     to: email,
@@ -30,10 +45,15 @@ export const sendOTPVerificationEmail = async (email: string, otp: string) => {
   };
 
   try {
-    await transporter.sendMail(mailOptions);
+    const info = await transporter.sendMail(mailOptions);
+    console.log('[MAILER] Email sent successfully!');
+    console.log('[MAILER] Message ID:', info.messageId);
+    console.log('[MAILER] Accepted:', info.accepted);
+    console.log('[MAILER] Rejected:', info.rejected);
+    console.log('[MAILER] Response:', info.response);
     return { success: true };
   } catch (error) {
-    console.error('Error sending OTP email:', error);
+    console.error('[MAILER] Error sending OTP email:', error);
     return { success: false, error };
   }
 };
