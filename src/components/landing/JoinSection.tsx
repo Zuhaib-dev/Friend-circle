@@ -21,7 +21,12 @@ export function JoinSection() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, message }),
+        body: JSON.stringify({ 
+          email, 
+          message,
+          name: "Anonymous Operative",
+          subject: "Signal from Join Section" 
+        }),
       });
 
       const data = await res.json();
