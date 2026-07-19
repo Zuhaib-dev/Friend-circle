@@ -1,8 +1,10 @@
 import { MetadataRoute } from "next";
+import connectToDatabase from "@/lib/mongodb";
+import TripMemory from "@/models/TripMemory";
 
 const BASE_URL = "https://friendcirclee.netlify.app";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
 
   const staticRoutes: MetadataRoute.Sitemap = [
@@ -110,5 +112,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  return staticRoutes;
+  let dynamicRoutes: MetadataRoute.Sitemap = [];
+
+  try {
+    await connectToDatabase();
+    const memories = await TripMemory.find({}, "_id updatedAt").lean();
+    
+    dynamicRoutes = memories.map((memory: any) => ({
+      url: `${BASE_URL}/memory/${memory._id}`,
+      lastModified: memory.updatedAt || now,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    }));
+  } catch (error) {
+    console.error("Failed to fetch memories for sitemap:", error);
+  }
+
+  return [...staticRoutes, ...dynamicRoutes];
 }
