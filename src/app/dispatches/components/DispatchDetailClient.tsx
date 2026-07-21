@@ -21,6 +21,7 @@ import {
   Lock,
   Loader2,
   AlertTriangle,
+  Mic,
 } from "lucide-react";
 import { TopNav } from "@/components/top-nav";
 import { FooterSection } from "@/components/landing/FooterSection";
@@ -106,6 +107,44 @@ export function DispatchDetailClient({
   const [commentError, setCommentError] = useState("");
   const [deletingCommentId, setDeletingCommentId] = useState<string | null>(null);
 
+  // TTS Voice Narrator State
+  const [isReadingAloud, setIsReadingAloud] = useState(false);
+  const [isPausedTTS, setIsPausedTTS] = useState(false);
+  const [availableVoices, setAvailableVoices] = useState<SpeechSynthesisVoice[]>([]);
+  const [selectedVoiceURI, setSelectedVoiceURI] = useState<string>("");
+
+  // Load available system voices on mount
+  useEffect(() => {
+    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+
+    const updateVoices = () => {
+      const voices = window.speechSynthesis.getVoices();
+      const enVoices = voices.filter((v) => v.lang.startsWith("en"));
+      setAvailableVoices(enVoices.length > 0 ? enVoices : voices);
+
+      // Pick best natural voice by default
+      const best =
+        enVoices.find(
+          (v) =>
+            v.name.includes("Online (Natural)") ||
+            v.name.includes("Natural") ||
+            v.name.includes("Google") ||
+            v.name.includes("Enhanced") ||
+            v.name.includes("Premium") ||
+            v.name.includes("Samantha") ||
+            v.name.includes("Alex") ||
+            v.name.includes("Daniel")
+        ) || enVoices[0];
+
+      if (best && !selectedVoiceURI) {
+        setSelectedVoiceURI(best.voiceURI);
+      }
+    };
+
+    updateVoices();
+    window.speechSynthesis.onvoiceschanged = updateVoices;
+  }, [selectedVoiceURI]);
+
   // Fetch reactions and user reaction choice on mount
   useEffect(() => {
     if (!dispatch?.slug) return;
@@ -133,21 +172,28 @@ export function DispatchDetailClient({
       .finally(() => setLoadingComments(false));
   }, [dispatch?.slug]);
 
-  // TTS Narrator State
-  const [isReadingAloud, setIsReadingAloud] = useState(false);
-  const [isPausedTTS, setIsPausedTTS] = useState(false);
-
-  // Clean Markdown into plain readable text for TTS narrator
-  const getReadableText = (markdown: string, title: string, summary: string) => {
+  // Clean and humanize Markdown for natural speech reading
+  const getHumanizedText = (markdown: string, title: string, summary: string) => {
     const cleanBody = (markdown || "")
-      .replace(/#{1,6}\s+/g, "") // remove headings
-      .replace(/\*{1,3}/g, "") // remove bold/italic asterisks
-      .replace(/`{1,3}[^`]*`{1,3}/g, "") // remove code blocks
+      .replace(/#{1,6}\s+/g, ". ") // headings to pauses
+      .replace(/\*{1,3}/g, "") // remove formatting symbols
+      .replace(/`{1,3}[^`]*`{1,3}/g, "") // remove code
       .replace(/\[([^\]]+)\]\([^\)]+\)/g, "$1") // remove links
-      .replace(/>\s+/g, "") // remove blockquotes
+      .replace(/>\s+/g, "Quote: ") // pronounce blockquotes nicely
       .replace(/- \[[ x]\]\s+/g, "") // remove checkboxes
       .replace(/[-*]\s+/g, "") // remove bullets
-      .replace(/\n{2,}/g, ". "); // replace newlines with pauses
+      .replace(/KM\/H/gi, "kilometers per hour")
+      .replace(/\bKG\b/gi, "kilograms")
+      .replace(/\bREV\b/gi, "Revision")
+      .replace(/\bCMD\b/gi, "Commander")
+      .replace(/\bLOC:\b/gi, "Location:")
+      .replace(/\bCOORD:\b/gi, "Coordinates:")
+      .replace(/\bELEV:\b/gi, "Elevation:")
+      .replace(/\bUTC\b/gi, "Universal Coordinated Time")
+      .replace(/°N/gi, " degrees North")
+      .replace(/°E/gi, " degrees East")
+      .replace(/°C/gi, " degrees Celsius")
+      .replace(/\n{2,}/g, ". "); // double newlines to pauses
 
     return `${title}. ${summary}. ${cleanBody}`;
   };
@@ -176,28 +222,20 @@ export function DispatchDetailClient({
       return;
     }
 
-    // Stop any previous speech
+    // Stop any previous audio
     synth.cancel();
 
     if (!dispatch) return;
 
-    const plainText = getReadableText(dispatch.content, dispatch.title, dispatch.summary);
+    const plainText = getHumanizedText(dispatch.content, dispatch.title, dispatch.summary);
     const utterance = new SpeechSynthesisUtterance(plainText);
-    utterance.rate = 0.95;
+    utterance.rate = 0.96; // Human conversational storytelling pacing
     utterance.pitch = 1.0;
 
     const voices = synth.getVoices();
-    const preferredVoice =
-      voices.find(
-        (v) =>
-          v.lang.startsWith("en") &&
-          (v.name.includes("Natural") ||
-            v.name.includes("Google") ||
-            v.name.includes("Samantha") ||
-            v.name.includes("Daniel"))
-      ) || voices.find((v) => v.lang.startsWith("en"));
+    const chosenVoice = voices.find((v) => v.voiceURI === selectedVoiceURI) || voices.find((v) => v.lang.startsWith("en"));
 
-    if (preferredVoice) utterance.voice = preferredVoice;
+    if (chosenVoice) utterance.voice = chosenVoice;
 
     utterance.onend = () => {
       setIsReadingAloud(false);
@@ -418,7 +456,7 @@ export function DispatchDetailClient({
           </p>
         </div>
 
-        {/* Author Badge & Audio Voice Memo Bar */}
+        {/* Author Badge & AI Voice Player Controls */}
         <div className="hairline border-ink bg-bone p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <a
             href={dispatch.author?.socialHandle || "https://www.zuhaibrashid.com/"}
@@ -457,7 +495,7 @@ export function DispatchDetailClient({
             {dispatch.audioMemoUrl && (
               <button
                 onClick={toggleAudio}
-                className="flex items-center gap-2 brick px-4 py-2 text-bone mono-label text-xs hover:bg-signal transition-colors cursor-pointer"
+                className="flex items-center gap-2 brick px-3.5 py-2 text-bone mono-label text-xs hover:bg-signal transition-colors cursor-pointer"
               >
                 {isPlayingAudio ? (
                   <>
@@ -469,6 +507,26 @@ export function DispatchDetailClient({
                   </>
                 )}
               </button>
+            )}
+
+            {/* AI Voice Selector Dropdown (if multiple voices exist) */}
+            {availableVoices.length > 0 && (
+              <div className="flex items-center bg-paper hairline border-ink px-2 py-1.5 mono-label text-[11px]">
+                <Mic className="h-3.5 w-3.5 text-signal mr-1.5 shrink-0" />
+                <select
+                  value={selectedVoiceURI}
+                  onChange={(e) => setSelectedVoiceURI(e.target.value)}
+                  disabled={isReadingAloud}
+                  className="bg-transparent outline-none cursor-pointer max-w-[150px] truncate"
+                  title="Select AI Narrator Voice"
+                >
+                  {availableVoices.map((v) => (
+                    <option key={v.voiceURI} value={v.voiceURI}>
+                      {v.name.replace(/Microsoft |Google |Apple /g, "")}
+                    </option>
+                  ))}
+                </select>
+              </div>
             )}
 
             {/* AI Text-To-Speech Narrator Button */}
@@ -540,7 +598,7 @@ export function DispatchDetailClient({
           </div>
         )}
 
-        {/* Tactical Reactions Bar (Auth Protected, 1 Reaction / User) */}
+        {/* Tactical Reactions Bar */}
         <section className="hairline border-ink bg-bone p-6 crosshair space-y-4">
           <div className="mono-label text-xs flex items-center justify-between">
             <span className="text-signal flex items-center gap-1.5 font-bold">
