@@ -19,11 +19,11 @@ export async function POST(
     await connectToDatabase();
 
     const isId = mongoose.Types.ObjectId.isValid(slug);
-    const query = isId ? { _id: slug } : { slug };
+    const query: Record<string, any> = isId ? { _id: slug, status: 'PUBLISHED' } : { slug, status: 'PUBLISHED' };
 
     const updateField = `reactions.${type}`;
 
-    const updated = await BlogPost.findOneAndUpdate(
+    const updated: any = await BlogPost.findOneAndUpdate(
       query,
       {
         $inc: {

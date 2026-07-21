@@ -4,6 +4,10 @@ import { authOptions } from '@/lib/authOptions';
 import connectToDatabase from '@/lib/mongodb';
 import BlogPost from '@/models/BlogPost';
 import mongoose from 'mongoose';
+import NewsletterSubscriber from '@/models/NewsletterSubscriber';
+import { sendBlogPublishedEmail } from '@/lib/mailer';
+
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://friendcirclee.netlify.app';
 
 function slugify(text: string): string {
   return text
@@ -28,10 +32,15 @@ export async function GET(
   try {
     const { slug } = await params;
     await connectToDatabase();
+    const session = await getServerSession(authOptions);
+    const isAdmin = session?.user?.role === 'ADMIN';
 
     // Query by slug or ObjectId
     const isId = mongoose.Types.ObjectId.isValid(slug);
-    const query = isId ? { _id: slug } : { slug };
+    const query: Record<string, any> = isId ? { _id: slug } : { slug };
+    if (!isAdmin) {
+      query.status = 'PUBLISHED';
+    }
 
     const dispatch = await BlogPost.findOneAndUpdate(
       query,
@@ -128,8 +137,24 @@ export async function PUT(
       }
     }
 
-    const updated = await BlogPost.findByIdAndUpdate(existing._id, updateData, { new: true })
+    const shouldNotifySubscribers = status === 'PUBLISHED' && existing.status !== 'PUBLISHED';
+
+    const updated = await BlogPost.findByIdAndUpdate(existing._id, updateData, {
+      new: true,
+      runValidators: true,
+    })
       .populate('author', 'name image role');
+
+    if (shouldNotifySubscribers && updated) {
+      const subscribers = await NewsletterSubscriber.find({ status: 'ACTIVE' }, 'email').lean();
+      const recipients = subscribers.map((subscriber: any) => subscriber.email);
+      await sendBlogPublishedEmail({
+        recipients,
+        title: updated.title,
+        summary: updated.summary,
+        url: `${BASE_URL}/dispatches/${updated.slug}`,
+      });
+    }
 
     return NextResponse.json(updated, { status: 200 });
   } catch (error: any) {

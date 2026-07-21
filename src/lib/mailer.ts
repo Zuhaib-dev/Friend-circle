@@ -16,6 +16,32 @@ const getMailerConfig = () => {
   return { user, pass, host, port, secure };
 };
 
+const createTransporter = () => {
+  const config = getMailerConfig();
+
+  return {
+    config,
+    transporter: nodemailer.createTransport({
+      host: config.host,
+      port: config.port,
+      secure: config.secure,
+      auth: {
+        user: config.user,
+        pass: config.pass,
+      },
+    }),
+  };
+};
+
+function escapeHtml(value: string) {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
 export const sendOTPVerificationEmail = async (email: string, otp: string) => {
   const to = email.trim().toLowerCase();
   console.log('[MAILER] Starting OTP email send...');
@@ -81,3 +107,57 @@ export const sendOTPVerificationEmail = async (email: string, otp: string) => {
     return { success: false, error };
   }
 };
+
+export async function sendBlogPublishedEmail({
+  recipients,
+  title,
+  summary,
+  url,
+}: {
+  recipients: string[];
+  title: string;
+  summary: string;
+  url: string;
+}) {
+  const uniqueRecipients = Array.from(
+    new Set(recipients.map((email) => email.trim().toLowerCase()).filter(Boolean))
+  );
+
+  if (uniqueRecipients.length === 0) {
+    return { success: true, sent: 0 };
+  }
+
+  let mailer;
+  try {
+    mailer = createTransporter();
+  } catch (error) {
+    console.error('[MAILER] Blog notification configuration error:', error);
+    return { success: false, error };
+  }
+
+  const safeTitle = escapeHtml(title);
+  const safeSummary = escapeHtml(summary);
+
+  try {
+    const info = await mailer.transporter.sendMail({
+      from: `"Friend Circle Dispatches" <${mailer.config.user}>`,
+      bcc: uniqueRecipients,
+      subject: `New Field Dispatch: ${title}`,
+      text: `${title}\n\n${summary}\n\nRead it here: ${url}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 640px; margin: 0 auto; padding: 24px; border: 1px solid #1c1917; background: #f5f5f4; color: #1c1917;">
+          <p style="font-family: monospace; color: #b91c1c; text-transform: uppercase; letter-spacing: .08em;">Friend Circle Field Dispatch</p>
+          <h1 style="font-size: 30px; line-height: 1.1; margin: 8px 0 16px; text-transform: uppercase;">${safeTitle}</h1>
+          <p style="font-size: 16px; line-height: 1.6; color: #44403c;">${safeSummary}</p>
+          <a href="${url}" style="display: inline-block; margin-top: 20px; background: #1c1917; color: #f5f5f4; text-decoration: none; padding: 12px 18px; font-family: monospace; text-transform: uppercase;">Read the dispatch</a>
+          <p style="margin-top: 24px; font-size: 12px; color: #78716c;">You received this because you joined the Friend Circle newsletter.</p>
+        </div>
+      `,
+    });
+
+    return { success: true, sent: uniqueRecipients.length, messageId: info.messageId };
+  } catch (error) {
+    console.error('[MAILER] Error sending blog notification:', error);
+    return { success: false, error };
+  }
+}

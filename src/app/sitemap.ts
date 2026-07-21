@@ -1,8 +1,12 @@
 import { MetadataRoute } from "next";
 import connectToDatabase from "@/lib/mongodb";
 import TripMemory from "@/models/TripMemory";
+import BlogPost from "@/models/BlogPost";
 
 const BASE_URL = "https://friendcirclee.netlify.app";
+
+export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
@@ -93,6 +97,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.5,
     },
     {
+      url: `${BASE_URL}/dispatches`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    {
       url: `${BASE_URL}/loadout`,
       lastModified: now,
       changeFrequency: "monthly",
@@ -116,14 +126,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   try {
     await connectToDatabase();
-    const memories = await TripMemory.find({}, "_id updatedAt").lean();
+    const [memories, dispatches] = await Promise.all([
+      TripMemory.find({}, "_id updatedAt").lean(),
+      BlogPost.find({ status: "PUBLISHED" }, "slug updatedAt publishedAt").lean(),
+    ]);
     
-    dynamicRoutes = memories.map((memory: any) => ({
+    const memoryRoutes: MetadataRoute.Sitemap = memories.map((memory: any) => ({
       url: `${BASE_URL}/memory/${memory._id}`,
       lastModified: memory.updatedAt || now,
       changeFrequency: "monthly",
       priority: 0.6,
     }));
+
+    const dispatchRoutes: MetadataRoute.Sitemap = dispatches.map((dispatch: any) => ({
+      url: `${BASE_URL}/dispatches/${dispatch.slug}`,
+      lastModified: dispatch.updatedAt || dispatch.publishedAt || now,
+      changeFrequency: "monthly",
+      priority: 0.75,
+    }));
+
+    dynamicRoutes = [...memoryRoutes, ...dispatchRoutes];
   } catch (error) {
     console.error("Failed to fetch memories for sitemap:", error);
   }

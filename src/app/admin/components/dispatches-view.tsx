@@ -7,14 +7,11 @@ import {
   Plus,
   Trash2,
   Edit,
-  Eye,
   Upload,
   Link as LinkIcon,
   CheckCircle2,
-  AlertTriangle,
   Loader2,
   Sparkles,
-  MapPin,
   Radio,
   Volume2,
   Tag,
@@ -216,6 +213,23 @@ export function DispatchesView() {
 
   const handleToggleStatus = async (d: DispatchItem) => {
     const nextStatus = d.status === "PUBLISHED" ? "DRAFT" : "PUBLISHED";
+    try {
+      const res = await fetch(`/api/dispatches/${d._id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: nextStatus }),
+      });
+      if (res.ok) {
+        const updated = await res.json();
+        setDispatches((prev) => prev.map((item) => (item._id === d._id ? updated : item)));
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleArchive = async (d: DispatchItem) => {
+    const nextStatus = d.status === "ARCHIVED" ? "DRAFT" : "ARCHIVED";
     try {
       const res = await fetch(`/api/dispatches/${d._id}`, {
         method: "PUT",
@@ -560,7 +574,7 @@ export function DispatchesView() {
       {/* Dispatches List Filters & Search */}
       <div className="hairline border-ink bg-bone p-4 flex flex-col md:flex-row gap-4 items-center justify-between">
         <div className="flex items-center gap-2 flex-wrap w-full md:w-auto">
-          {(["ALL", "PUBLISHED", "DRAFT"] as const).map((st) => (
+          {(["ALL", "PUBLISHED", "DRAFT", "ARCHIVED"] as const).map((st) => (
             <button
               key={st}
               onClick={() => setFilter(st)}
@@ -639,6 +653,13 @@ export function DispatchesView() {
                   className="mono-label text-[10px] hover:text-signal transition-colors cursor-pointer"
                 >
                   {d.status === "PUBLISHED" ? "UNPUBLISH" : "PUBLISH"}
+                </button>
+
+                <button
+                  onClick={() => handleArchive(d)}
+                  className="mono-label text-[10px] hover:text-signal transition-colors cursor-pointer"
+                >
+                  {d.status === "ARCHIVED" ? "RESTORE" : "ARCHIVE"}
                 </button>
 
                 <div className="flex items-center gap-2">

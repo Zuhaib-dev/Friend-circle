@@ -4,6 +4,10 @@ import { authOptions } from '@/lib/authOptions';
 import connectToDatabase from '@/lib/mongodb';
 import BlogPost from '@/models/BlogPost';
 import User from '@/models/User';
+import NewsletterSubscriber from '@/models/NewsletterSubscriber';
+import { sendBlogPublishedEmail } from '@/lib/mailer';
+
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://friendcirclee.netlify.app';
 
 function slugify(text: string): string {
   return text
@@ -29,6 +33,8 @@ export async function GET(req: Request) {
     const search = searchParams.get('search');
     const tag = searchParams.get('tag');
     const adminMode = searchParams.get('admin') === 'true';
+    const limit = Math.min(Math.max(Number(searchParams.get('limit') || 24), 1), 60);
+    const page = Math.max(Number(searchParams.get('page') || 1), 1);
 
     const session = await getServerSession(authOptions);
 
@@ -54,10 +60,17 @@ export async function GET(req: Request) {
       ];
     }
 
-    const dispatches = await BlogPost.find(filter)
+    const query = BlogPost.find(filter)
       .populate('author', 'name image role')
       .sort({ featured: -1, createdAt: -1 })
-      .lean();
+      .skip((page - 1) * limit)
+      .limit(limit);
+
+    if (!adminMode || !session?.user || session.user.role !== 'ADMIN') {
+      query.select('title slug summary coverImage audioMemoUrl tags category author publishedAt createdAt updatedAt readTimeMinutes telemetry viewsCount likesCount featured');
+    }
+
+    const dispatches = await query.lean();
 
     return NextResponse.json(dispatches, { status: 200 });
   } catch (error: any) {
@@ -135,6 +148,17 @@ export async function POST(req: Request) {
     });
 
     const populated = await BlogPost.findById(dispatch._id).populate('author', 'name image role');
+
+    if (postStatus === 'PUBLISHED') {
+      const subscribers = await NewsletterSubscriber.find({ status: 'ACTIVE' }, 'email').lean();
+      const recipients = subscribers.map((subscriber: any) => subscriber.email);
+      await sendBlogPublishedEmail({
+        recipients,
+        title: dispatch.title,
+        summary: dispatch.summary,
+        url: `${BASE_URL}/dispatches/${dispatch.slug}`,
+      });
+    }
 
     return NextResponse.json(populated, { status: 201 });
   } catch (error: any) {
