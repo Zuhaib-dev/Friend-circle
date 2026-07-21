@@ -27,6 +27,10 @@ export interface IBlogPost extends Document {
     acknowledged: number;
     copied: number;
   };
+  userReactions?: {
+    userId: mongoose.Types.ObjectId;
+    type: 'roger' | 'acknowledged' | 'copied';
+  }[];
   featured: boolean;
   createdAt: Date;
   updatedAt: Date;
@@ -110,6 +114,12 @@ const BlogPostSchema: Schema = new Schema(
       acknowledged: { type: Number, default: 0 },
       copied: { type: Number, default: 0 },
     },
+    userReactions: [
+      {
+        userId: { type: Schema.Types.ObjectId, ref: 'User' },
+        type: { type: String, enum: ['roger', 'acknowledged', 'copied'] },
+      },
+    ],
     featured: {
       type: Boolean,
       default: false,

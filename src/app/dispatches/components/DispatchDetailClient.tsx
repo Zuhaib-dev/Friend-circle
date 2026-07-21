@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 import {
   ArrowLeft,
   Clock,
@@ -13,6 +14,13 @@ import {
   Check,
   Radio,
   ExternalLink,
+  MessageSquare,
+  Send,
+  Trash2,
+  User as UserIcon,
+  Lock,
+  Loader2,
+  AlertTriangle,
 } from "lucide-react";
 import { TopNav } from "@/components/top-nav";
 import { FooterSection } from "@/components/landing/FooterSection";
@@ -53,11 +61,26 @@ type Dispatch = {
   };
 };
 
+type CommentItem = {
+  _id: string;
+  text: string;
+  createdAt: string;
+  author: {
+    _id: string;
+    name?: string;
+    image?: string;
+    role?: string;
+    teamMemberStatus?: string;
+    bio?: string;
+  };
+};
+
 export function DispatchDetailClient({
   initialDispatch,
 }: {
   initialDispatch: Dispatch | null;
 }) {
+  const { data: session } = useSession();
   const [dispatch] = useState<Dispatch | null>(initialDispatch);
   const loading = false;
   const error = initialDispatch ? "" : "Dispatch not found";
@@ -65,19 +88,50 @@ export function DispatchDetailClient({
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
   const [audioObj, setAudioObj] = useState<HTMLAudioElement | null>(null);
 
-  // Local state for interactive reactions
+  // Reaction State
   const [reactions, setReactions] = useState({
     roger: initialDispatch?.reactions?.roger || 0,
     acknowledged: initialDispatch?.reactions?.acknowledged || 0,
     copied: initialDispatch?.reactions?.copied || 0,
   });
-  const [userReacted, setUserReacted] = useState<Record<string, boolean>>({});
+  const [userReaction, setUserReaction] = useState<string | null>(null);
+  const [reactionError, setReactionError] = useState("");
+  const [isReacting, setIsReacting] = useState(false);
 
+  // Comment State
+  const [comments, setComments] = useState<CommentItem[]>([]);
+  const [loadingComments, setLoadingComments] = useState(true);
+  const [newCommentText, setNewCommentText] = useState("");
+  const [isSubmittingComment, setIsSubmittingComment] = useState(false);
+  const [commentError, setCommentError] = useState("");
+  const [deletingCommentId, setDeletingCommentId] = useState<string | null>(null);
+
+  // Fetch reactions and user reaction choice on mount
   useEffect(() => {
-    if (initialDispatch?.reactions) {
-      setReactions(initialDispatch.reactions);
-    }
-  }, [initialDispatch]);
+    if (!dispatch?.slug) return;
+
+    fetch(`/api/dispatches/${dispatch.slug}/react`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.reactions) setReactions(data.reactions);
+        if (data.userReaction) setUserReaction(data.userReaction);
+      })
+      .catch(() => {});
+  }, [dispatch?.slug]);
+
+  // Fetch comments on mount
+  useEffect(() => {
+    if (!dispatch?.slug) return;
+
+    setLoadingComments(true);
+    fetch(`/api/dispatches/${dispatch.slug}/comments`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data)) setComments(data);
+      })
+      .catch(() => {})
+      .finally(() => setLoadingComments(false));
+  }, [dispatch?.slug]);
 
   useEffect(() => {
     return () => {
@@ -106,27 +160,101 @@ export function DispatchDetailClient({
   };
 
   const handleReaction = async (type: "roger" | "acknowledged" | "copied") => {
-    if (userReacted[type]) return;
+    if (!session?.user) {
+      setReactionError("AUTHENTICATION REQUIRED: Please log in to react.");
+      return;
+    }
 
-    setUserReacted((prev) => ({ ...prev, [type]: true }));
-    setReactions((prev) => ({ ...prev, [type]: prev[type] + 1 }));
+    setReactionError("");
+    setIsReacting(true);
 
     try {
-      await fetch(`/api/dispatches/${dispatch?.slug}/react`, {
+      const res = await fetch(`/api/dispatches/${dispatch?.slug}/react`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ type }),
       });
-    } catch (err) {
-      console.error("Reaction failed:", err);
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to submit reaction");
+      }
+
+      if (data.reactions) setReactions(data.reactions);
+      setUserReaction(data.userReaction);
+    } catch (err: any) {
+      setReactionError(err.message || "Failed to submit reaction");
+    } finally {
+      setIsReacting(false);
     }
   };
 
-  const handleShare = () => {
-    if (typeof window !== "undefined") {
-      navigator.clipboard.writeText(window.location.href);
+  const handleShare = async () => {
+    if (navigator.clipboard) {
+      await navigator.clipboard.writeText(window.location.href);
       setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      setTimeout(() => setCopied(false), 2500);
+    }
+  };
+
+  const handlePostComment = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!session?.user) {
+      setCommentError("AUTHENTICATION REQUIRED: Log in to post a comment.");
+      return;
+    }
+
+    const text = newCommentText.trim();
+    if (!text) {
+      setCommentError("Comment cannot be empty.");
+      return;
+    }
+
+    setCommentError("");
+    setIsSubmittingComment(true);
+
+    try {
+      const res = await fetch(`/api/dispatches/${dispatch?.slug}/comments`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text }),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to post comment");
+      }
+
+      setComments((prev) => [data, ...prev]);
+      setNewCommentText("");
+    } catch (err: any) {
+      setCommentError(err.message || "Failed to post comment");
+    } finally {
+      setIsSubmittingComment(false);
+    }
+  };
+
+  const handleDeleteComment = async (commentId: string) => {
+    if (!confirm("Are you sure you want to delete this comment?")) return;
+
+    setDeletingCommentId(commentId);
+
+    try {
+      const res = await fetch(`/api/dispatches/${dispatch?.slug}/comments?commentId=${commentId}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to delete comment");
+      }
+
+      setComments((prev) => prev.filter((c) => c._id !== commentId));
+    } catch (err: any) {
+      alert(err.message || "Failed to delete comment");
+    } finally {
+      setDeletingCommentId(null);
     }
   };
 
@@ -177,9 +305,8 @@ export function DispatchDetailClient({
         </div>
       </section>
 
-      {/* Article Content Container */}
-      <main className="flex-1 max-w-4xl w-full mx-auto px-4 md:px-8 py-10 md:py-16 space-y-8">
-        {/* Category & Tags Header */}
+      <main className="flex-1 max-w-4xl w-full mx-auto px-4 md:px-8 py-10 space-y-8">
+        {/* Category & Meta Header */}
         <div className="flex items-center justify-between mono-label text-xs">
           <span className="brick text-bone px-3 py-1 text-xs">{dispatch.category}</span>
           <div className="flex items-center gap-3 opacity-60">
@@ -236,12 +363,17 @@ export function DispatchDetailClient({
           {dispatch.audioMemoUrl && (
             <button
               onClick={toggleAudio}
-              className={`mono-label px-4 py-2 text-xs hairline border-ink transition-colors flex items-center gap-2 cursor-pointer ${
-                isPlayingAudio ? "brick text-bone animate-pulse" : "bg-paper text-ink hover:bg-ink hover:text-bone"
-              }`}
+              className="flex items-center gap-2 brick px-4 py-2 text-bone mono-label text-xs hover:bg-signal transition-colors self-start sm:self-auto cursor-pointer"
             >
-              {isPlayingAudio ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4 text-signal" />}
-              {isPlayingAudio ? "PAUSE VOICE DISPATCH" : "LISTEN AUDIO DISPATCH"}
+              {isPlayingAudio ? (
+                <>
+                  <VolumeX className="h-4 w-4 animate-pulse text-signal font-bold" /> PAUSE VOICE MEMO
+                </>
+              ) : (
+                <>
+                  <Volume2 className="h-4 w-4" /> PLAY AUDIO MEMO
+                </>
+              )}
             </button>
           )}
         </div>
@@ -253,20 +385,15 @@ export function DispatchDetailClient({
               src={dispatch.coverImage}
               alt={dispatch.title}
               fill
-              priority
               unoptimized
-              sizes="(max-width: 1024px) 100vw, 800px"
-              className="object-cover contrast-125"
+              className="object-cover"
+              priority
             />
-            <div className="absolute bottom-2 left-2 right-2 flex justify-between mono-label text-[10px] text-bone mix-blend-difference">
-              <span>{dispatch.telemetry?.location || "KASHMIR FIELD MANUAL"}</span>
-              <span>{dispatch.telemetry?.weather || "4°C"}</span>
-            </div>
           </div>
         )}
 
-        {/* Article Body Content */}
-        <article className="max-w-none pt-4 border-t border-ink/20">
+        {/* Article Body */}
+        <article className="prose prose-stone max-w-none dark:prose-invert">
           <MarkdownRenderer content={dispatch.content} />
         </article>
 
@@ -282,11 +409,11 @@ export function DispatchDetailClient({
           </div>
         )}
 
-        {/* Tactical Reactions & Share Bar */}
+        {/* Tactical Reactions Bar (Auth Protected, 1 Reaction / User) */}
         <section className="hairline border-ink bg-bone p-6 crosshair space-y-4">
           <div className="mono-label text-xs flex items-center justify-between">
             <span className="text-signal flex items-center gap-1.5 font-bold">
-              <Radio className="h-3.5 w-3.5" /> REACTION PROTOCOL
+              <Radio className="h-3.5 w-3.5" /> REACTION PROTOCOL (AUTH REQUIRED)
             </span>
             <button
               onClick={handleShare}
@@ -300,37 +427,55 @@ export function DispatchDetailClient({
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <button
               onClick={() => handleReaction("roger")}
-              disabled={userReacted.roger}
+              disabled={isReacting}
               className={`p-3 hairline border-ink mono-label text-xs flex items-center justify-between transition-colors cursor-pointer ${
-                userReacted.roger ? "brick text-bone" : "bg-paper hover:bg-ink hover:text-bone"
+                userReaction === "roger"
+                  ? "brick text-bone border-signal font-bold"
+                  : "bg-paper hover:bg-ink hover:text-bone"
               }`}
             >
-              <span>[ ROGER ]</span>
+              <span>[ ROGER {userReaction === "roger" ? "✓" : ""} ]</span>
               <span className="font-mono">{reactions.roger}</span>
             </button>
 
             <button
               onClick={() => handleReaction("acknowledged")}
-              disabled={userReacted.acknowledged}
+              disabled={isReacting}
               className={`p-3 hairline border-ink mono-label text-xs flex items-center justify-between transition-colors cursor-pointer ${
-                userReacted.acknowledged ? "brick text-bone" : "bg-paper hover:bg-ink hover:text-bone"
+                userReaction === "acknowledged"
+                  ? "brick text-bone border-signal font-bold"
+                  : "bg-paper hover:bg-ink hover:text-bone"
               }`}
             >
-              <span>[ ACKNOWLEDGED ]</span>
+              <span>[ ACKNOWLEDGED {userReaction === "acknowledged" ? "✓" : ""} ]</span>
               <span className="font-mono">{reactions.acknowledged}</span>
             </button>
 
             <button
               onClick={() => handleReaction("copied")}
-              disabled={userReacted.copied}
+              disabled={isReacting}
               className={`p-3 hairline border-ink mono-label text-xs flex items-center justify-between transition-colors cursor-pointer ${
-                userReacted.copied ? "brick text-bone" : "bg-paper hover:bg-ink hover:text-bone"
+                userReaction === "copied"
+                  ? "brick text-bone border-signal font-bold"
+                  : "bg-paper hover:bg-ink hover:text-bone"
               }`}
             >
-              <span>[ DISPATCH COPIED ]</span>
+              <span>[ DISPATCH COPIED {userReaction === "copied" ? "✓" : ""} ]</span>
               <span className="font-mono">{reactions.copied}</span>
             </button>
           </div>
+
+          {reactionError && (
+            <div className="mono-label text-xs text-signal flex items-center gap-1.5 pt-1">
+              <AlertTriangle className="h-3.5 w-3.5 shrink-0" />
+              {reactionError}
+              {!session?.user && (
+                <Link href="/login" className="underline font-bold ml-1 hover:text-ink">
+                  LOGIN HERE →
+                </Link>
+              )}
+            </div>
+          )}
         </section>
 
         {/* Author Bio Box */}
@@ -378,6 +523,179 @@ export function DispatchDetailClient({
           </a>
         </section>
 
+        {/* FIELD COMMENTS SECTION */}
+        <section className="space-y-6 pt-4">
+          <div className="hairline-b border-ink pb-3 flex items-center justify-between">
+            <h3 className="font-display text-2xl font-black uppercase flex items-center gap-2">
+              <MessageSquare className="h-5 w-5 text-signal" /> FIELD COMMENTS
+              <span className="mono-label text-xs text-signal font-bold bg-bone hairline border-ink px-2 py-0.5 ml-2">
+                {comments.length.toString().padStart(2, "0")} LOGS
+              </span>
+            </h3>
+            <span className="mono-label text-xs opacity-60 hidden sm:inline">// CHANNEL OPEN</span>
+          </div>
+
+          {/* Comment Form / Login Prompt */}
+          {session?.user ? (
+            <form onSubmit={handlePostComment} className="hairline border-ink bg-paper p-5 space-y-3 shadow-[4px_4px_0_0_oklch(0.13_0.01_60)]">
+              <div className="flex items-center justify-between mono-label text-xs">
+                <span className="flex items-center gap-2 font-bold">
+                  {session.user.image ? (
+                    <Image
+                      src={session.user.image}
+                      alt={session.user.name || "User"}
+                      width={22}
+                      height={22}
+                      className="hairline border-ink object-cover"
+                    />
+                  ) : (
+                    <UserIcon className="h-4 w-4 text-signal" />
+                  )}
+                  {session.user.name || session.user.email}
+                </span>
+                <span className="opacity-50">{newCommentText.length} / 1000 CHARS</span>
+              </div>
+
+              <textarea
+                value={newCommentText}
+                onChange={(e) => setNewCommentText(e.target.value)}
+                placeholder="Log your comment or tactical field feedback..."
+                rows={3}
+                maxLength={1000}
+                className="w-full bg-bone hairline border-ink p-3 text-sm font-sans outline-none focus:border-signal transition-colors resize-y"
+              />
+
+              {commentError && (
+                <div className="mono-label text-xs text-signal flex items-center gap-1.5">
+                  <AlertTriangle className="h-3.5 w-3.5" />
+                  {commentError}
+                </div>
+              )}
+
+              <div className="flex justify-end">
+                <button
+                  type="submit"
+                  disabled={isSubmittingComment || !newCommentText.trim()}
+                  className="brick text-bone px-5 py-2.5 mono-label text-xs flex items-center gap-2 hover:bg-signal transition-colors disabled:opacity-50 cursor-pointer"
+                >
+                  {isSubmittingComment ? (
+                    <>
+                      <Loader2 className="h-4 w-4 animate-spin" /> SUBMITTING...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="h-3.5 w-3.5" /> TRANSMIT COMMENT
+                    </>
+                  )}
+                </button>
+              </div>
+            </form>
+          ) : (
+            <div className="hairline border-ink bg-bone crosshair p-6 text-center space-y-3">
+              <div className="mono-label text-xs text-signal flex items-center justify-center gap-2 font-bold">
+                <Lock className="h-4 w-4" /> AUTHENTICATION REQUIRED FOR DISPATCH LOGS
+              </div>
+              <p className="font-display italic text-sm text-ink/75">
+                Log in with your account to participate in field conversations and post comments.
+              </p>
+              <Link
+                href="/login"
+                className="inline-flex items-center gap-2 brick text-bone px-6 py-2.5 mono-label text-xs hover:bg-signal transition-colors"
+              >
+                LOGIN TO TRANSMIT COMMENTS
+              </Link>
+            </div>
+          )}
+
+          {/* Comments List */}
+          <div className="space-y-4">
+            {loadingComments ? (
+              <div className="p-8 text-center mono-label text-xs text-signal flex items-center justify-center gap-2">
+                <Loader2 className="h-4 w-4 animate-spin" /> LOADING FIELD COMMENTS...
+              </div>
+            ) : comments.length === 0 ? (
+              <div className="p-8 hairline border-ink bg-paper text-center mono-label text-xs opacity-60">
+                NO COMMENTS LOGGED YET. BE THE FIRST TO TRANSMIT FEEDBACK.
+              </div>
+            ) : (
+              comments.map((comment) => {
+                const isAuthorOrAdmin =
+                  session?.user?.email &&
+                  (comment.author?.name === session.user.name ||
+                    session.user.role === "ADMIN");
+
+                return (
+                  <div
+                    key={comment._id}
+                    className="hairline border-ink bg-bone p-5 space-y-3 relative group"
+                  >
+                    <div className="flex items-center justify-between gap-4">
+                      <div className="flex items-center gap-3">
+                        {comment.author?.image ? (
+                          <Image
+                            src={comment.author.image}
+                            alt={comment.author.name || "User"}
+                            width={32}
+                            height={32}
+                            className="hairline border-ink object-cover"
+                          />
+                        ) : (
+                          <div className="h-8 w-8 brick text-bone grid place-items-center mono-label text-[10px]">
+                            {(comment.author?.name || "U")[0].toUpperCase()}
+                          </div>
+                        )}
+                        <div>
+                          <div className="font-display font-bold text-sm leading-tight flex items-center gap-2">
+                            {comment.author?.name || "Anonymous Member"}
+                            {comment.author?.role === "ADMIN" && (
+                              <span className="brick text-bone text-[9px] px-1.5 py-0.5 mono-label">
+                                CMD
+                              </span>
+                            )}
+                            {comment.author?.teamMemberStatus === "APPROVED" && comment.author?.role !== "ADMIN" && (
+                              <span className="bg-signal text-bone text-[9px] px-1.5 py-0.5 mono-label">
+                                CREW
+                              </span>
+                            )}
+                          </div>
+                          <div className="mono-label text-[10px] opacity-60">
+                            {new Date(comment.createdAt).toLocaleDateString("en-US", {
+                              month: "short",
+                              day: "numeric",
+                              year: "numeric",
+                              hour: "2-digit",
+                              minute: "2-digit",
+                            })}
+                          </div>
+                        </div>
+                      </div>
+
+                      {isAuthorOrAdmin && (
+                        <button
+                          onClick={() => handleDeleteComment(comment._id)}
+                          disabled={deletingCommentId === comment._id}
+                          className="mono-label text-[10px] text-ink/40 hover:text-signal transition-colors p-1 cursor-pointer flex items-center gap-1"
+                          title="Delete comment"
+                        >
+                          {deletingCommentId === comment._id ? (
+                            <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                          ) : (
+                            <Trash2 className="h-3.5 w-3.5" />
+                          )}
+                        </button>
+                      )}
+                    </div>
+
+                    <p className="font-serif text-sm md:text-base text-ink/85 leading-relaxed whitespace-pre-line pl-11">
+                      {comment.text}
+                    </p>
+                  </div>
+                );
+              })
+            )}
+          </div>
+        </section>
+
         {/* Back Link */}
         <div className="pt-4 text-center">
           <Link
@@ -395,4 +713,3 @@ export function DispatchDetailClient({
 }
 
 export default DispatchDetailClient;
-
