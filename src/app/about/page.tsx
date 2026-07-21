@@ -43,7 +43,7 @@ export default function AboutPage() {
 
       <TopNav />
 
-      <section ref={heroRef} className="relative mx-auto max-w-[1400px] px-5 sm:px-8 pt-10 sm:pt-16 pb-10">
+      <section ref={heroRef} className="relative mx-auto max-w-350 px-5 sm:px-8 pt-10 sm:pt-16 pb-10">
         
         {/* Animated Meta Data */}
         <motion.div 

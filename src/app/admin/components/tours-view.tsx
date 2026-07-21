@@ -304,7 +304,7 @@ export function ToursView() {
                 <textarea
                   value={formState.description}
                   onChange={(e) => setFormState({ ...formState, description: e.target.value })}
-                  className="w-full bg-bone hairline border-ink px-3 py-2 font-mono text-sm focus:outline-none focus:border-signal min-h-[80px]"
+                  className="w-full bg-bone hairline border-ink px-3 py-2 font-mono text-sm focus:outline-none focus:border-signal min-h-20"
                   placeholder="Optional details..."
                 />
               </div>

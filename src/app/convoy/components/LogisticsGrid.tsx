@@ -18,7 +18,7 @@ export function WaypointPanel({ waypoints }: { waypoints: any[] }) {
   return (
     <Panel code="RT-01" title="Route Waypoints" right={`${waypoints.length} STOPS`}>
       <ol className="relative pl-6">
-        <span className="absolute left-[7px] top-1 bottom-1 w-px bg-ink/30" />
+        <span className="absolute left-1.75 top-1 bottom-1 w-px bg-ink/30" />
         {waypoints.map((w, i) => (
           <motion.li
             key={w.code}
@@ -125,7 +125,7 @@ export function FoodPanel({ foodDuties }: { foodDuties: any[] }) {
               <button
                 type="button"
                 onClick={() => setDone((d) => ({ ...d, [i]: !d[i] }))}
-                className="w-full min-h-[44px] flex items-center gap-3 py-2.5 px-1 group hover:bg-acid/15 transition-colors text-left"
+                className="w-full min-h-11 flex items-center gap-3 py-2.5 px-1 group hover:bg-acid/15 transition-colors text-left"
               >
                 <motion.span
                   whileTap={{ scale: 0.88 }}
@@ -230,7 +230,7 @@ export function GearPanel({ title, code, items }: { title: string; code: string;
               <button
                 type="button"
                 onClick={() => setDone((d) => ({ ...d, [i]: !d[i] }))}
-                className="w-full min-h-[44px] flex items-center gap-2.5 py-1.5 px-1 group hover:bg-acid/15 transition-colors text-left"
+                className="w-full min-h-11 flex items-center gap-2.5 py-1.5 px-1 group hover:bg-acid/15 transition-colors text-left"
               >
                 <motion.span
                   whileTap={{ scale: 0.85 }}

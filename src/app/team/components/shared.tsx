@@ -102,7 +102,7 @@ export function NavBtn({
       {active && (
         <motion.span
           layoutId="navdot"
-          className="absolute left-[-6px] top-1/2 -translate-y-1/2 h-2 w-2 bg-signal hairline border-ink"
+          className="absolute -left-1.5 top-1/2 -translate-y-1/2 h-2 w-2 bg-signal hairline border-ink"
         />
       )}
     </motion.button>

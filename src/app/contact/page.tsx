@@ -10,7 +10,7 @@ export default function ContactClient() {
     <div className="min-h-screen overflow-x-hidden bg-bone text-ink">
       <TopNav />
 
-      <section className="mx-auto max-w-[1400px] px-5 sm:px-8 pt-10 sm:pt-16 pb-10">
+      <section className="mx-auto max-w-350 px-5 sm:px-8 pt-10 sm:pt-16 pb-10">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-y-3 gap-x-6 mono-label text-[10px] tracking-[0.18em] uppercase opacity-60 hairline-b border-ink/40 pb-4 mb-10">
           <Meta k="Logged" v="Srinagar / KMR" />
           <Meta k="Base" v="Camp / 01" />
@@ -35,7 +35,7 @@ export default function ContactClient() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1400px] px-5 sm:px-8 pb-16 grid lg:grid-cols-[1.4fr_1fr] gap-8">
+      <section className="mx-auto max-w-350 px-5 sm:px-8 pb-16 grid lg:grid-cols-[1.4fr_1fr] gap-8">
         <ContactForm />
         <FieldOfficeCard />
       </section>

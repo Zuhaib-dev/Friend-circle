@@ -50,7 +50,7 @@ export function JoinSection() {
           <h3 className="display-num text-[clamp(40px,7vw,84px)] mt-2 leading-none">Send a signal<span className="text-signal">.</span></h3>
           <p className="font-display italic text-xl text-ink/70 max-w-xl mt-4">Drop a coordinate. We don't promise a reply — we promise we'll read it by the fire.</p>
         </div>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-0 hairline border-ink w-full md:w-[400px]">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-0 hairline border-ink w-full md:w-100">
           <input
             type="email"
             value={email}

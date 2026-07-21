@@ -266,7 +266,7 @@ export function RouteTraceSection({ waypoints }: { waypoints: any[] }) {
                       <span className="absolute inset-x-0 -top-4 mono-label text-[8px] text-center opacity-0 group-hover:opacity-100 transition-opacity">
                         {w.elev}
                       </span>
-                      <span className="absolute inset-x-0 top-0 h-[2px] bg-signal" />
+                      <span className="absolute inset-x-0 top-0 h-0.5 bg-signal" />
                     </motion.div>
                   );
                 })}
@@ -280,7 +280,7 @@ export function RouteTraceSection({ waypoints }: { waypoints: any[] }) {
             <div className="flex-1 p-3 md:p-4 overflow-hidden">
               <div className="mono-label opacity-60 mb-2">WAYPOINT LOG</div>
               <ol className="relative">
-                <span className="absolute left-[7px] top-1 bottom-1 w-px bg-ink/30" />
+                <span className="absolute left-1.75 top-1 bottom-1 w-px bg-ink/30" />
                 {wps.map((w, i) => (
                   <motion.li
                     key={w.id}
@@ -291,7 +291,7 @@ export function RouteTraceSection({ waypoints }: { waypoints: any[] }) {
                     className="relative pl-6 py-1.5 flex items-center justify-between group hover:bg-acid/30 transition-colors px-1"
                   >
                     <span
-                      className={`absolute left-0 top-1/2 -translate-y-1/2 h-[15px] w-[15px] hairline border-ink ${
+                      className={`absolute left-0 top-1/2 -translate-y-1/2 h-3.75 w-3.75 hairline border-ink ${
                         i === 0 || i === wps.length - 1 ? "bg-signal" : "bg-acid"
                       } flex items-center justify-center mono-label text-[8px] text-ink`}
                     >

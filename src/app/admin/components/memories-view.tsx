@@ -163,9 +163,9 @@ export function MemoriesView() {
                   </div>
                 </div>
 
-                <textarea placeholder="DESCRIPTION SUMMARY" value={form.description} onChange={e => setForm({...form, description: e.target.value})} className="input-field min-h-[60px]" required />
-                <textarea placeholder="STORY OF THE DAY (Full text)" value={form.story} onChange={e => setForm({...form, story: e.target.value})} className="input-field min-h-[120px]" required />
-                <textarea placeholder="BEST MOMENT" value={form.bestMoment} onChange={e => setForm({...form, bestMoment: e.target.value})} className="input-field min-h-[60px]" required />
+                <textarea placeholder="DESCRIPTION SUMMARY" value={form.description} onChange={e => setForm({...form, description: e.target.value})} className="input-field min-h-15" required />
+                <textarea placeholder="STORY OF THE DAY (Full text)" value={form.story} onChange={e => setForm({...form, story: e.target.value})} className="input-field min-h-30" required />
+                <textarea placeholder="BEST MOMENT" value={form.bestMoment} onChange={e => setForm({...form, bestMoment: e.target.value})} className="input-field min-h-15" required />
               </div>
 
               {/* CREW */}

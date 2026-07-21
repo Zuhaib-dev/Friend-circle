@@ -59,7 +59,7 @@ export function OperatorCard({ op, index }: { op: Operator; index: number }) {
         </div>
 
         {/* Info / Flip */}
-        <div className="relative min-h-[88px]">
+        <div className="relative min-h-22">
           <AnimatePresence mode="wait" initial={false}>
             {!flip ? (
               <motion.div

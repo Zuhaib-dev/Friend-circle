@@ -102,7 +102,7 @@ export default function TestimonialsPage() {
           <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(oklch(0.13 0.01 60 / 0.4) 1px, transparent 1px)", backgroundSize: "16px 16px" }} />
         </motion.div>
         
-        <div className="max-w-[1400px] mx-auto relative z-10">
+        <div className="max-w-350 mx-auto relative z-10">
           <motion.div style={{ opacity: heroOpacity }} className="flex flex-col md:flex-row md:items-end justify-between gap-8">
             <div className="max-w-3xl">
               <motion.div 
@@ -165,7 +165,7 @@ export default function TestimonialsPage() {
       </div>
 
       {/* Grid Section */}
-      <section className="mx-auto max-w-[1400px] px-5 sm:px-8 py-16 sm:py-24">
+      <section className="mx-auto max-w-350 px-5 sm:px-8 py-16 sm:py-24">
         {/* We use a CSS masonry-like stagger by alternating col spans or margins */}
         <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
           {testimonials.map((t, i) => (

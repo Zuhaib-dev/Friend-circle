@@ -159,7 +159,7 @@ export function TopNav() {
                 aria-expanded={open}
               >
                 <Avatar name={user.name || "Operator"} src={user.image || undefined} size={24} />
-                <span className="mono-label hidden sm:inline max-w-[120px] truncate">{user.name?.split(" ")[0] || "Operator"}</span>
+                <span className="mono-label hidden sm:inline max-w-30 truncate">{user.name?.split(" ")[0] || "Operator"}</span>
                 <ChevronDown className={`h-3 w-3 transition-transform ${open ? "rotate-180" : ""}`} />
               </button>
 
@@ -179,7 +179,7 @@ export function TopNav() {
                       <div className="min-w-0 flex-1">
                         <div className="font-display text-base text-ink leading-tight truncate">{user.name}</div>
                         <div className="mono-label opacity-60 truncate">{user.email}</div>
-                        <div className="mt-1.5"><span className="mono-label text-signal text-[10px] tracking-wider border border-signal/40 px-1.5 py-[2px]">{user.role || 'USER'}</span></div>
+                        <div className="mt-1.5"><span className="mono-label text-signal text-[10px] tracking-wider border border-signal/40 px-1.5 py-0.5">{user.role || 'USER'}</span></div>
                       </div>
                     </div>
                     <div className="px-3 py-2 hairline-b border-ink/30 flex items-center justify-between mono-label">

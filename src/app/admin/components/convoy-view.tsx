@@ -221,7 +221,7 @@ export function ConvoyView() {
                     className="w-full hairline bg-bone pl-9 pr-3 py-2.5 font-mono text-sm focus:bg-acid/20 focus:outline-none"
                   />
                 </div>
-                <div className="hairline border-ink h-[250px] overflow-y-auto">
+                <div className="hairline border-ink h-62.5 overflow-y-auto">
                   {filteredUsers.map((u) => (
                     <button
                       key={u._id}
