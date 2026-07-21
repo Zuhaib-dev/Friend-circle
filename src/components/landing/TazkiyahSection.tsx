@@ -281,7 +281,7 @@ export function TazkiyahSection() {
             <div className="display-num text-[120px] leading-none my-2 tabular-nums">{count}</div>
             <div className="mono-label">SET / 33 · CYCLES {Math.floor(count / 33)}</div>
             <div className="grid grid-cols-3 gap-0 hairline border-ink mt-5">
-              <button onClick={() => setCount((c) => Math.max(0, c - 1))} className="hairline-r border-ink p-3 hover:brick hover:text-bone transition-colors mono-label flex items-center justify-center gap-1">
+              <button onClick={() => setCount((c) => Math.max(0, c - 1))} aria-label="Decrease count" className="hairline-r border-ink p-3 hover:brick hover:text-bone transition-colors mono-label flex items-center justify-center gap-1">
                 <Minus className="h-3.5 w-3.5" />
               </button>
               <button onClick={() => setCount(0)} className="hairline-r border-ink p-3 hover:bg-signal hover:text-bone transition-colors mono-label">RESET</button>
