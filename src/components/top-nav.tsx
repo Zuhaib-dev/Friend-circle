@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { LogIn, LogOut, User as UserIcon, Settings, ChevronDown, CircleDot, Menu, X, ShieldCheck, Image as ImageIcon, Radar, Terminal, Video as VideoIcon, Compass, Crosshair, Package, BookOpen, Database, Info, MessageSquare } from "lucide-react";
+import { LogIn, LogOut, User as UserIcon, Settings, ChevronDown, CircleDot, Menu, X, ShieldCheck, Image as ImageIcon, Radar, Terminal, Video as VideoIcon, Compass, Crosshair, Package, BookOpen, Database, Info, MessageSquare, FileText } from "lucide-react";
 import { useSession, signOut as doSignOut } from "next-auth/react";
 import { initialsOf } from "../lib/utils";
 import { QiblaDialog } from "@/components/QiblaDialog";
@@ -109,6 +109,7 @@ export function TopNav() {
       ]
     : [
         { href: "/tours", label: "ROUTES" },
+        { href: "/dispatches", label: "DISPATCHES" },
         { href: "/gallery", label: "FRAMES" },
         { href: "/surveillance", label: "FEEDS" },
         { href: "/live-ops", label: "LIVE-OPS" },
@@ -195,6 +196,7 @@ export function TopNav() {
                     <MenuItem icon={ImageIcon} label="GALLERY" code="03" onClick={() => { setOpen(false); navigate.push('/gallery'); }} />
                     <MenuItem icon={Database} label="MEMORY" code="04" onClick={() => { setOpen(false); navigate.push('/memory'); }} />
                     <MenuItem icon={VideoIcon} label="FEEDS" code="05" onClick={() => { setOpen(false); navigate.push('/surveillance'); }} />
+                    <MenuItem icon={FileText} label="DISPATCHES" code="05B" onClick={() => { setOpen(false); navigate.push('/dispatches'); }} />
                     
                     {/* Operations */}
                     <MenuItem icon={Crosshair} label="LIVE-OPS" code="06" onClick={() => { setOpen(false); navigate.push('/live-ops'); }} />

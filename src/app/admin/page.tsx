@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { Activity, Radar, ShieldCheck, Image as ImageIcon, Lock, Crosshair as CrosshairIcon, Users, Package, MapPin, Route, BarChart3 } from "lucide-react";
+import { Activity, Radar, ShieldCheck, Image as ImageIcon, Lock, Crosshair as CrosshairIcon, Users, Package, MapPin, Route, BarChart3, FileText } from "lucide-react";
 import { TopNav } from "@/components/top-nav";
 
 import { NavBtn, Row, type View, type Operator, type Intel, type LogEntry } from "./components/shared";
@@ -15,6 +15,7 @@ import { LoadoutView } from "./components/loadout-view";
 import { ConvoyView } from "./components/convoy-view";
 import { MemoriesView } from "./components/memories-view";
 import { AnalyticsView } from "./components/analytics-view";
+import { DispatchesView } from "./components/dispatches-view";
 
 // ---------- Seed data ----------
 const SEED_OPS: Operator[] = [
@@ -170,6 +171,7 @@ export default function AdminPage() {
             <NavBtn id="convoy" current={view} setView={setView} icon={Route} label="CONVOY" code="08" />
             <NavBtn id="memories" current={view} setView={setView} icon={MapPin} label="AAR LOGS" code="09" />
             <NavBtn id="analytics" current={view} setView={setView} icon={BarChart3} label="TELEMETRY / ANALYTICS" code="10" />
+            <NavBtn id="dispatches" current={view} setView={setView} icon={FileText} label="FIELD DISPATCHES" code="11" />
 
             <div className="mono-label opacity-50 px-2 pt-4 pb-1">// QUEUE</div>
             <div className="hairline border-ink/40 p-2 space-y-1.5">
@@ -298,6 +300,9 @@ export default function AdminPage() {
               )}
               {view === "analytics" && (
                 <AnalyticsView />
+              )}
+              {view === "dispatches" && (
+                <DispatchesView />
               )}
             </motion.div>
           </AnimatePresence>
