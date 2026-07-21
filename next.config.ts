@@ -31,6 +31,14 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "ik.imagekit.io", // ImageKit CDN (gallery, crew portraits, tour covers)
       },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com", // Unsplash images for dispatches/blogs
+      },
+      {
+        protocol: "https",
+        hostname: "picsum.photos", // Placeholder images
+      },
     ],
   },
 

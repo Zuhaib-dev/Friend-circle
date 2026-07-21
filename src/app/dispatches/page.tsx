@@ -140,6 +140,7 @@ export default function DispatchesPage() {
                     src={featuredPost.coverImage}
                     alt={featuredPost.title}
                     fill
+                    unoptimized
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     className="object-cover grayscale contrast-125 group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
                   />
@@ -249,6 +250,7 @@ export default function DispatchesPage() {
                         src={post.coverImage}
                         alt={post.title}
                         fill
+                        unoptimized
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         className="object-cover grayscale contrast-125 group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105"
                       />

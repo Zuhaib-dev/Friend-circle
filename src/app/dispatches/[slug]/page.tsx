@@ -257,6 +257,7 @@ export default function DispatchDetailPage({
               alt={dispatch.title}
               fill
               priority
+              unoptimized
               sizes="(max-width: 1024px) 100vw, 800px"
               className="object-cover contrast-125"
             />
