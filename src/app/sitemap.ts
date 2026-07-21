@@ -141,8 +141,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const dispatchRoutes: MetadataRoute.Sitemap = dispatches.map((dispatch: any) => ({
       url: `${BASE_URL}/dispatches/${dispatch.slug}`,
       lastModified: dispatch.updatedAt || dispatch.publishedAt || now,
-      changeFrequency: "monthly",
-      priority: 0.75,
+      changeFrequency: "weekly",
+      priority: 0.85,
     }));
 
     dynamicRoutes = [...memoryRoutes, ...dispatchRoutes];

@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions";
 import connectToDatabase from "@/lib/mongodb";
 import BlogPost from "@/models/BlogPost";
-import DispatchDetailClient from "@/app/dispatches/components/DispatchDetailClient";
+import { DispatchDetailClient } from "@/app/dispatches/components/DispatchDetailClient";
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://friendcirclee.netlify.app";
 
@@ -46,8 +46,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const title = `${dispatch.title} | Friend Circle`;
+  const title = `${dispatch.title} | Friend Circle Dispatches`;
   const url = `${BASE_URL}/dispatches/${dispatch.slug}`;
+  const keywords = Array.isArray(dispatch.tags)
+    ? dispatch.tags
+    : ["expedition", "kashmir", "field-notes", "outdoor-journal"];
 
   return {
     title,
@@ -55,30 +58,39 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     alternates: {
       canonical: url,
     },
-    keywords: dispatch.tags,
+    keywords,
+    authors: [{ name: dispatch.author?.name || "Zuhaib Rashid", url: dispatch.author?.socialHandle || "https://www.zuhaibrashid.com/" }],
     openGraph: {
       title,
       description: dispatch.summary,
       url,
-      siteName: "Friend Circle",
+      siteName: "Friend Circle Dispatches",
       type: "article",
       publishedTime: dispatch.publishedAt || dispatch.createdAt,
       modifiedTime: dispatch.updatedAt,
-      authors: dispatch.author?.name ? [dispatch.author.name] : undefined,
+      authors: [dispatch.author?.name || "Zuhaib Rashid"],
       images: dispatch.coverImage
         ? [
             {
               url: dispatch.coverImage,
               alt: dispatch.title,
+              width: 1200,
+              height: 630,
             },
           ]
-        : undefined,
+        : [
+            {
+              url: `${BASE_URL}/icon.png`,
+              alt: "Friend Circle Field Manual",
+            },
+          ],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description: dispatch.summary,
-      images: dispatch.coverImage ? [dispatch.coverImage] : undefined,
+      images: dispatch.coverImage ? [dispatch.coverImage] : [`${BASE_URL}/icon.png`],
+      creator: "@zuhaibrashid",
     },
   };
 }
@@ -95,19 +107,54 @@ export default async function DispatchDetailPage({ params }: PageProps) {
         "@type": "BlogPosting",
         headline: dispatch.title,
         description: dispatch.summary,
+        articleSection: dispatch.category,
+        keywords: Array.isArray(dispatch.tags) ? dispatch.tags.join(", ") : undefined,
         image: dispatch.coverImage ? [dispatch.coverImage] : undefined,
         datePublished: dispatch.publishedAt || dispatch.createdAt,
         dateModified: dispatch.updatedAt || dispatch.publishedAt || dispatch.createdAt,
         author: {
           "@type": "Person",
-          name: dispatch.author?.name || "Friend Circle",
+          name: dispatch.author?.name || "Zuhaib Rashid",
+          url: dispatch.author?.socialHandle || "https://www.zuhaibrashid.com/",
+          sameAs: ["https://www.zuhaibrashid.com/"],
         },
         publisher: {
           "@type": "Organization",
           name: "Friend Circle",
           url: BASE_URL,
+          logo: {
+            "@type": "ImageObject",
+            url: `${BASE_URL}/icon.png`,
+          },
         },
         mainEntityOfPage: `${BASE_URL}/dispatches/${dispatch.slug}`,
+      }
+    : null;
+
+  const breadcrumbJsonLd = dispatch
+    ? {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: BASE_URL,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Dispatches",
+            item: `${BASE_URL}/dispatches`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: dispatch.title,
+            item: `${BASE_URL}/dispatches/${dispatch.slug}`,
+          },
+        ],
       }
     : null;
 
@@ -117,6 +164,12 @@ export default async function DispatchDetailPage({ params }: PageProps) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+        />
+      )}
+      {breadcrumbJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
         />
       )}
       <DispatchDetailClient initialDispatch={dispatch} />
