@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import { TopNav } from "@/components/top-nav";
 import { FooterSection } from "@/components/landing/FooterSection";
+import { MarkdownRenderer } from "@/components/MarkdownRenderer";
 
 type Dispatch = {
   _id: string;
@@ -269,10 +270,8 @@ export default function DispatchDetailPage({
         )}
 
         {/* Article Body Content */}
-        <article className="prose max-w-none font-sans text-ink text-lg leading-relaxed space-y-6 pt-4 border-t border-ink/20">
-          <div className="whitespace-pre-line">
-            {dispatch.content}
-          </div>
+        <article className="max-w-none pt-4 border-t border-ink/20">
+          <MarkdownRenderer content={dispatch.content} />
         </article>
 
         {/* Tags Row */}

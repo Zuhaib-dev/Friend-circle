@@ -22,6 +22,7 @@ import {
   ExternalLink
 } from "lucide-react";
 import { uploadCompressedImageToImageKit } from "@/lib/image-upload";
+import { MarkdownRenderer } from "@/components/MarkdownRenderer";
 
 type DispatchItem = {
   _id: string;
@@ -547,8 +548,8 @@ export function DispatchesView() {
                     />
                   </div>
                 )}
-                <div className="prose max-w-none font-sans text-ink leading-relaxed whitespace-pre-line border-t border-ink/20 pt-6">
-                  {form.content}
+                <div className="border-t border-ink/20 pt-6">
+                  <MarkdownRenderer content={form.content} />
                 </div>
               </div>
             )}
