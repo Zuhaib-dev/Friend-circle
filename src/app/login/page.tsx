@@ -1,38 +1,42 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { motion } from "motion/react";
 import { Mail, Lock, ArrowRight, Loader2, KeyRound } from "lucide-react";
 import { AuthShell, AuthPanel, GoogleIcon, FieldRow, inputClass } from "@/components/auth-shell";
 
-export default function LoginPage() {
+function LoginContent() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const rawCallbackUrl = searchParams.get("callbackUrl") || searchParams.get("redirect") || "/";
+  const callbackUrl = rawCallbackUrl.startsWith("/") ? rawCallbackUrl : "/";
+
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
   const [loading, setLoading] = useState<"google" | "email" | null>(null);
 
   const onGoogle = async () => {
     setLoading("google");
-    await new Promise((r) => setTimeout(r, 1400));
-    await signIn("google", { callbackUrl: "/" });
+    await new Promise((r) => setTimeout(r, 1000));
+    await signIn("google", { callbackUrl });
     setLoading(null);
-    router.push("/");
   };
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading("email");
-    await new Promise((r) => setTimeout(r, 1100));
+    await new Promise((r) => setTimeout(r, 800));
     const res = await signIn("credentials", { redirect: false, email, password: pwd });
     if (res?.error) {
       setLoading(null);
       return alert(res.error);
     }
     setLoading(null);
-    router.push("/");
+    router.push(callbackUrl);
+    router.refresh();
   };
 
   return (
@@ -117,7 +121,7 @@ export default function LoginPage() {
             whileTap={{ scale: 0.99 }}
             type="submit"
             disabled={loading !== null}
-            className="w-full brick px-3 py-3 mono-label text-bone flex items-center justify-center gap-2 hover:bg-signal transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+            className="w-full brick px-3 py-3 mono-label text-bone flex items-center justify-center gap-2 hover:bg-signal transition-colors disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer"
           >
             {loading === "email" ? (
               <>
@@ -135,11 +139,25 @@ export default function LoginPage() {
 
         <div className="hairline-t border-ink/30 mt-6 pt-4 flex items-center justify-between mono-label">
           <span className="opacity-60">NEW OPERATOR?</span>
-          <Link href="/register" className="text-signal hover:underline flex items-center gap-1">
+          <Link href={`/register${callbackUrl !== '/' ? `?callbackUrl=${encodeURIComponent(callbackUrl)}` : ''}`} className="text-signal hover:underline flex items-center gap-1">
             REQUEST CLEARANCE <ArrowRight className="h-3 w-3" />
           </Link>
         </div>
       </AuthPanel>
     </AuthShell>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-bone flex items-center justify-center mono-label text-signal gap-2">
+          <Loader2 className="h-5 w-5 animate-spin" /> LOADING AUTHENTICATION…
+        </div>
+      }
+    >
+      <LoginContent />
+    </Suspense>
   );
 }

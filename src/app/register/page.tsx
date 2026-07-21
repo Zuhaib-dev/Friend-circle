@@ -1,15 +1,19 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { motion } from "motion/react";
 import { Mail, Lock, User, ArrowRight, Loader2, ShieldCheck } from "lucide-react";
 import { AuthShell, AuthPanel, GoogleIcon, FieldRow, inputClass } from "@/components/auth-shell";
 
-export default function RegisterPage() {
+function RegisterContent() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const rawCallbackUrl = searchParams.get("callbackUrl") || searchParams.get("redirect") || "/";
+  const callbackUrl = rawCallbackUrl.startsWith("/") ? rawCallbackUrl : "/";
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
@@ -18,10 +22,9 @@ export default function RegisterPage() {
 
   const onGoogle = async () => {
     setLoading("google");
-    await new Promise((r) => setTimeout(r, 1400));
-    await signIn("google", { callbackUrl: "/" });
+    await new Promise((r) => setTimeout(r, 1000));
+    await signIn("google", { callbackUrl });
     setLoading(null);
-    router.push("/");
   };
 
   const onSubmit = async (e: React.FormEvent) => {
@@ -43,8 +46,8 @@ export default function RegisterPage() {
       }
       
       setLoading(null);
-      router.push(`/verify-otp?email=${encodeURIComponent(email)}&name=${encodeURIComponent(name)}`);
-    } catch (err) {
+      router.push(`/verify-otp?email=${encodeURIComponent(email)}&name=${encodeURIComponent(name)}${callbackUrl !== '/' ? `&callbackUrl=${encodeURIComponent(callbackUrl)}` : ''}`);
+    } catch {
       setError("Network error. Please try again.");
       setLoading(null);
     }
@@ -59,15 +62,16 @@ export default function RegisterPage() {
             Enlist<span className="text-signal">.</span>
           </h1>
           <p className="font-display italic text-ink/70 mt-1">
-            Request your call-sign. The crew will brief you at sundown.
+            Apply for clearance. Full access unlocked upon verification.
           </p>
         </div>
 
+        {/* Google */}
         <button
           type="button"
           onClick={onGoogle}
           disabled={loading !== null}
-          className="w-full hairline bg-bone px-3 py-3 flex items-center justify-center gap-3 mono-label text-ink hover:bg-ink hover:text-bone transition-colors disabled:opacity-60 disabled:cursor-not-allowed group"
+          className="w-full hairline bg-bone px-3 py-3 flex items-center justify-center gap-3 mono-label text-ink hover:bg-ink hover:text-bone transition-colors disabled:opacity-60 disabled:cursor-not-allowed group relative overflow-hidden cursor-pointer"
         >
           {loading === "google" ? (
             <>
@@ -77,7 +81,7 @@ export default function RegisterPage() {
           ) : (
             <>
               <GoogleIcon className="h-4 w-4 transition-transform group-hover:scale-110" />
-              <span>ENLIST WITH GOOGLE</span>
+              <span>SIGN UP WITH GOOGLE</span>
               <ArrowRight className="h-3.5 w-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
             </>
           )}
@@ -85,27 +89,32 @@ export default function RegisterPage() {
 
         <div className="flex items-center gap-3 my-5">
           <div className="flex-1 hairline-t border-ink/30" />
-          <span className="mono-label opacity-60">OR / MANUAL DOSSIER</span>
+          <span className="mono-label opacity-60">OR / MANUAL FORM</span>
           <div className="flex-1 hairline-t border-ink/30" />
         </div>
 
+        {error && (
+          <div className="mb-4 p-3 hairline border-signal bg-signal/10 mono-label text-xs text-signal">
+            ⚠️ {error}
+          </div>
+        )}
+
         <form onSubmit={onSubmit} className="space-y-4">
-          <FieldRow label="FULL NAME" code="STR / 00">
+          <FieldRow label="FULL NAME" code="STR / 01">
             <div className="relative">
               <User className="h-3.5 w-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-signal" />
               <input
                 type="text"
                 required
-                minLength={2}
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="Aqib Hussain"
+                placeholder="Zuhaib Rashid"
                 className={`${inputClass} pl-9`}
               />
             </div>
           </FieldRow>
 
-          <FieldRow label="EMAIL" code="STR / 01">
+          <FieldRow label="EMAIL ADDRESS" code="STR / 02">
             <div className="relative">
               <Mail className="h-3.5 w-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-signal" />
               <input
@@ -119,59 +128,66 @@ export default function RegisterPage() {
             </div>
           </FieldRow>
 
-          <FieldRow label="PASSWORD" code="STR / 02">
+          <FieldRow label="CREATE PASSWORD" code="STR / 03">
             <div className="relative">
               <Lock className="h-3.5 w-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-signal" />
               <input
                 type="password"
                 required
-                minLength={8}
+                minLength={6}
                 value={pwd}
                 onChange={(e) => setPwd(e.target.value)}
-                placeholder="MIN · 8 CHARS"
+                placeholder="••••••••••••"
                 className={`${inputClass} pl-9`}
               />
             </div>
-            <div className="mono-label opacity-50 mt-1">USE 8+ CHARS · MIX SIGNAL & NOISE</div>
           </FieldRow>
 
-          {error && (
-            <motion.div
-              initial={{ opacity: 0, y: -4 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="hairline border-signal bg-signal/10 px-3 py-2 mono-label text-signal"
-            >
-              ⚠ {error}
-            </motion.div>
-          )}
+          <p className="mono-label text-[10px] opacity-60 pt-1">
+            By enlisting, you agree to the Kashmir Field Code of Conduct & Telemetry Terms.
+          </p>
 
           <motion.button
             whileTap={{ scale: 0.99 }}
             type="submit"
             disabled={loading !== null}
-            className="w-full brick px-3 py-3 mono-label text-bone flex items-center justify-center gap-2 hover:bg-signal transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+            className="w-full brick px-3 py-3 mono-label text-bone flex items-center justify-center gap-2 hover:bg-signal transition-colors disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer"
           >
             {loading === "email" ? (
               <>
                 <Loader2 className="h-4 w-4 animate-spin" />
-                FILING DOSSIER…
+                TRANSMITTING DOSSIER…
               </>
             ) : (
               <>
                 <ShieldCheck className="h-4 w-4" />
-                SUBMIT · REQUEST OTP
+                ENLIST · SUBMIT DOSSIER
               </>
             )}
           </motion.button>
         </form>
 
         <div className="hairline-t border-ink/30 mt-6 pt-4 flex items-center justify-between mono-label">
-          <span className="opacity-60">ALREADY ENLISTED?</span>
-          <Link href="/login" className="text-signal hover:underline flex items-center gap-1">
-            RETURN TO LOGIN <ArrowRight className="h-3 w-3" />
+          <span className="opacity-60">ALREADY CLEARANCE?</span>
+          <Link href={`/login${callbackUrl !== '/' ? `?callbackUrl=${encodeURIComponent(callbackUrl)}` : ''}`} className="text-signal hover:underline flex items-center gap-1">
+            LOGIN HERE <ArrowRight className="h-3 w-3" />
           </Link>
         </div>
       </AuthPanel>
     </AuthShell>
+  );
+}
+
+export default function RegisterPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-bone flex items-center justify-center mono-label text-signal gap-2">
+          <Loader2 className="h-5 w-5 animate-spin" /> LOADING ENLISTMENT…
+        </div>
+      }
+    >
+      <RegisterContent />
+    </Suspense>
   );
 }

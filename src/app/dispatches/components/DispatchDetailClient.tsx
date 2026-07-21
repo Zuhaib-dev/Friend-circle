@@ -659,7 +659,10 @@ export function DispatchDetailClient({
               <AlertTriangle className="h-3.5 w-3.5 shrink-0" />
               {reactionError}
               {!session?.user && (
-                <Link href="/login" className="underline font-bold ml-1 hover:text-ink">
+                <Link
+                  href={`/login?callbackUrl=${encodeURIComponent(`/dispatches/${dispatch.slug}`)}`}
+                  className="underline font-bold ml-1 hover:text-ink"
+                >
                   LOGIN HERE →
                 </Link>
               )}
@@ -788,7 +791,7 @@ export function DispatchDetailClient({
                 Log in with your account to participate in field conversations and post comments.
               </p>
               <Link
-                href="/login"
+                href={`/login?callbackUrl=${encodeURIComponent(`/dispatches/${dispatch.slug}`)}`}
                 className="inline-flex items-center gap-2 brick text-bone px-6 py-2.5 mono-label text-xs hover:bg-signal transition-colors"
               >
                 LOGIN TO TRANSMIT COMMENTS

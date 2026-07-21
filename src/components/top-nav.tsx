@@ -100,6 +100,15 @@ export function TopNav() {
   const pathname = usePathname();
   const isTazkiyah = pathname?.startsWith("/tazkiyah");
 
+  const loginHref =
+    pathname && pathname !== "/" && pathname !== "/login" && pathname !== "/register"
+      ? `/login?callbackUrl=${encodeURIComponent(pathname)}`
+      : "/login";
+  const registerHref =
+    pathname && pathname !== "/" && pathname !== "/login" && pathname !== "/register"
+      ? `/register?callbackUrl=${encodeURIComponent(pathname)}`
+      : "/register";
+
   const navLinks = isTazkiyah
     ? [
         { href: "/tazkiyah", label: "OVERVIEW" },
@@ -245,15 +254,15 @@ export function TopNav() {
           ) : (
             <>
               <Link
-                href="/login"
-                className="hidden sm:flex items-center gap-1.5 hairline border-ink px-3 py-1.5 mono-label hover:bg-ink hover:text-bone transition-colors"
+                href={loginHref}
+                className="hidden sm:flex items-center gap-1.5 hairline border-ink px-3 py-1.5 mono-label hover:bg-ink hover:text-bone transition-colors cursor-pointer"
               >
                 <LogIn className="h-3.5 w-3.5" />
                 LOGIN
               </Link>
               <Link
-                href="/register"
-                className="hidden sm:flex items-center gap-1.5 brick px-3 py-1.5 mono-label text-bone hover:bg-signal hover:border-signal transition-colors"
+                href={registerHref}
+                className="hidden sm:flex items-center gap-1.5 brick px-3 py-1.5 mono-label text-bone hover:bg-signal hover:border-signal transition-colors cursor-pointer"
               >
                 ENLIST
               </Link>
@@ -305,16 +314,16 @@ export function TopNav() {
               {!user && hydrated && (
                 <div className="p-3 grid grid-cols-2 gap-2">
                   <Link
-                    href="/login"
+                    href={loginHref}
                     onClick={() => setMobileOpen(false)}
-                    className="hairline border-ink px-3 py-2.5 mono-label text-center hover:bg-ink hover:text-bone transition-colors flex items-center justify-center gap-1.5"
+                    className="hairline border-ink px-3 py-2.5 mono-label text-center hover:bg-ink hover:text-bone transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
                   >
                     <LogIn className="h-3.5 w-3.5" /> LOGIN
                   </Link>
                   <Link
-                    href="/register"
+                    href={registerHref}
                     onClick={() => setMobileOpen(false)}
-                    className="brick px-3 py-2.5 mono-label text-bone text-center hover:bg-signal hover:border-signal transition-colors"
+                    className="brick px-3 py-2.5 mono-label text-bone text-center hover:bg-signal hover:border-signal transition-colors cursor-pointer"
                   >
                     ENLIST
                   </Link>
