@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions";
 import connectToDatabase from "@/lib/mongodb";
 import BlogPost from "@/models/BlogPost";
-import DispatchDetailClient from "../components/DispatchDetailClient";
+import DispatchDetailClient from "@/app/dispatches/components/DispatchDetailClient";
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://friendcirclee.netlify.app";
 
@@ -22,7 +22,7 @@ async function getDispatch(slug: string, incrementViews = false, allowUnpublishe
   }
 
   const operation = incrementViews
-    ? BlogPost.findOneAndUpdate(query, { $inc: { viewsCount: 1 } }, { new: true })
+    ? BlogPost.findOneAndUpdate(query, { $inc: { viewsCount: 1 } }, { returnDocument: "after" })
     : BlogPost.findOne(query);
 
   const dispatch = await operation

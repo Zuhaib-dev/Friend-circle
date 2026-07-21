@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import connectToDatabase from "@/lib/mongodb";
 import BlogPost from "@/models/BlogPost";
-import DispatchesClient from "./components/DispatchesClient";
+import DispatchesClient from "@/app/dispatches/components/DispatchesClient";
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://friendcirclee.netlify.app";
 

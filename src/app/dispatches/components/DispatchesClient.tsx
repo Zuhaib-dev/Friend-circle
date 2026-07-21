@@ -44,7 +44,7 @@ type DispatchItem = {
   featured?: boolean;
 };
 
-export default function DispatchesClient({
+export function DispatchesClient({
   initialDispatches,
 }: {
   initialDispatches: DispatchItem[];
@@ -301,3 +301,5 @@ export default function DispatchesClient({
     </div>
   );
 }
+
+export default DispatchesClient;

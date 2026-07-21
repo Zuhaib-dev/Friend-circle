@@ -45,7 +45,7 @@ export async function GET(
     const dispatch = await BlogPost.findOneAndUpdate(
       query,
       { $inc: { viewsCount: 1 } },
-      { new: true }
+      { returnDocument: 'after' }
     ).populate('author', 'name image role bio socialHandle');
 
     if (!dispatch) {
@@ -140,7 +140,7 @@ export async function PUT(
     const shouldNotifySubscribers = status === 'PUBLISHED' && existing.status !== 'PUBLISHED';
 
     const updated = await BlogPost.findByIdAndUpdate(existing._id, updateData, {
-      new: true,
+      returnDocument: 'after',
       runValidators: true,
     })
       .populate('author', 'name image role');

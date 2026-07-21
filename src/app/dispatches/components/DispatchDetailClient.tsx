@@ -51,7 +51,7 @@ type Dispatch = {
   };
 };
 
-export default function DispatchDetailClient({
+export function DispatchDetailClient({
   initialDispatch,
 }: {
   initialDispatch: Dispatch | null;
@@ -339,3 +339,6 @@ export default function DispatchDetailClient({
     </div>
   );
 }
+
+export default DispatchDetailClient;
+

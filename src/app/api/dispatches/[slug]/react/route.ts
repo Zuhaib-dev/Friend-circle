@@ -31,7 +31,7 @@ export async function POST(
           likesCount: 1,
         },
       },
-      { new: true }
+      { returnDocument: 'after' }
     );
 
     if (!updated) {
