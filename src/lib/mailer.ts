@@ -161,3 +161,38 @@ export async function sendBlogPublishedEmail({
     return { success: false, error };
   }
 }
+
+export async function sendWelcomeNewsletterEmail(email: string) {
+  const to = email.trim().toLowerCase();
+  let mailer;
+  try {
+    mailer = createTransporter();
+  } catch (error) {
+    console.error('[MAILER] Newsletter welcome email config error:', error);
+    return { success: false, error };
+  }
+
+  try {
+    const info = await mailer.transporter.sendMail({
+      from: `"Friend Circle Dispatches" <${mailer.config.user}>`,
+      to,
+      subject: `Welcome to Friend Circle Field Dispatches`,
+      text: `Welcome to Friend Circle Field Dispatches!\n\nYou are now subscribed to receive tactical notes, expedition logs, and stories from remote Kashmir.\n\nExplore current dispatches: https://friendcirclee.netlify.app/dispatches`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 640px; margin: 0 auto; padding: 24px; border: 1px solid #1c1917; background: #f5f5f4; color: #1c1917;">
+          <p style="font-family: monospace; color: #d43c1a; text-transform: uppercase; letter-spacing: .08em; font-weight: bold;">// SUBSCRIPTION CONFIRMED</p>
+          <h1 style="font-size: 28px; line-height: 1.1; margin: 8px 0 16px; text-transform: uppercase;">WELCOME TO THE FIELD MANUAL</h1>
+          <p style="font-size: 16px; line-height: 1.6; color: #44403c;">You are now subscribed to Friend Circle dispatches. Whenever Commander Zuhaib Rashid publishes a new expedition log or tactical notes from Kashmir, you will receive a direct dispatch right to your inbox.</p>
+          <a href="https://friendcirclee.netlify.app/dispatches" style="display: inline-block; margin-top: 20px; background: #1c1917; color: #f5f5f4; text-decoration: none; padding: 12px 20px; font-family: monospace; text-transform: uppercase; font-weight: bold;">EXPLORE FIELD DISPATCHES →</a>
+          <p style="margin-top: 24px; font-size: 12px; color: #78716c;">You received this because you subscribed to Friend Circle dispatches at friendcirclee.netlify.app.</p>
+        </div>
+      `,
+    });
+
+    return { success: true, messageId: info.messageId };
+  } catch (error) {
+    console.error('[MAILER] Error sending newsletter welcome email:', error);
+    return { success: false, error };
+  }
+}
+

@@ -10,6 +10,14 @@ export function NewsletterSignup() {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email || !emailRegex.test(email.trim())) {
+      setStatus("error");
+      setMessage("Please enter a valid email address.");
+      return;
+    }
+
     setStatus("loading");
     setMessage("");
 
@@ -27,7 +35,7 @@ export function NewsletterSignup() {
 
       setEmail("");
       setStatus("success");
-      setMessage("You're on the dispatch list.");
+      setMessage("Subscribed! Check your inbox for your welcome dispatch.");
     } catch (error: any) {
       setStatus("error");
       setMessage(error.message || "Unable to join newsletter");
