@@ -133,9 +133,101 @@ export function DispatchDetailClient({
       .finally(() => setLoadingComments(false));
   }, [dispatch?.slug]);
 
+  // TTS Narrator State
+  const [isReadingAloud, setIsReadingAloud] = useState(false);
+  const [isPausedTTS, setIsPausedTTS] = useState(false);
+
+  // Clean Markdown into plain readable text for TTS narrator
+  const getReadableText = (markdown: string, title: string, summary: string) => {
+    const cleanBody = (markdown || "")
+      .replace(/#{1,6}\s+/g, "") // remove headings
+      .replace(/\*{1,3}/g, "") // remove bold/italic asterisks
+      .replace(/`{1,3}[^`]*`{1,3}/g, "") // remove code blocks
+      .replace(/\[([^\]]+)\]\([^\)]+\)/g, "$1") // remove links
+      .replace(/>\s+/g, "") // remove blockquotes
+      .replace(/- \[[ x]\]\s+/g, "") // remove checkboxes
+      .replace(/[-*]\s+/g, "") // remove bullets
+      .replace(/\n{2,}/g, ". "); // replace newlines with pauses
+
+    return `${title}. ${summary}. ${cleanBody}`;
+  };
+
+  const handleToggleNarrator = () => {
+    if (typeof window === "undefined" || !("speechSynthesis" in window)) {
+      alert("Text-to-speech is not supported on this browser.");
+      return;
+    }
+
+    const synth = window.speechSynthesis;
+
+    if (isReadingAloud) {
+      if (synth.speaking) {
+        if (synth.paused) {
+          synth.resume();
+          setIsPausedTTS(false);
+        } else {
+          synth.pause();
+          setIsPausedTTS(true);
+        }
+      } else {
+        setIsReadingAloud(false);
+        setIsPausedTTS(false);
+      }
+      return;
+    }
+
+    // Stop any previous speech
+    synth.cancel();
+
+    if (!dispatch) return;
+
+    const plainText = getReadableText(dispatch.content, dispatch.title, dispatch.summary);
+    const utterance = new SpeechSynthesisUtterance(plainText);
+    utterance.rate = 0.95;
+    utterance.pitch = 1.0;
+
+    const voices = synth.getVoices();
+    const preferredVoice =
+      voices.find(
+        (v) =>
+          v.lang.startsWith("en") &&
+          (v.name.includes("Natural") ||
+            v.name.includes("Google") ||
+            v.name.includes("Samantha") ||
+            v.name.includes("Daniel"))
+      ) || voices.find((v) => v.lang.startsWith("en"));
+
+    if (preferredVoice) utterance.voice = preferredVoice;
+
+    utterance.onend = () => {
+      setIsReadingAloud(false);
+      setIsPausedTTS(false);
+    };
+
+    utterance.onerror = () => {
+      setIsReadingAloud(false);
+      setIsPausedTTS(false);
+    };
+
+    synth.speak(utterance);
+    setIsReadingAloud(true);
+    setIsPausedTTS(false);
+  };
+
+  const handleStopNarrator = () => {
+    if (typeof window !== "undefined" && "speechSynthesis" in window) {
+      window.speechSynthesis.cancel();
+    }
+    setIsReadingAloud(false);
+    setIsPausedTTS(false);
+  };
+
   useEffect(() => {
     return () => {
       audioObj?.pause();
+      if (typeof window !== "undefined" && "speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+      }
     };
   }, [audioObj]);
 
@@ -359,23 +451,62 @@ export function DispatchDetailClient({
             </div>
           </a>
 
-          {/* Audio Memo Action */}
-          {dispatch.audioMemoUrl && (
+          {/* Audio & Narrator Actions */}
+          <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto">
+            {/* Audio Voice Memo MP3 Player */}
+            {dispatch.audioMemoUrl && (
+              <button
+                onClick={toggleAudio}
+                className="flex items-center gap-2 brick px-4 py-2 text-bone mono-label text-xs hover:bg-signal transition-colors cursor-pointer"
+              >
+                {isPlayingAudio ? (
+                  <>
+                    <VolumeX className="h-4 w-4 animate-pulse text-signal font-bold" /> PAUSE VOICE MEMO
+                  </>
+                ) : (
+                  <>
+                    <Volume2 className="h-4 w-4" /> PLAY AUDIO MEMO
+                  </>
+                )}
+              </button>
+            )}
+
+            {/* AI Text-To-Speech Narrator Button */}
             <button
-              onClick={toggleAudio}
-              className="flex items-center gap-2 brick px-4 py-2 text-bone mono-label text-xs hover:bg-signal transition-colors self-start sm:self-auto cursor-pointer"
+              onClick={handleToggleNarrator}
+              className={`flex items-center gap-2 px-4 py-2 mono-label text-xs transition-colors cursor-pointer ${
+                isReadingAloud
+                  ? "bg-signal text-bone font-bold"
+                  : "brick text-bone hover:bg-signal"
+              }`}
             >
-              {isPlayingAudio ? (
-                <>
-                  <VolumeX className="h-4 w-4 animate-pulse text-signal font-bold" /> PAUSE VOICE MEMO
-                </>
+              {isReadingAloud ? (
+                isPausedTTS ? (
+                  <>
+                    <Volume2 className="h-4 w-4 opacity-75" /> RESUME NARRATOR
+                  </>
+                ) : (
+                  <>
+                    <VolumeX className="h-4 w-4 animate-pulse" /> PAUSE NARRATOR
+                  </>
+                )
               ) : (
                 <>
-                  <Volume2 className="h-4 w-4" /> PLAY AUDIO MEMO
+                  <Volume2 className="h-4 w-4" /> READ DISPATCH ALOUD
                 </>
               )}
             </button>
-          )}
+
+            {isReadingAloud && (
+              <button
+                onClick={handleStopNarrator}
+                className="bg-paper hairline border-ink text-ink hover:bg-ink hover:text-bone px-3 py-2 mono-label text-xs transition-colors cursor-pointer"
+                title="Stop Narrator"
+              >
+                STOP
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Cover Image */}
