@@ -29,6 +29,8 @@ type DispatchItem = {
     name?: string;
     image?: string;
     role?: string;
+    bio?: string;
+    socialHandle?: string;
   };
   publishedAt?: string;
   createdAt: string;

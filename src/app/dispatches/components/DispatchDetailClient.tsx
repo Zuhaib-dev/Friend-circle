@@ -12,6 +12,7 @@ import {
   Share2,
   Check,
   Radio,
+  ExternalLink,
 } from "lucide-react";
 import { TopNav } from "@/components/top-nav";
 import { FooterSection } from "@/components/landing/FooterSection";
@@ -32,6 +33,7 @@ type Dispatch = {
     image?: string;
     role?: string;
     bio?: string;
+    socialHandle?: string;
   };
   publishedAt?: string;
   createdAt: string;
@@ -199,14 +201,20 @@ export function DispatchDetailClient({
 
         {/* Author Badge & Audio Voice Memo Bar */}
         <div className="hairline border-ink bg-bone p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
+          <a
+            href={dispatch.author?.socialHandle || "https://www.zuhaibrashid.com/"}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 group/author"
+            title="Visit Author Profile (zuhaibrashid.com)"
+          >
             {dispatch.author?.image ? (
               <Image
                 src={dispatch.author.image}
                 alt={dispatch.author.name || "Author"}
-                width={40}
-                height={40}
-                className="rounded-none hairline border-ink object-cover"
+                width={42}
+                height={42}
+                className="rounded-none hairline border-ink object-cover group-hover/author:border-signal transition-colors"
               />
             ) : (
               <div className="h-10 w-10 brick text-bone grid place-items-center mono-label text-xs">
@@ -214,14 +222,15 @@ export function DispatchDetailClient({
               </div>
             )}
             <div>
-              <div className="font-display font-bold text-base leading-tight">
+              <div className="font-display font-bold text-base leading-tight group-hover/author:text-signal transition-colors flex items-center gap-1.5">
                 {dispatch.author?.name || "Zuhaib Rashid"}
+                <ExternalLink className="h-3 w-3 opacity-60 group-hover/author:opacity-100" />
               </div>
               <div className="mono-label text-[10px] opacity-60">
                 {dispatch.author?.role || "COMMANDER"} · {new Date(dispatch.publishedAt || dispatch.createdAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
               </div>
             </div>
-          </div>
+          </a>
 
           {/* Audio Memo Action */}
           {dispatch.audioMemoUrl && (
@@ -322,6 +331,51 @@ export function DispatchDetailClient({
               <span className="font-mono">{reactions.copied}</span>
             </button>
           </div>
+        </section>
+
+        {/* Author Bio Box */}
+        <section className="hairline border-ink bg-paper p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 shadow-[4px_4px_0_0_oklch(0.13_0.01_60)]">
+          <div className="flex items-center gap-4">
+            <a
+              href={dispatch.author?.socialHandle || "https://www.zuhaibrashid.com/"}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image
+                src={dispatch.author?.image || "https://lh3.googleusercontent.com/a/ACg8ocKLXWy8hu2kdBVZZKmeyKx-sFkSVY9Htu8DzMLD_5bWgAplykU=s96-c"}
+                alt="Zuhaib Rashid"
+                width={56}
+                height={56}
+                className="hairline border-ink object-cover hover:border-signal transition-colors"
+              />
+            </a>
+            <div>
+              <div className="mono-label text-[10px] text-signal font-bold">AUTHOR // COMMANDER</div>
+              <h4 className="font-display font-bold text-xl uppercase leading-tight mt-0.5">
+                <a
+                  href={dispatch.author?.socialHandle || "https://www.zuhaibrashid.com/"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-signal transition-colors flex items-center gap-1.5"
+                >
+                  {dispatch.author?.name || "Zuhaib Rashid"}
+                  <ExternalLink className="h-4 w-4 text-signal" />
+                </a>
+              </h4>
+              <p className="font-serif text-sm text-ink/75 mt-1 max-w-lg">
+                {dispatch.author?.bio || "Lead Commander at Friend Circle. Documenting Kashmir expeditions, offroad routes, and mountain reflections."}
+              </p>
+            </div>
+          </div>
+
+          <a
+            href={dispatch.author?.socialHandle || "https://www.zuhaibrashid.com/"}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="brick text-bone px-4 py-2.5 mono-label text-xs hover:bg-signal transition-colors shrink-0 flex items-center gap-2"
+          >
+            VISIT ZUHAIBRASHID.COM <ExternalLink className="h-3.5 w-3.5" />
+          </a>
         </section>
 
         {/* Back Link */}
