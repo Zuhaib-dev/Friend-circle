@@ -57,7 +57,7 @@ export function NewsletterSignup() {
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="w-full md:w-[360px] space-y-2">
+        <form onSubmit={handleSubmit} className="w-full md:w-90 space-y-2">
           <div className="flex hairline border-ink bg-paper">
             <label htmlFor="newsletter-email" className="sr-only">
               Email address

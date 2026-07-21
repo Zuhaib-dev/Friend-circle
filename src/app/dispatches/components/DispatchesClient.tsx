@@ -122,7 +122,7 @@ export function DispatchesClient({
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 md:px-8 py-10 space-y-12">
         {/* Featured Dispatch Banner */}
         {!loading && featuredPost && (
-          <section className="hairline border-ink bg-bone crosshair p-6 md:p-10 relative overflow-hidden group shadow-[6px_6px_0_0_oklch(0.13_0.01_60)]">
+          <section className="hairline border-ink bg-bone crosshair p-6 md:p-10 overflow-hidden group shadow-[6px_6px_0_0_oklch(0.13_0.01_60)]">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               {/* Cover Image */}
               <div className="lg:col-span-6 relative aspect-16/10 bg-paper hairline border-ink overflow-hidden">
@@ -235,7 +235,7 @@ export function DispatchesClient({
               >
                 <div>
                   {/* Thumbnail / Cover */}
-                  <div className="relative aspect-16/9 bg-paper hairline-b border-ink overflow-hidden">
+                  <div className="relative aspect-video bg-paper hairline-b border-ink overflow-hidden">
                     {post.coverImage ? (
                       <Image
                         src={post.coverImage}

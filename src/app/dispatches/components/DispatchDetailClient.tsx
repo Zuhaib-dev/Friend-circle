@@ -248,7 +248,7 @@ export function DispatchDetailClient({
 
         {/* Cover Image */}
         {dispatch.coverImage && (
-          <div className="relative aspect-16/9 bg-paper hairline border-ink crosshair overflow-hidden">
+          <div className="aspect-video bg-paper hairline border-ink crosshair overflow-hidden">
             <Image
               src={dispatch.coverImage}
               alt={dispatch.title}
