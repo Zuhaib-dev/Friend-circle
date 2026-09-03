@@ -132,7 +132,7 @@ export default function CrewPage() {
       </section>
 
       {/* Command strip — terminal search */}
-      <section className="sticky top-[44px] z-40 bg-bone hairline-b border-ink">
+      <section className="sticky top-11 z-40 bg-bone hairline-b border-ink">
         <div className="px-4 md:px-8 py-3 flex flex-col md:flex-row md:items-center gap-3">
           <div className="flex items-center gap-2 mono-label text-signal">
             <Radio className="h-3.5 w-3.5 animate-pulse" />
@@ -173,7 +173,7 @@ export default function CrewPage() {
       </section>
 
       {/* Roster grid */}
-      <section className="px-4 md:px-8 py-8 min-h-[400px]">
+      <section className="px-4 md:px-8 py-8 min-h-100">
         {filtered.length === 0 && crew.length > 0 ? (
           <EmptyState query={query} />
         ) : (
@@ -290,7 +290,7 @@ function DossierCard({ member, index, isMe }: { member: CrewMember; index: numbe
           </Link>
         </h2>
         <div className="flex items-center justify-between gap-2 mt-1 mb-2">
-          <span className={`mono-label hairline border-ink px-1.5 py-[2px] ${isAdmin ? "bg-signal text-bone border-signal" : ""}`}>
+          <span className={`mono-label hairline border-ink px-1.5 py-0.5 ${isAdmin ? "bg-signal text-bone border-signal" : ""}`}>
             [ {displayRole} ]
           </span>
           <a
@@ -358,7 +358,7 @@ function DossierCard({ member, index, isMe }: { member: CrewMember; index: numbe
         variants={{ hover: { scaleX: 1 } }}
         initial={{ scaleX: 0 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className="absolute bottom-0 left-0 right-0 h-[2px] bg-signal origin-left z-20"
+        className="absolute bottom-0 left-0 right-0 h-0.5 bg-signal origin-left z-20"
       />
     </motion.article>
   );

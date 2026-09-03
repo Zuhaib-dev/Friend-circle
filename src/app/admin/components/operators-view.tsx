@@ -66,7 +66,7 @@ function OperatorRow({
       className="hairline border-ink/40 group relative overflow-hidden flex flex-col"
     >
       <motion.span
-        className="absolute left-0 top-0 bottom-0 w-[2px] bg-signal"
+        className="absolute left-0 top-0 bottom-0 w-0.5 bg-signal"
         initial={{ scaleY: 0 }}
         whileHover={{ scaleY: 1 }}
         style={{ transformOrigin: "top" }}

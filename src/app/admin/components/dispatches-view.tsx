@@ -369,7 +369,7 @@ export function DispatchesView() {
                 {/* Cover Image Settings */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 hairline border-ink/40 p-4 bg-bone">
                   <div>
-                    <label className="mono-label block text-xs mb-1 flex items-center gap-1.5">
+                    <label className="mono-label text-xs mb-1 flex items-center gap-1.5">
                       <LinkIcon className="h-3.5 w-3.5 text-signal" /> COVER IMAGE URL
                     </label>
                     <input
@@ -382,7 +382,7 @@ export function DispatchesView() {
                   </div>
 
                   <div>
-                    <label className="mono-label block text-xs mb-1 flex items-center gap-1.5">
+                    <label className="mono-label text-xs mb-1 flex items-center gap-1.5">
                       <Upload className="h-3.5 w-3.5 text-signal" /> OR UPLOAD FILE TO IMAGEKIT
                     </label>
                     <input
@@ -403,7 +403,7 @@ export function DispatchesView() {
                 {/* Optional Voice Memo URL & Tags */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="mono-label block text-xs mb-1 flex items-center gap-1.5">
+                    <label className="mono-label text-xs mb-1 flex items-center gap-1.5">
                       <Volume2 className="h-3.5 w-3.5 text-signal" /> AUDIO MEMO URL (OPTIONAL MP3)
                     </label>
                     <input
@@ -416,7 +416,7 @@ export function DispatchesView() {
                   </div>
 
                   <div>
-                    <label className="mono-label block text-xs mb-1 flex items-center gap-1.5">
+                    <label className="mono-label text-xs mb-1 flex items-center gap-1.5">
                       <Tag className="h-3.5 w-3.5 text-signal" /> TAGS (COMMA SEPARATED)
                     </label>
                     <input
@@ -554,7 +554,7 @@ export function DispatchesView() {
                 </h1>
                 <p className="font-display italic text-xl text-ink/70">{form.summary}</p>
                 {form.coverImage && (
-                  <div className="aspect-16/9 relative overflow-hidden hairline border-ink">
+                  <div className="aspect-video relative overflow-hidden hairline border-ink">
                     <img
                       src={form.coverImage}
                       alt="Cover"
