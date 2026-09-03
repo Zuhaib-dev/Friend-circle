@@ -4,7 +4,7 @@ import { authOptions } from '@/lib/authOptions';
 import connectToDatabase from '@/lib/mongodb';
 import Post from '@/models/Post';
 
-export async function POST(req: Request, { params }: { params: { id: string } }) {
+export async function POST(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
     const session = await getServerSession(authOptions);
     if (!session || !session.user) {
@@ -12,7 +12,7 @@ export async function POST(req: Request, { params }: { params: { id: string } })
     }
 
     await connectToDatabase();
-    const { id } = params; // Post ID
+    const { id } = await params; // Post ID
     const currentUserId = (session.user as any).id;
 
     await Post.updateOne(
@@ -27,7 +27,7 @@ export async function POST(req: Request, { params }: { params: { id: string } })
   }
 }
 
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+export async function DELETE(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
     const session = await getServerSession(authOptions);
     if (!session || !session.user) {
@@ -35,7 +35,7 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
     }
 
     await connectToDatabase();
-    const { id } = params;
+    const { id } = await params;
     const currentUserId = (session.user as any).id;
 
     await Post.updateOne(

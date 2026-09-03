@@ -4,11 +4,11 @@ import User from '@/models/User';
 import Post from '@/models/Post';
 import Follow from '@/models/Follow';
 
-export async function GET(req: Request, { params }: { params: { id: string } }) {
+export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
     await connectToDatabase();
     
-    const { id } = params;
+    const { id } = await params;
 
     const user = await User.findById(id).select('name image role phone socialHandle bio');
     if (!user) {

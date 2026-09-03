@@ -23,7 +23,7 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
   }
 }
 
-export async function POST(req: Request, { params }: { params: { id: string } }) {
+export async function POST(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
     const session = await getServerSession(authOptions);
     if (!session || !session.user) {
@@ -31,7 +31,7 @@ export async function POST(req: Request, { params }: { params: { id: string } })
     }
 
     await connectToDatabase();
-    const { id } = params; // Target user to follow
+    const { id } = await params; // Target user to follow
     const currentUserId = (session.user as any).id;
 
     if (id === currentUserId) {
@@ -51,7 +51,7 @@ export async function POST(req: Request, { params }: { params: { id: string } })
   }
 }
 
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+export async function DELETE(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
     const session = await getServerSession(authOptions);
     if (!session || !session.user) {
@@ -59,7 +59,7 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
     }
 
     await connectToDatabase();
-    const { id } = params;
+    const { id } = await params;
     const currentUserId = (session.user as any).id;
 
     await Follow.deleteOne({ follower: currentUserId, following: id });
