@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { CheckCircle2, XCircle, Inbox, ChevronDown, ChevronUp, ExternalLink, Phone } from "lucide-react";
 import { Panel, EmptyState, fmtAgo, type Operator } from "./shared";
 import Image from "next/image";
+import Link from "next/link";
 
 export function OperatorsView({
   operators,
@@ -146,6 +147,10 @@ function OperatorRow({
                       </a>
                     </div>
                   )}
+                  <Link href={`/crew/${op.id}`} className="flex items-center gap-1.5 mono-label text-xs hover:text-signal hover:underline">
+                    <ExternalLink className="h-3 w-3" />
+                    VIEW DOSSIER
+                  </Link>
                 </div>
               </div>
             </div>

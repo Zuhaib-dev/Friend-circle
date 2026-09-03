@@ -1,8 +1,10 @@
 "use client";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { ShieldAlert, ShieldCheck, Users, Search, Ban } from "lucide-react";
+import { ShieldAlert, ShieldCheck, Users, Search, Ban, ExternalLink } from "lucide-react";
 import { Panel, EmptyState } from "./shared";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 type UserData = {
   _id: string;
@@ -17,6 +19,7 @@ export function PersonnelView() {
   const [users, setUsers] = useState<UserData[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
+  const router = useRouter();
 
   useEffect(() => {
     fetch("/api/admin/users?view=all")
@@ -79,7 +82,7 @@ export function PersonnelView() {
       ) : (
         <div className="space-y-2">
           {/* Header row */}
-          <div className="hidden md:grid grid-cols-[1fr_1fr_120px_100px_140px] gap-3 px-3 py-2 hairline-b border-ink/40 mono-label opacity-60 text-xs">
+          <div className="hidden md:grid grid-cols-[1fr_1fr_120px_100px_180px] gap-3 px-3 py-2 hairline-b border-ink/40 mono-label opacity-60 text-xs">
             <span>NAME / ID</span>
             <span>EMAIL</span>
             <span>ROLE</span>
@@ -95,9 +98,10 @@ export function PersonnelView() {
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95 }}
-                className={`hairline border-ink/40 group relative overflow-hidden ${user.isSuspended ? 'bg-ink/5' : ''}`}
+                onClick={() => router.push(`/crew/${user._id}`)}
+                className={`hairline border-ink/40 group relative overflow-hidden cursor-pointer hover:bg-ink/5 ${user.isSuspended ? 'bg-ink/5' : ''}`}
               >
-                <div className="grid grid-cols-2 md:grid-cols-[1fr_1fr_120px_100px_140px] gap-3 items-center px-3 py-3">
+                <div className="grid grid-cols-2 md:grid-cols-[1fr_1fr_120px_100px_180px] gap-3 items-center px-3 py-3">
                   <div className="min-w-0">
                     <div className="font-display text-lg leading-tight truncate">
                       {user.name}
@@ -129,7 +133,13 @@ export function PersonnelView() {
                     )}
                   </span>
 
-                  <div className="col-span-2 md:col-span-1 flex gap-2 justify-end mt-2 md:mt-0">
+                  <div className="col-span-2 md:col-span-1 flex gap-2 justify-end mt-2 md:mt-0" onClick={e => e.stopPropagation()}>
+                    <Link
+                      href={`/crew/${user._id}`}
+                      className="hairline border-ink px-2.5 py-1.5 mono-label hover:bg-ink hover:text-bone transition-colors flex items-center gap-1.5"
+                    >
+                      <ExternalLink className="h-3 w-3" /> DOSSIER
+                    </Link>
                     <button
                       onClick={() => handleToggleSuspend(user)}
                       disabled={user.role === 'ADMIN'}
