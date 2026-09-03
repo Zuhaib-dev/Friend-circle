@@ -19,26 +19,11 @@ type CrewMember = {
   socialHandle?: string;
 };
 
-export function CrewSection() {
-  const { data: session } = useSession();
-  const myEmail = session?.user?.email?.toLowerCase();
+export function CrewSection({ initialCrew = [], sessionEmail = null }: { initialCrew?: CrewMember[], sessionEmail?: string | null }) {
   const router = useRouter();
-
-  const [crew, setCrew] = useState<CrewMember[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [crew, setCrew] = useState<CrewMember[]>(initialCrew);
   const [expanded, setExpanded] = useState(false);
-
   const VISIBLE = 6;
-
-  useEffect(() => {
-    fetch("/api/crew")
-      .then((r) => r.json())
-      .then((data) => {
-        if (Array.isArray(data)) setCrew(data);
-      })
-      .catch(console.error)
-      .finally(() => setLoading(false));
-  }, []);
 
   // Sort: ADMIN first → logged-in user second → rest by insertion order
   const sorted = useMemo(() => {
@@ -46,11 +31,11 @@ export function CrewSection() {
       const aAdmin = a.role === "ADMIN" ? 0 : 1;
       const bAdmin = b.role === "ADMIN" ? 0 : 1;
       if (aAdmin !== bAdmin) return aAdmin - bAdmin;
-      const aMe = myEmail && a.email.toLowerCase() === myEmail ? 0 : 1;
-      const bMe = myEmail && b.email.toLowerCase() === myEmail ? 0 : 1;
+      const aMe = sessionEmail && a.email.toLowerCase() === sessionEmail ? 0 : 1;
+      const bMe = sessionEmail && b.email.toLowerCase() === sessionEmail ? 0 : 1;
       return aMe - bMe;
     });
-  }, [crew, myEmail]);
+  }, [crew, sessionEmail]);
 
   const displayed = expanded ? sorted : sorted.slice(0, VISIBLE);
   const hasMore = sorted.length > VISIBLE;
@@ -65,30 +50,13 @@ export function CrewSection() {
       />
 
       {/* Grid */}
-      {loading ? (
-        /* Skeleton */
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 hairline border-ink">
-          {Array.from({ length: 6 }).map((_, i) => (
-            <div
-              key={i}
-              className={`p-5 bg-bone animate-pulse
-                ${(i + 1) % 3 !== 0 ? "lg:hairline-r" : ""}
-                ${(i + 1) % 2 !== 0 ? "md:hairline-r" : ""}
-                hairline-b border-ink/50`}
-            >
-              <div className="aspect-4/5 bg-ink/8 mb-4" />
-              <div className="h-8 w-32 bg-ink/8 mb-2" />
-              <div className="h-4 w-20 bg-ink/8" />
-            </div>
-          ))}
-        </div>
-      ) : (
-        <>
+      {/* Grid */}
+      <>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 hairline border-ink">
             <AnimatePresence mode="popLayout">
               {displayed.map((c, i) => {
                 const isAdmin = c.role === "ADMIN";
-                const isMe = myEmail && c.email.toLowerCase() === myEmail;
+                const isMe = sessionEmail && c.email.toLowerCase() === sessionEmail;
                 const padded = String(i + 1).padStart(2, "0");
                 return (
                   <motion.article
@@ -99,7 +67,7 @@ export function CrewSection() {
                     exit={{ opacity: 0, scale: 0.96 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-40px" }}
-                    transition={{ duration: 0.4, delay: i * 0.06, ease: "easeOut" }}
+                    transition={{ duration: 0.25, delay: i * 0.04, ease: "easeOut" }}
                     onClick={() => router.push(`/crew/${c._id}`)}
                     className={`relative p-5 bg-bone group cursor-pointer
                       ${(i + 1) % 3 !== 0 ? "lg:hairline-r" : ""}
@@ -114,8 +82,9 @@ export function CrewSection() {
                           src={c.image}
                           alt={c.name}
                           fill
+                          priority={i < 3}
                           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                          className="object-cover transition-transform duration-700 group-hover:scale-105"
+                          className="object-cover transition-transform duration-500 group-hover:scale-105"
                         />
                       ) : (
                         <>
@@ -227,7 +196,6 @@ export function CrewSection() {
             </Link>
           </div>
         </>
-      )}
     </section>
   );
 }

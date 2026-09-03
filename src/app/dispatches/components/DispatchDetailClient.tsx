@@ -517,7 +517,7 @@ export function DispatchDetailClient({
                   value={selectedVoiceURI}
                   onChange={(e) => setSelectedVoiceURI(e.target.value)}
                   disabled={isReadingAloud}
-                  className="bg-transparent outline-none cursor-pointer max-w-[150px] truncate"
+                  className="bg-transparent outline-none cursor-pointer max-w-37.5 truncate"
                   title="Select AI Narrator Voice"
                 >
                   {availableVoices.map((v) => (
@@ -866,7 +866,7 @@ export function DispatchDetailClient({
                         <button
                           onClick={() => handleDeleteComment(comment._id)}
                           disabled={deletingCommentId === comment._id}
-                          className="mono-label text-[10px] text-ink/40 hover:text-signal transition-colors p-1 cursor-pointer flex items-center gap-1"
+                          className="mono-label text-[10px] text-ink/40 hover:text-signal transition-colors p-1 cursor-pointer flex items-center gap-1 max-w-37.5"
                           title="Delete comment"
                         >
                           {deletingCommentId === comment._id ? (

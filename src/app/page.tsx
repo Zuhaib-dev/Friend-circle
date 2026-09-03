@@ -12,14 +12,39 @@ import { FAQSection } from "@/components/landing/FAQSection";
 import { JoinSection } from "@/components/landing/JoinSection";
 import { FooterSection } from "@/components/landing/FooterSection";
 
-export default function LandingPage() {
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/authOptions";
+import connectToDatabase from "@/lib/mongodb";
+import User from "@/models/User";
+
+export default async function LandingPage() {
+  const session = await getServerSession(authOptions);
+  
+  await connectToDatabase();
+  const crewDocs = await User.find({
+    $or: [
+      { role: 'ADMIN' },
+      { role: 'TEAM_MEMBER', teamMemberStatus: 'APPROVED' }
+    ]
+  }).select('name email image role socialHandle bio').lean();
+  
+  const initialCrew = crewDocs.map(c => ({
+    _id: c._id.toString(),
+    name: c.name,
+    email: c.email,
+    role: c.role as "TEAM_MEMBER" | "ADMIN",
+    image: c.image || undefined,
+    bio: c.bio || undefined,
+    socialHandle: c.socialHandle || undefined,
+  }));
+
   return (
     <main className="text-ink">
       <TopBar />
       <Hero />
       <Ticker />
       <StatsRow />
-      <CrewSection />
+      <CrewSection initialCrew={initialCrew} sessionEmail={session?.user?.email || null} />
       <ToursSection />
       <SurveillanceSection />
       <TelemetrySection />

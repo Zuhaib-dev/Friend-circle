@@ -104,13 +104,13 @@ export default function RootLayout({
         <AuthProvider>
           <NextTopLoader 
             color="#E53E1F"
-            initialPosition={0.08}
-            crawlSpeed={200}
-            height={3}
+            initialPosition={0.2}
+            crawlSpeed={150}
+            height={4}
             crawl={true}
             showSpinner={false}
             easing="ease"
-            speed={200}
+            speed={150}
             shadow="0 0 10px #E53E1F,0 0 5px #E53E1F"
             zIndex={1600}
           />
