@@ -43,8 +43,8 @@ export async function POST(req: Request) {
 
     await connectToDatabase();
 
-    // Posts created by admins are auto-approved. Team member posts require review.
-    const initialStatus = role === 'ADMIN' ? 'APPROVED' : 'PENDING';
+    // Posts created by admins and team members are auto-approved.
+    const initialStatus = (role === 'ADMIN' || role === 'TEAM_MEMBER') ? 'APPROVED' : 'PENDING';
 
     const newPost = await Post.create({
       author: (session.user as any).id,

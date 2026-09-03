@@ -6,6 +6,7 @@ export interface IPost extends Document {
   imageKitFileId?: string;
   caption?: string;
   status: 'PENDING' | 'APPROVED' | 'REJECTED';
+  likes: mongoose.Types.ObjectId[];
 }
 
 const PostSchema: Schema = new Schema(
@@ -30,6 +31,10 @@ const PostSchema: Schema = new Schema(
       enum: ['PENDING', 'APPROVED', 'REJECTED'],
       default: 'PENDING',
     },
+    likes: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+    }],
   },
   { timestamps: true }
 );

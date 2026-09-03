@@ -16,7 +16,9 @@ import {
   AtSign,
 } from "lucide-react";
 import { TopNav } from "@/components/top-nav";
+import { BottomNav } from "@/components/bottom-nav";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 // Crosshairs component for the corners
 function Crosshairs() {
@@ -187,14 +189,15 @@ export default function CrewPage() {
         )}
       </section>
 
-      {/* Footer */}
-      <footer className="hairline-t border-ink px-4 md:px-8 py-4 mono-label flex items-center justify-between flex-wrap gap-3">
+      <footer className="hairline-t border-ink px-4 md:px-8 py-4 mono-label flex items-center justify-between flex-wrap gap-3 pb-20 md:pb-4">
         <span className="flex items-center gap-2 opacity-70">
           <Activity className="h-3 w-3 text-signal" />
           REGISTRY / v4.2 · ENCRYPTED CHANNEL
         </span>
         <span className="opacity-60">CLEARANCE LVL 3 · {utc}</span>
       </footer>
+
+      <BottomNav />
     </main>
   );
 }
@@ -278,7 +281,10 @@ function DossierCard({ member, index, isMe }: { member: CrewMember; index: numbe
       {/* Body */}
       <div className="p-3 flex flex-col flex-1 z-10">
         <h2 className="font-display text-2xl leading-tight uppercase truncate" title={member.name}>
-          {member.name}
+          <Link href={`/crew/${member._id}`} className="hover:text-signal transition-colors flex items-center gap-2">
+            {member.name}
+            <LinkIcon className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+          </Link>
         </h2>
         <div className="flex items-center justify-between gap-2 mt-1 mb-2">
           <span className={`mono-label hairline border-ink px-1.5 py-[2px] ${isAdmin ? "bg-signal text-bone border-signal" : ""}`}>
@@ -298,6 +304,12 @@ function DossierCard({ member, index, isMe }: { member: CrewMember; index: numbe
           ) : (
              <span className="opacity-40 italic">Bio data redacted or unavailable for this operative.</span>
           )}
+        </div>
+        
+        <div className="mt-2">
+          <Link href={`/crew/${member._id}`} className="w-full text-center py-1.5 hairline border-ink bg-ink/5 mono-label hover:bg-signal hover:text-bone hover:border-signal transition-colors block">
+            VIEW DOSSIER
+          </Link>
         </div>
 
         {/* footer row */}
