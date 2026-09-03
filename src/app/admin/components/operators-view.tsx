@@ -95,10 +95,10 @@ function OperatorRow({
         </div>
         <span className="mono-label opacity-80 truncate">{op.email}</span>
         <span className="mono-label text-signal">{fmtAgo(op.ts)}</span>
-        <div className="col-span-2 md:col-span-1 flex gap-2 justify-end" onClick={e => e.stopPropagation()}>
+        <div className="col-span-2 md:col-span-1 flex gap-2 justify-end">
           <motion.button
             whileTap={{ scale: 0.96 }}
-            onClick={() => onPurge(op)}
+            onClick={(e) => { e.stopPropagation(); onPurge(op); }}
             className="hairline border-ink px-2.5 py-1.5 mono-label hover:bg-ink hover:text-bone transition-colors flex items-center gap-1.5"
           >
             <XCircle className="h-3 w-3" />
@@ -106,7 +106,7 @@ function OperatorRow({
           </motion.button>
           <motion.button
             whileTap={{ scale: 0.96 }}
-            onClick={() => onGrant(op)}
+            onClick={(e) => { e.stopPropagation(); onGrant(op); }}
             className="brick px-2.5 py-1.5 mono-label text-bone hover:bg-signal hover:border-signal transition-colors flex items-center gap-1.5"
           >
             <CheckCircle2 className="h-3 w-3" />

@@ -220,7 +220,7 @@ export function LoadoutView() {
                       </div>
                     </div>
                   </div>
-                  <button onClick={() => handleDeleteTrip(t.tripId)} className="opacity-0 group-hover:opacity-100 p-2 hover:text-signal transition-all">
+                  <button onClick={() => handleDeleteTrip(t.tripId)} className="opacity-0 group-hover:opacity-100 p-2 hover:text-signal transition-all" aria-label={`Delete ${t.name}`}>
                     <Trash2 className="h-4 w-4" />
                   </button>
                 </div>
@@ -319,7 +319,7 @@ export function LoadoutView() {
                       {i.critical && <span className="text-signal border border-signal/50 px-1">CRIT</span>}
                     </div>
                   </div>
-                  <button onClick={() => handleDeleteItem(i.itemId)} className="opacity-0 group-hover:opacity-100 p-1.5 hover:text-signal transition-all shrink-0">
+                  <button onClick={() => handleDeleteItem(i.itemId)} className="opacity-0 group-hover:opacity-100 p-1.5 hover:text-signal transition-all shrink-0" aria-label={`Delete ${i.name}`}>
                     <Trash2 className="h-3.5 w-3.5" />
                   </button>
                 </div>

@@ -335,6 +335,8 @@ export function DispatchesView() {
                       placeholder="e.g. Ridge Log: Dawn Over Sonamarg Pass"
                       className="w-full bg-bone hairline border-ink px-3 py-2 font-display text-xl font-bold focus:outline-none focus:border-signal"
                       required
+                      minLength={3}
+                      maxLength={100}
                     />
                   </div>
 
@@ -376,7 +378,7 @@ export function DispatchesView() {
                       <LinkIcon className="h-3.5 w-3.5 text-signal" /> COVER IMAGE URL
                     </label>
                     <input
-                      type="text"
+                      type="url"
                       value={form.coverImage}
                       onChange={(e) => setForm({ ...form, coverImage: e.target.value })}
                       placeholder="https://images.unsplash.com/..."
@@ -410,7 +412,7 @@ export function DispatchesView() {
                       <Volume2 className="h-3.5 w-3.5 text-signal" /> AUDIO MEMO URL (OPTIONAL MP3)
                     </label>
                     <input
-                      type="text"
+                      type="url"
                       value={form.audioMemoUrl}
                       onChange={(e) => setForm({ ...form, audioMemoUrl: e.target.value })}
                       placeholder="https://.../field-recording.mp3"

@@ -9,8 +9,8 @@ const imagekit = new ImageKit({
   urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT as string,
 });
 
-function errorMessage(error: unknown) {
-  return error instanceof Error ? error.message : error;
+function getErrorStr(error: unknown) {
+  return error instanceof Error ? error.message : String(error);
 }
 
 export async function GET() {
@@ -28,7 +28,7 @@ export async function GET() {
       publicKey: process.env.IMAGEKIT_PUBLIC_KEY
     }, { status: 200 });
   } catch (error: unknown) {
-    console.error('ImageKit Auth error:', errorMessage(error));
+    console.error('ImageKit Auth error:', getErrorStr(error));
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }

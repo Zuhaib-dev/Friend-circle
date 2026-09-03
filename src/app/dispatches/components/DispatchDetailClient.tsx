@@ -688,7 +688,7 @@ export function DispatchDetailClient({
             </a>
             <div>
               <div className="mono-label text-[10px] text-signal font-bold">AUTHOR // COMMANDER</div>
-              <h4 className="font-display font-bold text-xl uppercase leading-tight mt-0.5">
+              <h2 className="font-display font-bold text-xl uppercase leading-tight mt-0.5">
                 <a
                   href={dispatch.author?.socialHandle || "https://www.zuhaibrashid.com/"}
                   target="_blank"
@@ -698,7 +698,7 @@ export function DispatchDetailClient({
                   {dispatch.author?.name || "Zuhaib Rashid"}
                   <ExternalLink className="h-4 w-4 text-signal" />
                 </a>
-              </h4>
+              </h2>
               <p className="font-serif text-sm text-ink/75 mt-1 max-w-lg">
                 {dispatch.author?.bio || "Lead Commander at Friend Circle. Documenting Kashmir expeditions, offroad routes, and mountain reflections."}
               </p>

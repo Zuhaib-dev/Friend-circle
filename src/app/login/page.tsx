@@ -87,6 +87,7 @@ function LoginContent() {
               <input
                 type="email"
                 required
+                autoComplete="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="operator@circle.kashmir"
@@ -101,6 +102,7 @@ function LoginContent() {
               <input
                 type="password"
                 required
+                autoComplete="current-password"
                 value={pwd}
                 onChange={(e) => setPwd(e.target.value)}
                 placeholder="••••••••••••"

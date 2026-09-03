@@ -357,8 +357,8 @@ export function ConvoyView() {
             <div className="space-y-2">
               {foodDuties.map((f, i) => (
                 <div key={i} className="hairline p-2 bg-bone flex items-center gap-2">
-                  <input type="text" value={f.item} onChange={e => {const nf = [...foodDuties]; nf[i].item = e.target.value; setFoodDuties(nf)}} className="flex-1 hairline px-2 py-1 font-mono text-xs" placeholder="Item (e.g. Kahwa, Water)" />
-                  <select value={typeof f.who === 'object' ? f.who.callsign || f.who._id : f.who} onChange={e => {const nf = [...foodDuties]; nf[i].who = e.target.value; setFoodDuties(nf)}} className="w-32 hairline px-2 py-1 font-mono text-xs uppercase">
+                  <input type="text" aria-label="Food item" value={f.item} onChange={e => {const nf = [...foodDuties]; nf[i].item = e.target.value; setFoodDuties(nf)}} className="flex-1 hairline px-2 py-1 font-mono text-xs" placeholder="Item (e.g. Kahwa, Water)" />
+                  <select aria-label="Assigned to" value={typeof f.who === 'object' ? f.who.callsign || f.who._id : f.who} onChange={e => {const nf = [...foodDuties]; nf[i].who = e.target.value; setFoodDuties(nf)}} className="w-32 hairline px-2 py-1 font-mono text-xs uppercase">
                     {roster.map(r => <option key={r.user._id||r.user} value={r.callsign}>{r.callsign}</option>)}
                   </select>
                   <label className="flex items-center gap-1 mono-label text-xs cursor-pointer px-2">
@@ -379,12 +379,12 @@ export function ConvoyView() {
             <div className="space-y-2">
               {prayers.map((p, i) => (
                 <div key={i} className="hairline p-2 bg-bone flex items-center gap-2">
-                  <select value={p.code} onChange={e => {const np = [...prayers]; np[i].code = e.target.value; setPrayers(np)}} className="w-28 hairline px-2 py-1 font-mono text-xs uppercase">
+                  <select aria-label="Prayer code" value={p.code} onChange={e => {const np = [...prayers]; np[i].code = e.target.value; setPrayers(np)}} className="w-28 hairline px-2 py-1 font-mono text-xs uppercase">
                     <option>FAJR</option><option>ZUHR</option><option>ASR</option><option>MAGHRIB</option><option>ISHA</option>
                   </select>
-                  <input type="text" value={p.time} onChange={e => {const np = [...prayers]; np[i].time = e.target.value; setPrayers(np)}} className="w-20 hairline px-2 py-1 font-mono text-xs" placeholder="00:00" />
-                  <input type="text" value={p.wp} onChange={e => {const np = [...prayers]; np[i].wp = e.target.value; setPrayers(np)}} className="w-20 hairline px-2 py-1 font-mono text-xs" placeholder="WP-00" />
-                  <input type="text" value={p.status} onChange={e => {const np = [...prayers]; np[i].status = e.target.value; setPrayers(np)}} className="flex-1 hairline px-2 py-1 font-mono text-xs" placeholder="Status (e.g. PRE-DEP, AT OBJ)" />
+                  <input aria-label="Prayer time" type="text" value={p.time} onChange={e => {const np = [...prayers]; np[i].time = e.target.value; setPrayers(np)}} className="w-20 hairline px-2 py-1 font-mono text-xs" placeholder="00:00" />
+                  <input aria-label="Prayer waypoint" type="text" value={p.wp} onChange={e => {const np = [...prayers]; np[i].wp = e.target.value; setPrayers(np)}} className="w-20 hairline px-2 py-1 font-mono text-xs" placeholder="WP-00" />
+                  <input aria-label="Prayer status" type="text" value={p.status} onChange={e => {const np = [...prayers]; np[i].status = e.target.value; setPrayers(np)}} className="flex-1 hairline px-2 py-1 font-mono text-xs" placeholder="Status (e.g. PRE-DEP, AT OBJ)" />
                   <button aria-label="Remove prayer stop" onClick={() => setPrayers(prayers.filter((_, idx) => idx !== i))} className="p-1 hover:text-signal"><Trash2 className="h-4 w-4" /></button>
                 </div>
               ))}

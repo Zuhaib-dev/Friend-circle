@@ -195,6 +195,7 @@ export function LiveOpsView() {
               onSubmit={handleSubmit}
               className="mb-8 p-4 hairline border-ink bg-ink/5 space-y-4 overflow-hidden crosshair"
             >
+              <fieldset disabled={submitting} className="space-y-4">
               <Crosshairs />
               <div className="mono-label text-signal mb-2 flex items-center gap-2">
                 <Terminal className="h-3.5 w-3.5" /> {editingId ? "MODIFY CONVOY" : "INITIALIZE CONVOY"}
@@ -340,6 +341,7 @@ export function LiveOpsView() {
                   {editingId ? (submitting ? "UPDATING..." : "UPDATE TELEMETRY") : (submitting ? "DISPATCHING..." : "DISPATCH NOW")}
                 </button>
               </div>
+              </fieldset>
             </motion.form>
           )}
         </AnimatePresence>
