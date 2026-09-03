@@ -4,7 +4,7 @@ import { authOptions } from '@/lib/authOptions';
 import connectToDatabase from '@/lib/mongodb';
 import Follow from '@/models/Follow';
 
-export async function GET(req: Request, { params }: { params: { id: string } }) {
+export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
     const session = await getServerSession(authOptions);
     if (!session || !session.user) {
@@ -12,7 +12,7 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
     }
 
     await connectToDatabase();
-    const { id } = params;
+    const { id } = await params;
     const currentUserId = (session.user as any).id;
 
     const follow = await Follow.findOne({ follower: currentUserId, following: id });
