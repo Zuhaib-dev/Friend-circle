@@ -63,7 +63,7 @@ export function QiblaDialog({ open, onClose }: { open: boolean; onClose: () => v
       // 3. Listen to Orientation
       const handleOrientation = (event: DeviceOrientationEvent) => {
         // webkitCompassHeading is absolute heading for iOS
-        let alpha = (event as any).webkitCompassHeading;
+        const alpha = (event as any).webkitCompassHeading;
         
         if (alpha !== undefined) {
           setHeading(alpha);

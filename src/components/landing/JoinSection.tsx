@@ -69,6 +69,7 @@ export function JoinSection() {
             className="bg-bone px-4 py-3 mono-label outline-none w-full h-32 resize-none hairline-b border-ink focus:bg-ink/5 disabled:opacity-50"
           />
           <button 
+            type="submit"
             disabled={status === "loading" || status === "success"}
             className="brick px-5 py-4 mono-label text-bone hover:bg-signal transition-colors flex items-center gap-2 justify-center disabled:opacity-50 disabled:cursor-not-allowed group"
           >

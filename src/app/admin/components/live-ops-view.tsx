@@ -24,6 +24,7 @@ type Convoy = {
 export function LiveOpsView() {
   const [convoys, setConvoys] = useState<Convoy[]>([]);
   const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [formState, setFormState] = useState({
@@ -53,12 +54,14 @@ export function LiveOpsView() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitting(true);
     try {
       let parsedPath = [];
       try {
         parsedPath = JSON.parse(formState.pathStr);
       } catch (err) {
         alert("Invalid JSON format for path.");
+        setSubmitting(false);
         return;
       }
 
@@ -95,6 +98,8 @@ export function LiveOpsView() {
       }
     } catch (err) {
       console.error(err);
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -328,9 +333,11 @@ export function LiveOpsView() {
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="w-full hairline border-ink bg-signal text-bone py-2 mono-label flex items-center justify-center gap-2 hover:bg-ink transition-colors"
+                  disabled={submitting}
+                  className="w-full hairline border-ink bg-signal text-bone py-2 mono-label flex items-center justify-center gap-2 hover:bg-ink transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <Activity className="h-3 w-3" /> {editingId ? "UPDATE TELEMETRY" : "DISPATCH NOW"}
+                  {submitting ? <Loader2 className="h-3 w-3 animate-spin" /> : <Activity className="h-3 w-3" />} 
+                  {editingId ? (submitting ? "UPDATING..." : "UPDATE TELEMETRY") : (submitting ? "DISPATCHING..." : "DISPATCH NOW")}
                 </button>
               </div>
             </motion.form>

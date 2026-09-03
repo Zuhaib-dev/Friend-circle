@@ -4,6 +4,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "@/components/AuthProvider";
 import { SessionTracker } from "@/components/SessionTracker";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import { Toaster } from "sonner";
 import NextTopLoader from 'nextjs-toploader';
 
 const geistSans = Geist({
@@ -115,7 +117,10 @@ export default function RootLayout({
             zIndex={1600}
           />
           <SessionTracker />
-          {children}
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            {children}
+            <Toaster position="bottom-right" richColors />
+          </ThemeProvider>
         </AuthProvider>
       </body>
     </html>

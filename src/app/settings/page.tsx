@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { TopNav } from "@/components/top-nav";
@@ -15,15 +15,7 @@ export default function SettingsPage() {
   const [currentSessionId, setCurrentSessionId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/login");
-    } else if (status === "authenticated") {
-      fetchSessions();
-    }
-  }, [status, router]);
-
-  const fetchSessions = async () => {
+  const fetchSessions = useCallback(async () => {
     try {
       const res = await fetch("/api/user/sessions");
       const data = await res.json();
@@ -36,7 +28,15 @@ export default function SettingsPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/login");
+    } else if (status === "authenticated") {
+      fetchSessions();
+    }
+  }, [status, router, fetchSessions]);
 
   const revokeSession = async (sessionId: string) => {
     if (!confirm("Are you sure you want to revoke this session?")) return;

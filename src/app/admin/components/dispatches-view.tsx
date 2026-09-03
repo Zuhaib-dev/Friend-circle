@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import { uploadCompressedImageToImageKit } from "@/lib/image-upload";
 import { MarkdownRenderer } from "@/components/MarkdownRenderer";
+import { toast } from "sonner";
 
 type DispatchItem = {
   _id: string;
@@ -158,7 +159,7 @@ export function DispatchesView() {
       const result = await uploadCompressedImageToImageKit(file, "tourCover");
       setForm((prev) => ({ ...prev, coverImage: result.url }));
     } catch (err: any) {
-      alert("Image upload failed: " + (err.message || "Unknown error"));
+      toast.error("Image upload failed: " + (err.message || "Unknown error"));
     } finally {
       setUploadingImage(false);
     }
@@ -167,7 +168,7 @@ export function DispatchesView() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.title.trim() || !form.summary.trim() || !form.content.trim()) {
-      alert("Please fill in Title, Summary, and Article Content.");
+      toast.error("Please fill in Title, Summary, and Article Content.");
       return;
     }
 
@@ -189,8 +190,9 @@ export function DispatchesView() {
 
       await fetchDispatches();
       setIsEditing(false);
+      toast.success(editingId ? "Dispatch updated" : "Dispatch created");
     } catch (err: any) {
-      alert(err.message || "An error occurred");
+      toast.error(err.message || "An error occurred");
     } finally {
       setSubmitting(false);
     }
@@ -203,8 +205,9 @@ export function DispatchesView() {
       const res = await fetch(`/api/dispatches/${id}`, { method: "DELETE" });
       if (res.ok) {
         setDispatches((prev) => prev.filter((d) => d._id !== id));
+        toast.success("Dispatch deleted");
       } else {
-        alert("Failed to delete dispatch");
+        toast.error("Failed to delete dispatch");
       }
     } catch (err) {
       console.error(err);

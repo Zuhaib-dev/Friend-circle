@@ -69,7 +69,7 @@ export function PersonnelView() {
           placeholder="SEARCH BY NAME OR EMAIL..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="bg-transparent border-none outline-none font-mono text-sm w-full placeholder:opacity-50"
+          className="bg-transparent border-none outline-none focus-visible:ring-1 focus-visible:ring-signal font-mono text-sm w-full placeholder:opacity-50"
         />
       </div>
 

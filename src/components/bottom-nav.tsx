@@ -13,28 +13,29 @@ export function BottomNav({ onAddClick }: { onAddClick?: () => void }) {
   // The navigation is hidden on desktop (md:hidden) and fixed to the bottom on mobile.
   return (
     <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 hairline-t border-ink bg-bone px-6 py-3 flex items-center justify-between pb-safe">
-      <Link href="/" className={`p-2 transition-colors ${pathname === "/" ? "text-signal" : "text-ink/60 hover:text-ink"}`}>
+      <Link href="/" aria-label="Home" className={`p-2 transition-colors ${pathname === "/" ? "text-signal" : "text-ink/60 hover:text-ink"}`}>
         <Home className="h-6 w-6" />
       </Link>
       
-      <Link href="/crew" className={`p-2 transition-colors ${pathname === "/crew" ? "text-signal" : "text-ink/60 hover:text-ink"}`}>
+      <Link href="/crew" aria-label="Search Crew" className={`p-2 transition-colors ${pathname === "/crew" ? "text-signal" : "text-ink/60 hover:text-ink"}`}>
         <Search className="h-6 w-6" />
       </Link>
       
       {user && (user as any).role !== 'USER' && (
         <button 
           onClick={onAddClick}
+          aria-label="Add Content"
           className="p-2 text-ink/60 hover:text-signal transition-colors"
         >
           <PlusSquare className="h-6 w-6" />
         </button>
       )}
       
-      <Link href="/gallery" className={`p-2 transition-colors ${pathname === "/gallery" ? "text-signal" : "text-ink/60 hover:text-ink"}`}>
+      <Link href="/gallery" aria-label="Gallery" className={`p-2 transition-colors ${pathname === "/gallery" ? "text-signal" : "text-ink/60 hover:text-ink"}`}>
         <ImageIcon className="h-6 w-6" />
       </Link>
       
-      <Link href={user ? `/crew/${(user as any).id}` : "/login"} className={`p-2 transition-colors ${pathname?.startsWith("/crew/") && pathname !== "/crew" ? "text-signal" : "text-ink/60 hover:text-ink"}`}>
+      <Link href={user ? `/crew/${(user as any).id}` : "/login"} aria-label="User Profile" className={`p-2 transition-colors ${pathname?.startsWith("/crew/") && pathname !== "/crew" ? "text-signal" : "text-ink/60 hover:text-ink"}`}>
         <UserIcon className="h-6 w-6" />
       </Link>
     </div>

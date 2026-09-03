@@ -72,7 +72,15 @@ function OperatorRow({
         style={{ transformOrigin: "top" }}
       />
       <div 
-        className="grid grid-cols-2 md:grid-cols-[100px_1fr_1fr_80px_220px] gap-3 items-center px-3 py-3 cursor-pointer hover:bg-ink/5"
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            setExpanded(!expanded);
+          }
+        }}
+        className="grid grid-cols-2 md:grid-cols-[100px_1fr_1fr_80px_220px] gap-3 items-center px-3 py-3 cursor-pointer hover:bg-ink/5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-signal"
         onClick={() => setExpanded(!expanded)}
       >
         <div className="mono-label opacity-70 flex items-center gap-1">

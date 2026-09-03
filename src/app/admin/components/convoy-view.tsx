@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import { toast } from "sonner";
 import { Panel, EmptyState } from "./shared";
 import { Route, Plus, Search, Trash2, Check, User, Save } from "lucide-react";
 import { WAYPOINTS, FOOD_DUTIES, GEAR_PERSONAL, GEAR_CONVOY, PRAYERS } from "../../convoy/data";
@@ -146,18 +147,18 @@ export function ConvoyView() {
       if (!res.ok) {
         const errorData = await res.json();
         console.error("Backend Error:", errorData);
-        alert(`Failed to save convoy: ${errorData.error}`);
+        toast.error(`Failed to save convoy: ${errorData.error}`);
       } else {
-        alert("Convoy saved to database!");
+        toast.success("Convoy saved to database!");
       }
     } catch (err) {
       console.error("Network/Client Error:", err);
-      alert("Network error: failed to save convoy");
+      toast.error("Network error: failed to save convoy");
     }
     setSaving(false);
   };
 
-  if (loading) return <div className="p-10 mono-label text-center">INITIALIZING CONVOY SYSTEM...</div>;
+  if (loading) return <div role="status" aria-live="polite" className="p-10 mono-label text-center">INITIALIZING CONVOY SYSTEM...</div>;
 
   return (
     <div className="space-y-6">
@@ -215,6 +216,7 @@ export function ConvoyView() {
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 opacity-40" />
                   <input
                     type="text"
+                    aria-label="Search personnel"
                     placeholder="Search personnel..."
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
@@ -307,7 +309,7 @@ export function ConvoyView() {
                       </div>
                     </div>
                   </div>
-                  <button onClick={() => removeRoster(i)} className="p-2 hover:text-signal opacity-0 group-hover:opacity-100 transition-all">
+                  <button aria-label="Remove from roster" onClick={() => removeRoster(i)} className="p-2 hover:text-signal opacity-0 group-hover:opacity-100 transition-all">
                     <Trash2 className="h-4 w-4" />
                   </button>
                 </div>
@@ -333,14 +335,14 @@ export function ConvoyView() {
             <div className="space-y-2">
               {waypoints.map((w, i) => (
                 <div key={i} className="hairline p-2 bg-bone flex items-center gap-2">
-                  <input type="text" value={w.code} onChange={e => {const nw = [...waypoints]; nw[i].code = e.target.value; setWaypoints(nw)}} className="w-20 hairline px-2 py-1 font-mono text-xs uppercase" placeholder="WP-00" />
-                  <input type="text" value={w.name} onChange={e => {const nw = [...waypoints]; nw[i].name = e.target.value; setWaypoints(nw)}} className="flex-1 hairline px-2 py-1 font-mono text-xs" placeholder="Location Name" />
-                  <select value={w.kind} onChange={e => {const nw = [...waypoints]; nw[i].kind = e.target.value; setWaypoints(nw)}} className="w-24 hairline px-2 py-1 font-mono text-xs uppercase">
+                  <input type="text" aria-label="Waypoint code" value={w.code} onChange={e => {const nw = [...waypoints]; nw[i].code = e.target.value; setWaypoints(nw)}} className="w-20 hairline px-2 py-1 font-mono text-xs uppercase" placeholder="WP-00" />
+                  <input type="text" aria-label="Waypoint name" value={w.name} onChange={e => {const nw = [...waypoints]; nw[i].name = e.target.value; setWaypoints(nw)}} className="flex-1 hairline px-2 py-1 font-mono text-xs" placeholder="Location Name" />
+                  <select aria-label="Waypoint kind" value={w.kind} onChange={e => {const nw = [...waypoints]; nw[i].kind = e.target.value; setWaypoints(nw)}} className="w-24 hairline px-2 py-1 font-mono text-xs uppercase">
                     <option>RALLY</option><option>PICKUP</option><option>FUEL</option><option>BREAK</option><option>OBJ</option>
                   </select>
-                  <input type="text" value={w.time} onChange={e => {const nw = [...waypoints]; nw[i].time = e.target.value; setWaypoints(nw)}} className="w-20 hairline px-2 py-1 font-mono text-xs" placeholder="00:00" />
-                  <input type="number" value={w.km} onChange={e => {const nw = [...waypoints]; nw[i].km = parseInt(e.target.value)||0; setWaypoints(nw)}} className="w-16 hairline px-2 py-1 font-mono text-xs" placeholder="KM" />
-                  <button onClick={() => setWaypoints(waypoints.filter((_, idx) => idx !== i))} className="p-1 hover:text-signal"><Trash2 className="h-4 w-4" /></button>
+                  <input type="text" aria-label="Waypoint time" value={w.time} onChange={e => {const nw = [...waypoints]; nw[i].time = e.target.value; setWaypoints(nw)}} className="w-20 hairline px-2 py-1 font-mono text-xs" placeholder="00:00" />
+                  <input type="number" aria-label="Waypoint distance in km" value={w.km} onChange={e => {const nw = [...waypoints]; nw[i].km = parseInt(e.target.value)||0; setWaypoints(nw)}} className="w-16 hairline px-2 py-1 font-mono text-xs" placeholder="KM" />
+                  <button aria-label="Remove waypoint" onClick={() => setWaypoints(waypoints.filter((_, idx) => idx !== i))} className="p-1 hover:text-signal"><Trash2 className="h-4 w-4" /></button>
                 </div>
               ))}
             </div>
@@ -362,7 +364,7 @@ export function ConvoyView() {
                   <label className="flex items-center gap-1 mono-label text-xs cursor-pointer px-2">
                     <input type="checkbox" checked={f.crit} onChange={e => {const nf = [...foodDuties]; nf[i].crit = e.target.checked; setFoodDuties(nf)}} /> CRIT
                   </label>
-                  <button onClick={() => setFoodDuties(foodDuties.filter((_, idx) => idx !== i))} className="p-1 hover:text-signal"><Trash2 className="h-4 w-4" /></button>
+                  <button aria-label="Remove food duty" onClick={() => setFoodDuties(foodDuties.filter((_, idx) => idx !== i))} className="p-1 hover:text-signal"><Trash2 className="h-4 w-4" /></button>
                 </div>
               ))}
             </div>
@@ -383,7 +385,7 @@ export function ConvoyView() {
                   <input type="text" value={p.time} onChange={e => {const np = [...prayers]; np[i].time = e.target.value; setPrayers(np)}} className="w-20 hairline px-2 py-1 font-mono text-xs" placeholder="00:00" />
                   <input type="text" value={p.wp} onChange={e => {const np = [...prayers]; np[i].wp = e.target.value; setPrayers(np)}} className="w-20 hairline px-2 py-1 font-mono text-xs" placeholder="WP-00" />
                   <input type="text" value={p.status} onChange={e => {const np = [...prayers]; np[i].status = e.target.value; setPrayers(np)}} className="flex-1 hairline px-2 py-1 font-mono text-xs" placeholder="Status (e.g. PRE-DEP, AT OBJ)" />
-                  <button onClick={() => setPrayers(prayers.filter((_, idx) => idx !== i))} className="p-1 hover:text-signal"><Trash2 className="h-4 w-4" /></button>
+                  <button aria-label="Remove prayer stop" onClick={() => setPrayers(prayers.filter((_, idx) => idx !== i))} className="p-1 hover:text-signal"><Trash2 className="h-4 w-4" /></button>
                 </div>
               ))}
             </div>
@@ -400,7 +402,7 @@ export function ConvoyView() {
                 {gearPersonal.map((g, i) => (
                   <div key={i} className="hairline p-1 bg-bone flex items-center gap-1">
                     <input type="text" value={g} onChange={e => {const ng = [...gearPersonal]; ng[i] = e.target.value; setGearPersonal(ng)}} className="flex-1 hairline px-2 py-1 font-mono text-xs" placeholder="Gear Item" />
-                    <button onClick={() => setGearPersonal(gearPersonal.filter((_, idx) => idx !== i))} className="p-1 hover:text-signal"><Trash2 className="h-4 w-4" /></button>
+                    <button aria-label="Remove personal gear" onClick={() => setGearPersonal(gearPersonal.filter((_, idx) => idx !== i))} className="p-1 hover:text-signal"><Trash2 className="h-4 w-4" /></button>
                   </div>
                 ))}
               </div>
@@ -414,7 +416,7 @@ export function ConvoyView() {
                 {gearConvoy.map((g, i) => (
                   <div key={i} className="hairline p-1 bg-bone flex items-center gap-1">
                     <input type="text" value={g} onChange={e => {const ng = [...gearConvoy]; ng[i] = e.target.value; setGearConvoy(ng)}} className="flex-1 hairline px-2 py-1 font-mono text-xs" placeholder="Gear Item" />
-                    <button onClick={() => setGearConvoy(gearConvoy.filter((_, idx) => idx !== i))} className="p-1 hover:text-signal"><Trash2 className="h-4 w-4" /></button>
+                    <button aria-label="Remove convoy gear" onClick={() => setGearConvoy(gearConvoy.filter((_, idx) => idx !== i))} className="p-1 hover:text-signal"><Trash2 className="h-4 w-4" /></button>
                   </div>
                 ))}
               </div>

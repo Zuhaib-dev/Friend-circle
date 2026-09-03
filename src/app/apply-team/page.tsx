@@ -274,6 +274,7 @@ export default function ApplyTeamPage() {
                   </label>
                   <input
                     type="tel"
+                    autoComplete="tel"
                     required
                     value={details}
                     onChange={(e) => setDetails(e.target.value.replace(/[^0-9+\s-]/g, ''))}
