@@ -309,7 +309,7 @@ function DossierCard({ member, index, isMe }: { member: CrewMember; index: numbe
           )}
         </div>
         
-        <div className="mt-2">
+        <div className="mt-2" onClick={(e) => e.stopPropagation()}>
           <Link href={`/crew/${member._id}`} className="w-full text-center py-1.5 hairline border-ink bg-ink/5 mono-label hover:bg-signal hover:text-bone hover:border-signal transition-colors block">
             VIEW DOSSIER
           </Link>

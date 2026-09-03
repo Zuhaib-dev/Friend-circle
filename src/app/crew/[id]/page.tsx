@@ -8,7 +8,7 @@ import { TopNav } from "@/components/top-nav";
 import { BottomNav } from "@/components/bottom-nav";
 import { Crosshairs } from "@/components/crosshairs";
 import { motion, AnimatePresence } from "motion/react";
-import { Activity, Camera, Heart, MessageCircle, MoreHorizontal, FileUp, X, Check, Loader2, Trash2 } from "lucide-react";
+import { Activity, Camera, Heart, MessageCircle, MoreHorizontal, FileUp, X, Check, Loader2, Trash2, ExternalLink } from "lucide-react";
 import { uploadCompressedImageToImageKit } from "@/lib/image-upload";
 import { initialsOf } from "@/lib/utils";
 
@@ -27,6 +27,7 @@ export default function PublicProfilePage() {
   // Modals
   const [activePost, setActivePost] = useState<any>(null);
   const [uploadOpen, setUploadOpen] = useState(false);
+  const [showFollowersModal, setShowFollowersModal] = useState<"followers" | "following" | null>(null);
 
   const isMe = user && (user as any).id === id;
 
@@ -35,7 +36,7 @@ export default function PublicProfilePage() {
       try {
         const [profileRes, followRes] = await Promise.all([
           fetch(`/api/crew/${id}`),
-          user ? fetch(`/api/crew/${id}/follow`) : Promise.resolve({ json: () => ({ isFollowing: false }) }),
+          user ? fetch(`/api/crew/${id}/follow`, { cache: 'no-store' }) : Promise.resolve({ ok: true, json: () => Promise.resolve({ isFollowing: false }) }),
         ]);
 
         if (profileRes.ok) {
@@ -147,12 +148,24 @@ export default function PublicProfilePage() {
 
             <div className="flex justify-center md:justify-start gap-6 mono-label hairline-y border-ink/20 py-2">
               <div className="flex flex-col items-center md:items-start"><span className="text-xl font-display">{stats.posts}</span><span className="opacity-60 text-[10px]">FRAMES</span></div>
-              <div className="flex flex-col items-center md:items-start"><span className="text-xl font-display">{stats.followers}</span><span className="opacity-60 text-[10px]">FOLLOWERS</span></div>
-              <div className="flex flex-col items-center md:items-start"><span className="text-xl font-display">{stats.following}</span><span className="opacity-60 text-[10px]">FOLLOWING</span></div>
+              <div className="flex flex-col items-center md:items-start cursor-pointer hover:text-signal transition-colors" onClick={() => setShowFollowersModal("followers")}><span className="text-xl font-display">{stats.followers}</span><span className="opacity-60 text-[10px]">FOLLOWERS</span></div>
+              <div className="flex flex-col items-center md:items-start cursor-pointer hover:text-signal transition-colors" onClick={() => setShowFollowersModal("following")}><span className="text-xl font-display">{stats.following}</span><span className="opacity-60 text-[10px]">FOLLOWING</span></div>
             </div>
 
             <div className="text-sm font-mono opacity-80 max-w-xl mx-auto md:mx-0">
               {profile.bio || <span className="italic opacity-50">No dossier summary available.</span>}
+              {profile.socialHandle && (
+                <div className="mt-4 pt-4 hairline-t border-ink/20">
+                  <a
+                    href={profile.socialHandle.startsWith('http') ? profile.socialHandle : `https://instagram.com/${profile.socialHandle.replace('@', '')}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 mono-label text-signal hover:underline"
+                  >
+                    <ExternalLink className="h-3 w-3" /> {profile.socialHandle}
+                  </a>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -186,6 +199,9 @@ export default function PublicProfilePage() {
         )}
         {uploadOpen && (
           <UploadModal onClose={() => setUploadOpen(false)} onUploaded={(p: any) => { setPosts([p, ...posts]); setStats(s => ({...s, posts: s.posts + 1})); }} />
+        )}
+        {showFollowersModal && (
+          <FollowersModal id={id} type={showFollowersModal} onClose={() => setShowFollowersModal(null)} />
         )}
       </AnimatePresence>
     </main>
@@ -340,6 +356,51 @@ function UploadModal({ onClose, onUploaded }: { onClose: () => void, onUploaded:
           <button onClick={handleUpload} disabled={uploading || !file} className="mono-label px-4 py-2 brick text-bone flex items-center gap-2 hover:bg-signal">
             {uploading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Check className="h-4 w-4" />} {uploading ? 'UPLOADING...' : 'PUBLISH'}
           </button>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+function FollowersModal({ id, type, onClose }: { id: string, type: "followers" | "following", onClose: () => void }) {
+  const [users, setUsers] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
+
+  useEffect(() => {
+    fetch(`/api/crew/${id}/followers`)
+      .then(r => r.json())
+      .then(data => {
+        setUsers(data[type] || []);
+      })
+      .finally(() => setLoading(false));
+  }, [id, type]);
+
+  return (
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-60 bg-ink/90 flex items-center justify-center p-4" onClick={onClose}>
+      <div className="bg-bone hairline border-ink max-w-md w-full h-[60vh] flex flex-col" onClick={e => e.stopPropagation()}>
+        <div className="hairline-b border-ink/40 p-4 flex items-center justify-between">
+          <h2 className="font-display text-xl uppercase tracking-widest">{type}</h2>
+          <button onClick={onClose} className="p-1 hover:bg-ink hover:text-bone transition-colors"><X className="h-5 w-5" /></button>
+        </div>
+        <div className="flex-1 overflow-y-auto p-4 space-y-2">
+          {loading ? (
+            <div className="flex items-center justify-center h-full mono-label text-signal animate-pulse">FETCHING...</div>
+          ) : users.length === 0 ? (
+            <div className="flex items-center justify-center h-full mono-label opacity-40">NO DATA FOUND</div>
+          ) : (
+            users.map(u => (
+              <div key={u._id} onClick={() => { onClose(); router.push(`/crew/${u._id}`); }} className="flex items-center gap-3 p-2 hairline border-transparent hover:border-ink/20 hover:bg-ink/5 cursor-pointer transition-colors group">
+                <div className="w-10 h-10 shrink-0 rounded-none bg-ink/10 relative overflow-hidden flex items-center justify-center text-sm font-display brick text-bone">
+                  {u.image ? <Image src={u.image} alt={u.name} fill className="object-cover" /> : initialsOf(u.name)}
+                </div>
+                <div>
+                  <div className="font-mono text-sm leading-tight group-hover:text-signal transition-colors">{u.name}</div>
+                  <div className="mono-label text-[10px] opacity-60">{u.role === 'ADMIN' ? 'CMD' : 'OP'}</div>
+                </div>
+              </div>
+            ))
+          )}
         </div>
       </div>
     </motion.div>
