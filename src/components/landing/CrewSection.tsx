@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ShieldCheck, AtSign, ArrowUpRight, ChevronUp, ChevronDown, Users } from "lucide-react";
 import { SectionHead } from "./primitives";
 
@@ -21,6 +22,7 @@ type CrewMember = {
 export function CrewSection() {
   const { data: session } = useSession();
   const myEmail = session?.user?.email?.toLowerCase();
+  const router = useRouter();
 
   const [crew, setCrew] = useState<CrewMember[]>([]);
   const [loading, setLoading] = useState(true);
@@ -98,6 +100,7 @@ export function CrewSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-40px" }}
                     transition={{ duration: 0.4, delay: i * 0.06, ease: "easeOut" }}
+                    onClick={() => router.push(`/crew/${c._id}`)}
                     className={`relative p-5 bg-bone group cursor-pointer
                       ${(i + 1) % 3 !== 0 ? "lg:hairline-r" : ""}
                       ${(i + 1) % 2 !== 0 ? "md:hairline-r lg:hairline-r" : "md:border-r-0"}

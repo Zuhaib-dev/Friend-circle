@@ -19,6 +19,7 @@ import { TopNav } from "@/components/top-nav";
 import { BottomNav } from "@/components/bottom-nav";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 // Crosshairs component for the corners
 function Crosshairs() {
@@ -213,6 +214,7 @@ function Stat({ label, value, mono }: { label: string; value: string; mono?: boo
 }
 
 function DossierCard({ member, index, isMe }: { member: CrewMember; index: number; isMe: boolean }) {
+  const router = useRouter();
   const isAdmin = member.role === "ADMIN";
   const displayRole = isAdmin ? "ADMIN_COMMAND" : "FIELD_OPERATOR";
   
@@ -230,7 +232,8 @@ function DossierCard({ member, index, isMe }: { member: CrewMember; index: numbe
       exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.18 } }}
       transition={{ duration: 0.4, delay: Math.min(index * 0.04, 0.4), ease: [0.22, 1, 0.36, 1] }}
       whileHover="hover"
-      className="group hairline border-ink bg-bone overflow-hidden crosshair flex flex-col h-full"
+      onClick={() => router.push(`/crew/${member._id}`)}
+      className="group hairline border-ink bg-bone overflow-hidden crosshair flex flex-col h-full cursor-pointer"
     >
       <Crosshairs />
 

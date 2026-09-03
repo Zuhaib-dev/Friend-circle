@@ -15,11 +15,6 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
       return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
-    // Only allow TEAM_MEMBER or ADMIN profiles to be viewed publicly (as per requirements)
-    if (user.role !== 'TEAM_MEMBER' && user.role !== 'ADMIN') {
-      return NextResponse.json({ error: 'Profile not public' }, { status: 403 });
-    }
-
     const followersCount = await Follow.countDocuments({ following: id });
     const followingCount = await Follow.countDocuments({ follower: id });
 

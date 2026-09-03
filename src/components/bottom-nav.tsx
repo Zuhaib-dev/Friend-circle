@@ -34,7 +34,7 @@ export function BottomNav({ onAddClick }: { onAddClick?: () => void }) {
         <ImageIcon className="h-6 w-6" />
       </Link>
       
-      <Link href={`/crew/${(user as any)?.id || 'me'}`} className={`p-2 transition-colors ${pathname?.startsWith("/crew/") && pathname !== "/crew" ? "text-signal" : "text-ink/60 hover:text-ink"}`}>
+      <Link href={user ? `/crew/${(user as any).id}` : "/login"} className={`p-2 transition-colors ${pathname?.startsWith("/crew/") && pathname !== "/crew" ? "text-signal" : "text-ink/60 hover:text-ink"}`}>
         <UserIcon className="h-6 w-6" />
       </Link>
     </div>
