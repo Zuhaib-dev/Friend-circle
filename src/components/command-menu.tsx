@@ -35,11 +35,14 @@ export function openCommandMenu() {
   }
 }
 
-export function CommandMenu() {
+export default function CommandMenu() {
   const [open, setOpen] = React.useState(false);
+  const [mounted, setMounted] = React.useState(false);
   const router = useRouter();
 
   React.useEffect(() => {
+    setMounted(true);
+
     const down = (e: KeyboardEvent) => {
       if ((e.key === "k" || e.key === "K") && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
@@ -62,6 +65,10 @@ export function CommandMenu() {
     setOpen(false);
     command();
   }, []);
+
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <CommandDialog open={open} onOpenChange={setOpen}>
@@ -199,3 +206,5 @@ export function CommandMenu() {
     </CommandDialog>
   );
 }
+
+export { CommandMenu };
