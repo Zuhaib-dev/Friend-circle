@@ -517,8 +517,9 @@ export function DispatchDetailClient({
                   value={selectedVoiceURI}
                   onChange={(e) => setSelectedVoiceURI(e.target.value)}
                   disabled={isReadingAloud}
-                  className="bg-transparent outline-none cursor-pointer max-w-37.5 truncate"
+                  className="bg-transparent outline-none focus-visible:ring-1 focus-visible:ring-signal cursor-pointer max-w-37.5 truncate"
                   title="Select AI Narrator Voice"
+                  aria-label="Select AI Narrator Voice"
                 >
                   {availableVoices.map((v) => (
                     <option key={v.voiceURI} value={v.voiceURI}>
@@ -752,6 +753,7 @@ export function DispatchDetailClient({
                 value={newCommentText}
                 onChange={(e) => setNewCommentText(e.target.value)}
                 placeholder="Log your comment or tactical field feedback..."
+                aria-label="Add dispatch comment or tactical feedback"
                 rows={3}
                 maxLength={1000}
                 className="w-full bg-bone hairline border-ink p-3 text-sm font-sans outline-none focus:border-signal transition-colors resize-y"

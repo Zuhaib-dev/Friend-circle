@@ -209,6 +209,7 @@ export function DispatchesClient({
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="SEARCH DISPATCHES..."
+              aria-label="Search dispatches"
               className="bg-paper hairline border-ink pl-9 pr-3 py-2 mono-label text-xs outline-none w-full focus:border-signal"
             />
           </div>

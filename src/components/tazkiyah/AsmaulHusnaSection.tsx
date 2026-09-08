@@ -140,7 +140,7 @@ function AsmaulHusnaModal({ isOpen, onClose, marked, setMarked, toggleMark, prog
                 ASMA UL-HUSNA · 99 NAMES
               </span>
             </div>
-            <button onClick={onClose} className="h-9 w-9 grid place-items-center text-white/50 hover:text-white hover:bg-white/10 rounded-sm transition-colors">
+            <button onClick={onClose} aria-label="Close 99 Names modal" className="h-9 w-9 grid place-items-center text-white/50 hover:text-white hover:bg-white/10 rounded-sm transition-colors">
               <X className="h-5 w-5" />
             </button>
           </div>

@@ -200,6 +200,8 @@ export default function ApplyTeamPage() {
           {success ? (
             <motion.div
               key="success"
+              role="status"
+              aria-live="polite"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               className="hairline border-ink bg-bone p-8 max-w-md w-full flex flex-col items-center justify-center text-center gap-4 relative"
@@ -223,8 +225,10 @@ export default function ApplyTeamPage() {
               {/* Left col: ID Badge */}
               <div className="flex flex-col gap-3">
                 <div className="mono-label opacity-50 flex items-center gap-1.5"><Crosshair className="h-3 w-3 text-signal" /> ID BADGE</div>
-                <div 
-                  className="hairline border-ink bg-bone aspect-3/4 relative group/avatar overflow-hidden cursor-pointer"
+                <button 
+                  type="button"
+                  aria-label="Upload operator ID badge photo"
+                  className="text-left hairline border-ink bg-bone aspect-3/4 relative group/avatar overflow-hidden cursor-pointer w-full block"
                   onClick={() => fileInputRef.current?.click()}
                 >
                   <div className="absolute inset-0 z-10 pointer-events-none shadow-[inset_0_0_40px_rgba(28,28,26,0.1)]" />
@@ -239,10 +243,11 @@ export default function ApplyTeamPage() {
                     <span className="truncate pr-2">{user.name}</span>
                     <span className="text-signal">UNVERIFIED</span>
                   </div>
-                </div>
+                </button>
                 <input
                   type="file"
                   accept="image/*"
+                  aria-label="Upload operator ID badge photo"
                   className="hidden"
                   ref={fileInputRef}
                   onChange={handleFileChange}
@@ -268,14 +273,21 @@ export default function ApplyTeamPage() {
                 </div>
 
                 <div className="space-y-1">
-                  <label className="mono-label text-[11px] opacity-70 flex items-center justify-between">
+                  <label htmlFor="operator-contact" className="mono-label text-[11px] opacity-70 flex items-center justify-between">
                     <span>OPERATOR CONTACT NUMBER</span>
                     <span className="text-signal">*REQUIRED</span>
                   </label>
                   <input
+                    id="operator-contact"
                     type="tel"
                     autoComplete="tel"
                     required
+                    minLength={10}
+                    maxLength={20}
+                    pattern="^(\+?[0-9\s-]{10,20})$"
+                    title="Please provide a valid phone number of at least 10 digits"
+                    aria-invalid={!!error}
+                    aria-describedby={error ? "apply-team-error" : undefined}
                     value={details}
                     onChange={(e) => setDetails(e.target.value.replace(/[^0-9+\s-]/g, ''))}
                     placeholder="+91 9876543210"
@@ -284,11 +296,13 @@ export default function ApplyTeamPage() {
                 </div>
 
                 <div className="space-y-1">
-                  <label className="mono-label text-[11px] opacity-70">EXTERNAL ALIAS (SOCIAL HANDLE)</label>
+                  <label htmlFor="operator-social" className="mono-label text-[11px] opacity-70">EXTERNAL ALIAS (SOCIAL HANDLE)</label>
                   <div className="relative flex items-center">
                     <span className="absolute left-3 mono-label text-ink/40">@</span>
                     <input
+                      id="operator-social"
                       type="text"
+                      maxLength={50}
                       value={socialHandle}
                       onChange={(e) => setSocialHandle(e.target.value)}
                       placeholder="instagram_handle"
@@ -298,9 +312,11 @@ export default function ApplyTeamPage() {
                 </div>
 
                 <div className="space-y-1">
-                  <label className="mono-label text-[11px] opacity-70">OPERATOR BIO (SUMMARY)</label>
+                  <label htmlFor="operator-bio" className="mono-label text-[11px] opacity-70">OPERATOR BIO (SUMMARY)</label>
                   <textarea
+                    id="operator-bio"
                     rows={3}
+                    maxLength={500}
                     value={bio}
                     onChange={(e) => setBio(e.target.value)}
                     placeholder="Brief dossier summary..."
@@ -309,7 +325,7 @@ export default function ApplyTeamPage() {
                 </div>
 
                 {error && (
-                  <div className="mono-label text-[10px] text-acid bg-acid/10 px-2 py-1 hairline border-acid/30 flex items-center gap-1.5">
+                  <div role="alert" aria-live="assertive" id="apply-team-error" className="mono-label text-[10px] text-acid bg-acid/10 px-2 py-1 hairline border-acid/30 flex items-center gap-1.5">
                     <Terminal className="h-3 w-3" /> {error}
                   </div>
                 )}

@@ -174,16 +174,16 @@ function AyatModal({ ayat, surah, onClose }: { ayat: Ayah | null; surah: Surah; 
     <AnimatePresence>
       {ayat && (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}
-          className="fixed inset-0 z-60 bg-black/80 backdrop-blur-md flex items-end sm:items-center justify-center p-0 sm:p-6" onClick={onClose}>
+          className="fixed inset-0 z-60 bg-black/80 backdrop-blur-md flex items-end sm:items-center justify-center p-0 sm:p-6" onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}>
           <motion.div initial={{ y: 60, opacity: 0, scale: 0.98 }} animate={{ y: 0, opacity: 1, scale: 1 }} exit={{ y: 30, opacity: 0, scale: 0.98 }}
-            transition={{ type: "spring", stiffness: 320, damping: 32 }} onClick={(e) => e.stopPropagation()}
+            transition={{ type: "spring", stiffness: 320, damping: 32 }}
             className="w-full sm:max-w-2xl bg-[#0f0f0f] border border-white/10 rounded-t-lg sm:rounded-sm overflow-hidden shadow-2xl">
             <div className="flex items-center justify-between px-5 py-3 border-b border-white/5">
               <div className="flex items-center gap-3">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-300 animate-pulse" />
                 <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-white/50">Surah {surah.name} · {surah.number}:{ayat.n}</span>
               </div>
-              <button onClick={onClose} className="h-7 w-7 grid place-items-center text-white/50 hover:text-white hover:bg-white/5 rounded-sm transition-colors">
+              <button onClick={onClose} aria-label="Close Ayat modal" className="h-7 w-7 grid place-items-center text-white/50 hover:text-white hover:bg-white/5 rounded-sm transition-colors">
                 <X className="h-4 w-4" />
               </button>
             </div>

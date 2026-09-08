@@ -123,8 +123,8 @@ export function PublicProfileClient({
 
             <div className="flex justify-center md:justify-start gap-6 mono-label hairline-y border-ink/20 py-2">
               <div className="flex flex-col items-center md:items-start"><span className="text-xl font-display">{stats.posts}</span><span className="opacity-60 text-[10px]">FRAMES</span></div>
-              <div className="flex flex-col items-center md:items-start cursor-pointer hover:text-signal transition-colors" onClick={() => setShowFollowersModal("followers")}><span className="text-xl font-display">{stats.followers}</span><span className="opacity-60 text-[10px]">FOLLOWERS</span></div>
-              <div className="flex flex-col items-center md:items-start cursor-pointer hover:text-signal transition-colors" onClick={() => setShowFollowersModal("following")}><span className="text-xl font-display">{stats.following}</span><span className="opacity-60 text-[10px]">FOLLOWING</span></div>
+              <button type="button" className="flex flex-col items-center md:items-start cursor-pointer hover:text-signal transition-colors text-left bg-transparent border-none p-0" onClick={() => setShowFollowersModal("followers")}><span className="text-xl font-display">{stats.followers}</span><span className="opacity-60 text-[10px]">FOLLOWERS</span></button>
+              <button type="button" className="flex flex-col items-center md:items-start cursor-pointer hover:text-signal transition-colors text-left bg-transparent border-none p-0" onClick={() => setShowFollowersModal("following")}><span className="text-xl font-display">{stats.following}</span><span className="opacity-60 text-[10px]">FOLLOWING</span></button>
             </div>
 
             <div className="text-sm font-mono opacity-80 max-w-xl mx-auto md:mx-0">
@@ -150,13 +150,13 @@ export function PublicProfileClient({
       <section className="px-4 md:px-8 py-8 max-w-5xl mx-auto">
         <div className="grid grid-cols-3 gap-1 md:gap-4">
           {posts.map(post => (
-            <div key={post._id} className="aspect-square relative cursor-pointer group bg-ink/5" onClick={() => setActivePost(post)}>
+            <button type="button" key={post._id} className="aspect-square relative cursor-pointer group bg-ink/5 block w-full p-0 border-0 text-left" onClick={() => setActivePost(post)} aria-label={`View frame: ${post.caption || 'Photo'}`}>
               <Image src={post.imageUrl} alt={post.caption || 'Image'} fill className="object-cover transition-opacity group-hover:opacity-80" />
               <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity bg-ink/30 text-bone mono-label">
                 <span className="flex items-center gap-1.5 drop-shadow"><Heart className="h-4 w-4 fill-current" /> {post.likes?.length || 0}</span>
                 <span className="flex items-center gap-1.5 drop-shadow"><MessageCircle className="h-4 w-4 fill-current" /></span>
               </div>
-            </div>
+            </button>
           ))}
         </div>
         {posts.length === 0 && (
@@ -223,9 +223,9 @@ function PostModal({ post, user, isOwner, onClose, onUpdate }: any) {
   };
 
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-60 bg-ink/90 flex items-center justify-center p-2 md:p-8" onClick={onClose}>
-      <div className="bg-bone hairline border-ink max-w-4xl w-full h-[80vh] md:h-150 flex flex-col md:flex-row relative" onClick={e => e.stopPropagation()}>
-        <button onClick={onClose} className="absolute right-2 top-2 z-10 p-2 bg-bone/80 hover:bg-signal text-ink hover:text-bone transition-colors md:hidden"><X className="h-5 w-5" /></button>
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-60 bg-ink/90 flex items-center justify-center p-2 md:p-8" onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}>
+      <div className="bg-bone hairline border-ink max-w-4xl w-full h-[80vh] md:h-150 flex flex-col md:flex-row relative">
+        <button onClick={onClose} aria-label="Close post modal" className="absolute right-2 top-2 z-10 p-2 bg-bone/80 hover:bg-signal text-ink hover:text-bone transition-colors md:hidden"><X className="h-5 w-5" /></button>
         <div className="w-full md:w-3/5 bg-ink h-1/2 md:h-full relative flex items-center justify-center">
           <Image src={post.imageUrl} alt="Post" fill className="object-contain" />
         </div>
@@ -245,19 +245,19 @@ function PostModal({ post, user, isOwner, onClose, onUpdate }: any) {
                 <span className="font-bold shrink-0">{c.author.name}</span>
                 <span className="flex-1">{c.content}</span>
                 {(isOwner || (user && user.id === c.author._id)) && (
-                  <button onClick={() => deleteComment(c._id)} className="opacity-0 group-hover:opacity-100 text-red-500 shrink-0"><X className="h-3 w-3" /></button>
+                  <button onClick={() => deleteComment(c._id)} aria-label="Delete comment" className="opacity-0 group-hover:opacity-100 text-red-500 shrink-0"><X className="h-3 w-3" /></button>
                 )}
               </div>
             ))}
           </div>
           <div className="hairline-t border-ink/20 p-3">
             <div className="flex items-center gap-4 mb-2">
-              <button onClick={handleLike} className={`${isLiked ? 'text-red-500' : 'text-ink'}`}><Heart className={`h-6 w-6 ${isLiked ? 'fill-current' : ''}`} /></button>
+              <button onClick={handleLike} aria-label={isLiked ? "Unlike post" : "Like post"} className={`${isLiked ? 'text-red-500' : 'text-ink'}`}><Heart className={`h-6 w-6 ${isLiked ? 'fill-current' : ''}`} /></button>
             </div>
             <div className="font-display font-bold text-sm mb-2">{likesCount} LIKES</div>
             {user ? (
               <form onSubmit={submitComment} className="flex items-center gap-2">
-                <input value={newComment} onChange={e => setNewComment(e.target.value)} placeholder="Add a comment..." className="flex-1 bg-transparent text-sm focus:outline-none" />
+                <input value={newComment} onChange={e => setNewComment(e.target.value)} placeholder="Add a comment..." aria-label="Add a comment" className="flex-1 bg-transparent text-sm focus:outline-none" />
                 <button type="submit" className="mono-label text-signal disabled:opacity-50" disabled={!newComment.trim()}>POST</button>
               </form>
             ) : (
@@ -313,16 +313,17 @@ function UploadModal({ onClose, onUploaded }: { onClose: () => void, onUploaded:
           <label className="border-2 border-dashed border-ink/40 h-64 flex flex-col items-center justify-center cursor-pointer hover:bg-ink/5 hover:border-signal transition-colors mb-4">
              <FileUp className="h-8 w-8 text-signal mb-2" />
              <span className="mono-label">SELECT IMAGE</span>
-             <input type="file" accept="image/*" className="hidden" onChange={handleFile} />
+             <input type="file" accept="image/*" aria-label="Upload post image file" className="hidden" onChange={handleFile} />
           </label>
         ) : (
           <div className="mb-4 relative h-64 bg-ink flex items-center justify-center">
             <Image src={preview} alt="Preview" fill className="object-contain" />
-            <button onClick={() => setPreview("")} className="absolute top-2 right-2 p-1.5 bg-bone/80 hover:bg-red-500 hover:text-white"><X className="h-4 w-4" /></button>
+            <button onClick={() => setPreview("")} aria-label="Clear image preview" className="absolute top-2 right-2 p-1.5 bg-bone/80 hover:bg-red-500 hover:text-white"><X className="h-4 w-4" /></button>
           </div>
         )}
         <textarea 
           placeholder="Caption (Optional)..." 
+          aria-label="Post caption"
           value={caption} onChange={e => setCaption(e.target.value)} 
           className="w-full hairline border-ink/30 bg-transparent p-3 font-mono text-sm resize-none h-20 mb-4 focus:outline-none focus:border-signal"
         />
@@ -352,11 +353,11 @@ function FollowersModal({ id, type, onClose }: { id: string, type: "followers" |
   }, [id, type]);
 
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-60 bg-ink/90 flex items-center justify-center p-4" onClick={onClose}>
-      <div className="bg-bone hairline border-ink max-w-md w-full h-[60vh] flex flex-col" onClick={e => e.stopPropagation()}>
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-60 bg-ink/90 flex items-center justify-center p-4" onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}>
+      <div className="bg-bone hairline border-ink max-w-md w-full h-[60vh] flex flex-col">
         <div className="hairline-b border-ink/40 p-4 flex items-center justify-between">
           <h2 className="font-display text-xl uppercase tracking-widest">{type}</h2>
-          <button onClick={onClose} className="p-1 hover:bg-ink hover:text-bone transition-colors"><X className="h-5 w-5" /></button>
+          <button onClick={onClose} aria-label="Close followers modal" className="p-1 hover:bg-ink hover:text-bone transition-colors"><X className="h-5 w-5" /></button>
         </div>
         <div className="flex-1 overflow-y-auto p-4 space-y-2">
           {loading ? (
@@ -365,7 +366,7 @@ function FollowersModal({ id, type, onClose }: { id: string, type: "followers" |
             <div className="flex items-center justify-center h-full mono-label opacity-40">NO DATA FOUND</div>
           ) : (
             users.map(u => (
-              <div key={u._id} onClick={() => { onClose(); router.push(`/crew/${u._id}`); }} className="flex items-center gap-3 p-2 hairline border-transparent hover:border-ink/20 hover:bg-ink/5 cursor-pointer transition-colors group">
+              <button type="button" key={u._id} onClick={() => { onClose(); router.push(`/crew/${u._id}`); }} className="w-full text-left flex items-center gap-3 p-2 hairline border-transparent hover:border-ink/20 hover:bg-ink/5 cursor-pointer transition-colors group bg-transparent">
                 <div className="w-10 h-10 shrink-0 rounded-none bg-ink/10 relative overflow-hidden flex items-center justify-center text-sm font-display brick text-bone">
                   {u.image ? <Image src={u.image} alt={u.name} fill className="object-cover" /> : initialsOf(u.name)}
                 </div>
@@ -373,7 +374,7 @@ function FollowersModal({ id, type, onClose }: { id: string, type: "followers" |
                   <div className="font-mono text-sm leading-tight group-hover:text-signal transition-colors">{u.name}</div>
                   <div className="mono-label text-[10px] opacity-60">{u.role === 'ADMIN' ? 'CMD' : 'OP'}</div>
                 </div>
-              </div>
+              </button>
             ))
           )}
         </div>

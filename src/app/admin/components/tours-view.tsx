@@ -196,57 +196,67 @@ export function ToursView() {
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-1">
-                  <label className="mono-label opacity-70">OPERATION NAME</label>
+                  <label htmlFor="tour-form-name" className="mono-label opacity-70">OPERATION NAME</label>
                   <input
+                    id="tour-form-name"
                     required
                     value={formState.name}
                     onChange={(e) => setFormState({ ...formState, name: e.target.value })}
                     className="w-full bg-bone hairline border-ink px-3 py-2 font-mono text-sm focus:outline-none focus:border-signal"
                     placeholder="e.g. Gurez Valley Run"
+                    aria-label="Operation name"
                   />
                 </div>
                 <div className="space-y-1">
-                  <label className="mono-label opacity-70">GENERAL AREA (PLACE)</label>
+                  <label htmlFor="tour-form-place" className="mono-label opacity-70">GENERAL AREA (PLACE)</label>
                   <input
+                    id="tour-form-place"
                     required
                     value={formState.place}
                     onChange={(e) => setFormState({ ...formState, place: e.target.value })}
                     className="w-full bg-bone hairline border-ink px-3 py-2 font-mono text-sm focus:outline-none focus:border-signal"
                     placeholder="e.g. Sonamarg, Ganderbal"
+                    aria-label="General area or place"
                   />
                 </div>
                 <div className="space-y-1">
-                  <label className="mono-label opacity-70">EXACT COORDINATES</label>
+                  <label htmlFor="tour-form-coords" className="mono-label opacity-70">EXACT COORDINATES</label>
                   <input
+                    id="tour-form-coords"
                     value={formState.coordinates}
                     onChange={(e) => setFormState({ ...formState, coordinates: e.target.value })}
                     className="w-full bg-bone hairline border-ink px-3 py-2 font-mono text-sm focus:outline-none focus:border-signal"
                     placeholder="e.g. 34.6378° N, 74.8378° E"
+                    aria-label="Exact coordinates"
                   />
                 </div>
                 <div className="space-y-1 flex gap-2">
                   <div className="flex-1 space-y-1">
-                    <label className="mono-label opacity-70">DISTANCE</label>
+                    <label htmlFor="tour-form-distance" className="mono-label opacity-70">DISTANCE</label>
                     <div className="relative">
                       <input
+                        id="tour-form-distance"
                         type="number"
                         value={formState.distance}
                         onChange={(e) => setFormState({ ...formState, distance: e.target.value })}
                         className="w-full bg-bone hairline border-ink pl-3 pr-10 py-2 font-mono text-sm focus:outline-none focus:border-signal"
                         placeholder="286"
+                        aria-label="Distance in kilometers"
                       />
                       <span className="absolute right-3 top-1/2 -translate-y-1/2 mono-label opacity-40">KM</span>
                     </div>
                   </div>
                   <div className="flex-1 space-y-1">
-                    <label className="mono-label opacity-70">ELEVATION</label>
+                    <label htmlFor="tour-form-elevation" className="mono-label opacity-70">ELEVATION</label>
                     <div className="relative">
                       <input
+                        id="tour-form-elevation"
                         type="number"
                         value={formState.elevation}
                         onChange={(e) => setFormState({ ...formState, elevation: e.target.value })}
                         className="w-full bg-bone hairline border-ink pl-3 pr-8 py-2 font-mono text-sm focus:outline-none focus:border-signal"
                         placeholder="3713"
+                        aria-label="Elevation in meters"
                       />
                       <span className="absolute right-3 top-1/2 -translate-y-1/2 mono-label opacity-40">M</span>
                     </div>
@@ -254,43 +264,51 @@ export function ToursView() {
                 </div>
                 <div className="space-y-1 flex gap-2">
                   <div className="flex-1 space-y-1">
-                    <label className="mono-label opacity-70">START TIME</label>
+                    <label htmlFor="tour-form-time" className="mono-label opacity-70">START TIME</label>
                     <div className="relative">
                       <input
+                        id="tour-form-time"
                         type="time"
                         value={formState.time}
                         onChange={(e) => setFormState({ ...formState, time: e.target.value })}
                         className="w-full bg-bone hairline border-ink px-3 py-2 font-mono text-sm focus:outline-none focus:border-signal"
+                        aria-label="Start time"
                       />
                     </div>
                   </div>
                   <div className="flex-1 space-y-1">
-                    <label className="mono-label opacity-70">PARTY SIZE</label>
+                    <label htmlFor="tour-form-partysize" className="mono-label opacity-70">PARTY SIZE</label>
                     <input
+                      id="tour-form-partysize"
                       type="number"
                       value={formState.partySize}
                       onChange={(e) => setFormState({ ...formState, partySize: e.target.value })}
                       className="w-full bg-bone hairline border-ink px-3 py-2 font-mono text-sm focus:outline-none focus:border-signal"
                       placeholder="6"
+                      aria-label="Party size"
                     />
                   </div>
                 </div>
                 <div className="space-y-1">
-                  <label className="mono-label opacity-70">EXECUTION DATE</label>
+                  <label htmlFor="tour-form-date" className="mono-label opacity-70">EXECUTION DATE</label>
                   <input
+                    id="tour-form-date"
                     required
                     type="date"
                     value={formState.date}
                     onChange={(e) => setFormState({ ...formState, date: e.target.value })}
                     className="w-full bg-bone hairline border-ink px-3 py-2 font-mono text-sm focus:outline-none focus:border-signal"
+                    aria-label="Execution date"
                   />
                 </div>
                 <div className="space-y-1">
-                  <label className="mono-label opacity-70">INITIAL STATUS</label>
+                  <label htmlFor="tour-form-status" className="mono-label opacity-70">INITIAL STATUS</label>
                   <select
+                    id="tour-form-status"
                     value={formState.status}
                     onChange={(e) => setFormState({ ...formState, status: e.target.value as Tour["status"] })}
                     className="w-full bg-bone hairline border-ink px-3 py-2 font-mono text-sm focus:outline-none focus:border-signal appearance-none rounded-none"
+                    aria-label="Initial status"
                   >
                     <option value="UPCOMING">UPCOMING</option>
                     <option value="COMPLETED">COMPLETED</option>
@@ -300,17 +318,19 @@ export function ToursView() {
               </div>
               
               <div className="space-y-1">
-                <label className="mono-label opacity-70">MISSION BRIEFING (DESCRIPTION)</label>
+                <label htmlFor="tour-form-desc" className="mono-label opacity-70">MISSION BRIEFING (DESCRIPTION)</label>
                 <textarea
+                  id="tour-form-desc"
                   value={formState.description}
                   onChange={(e) => setFormState({ ...formState, description: e.target.value })}
                   className="w-full bg-bone hairline border-ink px-3 py-2 font-mono text-sm focus:outline-none focus:border-signal min-h-20"
                   placeholder="Optional details..."
+                  aria-label="Mission briefing description"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="mono-label opacity-70">COVER IMAGE (OPTIONAL)</label>
+                <label htmlFor="tour-form-image" className="mono-label opacity-70">COVER IMAGE (OPTIONAL)</label>
                 <div className="flex items-center gap-3">
                   <div className="h-16 w-16 hairline border-ink/50 bg-ink/5 flex items-center justify-center shrink-0 overflow-hidden relative">
                     {formState.coverImage ? (
@@ -326,10 +346,12 @@ export function ToursView() {
                   </div>
                   <div className="flex-1">
                     <input 
+                      id="tour-form-image"
                       type="file" 
                       accept="image/*"
                       onChange={handleImageUpload}
                       disabled={uploadingImage}
+                      aria-label="Tour cover image file"
                       className="block w-full text-sm font-mono file:mr-4 file:py-1.5 file:px-3 file:border-0 file:text-xs file:font-mono file:bg-ink file:text-bone hover:file:bg-signal transition-colors file:cursor-pointer disabled:opacity-50"
                     />
                     {formState.coverImage && (
@@ -395,6 +417,7 @@ export function ToursView() {
                   <select
                     value={tour.status}
                     onChange={(e) => updateStatus(tour._id, e.target.value as Tour["status"])}
+                    aria-label="Update tour status"
                     className="bg-transparent hairline border-ink px-2 py-1 font-mono text-[10px] uppercase appearance-none"
                   >
                     <option value="UPCOMING">UPCOMING</option>

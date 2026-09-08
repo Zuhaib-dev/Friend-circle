@@ -93,10 +93,11 @@ export default function SurveillancePage() {
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
                 placeholder="QUERY · TITLE / OPERATOR / COORD…"
+                aria-label="Query surveillance transmissions by title, operator, or coordinate"
                 className="w-full bg-transparent px-3 py-2.5 font-mono text-sm tracking-wider placeholder:text-ink/40 focus:outline-none"
               />
               {q && (
-                <button onClick={() => setQ("")} className="mono-label opacity-60 hover:opacity-100 hover:text-signal">
+                <button onClick={() => setQ("")} aria-label="Clear search query" className="mono-label opacity-60 hover:opacity-100 hover:text-signal">
                   <X className="h-3.5 w-3.5" />
                 </button>
               )}

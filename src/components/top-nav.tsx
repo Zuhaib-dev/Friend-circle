@@ -5,10 +5,11 @@ import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { LogIn, LogOut, User as UserIcon, Settings, ChevronDown, CircleDot, Menu, X, ShieldCheck, Image as ImageIcon, Radar, Terminal, Video as VideoIcon, Compass, Crosshair, Package, BookOpen, Database, Info, MessageSquare, FileText } from "lucide-react";
+import { LogIn, LogOut, User as UserIcon, Settings, ChevronDown, CircleDot, Menu, X, ShieldCheck, Image as ImageIcon, Radar, Terminal, Video as VideoIcon, Compass, Crosshair, Package, BookOpen, Database, Info, MessageSquare, FileText, Search } from "lucide-react";
 import { useSession, signOut as doSignOut } from "next-auth/react";
 import { initialsOf } from "../lib/utils";
 import { QiblaDialog } from "@/components/QiblaDialog";
+import { openCommandMenu } from "@/components/command-menu";
 
 function Avatar({ name, src, size = 28 }: { name: string; src?: string; size?: number }) {
   const [err, setErr] = useState(false);
@@ -269,6 +270,18 @@ export function TopNav() {
             </>
           )}
 
+          {/* Command Menu Quick Search */}
+          <button
+            type="button"
+            onClick={() => openCommandMenu()}
+            className="hidden sm:flex items-center gap-1.5 hairline border-ink/40 px-2 py-1 mono-label text-xs hover:border-signal hover:text-signal transition-colors text-ink/70"
+            aria-label="Open command palette"
+          >
+            <Search className="h-3 w-3" />
+            <span className="text-[10px]">SEARCH</span>
+            <kbd className="text-[9px] bg-ink/10 px-1 py-0.5 hairline border-ink/20 font-mono">⌘K</kbd>
+          </button>
+
           {/* Global Qibla Trigger */}
           <button
             onClick={() => setQiblaOpen(true)}
@@ -280,9 +293,12 @@ export function TopNav() {
 
           {/* Mobile menu trigger */}
           <button
+            type="button"
             onClick={() => setMobileOpen((o) => !o)}
             className="md:hidden hairline border-ink p-1.5 hover:bg-ink hover:text-bone transition-colors"
-            aria-label="Menu"
+            aria-label="Toggle navigation menu"
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-nav-panel"
           >
             {mobileOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
           </button>
@@ -293,13 +309,29 @@ export function TopNav() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
+            id="mobile-nav-panel"
+            aria-label="Mobile Navigation"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
             className="md:hidden hairline-t border-ink overflow-hidden bg-bone"
           >
-            <nav className="flex flex-col">
+            <nav id="mobile-nav-menu" aria-label="Mobile links" className="flex flex-col">
+              <div className="px-4 py-2 hairline-b border-ink/20 flex items-center justify-between">
+                <span className="mono-label text-[10px] opacity-60">TACTICAL DIRECTORY</span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMobileOpen(false);
+                    openCommandMenu();
+                  }}
+                  className="flex items-center gap-1 text-signal mono-label text-[10px] hover:underline cursor-pointer"
+                  aria-label="Search routes and protocols"
+                >
+                  <Search className="h-3 w-3" /> SEARCH (⌘K)
+                </button>
+              </div>
               {navLinks.map((l) => (
                 <a
                   key={l.href}

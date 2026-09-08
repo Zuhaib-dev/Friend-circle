@@ -131,6 +131,7 @@ export function CrewClient({ initialCrew, sessionEmail }: { initialCrew: CrewMem
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="search_personnel.exe_"
+              aria-label="Search personnel"
               className="flex-1 bg-transparent font-mono text-sm tracking-wider text-ink placeholder:text-ink/30 focus:outline-none"
               spellCheck={false}
               autoComplete="off"
@@ -297,8 +298,8 @@ function DossierCard({ member, index, isMe }: { member: CrewMember; index: numbe
           )}
         </div>
         
-        <div className="mt-2" onClick={(e) => e.stopPropagation()}>
-          <Link href={`/crew/${member._id}`} className="w-full text-center py-1.5 hairline border-ink bg-ink/5 mono-label hover:bg-signal hover:text-bone hover:border-signal transition-colors block">
+        <div className="mt-2">
+          <Link href={`/crew/${member._id}`} onClick={(e) => e.stopPropagation()} className="w-full text-center py-1.5 hairline border-ink bg-ink/5 mono-label hover:bg-signal hover:text-bone hover:border-signal transition-colors block">
             VIEW DOSSIER
           </Link>
         </div>

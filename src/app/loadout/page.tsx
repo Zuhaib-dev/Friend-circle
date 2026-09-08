@@ -331,6 +331,7 @@ export default function LoadoutPage() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="SEARCH GEAR / CODE..."
+                aria-label="Search gear by name or code"
                 className="bg-transparent outline-none mono-label text-ink placeholder:text-ink/40 w-full min-w-0"
               />
               {query && (

@@ -255,6 +255,7 @@ export default function ProfilePage() {
             <input
               type="file"
               accept="image/*"
+              aria-label="Upload operator profile photo"
               className="hidden"
               ref={fileInputRef}
               onChange={handleFileChange}
@@ -270,10 +271,12 @@ export default function ProfilePage() {
 
             <div className="space-y-4 max-w-xl">
               <div className="space-y-1">
-                <label className="mono-label text-[11px] opacity-70">DESIGNATION (NAME)</label>
+                <label htmlFor="profile-name" className="mono-label text-[11px] opacity-70">DESIGNATION (NAME)</label>
                 <input
+                  id="profile-name"
                   type="text"
                   required
+                  autoComplete="name"
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
                   className="w-full hairline border-ink bg-transparent px-3 py-2.5 font-mono text-sm placeholder:text-ink/30 focus:outline-none focus:ring-1 focus:ring-signal focus:border-signal transition-all"
@@ -281,10 +284,12 @@ export default function ProfilePage() {
               </div>
 
               <div className="space-y-1">
-                <label className="mono-label text-[11px] opacity-70">NETWORK IDENTITY (EMAIL)</label>
+                <label htmlFor="profile-email" className="mono-label text-[11px] opacity-70">NETWORK IDENTITY (EMAIL)</label>
                 <input
+                  id="profile-email"
                   type="email"
                   disabled
+                  autoComplete="email"
                   value={profile?.email || ""}
                   className="w-full hairline border-ink/30 bg-ink/5 px-3 py-2.5 font-mono text-sm opacity-60 cursor-not-allowed"
                 />
@@ -293,10 +298,12 @@ export default function ProfilePage() {
               {isAdvanced && (
                 <>
                   <div className="space-y-1">
-                    <label className="mono-label text-[11px] opacity-70">COMM LINK (PHONE)</label>
+                    <label htmlFor="profile-phone" className="mono-label text-[11px] opacity-70">COMM LINK (PHONE)</label>
                     <input
+                      id="profile-phone"
                       type="tel"
                       disabled={!!profile?.phone}
+                      autoComplete="tel"
                       value={form.phone}
                       onChange={(e) => setForm({ ...form, phone: e.target.value.replace(/[^0-9+\s-]/g, '') })}
                       placeholder="+91 9876543210"
@@ -305,26 +312,30 @@ export default function ProfilePage() {
                   </div>
 
                   <div className="space-y-1">
-                    <label className="mono-label text-[11px] opacity-70">EXTERNAL ALIAS (SOCIAL HANDLE)</label>
+                    <label htmlFor="profile-social" className="mono-label text-[11px] opacity-70">EXTERNAL ALIAS (SOCIAL HANDLE)</label>
                     <div className="relative flex items-center">
                       <span className="absolute left-3 mono-label text-ink/40">@</span>
                       <input
+                        id="profile-social"
                         type="text"
                         value={form.socialHandle}
                         onChange={(e) => setForm({ ...form, socialHandle: e.target.value })}
                         placeholder="instagram_handle"
+                        aria-label="External alias social handle"
                         className="w-full hairline border-ink bg-transparent pl-8 pr-3 py-2.5 font-mono text-sm placeholder:text-ink/30 focus:outline-none focus:ring-1 focus:ring-signal focus:border-signal transition-all"
                       />
                     </div>
                   </div>
 
                   <div className="space-y-1">
-                    <label className="mono-label text-[11px] opacity-70">OPERATOR BIO (SUMMARY)</label>
+                    <label htmlFor="profile-bio" className="mono-label text-[11px] opacity-70">OPERATOR BIO (SUMMARY)</label>
                     <textarea
+                      id="profile-bio"
                       rows={4}
                       value={form.bio}
                       onChange={(e) => setForm({ ...form, bio: e.target.value })}
                       placeholder="Brief dossier summary..."
+                      aria-label="Operator bio summary"
                       className="w-full hairline border-ink bg-transparent px-3 py-2.5 font-mono text-sm placeholder:text-ink/30 focus:outline-none focus:ring-1 focus:ring-signal focus:border-signal transition-all resize-none"
                     />
                   </div>

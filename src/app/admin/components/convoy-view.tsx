@@ -401,7 +401,7 @@ export function ConvoyView() {
               <div className="space-y-2">
                 {gearPersonal.map((g, i) => (
                   <div key={i} className="hairline p-1 bg-bone flex items-center gap-1">
-                    <input type="text" value={g} onChange={e => {const ng = [...gearPersonal]; ng[i] = e.target.value; setGearPersonal(ng)}} className="flex-1 hairline px-2 py-1 font-mono text-xs" placeholder="Gear Item" />
+                    <input type="text" aria-label={`Personal gear item ${i + 1}`} value={g} onChange={e => {const ng = [...gearPersonal]; ng[i] = e.target.value; setGearPersonal(ng)}} className="flex-1 hairline px-2 py-1 font-mono text-xs" placeholder="Gear Item" />
                     <button aria-label="Remove personal gear" onClick={() => setGearPersonal(gearPersonal.filter((_, idx) => idx !== i))} className="p-1 hover:text-signal"><Trash2 className="h-4 w-4" /></button>
                   </div>
                 ))}
@@ -415,7 +415,7 @@ export function ConvoyView() {
               <div className="space-y-2">
                 {gearConvoy.map((g, i) => (
                   <div key={i} className="hairline p-1 bg-bone flex items-center gap-1">
-                    <input type="text" value={g} onChange={e => {const ng = [...gearConvoy]; ng[i] = e.target.value; setGearConvoy(ng)}} className="flex-1 hairline px-2 py-1 font-mono text-xs" placeholder="Gear Item" />
+                    <input type="text" aria-label={`Convoy gear item ${i + 1}`} value={g} onChange={e => {const ng = [...gearConvoy]; ng[i] = e.target.value; setGearConvoy(ng)}} className="flex-1 hairline px-2 py-1 font-mono text-xs" placeholder="Gear Item" />
                     <button aria-label="Remove convoy gear" onClick={() => setGearConvoy(gearConvoy.filter((_, idx) => idx !== i))} className="p-1 hover:text-signal"><Trash2 className="h-4 w-4" /></button>
                   </div>
                 ))}

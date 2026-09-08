@@ -7,6 +7,7 @@ import { SessionTracker } from "@/components/SessionTracker";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Toaster } from "sonner";
 import NextTopLoader from 'nextjs-toploader';
+import { CommandMenu } from "@/components/command-menu";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -120,6 +121,7 @@ export default function RootLayout({
           <SessionTracker />
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             {children}
+            <CommandMenu />
             <Toaster position="bottom-right" richColors />
           </ThemeProvider>
         </AuthProvider>

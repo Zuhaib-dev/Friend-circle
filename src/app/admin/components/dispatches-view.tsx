@@ -327,8 +327,9 @@ export function DispatchesView() {
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
                   {/* Title */}
                   <div className="md:col-span-8">
-                    <label className="mono-label block text-xs mb-1">ARTICLE TITLE *</label>
+                    <label htmlFor="dispatch-title" className="mono-label block text-xs mb-1">ARTICLE TITLE *</label>
                     <input
+                      id="dispatch-title"
                       type="text"
                       value={form.title}
                       onChange={(e) => setForm({ ...form, title: e.target.value })}
@@ -342,8 +343,9 @@ export function DispatchesView() {
 
                   {/* Category */}
                   <div className="md:col-span-4">
-                    <label className="mono-label block text-xs mb-1">CATEGORY</label>
+                    <label htmlFor="dispatch-category" className="mono-label block text-xs mb-1">CATEGORY</label>
                     <select
+                      id="dispatch-category"
                       value={form.category}
                       onChange={(e) =>
                         setForm({ ...form, category: e.target.value as DispatchItem["category"] })
@@ -361,8 +363,9 @@ export function DispatchesView() {
 
                 {/* Summary */}
                 <div>
-                  <label className="mono-label block text-xs mb-1">EXCERPT / SUMMARY *</label>
+                  <label htmlFor="dispatch-summary" className="mono-label block text-xs mb-1">EXCERPT / SUMMARY *</label>
                   <textarea
+                    id="dispatch-summary"
                     value={form.summary}
                     onChange={(e) => setForm({ ...form, summary: e.target.value })}
                     placeholder="Short 1-2 sentence lead overview for article cards..."
@@ -374,10 +377,11 @@ export function DispatchesView() {
                 {/* Cover Image Settings */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 hairline border-ink/40 p-4 bg-bone">
                   <div>
-                    <label className="mono-label text-xs mb-1 flex items-center gap-1.5">
+                    <label htmlFor="dispatch-cover-image" className="mono-label text-xs mb-1 flex items-center gap-1.5">
                       <LinkIcon className="h-3.5 w-3.5 text-signal" /> COVER IMAGE URL
                     </label>
                     <input
+                      id="dispatch-cover-image"
                       type="url"
                       value={form.coverImage}
                       onChange={(e) => setForm({ ...form, coverImage: e.target.value })}
@@ -387,10 +391,11 @@ export function DispatchesView() {
                   </div>
 
                   <div>
-                    <label className="mono-label text-xs mb-1 flex items-center gap-1.5">
+                    <label htmlFor="dispatch-image-upload" className="mono-label text-xs mb-1 flex items-center gap-1.5">
                       <Upload className="h-3.5 w-3.5 text-signal" /> OR UPLOAD FILE TO IMAGEKIT
                     </label>
                     <input
+                      id="dispatch-image-upload"
                       type="file"
                       accept="image/*"
                       onChange={handleImageFileUpload}
@@ -408,10 +413,11 @@ export function DispatchesView() {
                 {/* Optional Voice Memo URL & Tags */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="mono-label text-xs mb-1 flex items-center gap-1.5">
+                    <label htmlFor="dispatch-audio-memo" className="mono-label text-xs mb-1 flex items-center gap-1.5">
                       <Volume2 className="h-3.5 w-3.5 text-signal" /> AUDIO MEMO URL (OPTIONAL MP3)
                     </label>
                     <input
+                      id="dispatch-audio-memo"
                       type="url"
                       value={form.audioMemoUrl}
                       onChange={(e) => setForm({ ...form, audioMemoUrl: e.target.value })}
@@ -421,10 +427,11 @@ export function DispatchesView() {
                   </div>
 
                   <div>
-                    <label className="mono-label text-xs mb-1 flex items-center gap-1.5">
+                    <label htmlFor="dispatch-tags" className="mono-label text-xs mb-1 flex items-center gap-1.5">
                       <Tag className="h-3.5 w-3.5 text-signal" /> TAGS (COMMA SEPARATED)
                     </label>
                     <input
+                      id="dispatch-tags"
                       type="text"
                       value={form.tags}
                       onChange={(e) => setForm({ ...form, tags: e.target.value })}
@@ -437,8 +444,9 @@ export function DispatchesView() {
                 {/* Telemetry metadata */}
                 <div className="hairline border-ink/40 p-4 bg-bone grid grid-cols-2 md:grid-cols-4 gap-3">
                   <div>
-                    <label className="mono-label block text-[10px] opacity-60 mb-1">LOCATION</label>
+                    <label htmlFor="dispatch-location" className="mono-label block text-[10px] opacity-60 mb-1">LOCATION</label>
                     <input
+                      id="dispatch-location"
                       type="text"
                       value={form.telemetry.location}
                       onChange={(e) =>
@@ -451,8 +459,9 @@ export function DispatchesView() {
                     />
                   </div>
                   <div>
-                    <label className="mono-label block text-[10px] opacity-60 mb-1">COORDINATES</label>
+                    <label htmlFor="dispatch-coordinates" className="mono-label block text-[10px] opacity-60 mb-1">COORDINATES</label>
                     <input
+                      id="dispatch-coordinates"
                       type="text"
                       value={form.telemetry.coordinates}
                       onChange={(e) =>
@@ -465,8 +474,9 @@ export function DispatchesView() {
                     />
                   </div>
                   <div>
-                    <label className="mono-label block text-[10px] opacity-60 mb-1">WEATHER</label>
+                    <label htmlFor="dispatch-weather" className="mono-label block text-[10px] opacity-60 mb-1">WEATHER</label>
                     <input
+                      id="dispatch-weather"
                       type="text"
                       value={form.telemetry.weather}
                       onChange={(e) =>
@@ -479,8 +489,9 @@ export function DispatchesView() {
                     />
                   </div>
                   <div>
-                    <label className="mono-label block text-[10px] opacity-60 mb-1">ELEVATION</label>
+                    <label htmlFor="dispatch-elevation" className="mono-label block text-[10px] opacity-60 mb-1">ELEVATION</label>
                     <input
+                      id="dispatch-elevation"
                       type="text"
                       value={form.telemetry.elevation}
                       onChange={(e) =>
@@ -496,10 +507,11 @@ export function DispatchesView() {
 
                 {/* Main Content Markdown Textarea */}
                 <div>
-                  <label className="mono-label block text-xs mb-1">
+                  <label htmlFor="dispatch-content" className="mono-label block text-xs mb-1">
                     ARTICLE BODY (MARKDOWN SUPPORTED) *
                   </label>
                   <textarea
+                    id="dispatch-content"
                     value={form.content}
                     onChange={(e) => setForm({ ...form, content: e.target.value })}
                     placeholder="Write your article using Markdown (## Headings, **bold**, > quotes, - lists)..."
@@ -597,6 +609,7 @@ export function DispatchesView() {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="SEARCH DISPATCHES..."
+          aria-label="Search dispatches"
           className="bg-paper hairline border-ink px-3 py-1.5 mono-label text-xs outline-none w-full md:w-64 focus:border-signal"
         />
       </div>

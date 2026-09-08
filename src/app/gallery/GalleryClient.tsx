@@ -213,11 +213,13 @@ export function GalleryClient({ initialFrames, isAdmin }: { initialFrames: Frame
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
                 placeholder="QUERY · UPLOADER OR CAPTION…"
+                aria-label="Search gallery frames by uploader or caption"
                 className="w-full bg-transparent px-3 py-2.5 font-mono text-sm tracking-wider placeholder:text-ink/40 focus:outline-none"
               />
               {q && (
                 <button
                   onClick={() => setQ("")}
+                  aria-label="Clear search query"
                   className="mono-label opacity-60 hover:opacity-100 hover:text-signal"
                 >
                   <X className="h-3.5 w-3.5" />

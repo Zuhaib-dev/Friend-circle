@@ -67,6 +67,7 @@ export function PersonnelView() {
         <input 
           type="text"
           placeholder="SEARCH BY NAME OR EMAIL..."
+          aria-label="Search personnel roster by name or email"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="bg-transparent border-none outline-none focus-visible:ring-1 focus-visible:ring-signal font-mono text-sm w-full placeholder:opacity-50"
@@ -133,15 +134,19 @@ export function PersonnelView() {
                     )}
                   </span>
 
-                  <div className="col-span-2 md:col-span-1 flex gap-2 justify-end mt-2 md:mt-0" onClick={e => e.stopPropagation()}>
+                  <div className="col-span-2 md:col-span-1 flex gap-2 justify-end mt-2 md:mt-0">
                     <Link
                       href={`/crew/${user._id}`}
+                      onClick={(e) => e.stopPropagation()}
                       className="hairline border-ink px-2.5 py-1.5 mono-label hover:bg-ink hover:text-bone transition-colors flex items-center gap-1.5"
                     >
                       <ExternalLink className="h-3 w-3" /> DOSSIER
                     </Link>
                     <button
-                      onClick={() => handleToggleSuspend(user)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleToggleSuspend(user);
+                      }}
                       disabled={user.role === 'ADMIN'}
                       className={`hairline border-ink px-2.5 py-1.5 mono-label transition-colors flex items-center gap-1.5 ${
                         user.role === 'ADMIN' 

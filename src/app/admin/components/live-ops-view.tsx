@@ -169,6 +169,7 @@ export function LiveOpsView() {
             &gt; {convoys.length} CONVOYS ON GRID
           </div>
           <button
+            disabled={submitting}
             onClick={() => {
               if (showForm) {
                 setShowForm(false);
@@ -179,7 +180,7 @@ export function LiveOpsView() {
                 setShowForm(true);
               }
             }}
-            className="hairline border-ink bg-ink text-bone px-3 py-1.5 mono-label flex items-center gap-2 hover:bg-transparent hover:text-ink transition-colors"
+            className="hairline border-ink bg-ink text-bone px-3 py-1.5 mono-label flex items-center gap-2 hover:bg-transparent hover:text-ink transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {showForm ? <X className="h-3 w-3" /> : <Plus className="h-3 w-3" />}
             {showForm ? "ABORT DISPATCH" : "DISPATCH CONVOY"}
@@ -193,18 +194,20 @@ export function LiveOpsView() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               onSubmit={handleSubmit}
+              aria-busy={submitting}
               className="mb-8 p-4 hairline border-ink bg-ink/5 space-y-4 overflow-hidden crosshair"
             >
               <fieldset disabled={submitting} className="space-y-4">
-              <Crosshairs />
-              <div className="mono-label text-signal mb-2 flex items-center gap-2">
-                <Terminal className="h-3.5 w-3.5" /> {editingId ? "MODIFY CONVOY" : "INITIALIZE CONVOY"}
-              </div>
+                <legend className="mono-label text-signal mb-2 flex items-center gap-2">
+                  <Terminal className="h-3.5 w-3.5" /> {editingId ? "MODIFY CONVOY" : "INITIALIZE CONVOY"}
+                </legend>
+                <Crosshairs />
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-1">
-                  <label className="mono-label opacity-70">CONVOY ID (SYSTEM)</label>
+                  <label htmlFor="liveops-convoy-id" className="mono-label opacity-70">CONVOY ID (SYSTEM)</label>
                   <input
+                    id="liveops-convoy-id"
                     required
                     disabled={!!editingId}
                     value={formState.convoyId}
@@ -214,8 +217,9 @@ export function LiveOpsView() {
                   />
                 </div>
                 <div className="space-y-1">
-                  <label className="mono-label opacity-70">CALLSIGN</label>
+                  <label htmlFor="liveops-callsign" className="mono-label opacity-70">CALLSIGN</label>
                   <input
+                    id="liveops-callsign"
                     required
                     value={formState.callsign}
                     onChange={(e) => setFormState({ ...formState, callsign: e.target.value })}
@@ -225,8 +229,9 @@ export function LiveOpsView() {
                 </div>
                 
                 <div className="space-y-1">
-                  <label className="mono-label opacity-70">START LOCATION</label>
+                  <label htmlFor="liveops-start" className="mono-label opacity-70">START LOCATION</label>
                   <input
+                    id="liveops-start"
                     required
                     value={formState.start}
                     onChange={(e) => setFormState({ ...formState, start: e.target.value })}
@@ -235,8 +240,9 @@ export function LiveOpsView() {
                   />
                 </div>
                 <div className="space-y-1">
-                  <label className="mono-label opacity-70">DESTINATION</label>
+                  <label htmlFor="liveops-destination" className="mono-label opacity-70">DESTINATION</label>
                   <input
+                    id="liveops-destination"
                     required
                     value={formState.destination}
                     onChange={(e) => setFormState({ ...formState, destination: e.target.value })}
@@ -246,8 +252,9 @@ export function LiveOpsView() {
                 </div>
 
                 <div className="space-y-1">
-                  <label className="mono-label opacity-70">VEHICLES (COMMA SEPARATED)</label>
+                  <label htmlFor="liveops-vehicles" className="mono-label opacity-70">VEHICLES (COMMA SEPARATED)</label>
                   <input
+                    id="liveops-vehicles"
                     value={formState.vehicles}
                     onChange={(e) => setFormState({ ...formState, vehicles: e.target.value })}
                     className="w-full bg-bone hairline border-ink px-3 py-2 font-mono text-sm focus:outline-none focus:border-signal"
@@ -256,8 +263,9 @@ export function LiveOpsView() {
                 </div>
                 <div className="space-y-1 flex gap-2">
                   <div className="flex-1 space-y-1">
-                    <label className="mono-label opacity-70">OPERATORS</label>
+                    <label htmlFor="liveops-operators" className="mono-label opacity-70">OPERATORS</label>
                     <input
+                      id="liveops-operators"
                       type="number"
                       value={formState.operators}
                       onChange={(e) => setFormState({ ...formState, operators: e.target.value })}
@@ -265,8 +273,9 @@ export function LiveOpsView() {
                     />
                   </div>
                   <div className="flex-1 space-y-1">
-                    <label className="mono-label opacity-70">STATUS</label>
+                    <label htmlFor="liveops-status" className="mono-label opacity-70">STATUS</label>
                     <select
+                      id="liveops-status"
                       value={formState.status}
                       onChange={(e) => setFormState({ ...formState, status: e.target.value as any })}
                       className="w-full bg-bone hairline border-ink px-3 py-2 font-mono text-sm focus:outline-none focus:border-signal appearance-none rounded-none"
@@ -280,8 +289,9 @@ export function LiveOpsView() {
 
                 <div className="space-y-1 flex gap-2">
                   <div className="flex-1 space-y-1">
-                    <label className="mono-label opacity-70">PROGRESS (0-1)</label>
+                    <label htmlFor="liveops-progress" className="mono-label opacity-70">PROGRESS (0-1)</label>
                     <input
+                      id="liveops-progress"
                       type="number" step="0.01"
                       value={formState.progress}
                       onChange={(e) => setFormState({ ...formState, progress: e.target.value })}
@@ -289,8 +299,9 @@ export function LiveOpsView() {
                     />
                   </div>
                   <div className="flex-1 space-y-1">
-                    <label className="mono-label opacity-70">BATTERY %</label>
+                    <label htmlFor="liveops-battery" className="mono-label opacity-70">BATTERY %</label>
                     <input
+                      id="liveops-battery"
                       type="number"
                       value={formState.battery}
                       onChange={(e) => setFormState({ ...formState, battery: e.target.value })}
@@ -301,8 +312,9 @@ export function LiveOpsView() {
 
                 <div className="space-y-1 flex gap-2">
                   <div className="flex-1 space-y-1">
-                    <label className="mono-label opacity-70">TEMP (°C)</label>
+                    <label htmlFor="liveops-temp" className="mono-label opacity-70">TEMP (°C)</label>
                     <input
+                      id="liveops-temp"
                       type="number"
                       value={formState.temp}
                       onChange={(e) => setFormState({ ...formState, temp: e.target.value })}
@@ -310,8 +322,9 @@ export function LiveOpsView() {
                     />
                   </div>
                   <div className="flex-1 space-y-1">
-                    <label className="mono-label opacity-70">WIND (KM/H)</label>
+                    <label htmlFor="liveops-wind" className="mono-label opacity-70">WIND (KM/H)</label>
                     <input
+                      id="liveops-wind"
                       type="number"
                       value={formState.wind}
                       onChange={(e) => setFormState({ ...formState, wind: e.target.value })}
@@ -322,8 +335,9 @@ export function LiveOpsView() {
               </div>
               
               <div className="space-y-1">
-                <label className="mono-label opacity-70">WAYPOINTS (JSON ARRAY)</label>
+                <label htmlFor="liveops-waypoints" className="mono-label opacity-70">WAYPOINTS (JSON ARRAY)</label>
                 <textarea
+                  id="liveops-waypoints"
                   required
                   value={formState.pathStr}
                   onChange={(e) => setFormState({ ...formState, pathStr: e.target.value })}
@@ -335,6 +349,7 @@ export function LiveOpsView() {
                 <button
                   type="submit"
                   disabled={submitting}
+                  aria-disabled={submitting}
                   className="w-full hairline border-ink bg-signal text-bone py-2 mono-label flex items-center justify-center gap-2 hover:bg-ink transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {submitting ? <Loader2 className="h-3 w-3 animate-spin" /> : <Activity className="h-3 w-3" />} 
@@ -376,6 +391,7 @@ export function LiveOpsView() {
                 <div className="flex items-center gap-2 w-full md:w-auto mt-3 md:mt-0">
                   <select
                     value={c.status}
+                    aria-label={`Update status for convoy ${c.callsign}`}
                     onChange={(e) => updateStatus(c.convoyId, e.target.value)}
                     className="bg-transparent hairline border-ink px-2 py-1 font-mono text-[10px] uppercase appearance-none"
                   >

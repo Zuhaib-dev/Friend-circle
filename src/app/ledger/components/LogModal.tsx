@@ -33,13 +33,13 @@ export function LogModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink/80 backdrop-blur-sm overflow-y-auto" onClick={onClose}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
+      <button type="button" aria-label="Close modal overlay" onClick={onClose} className="fixed inset-0 bg-ink/80 backdrop-blur-sm -z-10 cursor-default border-none p-0 w-full h-full" />
       <motion.div 
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
-        className="bg-bone hairline border-ink w-full max-w-md p-6 crosshair my-8 z-10"
-        onClick={(e) => e.stopPropagation()}
+        className="bg-bone hairline border-ink w-full max-w-md p-6 crosshair my-8 z-10 relative"
       >
         <Crosshairs />
         <button type="button" onClick={onClose} className="absolute top-4 right-4 z-50 mono-label hover:text-signal p-2 flex items-center gap-1 cursor-pointer"><X className="h-4 w-4" /> CLOSE</button>
@@ -65,24 +65,28 @@ export function LogModal({
 
           {/* DESCRIPTION */}
           <div>
-            <label className="mono-label opacity-60 block mb-2">DESCRIPTION</label>
+            <label htmlFor="log-desc" className="mono-label opacity-60 block mb-2">DESCRIPTION</label>
             <input 
+              id="log-desc"
               type="text" 
               value={desc}
               onChange={e => setDesc(e.target.value)}
               placeholder="DIESEL // SONAMARG"
+              aria-label="Transaction description"
               className="w-full hairline border-ink bg-bone px-3 py-2.5 font-mono text-sm uppercase placeholder:opacity-30 focus:bg-acid/10 focus:outline-none"
             />
           </div>
 
           {/* AMOUNT */}
           <div>
-            <label className="mono-label opacity-60 block mb-2">AMOUNT ₹</label>
+            <label htmlFor="log-amt" className="mono-label opacity-60 block mb-2">AMOUNT ₹</label>
             <input 
+              id="log-amt"
               type="number" 
               value={amt}
               onChange={e => setAmt(e.target.value)}
               placeholder="0000"
+              aria-label="Transaction amount"
               className="w-full hairline border-ink bg-bone px-3 py-2.5 font-display text-2xl placeholder:opacity-30 focus:bg-acid/10 focus:outline-none"
             />
           </div>

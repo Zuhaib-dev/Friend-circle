@@ -106,6 +106,8 @@ function RegisterContent() {
               <input
                 type="text"
                 required
+                autoComplete="name"
+                aria-label="Full name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Zuhaib Rashid"
@@ -120,6 +122,8 @@ function RegisterContent() {
               <input
                 type="email"
                 required
+                autoComplete="email"
+                aria-label="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="operator@circle.kashmir"
@@ -135,6 +139,8 @@ function RegisterContent() {
                 type="password"
                 required
                 minLength={6}
+                autoComplete="new-password"
+                aria-label="Create password"
                 value={pwd}
                 onChange={(e) => setPwd(e.target.value)}
                 placeholder="••••••••••••"

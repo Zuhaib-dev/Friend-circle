@@ -116,6 +116,7 @@ export function QiblaDialog({ open, onClose }: { open: boolean; onClose: () => v
             
             <button 
               onClick={onClose}
+              aria-label="Close Qibla HUD dialog"
               className="absolute top-4 right-4 z-50 p-2 text-white/50 hover:text-white hover:bg-white/5 transition-colors rounded-sm"
             >
               <X className="h-5 w-5" />

@@ -88,6 +88,7 @@ function LoginContent() {
                 type="email"
                 required
                 autoComplete="email"
+                aria-label="Operator email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="operator@circle.kashmir"
@@ -103,6 +104,7 @@ function LoginContent() {
                 type="password"
                 required
                 autoComplete="current-password"
+                aria-label="Password"
                 value={pwd}
                 onChange={(e) => setPwd(e.target.value)}
                 placeholder="••••••••••••"
@@ -113,7 +115,7 @@ function LoginContent() {
 
           <div className="flex items-center justify-between pt-1">
             <label className="flex items-center gap-2 mono-label cursor-pointer">
-              <input type="checkbox" className="accent-signal h-3 w-3" />
+              <input type="checkbox" aria-label="Keep session active" className="accent-signal h-3 w-3" />
               KEEP SESSION
             </label>
             <a className="mono-label text-signal hover:underline cursor-pointer">FORGOT KEY?</a>

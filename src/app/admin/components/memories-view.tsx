@@ -143,18 +143,18 @@ export function MemoriesView() {
               <div className="space-y-4">
                 <h3 className="mono-label opacity-70 bg-ink/10 px-2 py-1">CORE INTEL</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <input placeholder="TITLE (e.g. PAHALGAM RALLY)" value={form.title} onChange={e => setForm({...form, title: e.target.value})} className="input-field" required />
-                  <input placeholder="CODE (e.g. AAR-014)" value={form.code} onChange={e => setForm({...form, code: e.target.value})} className="input-field" required />
-                  <input placeholder="DATE (e.g. 14 JUN 2026)" value={form.date} onChange={e => setForm({...form, date: e.target.value})} className="input-field" required />
-                  <input placeholder="DISTANCE (e.g. 412 KM)" value={form.distance} onChange={e => setForm({...form, distance: e.target.value})} className="input-field" required />
-                  <input placeholder="WEATHER (e.g. 8°C · DRIZZLE)" value={form.weather} onChange={e => setForm({...form, weather: e.target.value})} className="input-field" required />
-                  <input placeholder="COORDINATES" value={form.coordinates} onChange={e => setForm({...form, coordinates: e.target.value})} className="input-field" required />
-                  <input placeholder="ELEVATION (e.g. 2,740M)" value={form.elevation} onChange={e => setForm({...form, elevation: e.target.value})} className="input-field" required />
+                  <input placeholder="TITLE (e.g. PAHALGAM RALLY)" aria-label="Memory title" value={form.title} onChange={e => setForm({...form, title: e.target.value})} className="input-field" required />
+                  <input placeholder="CODE (e.g. AAR-014)" aria-label="Mission code" value={form.code} onChange={e => setForm({...form, code: e.target.value})} className="input-field" required />
+                  <input placeholder="DATE (e.g. 14 JUN 2026)" aria-label="Expedition date" value={form.date} onChange={e => setForm({...form, date: e.target.value})} className="input-field" required />
+                  <input placeholder="DISTANCE (e.g. 412 KM)" aria-label="Total distance" value={form.distance} onChange={e => setForm({...form, distance: e.target.value})} className="input-field" required />
+                  <input placeholder="WEATHER (e.g. 8°C · DRIZZLE)" aria-label="Recorded weather" value={form.weather} onChange={e => setForm({...form, weather: e.target.value})} className="input-field" required />
+                  <input placeholder="COORDINATES" aria-label="GPS coordinates" value={form.coordinates} onChange={e => setForm({...form, coordinates: e.target.value})} className="input-field" required />
+                  <input placeholder="ELEVATION (e.g. 2,740M)" aria-label="Peak elevation" value={form.elevation} onChange={e => setForm({...form, elevation: e.target.value})} className="input-field" required />
                   
                   <div className="space-y-1">
                     <label className="mono-label opacity-70 text-[10px]">BANNER IMAGE</label>
                     <div className="flex gap-2">
-                      <input type="text" placeholder="URL" value={form.bannerImage} onChange={e => setForm({...form, bannerImage: e.target.value})} className="input-field flex-1" />
+                      <input type="text" placeholder="URL" aria-label="Banner image URL" value={form.bannerImage} onChange={e => setForm({...form, bannerImage: e.target.value})} className="input-field flex-1" />
                       <label className="cursor-pointer brick px-3 py-1 flex items-center justify-center bg-signal text-bone hover:bg-ink">
                         {uploadingImage ? <Loader2 className="animate-spin h-4 w-4" /> : <UploadCloud className="h-4 w-4" />}
                         <input type="file" className="hidden" accept="image/*" onChange={(e) => handleImageUpload(e, "bannerImage")} disabled={uploadingImage} />
@@ -163,9 +163,9 @@ export function MemoriesView() {
                   </div>
                 </div>
 
-                <textarea placeholder="DESCRIPTION SUMMARY" value={form.description} onChange={e => setForm({...form, description: e.target.value})} className="input-field min-h-15" required />
-                <textarea placeholder="STORY OF THE DAY (Full text)" value={form.story} onChange={e => setForm({...form, story: e.target.value})} className="input-field min-h-30" required />
-                <textarea placeholder="BEST MOMENT" value={form.bestMoment} onChange={e => setForm({...form, bestMoment: e.target.value})} className="input-field min-h-15" required />
+                <textarea placeholder="DESCRIPTION SUMMARY" aria-label="Description summary" value={form.description} onChange={e => setForm({...form, description: e.target.value})} className="input-field min-h-15" required />
+                <textarea placeholder="STORY OF THE DAY (Full text)" aria-label="Story of the day" value={form.story} onChange={e => setForm({...form, story: e.target.value})} className="input-field min-h-30" required />
+                <textarea placeholder="BEST MOMENT" aria-label="Best moment" value={form.bestMoment} onChange={e => setForm({...form, bestMoment: e.target.value})} className="input-field min-h-15" required />
               </div>
 
               {/* CREW */}
@@ -176,10 +176,10 @@ export function MemoriesView() {
                 </div>
                 {form.crew?.map((c, i) => (
                   <div key={i} className="flex gap-2 items-center">
-                    <input placeholder="CALLSIGN" value={c.callsign} onChange={e => { const nc = [...(form.crew||[])]; nc[i].callsign = e.target.value; setForm({...form, crew: nc}) }} className="input-field w-1/3" />
-                    <input placeholder="NAME" value={c.name} onChange={e => { const nc = [...(form.crew||[])]; nc[i].name = e.target.value; setForm({...form, crew: nc}) }} className="input-field w-1/3" />
-                    <input placeholder="RIG" value={c.rig} onChange={e => { const nc = [...(form.crew||[])]; nc[i].rig = e.target.value; setForm({...form, crew: nc}) }} className="input-field w-1/3" />
-                    <button type="button" onClick={() => setForm({...form, crew: form.crew?.filter((_, idx) => idx !== i)})} className="p-2 text-red-500"><Trash2 className="h-4 w-4" /></button>
+                    <input placeholder="CALLSIGN" aria-label={`Crew callsign ${i + 1}`} value={c.callsign} onChange={e => { const nc = [...(form.crew||[])]; nc[i].callsign = e.target.value; setForm({...form, crew: nc}) }} className="input-field w-1/3" />
+                    <input placeholder="NAME" aria-label={`Crew name ${i + 1}`} value={c.name} onChange={e => { const nc = [...(form.crew||[])]; nc[i].name = e.target.value; setForm({...form, crew: nc}) }} className="input-field w-1/3" />
+                    <input placeholder="RIG" aria-label={`Crew rig ${i + 1}`} value={c.rig} onChange={e => { const nc = [...(form.crew||[])]; nc[i].rig = e.target.value; setForm({...form, crew: nc}) }} className="input-field w-1/3" />
+                    <button type="button" aria-label={`Remove crew member ${i + 1}`} onClick={() => setForm({...form, crew: form.crew?.filter((_, idx) => idx !== i)})} className="p-2 text-red-500"><Trash2 className="h-4 w-4" /></button>
                   </div>
                 ))}
               </div>
@@ -192,10 +192,10 @@ export function MemoriesView() {
                 </div>
                 {form.quotes?.map((q, i) => (
                   <div key={i} className="flex gap-2 items-center">
-                    <input placeholder="TIME (UTC)" value={q.time} onChange={e => { const nq = [...(form.quotes||[])]; nq[i].time = e.target.value; setForm({...form, quotes: nq}) }} className="input-field w-1/4" />
-                    <input placeholder="CALLSIGN" value={q.callsign} onChange={e => { const nq = [...(form.quotes||[])]; nq[i].callsign = e.target.value; setForm({...form, quotes: nq}) }} className="input-field w-1/4" />
-                    <input placeholder="MESSAGE" value={q.message} onChange={e => { const nq = [...(form.quotes||[])]; nq[i].message = e.target.value; setForm({...form, quotes: nq}) }} className="input-field flex-1" />
-                    <button type="button" onClick={() => setForm({...form, quotes: form.quotes?.filter((_, idx) => idx !== i)})} className="p-2 text-red-500"><Trash2 className="h-4 w-4" /></button>
+                    <input placeholder="TIME (UTC)" aria-label={`Quote time ${i + 1}`} value={q.time} onChange={e => { const nq = [...(form.quotes||[])]; nq[i].time = e.target.value; setForm({...form, quotes: nq}) }} className="input-field w-1/4" />
+                    <input placeholder="CALLSIGN" aria-label={`Quote callsign ${i + 1}`} value={q.callsign} onChange={e => { const nq = [...(form.quotes||[])]; nq[i].callsign = e.target.value; setForm({...form, quotes: nq}) }} className="input-field w-1/4" />
+                    <input placeholder="MESSAGE" aria-label={`Quote message ${i + 1}`} value={q.message} onChange={e => { const nq = [...(form.quotes||[])]; nq[i].message = e.target.value; setForm({...form, quotes: nq}) }} className="input-field flex-1" />
+                    <button type="button" aria-label={`Remove intercepted comm ${i + 1}`} onClick={() => setForm({...form, quotes: form.quotes?.filter((_, idx) => idx !== i)})} className="p-2 text-red-500"><Trash2 className="h-4 w-4" /></button>
                   </div>
                 ))}
               </div>
@@ -208,12 +208,12 @@ export function MemoriesView() {
                 </div>
                 {form.waypoints?.map((w, i) => (
                   <div key={i} className="flex gap-2 items-center flex-wrap">
-                    <input placeholder="ID" value={w.id} onChange={e => { const nw = [...(form.waypoints||[])]; nw[i].id = e.target.value; setForm({...form, waypoints: nw}) }} className="input-field w-20" />
-                    <input placeholder="NAME" value={w.name} onChange={e => { const nw = [...(form.waypoints||[])]; nw[i].name = e.target.value; setForm({...form, waypoints: nw}) }} className="input-field w-40" />
-                    <input placeholder="TIME" value={w.time} onChange={e => { const nw = [...(form.waypoints||[])]; nw[i].time = e.target.value; setForm({...form, waypoints: nw}) }} className="input-field w-24" />
-                    <input type="number" placeholder="KM" value={w.km} onChange={e => { const nw = [...(form.waypoints||[])]; nw[i].km = Number(e.target.value); setForm({...form, waypoints: nw}) }} className="input-field w-20" />
-                    <input type="number" placeholder="ELEV" value={w.elev} onChange={e => { const nw = [...(form.waypoints||[])]; nw[i].elev = Number(e.target.value); setForm({...form, waypoints: nw}) }} className="input-field w-24" />
-                    <button type="button" onClick={() => setForm({...form, waypoints: form.waypoints?.filter((_, idx) => idx !== i)})} className="p-2 text-red-500"><Trash2 className="h-4 w-4" /></button>
+                    <input placeholder="ID" aria-label={`Waypoint ID ${w.id || i + 1}`} value={w.id} onChange={e => { const nw = [...(form.waypoints||[])]; nw[i].id = e.target.value; setForm({...form, waypoints: nw}) }} className="input-field w-20" />
+                    <input placeholder="NAME" aria-label={`Waypoint name ${i + 1}`} value={w.name} onChange={e => { const nw = [...(form.waypoints||[])]; nw[i].name = e.target.value; setForm({...form, waypoints: nw}) }} className="input-field w-40" />
+                    <input placeholder="TIME" aria-label={`Waypoint time ${i + 1}`} value={w.time} onChange={e => { const nw = [...(form.waypoints||[])]; nw[i].time = e.target.value; setForm({...form, waypoints: nw}) }} className="input-field w-24" />
+                    <input type="number" placeholder="KM" aria-label={`Waypoint distance km ${i + 1}`} value={w.km} onChange={e => { const nw = [...(form.waypoints||[])]; nw[i].km = Number(e.target.value); setForm({...form, waypoints: nw}) }} className="input-field w-20" />
+                    <input type="number" placeholder="ELEV" aria-label={`Waypoint elevation ${i + 1}`} value={w.elev} onChange={e => { const nw = [...(form.waypoints||[])]; nw[i].elev = Number(e.target.value); setForm({...form, waypoints: nw}) }} className="input-field w-24" />
+                    <button type="button" aria-label={`Remove waypoint ${w.id || i + 1}`} onClick={() => setForm({...form, waypoints: form.waypoints?.filter((_, idx) => idx !== i)})} className="p-2 text-red-500"><Trash2 className="h-4 w-4" /></button>
                   </div>
                 ))}
               </div>
@@ -234,11 +234,11 @@ export function MemoriesView() {
                           <input type="file" className="hidden" accept="image/*" onChange={(e) => handleImageUpload(e, "media", i)} />
                         </label>
                       </div>
-                      <input placeholder="URL" value={m.url} onChange={e => { const nm = [...(form.media||[])]; nm[i].url = e.target.value; setForm({...form, media: nm}) }} className="input-field text-xs p-1" />
+                      <input placeholder="URL" aria-label={`Media URL ${i + 1}`} value={m.url} onChange={e => { const nm = [...(form.media||[])]; nm[i].url = e.target.value; setForm({...form, media: nm}) }} className="input-field text-xs p-1" />
                       <label className="flex items-center gap-2 text-xs mono-label">
                         <input type="checkbox" checked={m.featured} onChange={e => { const nm = [...(form.media||[])]; nm[i].featured = e.target.checked; setForm({...form, media: nm}) }} /> FEATURED
                       </label>
-                      <button type="button" onClick={() => setForm({...form, media: form.media?.filter((_, idx) => idx !== i)})} className="absolute top-1 right-1 bg-red-500 text-white p-1"><Trash2 className="h-3 w-3" /></button>
+                      <button type="button" aria-label={`Remove media evidence ${i + 1}`} onClick={() => setForm({...form, media: form.media?.filter((_, idx) => idx !== i)})} className="absolute top-1 right-1 bg-red-500 text-white p-1"><Trash2 className="h-3 w-3" /></button>
                     </div>
                   ))}
                 </div>
@@ -252,10 +252,10 @@ export function MemoriesView() {
                 </div>
                 {form.logistics?.map((l, i) => (
                   <div key={i} className="flex gap-2 items-center">
-                    <input placeholder="LABEL (e.g. TOTAL EXPENSE)" value={l.label} onChange={e => { const nl = [...(form.logistics||[])]; nl[i].label = e.target.value; setForm({...form, logistics: nl}) }} className="input-field w-1/3" />
-                    <input placeholder="VALUE" value={l.value} onChange={e => { const nl = [...(form.logistics||[])]; nl[i].value = e.target.value; setForm({...form, logistics: nl}) }} className="input-field w-1/3" />
-                    <input placeholder="CODE" value={l.code} onChange={e => { const nl = [...(form.logistics||[])]; nl[i].code = e.target.value; setForm({...form, logistics: nl}) }} className="input-field w-1/4" />
-                    <button type="button" onClick={() => setForm({...form, logistics: form.logistics?.filter((_, idx) => idx !== i)})} className="p-2 text-red-500"><Trash2 className="h-4 w-4" /></button>
+                    <input placeholder="LABEL (e.g. TOTAL EXPENSE)" aria-label={`Logistics label ${i + 1}`} value={l.label} onChange={e => { const nl = [...(form.logistics||[])]; nl[i].label = e.target.value; setForm({...form, logistics: nl}) }} className="input-field w-1/3" />
+                    <input placeholder="VALUE" aria-label={`Logistics value ${i + 1}`} value={l.value} onChange={e => { const nl = [...(form.logistics||[])]; nl[i].value = e.target.value; setForm({...form, logistics: nl}) }} className="input-field w-1/3" />
+                    <input placeholder="CODE" aria-label={`Logistics code ${i + 1}`} value={l.code} onChange={e => { const nl = [...(form.logistics||[])]; nl[i].code = e.target.value; setForm({...form, logistics: nl}) }} className="input-field w-1/4" />
+                    <button type="button" aria-label={`Remove logistics entry ${l.label || i + 1}`} onClick={() => setForm({...form, logistics: form.logistics?.filter((_, idx) => idx !== i)})} className="p-2 text-red-500"><Trash2 className="h-4 w-4" /></button>
                   </div>
                 ))}
               </div>
