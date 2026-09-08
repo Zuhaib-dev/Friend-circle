@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQueryState, parseAsString } from "nuqs";
 import { AnimatePresence, motion } from "motion/react";
 import {
   Compass,
@@ -86,56 +88,67 @@ function useUTC() {
 export default function LoadoutPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
+  const queryClient = useQueryClient();
   
-  const [trips, setTrips] = useState<Trip[]>([]);
-  const [items, setItems] = useState<Item[]>([]);
-  const [trip, setTrip] = useState<Trip | null>(null);
-  
-  const [filter, setFilter] = useState<CategoryKey | "ALL">("ALL");
-  const [query, setQuery] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [filter, setFilter] = useQueryState<CategoryKey | "ALL">("filter", parseAsString.withDefault("ALL") as any);
+  const [query, setQuery] = useQueryState("q", parseAsString.withDefault(""));
+  const [selectedTripId, setSelectedTripId] = useQueryState("trip", parseAsString.withDefault(""));
   const utc = useUTC();
+
+  const enabled = status === 'authenticated' && ((session?.user as any)?.role === 'ADMIN' || (session?.user as any)?.role === 'TEAM_MEMBER');
+
+  const { data: trips = [], isLoading: loadingTrips } = useQuery<Trip[]>({
+    queryKey: ["loadout-trips"],
+    queryFn: async () => {
+      const res = await fetch('/api/loadout/trips');
+      return res.json();
+    },
+    enabled,
+  });
+
+  const { data: items = [], isLoading: loadingItems } = useQuery<Item[]>({
+    queryKey: ["loadout-items"],
+    queryFn: async () => {
+      const res = await fetch('/api/loadout/items');
+      return res.json();
+    },
+    enabled,
+  });
+
+  const loading = loadingTrips || loadingItems || status === 'loading';
+  const trip = trips.find(t => t.tripId === selectedTripId) || trips[0] || null;
 
   useEffect(() => {
     if (status === 'unauthenticated') {
       router.push('/login');
-    } else if (status === 'authenticated') {
-      const role = (session?.user as any)?.role;
-      if (role !== 'ADMIN' && role !== 'TEAM_MEMBER') {
-        router.push('/');
-      } else {
-        // Fetch data
-        Promise.all([
-          fetch('/api/loadout/trips').then(r => r.json()),
-          fetch('/api/loadout/items').then(r => r.json())
-        ]).then(([tripData, itemData]) => {
-          if (Array.isArray(tripData)) {
-            setTrips(tripData);
-            if (tripData.length > 0) setTrip(tripData[0]);
-          }
-          if (Array.isArray(itemData)) {
-            setItems(itemData);
-          }
-          setLoading(false);
-        }).catch(err => {
-          console.error(err);
-          setLoading(false);
-        });
-      }
+    } else if (status === 'authenticated' && !enabled) {
+      router.push('/');
     }
-  }, [status, router, session]);
+  }, [status, router, enabled]);
 
-  const updateItem = async (updates: Partial<Item> & { itemId: string }) => {
-    setItems(items.map(i => i.itemId === updates.itemId ? { ...i, ...updates } : i));
-    try {
-      await fetch('/api/loadout/items', {
+  useEffect(() => {
+    if (trips.length > 0 && !selectedTripId) {
+      setSelectedTripId(trips[0].tripId);
+    }
+  }, [trips, selectedTripId, setSelectedTripId]);
+
+  const itemMutation = useMutation({
+    mutationFn: async (payload: any) => {
+      const res = await fetch('/api/loadout/items', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updates)
+        body: JSON.stringify(payload)
       });
-    } catch (e) {
-      console.error(e);
+      if (!res.ok) throw new Error("Failed to update item");
+      return res.json();
     }
+  });
+
+  const updateItem = (updates: Partial<Item> & { itemId: string }) => {
+    queryClient.setQueryData<Item[]>(["loadout-items"], (old = []) => 
+      old.map(i => i.itemId === updates.itemId ? { ...i, ...updates } : i)
+    );
+    itemMutation.mutate(updates);
   };
 
   const togglePacked = (itemId: string, currentPacked: boolean) => {
@@ -146,20 +159,14 @@ export default function LoadoutPage() {
     updateItem({ itemId, qty: Math.max(1, currentQty + delta) });
   };
   
-  const packAllCritical = async () => {
+  const packAllCritical = () => {
     const criticalUnpacked = items.filter(i => i.critical && !i.packed);
     if (criticalUnpacked.length === 0) return;
     
-    setItems(items.map(i => i.critical ? { ...i, packed: true } : i));
-    try {
-      await fetch('/api/loadout/items', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(criticalUnpacked.map(i => ({ itemId: i.itemId, packed: true })))
-      });
-    } catch (e) {
-      console.error(e);
-    }
+    queryClient.setQueryData<Item[]>(["loadout-items"], (old = []) => 
+      old.map(i => i.critical ? { ...i, packed: true } : i)
+    );
+    itemMutation.mutate(criticalUnpacked.map(i => ({ itemId: i.itemId, packed: true })));
   };
 
   const totals = useMemo(() => {
@@ -306,7 +313,7 @@ export default function LoadoutPage() {
             return (
               <button
                 key={t.tripId}
-                onClick={() => setTrip(t)}
+                onClick={() => setSelectedTripId(t.tripId)}
                 className={`shrink-0 hairline px-3 py-1.5 mono-label transition-colors ${
                   active ? "bg-ink text-bone border-ink" : "border-ink/40 hover:bg-ink hover:text-bone"
                 }`}

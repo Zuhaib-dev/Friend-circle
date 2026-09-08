@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useState, useCallback } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useQueryState, parseAsString } from "nuqs";
 import { motion, AnimatePresence } from "motion/react";
 import {
   Activity,
@@ -109,18 +111,15 @@ function useUtc() {
 
 export default function LiveOpsPage() {
   const utc = useUtc();
-  const [selectedId, setSelectedId] = useState<string>("");
+  const [selectedId, setSelectedId] = useQueryState("convoy", parseAsString.withDefault(""));
   const [playing, setPlaying] = useState(true);
   const [tick, setTick] = useState(0);
 
-  const [convoys, setConvoys] = useState<Convoy[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  const fetchConvoys = useCallback(async () => {
-    try {
+  const { data: convoys = [], isLoading: loading } = useQuery<Convoy[]>({
+    queryKey: ["live-convoys"],
+    queryFn: async () => {
       const res = await fetch('/api/convoys');
       const data = await res.json();
-      
       const mapped = data.map((c: any) => ({
         ...c,
         path: c.path.map((p: any) => ({
@@ -128,22 +127,16 @@ export default function LiveOpsPage() {
           ...latLonToXY(p.lat, p.lon)
         }))
       }));
-      setConvoys(mapped);
-      setLoading(false);
-      if (mapped.length > 0 && selectedId === "") {
-        setSelectedId(mapped[0].convoyId);
-      }
-    } catch (e) {
-      console.error(e);
-      setLoading(false);
-    }
-  }, [selectedId]);
+      return mapped;
+    },
+    refetchInterval: 3000,
+  });
 
   useEffect(() => {
-    fetchConvoys();
-    const interval = setInterval(fetchConvoys, 3000);
-    return () => clearInterval(interval);
-  }, [fetchConvoys]);
+    if (!loading && convoys.length > 0 && selectedId === "") {
+      setSelectedId(convoys[0].convoyId);
+    }
+  }, [loading, convoys, selectedId, setSelectedId]);
 
   // sweep & breadcrumb animation tick
   useEffect(() => {

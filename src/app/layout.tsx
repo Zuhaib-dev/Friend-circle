@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Fraunces, Inter, JetBrains_Mono, Amiri, Scheherazade_New } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "@/components/AuthProvider";
 import { SessionTracker } from "@/components/SessionTracker";
@@ -8,6 +8,8 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { Toaster } from "sonner";
 import NextTopLoader from 'nextjs-toploader';
 import CommandMenu from "@/components/command-menu";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
+import QueryProvider from "@/components/QueryProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,6 +19,38 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const amiri = Amiri({
+  variable: "--font-amiri",
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "swap",
+});
+
+const scheherazadeNew = Scheherazade_New({
+  variable: "--font-scheherazade-new",
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -76,10 +110,9 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} ${inter.variable} ${jetbrainsMono.variable} ${amiri.variable} ${scheherazadeNew.variable} h-full antialiased`}
     >
       <head>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900&family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500;700&family=Amiri:ital,wght@0,400;0,700;1,400&family=Scheherazade+New:wght@400;700&display=swap" />
       </head>
       <body className="min-h-full flex flex-col">
         <Script id="json-ld" type="application/ld+json" dangerouslySetInnerHTML={{
@@ -105,26 +138,30 @@ export default function RootLayout({
             ]
           })
         }} />
-        <AuthProvider>
-          <NextTopLoader 
-            color="#E53E1F"
-            initialPosition={0.2}
-            crawlSpeed={150}
-            height={4}
-            crawl={true}
-            showSpinner={false}
-            easing="ease"
-            speed={150}
-            shadow="0 0 10px #E53E1F,0 0 5px #E53E1F"
-            zIndex={1600}
-          />
-          <SessionTracker />
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            {children}
-            <CommandMenu />
-            <Toaster position="bottom-right" richColors />
-          </ThemeProvider>
-        </AuthProvider>
+        <QueryProvider>
+          <NuqsAdapter>
+            <AuthProvider>
+              <NextTopLoader 
+                color="#E53E1F"
+                initialPosition={0.2}
+                crawlSpeed={150}
+                height={4}
+                crawl={true}
+                showSpinner={false}
+                easing="ease"
+                speed={150}
+                shadow="0 0 10px #E53E1F,0 0 5px #E53E1F"
+                zIndex={1600}
+              />
+              <SessionTracker />
+              <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+                {children}
+                <CommandMenu />
+                <Toaster position="bottom-right" richColors />
+              </ThemeProvider>
+            </AuthProvider>
+          </NuqsAdapter>
+        </QueryProvider>
       </body>
     </html>
   );

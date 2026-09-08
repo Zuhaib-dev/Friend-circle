@@ -14,8 +14,13 @@ import { PersonnelView } from "./components/personnel-view";
 import { LoadoutView } from "./components/loadout-view";
 import { ConvoyView } from "./components/convoy-view";
 import { MemoriesView } from "./components/memories-view";
-import { AnalyticsView } from "./components/analytics-view";
+import dynamic from "next/dynamic";
 import { DispatchesView } from "./components/dispatches-view";
+
+const AnalyticsView = dynamic(() => import("./components/analytics-view").then(m => ({ default: m.AnalyticsView })), {
+  loading: () => <div className="py-20 text-center mono-label animate-pulse text-signal">LOADING TELEMETRY ENGINE...</div>,
+  ssr: false,
+});
 
 // ---------- Seed data ----------
 const SEED_OPS: Operator[] = [

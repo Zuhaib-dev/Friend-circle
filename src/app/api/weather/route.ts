@@ -20,6 +20,10 @@ export async function GET() {
       wind: Math.round(data.wind.speed * 3.6), // m/s to km/h
       location: data.name.toUpperCase(),
       time: new Date().toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Kolkata' })
+    }, {
+      headers: {
+        "Cache-Control": "public, s-maxage=600, stale-while-revalidate=3600",
+      },
     });
   } catch (error) {
     return NextResponse.json({ error: "Weather fetch failed" }, { status: 500 });

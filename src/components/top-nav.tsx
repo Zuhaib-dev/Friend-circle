@@ -146,13 +146,14 @@ export function TopNav() {
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-1">
           {navLinks.map((l) => (
-            <a
+            <Link
               key={l.href}
               href={l.href}
+              prefetch={true}
               className="mono-label px-3 py-1.5 hover:bg-ink hover:text-bone transition-colors"
             >
               {l.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -333,15 +334,16 @@ export function TopNav() {
                 </button>
               </div>
               {navLinks.map((l) => (
-                <a
+                <Link
                   key={l.href}
                   href={l.href}
+                  prefetch={true}
                   onClick={() => setMobileOpen(false)}
                   className="hairline-b border-ink/20 px-4 py-3 mono-label hover:bg-ink hover:text-bone transition-colors flex items-center justify-between"
                 >
                   <span>{l.label}</span>
                   <span className="opacity-40">→</span>
-                </a>
+                </Link>
               ))}
               {!user && hydrated && (
                 <div className="p-3 grid grid-cols-2 gap-2">

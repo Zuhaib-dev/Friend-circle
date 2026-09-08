@@ -7,7 +7,7 @@ export async function GET() {
     await connectToDatabase();
     
     // Fetch all tours, sorting by date descending
-    const tours = await Tour.find().sort({ date: -1 });
+    const tours = await Tour.find().sort({ date: -1 }).lean();
     
     return NextResponse.json(tours);
   } catch (error) {

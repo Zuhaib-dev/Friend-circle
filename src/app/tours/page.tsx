@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQueryState, parseAsString } from "nuqs";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import {
@@ -47,20 +49,19 @@ const FILTERS: { key: "ALL" | Status; label: string }[] = [
 ];
 
 export default function ToursPage() {
-  const [query, setQuery] = useState("");
-  const [filter, setFilter] = useState<"ALL" | Status>("UPCOMING");
+  const [query, setQuery] = useQueryState("q", parseAsString.withDefault(""));
+  const [filter, setFilter] = useQueryState("filter", parseAsString.withDefault("UPCOMING"));
   const [active, setActive] = useState<Tour | null>(null);
   const [utc, setUtc] = useState("");
-  const [tours, setTours] = useState<Tour[]>([]);
 
-  useEffect(() => {
-    fetch("/api/tours")
-      .then(r => r.json())
-      .then(data => {
-        if (Array.isArray(data)) setTours(data);
-      })
-      .catch(console.error);
-  }, []);
+  const { data: tours = [] } = useQuery<Tour[]>({
+    queryKey: ["tours"],
+    queryFn: async () => {
+      const res = await fetch("/api/tours");
+      if (!res.ok) throw new Error("Failed to fetch tours");
+      return res.json();
+    },
+  });
 
   useEffect(() => {
     const tick = () => {
@@ -235,21 +236,21 @@ function EmptyState() {
 function TourModal({ tour, onClose }: { tour: Tour; onClose: () => void }) {
   const meta = STATUS_META[tour.status];
   const { data: session } = useSession();
-  const [messages, setMessages] = useState<Msg[]>([]);
   const [draft, setDraft] = useState("");
   const listRef = useRef<HTMLDivElement>(null);
+  const queryClient = useQueryClient();
   
   const canCommunicate = session?.user?.role === "ADMIN" || session?.user?.teamMemberStatus === "APPROVED";
 
-  useEffect(() => {
-    if (!canCommunicate) return;
-    fetch(`/api/tours/${tour._id}/comments`)
-      .then(r => r.json())
-      .then(data => {
-        if (Array.isArray(data)) setMessages(data);
-      })
-      .catch(console.error);
-  }, [tour._id, canCommunicate]);
+  const { data: messages = [] } = useQuery<Msg[]>({
+    queryKey: ["tour-comments", tour._id],
+    queryFn: async () => {
+      const res = await fetch(`/api/tours/${tour._id}/comments`);
+      if (!res.ok) throw new Error("Failed to fetch comments");
+      return res.json();
+    },
+    enabled: !!canCommunicate,
+  });
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
@@ -262,25 +263,26 @@ function TourModal({ tour, onClose }: { tour: Tour; onClose: () => void }) {
     listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: "smooth" });
   }, [messages.length]);
 
-  const send = async () => {
-    const body = draft.trim();
-    if (!body || !canCommunicate) return;
-    
-    setDraft("");
-    
-    try {
+  const sendMutation = useMutation({
+    mutationFn: async (text: string) => {
       const res = await fetch(`/api/tours/${tour._id}/comments`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: body }),
+        body: JSON.stringify({ text }),
       });
-      if (res.ok) {
-        const newMsg = await res.json();
-        setMessages((m) => [...m, newMsg]);
-      }
-    } catch (err) {
-      console.error(err);
+      if (!res.ok) throw new Error("Failed to post message");
+      return res.json();
+    },
+    onSuccess: (newMsg) => {
+      queryClient.setQueryData<Msg[]>(["tour-comments", tour._id], (old = []) => [...old, newMsg]);
     }
+  });
+
+  const send = () => {
+    const body = draft.trim();
+    if (!body || !canCommunicate || sendMutation.isPending) return;
+    setDraft("");
+    sendMutation.mutate(body);
   };
 
   return (
