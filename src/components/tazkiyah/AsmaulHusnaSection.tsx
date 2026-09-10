@@ -159,7 +159,7 @@ function AsmaulHusnaModal({ isOpen, onClose, marked, setMarked, toggleMark, prog
                       <span>REFLECTED · {marked.size} / {ASMAUL_HUSNA.length}</span>
                       <span>{progress}%</span>
                     </div>
-                    <div className="h-[2px] w-full bg-white/10 overflow-hidden">
+                    <div className="h-0.5 w-full bg-white/10 overflow-hidden">
                       <motion.div
                         className="h-full bg-linear-to-r from-emerald-300 to-amber-200"
                         initial={{ width: 0 }}
@@ -245,49 +245,49 @@ function NameCard({
       }}
     >
       <motion.div
-        className="relative group overflow-hidden border border-white/10 bg-[#111] hover:border-emerald-300/30 transition-colors cursor-default min-h-[120px] sm:min-h-[140px]"
+        className="relative group overflow-hidden border border-white/10 bg-[#111] hover:border-emerald-300/30 transition-colors cursor-default min-h-30 sm:min-h-35"
         initial="rest"
         whileHover="hover"
         animate="rest"
       >
         {/* Crosshair corners */}
         <motion.div
-          className="absolute top-0 left-0 w-4 h-[2px] bg-emerald-300/70 origin-left"
+          className="absolute top-0 left-0 w-4 h-0.5 bg-emerald-300/70 origin-left"
           variants={{ rest: { scaleX: 0 }, hover: { scaleX: 1 } }}
           transition={{ duration: 0.2 }}
         />
         <motion.div
-          className="absolute top-0 left-0 w-[2px] h-4 bg-emerald-300/70 origin-top"
+          className="absolute top-0 left-0 w-0.5 h-4 bg-emerald-300/70 origin-top"
           variants={{ rest: { scaleY: 0 }, hover: { scaleY: 1 } }}
           transition={{ duration: 0.2 }}
         />
         <motion.div
-          className="absolute top-0 right-0 w-4 h-[2px] bg-emerald-300/70 origin-right"
+          className="absolute top-0 right-0 w-4 h-0.5 bg-emerald-300/70 origin-right"
           variants={{ rest: { scaleX: 0 }, hover: { scaleX: 1 } }}
           transition={{ duration: 0.2 }}
         />
         <motion.div
-          className="absolute top-0 right-0 w-[2px] h-4 bg-emerald-300/70 origin-top"
+          className="absolute top-0 right-0 w-0.5 h-4 bg-emerald-300/70 origin-top"
           variants={{ rest: { scaleY: 0 }, hover: { scaleY: 1 } }}
           transition={{ duration: 0.2 }}
         />
         <motion.div
-          className="absolute bottom-0 left-0 w-4 h-[2px] bg-emerald-300/70 origin-left"
+          className="absolute bottom-0 left-0 w-4 h-0.5 bg-emerald-300/70 origin-left"
           variants={{ rest: { scaleX: 0 }, hover: { scaleX: 1 } }}
           transition={{ duration: 0.2 }}
         />
         <motion.div
-          className="absolute bottom-0 left-0 w-[2px] h-4 bg-emerald-300/70 origin-bottom"
+          className="absolute bottom-0 left-0 w-0.5 h-4 bg-emerald-300/70 origin-bottom"
           variants={{ rest: { scaleY: 0 }, hover: { scaleY: 1 } }}
           transition={{ duration: 0.2 }}
         />
         <motion.div
-          className="absolute bottom-0 right-0 w-4 h-[2px] bg-emerald-300/70 origin-right"
+          className="absolute bottom-0 right-0 w-4 h-0.5 bg-emerald-300/70 origin-right"
           variants={{ rest: { scaleX: 0 }, hover: { scaleX: 1 } }}
           transition={{ duration: 0.2 }}
         />
         <motion.div
-          className="absolute bottom-0 right-0 w-[2px] h-4 bg-emerald-300/70 origin-bottom"
+          className="absolute bottom-0 right-0 w-0.5 h-4 bg-emerald-300/70 origin-bottom"
           variants={{ rest: { scaleY: 0 }, hover: { scaleY: 1 } }}
           transition={{ duration: 0.2 }}
         />

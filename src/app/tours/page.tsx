@@ -118,7 +118,7 @@ export default function ToursPage() {
         </div>
       </section>
 
-      <section className="sticky top-[41px] z-30 bg-bone hairline-b border-ink">
+      <section className="sticky top-10.25 z-30 bg-bone hairline-b border-ink">
         <div className="px-4 md:px-8 py-3 max-w-7xl mx-auto flex flex-col md:flex-row md:items-center gap-3">
           <div className="flex items-center gap-2 hairline border-ink px-2.5 py-1.5 flex-1 min-w-0 group focus-within:bg-ink focus-within:text-bone transition-colors">
             <Search className="h-3.5 w-3.5 text-signal group-focus-within:text-bone" />

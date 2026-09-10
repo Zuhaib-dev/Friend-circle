@@ -110,7 +110,7 @@ export function QiblaDialog({ open, onClose }: { open: boolean; onClose: () => v
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.95, opacity: 0 }}
-            className="w-full max-w-lg border border-white/10 bg-[#101010] p-6 sm:p-10 relative overflow-hidden flex flex-col items-center justify-center min-h-[500px]"
+            className="w-full max-w-lg border border-white/10 bg-[#101010] p-6 sm:p-10 relative overflow-hidden flex flex-col items-center justify-center min-h-125"
           >
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.03)_1px,transparent_1px)] bg-size-[16px_16px] opacity-40" />
             

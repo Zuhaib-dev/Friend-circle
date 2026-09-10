@@ -251,7 +251,7 @@ export default function LoadoutPage() {
             </div>
 
             {trip && (
-              <div className="hairline border-ink grid grid-cols-3 divide-x divide-ink/20 w-full sm:w-auto sm:min-w-[280px]">
+              <div className="hairline border-ink grid grid-cols-3 divide-x divide-ink/20 w-full sm:w-auto sm:min-w-70">
                 <HudStat label="UTC" value={utc} />
                 <HudStat label="TRIP" value={trip.code} />
                 <HudStat label="HZRD" value={trip.hazard} accent={trip.hazard === "HIGH"} />
@@ -625,7 +625,7 @@ function ItemRow({
         >
           <Minus className="h-3 w-3" />
         </button>
-        <span className="px-2 mono-label min-w-[26px] text-center">{item.qty}</span>
+        <span className="px-2 mono-label min-w-6.5 text-center">{item.qty}</span>
         <button
           onClick={() => onQty(1)}
           className="px-1.5 py-1 hover:bg-ink hover:text-bone transition-colors"
@@ -636,7 +636,7 @@ function ItemRow({
       </div>
 
       {/* Weight */}
-      <div className="text-right shrink-0 hidden sm:block min-w-[64px]">
+      <div className="text-right shrink-0 hidden sm:block min-w-16">
         <div className="font-mono text-sm leading-none">{fmtG(item.weight * item.qty)}</div>
         <div className="mono-label opacity-40 text-[9px] mt-1">{item.weight}g × {item.qty}</div>
       </div>

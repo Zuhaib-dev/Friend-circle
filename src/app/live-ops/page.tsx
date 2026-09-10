@@ -770,7 +770,7 @@ function BeaconLog({ selected }: { selected: Convoy }) {
   }, [pool]);
 
   return (
-    <div className="font-mono text-[11px] leading-relaxed p-3 h-[340px] overflow-hidden">
+    <div className="font-mono text-[11px] leading-relaxed p-3 h-85 overflow-hidden">
       <AnimatePresence initial={false}>
         {lines.map((l) => (
           <motion.div

@@ -341,7 +341,7 @@ export function LiveOpsView() {
                   required
                   value={formState.pathStr}
                   onChange={(e) => setFormState({ ...formState, pathStr: e.target.value })}
-                  className="w-full bg-bone hairline border-ink px-3 py-2 font-mono text-xs focus:outline-none focus:border-signal min-h-[120px]"
+                  className="w-full bg-bone hairline border-ink px-3 py-2 font-mono text-xs focus:outline-none focus:border-signal min-h-30"
                 />
               </div>
 

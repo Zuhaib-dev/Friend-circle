@@ -37,7 +37,7 @@ export function QuranSection() {
               className="w-full bg-[#0a0a0a] border border-white/10 rounded-sm pl-9 pr-3 py-2 text-sm placeholder-white/30 focus:outline-none focus:border-emerald-300/50 transition-colors" />
           </div>
         </div>
-        <div className="max-h-[500px] lg:max-h-[calc(100vh-280px)] overflow-y-auto">
+        <div className="max-h-125 lg:max-h-[calc(100vh-280px)] overflow-y-auto">
           {mode === "surahs" ? filtered.map((s) => (
             <motion.button key={s.number} onClick={() => setActive(s)} whileHover={{ x: 2 }}
               className={`w-full grid grid-cols-[36px_1fr_auto] items-center gap-3 px-4 py-3 text-left border-b border-white/5 transition-colors ${active.number === s.number ? "bg-emerald-300/6" : "hover:bg-white/3"}`}>

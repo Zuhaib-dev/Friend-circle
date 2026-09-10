@@ -74,10 +74,10 @@ export default function SurveillancePage() {
       <TopNav />
 
       {/* Command bar */}
-      <section className="hairline-b border-ink bg-bone sticky top-[44px] md:top-[48px] z-40">
+      <section className="hairline-b border-ink bg-bone sticky top-11 md:top-12 z-40">
         <div className="px-4 py-3 md:py-4">
           <div className="flex items-center gap-2 mb-3 mono-label">
-            <span className="brick text-bone px-2 py-[2px]">FEEDS / 06</span>
+            <span className="brick text-bone px-2 py-0.5">FEEDS / 06</span>
             <span className="opacity-60">·</span>
             <span>SURVEILLANCE ARCHIVE</span>
             <span className="ml-auto hidden md:flex items-center gap-1.5 text-signal">
