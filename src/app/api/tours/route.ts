@@ -12,6 +12,6 @@ export async function GET() {
     return NextResponse.json(tours);
   } catch (error) {
     console.error("Error fetching tours:", error);
-    return NextResponse.json({ error: "Failed to fetch tours" }, { status: 500 });
+    return NextResponse.json({ error: "Failed to fetch tours " }, { status: 500 });
   }
 }
