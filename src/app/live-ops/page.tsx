@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = 'force-dynamic';
+
 import { useEffect, useMemo, useState, useCallback } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useQueryState, parseAsString } from "nuqs";
