@@ -1,8 +1,6 @@
 "use client";
 
-export const dynamic = 'force-dynamic';
-
-import { useEffect, useMemo, useState, useCallback } from "react";
+import { useEffect, useMemo, useState, useCallback, Suspense } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useQueryState, parseAsString } from "nuqs";
 import { motion, AnimatePresence } from "motion/react";
@@ -112,6 +110,14 @@ function useUtc() {
 /* -------------------------------- PAGE --------------------------------- */
 
 export default function LiveOpsPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-bone flex items-center justify-center mono-label text-signal">ESTABLISHING UPLINK...</div>}>
+      <LiveOpsContent />
+    </Suspense>
+  );
+}
+
+function LiveOpsContent() {
   const utc = useUtc();
   const [selectedId, setSelectedId] = useQueryState("convoy", parseAsString.withDefault(""));
   const [playing, setPlaying] = useState(true);
