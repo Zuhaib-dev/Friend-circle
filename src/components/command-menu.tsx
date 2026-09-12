@@ -206,5 +206,3 @@ export default function CommandMenu() {
     </CommandDialog>
   );
 }
-
-export { CommandMenu };

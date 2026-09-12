@@ -160,6 +160,7 @@ export function TopNav() {
         {/* Right cluster */}
         <div className="flex items-center gap-2">
           {/* Auth */}
+          <div className="flex items-center gap-2">
           {!hydrated ? (
             <span className="h-7 w-20 hairline border-ink/30 animate-pulse hidden sm:block" />
           ) : user ? (
@@ -270,6 +271,7 @@ export function TopNav() {
               </Link>
             </>
           )}
+          </div>
 
           {/* Command Menu Quick Search */}
           <button

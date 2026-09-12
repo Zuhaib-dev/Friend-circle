@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, Suspense } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useQueryState, parseAsString } from "nuqs";
 import { AnimatePresence, motion } from "motion/react";
@@ -49,6 +49,14 @@ const FILTERS: { key: "ALL" | Status; label: string }[] = [
 ];
 
 export default function ToursPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-bone flex items-center justify-center mono-label text-signal">ESTABLISHING SECURE LINK...</div>}>
+      <ToursContent />
+    </Suspense>
+  );
+}
+
+function ToursContent() {
   const [query, setQuery] = useQueryState("q", parseAsString.withDefault(""));
   const [filter, setFilter] = useQueryState("filter", parseAsString.withDefault("UPCOMING"));
   const [active, setActive] = useState<Tour | null>(null);
