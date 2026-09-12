@@ -64,9 +64,10 @@ function TacticalStrip({ wx }: { wx: { temp: number, wind: number, location: str
 }
 
 export function TopNav() {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const user = session?.user;
-  const hydrated = status !== "loading";
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => setHydrated(true), []);
   const navigate = useRouter();
   const [open, setOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
