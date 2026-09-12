@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, Suspense } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useQueryState, parseAsString } from "nuqs";
 import { AnimatePresence, motion } from "motion/react";
@@ -86,6 +86,14 @@ function useUTC() {
 // Page
 // ────────────────────────────────────────────────────────────────────
 export default function LoadoutPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-bone flex items-center justify-center mono-label text-signal">ESTABLISHING SECURE LINK...</div>}>
+      <LoadoutContent />
+    </Suspense>
+  );
+}
+
+function LoadoutContent() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const queryClient = useQueryClient();
