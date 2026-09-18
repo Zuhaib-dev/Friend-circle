@@ -2,7 +2,6 @@ import { TopBar, Hero, Ticker, StatsRow } from "@/components/landing/HeroSection
 import { BentoSection } from "@/components/landing/BentoSection";
 import { CrewSection } from "@/components/landing/CrewSection";
 import { ToursSection } from "@/components/landing/ToursSection";
-import { SurveillanceSection } from "@/components/landing/SurveillanceSection";
 import { TelemetrySection } from "@/components/landing/TelemetrySection";
 import { LoadoutSection } from "@/components/landing/LoadoutSection";
 import { TazkiyahSection } from "@/components/landing/TazkiyahSection";
@@ -44,11 +43,10 @@ export default async function LandingPage() {
       <TopBar />
       <Hero />
       <Ticker />
-      <BentoSection />
       <StatsRow />
       <CrewSection initialCrew={initialCrew} sessionEmail={session?.user?.email || null} />
       <ToursSection />
-      <SurveillanceSection />
+      <BentoSection />
       <TelemetrySection />
       <LoadoutSection />
       <TazkiyahSection />
