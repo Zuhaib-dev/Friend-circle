@@ -1,4 +1,5 @@
 <div align="center">
+  <video src="./public/friend-circle-launch.mp4" autoplay loop muted playsinline width="100%" style="border-radius: 8px; margin-bottom: 20px;"></video>
   <img src="./public/og.png" alt="Friend Circle Banner" width="100%" style="border-radius: 8px; margin-bottom: 20px;" />
 
   **A Next-Generation Tactical Adventure & Islamic Lifestyle Platform**
