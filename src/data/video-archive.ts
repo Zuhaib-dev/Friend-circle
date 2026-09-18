@@ -101,7 +101,7 @@ export const VIDEO_ARCHIVE = [
   {
     "id": "FEED-0010",
     "src": "/archive/videos/feed-010.mp4",
-    "title": "SINTHON TOP",
+    "title": "Zojila Pass",
     "uploader": "ARCHIVE",
     "date": 1704067209000,
     "sizeMB": 17.1,
