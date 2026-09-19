@@ -30,7 +30,7 @@ export function BentoSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="p-6 md:p-8 rounded-2xl border border-bone/10 bg-ink flex flex-col justify-between min-h-[200px] hover:border-signal/30 transition-colors"
+            className="p-6 md:p-8 rounded-2xl border border-bone/10 bg-ink flex flex-col justify-between min-h-50 hover:border-signal/30 transition-colors"
           >
             <div>
               <div className="flex items-center gap-3 mb-3">
@@ -50,7 +50,7 @@ export function BentoSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="p-6 md:p-8 rounded-2xl border border-bone/10 bg-ink flex flex-col justify-between min-h-[200px] hover:border-signal/30 transition-colors"
+            className="p-6 md:p-8 rounded-2xl border border-bone/10 bg-ink flex flex-col justify-between min-h-50 hover:border-signal/30 transition-colors"
           >
             <div>
               <div className="flex items-center gap-3 mb-3">
@@ -70,7 +70,7 @@ export function BentoSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="col-span-1 md:col-span-2 p-6 md:p-10 rounded-2xl border border-bone/10 bg-ink flex flex-col justify-between min-h-[280px] hover:border-signal/30 transition-colors"
+            className="col-span-1 md:col-span-2 p-6 md:p-10 rounded-2xl border border-bone/10 bg-ink flex flex-col justify-between min-h-70 hover:border-signal/30 transition-colors"
           >
             <div>
               <div className="flex flex-wrap items-center gap-4 mb-4">
@@ -107,7 +107,7 @@ export function BentoSection() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="relative rounded-2xl overflow-hidden border border-bone/10 bg-black min-h-[500px] lg:min-h-full group"
+          className="relative rounded-2xl overflow-hidden border border-bone/10 bg-black min-h-125 lg:min-h-full group"
         >
           {/* Header overlay */}
           <div className="absolute top-8 left-8 z-10">
@@ -129,7 +129,7 @@ export function BentoSection() {
           />
           
           {/* Custom controls gradient overlay */}
-          <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-black/80 via-black/30 to-transparent pointer-events-none" />
+          <div className="absolute inset-x-0 bottom-0 h-48 bg-linear-to-t from-black/80 via-black/30 to-transparent pointer-events-none" />
 
           {/* Unmute & Action Area */}
           <div className="absolute bottom-8 left-8 right-8 flex items-center justify-between z-10">
