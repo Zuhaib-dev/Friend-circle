@@ -3,7 +3,7 @@ import { useMemo, useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
 import { Sparkles } from "lucide-react";
-import { SURAHS, JUZ, Surah } from "@/data/quran-data";
+import { SURAHS, JUZ, JUZ_FIRST_SURAH, Surah } from "@/data/quran-data";
 import { QuranHeader } from "@/components/tazkiyah/quran/QuranHeader";
 import { LastSeenBanner } from "@/components/tazkiyah/quran/LastSeenBanner";
 import { SegmentedTabs } from "@/components/tazkiyah/quran/SegmentedTabs";
@@ -108,7 +108,16 @@ function QuranPageContent() {
                 className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5"
               >
                 {filteredJuz.map((j, i) => (
-                  <JuzCard key={j.number} juz={j} index={i} />
+                  <JuzCard
+                    key={j.number}
+                    juz={j}
+                    index={i}
+                    onClick={() => {
+                      const firstSurahNum = JUZ_FIRST_SURAH[j.number];
+                      const s = SURAHS.find((s) => s.number === firstSurahNum);
+                      if (s) setSelected(s);
+                    }}
+                  />
                 ))}
               </motion.div>
             )}
