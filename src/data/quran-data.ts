@@ -148,15 +148,37 @@ function toArabicNumber(n: number) {
   return String(n).replace(/\d/g, (d) => "٠١٢٣٤٥٦٧٨٩"[Number(d)]);
 }
 
-const SAMPLE_JUZ_STARTS = [
-  "Al-Fatihah 1", "Al-Baqarah 142", "Al-Baqarah 253", "Aal-E-Imran 93",
-  "An-Nisa 24", "An-Nisa 148", "Al-Ma'idah 82", "Al-An'am 111",
-  "Al-A'raf 88", "Al-Anfal 41", "At-Tawbah 93", "Hud 6",
-  "Yusuf 53", "Al-Hijr 1", "Al-Isra 1", "Al-Kahf 75",
-  "Al-Anbiya 1", "Al-Mu'minun 1", "Al-Furqan 21", "An-Naml 56",
-  "Al-Ankabut 46", "Al-Ahzab 31", "Ya-Sin 28", "Az-Zumar 32",
-  "Fussilat 47", "Al-Ahqaf 1", "Adh-Dhariyat 31", "Al-Mujadila 1",
-  "Al-Mulk 1", "An-Naba 1",
+const JUZ_DATA = [
+  { number: 1, name: "Alif Lam Meem", start: "Al-Fatihah 1", end: "Al-Baqarah 141" },
+  { number: 2, name: "Sayaqool", start: "Al-Baqarah 142", end: "Al-Baqarah 252" },
+  { number: 3, name: "Tilkal Rusull", start: "Al-Baqarah 253", end: "Aal-E-Imran 92" },
+  { number: 4, name: "Lan Tana Loo", start: "Aal-E-Imran 93", end: "An-Nisa 23" },
+  { number: 5, name: "Wal Mohsanat", start: "An-Nisa 24", end: "An-Nisa 147" },
+  { number: 6, name: "La Yuhibbullah", start: "An-Nisa 148", end: "Al-Ma'idah 81" },
+  { number: 7, name: "Wa Iza Samiu", start: "Al-Ma'idah 82", end: "Al-An'am 110" },
+  { number: 8, name: "Wa Lau Annana", start: "Al-An'am 111", end: "Al-A'raf 87" },
+  { number: 9, name: "Qalal Malao", start: "Al-A'raf 88", end: "Al-Anfal 40" },
+  { number: 10, name: "Wa A'lamu", start: "Al-Anfal 41", end: "At-Tawbah 92" },
+  { number: 11, name: "Yatazeroon", start: "At-Tawbah 93", end: "Hud 5" },
+  { number: 12, name: "Wa Mamin Da'abat", start: "Hud 6", end: "Yusuf 52" },
+  { number: 13, name: "Wa Ma Ubrioo", start: "Yusuf 53", end: "Ibrahim 52" },
+  { number: 14, name: "Rubama", start: "Al-Hijr 1", end: "An-Nahl 128" },
+  { number: 15, name: "Subhanallazi", start: "Al-Isra 1", end: "Al-Kahf 74" },
+  { number: 16, name: "Qal Alam", start: "Al-Kahf 75", end: "Ta-Ha 135" },
+  { number: 17, name: "Aqtarabo", start: "Al-Anbiya 1", end: "Al-Hajj 78" },
+  { number: 18, name: "Qadd Aflaha", start: "Al-Mu'minun 1", end: "An-Nur 64" },
+  { number: 19, name: "Wa Qalallazina", start: "Al-Furqan 21", end: "An-Naml 55" },
+  { number: 20, name: "A'man Khalaq", start: "An-Naml 56", end: "Al-Qasas 88" },
+  { number: 21, name: "Utlu Ma Oohi", start: "Al-Ankabut 46", end: "As-Sajdah 30" },
+  { number: 22, name: "Wa Manyaqnut", start: "Al-Ahzab 31", end: "Fatir 45" },
+  { number: 23, name: "Wa Mali", start: "Ya-Sin 28", end: "Sad 88" },
+  { number: 24, name: "Faman Azlam", start: "Az-Zumar 32", end: "Ghafir 85" },
+  { number: 25, name: "Elahe Yuraddo", start: "Fussilat 47", end: "Al-Jathiyah 37" },
+  { number: 26, name: "Ha'a Meem", start: "Al-Ahqaf 1", end: "Qaf 45" },
+  { number: 27, name: "Qala Fama Khatbukum", start: "Adh-Dhariyat 31", end: "Al-Hadid 29" },
+  { number: 28, name: "Qadd Sami Allah", start: "Al-Mujadila 1", end: "At-Tahrim 12" },
+  { number: 29, name: "Tabarakallazi", start: "Al-Mulk 1", end: "Al-Mursalat 50" },
+  { number: 30, name: "Amma Yatasa'aloon", start: "An-Naba 1", end: "An-Nas 6" },
 ];
 
 // Mapping of Juz number -> first surah number in that Juz (for opening a surah when clicking a Juz)
@@ -167,10 +189,12 @@ export const JUZ_FIRST_SURAH: Record<number, number> = {
   27: 51, 28: 58, 29: 67, 30: 78,
 };
 
-export const JUZ = Array.from({ length: 30 }, (_, i) => ({
-  number: i + 1,
-  arabic: `الجزء ${toArabicNumber(i + 1)}`,
-  start: SAMPLE_JUZ_STARTS[i] ?? "—",
+export const JUZ = JUZ_DATA.map((j) => ({
+  number: j.number,
+  name: j.name,
+  arabic: `الجزء ${toArabicNumber(j.number)}`,
+  start: j.start,
+  end: j.end,
 }));
 
 export type Ayah = { n: number; arabic: string; english: string; urdu: string; audio?: string };

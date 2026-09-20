@@ -34,15 +34,27 @@ export function JuzCard({
         <span className="text-xs tabular-nums text-emerald-200">{juz.number}</span>
       </div>
       <div>
-        <p
-          className="text-2xl text-zinc-100 transition group-hover:text-emerald-200"
-          style={{ fontFamily: "'Amiri', serif" }}
-        >
-          {juz.arabic}
-        </p>
-        <div className="mt-1 flex items-center justify-between">
-          <p className="truncate text-[10px] text-zinc-500">starts · {juz.start}</p>
-          <ChevronRight className="size-3 text-zinc-600 transition group-hover:translate-x-0.5 group-hover:text-emerald-300" />
+        <div className="mb-3">
+          <p
+            className="text-2xl text-zinc-100 transition group-hover:text-emerald-200"
+            style={{ fontFamily: "'Amiri', serif" }}
+          >
+            {juz.arabic}
+          </p>
+          <p className="mt-1 text-xs font-medium text-zinc-400 transition group-hover:text-emerald-200/80">
+            {juz.name}
+          </p>
+        </div>
+        <div className="flex flex-col gap-1">
+          <p className="truncate text-[10px] text-zinc-500">
+            <span className="text-zinc-400">starts</span> · {juz.start}
+          </p>
+          <div className="flex items-center justify-between">
+            <p className="truncate text-[10px] text-zinc-500">
+              <span className="text-zinc-400">ends</span> · {juz.end}
+            </p>
+            <ChevronRight className="size-3 text-zinc-600 transition group-hover:translate-x-0.5 group-hover:text-emerald-300" />
+          </div>
         </div>
       </div>
     </motion.button>
