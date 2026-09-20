@@ -1,4 +1,7 @@
 import nodemailer from 'nodemailer';
+import createLogger from '@/lib/logger';
+
+const log = createLogger('MAILER');
 
 const getMailerConfig = () => {
   const user = process.env.EMAIL_USER?.trim();
@@ -44,14 +47,13 @@ function escapeHtml(value: string) {
 
 export const sendOTPVerificationEmail = async (email: string, otp: string) => {
   const to = email.trim().toLowerCase();
-  console.log('[MAILER] Starting OTP email send...');
-  console.log('[MAILER] Sending to:', to);
+  log.debug('Starting OTP email send');
 
   let config;
   try {
     config = getMailerConfig();
   } catch (error) {
-    console.error('[MAILER] Configuration error:', error);
+    log.error('Configuration error', { message: (error as Error).message });
     return { success: false, error };
   }
 
@@ -68,9 +70,9 @@ export const sendOTPVerificationEmail = async (email: string, otp: string) => {
   // Verify SMTP connection first
   try {
     await transporter.verify();
-    console.log('[MAILER] SMTP connection verified successfully');
+    log.debug('SMTP connection verified');
   } catch (verifyError) {
-    console.error('[MAILER] SMTP verification FAILED:', verifyError);
+    log.error('SMTP verification failed', { message: (verifyError as Error).message });
     return { success: false, error: verifyError };
   }
 
@@ -96,14 +98,10 @@ export const sendOTPVerificationEmail = async (email: string, otp: string) => {
 
   try {
     const info = await transporter.sendMail(mailOptions);
-    console.log('[MAILER] Email sent successfully!');
-    console.log('[MAILER] Message ID:', info.messageId);
-    console.log('[MAILER] Accepted:', info.accepted);
-    console.log('[MAILER] Rejected:', info.rejected);
-    console.log('[MAILER] Response:', info.response);
+    log.info('OTP email sent', { messageId: info.messageId });
     return { success: true };
   } catch (error) {
-    console.error('[MAILER] Error sending OTP email:', error);
+    log.error('Error sending OTP email', { message: (error as Error).message });
     return { success: false, error };
   }
 };
@@ -131,7 +129,7 @@ export async function sendBlogPublishedEmail({
   try {
     mailer = createTransporter();
   } catch (error) {
-    console.error('[MAILER] Blog notification configuration error:', error);
+    log.error('Blog notification config error', { message: (error as Error).message });
     return { success: false, error };
   }
 
@@ -155,9 +153,10 @@ export async function sendBlogPublishedEmail({
       `,
     });
 
+    log.info('Blog notification sent', { count: uniqueRecipients.length, messageId: info.messageId });
     return { success: true, sent: uniqueRecipients.length, messageId: info.messageId };
   } catch (error) {
-    console.error('[MAILER] Error sending blog notification:', error);
+    log.error('Error sending blog notification', { message: (error as Error).message });
     return { success: false, error };
   }
 }
@@ -168,7 +167,7 @@ export async function sendWelcomeNewsletterEmail(email: string) {
   try {
     mailer = createTransporter();
   } catch (error) {
-    console.error('[MAILER] Newsletter welcome email config error:', error);
+    log.error('Newsletter welcome email config error', { message: (error as Error).message });
     return { success: false, error };
   }
 
@@ -189,10 +188,10 @@ export async function sendWelcomeNewsletterEmail(email: string) {
       `,
     });
 
+    log.info('Newsletter welcome email sent', { messageId: info.messageId });
     return { success: true, messageId: info.messageId };
   } catch (error) {
-    console.error('[MAILER] Error sending newsletter welcome email:', error);
+    log.error('Error sending newsletter welcome email', { message: (error as Error).message });
     return { success: false, error };
   }
 }
-

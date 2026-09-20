@@ -33,6 +33,6 @@ export default withAuth(
 );
 
 export const config = {
-  // Apply middleware only to /admin and /team routes (and their subpaths)
-  matcher: ["/admin/:path*", "/team/:path*"],
+  // Apply middleware to admin/team pages AND their API routes
+  matcher: ["/admin/:path*", "/team/:path*", "/api/admin/:path*", "/api/team/:path*"],
 };

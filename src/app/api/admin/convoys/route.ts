@@ -34,15 +34,24 @@ export async function POST(req: Request) {
     const body = await req.json();
     await connectToDatabase();
 
+    // Allowlist fields to prevent mass assignment
+    const allowed: Record<string, unknown> = {};
+    const ALLOWED_FIELDS = [
+      "missionId", "name", "description", "date", "status",
+      "roster", "waypoints", "foodDuties",
+      "gearPersonal", "gearConvoy", "prayers",
+    ] as const;
+    for (const key of ALLOWED_FIELDS) {
+      if (body[key] !== undefined) allowed[key] = body[key];
+    }
+
     if (body._id) {
       // Update existing
-      const updated = await Mission.findByIdAndUpdate(body._id, body, { new: true });
+      const updated = await Mission.findByIdAndUpdate(body._id, allowed, { new: true });
       return NextResponse.json(updated);
     } else {
       // Create new
-      // If there is already an active mission, we might want to mark it COMPLETED first, 
-      // but for simplicity, we just create the new one.
-      const newMission = new Mission(body);
+      const newMission = new Mission(allowed);
       const saved = await newMission.save();
       return NextResponse.json(saved);
     }
