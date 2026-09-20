@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Search, Bookmark, Copy, Share2, Play, Pause, Check, X, ChevronRight } from "lucide-react";
 import Link from "next/link";
-import { SURAHS, JUZ, Surah, Ayah } from "@/data/quran-data";
+import { SURAHS, JUZ, JUZ_FIRST_SURAH, Surah, Ayah } from "@/data/quran-data";
 import { useQuranSurah } from "@/hooks/useQuranSurah";
 import { useLastSeen } from "@/hooks/useLastSeen";
 import { useRef } from "react";
@@ -49,7 +49,15 @@ export function QuranSection() {
               <span className="text-right text-base text-white/80" style={{ fontFamily: "'Amiri', serif" }}>{s.arabic}</span>
             </motion.button>
           )) : JUZ.map((j) => (
-            <button key={j.number} className="w-full grid grid-cols-[36px_1fr_auto] items-center gap-3 px-4 py-3 text-left border-b border-white/5 hover:bg-white/3 transition-colors">
+            <button 
+              key={j.number} 
+              onClick={() => {
+                const firstSurahNum = JUZ_FIRST_SURAH[j.number];
+                const s = SURAHS.find((s) => s.number === firstSurahNum);
+                if (s) setActive(s);
+              }}
+              className="w-full grid grid-cols-[36px_1fr_auto] items-center gap-3 px-4 py-3 text-left border-b border-white/5 hover:bg-white/3 transition-colors"
+            >
               <span className="font-mono text-xs text-white/40">{String(j.number).padStart(2, "0")}</span>
               <span>
                 <div className="text-sm text-white">Juz {j.number}</div>
