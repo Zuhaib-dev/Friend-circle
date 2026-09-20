@@ -1,33 +1,24 @@
 import { useState, useEffect } from "react";
+import { Ayah } from "./useQuranSurah";
 
-export type Ayah = {
-  n: number;
-  arabic: string;
-  english: string;
-  urdu: string;
-  audio: string;
-  surahNumber?: number;
-  surahName?: string;
-};
+const juzCache = new Map<number, Ayah[]>();
 
-const surahCache = new Map<number, Ayah[]>();
-
-export function useQuranSurah(surahNumber: number | null) {
+export function useQuranJuz(juzNumber: number | null) {
   const [ayat, setAyat] = useState<Ayah[] | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
-    if (surahNumber === null) {
+    if (juzNumber === null) {
       setAyat(null);
       return;
     }
 
     let mounted = true;
 
-    async function fetchSurah() {
-      if (surahCache.has(surahNumber!)) {
-        setAyat(surahCache.get(surahNumber!)!);
+    async function fetchJuz() {
+      if (juzCache.has(juzNumber!)) {
+        setAyat(juzCache.get(juzNumber!)!);
         setLoading(false);
         return;
       }
@@ -37,11 +28,10 @@ export function useQuranSurah(surahNumber: number | null) {
       setAyat(null);
 
       try {
-        // Fetch Arabic Uthmani, English Sahih, Urdu Jalandhry, and Audio Alafasy
         const res = await fetch(
-          `https://api.alquran.cloud/v1/surah/${surahNumber}/editions/quran-uthmani,en.sahih,ur.jalandhry,ar.alafasy`
+          `https://api.alquran.cloud/v1/juz/${juzNumber}/editions/quran-uthmani,en.sahih,ur.jalandhry,ar.alafasy`
         );
-        if (!res.ok) throw new Error("Failed to fetch surah data");
+        if (!res.ok) throw new Error("Failed to fetch juz data");
         const json = await res.json();
         const data = json.data;
 
@@ -58,13 +48,12 @@ export function useQuranSurah(surahNumber: number | null) {
         const EN_BISMILLAH_PREFIX = "In the name of Allah, the Entirely Merciful, the Especially Merciful. ";
         const UR_BISMILLAH_PREFIX = "شروع اللہ کا نام لے کر جو بڑا مہربان نہایت رحم والا ہے";
         
-        const combinedAyat: Ayah[] = arAyahs.map((ar: unknown, i: number) => {
-          const arObj = ar as { numberInSurah: number; text: string };
-          let text = arObj.text;
+        const combinedAyat: Ayah[] = arAyahs.map((ar: any, i: number) => {
+          let text = ar.text;
           let enText = enAyahs[i]?.text || "";
           let urText = urAyahs[i]?.text || "";
           
-          if (surahNumber !== 1 && surahNumber !== 9 && i === 0) {
+          if (ar.surah.number !== 1 && ar.surah.number !== 9 && ar.numberInSurah === 1) {
             if (text.startsWith(BISMILLAH_PREFIX)) {
               text = text.replace(BISMILLAH_PREFIX, "").trim();
             }
@@ -77,15 +66,18 @@ export function useQuranSurah(surahNumber: number | null) {
           }
           
           return {
-            n: arObj.numberInSurah,
+            n: ar.numberInSurah,
             arabic: text,
             english: enText,
             urdu: urText,
             audio: auAyahs[i]?.audio || "",
+            // Additional fields useful for Juz view
+            surahNumber: ar.surah.number,
+            surahName: ar.surah.englishName,
           };
         });
 
-        surahCache.set(surahNumber!, combinedAyat);
+        juzCache.set(juzNumber!, combinedAyat);
 
         if (mounted) {
           setAyat(combinedAyat);
@@ -99,12 +91,12 @@ export function useQuranSurah(surahNumber: number | null) {
       }
     }
 
-    fetchSurah();
+    fetchJuz();
 
     return () => {
       mounted = false;
     };
-  }, [surahNumber]);
+  }, [juzNumber]);
 
   return { ayat, loading, error };
 }

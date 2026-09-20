@@ -197,7 +197,7 @@ export const JUZ = JUZ_DATA.map((j) => ({
   end: j.end,
 }));
 
-export type Ayah = { n: number; arabic: string; english: string; urdu: string; audio?: string };
+export type Ayah = { n: number; arabic: string; english: string; urdu: string; audio?: string; surahNumber?: number; surahName?: string; };
 
 export const SAMPLE_AYAT: Record<number, Ayah[]> = {
   1: [
