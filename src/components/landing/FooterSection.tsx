@@ -41,7 +41,11 @@ export function FooterSection() {
         </div>
       </div>
       <div className="hairline-t border-bone/30 px-4 md:px-8 py-3 flex flex-wrap items-center justify-between gap-2 mono-label text-bone/70">
-        <span>© 2026 FRIEND CIRCLE — NO RIGHTS RESERVED, ALL WRONGS REMEMBERED.</span>
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+          <span>© 2026 FRIEND CIRCLE — NO RIGHTS RESERVED, ALL WRONGS REMEMBERED.</span>
+          <span className="hidden sm:inline text-bone/30">|</span>
+          <span>BUILT BY <a href="https://zuhaibrashid.com" target="_blank" rel="noopener noreferrer" className="text-bone hover:text-signal transition-colors">ZUHAIB RASHID</a></span>
+        </div>
         <span className="flex items-center gap-2"><Gauge className="h-3.5 w-3.5 text-signal" /> CHAI BILL: PENDING ON FURQAN SINCE 2019</span>
       </div>
     </footer>
