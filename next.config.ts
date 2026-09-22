@@ -1,6 +1,6 @@
 import type { NextConfig } from "next";
 import withPWAInit from "@ducanh2912/next-pwa";
-import { withSentryConfig } from "@sentry/nextjs";
+import { withSentryConfig } from "@sentry/nextjs/config";
 
 const withPWA = withPWAInit({
   dest: "public",
@@ -100,11 +100,16 @@ const nextConfig: NextConfig = {
 
 export default withSentryConfig(withPWA(nextConfig), {
   silent: !process.env.CI,
-  widenClientFileUpload: true,
-  hideSourceMaps: true,
-  disableLogger: true,
-  automaticVercelMonitors: true,
-  reactComponentAnnotation: {
-    enabled: true,
+  sourcemaps: {
+    disable: true,
+  },
+  webpack: {
+    treeshake: {
+      removeDebugLogging: true,
+    },
+    automaticVercelMonitors: true,
+    reactComponentAnnotation: {
+      enabled: true,
+    },
   },
 });
