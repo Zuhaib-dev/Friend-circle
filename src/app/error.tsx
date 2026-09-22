@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import * as Sentry from "@sentry/nextjs";
 import { AlertCircle } from "lucide-react";
 
 export default function ErrorBoundary({
@@ -12,6 +13,7 @@ export default function ErrorBoundary({
 }) {
   useEffect(() => {
     console.error(error);
+    Sentry.captureException(error);
   }, [error]);
 
   return (
