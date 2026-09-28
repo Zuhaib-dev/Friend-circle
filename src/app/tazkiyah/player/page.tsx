@@ -17,6 +17,8 @@ export default function PlayerPage() {
   const [playing, setPlaying] = useState(false);
   const [liked, setLiked] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
 
   const { prefs, setPrefs } = useReaderPrefs();
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -50,6 +52,15 @@ export default function PlayerPage() {
       setPlaying(true);
     }
   };
+
+  const formatTime = (time: number) => {
+    if (isNaN(time) || time === 0) return "00:00";
+    const m = Math.floor(time / 60);
+    const s = Math.floor(time % 60);
+    return `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
+  };
+
+  const progressPercent = duration > 0 ? (currentTime / duration) * 100 : 0;
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-zinc-100 flex flex-col overflow-x-hidden">
@@ -156,13 +167,21 @@ export default function PlayerPage() {
                   <button aria-label="More options" className="text-zinc-500 transition hover:text-emerald-300"><MoreHorizontal size={20} /></button>
                 </div>
                 <div className="mt-6">
-                  <div className="relative h-1 rounded-full bg-white/10">
-                    <motion.div animate={{ width: playing ? ['32%', '68%', '32%'] : '32%' }} transition={{ duration: 8, repeat: playing ? Infinity : 0, ease: 'easeInOut' }} className="absolute left-0 top-0 h-1 rounded-full bg-emerald-400" />
-                    <motion.span animate={{ left: playing ? ['32%', '68%', '32%'] : '32%' }} transition={{ duration: 8, repeat: playing ? Infinity : 0, ease: 'easeInOut' }} className="absolute top-1/2 size-3 -translate-y-1/2 rounded-full border-2 border-[#0a0a0a] bg-emerald-400 shadow" />
+                  <div 
+                    className="relative h-1 rounded-full bg-white/10 cursor-pointer group"
+                    onClick={(e) => {
+                      if (!audioRef.current || !duration) return;
+                      const rect = e.currentTarget.getBoundingClientRect();
+                      const pos = (e.clientX - rect.left) / rect.width;
+                      audioRef.current.currentTime = pos * duration;
+                    }}
+                  >
+                    <motion.div style={{ width: `${progressPercent}%` }} className="absolute left-0 top-0 h-1 rounded-full bg-emerald-400" />
+                    <motion.span style={{ left: `${progressPercent}%` }} className="absolute top-1/2 size-3 -translate-y-1/2 rounded-full border-2 border-[#0a0a0a] bg-emerald-400 shadow opacity-0 group-hover:opacity-100 transition-opacity" />
                   </div>
-                  <div className="mt-2 flex justify-between text-[11px] text-zinc-500">
-                    <span>00:00</span>
-                    <span>{currentSurah.ayats} Ayat</span>
+                  <div className="mt-2 flex justify-between text-[11px] text-zinc-500 tabular-nums">
+                    <span>{formatTime(currentTime)}</span>
+                    <span>{formatTime(duration)}</span>
                   </div>
                 </div>
                 <div className="mt-3 flex items-center justify-between pb-2">
@@ -209,6 +228,8 @@ export default function PlayerPage() {
         onEnded={nextSurah}
         onPause={() => setPlaying(false)}
         onPlay={() => setPlaying(true)}
+        onTimeUpdate={() => setCurrentTime(audioRef.current?.currentTime || 0)}
+        onLoadedMetadata={() => setDuration(audioRef.current?.duration || 0)}
       />
     </div>
   );
