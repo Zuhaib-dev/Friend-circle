@@ -92,6 +92,43 @@ export default function PlayerPage() {
     return `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
   };
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+
+      switch (e.key) {
+        case " ":
+          e.preventDefault();
+          setPlaying(p => !p);
+          break;
+        case "ArrowRight":
+          e.preventDefault();
+          if (audioRef.current) audioRef.current.currentTime = Math.min(audioRef.current.duration || 0, audioRef.current.currentTime + 10);
+          break;
+        case "ArrowLeft":
+          e.preventDefault();
+          if (audioRef.current) audioRef.current.currentTime = Math.max(0, audioRef.current.currentTime - 10);
+          break;
+        case "m":
+        case "M":
+          setIsMuted(m => !m);
+          break;
+        case "n":
+        case "N":
+          nextSurah();
+          break;
+        case "p":
+        case "P":
+        case "b":
+        case "B":
+          prevSurah();
+          break;
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [currentSurah.number]);
+
   const progressPercent = duration > 0 ? (currentTime / duration) * 100 : 0;
 
   return (
