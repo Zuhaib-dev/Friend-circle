@@ -43,8 +43,16 @@ export default function PlayerPage() {
 
   useEffect(() => {
     if (!isLoaded) return;
+    localStorage.setItem("tazkiyah_player_state", JSON.stringify({
+      surahNumber: currentSurah.number,
+      time: currentTime
+    }));
+  }, [currentSurah.number, isLoaded]);
+
+  useEffect(() => {
+    if (!isLoaded) return;
     
-    // Debounce the save to prevent excessive writes and ensure state has fully updated
+    // Debounce the save for time updates
     const timeout = setTimeout(() => {
       localStorage.setItem("tazkiyah_player_state", JSON.stringify({
         surahNumber: currentSurah.number,
@@ -53,7 +61,7 @@ export default function PlayerPage() {
     }, 1000);
     
     return () => clearTimeout(timeout);
-  }, [currentSurah.number, currentTime, isLoaded]);
+  }, [currentTime, isLoaded]);
 
   const audioSrc = `https://cdn.islamic.network/quran/audio-surah/128/${prefs.reciter}/${currentSurah.number}.mp3`;
 
@@ -73,6 +81,7 @@ export default function PlayerPage() {
     const idx = SURAHS.findIndex(s => s.number === currentSurah.number);
     if (idx < SURAHS.length - 1) {
       setCurrentSurah(SURAHS[idx + 1]);
+      setCurrentTime(0);
       setPlaying(true);
     }
   };
@@ -81,6 +90,7 @@ export default function PlayerPage() {
     const idx = SURAHS.findIndex(s => s.number === currentSurah.number);
     if (idx > 0) {
       setCurrentSurah(SURAHS[idx - 1]);
+      setCurrentTime(0);
       setPlaying(true);
     }
   };
@@ -127,7 +137,7 @@ export default function PlayerPage() {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [currentSurah.number]);
+  }, [currentSurah.number, isLoaded]);
 
   const progressPercent = duration > 0 ? (currentTime / duration) * 100 : 0;
 
@@ -150,7 +160,7 @@ export default function PlayerPage() {
       />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] bg-size-[18px_18px] opacity-20 z-0" />
 
-      <div className="relative z-10 mx-auto flex w-full max-w-370 flex-col px-5 py-5 sm:px-8 lg:px-12 flex-1">
+      <div className={`relative z-10 mx-auto flex w-full max-w-370 flex-col px-5 py-5 sm:px-8 lg:px-12 flex-1 transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
         <motion.header initial={{ opacity: 0, y: -18 }} animate={{ opacity: playing ? 0.3 : 1, y: 0 }} transition={{ duration: .7, ease }} className="flex items-center justify-between border-b border-white/10 pb-5 hover:opacity-100 transition-opacity">
            <Link href="/tazkiyah" className="flex items-center gap-3 group text-zinc-300 hover:text-emerald-200 transition">
              <div>
@@ -323,7 +333,7 @@ export default function PlayerPage() {
           </div>
           <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-4 max-h-90 overflow-y-auto pr-2 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-white/10">
             {SURAHS.map((chapter) => (
-              <motion.button whileHover={{ y: -3 }} whileTap={{ scale: .98 }} key={chapter.number} onClick={() => { setCurrentSurah(chapter); setPlaying(true); }} className={`group flex items-center gap-3 rounded-xl p-3 text-left transition ${currentSurah.number === chapter.number ? 'bg-white/10 shadow-sm border border-white/5' : 'hover:bg-white/5 border border-transparent'}`}>
+              <motion.button whileHover={{ y: -3 }} whileTap={{ scale: .98 }} key={chapter.number} onClick={() => { setCurrentSurah(chapter); setCurrentTime(0); setPlaying(true); }} className={`group flex items-center gap-3 rounded-xl p-3 text-left transition ${currentSurah.number === chapter.number ? 'bg-white/10 shadow-sm border border-white/5' : 'hover:bg-white/5 border border-transparent'}`}>
                 <span className={`font-mono text-xs ${currentSurah.number === chapter.number ? 'text-emerald-400' : 'text-zinc-500'}`}>{chapter.number.toString().padStart(2, '0')}</span>
                 <span className="min-w-0 flex-1">
                   <span className="block truncate text-sm font-medium text-zinc-200">{chapter.name}</span>
