@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "motion/react";
 import Link from "next/link";
 import {
   ArrowRight, ChevronDown, Heart, MoreHorizontal, Pause, Play,
-  Repeat2, SkipBack, SkipForward, Sparkles, Volume2, VolumeX, Settings2, Check
+  Repeat2, SkipBack, SkipForward, Volume2, VolumeX, Settings2, Check
 } from "lucide-react";
 import { SURAHS, Surah, RECITERS } from "@/data/quran-data";
 import { useReaderPrefs } from "@/hooks/useReaderPrefs";
@@ -116,11 +116,8 @@ export default function PlayerPage() {
       <div className="relative z-10 mx-auto flex w-full max-w-[1480px] flex-col px-5 py-5 sm:px-8 lg:px-12 flex-1">
         <motion.header initial={{ opacity: 0, y: -18 }} animate={{ opacity: playing ? 0.3 : 1, y: 0 }} transition={{ duration: .7, ease }} className="flex items-center justify-between border-b border-white/10 pb-5 hover:opacity-100 transition-opacity">
            <Link href="/tazkiyah" className="flex items-center gap-3 group text-zinc-300 hover:text-emerald-200 transition">
-             <motion.div whileHover={{ rotate: 12, scale: 1.08 }} className="grid size-10 place-items-center rounded-full bg-white/5 border border-white/10 group-hover:border-emerald-300/30 shadow-sm text-emerald-300">
-               <Sparkles size={18} strokeWidth={1.8} />
-             </motion.div>
              <div>
-               <p className="text-lg font-semibold tracking-tight" style={{ fontFamily: "'Fraunces', serif" }}>Friendcirclee</p>
+               <p className="text-lg font-semibold tracking-tight" style={{ fontFamily: "'Fraunces', serif" }}>Friend Circle</p>
                <p className="text-[10px] font-medium uppercase tracking-[0.25em] text-emerald-300/70">Tazkiyah Player</p>
              </div>
            </Link>
