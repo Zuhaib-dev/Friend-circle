@@ -140,7 +140,7 @@ export default function PlayerPage() {
         transition={{ duration: 1.5 }}
       />
       {/* Ambient backgrounds */}
-      <motion.div className="pointer-events-none fixed inset-0 -z-0 opacity-40"
+      <motion.div className="pointer-events-none fixed inset-0 z-0 opacity-40"
         animate={{ 
           background: playing 
             ? 'radial-gradient(circle at 50% 50%, rgba(16,185,129,.15), transparent 60%), radial-gradient(circle at 8% 78%, rgba(252,211,77,.05), transparent 28%)' 
@@ -148,9 +148,9 @@ export default function PlayerPage() {
         }}
         transition={{ duration: 2 }}
       />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] bg-size-[18px_18px] opacity-20 -z-0" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] bg-size-[18px_18px] opacity-20 z-0" />
 
-      <div className="relative z-10 mx-auto flex w-full max-w-[1480px] flex-col px-5 py-5 sm:px-8 lg:px-12 flex-1">
+      <div className="relative z-10 mx-auto flex w-full max-w-370 flex-col px-5 py-5 sm:px-8 lg:px-12 flex-1">
         <motion.header initial={{ opacity: 0, y: -18 }} animate={{ opacity: playing ? 0.3 : 1, y: 0 }} transition={{ duration: .7, ease }} className="flex items-center justify-between border-b border-white/10 pb-5 hover:opacity-100 transition-opacity">
            <Link href="/tazkiyah" className="flex items-center gap-3 group text-zinc-300 hover:text-emerald-200 transition">
              <div>
@@ -187,7 +187,7 @@ export default function PlayerPage() {
             initial={{ opacity: 0, x: -28 }} 
             animate={{ opacity: playing ? 0.25 : 1, x: 0, filter: playing ? "blur(4px)" : "blur(0px)" }} 
             transition={{ duration: 1, delay: .15, ease }} 
-            className="order-2 lg:order-1 transition-all hover:!opacity-100 hover:!filter-none"
+            className="order-2 lg:order-1 transition-all hover:opacity-100! hover:filter-none!"
           >
             <div className="mb-10 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.22em] text-emerald-300/60">
               <span className="h-px w-8 bg-emerald-300/40" />Today's reflection
@@ -229,7 +229,7 @@ export default function PlayerPage() {
                   : "0 25px 70px -30px rgba(0,0,0,0.5)" 
               }}
               transition={{ duration: 2, repeat: playing ? Infinity : 0, repeatType: "reverse" }}
-              className="relative mx-auto max-w-[510px] overflow-hidden rounded-[28px] bg-white/5 border border-white/10 p-3"
+              className="relative mx-auto max-w-127.5 overflow-hidden rounded-[28px] bg-white/5 border border-white/10 p-3"
             >
               <motion.div 
                 animate={{ y: playing ? [0, -5, 0] : 0, backgroundColor: playing ? "rgba(6,78,59,0.5)" : "rgba(6,78,59,0.3)" }} 
@@ -312,7 +312,7 @@ export default function PlayerPage() {
           animate={{ opacity: playing ? 0.3 : 1, filter: playing ? "blur(3px)" : "blur(0px)" }}
           viewport={{ once: true, margin: '-80px' }} 
           transition={{ duration: 1, ease }} 
-          className="border-t border-white/10 py-8 mt-12 transition-all hover:!opacity-100 hover:!filter-none z-10 relative"
+          className="border-t border-white/10 py-8 mt-12 transition-all hover:opacity-100! hover:filter-none! z-10 relative"
         >
           <div className="mb-5 flex items-center justify-between">
             <div>
@@ -321,7 +321,7 @@ export default function PlayerPage() {
             </div>
             <button className="hidden items-center gap-1 text-sm text-emerald-400 sm:flex transition hover:text-emerald-300">View all <ArrowRight size={15} /></button>
           </div>
-          <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-4 max-h-[360px] overflow-y-auto pr-2 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-white/10">
+          <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-4 max-h-90 overflow-y-auto pr-2 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-white/10">
             {SURAHS.map((chapter) => (
               <motion.button whileHover={{ y: -3 }} whileTap={{ scale: .98 }} key={chapter.number} onClick={() => { setCurrentSurah(chapter); setPlaying(true); }} className={`group flex items-center gap-3 rounded-xl p-3 text-left transition ${currentSurah.number === chapter.number ? 'bg-white/10 shadow-sm border border-white/5' : 'hover:bg-white/5 border border-transparent'}`}>
                 <span className={`font-mono text-xs ${currentSurah.number === chapter.number ? 'text-emerald-400' : 'text-zinc-500'}`}>{chapter.number.toString().padStart(2, '0')}</span>
@@ -330,7 +330,7 @@ export default function PlayerPage() {
                   <span className="mt-0.5 block truncate text-xs text-zinc-500">{chapter.meaning}</span>
                 </span>
                 <span className="text-xs text-zinc-600">{chapter.ayats}</span>
-                {currentSurah.number === chapter.number && <ChevronDown className="rotate-[-90deg] text-emerald-400" size={15} />}
+                {currentSurah.number === chapter.number && <ChevronDown className="-rotate-90 text-emerald-400" size={15} />}
               </motion.button>
             ))}
           </div>
