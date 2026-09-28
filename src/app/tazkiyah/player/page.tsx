@@ -20,6 +20,7 @@ export default function PlayerPage() {
   const [duration, setDuration] = useState(0);
   const [isMuted, setIsMuted] = useState(false);
   const [isRepeat, setIsRepeat] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const { prefs, setPrefs } = useReaderPrefs();
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -37,14 +38,22 @@ export default function PlayerPage() {
         }
       } catch {}
     }
+    setIsLoaded(true);
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("tazkiyah_player_state", JSON.stringify({
-      surahNumber: currentSurah.number,
-      time: currentTime
-    }));
-  }, [currentSurah.number, currentTime]);
+    if (!isLoaded) return;
+    
+    // Debounce the save to prevent excessive writes and ensure state has fully updated
+    const timeout = setTimeout(() => {
+      localStorage.setItem("tazkiyah_player_state", JSON.stringify({
+        surahNumber: currentSurah.number,
+        time: currentTime
+      }));
+    }, 1000);
+    
+    return () => clearTimeout(timeout);
+  }, [currentSurah.number, currentTime, isLoaded]);
 
   const audioSrc = `https://cdn.islamic.network/quran/audio-surah/128/${prefs.reciter}/${currentSurah.number}.mp3`;
 
