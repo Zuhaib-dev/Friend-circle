@@ -4,11 +4,10 @@ import { motion, AnimatePresence } from "motion/react";
 import Link from "next/link";
 import {
   ArrowRight, ChevronDown, Heart, MoreHorizontal, Pause, Play,
-  Repeat2, SkipBack, SkipForward, Sparkles, Volume2, Settings2, Check
+  Repeat2, SkipBack, SkipForward, Sparkles, Volume2, VolumeX, Settings2, Check
 } from "lucide-react";
 import { SURAHS, Surah, RECITERS } from "@/data/quran-data";
 import { useReaderPrefs } from "@/hooks/useReaderPrefs";
-import { TopNav } from "@/components/top-nav";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -19,9 +18,33 @@ export default function PlayerPage() {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [isMuted, setIsMuted] = useState(false);
+  const [isRepeat, setIsRepeat] = useState(false);
 
   const { prefs, setPrefs } = useReaderPrefs();
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const initialTimeRef = useRef<number>(0);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("tazkiyah_player_state");
+    if (saved) {
+      try {
+        const { surahNumber, time } = JSON.parse(saved);
+        const s = SURAHS.find(x => x.number === surahNumber);
+        if (s) {
+          setCurrentSurah(s);
+          if (time > 0) initialTimeRef.current = time;
+        }
+      } catch {}
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("tazkiyah_player_state", JSON.stringify({
+      surahNumber: currentSurah.number,
+      time: currentTime
+    }));
+  }, [currentSurah.number, currentTime]);
 
   const audioSrc = `https://cdn.islamic.network/quran/audio-surah/128/${prefs.reciter}/${currentSurah.number}.mp3`;
 
@@ -64,7 +87,6 @@ export default function PlayerPage() {
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-zinc-100 flex flex-col overflow-x-hidden">
-      <TopNav />
       {/* Ambient backgrounds */}
       <motion.div className="pointer-events-none fixed inset-0 -z-0 opacity-40"
         animate={{ background: 'radial-gradient(circle at 80% 12%, rgba(110,231,183,.15), transparent 32%), radial-gradient(circle at 8% 78%, rgba(252,211,77,.08), transparent 28%)' }}
@@ -185,13 +207,15 @@ export default function PlayerPage() {
                   </div>
                 </div>
                 <div className="mt-3 flex items-center justify-between pb-2">
-                  <button aria-label="Repeat" className="text-zinc-500 transition hover:text-emerald-300"><Repeat2 size={17} /></button>
+                  <button onClick={() => setIsRepeat(!isRepeat)} aria-label="Repeat" className={`transition ${isRepeat ? 'text-emerald-400' : 'text-zinc-500 hover:text-emerald-300'}`}><Repeat2 size={17} /></button>
                   <button onClick={prevSurah} aria-label="Previous" className="text-zinc-400 hover:text-zinc-200 transition"><SkipBack size={20} fill="currentColor" /></button>
                   <motion.button whileHover={{ scale: 1.08 }} whileTap={{ scale: .92 }} aria-label={playing ? 'Pause' : 'Play'} onClick={togglePlay} className="grid size-12 place-items-center rounded-full bg-emerald-400 text-[#0a0a0a] shadow-md transition">
                     {playing ? <Pause size={19} fill="currentColor" /> : <Play className="ml-0.5" size={19} fill="currentColor" />}
                   </motion.button>
                   <button onClick={nextSurah} aria-label="Next" className="text-zinc-400 hover:text-zinc-200 transition"><SkipForward size={20} fill="currentColor" /></button>
-                  <button aria-label="Volume" className="text-zinc-500 hover:text-emerald-300 transition"><Volume2 size={17} /></button>
+                  <button onClick={() => setIsMuted(!isMuted)} aria-label="Volume" className={`transition ${isMuted ? 'text-emerald-400' : 'text-zinc-500 hover:text-emerald-300'}`}>
+                    {isMuted ? <VolumeX size={17} /> : <Volume2 size={17} />}
+                  </button>
                 </div>
               </div>
             </div>
@@ -225,11 +249,19 @@ export default function PlayerPage() {
       <audio
         ref={audioRef}
         src={audioSrc}
+        muted={isMuted}
+        loop={isRepeat}
         onEnded={nextSurah}
         onPause={() => setPlaying(false)}
         onPlay={() => setPlaying(true)}
         onTimeUpdate={() => setCurrentTime(audioRef.current?.currentTime || 0)}
-        onLoadedMetadata={() => setDuration(audioRef.current?.duration || 0)}
+        onLoadedMetadata={() => {
+          setDuration(audioRef.current?.duration || 0);
+          if (initialTimeRef.current > 0 && audioRef.current) {
+            audioRef.current.currentTime = initialTimeRef.current;
+            initialTimeRef.current = 0;
+          }
+        }}
       />
     </div>
   );
