@@ -7,6 +7,7 @@ export type ReaderPrefs = {
   lineHeight: number;
   arabicFont: "amiri" | "scheherazade";
   showArabic: boolean;
+  reciter: string;
 };
 
 export const DEFAULT_PREFS: ReaderPrefs = {
@@ -15,7 +16,16 @@ export const DEFAULT_PREFS: ReaderPrefs = {
   lineHeight: 2.2,
   arabicFont: "amiri",
   showArabic: true,
+  reciter: "ar.alafasy",
 };
+
+export const RECITERS = [
+  { id: "ar.alafasy", name: "Mishary Rashid Alafasy" },
+  { id: "ar.abdulbasitmurattal", name: "Abdul Basit" },
+  { id: "ar.husary", name: "Mahmoud Khalil Al-Husary" },
+  { id: "ar.minshawi", name: "Mohamed Siddiq Al-Minshawi" },
+  { id: "ar.sudais", name: "Abdur-Rahman As-Sudais" },
+];
 
 
 export type Surah = {

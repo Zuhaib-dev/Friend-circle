@@ -115,6 +115,7 @@ export function TopNav() {
     ? [
         { href: "/tazkiyah", label: "OVERVIEW" },
         { href: "/tazkiyah/quran", label: "QUR'AN" },
+        { href: "/tazkiyah/player", label: "PLAYER" },
         { href: "/tazkiyah#seerah", label: "SEERAH" },
         { href: "/tazkiyah#hadith", label: "HADITH" },
       ]
