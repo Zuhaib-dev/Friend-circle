@@ -95,16 +95,26 @@ export default function PlayerPage() {
   const progressPercent = duration > 0 ? (currentTime / duration) * 100 : 0;
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-zinc-100 flex flex-col overflow-x-hidden">
+    <div className="min-h-screen bg-[#0a0a0a] text-zinc-100 flex flex-col overflow-x-hidden relative">
+      {/* Dynamic Overlay when playing */}
+      <motion.div
+        animate={{ opacity: playing ? 0.7 : 0, backdropFilter: playing ? "blur(8px)" : "blur(0px)" }}
+        className="pointer-events-none fixed inset-0 z-0 bg-[#0a0a0a]/40"
+        transition={{ duration: 1.5 }}
+      />
       {/* Ambient backgrounds */}
       <motion.div className="pointer-events-none fixed inset-0 -z-0 opacity-40"
-        animate={{ background: 'radial-gradient(circle at 80% 12%, rgba(110,231,183,.15), transparent 32%), radial-gradient(circle at 8% 78%, rgba(252,211,77,.08), transparent 28%)' }}
-        transition={{ duration: 1.2 }}
+        animate={{ 
+          background: playing 
+            ? 'radial-gradient(circle at 50% 50%, rgba(16,185,129,.15), transparent 60%), radial-gradient(circle at 8% 78%, rgba(252,211,77,.05), transparent 28%)' 
+            : 'radial-gradient(circle at 80% 12%, rgba(110,231,183,.15), transparent 32%), radial-gradient(circle at 8% 78%, rgba(252,211,77,.08), transparent 28%)' 
+        }}
+        transition={{ duration: 2 }}
       />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] bg-size-[18px_18px] opacity-20 -z-0" />
 
       <div className="relative z-10 mx-auto flex w-full max-w-[1480px] flex-col px-5 py-5 sm:px-8 lg:px-12 flex-1">
-        <motion.header initial={{ opacity: 0, y: -18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .7, ease }} className="flex items-center justify-between border-b border-white/10 pb-5">
+        <motion.header initial={{ opacity: 0, y: -18 }} animate={{ opacity: playing ? 0.3 : 1, y: 0 }} transition={{ duration: .7, ease }} className="flex items-center justify-between border-b border-white/10 pb-5 hover:opacity-100 transition-opacity">
            <Link href="/tazkiyah" className="flex items-center gap-3 group text-zinc-300 hover:text-emerald-200 transition">
              <motion.div whileHover={{ rotate: 12, scale: 1.08 }} className="grid size-10 place-items-center rounded-full bg-white/5 border border-white/10 group-hover:border-emerald-300/30 shadow-sm text-emerald-300">
                <Sparkles size={18} strokeWidth={1.8} />
@@ -138,8 +148,13 @@ export default function PlayerPage() {
            </div>
         </motion.header>
 
-        <section id="listen" className="grid flex-1 items-center gap-12 py-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20 lg:py-20">
-          <motion.div initial={{ opacity: 0, x: -28 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: .8, delay: .15, ease }} className="order-2 lg:order-1">
+        <section id="listen" className="grid flex-1 items-center gap-12 py-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20 lg:py-20 relative z-10">
+          <motion.div 
+            initial={{ opacity: 0, x: -28 }} 
+            animate={{ opacity: playing ? 0.25 : 1, x: 0, filter: playing ? "blur(4px)" : "blur(0px)" }} 
+            transition={{ duration: 1, delay: .15, ease }} 
+            className="order-2 lg:order-1 transition-all hover:!opacity-100 hover:!filter-none"
+          >
             <div className="mb-10 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.22em] text-emerald-300/60">
               <span className="h-px w-8 bg-emerald-300/40" />Today's reflection
             </div>
@@ -167,11 +182,36 @@ export default function PlayerPage() {
             </div>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, scale: .92, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: .9, delay: .25, ease }} className="order-1 lg:order-2">
-            <div className="relative mx-auto max-w-[510px] overflow-hidden rounded-[28px] bg-white/5 border border-white/10 p-3 shadow-[0_25px_70px_-30px_rgba(0,0,0,0.5)]">
-              <motion.div animate={{ y: playing ? [0, -5, 0] : 0 }} transition={{ duration: 4, repeat: playing ? Infinity : 0, ease: 'easeInOut' }} className="relative aspect-[1.1] overflow-hidden rounded-[20px] bg-emerald-900/30 p-8 text-emerald-50 sm:p-12 border border-white/5">
-                <motion.div animate={{ rotate: playing ? 360 : 0 }} transition={{ duration: 35, repeat: playing ? Infinity : 0, ease: 'linear' }} className="absolute -right-20 -top-24 size-72 rounded-full border border-emerald-300/20" />
-                <motion.div animate={{ rotate: playing ? -360 : 0 }} transition={{ duration: 45, repeat: playing ? Infinity : 0, ease: 'linear' }} className="absolute -bottom-32 -left-20 size-80 rounded-full border border-emerald-300/20" />
+          <motion.div 
+            initial={{ opacity: 0, scale: .92, y: 20 }} 
+            animate={{ opacity: 1, scale: playing ? 1.03 : 1, y: 0 }} 
+            transition={{ duration: 1.2, delay: .25, ease }} 
+            className="order-1 lg:order-2 z-20"
+          >
+            <motion.div 
+              animate={{ 
+                boxShadow: playing 
+                  ? "0 30px 90px -15px rgba(16,185,129,0.3)" 
+                  : "0 25px 70px -30px rgba(0,0,0,0.5)" 
+              }}
+              transition={{ duration: 2, repeat: playing ? Infinity : 0, repeatType: "reverse" }}
+              className="relative mx-auto max-w-[510px] overflow-hidden rounded-[28px] bg-white/5 border border-white/10 p-3"
+            >
+              <motion.div 
+                animate={{ y: playing ? [0, -5, 0] : 0, backgroundColor: playing ? "rgba(6,78,59,0.5)" : "rgba(6,78,59,0.3)" }} 
+                transition={{ duration: 4, repeat: playing ? Infinity : 0, ease: 'easeInOut' }} 
+                className="relative aspect-[1.1] overflow-hidden rounded-[20px] p-8 text-emerald-50 sm:p-12 border border-white/5"
+              >
+                <motion.div 
+                  animate={{ rotate: playing ? 360 : 0, scale: playing ? [1, 1.1, 1] : 1, opacity: playing ? 0.35 : 0.2 }} 
+                  transition={{ rotate: { duration: 35, repeat: playing ? Infinity : 0, ease: 'linear' }, scale: { duration: 8, repeat: playing ? Infinity : 0, ease: 'easeInOut' } }} 
+                  className="absolute -right-20 -top-24 size-72 rounded-full border border-emerald-300" 
+                />
+                <motion.div 
+                  animate={{ rotate: playing ? -360 : 0, scale: playing ? [1, 1.2, 1] : 1, opacity: playing ? 0.3 : 0.2 }} 
+                  transition={{ rotate: { duration: 45, repeat: playing ? Infinity : 0, ease: 'linear' }, scale: { duration: 10, repeat: playing ? Infinity : 0, ease: 'easeInOut' } }} 
+                  className="absolute -bottom-32 -left-20 size-80 rounded-full border border-emerald-300" 
+                />
                 <div className="relative flex h-full flex-col justify-between">
                   <div className="flex items-start justify-between">
                     <span className="text-xs uppercase tracking-[0.25em] text-emerald-200/70">Qur'an recitation</span>
@@ -227,11 +267,19 @@ export default function PlayerPage() {
                   </button>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         </section>
 
-        <motion.section id="library" initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-80px' }} transition={{ duration: .7, ease }} className="border-t border-white/10 py-8 mt-12">
+        <motion.section 
+          id="library" 
+          initial={{ opacity: 0, y: 24 }} 
+          whileInView={{ opacity: 1, y: 0 }} 
+          animate={{ opacity: playing ? 0.3 : 1, filter: playing ? "blur(3px)" : "blur(0px)" }}
+          viewport={{ once: true, margin: '-80px' }} 
+          transition={{ duration: 1, ease }} 
+          className="border-t border-white/10 py-8 mt-12 transition-all hover:!opacity-100 hover:!filter-none z-10 relative"
+        >
           <div className="mb-5 flex items-center justify-between">
             <div>
               <p className="text-xs font-medium uppercase tracking-[0.2em] text-emerald-300/60">Your listening list</p>
