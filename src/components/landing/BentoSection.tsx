@@ -1,13 +1,33 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
 import { ArrowRight, Volume2, VolumeX, Star, Users } from "lucide-react";
 import Link from "next/link";
 
 export function BentoSection() {
+  const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isMuted, setIsMuted] = useState(true);
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoadVideo(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "300px" }
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
 
   const toggleMute = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -19,7 +39,7 @@ export function BentoSection() {
   };
 
   return (
-    <section className="px-4 md:px-8 py-10 max-w-[1920px] mx-auto bg-ink text-bone hairline-b border-ink">
+    <section ref={sectionRef} className="px-4 md:px-8 py-10 max-w-[1920px] mx-auto bg-ink text-bone hairline-b border-ink">
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-6 max-w-[1600px] mx-auto">
         
         {/* Left Side: Stats and CTA */}
@@ -119,12 +139,12 @@ export function BentoSection() {
           {/* Video Player */}
           <video
             ref={videoRef}
-            src="/friend-circle-launch.mp4"
+            src={shouldLoadVideo ? "/friend-circle-launch.mp4" : undefined}
             autoPlay
             loop
             muted
             playsInline
-            preload="metadata"
+            preload={shouldLoadVideo ? "metadata" : "none"}
             className="absolute inset-0 w-full h-full object-cover"
           />
           
