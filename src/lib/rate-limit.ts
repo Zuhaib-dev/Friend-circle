@@ -51,6 +51,11 @@ export function rateLimit(name: string, options: { limit: number; windowMs: numb
       const entry = bucket.get(token);
 
       if (!entry || now > entry.resetAt) {
+        // Bound memory when clients rotate identifiers or provide many distinct keys.
+        if (!entry && bucket.size >= 20_000) {
+          const oldestKey = bucket.keys().next().value;
+          if (oldestKey !== undefined) bucket.delete(oldestKey);
+        }
         bucket.set(token, { count: 1, resetAt: now + options.windowMs });
         return { success: true, remaining: options.limit - 1 };
       }
