@@ -137,22 +137,22 @@ export function TopNav() {
   return (
     <div className="hairline-b border-ink bg-bone sticky top-0 z-50">
       <TacticalStrip wx={wx} />
-      <div className="flex items-center justify-between px-4 py-2 gap-3">
+      <div className="flex min-w-0 items-center justify-between px-4 py-2 gap-3">
         {/* Brand */}
-        <Link href="/" className="flex items-center gap-2 mono-label text-ink hover:text-signal transition-colors">
+        <Link href="/" className="flex shrink-0 items-center gap-2 mono-label text-ink hover:text-signal transition-colors">
           <CircleDot className="h-3.5 w-3.5 text-signal animate-blink" />
           <span className="hidden sm:inline">FRIEND CIRCLE / KMR</span>
           <span className="sm:hidden">FC / KMR</span>
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-1">
+        <nav aria-label="Main navigation" className="hidden 2xl:flex min-w-0 flex-1 items-center justify-center gap-0">
           {navLinks.map((l) => (
             <Link
               key={l.href}
               href={l.href}
               prefetch={true}
-              className="mono-label px-3 py-1.5 hover:bg-ink hover:text-bone transition-colors"
+              className="mono-label whitespace-nowrap px-2 py-1.5 text-[10px] hover:bg-ink hover:text-bone transition-colors"
             >
               {l.label}
             </Link>
@@ -160,7 +160,7 @@ export function TopNav() {
         </nav>
 
         {/* Right cluster */}
-        <div className="flex items-center gap-2">
+        <div className="flex shrink-0 items-center gap-2">
           {/* Auth */}
           <div className="flex items-center gap-2">
           {!hydrated ? (
@@ -279,7 +279,7 @@ export function TopNav() {
           <button
             type="button"
             onClick={() => openCommandMenu()}
-            className="hidden sm:flex items-center gap-1.5 hairline border-ink/40 px-2 py-1 mono-label text-xs hover:border-signal hover:text-signal transition-colors text-ink/70"
+            className="hidden sm:flex shrink-0 items-center gap-1.5 whitespace-nowrap hairline border-ink/40 px-2 py-1 mono-label text-xs hover:border-signal hover:text-signal transition-colors text-ink/70"
             aria-label="Open command palette"
           >
             <Search className="h-3 w-3" />
@@ -300,7 +300,7 @@ export function TopNav() {
           <button
             type="button"
             onClick={() => setMobileOpen((o) => !o)}
-            className="md:hidden hairline border-ink p-1.5 hover:bg-ink hover:text-bone transition-colors"
+            className="2xl:hidden hairline border-ink p-1.5 hover:bg-ink hover:text-bone transition-colors"
             aria-label="Toggle navigation menu"
             aria-expanded={mobileOpen}
             aria-controls="mobile-nav-panel"
@@ -320,7 +320,7 @@ export function TopNav() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="md:hidden hairline-t border-ink overflow-hidden bg-bone"
+            className="2xl:hidden hairline-t border-ink overflow-hidden bg-bone"
           >
             <nav id="mobile-nav-menu" aria-label="Mobile links" className="flex flex-col">
               <div className="px-4 py-2 hairline-b border-ink/20 flex items-center justify-between">
