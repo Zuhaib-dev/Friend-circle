@@ -56,33 +56,58 @@ export async function GET() {
 export async function POST(req: Request) {
   try {
     const session = await getServerSession(authOptions);
+    const role = (session?.user as any)?.role;
     // TEAM_MEMBERs can update packing status. ADMIN can update everything.
-    if (!session || ((session.user as any).role !== 'ADMIN' && (session.user as any).role !== 'TEAM_MEMBER')) {
+    if (role !== 'ADMIN' && role !== 'TEAM_MEMBER') {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 403 });
     }
 
-    await connectToDatabase();
     const body = await req.json();
-    
-    // For mass updates (e.g., pack all critical)
+    const isAdmin = role === 'ADMIN';
+    const allowedFields = isAdmin
+      ? ['name', 'code', 'category', 'weight', 'qty', 'critical', 'packed']
+      : ['qty', 'packed'];
+    const updatesFor = (update: Record<string, unknown>) =>
+      Object.fromEntries(allowedFields
+        .filter((field) => update[field] !== undefined)
+        .map((field) => [field, update[field]]));
+
+    if (Array.isArray(body) && (body.length === 0 || body.length > 100)) {
+      return NextResponse.json({ error: 'Invalid update batch' }, { status: 400 });
+    }
+    if (!Array.isArray(body) && (!body || typeof body !== 'object')) {
+      return NextResponse.json({ error: 'Invalid payload' }, { status: 400 });
+    }
+
+    const updates = Array.isArray(body) ? body : [body];
+    if (updates.some((update) =>
+      !update || typeof update !== 'object' || Array.isArray(update) ||
+      typeof update.itemId !== 'string' || !update.itemId.trim() ||
+      Object.keys(update).some((key) => key !== 'itemId' && !allowedFields.includes(key)) ||
+      Object.keys(updatesFor(update)).length === 0
+    )) {
+      return NextResponse.json({ error: 'Invalid or unauthorized item fields' }, { status: 400 });
+    }
+
+    await connectToDatabase();
+
     if (Array.isArray(body)) {
-      const updates = body.map((update) => 
-        LoadoutItem.findOneAndUpdate({ itemId: update.itemId }, { $set: update }, { new: true })
-      );
-      const results = await Promise.all(updates);
+      const results = await Promise.all(updates.map((update) =>
+        LoadoutItem.findOneAndUpdate(
+          { itemId: update.itemId },
+          { $set: updatesFor(update) },
+          { new: true, runValidators: true }
+        )
+      ));
       return NextResponse.json(results, { status: 200 });
     }
     
-    if (body.itemId) {
-      const updated = await LoadoutItem.findOneAndUpdate(
-        { itemId: body.itemId },
-        { $set: body },
-        { new: true, upsert: true }
-      );
-      return NextResponse.json(updated, { status: 200 });
-    }
-
-    return NextResponse.json({ error: 'Missing itemId' }, { status: 400 });
+    const updated = await LoadoutItem.findOneAndUpdate(
+      { itemId: body.itemId },
+      { $set: updatesFor(body) },
+      { new: true, runValidators: true, upsert: isAdmin }
+    );
+    return NextResponse.json(updated, { status: 200 });
   } catch (error: any) {
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
