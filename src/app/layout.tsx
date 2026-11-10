@@ -9,7 +9,6 @@ import { Toaster } from "sonner";
 import NextTopLoader from 'nextjs-toploader';
 import CommandMenu from "@/components/command-menu";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
-import QueryProvider from "@/components/QueryProvider";
 
 const fraunces = Fraunces({
   variable: "--font-fraunces",
@@ -114,30 +113,28 @@ export default function RootLayout({
             ]
           })
         }} />
-        <QueryProvider>
-          <NuqsAdapter>
-            <AuthProvider>
-              <NextTopLoader 
-                color="#E53E1F"
-                initialPosition={0.2}
-                crawlSpeed={150}
-                height={4}
-                crawl={true}
-                showSpinner={false}
-                easing="ease"
-                speed={150}
-                shadow="0 0 10px #E53E1F,0 0 5px #E53E1F"
-                zIndex={1600}
-              />
-              <SessionTracker />
-              <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-                {children}
-                <CommandMenu />
-                <Toaster position="bottom-right" richColors />
-              </ThemeProvider>
-            </AuthProvider>
-          </NuqsAdapter>
-        </QueryProvider>
+        <NuqsAdapter>
+          <AuthProvider>
+            <NextTopLoader
+              color="#E53E1F"
+              initialPosition={0.2}
+              crawlSpeed={150}
+              height={4}
+              crawl={true}
+              showSpinner={false}
+              easing="ease"
+              speed={150}
+              shadow="0 0 10px #E53E1F,0 0 5px #E53E1F"
+              zIndex={1600}
+            />
+            <SessionTracker />
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+              {children}
+              <CommandMenu />
+              <Toaster position="bottom-right" richColors />
+            </ThemeProvider>
+          </AuthProvider>
+        </NuqsAdapter>
       </body>
     </html>
   );
