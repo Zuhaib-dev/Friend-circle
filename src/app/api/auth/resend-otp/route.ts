@@ -13,6 +13,7 @@ const log = createLogger('AUTH/RESEND-OTP');
 
 // HIGH-01: 3 resends per IP per 60 minutes
 const limiter = rateLimit('resend-otp', { limit: 3, windowMs: 60 * 60 * 1000 });
+const accountLimiter = rateLimit('resend-otp-account', { limit: 3, windowMs: 60 * 60 * 1000 });
 
 export async function POST(req: Request) {
   try {
@@ -29,8 +30,14 @@ export async function POST(req: Request) {
     const { email } = await req.json();
     const normalizedEmail = typeof email === 'string' ? email.trim().toLowerCase() : '';
 
-    if (!normalizedEmail) {
+    if (!normalizedEmail || normalizedEmail.length > 254) {
       return NextResponse.json({ error: 'Please provide email' }, { status: 400 });
+    }
+    if (!accountLimiter.check(normalizedEmail).success) {
+      return NextResponse.json(
+        { error: 'Too many requests. Please try again later.' },
+        { status: 429 }
+      );
     }
 
     await connectToDatabase();

@@ -11,6 +11,7 @@ const log = createLogger('AUTH/VERIFY-OTP');
 
 // HIGH-01: 5 OTP attempts per IP per 15 minutes
 const limiter = rateLimit('verify-otp', { limit: 5, windowMs: 15 * 60 * 1000 });
+const accountLimiter = rateLimit('verify-otp-account', { limit: 5, windowMs: 15 * 60 * 1000 });
 
 export async function POST(req: Request) {
   try {
@@ -30,6 +31,15 @@ export async function POST(req: Request) {
 
     if (!normalizedEmail || !normalizedOtp) {
       return NextResponse.json({ error: 'Please provide email and OTP' }, { status: 400 });
+    }
+    if (normalizedEmail.length > 254 || !/^\d{6}$/.test(normalizedOtp)) {
+      return NextResponse.json({ error: 'Invalid email or OTP' }, { status: 400 });
+    }
+    if (!accountLimiter.check(normalizedEmail).success) {
+      return NextResponse.json(
+        { error: 'Too many attempts. Please try again later.' },
+        { status: 429 }
+      );
     }
 
     await connectToDatabase();
