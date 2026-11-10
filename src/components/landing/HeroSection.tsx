@@ -55,15 +55,15 @@ export function Hero() {
         <span className="hidden md:flex items-center gap-2"><Radio className="h-3.5 w-3.5 text-signal animate-blink" /> CHANNEL 7 OPEN</span>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr]">
+      <div className="grid grid-cols-1 xl:grid-cols-[minmax(0,1.1fr)_2rem_minmax(0,0.9fr)]">
         {/* Left: monumental headline */}
-        <div className="p-6 md:p-10 lg:p-14 hairline-r border-ink/80">
+        <div className="min-w-0 p-6 md:p-10 xl:p-12 2xl:p-14 hairline-r border-ink/80">
           <div className="flex items-center gap-3 mono-label mb-6">
             <span className="signal-chip"><CircleDot className="h-3 w-3" />HQ / 01</span>
             <span>VOL. 01 — ISSUE 06 — KASHMIR FIELD MANUAL</span>
           </div>
 
-          <h1 className="display-num text-ink text-[clamp(64px,13vw,180px)]">
+          <h1 className="display-num text-ink text-[clamp(64px,10vw,136px)] leading-[0.92] xl:text-[clamp(64px,9vw,144px)]">
             THE<br />
             DIGITAL<br />
             <span className="bg-signal text-bone px-3">CAMPFIRE</span>
@@ -98,12 +98,12 @@ export function Hero() {
         </div>
 
         {/* Center spine */}
-        <div className="hidden lg:flex w-8 tick-v border-ink" />
+        <div className="hidden xl:flex tick-v border-ink" />
 
         {/* Right: cinematic image panel */}
-        <div className="relative overflow-hidden hairline-l border-ink/80 min-h-[420px] lg:min-h-0">
+        <div className="relative min-w-0 overflow-hidden hairline-l border-ink/80 min-h-[clamp(360px,56vw,640px)] xl:min-h-0">
           <motion.div style={{ y }} className="absolute inset-0">
-            <Image src="/hero-mountains.jpg" alt="Kashmir ridgeline" fill priority sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover grayscale contrast-125" />
+            <Image src="/hero-mountains.jpg" alt="Kashmir ridgeline" fill priority sizes="(max-width: 1279px) 100vw, 50vw" className="object-cover grayscale contrast-125" />
             <div className="absolute inset-0 bg-bone/10 mix-blend-multiply" />
             <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "radial-gradient(oklch(0.13 0.01 60 / 0.18) 1px, transparent 1px)", backgroundSize: "6px 6px" }} />
           </motion.div>
