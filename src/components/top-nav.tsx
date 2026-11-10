@@ -9,7 +9,7 @@ import { LogIn, LogOut, User as UserIcon, Settings, ChevronDown, CircleDot, Menu
 import { useSession, signOut as doSignOut } from "next-auth/react";
 import { initialsOf } from "../lib/utils";
 import { QiblaDialog } from "@/components/QiblaDialog";
-import { openCommandMenu } from "@/components/command-menu";
+import { openCommandMenu } from "@/components/command-menu-events";
 
 function Avatar({ name, src, size = 28 }: { name: string; src?: string; size?: number }) {
   const [err, setErr] = useState(false);
