@@ -5,6 +5,9 @@ import { withSentryConfig } from "@sentry/nextjs/config";
 const withPWA = withPWAInit({
   dest: "public",
   disable: process.env.NODE_ENV === "development",
+  // Keep the large on-demand media archive and homepage video out of the
+  // service worker's initial precache download.
+  publicExcludes: ["!archive/**/*", "!friend-circle-launch.mp4"],
   workboxOptions: {
     disableDevLogs: true,
     exclude: [/public\/archive\/.*$/, /\.mp4$/],
