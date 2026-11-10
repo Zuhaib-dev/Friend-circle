@@ -1,5 +1,3 @@
-"use client";
-
 import { Circle, ArrowUpRight, Gauge } from "lucide-react";
 
 export function FooterSection() {
