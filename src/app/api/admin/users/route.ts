@@ -4,6 +4,26 @@ import { authOptions } from '@/lib/authOptions';
 import connectToDatabase from '@/lib/mongodb';
 import User from '@/models/User';
 
+const ADMIN_USER_FIELDS = '_id name email image role teamMemberStatus teamMemberDetails phone socialHandle bio isSuspended createdAt updatedAt';
+
+function serializeAdminUser(user: any) {
+  return {
+    _id: user._id,
+    name: user.name,
+    email: user.email,
+    image: user.image,
+    role: user.role,
+    teamMemberStatus: user.teamMemberStatus,
+    teamMemberDetails: user.teamMemberDetails,
+    phone: user.phone,
+    socialHandle: user.socialHandle,
+    bio: user.bio,
+    isSuspended: user.isSuspended,
+    createdAt: user.createdAt,
+    updatedAt: user.updatedAt,
+  };
+}
+
 export async function GET(req: Request) {
   try {
     const session = await getServerSession(authOptions);
@@ -19,10 +39,10 @@ export async function GET(req: Request) {
     
     let users;
     if (view === 'all') {
-      users = await User.find().select('-password');
+      users = await User.find().select(ADMIN_USER_FIELDS).lean();
     } else {
       // Default to pending
-      users = await User.find({ teamMemberStatus: 'PENDING' }).select('-password');
+      users = await User.find({ teamMemberStatus: 'PENDING' }).select(ADMIN_USER_FIELDS).lean();
     }
 
     return NextResponse.json(users, { status: 200 });
@@ -70,7 +90,7 @@ export async function PATCH(req: Request) {
 
     await user.save();
 
-    return NextResponse.json({ message: `User successfully ${action.toLowerCase()}d`, user }, { status: 200 });
+    return NextResponse.json({ message: `User successfully ${action.toLowerCase()}d`, user: serializeAdminUser(user) }, { status: 200 });
   } catch (error: any) {
     console.error('Admin PATCH user error:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
