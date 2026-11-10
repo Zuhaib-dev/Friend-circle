@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import connectToDatabase from "@/lib/mongodb";
-import BlogPost from "@/models/BlogPost";
-import DispatchesClient from "@/app/dispatches/components/DispatchesClient";
+import { Suspense } from "react";
+import DispatchesPageData from "./DispatchesPageData";
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://friendcirclee.netlify.app";
 
@@ -31,22 +30,23 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function DispatchesPage() {
-  let dispatches = [];
+function DispatchesFallback() {
+  return (
+    <main className="min-h-screen bg-bone text-ink px-4 md:px-8 py-12">
+      <div className="mb-8 h-28 animate-pulse bg-ink/5" />
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {Array.from({ length: 6 }, (_, index) => (
+          <div key={index} className="h-80 animate-pulse bg-ink/5 hairline border-ink/20" />
+        ))}
+      </div>
+    </main>
+  );
+}
 
-  try {
-    await connectToDatabase();
-    const docs = await BlogPost.find({ status: "PUBLISHED" })
-      .select("title slug summary coverImage audioMemoUrl tags category author publishedAt createdAt updatedAt readTimeMinutes telemetry viewsCount likesCount featured")
-      .populate("author", "name image role")
-      .sort({ featured: -1, publishedAt: -1, createdAt: -1 })
-      .limit(60)
-      .lean();
-
-    dispatches = JSON.parse(JSON.stringify(docs));
-  } catch (error) {
-    console.error("Failed to fetch dispatches for page:", error);
-  }
-
-  return <DispatchesClient initialDispatches={dispatches} />;
+export default function DispatchesPage() {
+  return (
+    <Suspense fallback={<DispatchesFallback />}>
+      <DispatchesPageData />
+    </Suspense>
+  );
 }
