@@ -1,25 +1,18 @@
-"use client";
-
-import { motion } from "motion/react";
 import Image from "next/image";
 import { TOURS } from "@/data/home-data";
-import { SectionHead } from "./primitives";
+import { SectionHeading } from "./SectionHeading";
 
 export function ToursSection() {
   return (
     <section id="tours" className="px-4 md:px-8 py-16 hairline-t border-ink">
-      <SectionHead code="OPS / 03" kicker="FIELD ROUTES" title="The ridge ledger" sub="Logged tours, with weight, weather, and warnings — pick your line." />
+      <SectionHeading code="OPS / 03" kicker="FIELD ROUTES" title="The ridge ledger" sub="Logged tours, with weight, weather, and warnings — pick your line." />
 
       <div className="grid grid-cols-12 gap-0 hairline border-ink">
         {TOURS.map((t, i) => {
           const featured = i === 0;
           return (
-            <motion.article
+            <article
               key={t.code}
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.4, delay: i * 0.05, ease: "easeOut" }}
               className={`${featured ? "col-span-12 lg:col-span-8 lg:row-span-2" : "col-span-12 sm:col-span-6 lg:col-span-4"} hairline-b lg:hairline-r border-ink/50 relative bg-bone group overflow-hidden`}
             >
               <div className={`relative overflow-hidden ${featured ? "aspect-video" : "aspect-4/3"}`}>
@@ -48,7 +41,7 @@ export function ToursSection() {
                   <div><div className="mono-label opacity-60">GRADE</div><div className="display-num text-2xl">{t.diff}</div></div>
                 </div>
               </div>
-            </motion.article>
+            </article>
           );
         })}
       </div>
