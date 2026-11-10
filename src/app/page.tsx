@@ -1,4 +1,5 @@
-import { TopBar, Hero, Ticker, StatsRow } from "@/components/landing/HeroSection";
+import { TopBar, Hero } from "@/components/landing/HeroSection";
+import { Ticker, StatsRow } from "@/components/landing/StaticHeroSections";
 import { BentoSection } from "@/components/landing/BentoSection";
 import { ToursSection } from "@/components/landing/ToursSection";
 import { TelemetrySection } from "@/components/landing/TelemetrySection";

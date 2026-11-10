@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform } from "motion/react";
 import Image from "next/image";
 import { MapPin, Wind, Radio, CircleDot, ArrowUpRight, Target, Crosshair } from "lucide-react";
 import { TopNav } from "@/components/top-nav";
-import { TICKER, STATS } from "@/data/home-data";
+import { TICKER } from "@/data/home-data";
 
 export function TopBar() {
   const [t, setT] = useState("");
@@ -136,37 +136,5 @@ export function Hero() {
         </div>
       </div>
     </header>
-  );
-}
-
-export function Ticker() {
-  const items = [...TICKER, ...TICKER];
-  return (
-    <div className="brick hairline-b border-ink overflow-hidden">
-      <div className="flex animate-marquee whitespace-nowrap py-2">
-        {items.map((t, i) => (
-          <span key={i} className="mono-label text-bone px-6 flex items-center gap-3">
-            <span className="h-1.5 w-1.5 bg-signal rounded-full" />
-            {t}
-          </span>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-export function StatsRow() {
-  return (
-    <section className="px-4 md:px-8 py-10">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-0 hairline border-ink">
-        {STATS.map((s, i) => (
-          <div key={s.label} className={`p-5 ${i < STATS.length - 1 ? "lg:hairline-r" : ""} ${i < 2 ? "hairline-b lg:hairline-b-0" : ""} ${i === 0 ? "hairline-r" : ""} ${i === 2 ? "hairline-r" : ""} border-ink/40 bg-bone`}>
-            <div className="mono-label">{s.label}</div>
-            <div className="display-num text-[44px] md:text-[64px] mt-1">{s.value}</div>
-            <div className="mono-label opacity-60">{s.sub}</div>
-          </div>
-        ))}
-      </div>
-    </section>
   );
 }
