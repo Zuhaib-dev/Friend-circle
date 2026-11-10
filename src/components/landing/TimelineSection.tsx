@@ -1,10 +1,10 @@
 import { TIMELINE } from "@/data/home-data";
-import { SectionHead } from "./primitives";
+import { SectionHeading } from "./SectionHeading";
 
 export function TimelineSection() {
   return (
     <section className="px-4 md:px-8 py-16 hairline-t border-ink">
-      <SectionHead code="LEDG / 06" kicker="THE LEDGER" title="Eight years, on record" sub="Receipts. Re-runs. Rituals. The crew's mission log." />
+      <SectionHeading code="LEDG / 06" kicker="THE LEDGER" title="Eight years, on record" sub="Receipts. Re-runs. Rituals. The crew's mission log." />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-0 hairline border-ink">
         {TIMELINE.map((e, i) => (
           <div
