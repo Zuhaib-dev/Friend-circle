@@ -14,11 +14,12 @@ export async function GET(
   try {
     const { slug } = await params;
     await connectToDatabase();
+    const session = await getServerSession(authOptions);
 
     const isId = mongoose.Types.ObjectId.isValid(slug);
-    const dispatch = await BlogPost.findOne(isId ? { _id: slug } : { slug }, '_id').lean();
+    const dispatch = await BlogPost.findOne(isId ? { _id: slug } : { slug }, '_id status').lean();
 
-    if (!dispatch) {
+    if (!dispatch || (dispatch.status !== 'PUBLISHED' && session?.user?.role !== 'ADMIN')) {
       return NextResponse.json({ error: 'Dispatch not found' }, { status: 404 });
     }
 
@@ -64,9 +65,9 @@ export async function POST(
     }
 
     const isId = mongoose.Types.ObjectId.isValid(slug);
-    const dispatch = await BlogPost.findOne(isId ? { _id: slug } : { slug }, '_id').lean();
+    const dispatch = await BlogPost.findOne(isId ? { _id: slug } : { slug }, '_id status').lean();
 
-    if (!dispatch) {
+    if (!dispatch || (dispatch.status !== 'PUBLISHED' && session.user.role !== 'ADMIN')) {
       return NextResponse.json({ error: 'Dispatch not found' }, { status: 404 });
     }
 
