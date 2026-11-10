@@ -14,7 +14,10 @@ export async function GET(req: Request) {
       return NextResponse.json(memory);
     }
 
-    const memories = await TripMemory.find().sort({ date: -1 });
+    const memories = await TripMemory.find()
+      .select("title code date distance coordinates bannerImage")
+      .sort({ date: -1 })
+      .lean();
     return NextResponse.json(memories);
   } catch (error) {
     return NextResponse.json({ error: "Failed to fetch memories" }, { status: 500 });
