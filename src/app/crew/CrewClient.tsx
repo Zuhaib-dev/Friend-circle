@@ -42,7 +42,18 @@ type CrewMember = {
 };
 
 export function CrewClient({ initialCrew, sessionUserId }: { initialCrew: CrewMember[], sessionUserId: string | null }) {
-  const [crew, setCrew] = useState<CrewMember[]>(initialCrew);
+  const [crew, setCrew] = useState<CrewMember[]>(() =>
+    initialCrew
+      .filter((member) => member && typeof member._id === "string" && member._id.length > 0)
+      .map((member) => ({
+        ...member,
+        name: typeof member.name === "string" && member.name.trim() ? member.name : "Unknown operator",
+        role: member.role === "ADMIN" ? "ADMIN" : "TEAM_MEMBER",
+        image: typeof member.image === "string" ? member.image : undefined,
+        bio: typeof member.bio === "string" ? member.bio : undefined,
+        socialHandle: typeof member.socialHandle === "string" ? member.socialHandle : undefined,
+      }))
+  );
   const [query, setQuery] = useState("");
   const [now, setNow] = useState<Date | null>(null);
 
