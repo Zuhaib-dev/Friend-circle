@@ -4,6 +4,26 @@ import { authOptions } from '@/lib/authOptions';
 import connectToDatabase from "@/lib/mongodb";
 import User from "@/models/User";
 
+const PROFILE_FIELDS = "_id name email image role teamMemberStatus teamMemberDetails phone socialHandle bio isVerified createdAt updatedAt";
+
+function serializeProfile(user: any) {
+  return {
+    _id: user._id,
+    name: user.name,
+    email: user.email,
+    image: user.image,
+    role: user.role,
+    teamMemberStatus: user.teamMemberStatus,
+    teamMemberDetails: user.teamMemberDetails,
+    phone: user.phone,
+    socialHandle: user.socialHandle,
+    bio: user.bio,
+    isVerified: user.isVerified,
+    createdAt: user.createdAt,
+    updatedAt: user.updatedAt,
+  };
+}
+
 export async function GET(req: Request) {
   try {
     const session = await getServerSession(authOptions);
@@ -14,13 +34,13 @@ export async function GET(req: Request) {
 
     await connectToDatabase();
 
-    const user = await User.findOne({ email: session.user.email }).select("-password -otp");
+    const user = await User.findOne({ email: session.user.email }).select(PROFILE_FIELDS);
 
     if (!user) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
-    return NextResponse.json(user, { status: 200 });
+    return NextResponse.json(serializeProfile(user), { status: 200 });
   } catch (error: any) {
     console.error("GET profile error:", error);
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
@@ -59,7 +79,7 @@ export async function PATCH(req: Request) {
 
     await user.save();
 
-    return NextResponse.json({ message: "Profile updated successfully", user }, { status: 200 });
+    return NextResponse.json({ message: "Profile updated successfully", user: serializeProfile(user) }, { status: 200 });
   } catch (error: any) {
     console.error("PATCH profile error:", error);
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
