@@ -14,18 +14,17 @@ export default async function CrewPageData() {
       { role: "TEAM_MEMBER", teamMemberStatus: "APPROVED" },
     ],
   })
-    .select("name email image role socialHandle bio")
+    .select("name image role socialHandle bio")
     .lean();
 
   const initialCrew = crewDocs.map((member) => ({
     _id: member._id.toString(),
     name: member.name,
-    email: member.email,
     role: member.role as "TEAM_MEMBER" | "ADMIN",
     image: member.image || undefined,
     bio: member.bio || undefined,
     socialHandle: member.socialHandle || undefined,
   }));
 
-  return <CrewClient initialCrew={initialCrew} sessionEmail={session?.user?.email || null} />;
+  return <CrewClient initialCrew={initialCrew} sessionUserId={session?.user?.id || null} />;
 }

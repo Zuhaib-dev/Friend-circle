@@ -8,7 +8,6 @@ import {
   Link as LinkIcon,
   ShieldCheck,
   Radio,
-  Mail,
   Users,
   Activity,
   X,
@@ -36,14 +35,13 @@ function Crosshairs() {
 type CrewMember = {
   _id: string;
   name: string;
-  email: string;
   role: "ADMIN" | "TEAM_MEMBER";
   image?: string;
   bio?: string;
   socialHandle?: string;
 };
 
-export function CrewClient({ initialCrew, sessionEmail }: { initialCrew: CrewMember[], sessionEmail: string | null }) {
+export function CrewClient({ initialCrew, sessionUserId }: { initialCrew: CrewMember[], sessionUserId: string | null }) {
   const [crew, setCrew] = useState<CrewMember[]>(initialCrew);
   const [query, setQuery] = useState("");
   const [now, setNow] = useState<Date | null>(null);
@@ -55,16 +53,15 @@ export function CrewClient({ initialCrew, sessionEmail }: { initialCrew: CrewMem
   }, []);
 
   const sorted = useMemo(() => {
-    const meEmail = sessionEmail?.toLowerCase();
     return [...crew].sort((a, b) => {
-      const aMe = meEmail && a.email.toLowerCase() === meEmail ? 1 : 0;
-      const bMe = meEmail && b.email.toLowerCase() === meEmail ? 1 : 0;
+      const aMe = sessionUserId && a._id === sessionUserId ? 1 : 0;
+      const bMe = sessionUserId && b._id === sessionUserId ? 1 : 0;
       const aRank = a.role === "ADMIN" ? 0 : aMe ? 1 : 2;
       const bRank = b.role === "ADMIN" ? 0 : bMe ? 1 : 2;
       if (aRank !== bRank) return aRank - bRank;
       return a.name.localeCompare(b.name);
     });
-  }, [sessionEmail, crew]);
+  }, [sessionUserId, crew]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -171,7 +168,7 @@ export function CrewClient({ initialCrew, sessionEmail }: { initialCrew: CrewMem
           >
             <AnimatePresence mode="popLayout">
               {filtered.map((m, i) => (
-                <DossierCard key={m._id} member={m} index={i} isMe={sessionEmail?.toLowerCase() === m.email.toLowerCase()} />
+                <DossierCard key={m._id} member={m} index={i} isMe={sessionUserId === m._id} />
               ))}
             </AnimatePresence>
           </motion.div>
@@ -282,13 +279,6 @@ function DossierCard({ member, index, isMe }: { member: CrewMember; index: numbe
           <span className={`mono-label hairline border-ink px-1.5 py-0.5 ${isAdmin ? "bg-signal text-bone border-signal" : ""}`}>
             [ {displayRole} ]
           </span>
-          <a
-            href={`mailto:${member.email}`}
-            className="mono-label opacity-60 hover:opacity-100 hover:text-signal flex items-center gap-1 transition-colors"
-            title={member.email}
-          >
-            <Mail className="h-3 w-3" /> MAIL
-          </a>
         </div>
         <div className="font-mono text-[11px] leading-relaxed text-ink/75 flex-1 line-clamp-3">
           {member.bio ? (

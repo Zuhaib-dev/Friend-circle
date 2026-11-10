@@ -7,13 +7,13 @@ export async function GET() {
     await connectToDatabase();
     
     // Fetch users who are either ADMIN or APPROVED TEAM_MEMBER
-    // We select name, email (to identify current user), image, role, socialHandle, bio
+    // Return only fields intended for the public roster.
     const crewMembers = await User.find({
       $or: [
         { role: 'ADMIN' },
         { role: 'TEAM_MEMBER', teamMemberStatus: 'APPROVED' }
       ]
-    }).select('name email image role socialHandle bio').lean();
+    }).select('name image role socialHandle bio').lean();
 
     return NextResponse.json(crewMembers, { status: 200 });
   } catch (error: any) {
