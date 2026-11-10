@@ -21,10 +21,10 @@ export default async function CrewPageData() {
     _id: member._id.toString(),
     name: member.name,
     email: member.email,
-    role: member.role,
-    image: member.image || null,
-    bio: member.bio || null,
-    socialHandle: member.socialHandle || null,
+    role: member.role as "TEAM_MEMBER" | "ADMIN",
+    image: member.image || undefined,
+    bio: member.bio || undefined,
+    socialHandle: member.socialHandle || undefined,
   }));
 
   return <CrewClient initialCrew={initialCrew} sessionEmail={session?.user?.email || null} />;
