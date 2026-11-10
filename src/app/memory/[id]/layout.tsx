@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import connectToDatabase from "@/lib/mongodb";
-import TripMemory from "@/models/TripMemory";
+import { getTripMemory } from "./data";
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   // Await the params object before using its properties
@@ -10,8 +9,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   let ogImage = "https://friendcirclee.netlify.app/og.png";
 
   try {
-    await connectToDatabase();
-    const memory = await TripMemory.findById(id).lean();
+    const memory = await getTripMemory(id);
     if (memory) {
       // Provide dynamic SEO properties
       title = `${memory.title} | Friend Circle`;
