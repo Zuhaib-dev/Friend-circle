@@ -1,6 +1,13 @@
 import { NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/authOptions';
 import connectToDatabase from '@/lib/mongodb';
 import Convoy from '@/models/Convoy';
+
+async function isAdmin() {
+  const session = await getServerSession(authOptions);
+  return session?.user?.role === 'ADMIN';
+}
 
 const SEED_DATA = [
   {
@@ -91,19 +98,35 @@ export async function GET() {
 
 export async function POST(req: Request) {
   try {
-    await connectToDatabase();
-    const body = await req.json();
-    
-    if (body.convoyId) {
-      const updated = await Convoy.findOneAndUpdate(
-        { convoyId: body.convoyId },
-        { $set: body },
-        { new: true, upsert: true }
-      );
-      return NextResponse.json(updated, { status: 200 });
+    if (!(await isAdmin())) {
+      return NextResponse.json({ error: 'Admin access required' }, { status: 403 });
     }
 
-    return NextResponse.json({ error: 'Missing convoyId' }, { status: 400 });
+    const body = await req.json();
+    if (!body || typeof body !== 'object' || Array.isArray(body)) {
+      return NextResponse.json({ error: 'Invalid payload' }, { status: 400 });
+    }
+    if (typeof body.convoyId !== 'string' || !body.convoyId.trim()) {
+      return NextResponse.json({ error: 'Missing convoyId' }, { status: 400 });
+    }
+
+    const allowedFields = [
+      'convoyId', 'callsign', 'status', 'operators', 'vehicles', 'start',
+      'destination', 'path', 'progress', 'battery', 'temp', 'wind', 'lastBeacon',
+    ] as const;
+    const update = Object.fromEntries(
+      allowedFields
+        .filter((key) => body[key] !== undefined)
+        .map((key) => [key, body[key]])
+    );
+
+    await connectToDatabase();
+    const updated = await Convoy.findOneAndUpdate(
+      { convoyId: body.convoyId.trim() },
+      { $set: update },
+      { new: true, upsert: true, runValidators: true }
+    );
+    return NextResponse.json(updated, { status: 200 });
   } catch (error: any) {
     console.error('Update convoy error:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
@@ -112,6 +135,10 @@ export async function POST(req: Request) {
 
 export async function DELETE(req: Request) {
   try {
+    if (!(await isAdmin())) {
+      return NextResponse.json({ error: 'Admin access required' }, { status: 403 });
+    }
+
     await connectToDatabase();
     const { searchParams } = new URL(req.url);
     const convoyId = searchParams.get('convoyId');
