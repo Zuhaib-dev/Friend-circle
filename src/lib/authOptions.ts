@@ -4,6 +4,12 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import bcrypt from 'bcryptjs';
 import connectToDatabase from '@/lib/mongodb';
 import User from '@/models/User';
+import { rateLimit } from '@/lib/rate-limit';
+
+const loginAccountLimiter = rateLimit('credentials-login-account', {
+  limit: 10,
+  windowMs: 15 * 60 * 1000,
+});
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -18,12 +24,18 @@ export const authOptions: NextAuthOptions = {
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
-        await connectToDatabase();
         if (!credentials?.email || !credentials?.password) {
           throw new Error('Please enter an email and password');
         }
 
-        const user = await User.findOne({ email: credentials.email, authProvider: 'credentials' });
+        const email = credentials.email.trim().toLowerCase();
+        if (email.length > 254 || !loginAccountLimiter.check(email).success) {
+          throw new Error('Too many login attempts. Please try again later.');
+        }
+
+        await connectToDatabase();
+
+        const user = await User.findOne({ email, authProvider: 'credentials' });
 
         if (!user) {
           throw new Error('No user found with this email');
