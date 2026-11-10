@@ -17,6 +17,15 @@ function sanitizeHeader(value: string): string {
   return value.replace(/[\r\n]/g, "").trim();
 }
 
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 export async function POST(req: Request) {
   try {
     // Rate limit check
@@ -48,6 +57,11 @@ export async function POST(req: Request) {
     const safeDispatchId = dispatchId ? sanitizeHeader(String(dispatchId)).slice(0, 50) : "";
     // Message body is not header-injected but cap it at a reasonable size
     const safeMessage = String(message).slice(0, 5000);
+    const htmlName = escapeHtml(safeName);
+    const htmlEmail = escapeHtml(safeEmail);
+    const htmlSubject = escapeHtml(safeSubject);
+    const htmlDispatchId = escapeHtml(safeDispatchId);
+    const htmlMessage = escapeHtml(safeMessage);
 
     const transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
@@ -68,11 +82,11 @@ export async function POST(req: Request) {
       text: `Dispatch Ticket: ${safeDispatchId || "N/A"}\nFrom: ${safeName} (${safeEmail})\nSubject: ${safeSubject}\n\nMessage:\n${safeMessage}`,
       html: `
         <div style="font-family: monospace; padding: 20px; border: 1px solid #1c1917; background: #f5f5f4; color: #1c1917;">
-          <h2 style="text-transform: uppercase; border-bottom: 1px solid #1c1917; padding-bottom: 10px;">DISPATCH TICKET ${safeDispatchId ? `(${safeDispatchId})` : ""}</h2>
-          <p><strong>OPERATOR:</strong> ${safeName} &lt;${safeEmail}&gt;</p>
-          <p><strong>SUBJECT:</strong> ${safeSubject}</p>
+          <h2 style="text-transform: uppercase; border-bottom: 1px solid #1c1917; padding-bottom: 10px;">DISPATCH TICKET ${htmlDispatchId ? `(${htmlDispatchId})` : ""}</h2>
+          <p><strong>OPERATOR:</strong> ${htmlName} &lt;${htmlEmail}&gt;</p>
+          <p><strong>SUBJECT:</strong> ${htmlSubject}</p>
           <p><strong>MESSAGE:</strong></p>
-          <div style="background: #ffffff; padding: 15px; border: 1px solid #1c1917; white-space: pre-wrap;">${safeMessage}</div>
+          <div style="background: #ffffff; padding: 15px; border: 1px solid #1c1917; white-space: pre-wrap;">${htmlMessage}</div>
           <p style="margin-top: 20px; font-size: 10px; color: #78716c;">Filed via Friend Circle HQ</p>
         </div>
       `,
