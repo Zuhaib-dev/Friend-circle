@@ -101,29 +101,33 @@ export const authOptions: NextAuthOptions = {
       const dbUser = isObjectId
         ? await User.findById(token.id)
         : await User.findOne({ email: token.email });
-        
-      if (dbUser) {
-        // Handle Session Revocation
-        if (token.sessionId) {
-          const sessionIndex = dbUser.activeSessions?.findIndex((s: any) => s.sessionId === token.sessionId);
-          if (sessionIndex === -1 || sessionIndex === undefined) {
-            // New session, add placeholder (ping will fill the rest)
-            await User.updateOne(
-              { _id: dbUser._id },
-              { $push: { activeSessions: { sessionId: token.sessionId, lastActive: new Date(), status: 'ACTIVE' } } }
-            );
-          } else if (dbUser.activeSessions[sessionIndex].status === 'REVOKED') {
-            // Token is revoked! Return empty token to log user out.
-            return {} as any;
-          }
-        }
 
-        token.id = dbUser._id.toString();
-        token.role = dbUser.role;
-        token.teamMemberStatus = dbUser.teamMemberStatus;
-        token.name = dbUser.name;
-        token.picture = dbUser.image;
+      // Revoke existing JWT sessions immediately when an account is suspended
+      // or removed, instead of waiting for the token's normal expiry.
+      if (!dbUser || dbUser.isSuspended) {
+        return {} as any;
       }
+        
+      // Handle Session Revocation
+      if (token.sessionId) {
+        const sessionIndex = dbUser.activeSessions?.findIndex((s: any) => s.sessionId === token.sessionId);
+        if (sessionIndex === -1 || sessionIndex === undefined) {
+          // New session, add placeholder (ping will fill the rest)
+          await User.updateOne(
+            { _id: dbUser._id },
+            { $push: { activeSessions: { sessionId: token.sessionId, lastActive: new Date(), status: 'ACTIVE' } } }
+          );
+        } else if (dbUser.activeSessions[sessionIndex].status === 'REVOKED') {
+          // Token is revoked! Return empty token to log user out.
+          return {} as any;
+        }
+      }
+
+      token.id = dbUser._id.toString();
+      token.role = dbUser.role;
+      token.teamMemberStatus = dbUser.teamMemberStatus;
+      token.name = dbUser.name;
+      token.picture = dbUser.image;
       return token;
     },
     async session({ session, token }) {
