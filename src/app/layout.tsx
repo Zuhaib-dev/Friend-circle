@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Geist, Geist_Mono, Fraunces, Inter, JetBrains_Mono, Amiri, Scheherazade_New } from "next/font/google";
+import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "@/components/AuthProvider";
 import { SessionTracker } from "@/components/SessionTracker";
@@ -10,16 +10,6 @@ import NextTopLoader from 'nextjs-toploader';
 import CommandMenu from "@/components/command-menu";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import QueryProvider from "@/components/QueryProvider";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 const fraunces = Fraunces({
   variable: "--font-fraunces",
@@ -36,20 +26,6 @@ const inter = Inter({
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
   subsets: ["latin"],
-  display: "swap",
-});
-
-const amiri = Amiri({
-  variable: "--font-amiri",
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  display: "swap",
-});
-
-const scheherazadeNew = Scheherazade_New({
-  variable: "--font-scheherazade-new",
-  subsets: ["latin"],
-  weight: ["400", "700"],
   display: "swap",
 });
 
@@ -110,7 +86,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} ${inter.variable} ${jetbrainsMono.variable} ${amiri.variable} ${scheherazadeNew.variable} h-full antialiased`}
+      className={`${fraunces.variable} ${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <head>
       </head>
