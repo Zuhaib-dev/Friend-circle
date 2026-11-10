@@ -9,10 +9,11 @@ import { redirect } from "next/navigation";
 
 export default async function PublicProfilePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const session = await getServerSession(authOptions);
+  const [session] = await Promise.all([
+    getServerSession(authOptions),
+    connectToDatabase(),
+  ]);
   const user = session?.user;
-
-  await connectToDatabase();
 
   const profileDoc = await User.findById(id).select('name image role phone socialHandle bio').lean();
   
@@ -35,12 +36,18 @@ export default async function PublicProfilePage({ params }: { params: Promise<{ 
     socialHandle: profileDoc.socialHandle || null,
   };
 
-  const followersCount = await Follow.countDocuments({ following: id });
-  const followingCount = await Follow.countDocuments({ follower: id });
-  const postsDocs = await Post.find({ author: id, status: 'APPROVED' })
-    .sort({ createdAt: -1 })
-    .populate('likes', 'name image')
-    .lean();
+  const currentUserId = (user as any)?.id;
+  const [followersCount, followingCount, postsDocs, follow] = await Promise.all([
+    Follow.countDocuments({ following: id }),
+    Follow.countDocuments({ follower: id }),
+    Post.find({ author: id, status: 'APPROVED' })
+      .sort({ createdAt: -1 })
+      .populate('likes', 'name image')
+      .lean(),
+    currentUserId
+      ? Follow.findOne({ follower: currentUserId, following: id })
+      : Promise.resolve(null),
+  ]);
 
   const posts = postsDocs.map((p: any) => ({
     ...p,
@@ -61,12 +68,7 @@ export default async function PublicProfilePage({ params }: { params: Promise<{ 
     posts: posts.length,
   };
 
-  let isFollowing = false;
-  if (user) {
-    const currentUserId = (user as any).id;
-    const follow = await Follow.findOne({ follower: currentUserId, following: id });
-    isFollowing = !!follow;
-  }
+  const isFollowing = !!follow;
 
   return (
     <PublicProfileClient 
