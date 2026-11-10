@@ -1,30 +1,23 @@
-import connectToDatabase from "@/lib/mongodb";
-import Post from "@/models/Post";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/authOptions";
-import { GalleryClient } from "./GalleryClient";
+import { Suspense } from "react";
+import GalleryPageData from "./GalleryPageData";
 
-export default async function GalleryPage() {
-  const session = await getServerSession(authOptions);
-  const isAdmin = (session?.user as any)?.role === "ADMIN";
+function GalleryPageFallback() {
+  return (
+    <main className="min-h-screen bg-bone text-ink px-4 py-6 md:py-8">
+      <div className="mb-6 h-24 animate-pulse bg-ink/5" />
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        {Array.from({ length: 8 }, (_, index) => (
+          <div key={index} className="aspect-4/3 animate-pulse bg-ink/5 hairline border-ink/20" />
+        ))}
+      </div>
+    </main>
+  );
+}
 
-  await connectToDatabase();
-  const posts = await Post.find({ imageUrl: { $exists: true, $ne: "" } })
-    .populate("author", "name")
-    .sort({ createdAt: -1 })
-    .lean();
-
-  const initialFrames = posts.map((post: any) => ({
-    id: `INTEL-${post._id.toString().slice(-5).toUpperCase()}`,
-    rawId: post._id.toString(),
-    src: post.imageUrl,
-    uploader: post.author?.name?.split(" ")[0].toUpperCase() || "UNKNOWN",
-    caption: post.caption || "NO CAPTION PROVIDED",
-    date: post.createdAt.getTime(),
-    sizeMB: 1.2,
-    w: 800,
-    h: 600,
-  }));
-
-  return <GalleryClient initialFrames={initialFrames} isAdmin={isAdmin} />;
+export default function GalleryPage() {
+  return (
+    <Suspense fallback={<GalleryPageFallback />}>
+      <GalleryPageData />
+    </Suspense>
+  );
 }
