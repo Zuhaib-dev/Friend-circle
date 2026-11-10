@@ -1,6 +1,5 @@
 import { TopBar, Hero, Ticker, StatsRow } from "@/components/landing/HeroSection";
 import { BentoSection } from "@/components/landing/BentoSection";
-import { CrewSection } from "@/components/landing/CrewSection";
 import { ToursSection } from "@/components/landing/ToursSection";
 import { TelemetrySection } from "@/components/landing/TelemetrySection";
 import { LoadoutSection } from "@/components/landing/LoadoutSection";
@@ -11,40 +10,34 @@ import { VoicesSection } from "@/components/landing/VoicesSection";
 import { FAQSection } from "@/components/landing/FAQSection";
 import { JoinSection } from "@/components/landing/JoinSection";
 import { FooterSection } from "@/components/landing/FooterSection";
+import { Suspense } from "react";
+import CrewRoster from "./CrewRoster";
 
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/authOptions";
-import connectToDatabase from "@/lib/mongodb";
-import User from "@/models/User";
+function CrewFallback() {
+  return (
+    <section id="crew" className="px-4 md:px-8 py-16" aria-label="Crew">
+      <div className="mb-8 h-24 animate-pulse bg-ink/5" />
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 hairline border-ink">
+        {Array.from({ length: 3 }, (_, index) => (
+          <div key={index} className="p-5 hairline-b border-ink/50">
+            <div className="aspect-4/5 animate-pulse bg-ink/5" />
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
 
-export default async function LandingPage() {
-  const session = await getServerSession(authOptions);
-  
-  await connectToDatabase();
-  const crewDocs = await User.find({
-    $or: [
-      { role: 'ADMIN' },
-      { role: 'TEAM_MEMBER', teamMemberStatus: 'APPROVED' }
-    ]
-  }).select('name email image role socialHandle bio').lean();
-  
-  const initialCrew = crewDocs.map(c => ({
-    _id: c._id.toString(),
-    name: c.name,
-    email: c.email,
-    role: c.role as "TEAM_MEMBER" | "ADMIN",
-    image: c.image || undefined,
-    bio: c.bio || undefined,
-    socialHandle: c.socialHandle || undefined,
-  }));
-
+export default function LandingPage() {
   return (
     <main className="text-ink">
       <TopBar />
       <Hero />
       <Ticker />
       <StatsRow />
-      <CrewSection initialCrew={initialCrew} sessionEmail={session?.user?.email || null} />
+      <Suspense fallback={<CrewFallback />}>
+        <CrewRoster />
+      </Suspense>
       <ToursSection />
       <BentoSection />
       <TelemetrySection />

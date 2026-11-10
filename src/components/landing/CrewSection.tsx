@@ -12,18 +12,19 @@ import { SectionHead } from "./primitives";
 type CrewMember = {
   _id: string;
   name: string;
-  email: string;
   role: "ADMIN" | "TEAM_MEMBER";
   image?: string;
   bio?: string;
   socialHandle?: string;
 };
 
-export function CrewSection({ initialCrew = [], sessionEmail = null }: { initialCrew?: CrewMember[], sessionEmail?: string | null }) {
+export function CrewSection({ initialCrew = [] }: { initialCrew?: CrewMember[] }) {
   const router = useRouter();
+  const { data: session } = useSession();
   const [crew, setCrew] = useState<CrewMember[]>(initialCrew);
   const [expanded, setExpanded] = useState(false);
   const VISIBLE = 6;
+  const currentUserId = session?.user?.id;
 
   // Sort: ADMIN first → logged-in user second → rest by insertion order
   const sorted = useMemo(() => {
@@ -31,11 +32,11 @@ export function CrewSection({ initialCrew = [], sessionEmail = null }: { initial
       const aAdmin = a.role === "ADMIN" ? 0 : 1;
       const bAdmin = b.role === "ADMIN" ? 0 : 1;
       if (aAdmin !== bAdmin) return aAdmin - bAdmin;
-      const aMe = sessionEmail && a.email.toLowerCase() === sessionEmail ? 0 : 1;
-      const bMe = sessionEmail && b.email.toLowerCase() === sessionEmail ? 0 : 1;
+      const aMe = currentUserId && a._id === currentUserId ? 0 : 1;
+      const bMe = currentUserId && b._id === currentUserId ? 0 : 1;
       return aMe - bMe;
     });
-  }, [crew, sessionEmail]);
+  }, [crew, currentUserId]);
 
   const displayed = expanded ? sorted : sorted.slice(0, VISIBLE);
   const hasMore = sorted.length > VISIBLE;
@@ -56,7 +57,7 @@ export function CrewSection({ initialCrew = [], sessionEmail = null }: { initial
             <AnimatePresence mode="popLayout">
               {displayed.map((c, i) => {
                 const isAdmin = c.role === "ADMIN";
-                const isMe = sessionEmail && c.email.toLowerCase() === sessionEmail;
+                const isMe = currentUserId && c._id === currentUserId;
                 const padded = String(i + 1).padStart(2, "0");
                 return (
                   <motion.article
