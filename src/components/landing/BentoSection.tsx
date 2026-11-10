@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
+import Image from "next/image";
 import { ArrowRight, Volume2, VolumeX, Star, Users } from "lucide-react";
 import Link from "next/link";
 
@@ -99,9 +100,15 @@ export function BentoSection() {
                 </h3>
                 <span className="inline-flex items-center gap-[-8px] align-middle px-2">
                    {/* Decorative user avatars simulating the bento design */}
-                   <span className="w-12 h-12 rounded-full border-2 border-ink bg-bone -mr-4 relative z-30" style={{ backgroundImage: "url('/archive/archive-051.jpg')", backgroundSize: 'cover' }}></span>
-                   <span className="w-12 h-12 rounded-full border-2 border-ink bg-signal -mr-4 relative z-20" style={{ backgroundImage: "url('/archive/archive-052.jpg')", backgroundSize: 'cover' }}></span>
-                   <span className="w-12 h-12 rounded-full border-2 border-ink bg-bone relative z-10" style={{ backgroundImage: "url('/archive/archive-079.jpg')", backgroundSize: 'cover' }}></span>
+                   <span className="w-12 h-12 rounded-full border-2 border-ink bg-bone -mr-4 relative z-30 overflow-hidden">
+                     <Image src="/archive/archive-051.jpg" alt="" width={48} height={48} sizes="48px" className="h-full w-full object-cover" />
+                   </span>
+                   <span className="w-12 h-12 rounded-full border-2 border-ink bg-signal -mr-4 relative z-20 overflow-hidden">
+                     <Image src="/archive/archive-052.jpg" alt="" width={48} height={48} sizes="48px" className="h-full w-full object-cover" />
+                   </span>
+                   <span className="w-12 h-12 rounded-full border-2 border-ink bg-bone relative z-10 overflow-hidden">
+                     <Image src="/archive/archive-079.jpg" alt="" width={48} height={48} sizes="48px" className="h-full w-full object-cover" />
+                   </span>
                 </span>
                 <h3 className="display-num text-4xl md:text-5xl lg:text-[64px] text-bone leading-none uppercase">
                   YOUR
